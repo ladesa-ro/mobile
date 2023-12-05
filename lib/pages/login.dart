@@ -25,17 +25,25 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
   Widget build(BuildContext context) {
     // Obtém a largura da tela
     double larguraTela = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          // Ícone verde do background
-          _elementoVerde(Alignment.topLeft, 140, 110),
-          // Ícone verde no canto inferior direito
-          _elementoVerde(Alignment.bottomRight, 140, 110),
-          // Formulário de login
-          _formularioLogin(larguraTela),
-        ],
+      body: SingleChildScrollView(
+        physics:
+            const ClampingScrollPhysics(), // Impede o estiramento do conteúdo ao usar o teclado
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          child: Stack(
+            children: [
+              // Ícone verde do background
+              _elementoVerde(Alignment.topLeft, 140, 110),
+              // Ícone verde no canto inferior direito
+              _elementoVerde(Alignment.bottomRight, 140, 110),
+              // Formulário de login
+              _formularioLogin(larguraTela),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -80,7 +88,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
       child: SingleChildScrollView(
         child: SizedBox(
           width: larguraTela > 800 ? 800 : larguraTela,
-          height: 500,
+          height: 800,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
             child: Column(
