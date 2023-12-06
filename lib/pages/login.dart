@@ -29,9 +29,8 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        physics:
-            const ClampingScrollPhysics(), // Impede o estiramento do conteúdo ao usar o teclado
-        child: Container(
+        physics: const ClampingScrollPhysics(),
+        child: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Stack(
             children: [
@@ -50,7 +49,6 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
 
 // Widget para elementos verdes com arredondamento interno
   Widget _elementoVerde(Alignment alignment, double width, double height) {
-    // Calcula os raios para arredondamento interno
     BorderRadiusGeometry borderRadius = BorderRadius.zero;
     if (alignment == Alignment.topLeft) {
       borderRadius = const BorderRadius.only(
