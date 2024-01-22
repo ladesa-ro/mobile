@@ -98,7 +98,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
                   'img/logo_sisgha.png',
                   height: 100,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 15),
                 // Campo de entrada para Matrícula
                 _campoDeEntrada('Matrícula', TextInputType.text),
                 const SizedBox(height: 10),
@@ -110,7 +110,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
                 const SizedBox(height: 40),
                 // Botão de entrar
                 _botaoEntrar(),
-                const SizedBox(height: 40),
+                const SizedBox(height: 20),
                 // Botão de Entrar como aluno
                 _botaoEntrarAluno(),
               ],
@@ -230,10 +230,11 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
   // Widget para o botão de entrar
   Widget _botaoEntrar() {
     return FilledButton(
-      onPressed: () => Navigator.pushNamed(context, '/home'),
+      onPressed: () => Navigator.pushNamedAndRemoveUntil(
+          context, '/navegação', (route) => false),
       style: ButtonStyle(
         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-          const EdgeInsets.fromLTRB(0, 20, 0, 20),
+          const EdgeInsets.fromLTRB(0, 10, 0, 10),
         ),
         shape: MaterialStateProperty.all<OutlinedBorder>(
           RoundedRectangleBorder(
@@ -260,7 +261,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
     return FilledButton(
       style: ButtonStyle(
         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-          const EdgeInsets.fromLTRB(15, 15, 0, 15),
+          const EdgeInsets.fromLTRB(15, 5, 0, 5),
         ),
         shape: MaterialStateProperty.all<OutlinedBorder>(
           RoundedRectangleBorder(
@@ -271,7 +272,8 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
           const Color.fromRGBO(57, 160, 72, 1),
         ),
       ),
-      onPressed: () => Navigator.pushNamed(context, '/home'),
+      onPressed: () =>
+          Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false),
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
