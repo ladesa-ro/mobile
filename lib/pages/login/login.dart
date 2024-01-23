@@ -168,7 +168,8 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
           GestureDetector(
             onTap: () => Navigator.pushNamed(context, '/home'),
             child: Text('Clique aqui',
-                style: _estiloTexto(13, cor: Color.fromRGBO(57, 160, 72, 1))),
+                style: _estiloTexto(13,
+                    cor: const Color.fromRGBO(57, 160, 72, 1))),
           ),
         ],
       ),
