@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:login_page/pages/calendario.dart';
-import 'package:login_page/pages/home.dart';
-import 'package:login_page/pages/perfil.dart';
+import 'package:sisgha_mobile/pages/calendario/calendario.dart';
+import 'package:sisgha_mobile/pages/home/home.dart';
+import 'package:sisgha_mobile/pages/perfil/perfil.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({Key? key}) : super(key: key);
