@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wc_form_validators/wc_form_validators.dart';
+import 'package:sisgha_mobile/pages/aluno.dart';
 
 class PaginaLogin extends StatefulWidget {
   const PaginaLogin({Key? key}) : super(key: key);
@@ -9,6 +9,10 @@ class PaginaLogin extends StatefulWidget {
 }
 
 class _EstadoPaginaLogin extends State<PaginaLogin> {
+  TextEditingController _matriculaController = TextEditingController();
+  TextEditingController _senhaController = TextEditingController();
+  bool _mostrarErroMatricula = false;
+  bool _mostrarErroSenha = false;
   bool _senhaVisivel = true;
   final formKey = GlobalKey<FormState>();
   final Color corPersonalizada = const Color.fromRGBO(154, 182, 158, 1);
@@ -84,6 +88,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
   Widget _formularioLogin(double larguraTela) {
     return Center(
       child: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
         child: SizedBox(
           width: larguraTela > 800 ? 800 : larguraTela,
           height: 800,
@@ -94,22 +99,31 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Image.asset('img/logo_sisgha.png', height: 100),
-                const SizedBox(height: 15),
-                Form(
-                    key: formKey,
-                    child: Column(
-                      children: [
-                        _campoDeEntrada('Matrícula', TextInputType.text),
-                        const SizedBox(height: 10),
-                        _campoDeEntradaSenha(
-                            'Senha', TextInputType.visiblePassword),
-                        const SizedBox(height: 10),
-                      ],
-                    )),
-                _recuperarSenha(),
-                const SizedBox(height: 40),
-                _botaoEntrar('Entrar', '/navegação'),
-                const SizedBox(height: 20),
+                const SizedBox(height: 35),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Column(
+                    children: [
+                      Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            _campoDeEntrada('Matrícula', TextInputType.number,
+                                _matriculaController, _mostrarErroMatricula),
+                            SizedBox(height: 16),
+                            _campoDeEntradaSenha('Senha', TextInputType.text,
+                                _senhaController, _mostrarErroSenha),
+                            const SizedBox(height: 20),
+                          ],
+                        ),
+                      ),
+                      _recuperarSenha(),
+                      const SizedBox(height: 20),
+                      _botaoEntrar('Entrar', '/navegação'),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 30),
                 _botaoEntrarAluno(),
               ],
             ),
@@ -119,41 +133,76 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
     );
   }
 
-  Widget _campoDeEntrada(String labelText, TextInputType inputType) {
-    return TextFormField(
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return "Este campo deve ser preenchido";
-        } else if (value.length != 13) {
-          return "A Matricula contém 11 dígitos numéricos";
-        }
-        return null;
-      },
-      decoration: _inputDecoration(labelText),
-      keyboardType: inputType,
+  Widget _campoDeEntrada(String labelText, TextInputType inputType,
+      TextEditingController controller, bool mostrarErro) {
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 300),
+      height: mostrarErro ? 60 : 40,
+      child: TextFormField(
+        controller: controller,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            setState(() {
+              _mostrarErroMatricula = true;
+            });
+            return "Campo obrigatório";
+          } else if (value.length != 13 || !isNumeric(value)) {
+            setState(() {
+              _mostrarErroMatricula = true;
+            });
+            return "Matrícula incorreta";
+          } else if (value.contains(" ")) {
+            setState(() {
+              _mostrarErroMatricula = true;
+            });
+            return "Matricula incorreta";
+          } else {
+            setState(() {
+              _mostrarErroMatricula = false;
+            });
+          }
+          return null;
+        },
+        decoration: _inputDecoration(labelText),
+        keyboardType: inputType,
+      ),
     );
   }
 
-  Widget _campoDeEntradaSenha(String labelText, TextInputType inputType) {
-    return TextFormField(
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return "Este campo deve ser preenchido";
-        } else if (value.length <= 5) {
-          return "A senha deve ter mais de 5 caracteres";
-        } else if (!value.contains(RegExp(r'[A-Z]'))) {
-          return "Letra maiúscula necessária";
-        } else if (!value.contains(RegExp(r'[a-z]'))) {
-          return "Letra minúscula necessária";
-        } else if (!value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-          return "Caractere especial necessário";
-        }
-        return null;
-      },
-      obscureText: _senhaVisivel,
-      decoration:
-          _inputDecoration(labelText, suffixIcon: _iconeVisibilidadeSenha()),
-      keyboardType: inputType,
+  Widget _campoDeEntradaSenha(String labelText, TextInputType inputType,
+      TextEditingController controller, bool mostrarErro) {
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 300),
+      height: mostrarErro ? 60 : 40,
+      child: TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            setState(() {
+              _mostrarErroSenha = true;
+            });
+            return "Campo obrigatório";
+          } else if (value.length <= 5) {
+            setState(() {
+              _mostrarErroSenha = true;
+            });
+            return "Senha incorreta";
+          } else if (!value.contains(RegExp(r'[A-Z]'))) {
+            setState(() {
+              _mostrarErroSenha = true;
+            });
+            return "Senha Incorreta";
+          } else {
+            setState(() {
+              _mostrarErroSenha = false;
+            });
+          }
+          return null;
+        },
+        obscureText: _senhaVisivel,
+        decoration:
+            _inputDecoration(labelText, suffixIcon: _iconeVisibilidadeSenha()),
+        keyboardType: inputType,
+      ),
     );
   }
 
@@ -163,13 +212,19 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Esqueceu a senha?', style: _estiloTexto(13)),
+          Text('Esqueceu a senha?',
+              style: _estiloTexto(
+                cor: const Color.fromRGBO(154, 182, 158, 1),
+                13,
+                peso: FontWeight.w600,
+              )),
           const SizedBox(width: 3),
           GestureDetector(
             onTap: () => Navigator.pushNamed(context, '/home'),
             child: Text('Clique aqui',
                 style: _estiloTexto(13,
-                    cor: const Color.fromRGBO(57, 160, 72, 1))),
+                    cor: const Color.fromRGBO(57, 160, 72, 1),
+                    peso: FontWeight.w600)),
           ),
         ],
       ),
@@ -181,35 +236,47 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
       onPressed: () {
         if (formKey.currentState != null && formKey.currentState!.validate()) {
           Navigator.pushNamedAndRemoveUntil(context, rota, (route) => false);
-        } else {
-          print("Form invalido");
         }
       },
       style: _estiloBotao(),
-      child: Text(
-        texto,
-        style: _estiloTexto(15, cor: Colors.white, peso: FontWeight.w600),
+      child: Container(
+        width: double.infinity,
+        child: Center(
+          child: Text(
+            texto,
+            style: _estiloTexto(15, cor: Colors.white, peso: FontWeight.w600),
+          ),
+        ),
       ),
     );
   }
 
   Widget _botaoEntrarAluno() {
-    return FilledButton(
-      style: _estiloBotao(),
-      onPressed: () =>
-          Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(width: 15),
-          Icon(Icons.person),
-          SizedBox(width: 10),
-          Text('|', style: TextStyle(fontSize: 25)),
-          SizedBox(width: 20),
-          Text('Entrar como Aluno',
-              style: _estiloTexto(15, peso: FontWeight.w600)),
-        ],
+    return SizedBox(
+      height: 45,
+      child: FilledButton(
+        style: _estiloBotao(),
+        onPressed: () => Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PaginaAluno(),
+            ),
+            (route) => false),
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(width: 15),
+              Icon(Icons.person),
+              SizedBox(width: 10),
+              Text('|', style: TextStyle(fontSize: 20)),
+              SizedBox(width: 20),
+              Text('Entrar como Aluno',
+                  style: _estiloTexto(15, peso: FontWeight.w600)),
+            ],
+          ),
+        ),
       ),
     );
   }

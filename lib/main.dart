@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
               seedColor: const Color.fromRGBO(57, 160, 72, 1)),
           useMaterial3: true,
         ),
-        initialRoute: '/login',
+        initialRoute: '/navegação',
         routes: {
           '/login': (context) => const PaginaLogin(),
           '/navegação': (context) => const Navigation(),
