@@ -4,14 +4,22 @@ import 'package:sisgha_mobile/pages/home/home.dart';
 import 'package:sisgha_mobile/pages/perfil/perfil.dart';
 
 class Navigation extends StatefulWidget {
-  const Navigation({Key? key}) : super(key: key);
+  final int initialIndex;
+
+  const Navigation({Key? key, required this.initialIndex}) : super(key: key);
 
   @override
   State<Navigation> createState() => _NavigationState();
 }
 
 class _NavigationState extends State<Navigation> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+  }
 
   @override
   Widget build(BuildContext context) {

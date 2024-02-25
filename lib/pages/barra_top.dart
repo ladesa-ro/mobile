@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sisgha_mobile/pages/navegacao.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
@@ -52,7 +53,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 padding: MaterialStateProperty.all(EdgeInsets.zero),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, "/perfilProf");
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Navigation(initialIndex: 1),
+                  ),
+                );
               },
               child: const CircleAvatar(
                 maxRadius: 26,

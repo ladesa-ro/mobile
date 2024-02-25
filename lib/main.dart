@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sisgha_mobile/pages/calendario/calendario.dart';
 import 'package:sisgha_mobile/pages/home/home.dart';
 import 'package:sisgha_mobile/pages/login/login.dart';
-import 'package:sisgha_mobile/pages/navega%C3%A7%C3%A3o.dart';
+import 'package:sisgha_mobile/pages/navegacao.dart';
 import 'package:sisgha_mobile/pages/perfil/perfil.dart';
 
 void main() {
@@ -24,10 +24,10 @@ class MyApp extends StatelessWidget {
               seedColor: const Color.fromRGBO(57, 160, 72, 1)),
           useMaterial3: true,
         ),
-        initialRoute: '/navegação',
+        initialRoute: '/login',
         routes: {
           '/login': (context) => const PaginaLogin(),
-          '/navegação': (context) => const Navigation(),
+          '/navegação': (context) => const Navigation(initialIndex: 0),
           '/home': (context) => const Home(),
           '/perfilProf': (context) => const Perfil(),
           '/calendario': (context) => const Calendar(),

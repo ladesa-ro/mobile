@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha_mobile/pages/aluno.dart';
+import 'package:sisgha_mobile/pages/estilos.dart';
 
 class PaginaLogin extends StatefulWidget {
   const PaginaLogin({Key? key}) : super(key: key);
@@ -213,7 +214,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Esqueceu a senha?',
-              style: _estiloTexto(
+              style: estiloTexto(
                 cor: const Color.fromRGBO(154, 182, 158, 1),
                 13,
                 peso: FontWeight.w600,
@@ -222,7 +223,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
           GestureDetector(
             onTap: () => Navigator.pushNamed(context, '/home'),
             child: Text('Clique aqui',
-                style: _estiloTexto(13,
+                style: estiloTexto(13,
                     cor: const Color.fromRGBO(57, 160, 72, 1),
                     peso: FontWeight.w600)),
           ),
@@ -238,13 +239,13 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
           Navigator.pushNamedAndRemoveUntil(context, rota, (route) => false);
         }
       },
-      style: _estiloBotao(),
+      style: estiloBotao(context),
       child: Container(
         width: double.infinity,
         child: Center(
           child: Text(
             texto,
-            style: _estiloTexto(15, cor: Colors.white, peso: FontWeight.w600),
+            style: estiloTexto(15, cor: Colors.white, peso: FontWeight.w600),
           ),
         ),
       ),
@@ -255,7 +256,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
     return SizedBox(
       height: 45,
       child: FilledButton(
-        style: _estiloBotao(),
+        style: estiloBotao(context),
         onPressed: () => Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
@@ -273,7 +274,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
               Text('|', style: TextStyle(fontSize: 20)),
               SizedBox(width: 20),
               Text('Entrar como Aluno',
-                  style: _estiloTexto(15, peso: FontWeight.w600)),
+                  style: estiloTexto(15, peso: FontWeight.w600)),
             ],
           ),
         ),
@@ -287,8 +288,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
       contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
       alignLabelWithHint: true,
       border: _inputBorder(),
-      labelStyle:
-          _estiloTexto(14, cor: corPersonalizada, peso: FontWeight.w600),
+      labelStyle: estiloTexto(14, cor: corPersonalizada, peso: FontWeight.w600),
       focusedBorder: _inputBorder(),
       suffixIcon: suffixIcon,
     );
@@ -307,25 +307,6 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
       icon: Icon(_senhaVisivel
           ? Icons.visibility_outlined
           : Icons.visibility_off_outlined),
-    );
-  }
-
-  ButtonStyle _estiloBotao() {
-    return ButtonStyle(
-      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-          const EdgeInsets.fromLTRB(0, 10, 0, 10)),
-      shape: MaterialStateProperty.all<OutlinedBorder>(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0))),
-      backgroundColor: MaterialStateProperty.all<Color>(
-          const Color.fromRGBO(57, 160, 72, 1)),
-    );
-  }
-
-  TextStyle _estiloTexto(double tamanho, {Color? cor, FontWeight? peso}) {
-    return TextStyle(
-      fontSize: tamanho,
-      color: cor,
-      fontWeight: peso,
     );
   }
 }
