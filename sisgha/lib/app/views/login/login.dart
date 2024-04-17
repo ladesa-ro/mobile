@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:teste/views/login/aluno.dart';
-import 'package:teste/views/estilos.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:teste/app/views/home/home.dart';
+import 'package:teste/app/views/login/aluno.dart';
+import 'package:teste/app/views/estilos.dart';
+import 'package:http/http.dart' as http;
 
 class PaginaLogin extends StatefulWidget {
   const PaginaLogin({Key? key}) : super(key: key);
@@ -10,8 +15,8 @@ class PaginaLogin extends StatefulWidget {
 }
 
 class _EstadoPaginaLogin extends State<PaginaLogin> {
-  TextEditingController _matriculaController = TextEditingController();
-  TextEditingController _senhaController = TextEditingController();
+  TextEditingController matriculaController = TextEditingController();
+  TextEditingController senhaController = TextEditingController();
   bool _mostrarErroMatricula = false;
   bool _mostrarErroSenha = false;
   bool _senhaVisivel = true;
@@ -109,17 +114,17 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
                         child: Column(
                           children: [
                             _campoDeEntrada('Matrícula', TextInputType.number,
-                                _matriculaController, _mostrarErroMatricula),
+                                matriculaController, _mostrarErroMatricula),
                             SizedBox(height: 16),
                             _campoDeEntradaSenha('Senha', TextInputType.text,
-                                _senhaController, _mostrarErroSenha),
+                                senhaController, _mostrarErroSenha),
                             const SizedBox(height: 20),
                           ],
                         ),
                       ),
                       _recuperarSenha(),
                       const SizedBox(height: 20),
-                      _botaoEntrar('Entrar', '/navegação'),
+                      _botaoEntrar('Entrar'),
                     ],
                   ),
                 ),
@@ -146,11 +151,6 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
               _mostrarErroMatricula = true;
             });
             return "Campo obrigatório";
-          } else if (value.length != 13 || !isNumeric(value)) {
-            setState(() {
-              _mostrarErroMatricula = true;
-            });
-            return "Matrícula incorreta";
           } else if (value.contains(" ")) {
             setState(() {
               _mostrarErroMatricula = true;
@@ -160,8 +160,8 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
             setState(() {
               _mostrarErroMatricula = false;
             });
+            return null;
           }
-          return null;
         },
         decoration: _inputDecoration(labelText),
         keyboardType: inputType,
@@ -175,28 +175,19 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
       duration: Duration(milliseconds: 300),
       height: mostrarErro ? 60 : 40,
       child: TextFormField(
+        controller: controller,
         validator: (value) {
           if (value == null || value.isEmpty) {
             setState(() {
               _mostrarErroSenha = true;
             });
             return "Campo obrigatório";
-          } else if (value.length <= 5) {
-            setState(() {
-              _mostrarErroSenha = true;
-            });
-            return "Senha incorreta";
-          } else if (!value.contains(RegExp(r'[A-Z]'))) {
-            setState(() {
-              _mostrarErroSenha = true;
-            });
-            return "Senha Incorreta";
           } else {
             setState(() {
               _mostrarErroSenha = false;
             });
+            return null;
           }
-          return null;
         },
         obscureText: _senhaVisivel,
         decoration:
@@ -231,11 +222,25 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
     );
   }
 
-  Widget _botaoEntrar(String texto, String rota) {
+  Widget _botaoEntrar(String texto) {
     return FilledButton(
-      onPressed: () {
-        if (formKey.currentState != null && formKey.currentState!.validate()) {
-          Navigator.pushNamedAndRemoveUntil(context, rota, (route) => false);
+      onPressed: () async {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (formKey.currentState!.validate()) {
+          bool deuCerto = await login();
+          if (!currentFocus.hasPrimaryFocus) {
+            currentFocus.unfocus();
+          }
+          if (deuCerto) {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Home(),
+                ));
+          } else {
+            senhaController.clear();
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
         }
       },
       style: estiloBotao(context),
@@ -308,4 +313,27 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
           : Icons.visibility_off_outlined),
     );
   }
+
+  Future<bool> login() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var url = Uri.parse("https://luna.sisgha.com/api/autenticacao/login");
+    var resposta = await http.post(url, body: {
+      "matriculaSiape": matriculaController.text,
+      "senha": senhaController.text,
+    });
+    if (resposta.statusCode == 201) {
+      await sharedPreferences.setString(
+          'token', "Token ${jsonDecode(resposta.body)['access_token']}");
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  final snackBar = const SnackBar(
+    content: Text(
+      "Matricula ou senha inválidos",
+      textAlign: TextAlign.center,
+    ),
+  );
 }

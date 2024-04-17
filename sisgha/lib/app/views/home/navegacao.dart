@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:teste/Pages/calendario.dart';
-import 'package:teste/Pages/home.dart';
-import 'package:teste/Pages/perfil.dart';
+import 'package:teste/app/views/calendario/calendario.dart';
+import 'package:teste/app/views/home/home.dart';
+import 'package:teste/app/views/perfil/perfil.dart';
 
 class Navigation extends StatefulWidget {
   final int initialIndex;
@@ -45,15 +45,15 @@ class _NavigationState extends State<Navigation> {
   Widget _buildPage(int index) {
     switch (index) {
       case 0:
-        return Center(
+        return const Center(
           child: Home(),
         );
       case 1:
-        return Center(
+        return const Center(
           child: Perfil(),
         );
       case 2:
-        return Center(
+        return const Center(
           child: Calendar(),
         );
       default:

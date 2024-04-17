@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:teste/views/home/navegacao.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:teste/app/views/boasvindas.dart';
+import 'package:teste/app/views/home/navegacao.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
@@ -18,12 +20,29 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
+            IconButton(
+                onPressed: () async {
+                  bool saiu = await sair();
+                  if (saiu) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BoasVindasPage(),
+                      ),
+                    );
+                  }
+                },
+                icon: const Icon(
+                  Icons.logout_rounded,
+                  size: 40,
+                  color: Colors.white,
+                )),
             Spacer(),
             const Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  'Danilo Escudero',
+                  'Wanderson Maikon',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,
@@ -62,12 +81,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               },
               child: const CircleAvatar(
                 maxRadius: 26,
-                backgroundImage: AssetImage("img/perfilusers.png"),
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<bool> sair() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.clear();
+    return true;
   }
 }

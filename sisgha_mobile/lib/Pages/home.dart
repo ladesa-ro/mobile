@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
-import 'package:teste/views/home/barra_top.dart';
-import 'package:teste/views/estilos.dart';
+import 'package:sisgha_mobile/pages/barra_top.dart';
+import 'package:sisgha_mobile/pages/estilos.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
