@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:teste/app/views/home/home.dart';
-import 'package:teste/app/views/login/login.dart';
+import 'package:sisgha/app/views/home/home.dart';
+import 'package:sisgha/app/views/login/login.dart';
 
 class BoasVindasPage extends StatefulWidget {
   const BoasVindasPage({super.key});

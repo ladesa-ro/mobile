@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:teste/app/views/boasvindas.dart';
-import 'package:teste/app/views/home/navegacao.dart';
+import 'package:sisgha/app/views/boasvindas.dart';
+import 'package:sisgha/app/views/home/navegacao.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;

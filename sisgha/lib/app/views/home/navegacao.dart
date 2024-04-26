@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:teste/app/views/calendario/calendario.dart';
-import 'package:teste/app/views/home/home.dart';
-import 'package:teste/app/views/perfil/perfil.dart';
+import 'package:sisgha/app/constants/colors.dart';
+import 'package:sisgha/app/views/calendario/calendario.dart';
+import 'package:sisgha/app/views/home/home.dart';
+import 'package:sisgha/app/views/perfil/perfil.dart';
 
 class Navigation extends StatefulWidget {
   final int initialIndex;
@@ -26,7 +27,7 @@ class _NavigationState extends State<Navigation> {
     return Scaffold(
       body: _buildPage(_selectedIndex),
       bottomNavigationBar: BottomAppBar(
-        color: const Color.fromRGBO(57, 160, 72, 1),
+        color: ColorApp.VerdeEscuro,
         child: SizedBox(
           height: 60.0,
           child: Row(
@@ -80,9 +81,7 @@ class _NavigationState extends State<Navigation> {
         child: Icon(
           icon,
           size: 35.0,
-          color: _selectedIndex == index
-              ? const Color.fromRGBO(57, 160, 72, 1)
-              : Colors.white,
+          color: _selectedIndex == index ? ColorApp.VerdeEscuro : Colors.white,
         ),
       ),
     );

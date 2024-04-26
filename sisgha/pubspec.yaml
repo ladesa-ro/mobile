@@ -1,5 +1,5 @@
-name: teste
-description: "A new Flutter project."
+name: sisgha
+description: Gerador de horários Mobile
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -66,7 +66,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-  - img/
+  - assets/img/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -83,8 +83,8 @@ flutter:
   fonts:
     - family: Poppins
       fonts:
-        - asset: fonts/Poppins-Regular.ttf
-        - asset: fonts/Poppins-Bold.ttf
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
           weight: 700
 
   #       - asset: fonts/Schyler-Italic.ttf
