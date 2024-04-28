@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sisgha/app/views/boasvindas.dart';
-import 'package:sisgha/app/views/home/navegacao.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+
+import 'package:sisgha/app/constants/Icones.dart';
+import 'package:sisgha/app/constants/colors.dart';
+import 'package:sisgha/app/constants/dias.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
@@ -14,84 +16,45 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Theme.of(context).colorScheme.primary,
+      foregroundColor: ColorApp.Branco,
       title: Padding(
         padding: const EdgeInsets.fromLTRB(8, 10, 8, 8),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            IconButton(
-                onPressed: () async {
-                  bool saiu = await sair();
-                  if (saiu) {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BoasVindasPage(),
-                      ),
-                    );
-                  }
-                },
-                icon: const Icon(
-                  Icons.logout_rounded,
-                  size: 40,
-                  color: Colors.white,
-                )),
-            Spacer(),
-            const Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+            Container(
+              margin: EdgeInsets.all(12),
+              child: Text(DatasFormatadas.DiaAgora,
+                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.w900)),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Wanderson Maikon',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w700,
-                    height: 0,
-                  ),
-                ),
+                    '${DatasFormatadas.DiaExtensoFormatado[0].toUpperCase() + DatasFormatadas.DiaExtensoFormatado.substring(1)}${DatasFormatadas.DiaExtensoFormatado == 'sabado' || DatasFormatadas.DiaExtensoFormatado == 'domingo' ? '' : 'Feira'}'),
                 Text(
-                  'Professor',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w700,
-                    height: 0,
-                  ),
+                  '${DatasFormatadas.MesAgora[0].toUpperCase() + DatasFormatadas.MesAgora.substring(1)} - Dia 12 a 16',
                 ),
               ],
             ),
-            const SizedBox(
-              width: 10,
-            ),
-            FilledButton(
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all(CircleBorder()),
-                padding: MaterialStateProperty.all(EdgeInsets.zero),
-              ),
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Navigation(initialIndex: 1),
+            Spacer(),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Iconify(
+                    Icones.Bell,
+                    size: 40,
+                    color: ColorApp.Branco,
                   ),
-                );
-              },
-              child: const CircleAvatar(
-                maxRadius: 26,
-              ),
+                ),
+              ],
             ),
           ],
         ),
       ),
     );
-  }
-
-  Future<bool> sair() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.clear();
-    return true;
   }
 }

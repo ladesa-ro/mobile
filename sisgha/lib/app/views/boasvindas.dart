@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sisgha/app/views/home/home.dart';
+import 'package:sisgha/app/views/home/navegacao.dart';
 import 'package:sisgha/app/views/login/login.dart';
 
 class BoasVindasPage extends StatefulWidget {
@@ -23,7 +23,9 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => const Home(),
+                builder: (context) => const Navigation(
+                  initialIndex: 0,
+                ),
               ));
         } else {
           Navigator.pushReplacement(

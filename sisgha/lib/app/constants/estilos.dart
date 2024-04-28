@@ -5,7 +5,7 @@ const Color corPersonalizada = Color.fromRGBO(154, 182, 158, 1);
 ButtonStyle estiloBotao(context) {
   return ButtonStyle(
     padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-        const EdgeInsets.fromLTRB(0, 10, 0, 10)),
+        const EdgeInsets.fromLTRB(0, 10, 10, 10)),
     shape: MaterialStateProperty.all<OutlinedBorder>(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0))),
     backgroundColor:

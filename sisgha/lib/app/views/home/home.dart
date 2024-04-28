@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:sisgha/app/constants/Icones.dart';
+import 'package:sisgha/app/constants/colors.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:sisgha/app/views/home/barra_top.dart';
 import 'package:sisgha/app/constants/estilos.dart';
@@ -20,11 +23,13 @@ class _HomeState extends State<Home> {
     DateTime? _selectedDay;
     initializeDateFormatting('pt_BR', null);
 
+    double tamnhoTela = MediaQuery.of(context).size.width;
+
     DateTime now = DateTime.now();
 
     DateTime firstDayOfWeek = now.subtract(Duration(days: now.weekday - 1));
 
-    DateTime lastDayOfWeek = firstDayOfWeek.add(Duration(days: 6));
+    DateTime lastDayOfWeek = firstDayOfWeek.add(const Duration(days: 6));
 
     DateFormat portugueseDateFormat = DateFormat('MMMM', 'pt_BR');
 
@@ -41,16 +46,18 @@ class _HomeState extends State<Home> {
         '$formattedFirstDayOfWeek - $formattedLastDayOfWeek, $formattedYear';
 
     return Scaffold(
-      appBar: CustomAppBar(height: 80),
+      //aqui mexe no tamnho da barra de cima
+      appBar: CustomAppBar(height: 90),
       body: Column(
         children: [
-          const SizedBox(
-            height: 30,
+          SizedBox(
+            height: MediaQuery.of(context).size.height - 995,
+            width: tamnhoTela,
           ),
           Container(
             padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-            height: 70,
-            width: 390,
+            height: 80,
+            width: MediaQuery.of(context).size.width - 40,
             child: ElevatedButton(
               style: estiloBotao(context),
               onPressed: () {
@@ -179,7 +186,9 @@ class _HomeState extends State<Home> {
                                 child: Center(
                                   child: Text(
                                     '${date.day}',
-                                    style: TextStyle(color: Colors.transparent),
+                                    style: TextStyle(
+                                        color:
+                                            const Color.fromARGB(0, 255, 0, 0)),
                                   ),
                                 ),
                               );
@@ -206,6 +215,7 @@ class _HomeState extends State<Home> {
                   },
                 );
               },
+              //botão que ira aparecer na tala com o calendario
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -217,14 +227,21 @@ class _HomeState extends State<Home> {
                     color: Colors.white,
                     Icons.calendar_month,
                   ),
-                  const SizedBox(
-                    width: 50,
-                  ),
+                  Spacer(),
                   Text(
-                    formattedDate,
+                    'Calendário ${now.year}',
                     style: estiloTexto(18,
                         cor: Colors.white, peso: FontWeight.w700),
                   ),
+                  Spacer(),
+                  const Iconify(
+                    Icones.SetaBaixo,
+                    color: ColorApp.Branco,
+                    size: 35,
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  )
                 ],
               ),
             ),

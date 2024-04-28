@@ -5,6 +5,7 @@ import 'package:sisgha/app/views/home/home.dart';
 import 'package:sisgha/app/views/home/navegacao.dart';
 import 'package:sisgha/app/views/login/login.dart';
 import 'package:sisgha/app/views/perfil/perfil.dart';
+import 'package:sisgha/app/views/splashScreen.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> rotas() {
@@ -15,6 +16,7 @@ class AppRoutes {
       '/home': (context) => const Home(),
       '/perfilProf': (context) => const Perfil(),
       '/calendario': (context) => const Calendar(),
+      '/antesDeTudo': (context) => SplashScreen(),
     };
   }
 }

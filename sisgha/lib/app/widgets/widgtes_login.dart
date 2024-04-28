@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/api/repository.dart';
+import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/views/home/navegacao.dart';
@@ -9,19 +11,19 @@ Widget elementoVerde(Alignment alignment, double width, double height) {
   BorderRadiusGeometry borderRadius = BorderRadius.zero;
   if (alignment == Alignment.topLeft) {
     borderRadius = const BorderRadius.only(
-      bottomRight: Radius.circular(2000),
+      bottomRight: Radius.circular(105),
     );
   } else if (alignment == Alignment.bottomRight) {
     borderRadius = const BorderRadius.only(
-      topLeft: Radius.circular(2000),
+      topLeft: Radius.circular(105),
     );
   }
 
   return Align(
     alignment: alignment,
     child: Container(
-      width: width,
-      height: height,
+      width: width * 1.2,
+      height: height * 1.8,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
@@ -39,7 +41,7 @@ Widget elementoVerde(Alignment alignment, double width, double height) {
 
 Widget botaoEntrarAluno(context) {
   return SizedBox(
-    height: 45,
+    height: 50,
     child: FilledButton(
       style: estiloBotao(context),
       onPressed: () => Navigator.pushAndRemoveUntil(
@@ -53,13 +55,22 @@ Widget botaoEntrarAluno(context) {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const SizedBox(width: 19),
+            const Iconify(
+              Icones.PersonCheia,
+              color: ColorApp.Branco,
+            ),
             const SizedBox(width: 15),
-            const Icon(Icons.person),
-            const SizedBox(width: 10),
-            const Text('|', style: TextStyle(fontSize: 20)),
+            Container(
+              width: 2,
+              height: 30,
+              color: ColorApp.Branco,
+            ),
             const SizedBox(width: 20),
-            Text('Entrar como Aluno',
-                style: estiloTexto(15, peso: FontWeight.w600)),
+            Center(
+              child: Text('Entrar como Aluno',
+                  style: estiloTexto(15, peso: FontWeight.w600)),
+            )
           ],
         ),
       ),
@@ -116,6 +127,7 @@ Widget botaoEntrar(texto, context, formKey, matricula, senha) {
     },
     style: estiloBotao(context),
     child: SizedBox(
+      height: 30,
       width: double.infinity,
       child: Center(
         child: Text(

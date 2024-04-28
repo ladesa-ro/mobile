@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/views/calendario/calendario.dart';
 import 'package:sisgha/app/views/home/home.dart';
@@ -33,9 +35,9 @@ class _NavigationState extends State<Navigation> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildIconButton(Icons.home_filled, 0),
-              _buildIconButton(Icons.person, 1),
-              _buildIconButton(Icons.calendar_today_outlined, 2),
+              _buildIconButton(Icones.Home, 0),
+              _buildIconButton(Icones.Person, 1),
+              _buildIconButton(Icones.Calendar, 2),
             ],
           ),
         ),
@@ -62,7 +64,7 @@ class _NavigationState extends State<Navigation> {
     }
   }
 
-  Widget _buildIconButton(IconData icon, int index) {
+  Widget _buildIconButton(String icon, int index) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -76,9 +78,9 @@ class _NavigationState extends State<Navigation> {
           color: _selectedIndex == index ? Colors.white : null,
           borderRadius: BorderRadius.circular(10),
         ),
-        width: 60,
-        height: 50,
-        child: Icon(
+        width: 80,
+        height: 45,
+        child: Iconify(
           icon,
           size: 35.0,
           color: _selectedIndex == index ? ColorApp.VerdeEscuro : Colors.white,

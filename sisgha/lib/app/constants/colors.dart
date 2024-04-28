@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 
 class ColorApp {
-  static const Color VerdeEscuro = Color.fromRGBO(57, 160, 72, 1);
-  static const Color VerdeClaro = Color.fromRGBO(0, 208, 71, 1);
-  static const Color VerdeCinza = Color.fromRGBO(154, 182, 158, 1);
+  static const Color VerdeEscuro = Color(0xFF39A048);
+  static const Color VerdeClaro = Color(0xFF00D047);
+  static const Color VerdeCinza = Color(0xFF9AB69E);
+  static const Color Branco = Color(0xFFFFFFFF);
+  static const Color Preto = Color(0x00000000);
 }
