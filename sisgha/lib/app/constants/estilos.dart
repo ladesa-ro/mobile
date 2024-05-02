@@ -34,8 +34,8 @@ InputDecoration inputDecoration(String labelText, {Widget? suffixIcon}) {
 }
 
 OutlineInputBorder inputBorder() {
-  return OutlineInputBorder(
+  return const OutlineInputBorder(
     borderSide: BorderSide(color: corPersonalizada),
-    borderRadius: const BorderRadius.all(Radius.circular(13)),
+    borderRadius: BorderRadius.all(Radius.circular(13)),
   );
 }

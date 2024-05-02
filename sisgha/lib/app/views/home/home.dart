@@ -27,24 +27,6 @@ class _HomeState extends State<Home> {
 
     DateTime now = DateTime.now();
 
-    DateTime firstDayOfWeek = now.subtract(Duration(days: now.weekday - 1));
-
-    DateTime lastDayOfWeek = firstDayOfWeek.add(const Duration(days: 6));
-
-    DateFormat portugueseDateFormat = DateFormat('MMMM', 'pt_BR');
-
-    String formattedFirstDayOfWeek =
-        portugueseDateFormat.format(firstDayOfWeek)[0].toUpperCase() +
-            portugueseDateFormat.format(firstDayOfWeek).substring(1) +
-            ' ' +
-            DateFormat('dd').format(firstDayOfWeek);
-    String formattedLastDayOfWeek = DateFormat('dd').format(lastDayOfWeek);
-
-    String formattedYear = DateFormat('yyyy').format(now);
-
-    String formattedDate =
-        '$formattedFirstDayOfWeek - $formattedLastDayOfWeek, $formattedYear';
-
     return Scaffold(
       //aqui mexe no tamnho da barra de cima
       appBar: CustomAppBar(height: 90),
