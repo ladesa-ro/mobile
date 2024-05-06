@@ -4,26 +4,27 @@ import 'package:sisgha/app/api/repository.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
+import 'package:sisgha/app/constants/tamanhoTela.dart';
 import 'package:sisgha/app/views/home/navegacao.dart';
 import 'package:sisgha/app/views/login/aluno.dart';
 
 Widget elementoVerde(Alignment alignment, double width, double height) {
   BorderRadiusGeometry borderRadius = BorderRadius.zero;
   if (alignment == Alignment.topLeft) {
-    borderRadius = const BorderRadius.only(
-      bottomRight: Radius.circular(105),
+    borderRadius = BorderRadius.only(
+      bottomRight: Radius.circular(width > 450 ? 120 : 80),
     );
   } else if (alignment == Alignment.bottomRight) {
-    borderRadius = const BorderRadius.only(
-      topLeft: Radius.circular(105),
+    borderRadius = BorderRadius.only(
+      topLeft: Radius.circular(width > 450 ? 120 : 80),
     );
   }
 
   return Align(
     alignment: alignment,
     child: Container(
-      width: width * 1.2,
-      height: height * 1.8,
+      width: width > 1000 ? width * 0.15 : width * 0.32,
+      height: height > 850 ? height * 0.15 : height * 0.17,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
@@ -41,7 +42,7 @@ Widget elementoVerde(Alignment alignment, double width, double height) {
 
 Widget botaoEntrarAluno(context) {
   return SizedBox(
-    height: 50,
+    height: TamanhoTela.vertical(context) > 750 ? 40 : 35,
     child: FilledButton(
       style: estiloBotao(context),
       onPressed: () => Navigator.pushAndRemoveUntil(
@@ -69,7 +70,9 @@ Widget botaoEntrarAluno(context) {
             const SizedBox(width: 20),
             Center(
               child: Text('Entrar como Aluno',
-                  style: estiloTexto(15, peso: FontWeight.w600)),
+                  style: estiloTexto(
+                      TamanhoTela.vertical(context) > 750 ? 21 : 16,
+                      peso: FontWeight.w600)),
             )
           ],
         ),
@@ -128,11 +131,12 @@ Widget botaoEntrar(texto, context, formKey, matricula, senha) {
     style: estiloBotao(context),
     child: SizedBox(
       height: 30,
-      width: double.infinity,
+      width: TamanhoTela.horizontal(context),
       child: Center(
         child: Text(
           texto,
-          style: estiloTexto(15, cor: Colors.white, peso: FontWeight.w600),
+          style: estiloTexto(TamanhoTela.vertical(context) > 750 ? 20 : 15,
+              cor: Colors.white, peso: FontWeight.w600),
         ),
       ),
     ),

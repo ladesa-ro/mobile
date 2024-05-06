@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
+import 'package:sisgha/app/constants/tamanhoTela.dart';
 import 'package:sisgha/app/views/calendario/calendario.dart';
 import 'package:sisgha/app/views/home/home.dart';
 import 'package:sisgha/app/views/perfil/perfil.dart';
@@ -35,9 +36,9 @@ class _NavigationState extends State<Navigation> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildIconButton(Icones.Home, 0),
-              _buildIconButton(Icones.Person, 1),
-              _buildIconButton(Icones.Calendar, 2),
+              _buildIconButton(Icones.HomeVazio, Icones.HomeCheio, 0),
+              _buildIconButton(Icones.PersonVazio, Icones.PersonCheia, 1),
+              _buildIconButton(Icones.CalendarVazio, Icones.CalendarCheio, 2),
             ],
           ),
         ),
@@ -64,7 +65,7 @@ class _NavigationState extends State<Navigation> {
     }
   }
 
-  Widget _buildIconButton(String icon, int index) {
+  Widget _buildIconButton(String iconVazio, String iconCheio, int index) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -78,13 +79,19 @@ class _NavigationState extends State<Navigation> {
           color: _selectedIndex == index ? Colors.white : null,
           borderRadius: BorderRadius.circular(10),
         ),
-        width: 80,
-        height: 45,
-        child: Iconify(
-          icon,
-          size: 35.0,
-          color: _selectedIndex == index ? ColorApp.VerdeEscuro : Colors.white,
-        ),
+        width: TamanhoTela.horizontal(context) / 6,
+        height: TamanhoTela.vertical(context) / 5,
+        child: _selectedIndex == index
+            ? Iconify(
+                iconCheio,
+                size: 30,
+                color: ColorApp.VerdeEscuro,
+              )
+            : Iconify(
+                iconVazio,
+                size: 30,
+                color: Colors.white,
+              ),
       ),
     );
   }
