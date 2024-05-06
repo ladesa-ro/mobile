@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
+import 'package:sisgha/app/constants/tamanhoTela.dart';
+import 'package:sisgha/app/widgets/quadrados_Home.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:sisgha/app/views/home/barra_top.dart';
 import 'package:sisgha/app/constants/estilos.dart';
@@ -23,23 +25,24 @@ class _HomeState extends State<Home> {
     DateTime? _selectedDay;
     initializeDateFormatting('pt_BR', null);
 
-    double tamnhoTela = MediaQuery.of(context).size.width;
-
     DateTime now = DateTime.now();
 
     return Scaffold(
       //aqui mexe no tamnho da barra de cima
-      appBar: CustomAppBar(height: 90),
-      body: Column(
+      appBar: CustomAppBar(
+          height: TamanhoTela.vertical(context) < 810
+              ? TamanhoTela.vertical(context) * 0.10
+              : TamanhoTela.vertical(context) * 0.07),
+      body: ListView(
         children: [
           SizedBox(
-            height: MediaQuery.of(context).size.height - 995,
-            width: tamnhoTela,
+            height: TamanhoTela.vertical(context) / 25,
+            width: TamanhoTela.horizontal(context),
           ),
           Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-            height: 80,
-            width: MediaQuery.of(context).size.width - 40,
+            padding: EdgeInsets.all(TamanhoTela.horizontal(context) * 0.01),
+            height: MediaQuery.sizeOf(context).height * 0.08,
+            width: MediaQuery.sizeOf(context).width,
             child: ElevatedButton(
               style: estiloBotao(context),
               onPressed: () {
@@ -49,13 +52,19 @@ class _HomeState extends State<Home> {
                     return AlertDialog(
                       contentPadding: EdgeInsets.all(0),
                       content: Container(
-                        width: double.maxFinite,
-                        height: 370,
+                        width: TamanhoTela.horizontal(context),
+                        height: TamanhoTela.horizontal(context),
                         child: TableCalendar(
-                          daysOfWeekHeight: 0,
+                          daysOfWeekHeight:
+                              TamanhoTela.vertical(context) > 700 ? 38 : 30,
+                          daysOfWeekStyle: const DaysOfWeekStyle(
+                              weekendStyle: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 15),
+                              weekdayStyle: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 15)),
                           locale: 'pt_BR',
-                          firstDay: DateTime.utc(2024, 1, 1),
-                          lastDay: DateTime.utc(2024, 12, 31),
+                          firstDay: DateTime.utc(DateTime.now().year, 1, 1),
+                          lastDay: DateTime.utc(DateTime.now().year, 12, 31),
                           focusedDay: _focusedDay,
                           calendarFormat: _calendarFormat,
                           headerStyle: const HeaderStyle(
@@ -77,10 +86,11 @@ class _HomeState extends State<Home> {
                               return Container(
                                 margin: EdgeInsets.all(5),
                                 decoration: BoxDecoration(
-                                  color: Color(0xFF7EDFBC),
-                                  borderRadius: BorderRadius.circular(11),
+                                  color: Color.fromARGB(255, 55, 0, 255),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
                                   border: Border.all(
-                                    color: Color.fromRGBO(8, 193, 127, 100),
+                                    color: Color.fromRGBO(197, 197, 197, 0.514),
                                     width: 3,
                                   ),
                                 ),
@@ -118,11 +128,11 @@ class _HomeState extends State<Home> {
 
                               Color color;
                               if (isSameWeek) {
-                                color = Color(0xFF7EDFBC);
+                                color = Color.fromARGB(255, 69, 0, 158);
                               } else if (date
                                       .isAfter(DateTime(now.year, 4, 17)) &&
                                   date.isBefore(DateTime(now.year, 6, 20))) {
-                                color = Color(0xFFAE31DA);
+                                color = Color.fromARGB(255, 69, 0, 158);
                               } else if (date
                                       .isAfter(DateTime(now.year, 7, 22)) &&
                                   date.isBefore(DateTime(now.year, 9, 25))) {
@@ -151,10 +161,10 @@ class _HomeState extends State<Home> {
                                   borderRadius: BorderRadius.circular(11),
                                 ),
                                 child: Center(
-                                  child: Text(
-                                    '${date.day}',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
+                                  child: Text('${date.day}',
+                                      style: TextStyle(
+                                        color: ColorApp.Branco,
+                                      )),
                                 ),
                               );
                             },
@@ -204,22 +214,24 @@ class _HomeState extends State<Home> {
                   const SizedBox(
                     width: 16,
                   ),
-                  const Icon(
-                    size: 40,
-                    color: Colors.white,
+                  Icon(
                     Icons.calendar_month,
+                    size: TamanhoTela.horizontal(context) / 12,
+                    color: Colors.white,
                   ),
                   Spacer(),
                   Text(
                     'Calendário ${now.year}',
-                    style: estiloTexto(18,
-                        cor: Colors.white, peso: FontWeight.w700),
+                    style: estiloTexto(
+                        TamanhoTela.horizontal(context) > 650 ? 35 : 18,
+                        cor: Colors.white,
+                        peso: FontWeight.w700),
                   ),
                   Spacer(),
-                  const Iconify(
+                  Iconify(
                     Icones.SetaBaixo,
                     color: ColorApp.Branco,
-                    size: 35,
+                    size: TamanhoTela.horizontal(context) > 650 ? 35 : 25,
                   ),
                   const SizedBox(
                     width: 16,
@@ -227,7 +239,12 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
-          )
+          ),
+          SizedBox(
+            height: TamanhoTela.vertical(context) / 25,
+          ),
+          //botoes com os dias da semana
+          ConstruindoQuadrados(context),
         ],
       ),
     );

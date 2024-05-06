@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/constants/theme_app.dart';
 import 'package:sisgha/app/routes/app_routes.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 void main() {
-  Animate.restartOnHotReload = true;
   runApp(const MyApp());
 }
 
@@ -17,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Login SISGHA',
       theme: ThemeApp.Tema(),
-      initialRoute: '/antesDeTudo',
+      initialRoute: '/primeiraTela',
       routes: AppRoutes.rotas(),
     );
   }

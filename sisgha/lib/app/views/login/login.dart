@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/imagens.dart';
+import 'package:sisgha/app/constants/tamanhoTela.dart';
 import 'package:sisgha/app/widgets/widgtes_login.dart';
 
 class PaginaLogin extends StatefulWidget {
@@ -26,8 +27,6 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
 
   @override
   Widget build(BuildContext context) {
-    double larguraTela = MediaQuery.of(context).size.width;
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -36,9 +35,13 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
           height: MediaQuery.of(context).size.height,
           child: Stack(
             children: [
-              elementoVerde(Alignment.topLeft, 140, 110),
-              elementoVerde(Alignment.bottomRight, 140, 110),
-              formularioLogin(larguraTela),
+              elementoVerde(Alignment.topLeft, TamanhoTela.horizontal(context),
+                  TamanhoTela.vertical(context)),
+              elementoVerde(
+                  Alignment.bottomRight,
+                  TamanhoTela.horizontal(context),
+                  TamanhoTela.vertical(context)),
+              formularioLogin(TamanhoTela.horizontal(context)),
             ],
           ),
         ),
@@ -56,11 +59,11 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Image.asset(ImageApp.logo_sisgha, height: 150),
-                const SizedBox(height: 35),
+                SizedBox(height: TamanhoTela.vertical(context) * 0.20),
+                Image.asset(ImageApp.logo_sisgha,
+                    width: TamanhoTela.horizontal(context) * 0.75),
+                SizedBox(height: TamanhoTela.vertical(context) * 0.02),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Column(
@@ -71,22 +74,25 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
                           children: [
                             _campoDeEntrada('Matrícula', TextInputType.number,
                                 matriculaController, _mostrarErroMatricula),
-                            SizedBox(height: 40),
+                            SizedBox(
+                                height: TamanhoTela.vertical(context) * 0.02),
                             _campoDeEntradaSenha('Senha', TextInputType.text,
                                 senhaController, _mostrarErroSenha),
-                            const SizedBox(height: 30),
+                            SizedBox(
+                                height: TamanhoTela.vertical(context) * 0.02),
                           ],
                         ),
                       ),
                       recuperarSenha(context),
-                      const SizedBox(height: 30),
+                      SizedBox(height: TamanhoTela.vertical(context) * 0.02),
                       botaoEntrar('Entrar', context, formKey,
                           matriculaController, senhaController),
                     ],
                   ),
                 ),
-                const SizedBox(height: 40),
+                SizedBox(height: TamanhoTela.vertical(context) * 0.02),
                 botaoEntrarAluno(context),
+                SizedBox(height: TamanhoTela.vertical(context) * 0.02),
               ],
             ),
           ),

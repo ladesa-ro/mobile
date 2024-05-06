@@ -16,7 +16,7 @@ class AppRoutes {
       '/home': (context) => const Home(),
       '/perfilProf': (context) => const Perfil(),
       '/calendario': (context) => const Calendar(),
-      '/antesDeTudo': (context) => SplashScreen(),
+      '/primeiraTela': (context) => const SplashScreen(),
     };
   }
 }

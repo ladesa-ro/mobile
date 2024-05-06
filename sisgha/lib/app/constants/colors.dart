@@ -7,5 +7,5 @@ class ColorApp {
   static const Color VerdeClaro = Color(0xFF00D047);
   static const Color VerdeCinza = Color(0xFF9AB69E);
   static const Color Branco = Color(0xFFFFFFFF);
-  static const Color Preto = Color(0x00000000);
+  static const Color Preto = Color.fromARGB(255, 0, 0, 0);
 }
