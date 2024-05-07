@@ -75,7 +75,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
                             _campoDeEntrada('Matrícula', TextInputType.number,
                                 matriculaController, _mostrarErroMatricula),
                             SizedBox(
-                                height: TamanhoTela.vertical(context) * 0.02),
+                                height: TamanhoTela.vertical(context) * 0.03),
                             _campoDeEntradaSenha('Senha', TextInputType.text,
                                 senhaController, _mostrarErroSenha),
                             SizedBox(
