@@ -1,4 +1,4 @@
-import 'package:iconify_flutter/iconify_flutter.dart';
+// ignore_for_file: file_names, constant_identifier_names
 
 class Icones {
   //Icones do navigator bar
