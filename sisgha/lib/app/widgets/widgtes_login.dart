@@ -112,7 +112,7 @@ Widget botaoEntrar(texto, context, formKey, matricula, senha) {
     onPressed: () async {
       FocusScopeNode currentFocus = FocusScope.of(context);
       if (formKey.currentState!.validate()) {
-        bool deuCerto = await login(matricula, senha);
+        bool deuCerto = await login(matricula, senha, context);
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
         }

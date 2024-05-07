@@ -23,7 +23,11 @@ class _SplashScreen extends State<SplashScreen> {
       });
 
       Future.delayed(const Duration(milliseconds: 1300), () {
-        Navigator.pushNamed(context, '/bemvindo');
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          '/bemvindo',
+          (route) => false,
+        );
       });
     });
   }
