@@ -5,11 +5,11 @@ class ThemeApp {
   static ThemeData Tema() {
     return ThemeData(
       fontFamily: 'Poppins',
+      useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
         primary: ColorApp.VerdeEscuro,
         seedColor: ColorApp.VerdeClaro,
-      ),
-      useMaterial3: true,
+      ).copyWith(background: Colors.white),
     );
   }
 }

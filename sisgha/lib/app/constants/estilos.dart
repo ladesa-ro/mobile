@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sisgha/app/constants/colors.dart';
 
-const Color corPersonalizada = Color.fromRGBO(154, 182, 158, 1);
-
-ButtonStyle estiloBotao(context) {
+ButtonStyle estiloBotao(
+    context, double left, double top, double right, double bottom) {
   return ButtonStyle(
     padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-        const EdgeInsets.fromLTRB(0, 10, 10, 10)),
+        EdgeInsets.fromLTRB(left, top, right, bottom)),
     shape: MaterialStateProperty.all<OutlinedBorder>(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0))),
     backgroundColor:
@@ -26,16 +26,19 @@ InputDecoration inputDecoration(String labelText, {Widget? suffixIcon}) {
     labelText: labelText,
     contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
     alignLabelWithHint: true,
-    border: inputBorder(),
-    labelStyle: estiloTexto(14, cor: corPersonalizada, peso: FontWeight.w600),
-    focusedBorder: inputBorder(),
+    enabledBorder: inputBorder(1.5),
+    border: inputBorder(2),
+    labelStyle:
+        estiloTexto(14, cor: ColorApp.VerdeCinza, peso: FontWeight.w600),
+    focusedBorder: inputBorder(2),
     suffixIcon: suffixIcon,
   );
 }
 
-OutlineInputBorder inputBorder() {
-  return const OutlineInputBorder(
-    borderSide: BorderSide(color: corPersonalizada),
-    borderRadius: BorderRadius.all(Radius.circular(13)),
+OutlineInputBorder inputBorder(double bold) {
+  return OutlineInputBorder(
+    borderSide: BorderSide(
+        color: ColorApp.VerdeCinza, style: BorderStyle.solid, width: bold),
+    borderRadius: const BorderRadius.all(Radius.circular(13)),
   );
 }

@@ -43,38 +43,40 @@ Widget elementoVerde(Alignment alignment, double width, double height) {
 Widget botaoEntrarAluno(context) {
   return SizedBox(
     height: TamanhoTela.vertical(context) > 750 ? 40 : 35,
-    child: FilledButton(
-      style: estiloBotao(context),
-      onPressed: () => Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const PaginaAluno(),
+    child: Center(
+      child: FilledButton(
+        style: estiloBotao(context, 0, 5, 0, 5),
+        onPressed: () => Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PaginaAluno(),
+            ),
+            (route) => false),
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(width: 19),
+              const Iconify(
+                Icones.PersonCheia,
+                color: ColorApp.Branco,
+              ),
+              const SizedBox(width: 20),
+              Container(
+                width: 2,
+                height: 30,
+                color: ColorApp.Branco,
+              ),
+              const SizedBox(width: 30),
+              Center(
+                child: Text('Entrar como Aluno',
+                    style: estiloTexto(
+                        TamanhoTela.vertical(context) > 750 ? 17 : 16,
+                        peso: FontWeight.w600)),
+              )
+            ],
           ),
-          (route) => false),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(width: 19),
-            const Iconify(
-              Icones.PersonCheia,
-              color: ColorApp.Branco,
-            ),
-            const SizedBox(width: 15),
-            Container(
-              width: 2,
-              height: 30,
-              color: ColorApp.Branco,
-            ),
-            const SizedBox(width: 20),
-            Center(
-              child: Text('Entrar como Aluno',
-                  style: estiloTexto(
-                      TamanhoTela.vertical(context) > 750 ? 21 : 16,
-                      peso: FontWeight.w600)),
-            )
-          ],
         ),
       ),
     ),
@@ -128,14 +130,14 @@ Widget botaoEntrar(texto, context, formKey, matricula, senha) {
         }
       }
     },
-    style: estiloBotao(context),
+    style: estiloBotao(context, 0, 0.5, 0, 6),
     child: SizedBox(
-      height: 30,
+      height: 20,
       width: TamanhoTela.horizontal(context),
       child: Center(
         child: Text(
           texto,
-          style: estiloTexto(TamanhoTela.vertical(context) > 750 ? 20 : 15,
+          style: estiloTexto(TamanhoTela.vertical(context) > 750 ? 18 : 15,
               cor: Colors.white, peso: FontWeight.w600),
         ),
       ),

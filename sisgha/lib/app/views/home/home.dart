@@ -44,14 +44,16 @@ class _HomeState extends State<Home> {
             height: MediaQuery.sizeOf(context).height * 0.08,
             width: MediaQuery.sizeOf(context).width,
             child: ElevatedButton(
-              style: estiloBotao(context),
+              style: estiloBotao(context, 0, 10, 0, 10),
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      contentPadding: EdgeInsets.all(0),
+                      contentPadding: const EdgeInsets.all(0),
                       content: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10)),
                         width: TamanhoTela.horizontal(context),
                         height: TamanhoTela.horizontal(context),
                         child: TableCalendar(

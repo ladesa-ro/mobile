@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:sisgha/app/views/boasvindas.dart';
+import 'package:sisgha/app/views/inicio/boasvindas.dart';
 import 'package:sisgha/app/views/calendario/calendario.dart';
 import 'package:sisgha/app/views/home/home.dart';
 import 'package:sisgha/app/views/home/navegacao.dart';
 import 'package:sisgha/app/views/login/login.dart';
 import 'package:sisgha/app/views/perfil/perfil.dart';
-import 'package:sisgha/app/views/splashScreen.dart';
+import 'package:sisgha/app/views/inicio/splashScreen.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> rotas() {

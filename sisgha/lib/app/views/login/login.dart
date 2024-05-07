@@ -60,10 +60,10 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
             child: Column(
               children: [
-                SizedBox(height: TamanhoTela.vertical(context) * 0.20),
-                Image.asset(ImageApp.logo_sisgha,
-                    width: TamanhoTela.horizontal(context) * 0.75),
-                SizedBox(height: TamanhoTela.vertical(context) * 0.02),
+                SizedBox(height: TamanhoTela.vertical(context) * 0.23),
+                Image.asset(ImageApp.logo_sigha_sem_barra,
+                    width: TamanhoTela.horizontal(context) * 0.55),
+                SizedBox(height: TamanhoTela.vertical(context) * 0.06),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Column(
@@ -90,7 +90,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
                     ],
                   ),
                 ),
-                SizedBox(height: TamanhoTela.vertical(context) * 0.02),
+                SizedBox(height: TamanhoTela.vertical(context) * 0.05),
                 botaoEntrarAluno(context),
                 SizedBox(height: TamanhoTela.vertical(context) * 0.02),
               ],
