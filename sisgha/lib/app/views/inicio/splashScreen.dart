@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/constants/colors.dart';
-
+import 'package:lottie/lottie.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,22 +13,29 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreen extends State<SplashScreen> {
   bool temporizador = false;
+  bool temporizador2 = false;
 
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 2), () {
+
+    Timer(Duration(milliseconds: 2200), () {
       setState(() {
         temporizador = true;
       });
-
-      Future.delayed(const Duration(milliseconds: 1300), () {
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          '/bemvindo',
-          (route) => false,
-        );
+      Timer(Duration(seconds: 2), () {
+        setState(() {
+          temporizador2 = true;
+        });
       });
+    });
+
+    Future.delayed(const Duration(milliseconds: 5210), () {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        '/bemvindo',
+        (route) => false,
+      );
     });
   }
 
@@ -42,9 +49,8 @@ class _SplashScreen extends State<SplashScreen> {
               left: 50,
               right: 50,
               bottom: 150,
-              child: Image.asset(
-                'assets/img/Logomarca-Teste.png',
-                width: TamanhoTela.horizontal(context) * 0.75,
+              child: Lottie.asset(
+                'assets/img/animacao_logo.json',
               )),
           Positioned(
             top: 0,
@@ -60,14 +66,18 @@ class _SplashScreen extends State<SplashScreen> {
                       TamanhoTela.vertical(context) < 700 ? 80 : 100),
                 ),
               ),
-              duration: const Duration(milliseconds: 1200),
-              curve: Curves.linear,
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.easeIn,
               height: temporizador
-                  ? MediaQuery.sizeOf(context).height
-                  : MediaQuery.sizeOf(context).height * 0.20,
+                  ? temporizador2
+                      ? TamanhoTela.vertical(context)
+                      : TamanhoTela.vertical(context) * 0.20
+                  : 0,
               width: temporizador
-                  ? MediaQuery.sizeOf(context).width
-                  : MediaQuery.sizeOf(context).width * 0.35,
+                  ? temporizador2
+                      ? TamanhoTela.horizontal(context)
+                      : TamanhoTela.horizontal(context) * 0.35
+                  : 0,
             ),
           ),
           Positioned(
@@ -84,14 +94,18 @@ class _SplashScreen extends State<SplashScreen> {
                       TamanhoTela.vertical(context) < 700 ? 80 : 100),
                 ),
               ),
-              duration: const Duration(milliseconds: 1200),
-              curve: Curves.linear,
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.easeIn,
               height: temporizador
-                  ? MediaQuery.sizeOf(context).height
-                  : MediaQuery.sizeOf(context).height * 0.20,
+                  ? temporizador2
+                      ? TamanhoTela.vertical(context)
+                      : TamanhoTela.vertical(context) * 0.20
+                  : 0,
               width: temporizador
-                  ? MediaQuery.sizeOf(context).width
-                  : MediaQuery.sizeOf(context).width * 0.35,
+                  ? temporizador2
+                      ? TamanhoTela.horizontal(context)
+                      : TamanhoTela.horizontal(context) * 0.35
+                  : 0,
             ),
           ),
         ],
