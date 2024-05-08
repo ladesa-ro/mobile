@@ -54,7 +54,7 @@ Widget botaoEntrarAluno(context) {
             (route) => false),
         child: Center(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(width: 19),
               const Iconify(
@@ -68,10 +68,11 @@ Widget botaoEntrarAluno(context) {
                 color: ColorApp.Branco,
               ),
               SizedBox(
-                width: 55,
+                width: TamanhoTela.horizontal(context) > 750 ? 18 : 16,
               ),
               Center(
                 child: Text('Entrar como Aluno',
+                    textAlign: TextAlign.center,
                     style: estiloTexto(
                         TamanhoTela.vertical(context) > 750 ? 17 : 16,
                         peso: FontWeight.w600)),
@@ -93,15 +94,17 @@ Widget recuperarSenha(context) {
         Text('Esqueceu a senha?',
             style: estiloTexto(
               cor: ColorApp.VerdeCinza,
-              13,
+              TamanhoTela.horizontal(context) > 750 ? 13 : 11,
               peso: FontWeight.w600,
             )),
         const SizedBox(width: 3),
         GestureDetector(
           onTap: () => Navigator.pushNamed(context, '/home'),
           child: Text('Clique aqui',
-              style: estiloTexto(13,
-                  cor: ColorApp.VerdeEscuro, peso: FontWeight.w600)),
+              style: estiloTexto(
+                  TamanhoTela.horizontal(context) > 750 ? 13 : 11,
+                  cor: ColorApp.VerdeEscuro,
+                  peso: FontWeight.w600)),
         ),
       ],
     ),
