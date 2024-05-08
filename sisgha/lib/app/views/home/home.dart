@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/constants/Icones.dart';
@@ -34,11 +32,11 @@ class _HomeState extends State<Home> {
       body: ListView(
         children: [
           SizedBox(
-            height: TamanhoTela.vertical(context) / 25,
+            height: TamanhoTela.vertical(context) * 0.04,
             width: TamanhoTela.horizontal(context),
           ),
           Container(
-            padding: EdgeInsets.all(TamanhoTela.horizontal(context) * 0.01),
+            padding: EdgeInsets.all(TamanhoTela.horizontal(context) * 0.02),
             height: MediaQuery.sizeOf(context).height * 0.08,
             width: MediaQuery.sizeOf(context).width,
             child: ElevatedButton(
@@ -85,10 +83,13 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(
-            height: TamanhoTela.vertical(context) / 25,
+            height: TamanhoTela.vertical(context) * 0.035,
           ),
           //botoes com os dias da semana
-          ConstruindoQuadrados(context),
+          Container(
+            height: TamanhoTela.vertical(context),
+            child: QuadradosHome(context),
+          )
         ],
       ),
     );

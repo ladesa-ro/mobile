@@ -19,7 +19,7 @@ class _SplashScreen extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Timer(Duration(milliseconds: 2200), () {
+    Timer(Duration(milliseconds: 2300), () {
       setState(() {
         temporizador = true;
       });
@@ -30,7 +30,7 @@ class _SplashScreen extends State<SplashScreen> {
       });
     });
 
-    Future.delayed(const Duration(milliseconds: 5210), () {
+    Future.delayed(const Duration(milliseconds: 5310), () {
       Navigator.pushNamedAndRemoveUntil(
         context,
         '/bemvindo',

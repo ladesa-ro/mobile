@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/dias.dart';
@@ -16,6 +19,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    DateTime date = now.add(Duration(days: 7 - now.weekday));
+    final diaDoMes = DateFormat('dd').format(date);
+
+    final primeirodiaSemana = int.parse(diaDoMes) - 6;
+
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Theme.of(context).colorScheme.primary,
@@ -49,7 +58,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
                 Text(
-                  '${DatasFormatadas.MesAgora[0].toUpperCase() + DatasFormatadas.MesAgora.substring(1)} - Dia 12 a 16',
+                  '${DatasFormatadas.MesAgora[0].toUpperCase() + DatasFormatadas.MesAgora.substring(1)} - ${primeirodiaSemana} a ${diaDoMes}',
                   style: estiloTexto(
                     TamanhoTela.horizontal(context) < 400 ? 21 : 23,
                     cor: ColorApp.Branco,

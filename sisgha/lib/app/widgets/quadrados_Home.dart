@@ -1,66 +1,95 @@
-// ignore_for_file: non_constant_identifier_names, prefer_const_constructors
-
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+import 'package:intl/intl.dart';
 import 'package:sisgha/app/constants/colors.dart';
-import 'package:sisgha/app/constants/dias.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
 
-Widget Quadrados_Home(context) {
-  return Container(
-    foregroundDecoration: BoxDecoration(),
-    decoration: BoxDecoration(
-        color: ColorApp.Branco,
-        border: Border.all(
-            color: ColorApp.VerdeEscuro,
-            width: 1.0,
-            style: BorderStyle.solid,
-            strokeAlign: BorderSide.strokeAlignInside),
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15),
-            topRight: Radius.circular(15),
-            bottomRight: Radius.circular(15),
-            bottomLeft: Radius.circular(15))),
-    width: TamanhoTela.horizontal(context) / 8,
-    height: TamanhoTela.vertical(context) / 12,
-    child: Column(
-      children: [
-        Spacer(),
-        Text(
-          'Seg',
-          style: estiloTexto(15, cor: ColorApp.VerdeEscuro),
-        ),
-        Spacer(),
-        Container(
-          width: 30,
-          height: 2,
-          color: ColorApp.VerdeEscuro,
-        ),
-        Spacer(),
-        Text('${DatasFormatadas.DiaAgora}',
-            style: estiloTexto(15, cor: ColorApp.VerdeEscuro)),
-        Spacer()
-      ],
+@override
+Widget QuadradosHome(BuildContext context) {
+  return Scaffold(
+    body: Container(
+      height: MediaQuery.sizeOf(context).height > 750
+          ? MediaQuery.sizeOf(context).height * 0.08
+          : MediaQuery.sizeOf(context).height * 0.10,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: 6,
+        itemBuilder: (context, index) {
+          return Container(
+            child: ConstrutorQuadrados(context, index),
+          );
+        },
+      ),
     ),
   );
 }
 
-Widget ConstruindoQuadrados(context) {
+Widget ConstrutorQuadrados(BuildContext context, int index) {
+  List<String> weekdays = [
+    'Seg',
+    'Ter',
+    'Qua',
+    'Qui',
+    'Sex',
+    'Sab',
+  ];
+  DateTime now = DateTime.now();
+  DateTime date = now.add(Duration(days: index - now.weekday + 1));
+  final diaDoMes = DateFormat('dd').format(date);
+
   return Row(
     children: [
-      Spacer(),
-      Quadrados_Home(context),
-      Spacer(),
-      Quadrados_Home(context),
-      Spacer(),
-      Quadrados_Home(context),
-      Spacer(),
-      Quadrados_Home(context),
-      Spacer(),
-      Quadrados_Home(context),
-      Spacer(),
-      Quadrados_Home(context),
-      Spacer(),
+      SizedBox(
+        width: TamanhoTela.horizontal(context) * 0.04,
+      ),
+      Container(
+        foregroundDecoration: BoxDecoration(),
+        decoration: BoxDecoration(
+          color: diaDoMes == DateFormat('dd').format(now)
+              ? ColorApp.VerdeEscuro
+              : null,
+          border: Border.all(
+            color: ColorApp.VerdeEscuro,
+            width: 1.0,
+            style: BorderStyle.solid,
+          ),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(13),
+          ),
+        ),
+        width: MediaQuery.of(context).size.width * 0.12,
+        height: MediaQuery.of(context).size.height * 0.10,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              weekdays[index],
+              style: estiloTexto(15,
+                  cor: diaDoMes == DateFormat('dd').format(now)
+                      ? ColorApp.Branco
+                      : ColorApp.VerdeCinza,
+                  peso: FontWeight.w700),
+            ),
+            Container(
+              width: 30,
+              height: 2,
+              color: diaDoMes == DateFormat('dd').format(now)
+                  ? ColorApp.Branco
+                  : ColorApp.VerdeCinza,
+            ),
+            Text(
+              '${diaDoMes}',
+              style: estiloTexto(15,
+                  cor: diaDoMes == DateFormat('dd').format(now)
+                      ? ColorApp.Branco
+                      : ColorApp.VerdeCinza,
+                  peso: FontWeight.w700),
+            ),
+          ],
+        ),
+      )
     ],
   );
 }

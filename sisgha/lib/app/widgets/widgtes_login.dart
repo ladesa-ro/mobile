@@ -54,7 +54,7 @@ Widget botaoEntrarAluno(context) {
             (route) => false),
         child: Center(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(width: 19),
               const Iconify(
@@ -68,7 +68,7 @@ Widget botaoEntrarAluno(context) {
                 color: ColorApp.Branco,
               ),
               SizedBox(
-                width: TamanhoTela.horizontal(context) > 750 ? 18 : 16,
+                width: TamanhoTela.horizontal(context) > 750 ? 55 : 45,
               ),
               Center(
                 child: Text('Entrar como Aluno',

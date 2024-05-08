@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class TamanhoTela {
   static double horizontal(BuildContext context) {
-    return MediaQuery.of(context).size.width;
+    return MediaQuery.sizeOf(context).width;
   }
 
   static double vertical(BuildContext context) {
-    return MediaQuery.of(context).size.height;
+    return MediaQuery.sizeOf(context).height;
   }
 }
