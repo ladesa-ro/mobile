@@ -12,7 +12,7 @@ class _FutureBuilderPerfilState extends State<FutureBuilderPerfil> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>>(
-      future: buscarUser(),
+      future: buscarUser(context),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return const Center(
@@ -34,7 +34,6 @@ class _FutureBuilderPerfilState extends State<FutureBuilderPerfil> {
                 );
               }
               var id = idSnapshot.data!;
-              print(id);
               return Center(
                 child: ListTile(
                   leading: CircleAvatar(
@@ -46,7 +45,7 @@ class _FutureBuilderPerfilState extends State<FutureBuilderPerfil> {
                   title: Text(snapshot.data!["nome"]),
                   subtitle: Text(snapshot.data!["email"]),
                   trailing:
-                      Text("Matricula: \n${snapshot.data!['matriculaSiape']}"),
+                      Text("Matricula: \n${snapshot.data!["matriculaSiape"]}"),
                 ),
               );
             },
