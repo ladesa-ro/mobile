@@ -67,15 +67,15 @@ Widget botaoEntrarAluno(context) {
                 height: 30,
                 color: ColorApp.Branco,
               ),
-              SizedBox(
-                width: TamanhoTela.horizontal(context) > 750 ? 55 : 45,
-              ),
+              const Spacer(),
               Center(
                 child: Text('Entrar como Aluno',
-                    textAlign: TextAlign.center,
                     style: estiloTexto(
                         TamanhoTela.vertical(context) > 750 ? 17 : 16,
                         peso: FontWeight.w600)),
+              ),
+              const Spacer(
+                flex: 3,
               ),
             ],
           ),
