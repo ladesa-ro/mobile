@@ -25,20 +25,18 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       //aqui mexe no tamnho da barra de cima
-      appBar: CustomAppBar(
-          height: TamanhoTela.vertical(context) < 810
-              ? TamanhoTela.vertical(context) * 0.10
-              : TamanhoTela.vertical(context) * 0.07),
+      appBar: const CustomAppBar(height: 55),
+
       body: ListView(
         children: [
-          SizedBox(
-            height: TamanhoTela.vertical(context) * 0.04,
-            width: TamanhoTela.horizontal(context),
-          ),
+          SizedBox(height: TamanhoTela.vertical(context) * 0.058),
           Container(
-            padding: EdgeInsets.all(TamanhoTela.horizontal(context) * 0.02),
-            height: MediaQuery.sizeOf(context).height * 0.08,
-            width: MediaQuery.sizeOf(context).width,
+            padding: EdgeInsets.only(
+                left: TamanhoTela.horizontal(context) * 0.02,
+                top: 0,
+                right: TamanhoTela.horizontal(context) * 0.02,
+                bottom: 0),
+            height: 52,
             child: ElevatedButton(
               style: estiloBotao(context, 0, 10, 0, 10),
               onPressed: () {
@@ -58,22 +56,22 @@ class _HomeState extends State<Home> {
                   ),
                   Icon(
                     Icons.calendar_month,
-                    size: TamanhoTela.horizontal(context) / 12,
-                    color: Colors.white,
+                    size: TamanhoTela.vertical(context) > 810 ? 28 : 22,
+                    color: ColorApp.Branco,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     'Calendário ${now.year}',
                     style: estiloTexto(
-                        TamanhoTela.horizontal(context) > 650 ? 35 : 18,
+                        TamanhoTela.vertical(context) > 810 ? 17 : 15,
                         cor: Colors.white,
-                        peso: FontWeight.w700),
+                        peso: FontWeight.bold),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Iconify(
                     Icones.SetaBaixo,
                     color: ColorApp.Branco,
-                    size: TamanhoTela.horizontal(context) > 650 ? 35 : 25,
+                    size: TamanhoTela.vertical(context) > 810 ? 25 : 20,
                   ),
                   const SizedBox(
                     width: 16,
@@ -83,10 +81,11 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(
-            height: TamanhoTela.vertical(context) * 0.035,
+            height: TamanhoTela.vertical(context) * 0.04,
           ),
           //botoes com os dias da semana
-          Container(
+
+          SizedBox(
             height: TamanhoTela.vertical(context),
             child: QuadradosHome(context),
           )

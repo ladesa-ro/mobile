@@ -30,6 +30,7 @@ class _NavigationState extends State<Navigation> {
     return Scaffold(
       body: _buildPage(_selectedIndex),
       bottomNavigationBar: BottomAppBar(
+        height: TamanhoTela.vertical(context) > 810 ? 60 : 56,
         color: ColorApp.VerdeEscuro,
         child: SizedBox(
           height: 60.0,
@@ -79,17 +80,17 @@ class _NavigationState extends State<Navigation> {
           color: _selectedIndex == index ? Colors.white : null,
           borderRadius: BorderRadius.circular(10),
         ),
-        width: TamanhoTela.horizontal(context) / 6,
-        height: TamanhoTela.vertical(context) / 5,
+        width: 55,
+        height: 50,
         child: _selectedIndex == index
             ? Iconify(
                 iconCheio,
-                size: 30,
+                size: 20,
                 color: ColorApp.VerdeEscuro,
               )
             : Iconify(
                 iconVazio,
-                size: 30,
+                size: 20,
                 color: Colors.white,
               ),
       ),

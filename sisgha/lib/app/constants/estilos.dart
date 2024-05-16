@@ -4,12 +4,13 @@ import 'package:sisgha/app/constants/colors.dart';
 ButtonStyle estiloBotao(
     context, double left, double top, double right, double bottom) {
   return ButtonStyle(
-    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+    //MaterialStateProperty tava assim antes mas tava dando erro
+    padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
         EdgeInsets.fromLTRB(left, top, right, bottom)),
-    shape: MaterialStateProperty.all<OutlinedBorder>(
+    shape: WidgetStateProperty.all<OutlinedBorder>(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0))),
     backgroundColor:
-        MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.primary),
+        WidgetStateProperty.all<Color>(Theme.of(context).colorScheme.primary),
   );
 }
 

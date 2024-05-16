@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
 import 'package:intl/intl.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
 
 @override
+// ignore: non_constant_identifier_names
 Widget QuadradosHome(BuildContext context) {
   return Scaffold(
-    body: Container(
+    body: SizedBox(
       height: MediaQuery.sizeOf(context).height > 750
           ? MediaQuery.sizeOf(context).height * 0.08
           : MediaQuery.sizeOf(context).height * 0.10,
@@ -26,6 +25,7 @@ Widget QuadradosHome(BuildContext context) {
   );
 }
 
+// ignore: non_constant_identifier_names
 Widget ConstrutorQuadrados(BuildContext context, int index) {
   List<String> weekdays = [
     'Seg',
@@ -45,7 +45,6 @@ Widget ConstrutorQuadrados(BuildContext context, int index) {
         width: TamanhoTela.horizontal(context) * 0.04,
       ),
       Container(
-        foregroundDecoration: BoxDecoration(),
         decoration: BoxDecoration(
           color: diaDoMes == DateFormat('dd').format(now)
               ? ColorApp.VerdeEscuro
@@ -70,7 +69,7 @@ Widget ConstrutorQuadrados(BuildContext context, int index) {
                   cor: diaDoMes == DateFormat('dd').format(now)
                       ? ColorApp.Branco
                       : ColorApp.VerdeCinza,
-                  peso: FontWeight.w700),
+                  peso: FontWeight.w600),
             ),
             Container(
               width: 30,
@@ -80,12 +79,12 @@ Widget ConstrutorQuadrados(BuildContext context, int index) {
                   : ColorApp.VerdeCinza,
             ),
             Text(
-              '${diaDoMes}',
+              diaDoMes,
               style: estiloTexto(15,
                   cor: diaDoMes == DateFormat('dd').format(now)
                       ? ColorApp.Branco
                       : ColorApp.VerdeCinza,
-                  peso: FontWeight.w700),
+                  peso: FontWeight.w600),
             ),
           ],
         ),
