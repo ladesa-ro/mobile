@@ -8,9 +8,10 @@ class ThemeApp {
       fontFamily: 'Poppins',
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-        primary: ColorApp.VerdeEscuro,
+        primary: ColorApp.VerdePrincipal,
         seedColor: ColorApp.VerdeClaro,
-      ).copyWith(background: Colors.white),
+        // o flutter atualizou e substituiu o backgraud para o surface
+      ).copyWith(surface: Colors.white),
     );
   }
 }

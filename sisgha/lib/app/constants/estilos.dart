@@ -16,10 +16,7 @@ ButtonStyle estiloBotao(
 
 TextStyle estiloTexto(double tamanho, {Color? cor, FontWeight? peso}) {
   return TextStyle(
-    fontSize: tamanho,
-    color: cor,
-    fontWeight: peso,
-  );
+      fontSize: tamanho, color: cor, fontWeight: peso, fontFamily: 'Poppins');
 }
 
 InputDecoration inputDecoration(String labelText, {Widget? suffixIcon}) {

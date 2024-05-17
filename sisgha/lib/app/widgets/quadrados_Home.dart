@@ -9,9 +9,9 @@ import 'package:sisgha/app/constants/tamanhoTela.dart';
 Widget QuadradosHome(BuildContext context) {
   return Scaffold(
     body: SizedBox(
-      height: MediaQuery.sizeOf(context).height > 750
-          ? MediaQuery.sizeOf(context).height * 0.08
-          : MediaQuery.sizeOf(context).height * 0.10,
+      height: TamanhoTela.vertical(context) > 810
+          ? TamanhoTela.vertical(context) * 0.08
+          : TamanhoTela.vertical(context) * 0.10,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 6,
@@ -47,10 +47,10 @@ Widget ConstrutorQuadrados(BuildContext context, int index) {
       Container(
         decoration: BoxDecoration(
           color: diaDoMes == DateFormat('dd').format(now)
-              ? ColorApp.VerdeEscuro
+              ? ColorApp.VerdePrincipal
               : null,
           border: Border.all(
-            color: ColorApp.VerdeEscuro,
+            color: ColorApp.VerdePrincipal,
             width: 1.0,
             style: BorderStyle.solid,
           ),

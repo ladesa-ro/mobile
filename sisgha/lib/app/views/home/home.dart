@@ -3,6 +3,7 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
+import 'package:sisgha/app/widgets/horarios.dart';
 import 'package:sisgha/app/widgets/mini_calend.dart';
 import 'package:sisgha/app/widgets/quadrados_Home.dart';
 import 'package:sisgha/app/views/home/barra_top.dart';
@@ -25,11 +26,14 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       //aqui mexe no tamnho da barra de cima
-      appBar: const CustomAppBar(height: 55),
+      appBar: const CustomAppBar(height: 60),
 
       body: ListView(
         children: [
-          SizedBox(height: TamanhoTela.vertical(context) * 0.058),
+          SizedBox(
+              height: TamanhoTela.vertical(context) > 810
+                  ? TamanhoTela.vertical(context) * 0.04
+                  : TamanhoTela.vertical(context) * 0.05),
           Container(
             padding: EdgeInsets.only(
                 left: TamanhoTela.horizontal(context) * 0.02,
@@ -85,10 +89,20 @@ class _HomeState extends State<Home> {
           ),
           //botoes com os dias da semana
 
-          SizedBox(
-            height: TamanhoTela.vertical(context),
+          Container(
+            height: TamanhoTela.vertical(context) > 810
+                ? TamanhoTela.vertical(context) * 0.08
+                : TamanhoTela.vertical(context) * 0.10,
             child: QuadradosHome(context),
-          )
+          ),
+          SizedBox(
+            height: TamanhoTela.vertical(context) * 0.05,
+          ),
+
+          Container(
+            height: TamanhoTela.vertical(context),
+            child: Horarios(context),
+          ),
         ],
       ),
     );

@@ -30,7 +30,7 @@ Widget elementoVerde(Alignment alignment, double width, double height) {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            ColorApp.VerdeEscuro,
+            ColorApp.VerdePrincipal,
             ColorApp.VerdeClaro,
           ],
         ),
@@ -103,7 +103,7 @@ Widget recuperarSenha(context) {
           child: Text('Clique aqui',
               style: estiloTexto(
                   TamanhoTela.horizontal(context) > 750 ? 13 : 11,
-                  cor: ColorApp.VerdeEscuro,
+                  cor: ColorApp.VerdePrincipal,
                   peso: FontWeight.w600)),
         ),
       ],
