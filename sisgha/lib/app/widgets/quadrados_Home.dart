@@ -3,92 +3,121 @@ import 'package:intl/intl.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
+import 'package:sisgha/app/widgets/horarios.dart';
 
-@override
-// ignore: non_constant_identifier_names
-Widget QuadradosHome(BuildContext context) {
-  return Scaffold(
-    body: SizedBox(
-      height: TamanhoTela.vertical(context) > 810
-          ? TamanhoTela.vertical(context) * 0.08
-          : TamanhoTela.vertical(context) * 0.10,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 6,
-        itemBuilder: (context, index) {
-          return Container(
-            child: ConstrutorQuadrados(context, index),
-          );
-        },
-      ),
-    ),
-  );
+class QuadradosHome extends StatefulWidget {
+  const QuadradosHome({super.key});
+
+  @override
+  State<QuadradosHome> createState() => _QuadradosHomeState();
 }
 
-// ignore: non_constant_identifier_names
-Widget ConstrutorQuadrados(BuildContext context, int index) {
-  List<String> weekdays = [
-    'Seg',
-    'Ter',
-    'Qua',
-    'Qui',
-    'Sex',
-    'Sab',
-  ];
-  DateTime now = DateTime.now();
-  DateTime date = now.add(Duration(days: index - now.weekday + 1));
-  final diaDoMes = DateFormat('dd').format(date);
+class _QuadradosHomeState extends State<QuadradosHome>
+    with TickerProviderStateMixin {
+  late TabController _tabController;
+  late int _quadradoSelecionado;
 
-  return Row(
-    children: [
-      SizedBox(
-        width: TamanhoTela.horizontal(context) * 0.04,
+  @override
+  void initState() {
+    super.initState();
+    _quadradoSelecionado = DateTime.now().weekday - 1;
+    _tabController = TabController(
+        length: 6, vsync: this, initialIndex: _quadradoSelecionado);
+    _tabController.addListener(() {
+      setState(() {
+        _quadradoSelecionado = _tabController.index;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    int index = 0;
+    return Scaffold(
+      body: Column(
+        children: [
+          TabBar(
+            //acredito que da para limpar essa parte do codigo com o tabbar teme mas nao tentei nao
+            splashFactory: NoSplash.splashFactory,
+            labelPadding: const EdgeInsets.all(7),
+            unselectedLabelStyle: estiloTexto(15,
+                cor: ColorApp.VerdeCinza, peso: FontWeight.w600),
+            indicator: const BoxDecoration(),
+            dividerHeight: 0,
+            labelStyle:
+                estiloTexto(15, cor: ColorApp.Branco, peso: FontWeight.bold),
+            controller: _tabController,
+            tabs: [
+              _contruindoInterface(index++),
+              _contruindoInterface(index++),
+              _contruindoInterface(index++),
+              _contruindoInterface(index++),
+              _contruindoInterface(index++),
+              _contruindoInterface(index),
+            ],
+          ),
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                Horarios(),
+                Horarios(),
+                Horarios(),
+                Horarios(),
+                Horarios(),
+                Horarios(),
+              ],
+            ),
+          )
+        ],
       ),
-      Container(
-        decoration: BoxDecoration(
-          color: diaDoMes == DateFormat('dd').format(now)
-              ? ColorApp.VerdePrincipal
-              : null,
+    );
+  }
+
+  Widget _contruindoInterface(int index) {
+    List<String> diasDaSemana = [
+      'Seg',
+      'Ter',
+      'Qua',
+      'Qui',
+      'Sex',
+      'Sab',
+    ];
+
+    DateTime now = DateTime.now();
+    DateTime date = now.add(Duration(days: index - now.weekday + 1));
+    final diaDaSemanaSoQueEmNumeros = DateFormat('dd').format(date);
+
+    bool qualselecionado = _quadradoSelecionado == index;
+    return Container(
+      decoration: BoxDecoration(
+          color: qualselecionado ? ColorApp.VerdeEscuro : null,
           border: Border.all(
-            color: ColorApp.VerdePrincipal,
-            width: 1.0,
-            style: BorderStyle.solid,
+              color: ColorApp.VerdeEscuro,
+              width: 1.0,
+              style: BorderStyle.solid),
+          borderRadius: const BorderRadius.all(Radius.circular(12))),
+      width: 50,
+      height: TamanhoTela.vertical(context) > 810 ? 75 : 70,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(diasDaSemana[index]),
+          Container(
+            color: qualselecionado ? ColorApp.Branco : ColorApp.VerdeCinza,
+            width: 30,
+            height: 1.5,
           ),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(13),
-          ),
-        ),
-        width: MediaQuery.of(context).size.width * 0.12,
-        height: MediaQuery.of(context).size.height * 0.10,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text(
-              weekdays[index],
-              style: estiloTexto(15,
-                  cor: diaDoMes == DateFormat('dd').format(now)
-                      ? ColorApp.Branco
-                      : ColorApp.VerdeCinza,
-                  peso: FontWeight.w600),
-            ),
-            Container(
-              width: 30,
-              height: 2,
-              color: diaDoMes == DateFormat('dd').format(now)
-                  ? ColorApp.Branco
-                  : ColorApp.VerdeCinza,
-            ),
-            Text(
-              diaDoMes,
-              style: estiloTexto(15,
-                  cor: diaDoMes == DateFormat('dd').format(now)
-                      ? ColorApp.Branco
-                      : ColorApp.VerdeCinza,
-                  peso: FontWeight.w600),
-            ),
-          ],
-        ),
-      )
-    ],
-  );
+          Text(diaDaSemanaSoQueEmNumeros)
+        ],
+      ),
+    );
+  }
 }

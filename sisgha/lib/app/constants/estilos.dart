@@ -9,8 +9,7 @@ ButtonStyle estiloBotao(
         EdgeInsets.fromLTRB(left, top, right, bottom)),
     shape: WidgetStateProperty.all<OutlinedBorder>(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0))),
-    backgroundColor:
-        WidgetStateProperty.all<Color>(Theme.of(context).colorScheme.primary),
+    backgroundColor: WidgetStateProperty.all<Color>(ColorApp.VerdeEscuro),
   );
 }
 

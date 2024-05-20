@@ -89,19 +89,9 @@ class _HomeState extends State<Home> {
           ),
           //botoes com os dias da semana
 
-          Container(
-            height: TamanhoTela.vertical(context) > 810
-                ? TamanhoTela.vertical(context) * 0.08
-                : TamanhoTela.vertical(context) * 0.10,
-            child: QuadradosHome(context),
-          ),
           SizedBox(
-            height: TamanhoTela.vertical(context) * 0.05,
-          ),
-
-          Container(
             height: TamanhoTela.vertical(context),
-            child: Horarios(context),
+            child: QuadradosHome(),
           ),
         ],
       ),

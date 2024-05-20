@@ -2,103 +2,52 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
-import 'package:sisgha/app/constants/estilos.dart';
-import 'package:sisgha/app/constants/tamanhoTela.dart';
 
-// ignore: non_constant_identifier_names
-Widget Horarios(BuildContext context) {
-  return Scaffold(
-      body: Column(
-    children: [
-      Container(
-        padding: const EdgeInsets.only(left: 15, right: 10),
-        margin: const EdgeInsets.only(right: 15, left: 15),
-        height: TamanhoTela.vertical(context) * 0.12,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          border: Border.all(
-            style: BorderStyle.solid,
-            width: 1.5,
-            color: ColorApp.VerdeCinza,
-          ),
-        ),
-        child: Row(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Linguagem de Programação',
-                  style: estiloTexto(
-                      TamanhoTela.vertical(context) > 810 ? 15 : 13,
-                      cor: ColorApp.VerdeCinza,
-                      peso: FontWeight.w500),
+class Horarios extends StatefulWidget {
+  const Horarios({super.key});
+
+  @override
+  State<Horarios> createState() => _HorariosState();
+}
+
+class _HorariosState extends State<Horarios> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ListView.builder(
+          itemCount: 2,
+          itemBuilder: (context, index) {
+            return Container(
+              margin: const EdgeInsets.only(
+                  left: 10, top: 20, right: 10, bottom: 0),
+              padding: const EdgeInsets.only(left: 12, right: 5),
+              height: 85,
+              decoration: BoxDecoration(
+                border: Border.all(color: ColorApp.VerdeCinza, width: 2),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(12),
                 ),
-                Text('2º A Informatica - Ambiente: Labin 1',
-                    style: estiloTexto(
-                        TamanhoTela.vertical(context) > 810 ? 15 : 13,
-                        cor: ColorApp.VerdeCinza,
-                        peso: FontWeight.w500)),
-                Text('Horario 8:10 - 9:00',
-                    style: estiloTexto(
-                        TamanhoTela.vertical(context) > 810 ? 15 : 13,
-                        cor: ColorApp.VerdeCinza,
-                        peso: FontWeight.w500))
-              ],
-            ),
-          ],
-        ),
-      ),
-      const SizedBox(
-        height: 20,
-      ),
-      Container(
-        padding: const EdgeInsets.only(left: 15, right: 13),
-        margin: const EdgeInsets.only(right: 15, left: 15),
-        height: TamanhoTela.vertical(context) * 0.12,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-          border: Border.all(
-            style: BorderStyle.solid,
-            width: 1.5,
-            color: ColorApp.Preto,
-          ),
-        ),
-        child: Row(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Linguagem de Programação',
-                  style: estiloTexto(
-                      TamanhoTela.vertical(context) > 810 ? 15 : 13,
-                      cor: ColorApp.Preto,
-                      peso: FontWeight.bold),
-                ),
-                Text('2º A Informatica - Ambiente: Labin 1',
-                    style: estiloTexto(
-                        TamanhoTela.vertical(context) > 810 ? 15 : 13,
-                        cor: ColorApp.Preto,
-                        peso: FontWeight.w300)),
-                Text('Horario 8:10 - 9:00',
-                    style: estiloTexto(
-                        TamanhoTela.vertical(context) > 810 ? 15 : 13,
-                        cor: ColorApp.Preto,
-                        peso: FontWeight.bold))
-              ],
-            ),
-            const Spacer(),
-            const Iconify(
-              Icones.Relogio,
-              color: ColorApp.VerdeEscuro,
-              size: 35,
-            )
-          ],
-        ),
-      ),
-    ],
-  ));
+              ),
+              child: const Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Logica de Programação'),
+                      Text('2º B Informatica'),
+                      Text('Horario: 8:20 a 9:10'),
+                    ],
+                  ),
+                  Spacer(),
+                  Iconify(
+                    Icones.Relogio,
+                    color: ColorApp.VerdePrincipal,
+                  )
+                ],
+              ),
+            );
+          }),
+    );
+  }
 }
