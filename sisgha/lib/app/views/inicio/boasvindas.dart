@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sisgha/app/views/home/navegacao.dart';
 import 'package:sisgha/app/views/login/login.dart';
+import 'package:sisgha/app/widgets/progressIndicator.dart';
 
 class BoasVindasPage extends StatefulWidget {
   const BoasVindasPage({super.key});
@@ -42,7 +43,7 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: CircularProgressIndicator(),
+        child: Progressindicator(),
       ),
     );
   }
