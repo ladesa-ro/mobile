@@ -65,13 +65,37 @@ class _QuadradosHomeState extends State<QuadradosHome>
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: [
-                Horarios(),
-                Horarios(),
-                Horarios(),
-                Horarios(),
-                Horarios(),
-                Horarios(),
+              children: const [
+                Horarios(
+                  materia: 'Matemática',
+                  turma: '3A',
+                  horario: '08:00 - 09:30',
+                ),
+                Horarios(
+                  materia: 'História',
+                  turma: '2B',
+                  horario: '10:00 - 11:30',
+                ),
+                Horarios(
+                  materia: 'Geografia',
+                  turma: '1C',
+                  horario: '13:00 - 14:30',
+                ),
+                Horarios(
+                  materia: 'Lógica de Programação',
+                  turma: '3C',
+                  horario: '13:00 - 14:30',
+                ),
+                Horarios(
+                  materia: 'Geografia',
+                  turma: '1C',
+                  horario: '13:00 - 14:30',
+                ),
+                Horarios(
+                  materia: 'Geografia',
+                  turma: '1C',
+                  horario: '13:00 - 14:30',
+                ),
               ],
             ),
           )
