@@ -8,6 +8,7 @@ class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SplashScreen createState() => _SplashScreen();
 }
 
@@ -19,11 +20,11 @@ class _SplashScreen extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-    Timer(Duration(milliseconds: 2300), () {
+    Timer(const Duration(milliseconds: 2300), () {
       setState(() {
         temporizador = true;
       });
-      Timer(Duration(seconds: 2), () {
+      Timer(const Duration(seconds: 2), () {
         setState(() {
           temporizador2 = true;
         });

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sisgha/app/constants/colors.dart';
 
 class ThemeApp {
+  // ignore: non_constant_identifier_names
   static ThemeData Tema() {
     return ThemeData(
       appBarTheme: const AppBarTheme(color: Colors.transparent),

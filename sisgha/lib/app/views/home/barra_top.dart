@@ -20,8 +20,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     DateTime now = DateTime.now();
     DateTime date = now.add(Duration(days: 6 - now.weekday));
     final diaDoMes = DateFormat('dd').format(date);
-
     final primeirodiaSemana = int.parse(diaDoMes) - 6;
+
+    final corrigeErro =
+        primeirodiaSemana < 0 ? primeirodiaSemana * -1 : primeirodiaSemana;
 
     return AppBar(
       automaticallyImplyLeading: false,
@@ -53,7 +55,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       peso: FontWeight.bold),
                 ),
                 Text(
-                  '${DatasFormatadas.MesAgora[0].toUpperCase() + DatasFormatadas.MesAgora.substring(1)} - ${primeirodiaSemana} a ${diaDoMes}',
+                  '${DatasFormatadas.MesAgora[0].toUpperCase() + DatasFormatadas.MesAgora.substring(1)} - $corrigeErro a $diaDoMes',
                   style: estiloTexto(
                       TamanhoTela.vertical(context) > 810 ? 16 : 14,
                       cor: ColorApp.Branco,

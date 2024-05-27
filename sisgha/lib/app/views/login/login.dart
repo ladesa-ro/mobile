@@ -104,7 +104,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
   Widget _campoDeEntrada(String labelText, TextInputType inputType,
       TextEditingController controller, bool mostrarErro) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       height: mostrarErro ? 60 : 40,
       child: TextFormField(
         controller: controller,
@@ -135,7 +135,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
   Widget _campoDeEntradaSenha(String labelText, TextInputType inputType,
       TextEditingController controller, bool mostrarErro) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       height: mostrarErro ? 60 : 40,
       child: TextFormField(
         controller: controller,

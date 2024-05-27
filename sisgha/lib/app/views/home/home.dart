@@ -3,7 +3,6 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
-import 'package:sisgha/app/widgets/horarios.dart';
 import 'package:sisgha/app/widgets/mini_calend.dart';
 import 'package:sisgha/app/widgets/quadrados_Home.dart';
 import 'package:sisgha/app/views/home/barra_top.dart';
@@ -11,7 +10,7 @@ import 'package:sisgha/app/constants/estilos.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key});
+  const Home({super.key});
 
   @override
   State<Home> createState() => _HomeState();
@@ -91,7 +90,7 @@ class _HomeState extends State<Home> {
 
           SizedBox(
             height: TamanhoTela.vertical(context),
-            child: QuadradosHome(),
+            child: const QuadradosHome(),
           ),
         ],
       ),

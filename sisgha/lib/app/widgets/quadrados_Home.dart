@@ -44,6 +44,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
         children: [
           TabBar(
             //acredito que da para limpar essa parte do codigo com o tabbar teme mas nao tentei nao
+
             splashFactory: NoSplash.splashFactory,
             labelPadding: const EdgeInsets.all(7),
             unselectedLabelStyle: estiloTexto(15,
@@ -65,6 +66,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
           Expanded(
             child: TabBarView(
               controller: _tabController,
+              physics: const NeverScrollableScrollPhysics(),
               children: const [
                 Horarios(
                   materia: 'Matemática',

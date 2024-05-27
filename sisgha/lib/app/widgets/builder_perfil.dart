@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/api/repository.dart';
+import 'package:sisgha/app/widgets/progressIndicator.dart';
 
 class FutureBuilderPerfil extends StatefulWidget {
   const FutureBuilderPerfil({super.key});
@@ -25,7 +26,9 @@ class _FutureBuilderPerfilState extends State<FutureBuilderPerfil> {
             builder: (context, idSnapshot) {
               if (idSnapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  child: Progressindicator(
+                    tamanho: 100,
+                  ),
                 );
               }
               if (idSnapshot.hasError || idSnapshot.data == null) {
@@ -52,7 +55,9 @@ class _FutureBuilderPerfilState extends State<FutureBuilderPerfil> {
           );
         }
         return const Center(
-          child: CircularProgressIndicator(),
+          child: Progressindicator(
+            tamanho: 100,
+          ),
         );
       },
     );

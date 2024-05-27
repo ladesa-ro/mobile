@@ -23,7 +23,7 @@ class Icones {
   //icones da Pagina Home
 
   static const String Bell =
-      '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d="M218.35 178c-5.77-10-14.35-37.87-14.35-74a76 76 0 1 0-152 0c0 36.13-8.59 64-14.36 73.95A12 12 0 0 0 48 196h44.23a36 36 0 0 0 71.54 0H208a12 12 0 0 0 10.35-18M128 220a28 28 0 0 1-27.71-24h55.42A28 28 0 0 1 128 220m83.45-34a3.91 3.91 0 0 1-3.44 2H48a3.91 3.91 0 0 1-3.44-2a4 4 0 0 1 0-4C52 169.17 60 139.32 60 104a68 68 0 1 1 136 0c0 35.31 8 65.17 15.44 78a4 4 0 0 1 .01 4"/></svg>';
+      '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17v1a3 3 0 1 1-6 0v-1m6 0H9m6 0h3.59c.383 0 .575 0 .73-.052a1 1 0 0 0 .627-.628c.053-.156.053-.348.053-.734c0-.169 0-.253-.014-.334a.998.998 0 0 0-.173-.42c-.048-.067-.108-.127-.227-.246l-.39-.39a.67.67 0 0 1-.196-.474V10a7 7 0 1 0-14 0v3.722a.67.67 0 0 1-.196.474l-.39.39c-.12.12-.179.179-.226.245a1 1 0 0 0-.175.421c-.013.08-.013.165-.013.334c0 .386 0 .578.052.734a1 1 0 0 0 .629.628c.155.052.346.052.729.052H9"/></svg>';
 
   static const String SetaBaixo =
       '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M7 9a1 1 0 0 0-.707 1.707l5 5a1 1 0 0 0 1.414 0l5-5A1 1 0 0 0 17 9z" clip-rule="evenodd"/></svg>';

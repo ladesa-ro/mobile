@@ -32,16 +32,13 @@ class _NavigationState extends State<Navigation> {
       bottomNavigationBar: BottomAppBar(
         height: TamanhoTela.vertical(context) > 810 ? 65 : 60,
         color: ColorApp.VerdePrincipal,
-        child: SizedBox(
-          height: 60.0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _buildIconButton(Icones.HomeVazio, Icones.HomeCheio, 0),
-              _buildIconButton(Icones.PersonVazio, Icones.PersonCheia, 1),
-              _buildIconButton(Icones.CalendarVazio, Icones.CalendarCheio, 2),
-            ],
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _buildIconButton(Icones.HomeVazio, Icones.HomeCheio, 0),
+            _buildIconButton(Icones.PersonVazio, Icones.PersonCheia, 1),
+            _buildIconButton(Icones.CalendarVazio, Icones.CalendarCheio, 2),
+          ],
         ),
       ),
     );
