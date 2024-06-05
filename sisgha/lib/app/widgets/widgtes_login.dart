@@ -57,8 +57,8 @@ Widget botaoEntrarAluno(context) {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(width: 19),
-              const Iconify(
-                Icones.PersonCheia,
+              const Icon(
+                Icones.PersonCheio,
                 color: ColorApp.Branco,
               ),
               const SizedBox(width: 20),

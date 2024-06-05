@@ -35,9 +35,18 @@ class _NavigationState extends State<Navigation> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildIconButton(Icones.HomeVazio, Icones.HomeCheio, 0),
-            _buildIconButton(Icones.PersonVazio, Icones.PersonCheia, 1),
-            _buildIconButton(Icones.CalendarVazio, Icones.CalendarCheio, 2),
+            _buildIconButton(
+                iconVazio: Icones.HomeVazio,
+                iconCheio: Icones.HomeCheio,
+                index: 0),
+            _buildIconButton(
+                iconVazio1: Icones.PersonVazio,
+                iconCheio1: Icones.PersonCheio,
+                index: 1),
+            _buildIconButton(
+                iconVazio: Icones.CalendarVazio,
+                iconCheio: Icones.CalendarCheio,
+                index: 2),
           ],
         ),
       ),
@@ -63,7 +72,13 @@ class _NavigationState extends State<Navigation> {
     }
   }
 
-  Widget _buildIconButton(String iconVazio, String iconCheio, int index) {
+  Widget _buildIconButton({
+    String? iconVazio,
+    String? iconCheio,
+    IconData? iconVazio1,
+    IconData? iconCheio1,
+    required int index,
+  }) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -80,16 +95,28 @@ class _NavigationState extends State<Navigation> {
         width: 60,
         height: 50,
         child: _selectedIndex == index
-            ? Iconify(
-                iconCheio,
-                size: 20,
-                color: ColorApp.VerdePrincipal,
-              )
-            : Iconify(
-                iconVazio,
-                size: 20,
-                color: Colors.white,
-              ),
+            ? (iconCheio1 != null
+                ? Icon(
+                    iconCheio1,
+                    color: ColorApp.VerdePrincipal,
+                    size: 30,
+                  )
+                : Iconify(
+                    iconCheio!,
+                    size: 20,
+                    color: ColorApp.VerdePrincipal,
+                  ))
+            : (iconVazio1 != null
+                ? Icon(
+                    iconVazio1,
+                    color: ColorApp.Branco,
+                    size: 30,
+                  )
+                : Iconify(
+                    iconVazio!,
+                    size: 20,
+                    color: ColorApp.Branco,
+                  )),
       ),
     );
   }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sisgha/app/constants/colors.dart';
+import 'package:sisgha/app/constants/estilos.dart';
+
 import 'package:sisgha/app/constants/tamanhoTela.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -18,20 +20,44 @@ class _MiniCalendarioState extends State<MiniCalendario> {
     DateTime focusedDay = DateTime.now();
     DateTime? selectedDay;
     return AlertDialog(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10))),
       contentPadding: const EdgeInsets.all(0),
       content: SizedBox(
-        width: TamanhoTela.horizontal(context),
-        height: TamanhoTela.horizontal(context),
+        height: TamanhoTela.vertical(context) > 810 ? 400 : 340,
+        width: 0,
         child: TableCalendar(
-          daysOfWeekHeight: 28,
-
-          //configurações dos nomes dos dias da semana ex: seg. ter. etc
-          daysOfWeekStyle: const DaysOfWeekStyle(
-            weekendStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-            weekdayStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          // Configurações dos nomes dos dias da semana ex: seg. ter. etc
+          daysOfWeekHeight: 40,
+          rowHeight: 42,
+          daysOfWeekStyle: DaysOfWeekStyle(
+            dowTextFormatter: (date, locale) {
+              switch (date.weekday) {
+                case DateTime.monday:
+                  return 'Seg';
+                case DateTime.tuesday:
+                  return 'Ter';
+                case DateTime.wednesday:
+                  return 'Qua';
+                case DateTime.thursday:
+                  return 'Qui';
+                case DateTime.friday:
+                  return 'Sex';
+                case DateTime.saturday:
+                  return 'Sab';
+                case DateTime.sunday:
+                  return 'Dom';
+                default:
+                  return '';
+              }
+            },
+            weekendStyle:
+                const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+            weekdayStyle:
+                const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
           ),
 
-          //
+          //configuraçoes padroes
           locale: 'pt_BR',
           firstDay: DateTime.utc(DateTime.now().year, 1, 1),
           lastDay: DateTime.utc(DateTime.now().year, 12, 31),
@@ -40,50 +66,58 @@ class _MiniCalendarioState extends State<MiniCalendario> {
 
           // configuraçoes do cabeçalho do calendario
           headerStyle: const HeaderStyle(
-            leftChevronIcon:
-                Icon(Icons.chevron_left_sharp, color: Colors.white),
-            rightChevronIcon:
-                Icon(Icons.chevron_right_sharp, color: Colors.white),
-            formatButtonVisible: false,
-            titleCentered: true,
-            headerMargin: EdgeInsets.all(0),
-            headerPadding: EdgeInsets.all(0),
-            titleTextStyle: TextStyle(fontSize: 20),
-            decoration: BoxDecoration(
-              color: Colors.deepPurple,
-            ),
-          ),
+              leftChevronIcon:
+                  Icon(Icons.chevron_left_sharp, color: Colors.white),
+              rightChevronIcon:
+                  Icon(Icons.chevron_right_sharp, color: Colors.white),
+              formatButtonVisible: false,
+              titleCentered: true,
+              headerMargin: EdgeInsets.zero,
+              headerPadding: EdgeInsets.zero,
+              decoration: BoxDecoration(
+                color: ColorApp.RoxoEscuro,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10)),
+              )),
 
-          //
+          //formata o quadrado do dia de hoje
           calendarBuilders: CalendarBuilders(
             todayBuilder: (context, date, events) {
               return Container(
-                margin: const EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 55, 0, 255),
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  border: Border.all(
-                    color: const Color.fromRGBO(197, 197, 197, 0.514),
-                    width: 3,
+                  width: 35,
+                  height: 35,
+                  margin: const EdgeInsets.all(5),
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 69, 0, 158),
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
-                ),
-                child: Center(
-                  child: Text(
-                    '${date.day}',
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ),
-              );
+                  alignment: Alignment.center,
+                  child: Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                color: const Color.fromARGB(255, 255, 255, 255),
+                                width: 1),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8))),
+                        child: Center(
+                          child: Text(
+                            '${date.day}',
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      )));
             },
+            //constroi o titulo/mes do calendario
             headerTitleBuilder: (context, date) {
               final formattedMonth = DateFormat.MMMM('pt_BR').format(date);
-              final capitalizedMonth =
-                  formattedMonth[0].toUpperCase() + formattedMonth.substring(1);
+              final capitalizedMonth = formattedMonth.toUpperCase();
               return Center(
-                child: Text(
-                  capitalizedMonth,
-                  style: const TextStyle(fontSize: 20, color: Colors.white),
-                ),
+                child: Text(capitalizedMonth,
+                    style: estiloTexto(17,
+                        cor: ColorApp.Branco, peso: FontWeight.bold)),
               );
             },
             defaultBuilder: (context, date, events) {
@@ -119,6 +153,8 @@ class _MiniCalendarioState extends State<MiniCalendario> {
 
               //configurações dos quadrados onde estao os dias do mês menos o dia de hoje
               return Container(
+                width: 35,
+                height: 35,
                 margin: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   color: color,
@@ -136,6 +172,8 @@ class _MiniCalendarioState extends State<MiniCalendario> {
             //dias de outros meses que aparecem apagados/cobertos pela cor cinza
             outsideBuilder: (context, date, events) {
               return Container(
+                width: 35,
+                height: 35,
                 margin: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(11),

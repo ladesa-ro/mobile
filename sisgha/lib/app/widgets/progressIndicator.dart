@@ -13,6 +13,6 @@ class Progressindicator extends StatefulWidget {
 class _ProgressindicatorState extends State<Progressindicator> {
   @override
   Widget build(BuildContext context) {
-    return Lottie.asset('img/teste.json', width: widget.tamanho);
+    return Lottie.asset('img/relogio.json', width: widget.tamanho);
   }
 }

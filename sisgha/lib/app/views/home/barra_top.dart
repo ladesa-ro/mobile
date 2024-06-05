@@ -18,12 +18,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
+
+    //utimo dia da semana, SABADO
     DateTime date = now.add(Duration(days: 6 - now.weekday));
     final diaDoMes = DateFormat('dd').format(date);
-    final primeirodiaSemana = int.parse(diaDoMes) - 6;
 
-    final corrigeErro =
-        primeirodiaSemana < 0 ? primeirodiaSemana * -1 : primeirodiaSemana;
+    //primeiro dia da semana, SEGUNDA
+    DateTime dia1 = now.add(Duration(days: 1 - now.weekday));
+    final dateTeste = DateFormat('dd').format(dia1);
+
+    // corrige um erro de o numero ficar negativo
+    final corrigeErro = int.parse(dateTeste) < 0 ? dateTeste * -1 : dateTeste;
 
     return AppBar(
       automaticallyImplyLeading: false,
@@ -34,7 +39,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              DatasFormatadas.DiaAgora,
+              DatasFormatadas.diaAtual,
               style: estiloTexto(
                 TamanhoTela.vertical(context) > 810 ? 43 : 36,
                 cor: ColorApp.Branco,
@@ -48,14 +53,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${DatasFormatadas.DiaExtensoFormatado[0].toUpperCase() + DatasFormatadas.DiaExtensoFormatado.substring(1)}${DatasFormatadas.DiaExtensoFormatado == 'sabado' || DatasFormatadas.DiaExtensoFormatado == 'domingo' ? '' : 'Feira'}',
+                  DatasFormatadas.obterDiaFormatado(),
                   style: estiloTexto(
                       TamanhoTela.vertical(context) > 810 ? 16 : 14,
                       cor: ColorApp.Branco,
                       peso: FontWeight.bold),
                 ),
                 Text(
-                  '${DatasFormatadas.MesAgora[0].toUpperCase() + DatasFormatadas.MesAgora.substring(1)} - $corrigeErro a $diaDoMes',
+                  '${DatasFormatadas.mesAtual[0].toUpperCase() + DatasFormatadas.mesAtual.substring(1)} - $corrigeErro a $diaDoMes',
                   style: estiloTexto(
                       TamanhoTela.vertical(context) > 810 ? 16 : 14,
                       cor: ColorApp.Branco,
@@ -68,7 +73,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               onPressed: () {},
               icon: const Iconify(
                 Icones.Bell,
-                size: 30,
+                size: 27,
                 color: ColorApp.Branco,
               ),
             )
