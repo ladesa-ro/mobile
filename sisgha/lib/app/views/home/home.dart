@@ -57,9 +57,9 @@ class _HomeState extends State<Home> {
                   const SizedBox(
                     width: 16,
                   ),
-                  Icon(
-                    Icons.calendar_month,
-                    size: TamanhoTela.vertical(context) > 810 ? 28 : 22,
+                  const Icon(
+                    Icones.CalendarVazio,
+                    size: 20,
                     color: ColorApp.Branco,
                   ),
                   const Spacer(),

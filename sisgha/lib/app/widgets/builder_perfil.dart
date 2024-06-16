@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/api/repository.dart';
+import 'package:sisgha/app/constants/colors.dart';
+import 'package:sisgha/app/constants/tamanhoTela.dart';
+import 'package:sisgha/app/widgets/button_edit_perfil.dart';
 import 'package:sisgha/app/widgets/progressIndicator.dart';
 
 class FutureBuilderPerfil extends StatefulWidget {
@@ -37,20 +40,50 @@ class _FutureBuilderPerfilState extends State<FutureBuilderPerfil> {
                 );
               }
               var id = idSnapshot.data!;
-              return Center(
-                child: ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.transparent,
-                    backgroundImage: NetworkImage(
-                      "https://luna.sisgha.com/api/usuarios/$id/imagem/perfil",
-                    ),
-                  ),
-                  title: Text(snapshot.data!["nome"]),
-                  subtitle: Text(snapshot.data!["email"]),
-                  trailing:
-                      Text("Matricula: \n${snapshot.data!["matriculaSiape"]}"),
-                ),
-              );
+              //se funcionar, mostra isso:
+              // ignore: sized_box_for_whitespace
+              return Container(
+                  height: 175,
+                  width: TamanhoTela.horizontal(context),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Stack(
+                        children: [
+                          Positioned(
+                            child: Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: ColorApp.Branco),
+                              height: 95,
+                              width: 95,
+                              child: CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                backgroundImage: NetworkImage(
+                                  "https://luna.sisgha.com/api/usuarios/$id/imagem/perfil",
+                                ),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 4,
+                            right: 9,
+                            child: BuildButtonEditPerfil(
+                                ColorApp.Preto, ColorApp.Branco),
+                          )
+                        ],
+                      )
+                    ],
+                  )
+
+                  //   title: Text(snapshot.data!["nome"]),
+                  //   subtitle: Text(snapshot.data!["email"]),
+                  //   trailing:
+                  //       Text("Matricula: \n${snapshot.data!["matriculaSiape"]}"),
+
+                  );
             },
           );
         }

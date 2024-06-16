@@ -54,28 +54,35 @@ Widget botaoEntrarAluno(context) {
             (route) => false),
         child: Center(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SizedBox(width: 19),
-              const Icon(
-                Icones.PersonCheio,
-                color: ColorApp.Branco,
-              ),
-              const SizedBox(width: 20),
+              // ignore: avoid_unnecessary_containers
               Container(
-                width: 2,
-                height: 30,
-                color: ColorApp.Branco,
+                child: Row(
+                  children: [
+                    const SizedBox(width: 19),
+                    const Icon(
+                      Icones.PersonCheio,
+                      color: ColorApp.Branco,
+                    ),
+                    const SizedBox(width: 20),
+                    Container(
+                      width: 2,
+                      height: 30,
+                      color: ColorApp.Branco,
+                    ),
+                  ],
+                ),
               ),
               const Spacer(),
-              Center(
-                child: Text('Entrar como Aluno',
-                    style: estiloTexto(
-                        TamanhoTela.vertical(context) > 750 ? 17 : 16,
-                        peso: FontWeight.w600)),
+              Text(
+                'Entrar como Aluno',
+                style: estiloTexto(
+                    TamanhoTela.vertical(context) > 750 ? 17 : 16,
+                    peso: FontWeight.w600),
               ),
               const Spacer(
-                flex: 3,
+                flex: 1,
               ),
             ],
           ),

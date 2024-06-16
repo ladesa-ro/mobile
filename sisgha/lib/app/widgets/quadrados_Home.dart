@@ -20,9 +20,14 @@ class _QuadradosHomeState extends State<QuadradosHome>
   @override
   void initState() {
     super.initState();
-    _quadradoSelecionado = DateTime.now().weekday - 1;
+
+    _quadradoSelecionado =
+        DateTime.now().weekday == 7 ? 0 : DateTime.now().weekday - 1;
+
     _tabController = TabController(
-        length: 6, vsync: this, initialIndex: _quadradoSelecionado);
+        length: 6,
+        vsync: this,
+        initialIndex: _quadradoSelecionado == -1 ? 0 : _quadradoSelecionado);
     _tabController.addListener(() {
       setState(() {
         _quadradoSelecionado = _tabController.index;
@@ -42,26 +47,27 @@ class _QuadradosHomeState extends State<QuadradosHome>
     return Scaffold(
       body: Column(
         children: [
-          TabBar(
-            //acredito que da para limpar essa parte do codigo com o tabbar teme mas nao tentei nao
-
-            splashFactory: NoSplash.splashFactory,
-            labelPadding: const EdgeInsets.all(7),
-            unselectedLabelStyle: estiloTexto(15,
-                cor: ColorApp.VerdeCinza, peso: FontWeight.w600),
-            indicator: const BoxDecoration(),
-            dividerHeight: 0,
-            labelStyle:
-                estiloTexto(15, cor: ColorApp.Branco, peso: FontWeight.bold),
-            controller: _tabController,
-            tabs: [
-              _contruindoInterface(index++),
-              _contruindoInterface(index++),
-              _contruindoInterface(index++),
-              _contruindoInterface(index++),
-              _contruindoInterface(index++),
-              _contruindoInterface(index),
-            ],
+          SizedBox(
+            height: 100,
+            child: TabBar(
+              splashFactory: NoSplash.splashFactory,
+              labelPadding: const EdgeInsets.all(7),
+              unselectedLabelStyle: estiloTexto(15,
+                  cor: ColorApp.VerdeCinza, peso: FontWeight.w600),
+              indicator: const BoxDecoration(),
+              dividerHeight: 0,
+              labelStyle:
+                  estiloTexto(15, cor: ColorApp.Branco, peso: FontWeight.bold),
+              controller: _tabController,
+              tabs: [
+                _contruindoInterface(index++),
+                _contruindoInterface(index++),
+                _contruindoInterface(index++),
+                _contruindoInterface(index++),
+                _contruindoInterface(index++),
+                _contruindoInterface(index),
+              ],
+            ),
           ),
           Expanded(
             child: TabBarView(
@@ -121,7 +127,11 @@ class _QuadradosHomeState extends State<QuadradosHome>
     final diaDaSemanaSoQueEmNumeros = DateFormat('dd').format(date);
 
     bool qualselecionado = _quadradoSelecionado == index;
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      margin: qualselecionado
+          ? const EdgeInsets.only(bottom: 10)
+          : const EdgeInsets.all(0),
       decoration: BoxDecoration(
           color: qualselecionado ? ColorApp.VerdeEscuro : null,
           border: Border.all(

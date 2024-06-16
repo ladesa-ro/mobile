@@ -97,9 +97,8 @@ class _MiniCalendarioState extends State<MiniCalendario> {
                       padding: const EdgeInsets.all(2.0),
                       child: Container(
                         decoration: BoxDecoration(
-                            border: Border.all(
-                                color: const Color.fromARGB(255, 255, 255, 255),
-                                width: 1),
+                            border:
+                                Border.all(color: ColorApp.Branco, width: 1),
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(8))),
                         child: Center(

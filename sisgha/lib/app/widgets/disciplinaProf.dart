@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 
@@ -44,10 +43,10 @@ class _DisciplinaprofState extends State<Disciplinaprof> {
             ],
           ),
           const Spacer(),
-          const Iconify(
+          const Icon(
             Icones.Relogio,
             color: ColorApp.VerdePrincipal,
-          ),
+          )
         ],
       ),
     );
