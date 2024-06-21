@@ -43,7 +43,7 @@ class _FutureBuilderPerfilState extends State<FutureBuilderPerfil> {
               //se funcionar, mostra isso:
               // ignore: sized_box_for_whitespace
               return Container(
-                  height: 175,
+                  height: 200,
                   width: TamanhoTela.horizontal(context),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -57,8 +57,8 @@ class _FutureBuilderPerfilState extends State<FutureBuilderPerfil> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(100),
                                   color: ColorApp.Branco),
-                              height: 95,
-                              width: 95,
+                              height: 105,
+                              width: 105,
                               child: CircleAvatar(
                                 backgroundColor: Colors.transparent,
                                 backgroundImage: NetworkImage(
@@ -68,10 +68,10 @@ class _FutureBuilderPerfilState extends State<FutureBuilderPerfil> {
                             ),
                           ),
                           Positioned(
-                            bottom: 4,
-                            right: 9,
+                            top: 65,
+                            left: 65,
                             child: BuildButtonEditPerfil(
-                                ColorApp.Preto, ColorApp.Branco),
+                                ColorApp.Preto, ColorApp.Branco, context),
                           )
                         ],
                       )

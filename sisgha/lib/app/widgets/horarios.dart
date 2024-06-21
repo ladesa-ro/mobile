@@ -22,7 +22,7 @@ class _HorariosState extends State<Horarios> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-          itemCount: 2,
+          itemCount: 3,
           itemBuilder: (context, index) {
             return Disciplinaprof(
                 materia: widget.materia,

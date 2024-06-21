@@ -19,17 +19,21 @@ class _MiniCalendarioState extends State<MiniCalendario> {
     CalendarFormat calendarFormat = CalendarFormat.month;
     DateTime focusedDay = DateTime.now();
     DateTime? selectedDay;
+
     return AlertDialog(
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10))),
       contentPadding: const EdgeInsets.all(0),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
       content: SizedBox(
-        height: TamanhoTela.vertical(context) > 810 ? 400 : 340,
-        width: 0,
+        height: TamanhoTela.vertical(context) > 810 ? 425 : 390,
+        width: TamanhoTela.vertical(context) > 810 ? 385 : 335,
         child: TableCalendar(
           // Configurações dos nomes dos dias da semana ex: seg. ter. etc
-          daysOfWeekHeight: 40,
-          rowHeight: 42,
+          daysOfWeekHeight: TamanhoTela.vertical(context) > 810 ? 50 : 40,
+          rowHeight: TamanhoTela.vertical(context) > 810 ? 48 : 40,
           daysOfWeekStyle: DaysOfWeekStyle(
             dowTextFormatter: (date, locale) {
               switch (date.weekday) {
@@ -52,9 +56,9 @@ class _MiniCalendarioState extends State<MiniCalendario> {
               }
             },
             weekendStyle:
-                const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             weekdayStyle:
-                const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
           ),
 
           //configuraçoes padroes
@@ -66,14 +70,20 @@ class _MiniCalendarioState extends State<MiniCalendario> {
 
           // configuraçoes do cabeçalho do calendario
           headerStyle: const HeaderStyle(
-              leftChevronIcon:
-                  Icon(Icons.chevron_left_sharp, color: Colors.white),
-              rightChevronIcon:
-                  Icon(Icons.chevron_right_sharp, color: Colors.white),
+              leftChevronIcon: Icon(
+                Icons.chevron_left_sharp,
+                color: Colors.white,
+                size: 30,
+              ),
+              rightChevronIcon: Icon(
+                Icons.chevron_right_sharp,
+                color: Colors.white,
+                size: 30,
+              ),
               formatButtonVisible: false,
               titleCentered: true,
               headerMargin: EdgeInsets.zero,
-              headerPadding: EdgeInsets.zero,
+              headerPadding: EdgeInsets.symmetric(vertical: 6),
               decoration: BoxDecoration(
                 color: ColorApp.RoxoEscuro,
                 borderRadius: BorderRadius.only(
@@ -81,12 +91,12 @@ class _MiniCalendarioState extends State<MiniCalendario> {
                     topRight: Radius.circular(10)),
               )),
 
-          //formata o quadrado do dia de hoje
           calendarBuilders: CalendarBuilders(
+            //formata o quadrado do dia de hoje
             todayBuilder: (context, date, events) {
               return Container(
-                  width: 35,
-                  height: 35,
+                  width: 40,
+                  height: 40,
                   margin: const EdgeInsets.all(5),
                   decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 69, 0, 158),
@@ -152,12 +162,12 @@ class _MiniCalendarioState extends State<MiniCalendario> {
 
               //configurações dos quadrados onde estao os dias do mês menos o dia de hoje
               return Container(
-                width: 35,
-                height: 35,
+                width: 40,
+                height: 40,
                 margin: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   color: color,
-                  borderRadius: BorderRadius.circular(11),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
                   child: Text('${date.day}',
@@ -171,11 +181,11 @@ class _MiniCalendarioState extends State<MiniCalendario> {
             //dias de outros meses que aparecem apagados/cobertos pela cor cinza
             outsideBuilder: (context, date, events) {
               return Container(
-                width: 35,
-                height: 35,
+                width: 40,
+                height: 40,
                 margin: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(11),
+                  borderRadius: BorderRadius.circular(10),
                   color: const Color.fromRGBO(217, 217, 217, 100),
                 ),
               );
@@ -195,7 +205,7 @@ class _MiniCalendarioState extends State<MiniCalendario> {
           selectedDayPredicate: (day) {
             return isSameDay(selectedDay, day);
           },
-          availableGestures: AvailableGestures.none,
+          availableGestures: AvailableGestures.all,
         ),
       ),
     );

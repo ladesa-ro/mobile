@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
+import 'package:sisgha/app/constants/estilos.dart';
 
 class Disciplinaprof extends StatefulWidget {
   final String materia;
@@ -24,7 +25,7 @@ class _DisciplinaprofState extends State<Disciplinaprof> {
     return Container(
       margin: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
       padding: const EdgeInsets.only(left: 12, right: 5),
-      height: 85,
+      height: 105,
       decoration: BoxDecoration(
         border: Border.all(color: ColorApp.VerdeCinza, width: 2),
         borderRadius: const BorderRadius.all(
@@ -37,16 +38,28 @@ class _DisciplinaprofState extends State<Disciplinaprof> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(widget.materia),
-              Text(widget.turma),
-              Text('Horario: ${widget.horario}'),
+              Text(
+                widget.materia,
+                style: estiloTexto(
+                  15,
+                  cor: ColorApp.VerdeCinza,
+                ),
+              ),
+              Text(
+                widget.turma,
+                style: estiloTexto(
+                  15,
+                  cor: ColorApp.VerdeCinza,
+                ),
+              ),
+              Text(
+                'Horario: ${widget.horario}',
+                style: estiloTexto(15,
+                    cor: ColorApp.VerdeCinza, peso: FontWeight.bold),
+              ),
             ],
           ),
           const Spacer(),
-          const Icon(
-            Icones.Relogio,
-            color: ColorApp.VerdePrincipal,
-          )
         ],
       ),
     );

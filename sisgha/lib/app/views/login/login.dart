@@ -60,7 +60,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
             child: Column(
               children: [
-                SizedBox(height: TamanhoTela.vertical(context) * 0.23),
+                SizedBox(height: TamanhoTela.vertical(context) * 0.15),
                 Image.asset(ImageApp.logo_sigha_sem_barra,
                     width: TamanhoTela.horizontal(context) * 0.55),
                 SizedBox(height: TamanhoTela.vertical(context) * 0.06),

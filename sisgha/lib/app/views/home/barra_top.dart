@@ -41,7 +41,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             Text(
               DatasFormatadas.diaAtual,
               style: estiloTexto(
-                TamanhoTela.vertical(context) > 810 ? 43 : 36,
+                TamanhoTela.vertical(context) > 810 ? 50 : 43,
                 cor: ColorApp.Branco,
                 peso: FontWeight.bold,
               ),
@@ -55,14 +55,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Text(
                   DatasFormatadas.obterDiaFormatado(),
                   style: estiloTexto(
-                      TamanhoTela.vertical(context) > 810 ? 16 : 14,
+                      TamanhoTela.vertical(context) > 810 ? 20 : 18,
                       cor: ColorApp.Branco,
                       peso: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 8,
                 ),
                 Text(
                   '${DatasFormatadas.mesAtual[0].toUpperCase() + DatasFormatadas.mesAtual.substring(1)} - $corrigeErro a $diaDoMes',
                   style: estiloTexto(
-                      TamanhoTela.vertical(context) > 810 ? 16 : 14,
+                      TamanhoTela.vertical(context) > 810 ? 20 : 18,
                       cor: ColorApp.Branco,
                       peso: FontWeight.bold),
                 ),
@@ -73,7 +76,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               onPressed: () {},
               icon: const Iconify(
                 Icones.Bell,
-                size: 27,
+                size: 34,
                 color: ColorApp.Branco,
               ),
             )

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/api/repository.dart';
 import 'package:sisgha/app/constants/colors.dart';
+import 'package:sisgha/app/constants/imagens.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
 import 'package:sisgha/app/views/inicio/boasvindas.dart';
 import 'package:sisgha/app/widgets/builder_perfil.dart';
 import 'package:sisgha/app/widgets/button_edit_perfil.dart';
-import 'package:sisgha/app/widgets/teste.dart';
 
 class Perfil extends StatelessWidget {
   const Perfil({Key? key}) : super(key: key);
@@ -14,23 +14,24 @@ class Perfil extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size(TamanhoTela.horizontal(context), 175),
+          preferredSize: Size(TamanhoTela.horizontal(context), 180),
           child: Stack(
             children: [
               Positioned(
-                height: 150,
+                height: 175,
                 width: TamanhoTela.horizontal(context),
                 child: Image.asset(
-                  'img/gtr.jpeg',
+                  alignment: Alignment.bottomCenter,
+                  ImageApp.imgTeste,
                   fit: BoxFit.cover,
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  //widget do botao que edita o fundo e a imagem
-                  BuildButtonEditPerfil(ColorApp.Branco, ColorApp.Preto),
-                ],
+              Positioned(
+                right: 10,
+                top: 15,
+                //widget do botao que edita o fundo e a imagem
+                child: BuildButtonEditPerfil(const Color.fromARGB(47, 0, 0, 0),
+                    ColorApp.Branco, context),
               ),
               //constroi a imagem do perfil
               const FutureBuilderPerfil(),
@@ -39,14 +40,6 @@ class Perfil extends StatelessWidget {
         ),
         body: ListView(
           children: [
-            /*é possivel fazer só uma requisição pra puchar de tudo o que nois prescizamos de uma vez?
-            exemplo, abaixo tem a classe teste, ela fais a mesma requisição da classe FutureBuilderPerfil, a 
-            diferença é que no teste ta sendo contruido a interface com o nome e o email e o FutureBuilderPerfil 
-            a interface da imgem redondinha, entao eu pensei assim, existe um jeito de antes de construir a tela Perfil
-            ele fazer essas requisições todas de uma vez, armazenar os resultados e depois quando prescisar so puxar 
-            os resultados armazenados? mas eu nao sei direito como funciona. qualquer coisa so me falar              
-            */
-            const Teste(),
             IconButton(
               onPressed: () async {
                 bool saiu = await sair();

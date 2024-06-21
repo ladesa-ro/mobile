@@ -25,8 +25,7 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       //aqui mexe no tamnho da barra de cima
-      appBar: const CustomAppBar(height: 60),
-
+      appBar: const CustomAppBar(height: 65),
       body: ListView(
         children: [
           SizedBox(
@@ -34,11 +33,8 @@ class _HomeState extends State<Home> {
                   ? TamanhoTela.vertical(context) * 0.04
                   : TamanhoTela.vertical(context) * 0.05),
           Container(
-            padding: EdgeInsets.only(
-                left: TamanhoTela.horizontal(context) * 0.02,
-                top: 0,
-                right: TamanhoTela.horizontal(context) * 0.02,
-                bottom: 0),
+            padding: EdgeInsets.symmetric(
+                horizontal: TamanhoTela.horizontal(context) * 0.07),
             height: 52,
             child: ElevatedButton(
               style: estiloBotao(context, 0, 10, 0, 10),
@@ -88,8 +84,10 @@ class _HomeState extends State<Home> {
           ),
           //botoes com os dias da semana
 
-          SizedBox(
+          Container(
             height: TamanhoTela.vertical(context),
+            padding: EdgeInsets.symmetric(
+                horizontal: TamanhoTela.horizontal(context) * 0.045),
             child: const QuadradosHome(),
           ),
         ],
