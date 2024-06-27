@@ -6,10 +6,6 @@ void main() {
   runApp(const MyApp());
 }
 
-// APENAS UM TESTE - DANILO ESCUDERO - 2024
-// APENAS UM TESTE - DANILO ESCUDERO - 2024
-// APENAS UM TESTE - DANILO ESCUDERO - 2024
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
