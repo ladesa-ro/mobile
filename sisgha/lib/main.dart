@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Login SISGHA',
+      title: 'SISGHA',
       theme: ThemeApp.Tema(),
       initialRoute: '/primeiraTela',
       routes: AppRoutes.rotas(),
