@@ -12,12 +12,13 @@ class PaginaLogin extends StatefulWidget {
 }
 
 class _EstadoPaginaLogin extends State<PaginaLogin> {
-  TextEditingController matriculaController = TextEditingController();
-  TextEditingController senhaController = TextEditingController();
+  final TextEditingController matriculaController = TextEditingController();
+  final TextEditingController senhaController = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   bool _mostrarErroMatricula = false;
   bool _mostrarErroSenha = false;
   bool _senhaVisivel = true;
-  final formKey = GlobalKey<FormState>();
 
   void alternarVisibilidadeSenha() {
     setState(() {
@@ -27,75 +28,77 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: Stack(
-            children: [
-              elementoVerde(Alignment.topLeft, TamanhoTela.horizontal(context),
-                  TamanhoTela.vertical(context)),
-              elementoVerde(
-                  Alignment.bottomRight,
-                  TamanhoTela.horizontal(context),
-                  TamanhoTela.vertical(context)),
-              formularioLogin(TamanhoTela.horizontal(context)),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+    final double larguraTela = TamanhoTela.horizontal(context);
+    final double alturaTela = TamanhoTela.vertical(context);
 
-  Widget formularioLogin(double larguraTela) {
-    return Center(
-      child: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
-        child: SizedBox(
-          width: larguraTela > 800 ? 800 : larguraTela,
-          height: 800,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-            child: Column(
-              children: [
-                SizedBox(height: TamanhoTela.vertical(context) * 0.15),
-                Image.asset(ImageApp.logo_sigha_sem_barra,
-                    width: TamanhoTela.horizontal(context) * 0.55),
-                SizedBox(height: TamanhoTela.vertical(context) * 0.06),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Column(
-                    children: [
-                      Form(
-                        key: formKey,
-                        child: Column(
-                          children: [
-                            _campoDeEntrada('Matrícula', TextInputType.number,
-                                matriculaController, _mostrarErroMatricula),
-                            SizedBox(
-                                height: TamanhoTela.vertical(context) * 0.03),
-                            _campoDeEntradaSenha('Senha', TextInputType.text,
-                                senhaController, _mostrarErroSenha),
-                            SizedBox(
-                                height: TamanhoTela.vertical(context) * 0.02),
-                          ],
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
+      body: MediaQuery.removeViewInsets(
+        removeTop: true,
+        context: context,
+        child: Stack(
+          children: [
+            elementoVerde(Alignment.topLeft, larguraTela, alturaTela),
+            elementoVerde(Alignment.bottomRight, larguraTela, alturaTela),
+            Center(
+              child: SingleChildScrollView(
+                child: SizedBox(
+                  width: larguraTela > 700 ? 800 : larguraTela,
+                  height: 800,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal:
+                            TamanhoTela.vertical(context) > 1000 ? 70 : 50,
+                        vertical: 20),
+                    child: Column(
+                      children: [
+                        const Spacer(),
+                        Image.asset(
+                          ImageApp.logo_sigha_sem_barra,
+                          width: 250,
                         ),
-                      ),
-                      recuperarSenha(context),
-                      SizedBox(height: TamanhoTela.vertical(context) * 0.02),
-                      botaoEntrar('Entrar', context, formKey,
-                          matriculaController, senhaController),
-                    ],
+                        const SizedBox(height: 30),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 40),
+                          child: Form(
+                            key: formKey,
+                            child: Column(
+                              children: [
+                                _campoDeEntrada(
+                                    'Matrícula',
+                                    TextInputType.number,
+                                    matriculaController,
+                                    _mostrarErroMatricula),
+                                const SizedBox(height: 20),
+                                _campoDeEntradaSenha(
+                                    'Senha',
+                                    TextInputType.text,
+                                    senhaController,
+                                    _mostrarErroSenha),
+                                const SizedBox(height: 20),
+                                recuperarSenha(context),
+                                const SizedBox(height: 20),
+                                botaoEntrar('Entrar', context, formKey,
+                                    matriculaController, senhaController),
+                                SizedBox(height: 30),
+                              ],
+                            ),
+                          ),
+                        ),
+                        botaoEntrarAluno(context),
+                        SizedBox(
+                            height: TamanhoTela.vertical(context) > 810
+                                ? 0
+                                : TamanhoTela.vertical(context) * 0.13),
+                        const Spacer(),
+                      ],
+                    ),
                   ),
                 ),
-                SizedBox(height: TamanhoTela.vertical(context) * 0.05),
-                botaoEntrarAluno(context),
-                SizedBox(height: TamanhoTela.vertical(context) * 0.02),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
@@ -105,7 +108,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
       TextEditingController controller, bool mostrarErro) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      height: mostrarErro ? 60 : 40,
+      height: mostrarErro ? 70 : 50,
       child: TextFormField(
         controller: controller,
         validator: (value) {
@@ -118,7 +121,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
             setState(() {
               _mostrarErroMatricula = true;
             });
-            return "Matricula incorreta";
+            return "Matrícula incorreta";
           } else {
             setState(() {
               _mostrarErroMatricula = false;
@@ -136,7 +139,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
       TextEditingController controller, bool mostrarErro) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      height: mostrarErro ? 60 : 40,
+      height: mostrarErro ? 70 : 50,
       child: TextFormField(
         controller: controller,
         validator: (value) {

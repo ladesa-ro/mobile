@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/api/repository.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
@@ -12,19 +11,19 @@ Widget elementoVerde(Alignment alignment, double width, double height) {
   BorderRadiusGeometry borderRadius = BorderRadius.zero;
   if (alignment == Alignment.topLeft) {
     borderRadius = BorderRadius.only(
-      bottomRight: Radius.circular(width > 450 ? 120 : 80),
+      bottomRight: Radius.circular(height > 810 ? width * 0.26 : width * 0.20),
     );
   } else if (alignment == Alignment.bottomRight) {
     borderRadius = BorderRadius.only(
-      topLeft: Radius.circular(width > 450 ? 120 : 80),
+      topLeft: Radius.circular(height > 810 ? width * 0.26 : width * 0.20),
     );
   }
 
   return Align(
     alignment: alignment,
     child: Container(
-      width: width > 1000 ? width * 0.15 : width * 0.32,
-      height: height > 850 ? height * 0.15 : height * 0.17,
+      width: height > 810 ? width * 0.39 : width * 0.32,
+      height: height > 810 ? height * 0.20 : height * 0.17,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
@@ -42,7 +41,8 @@ Widget elementoVerde(Alignment alignment, double width, double height) {
 
 Widget botaoEntrarAluno(context) {
   return SizedBox(
-    height: TamanhoTela.vertical(context) > 750 ? 40 : 35,
+    height: 45,
+    width: 290,
     child: Center(
       child: FilledButton(
         style: estiloBotao(context, 0, 5, 0, 5),
@@ -64,8 +64,9 @@ Widget botaoEntrarAluno(context) {
                     const Icon(
                       Icones.PersonCheio,
                       color: ColorApp.Branco,
+                      size: 30,
                     ),
-                    const SizedBox(width: 20),
+                    const SizedBox(width: 10),
                     Container(
                       width: 2,
                       height: 30,
@@ -77,12 +78,10 @@ Widget botaoEntrarAluno(context) {
               const Spacer(),
               Text(
                 'Entrar como Aluno',
-                style: estiloTexto(
-                    TamanhoTela.vertical(context) > 750 ? 17 : 16,
-                    peso: FontWeight.w600),
+                style: estiloTexto(17, peso: FontWeight.w600),
               ),
               const Spacer(
-                flex: 1,
+                flex: 2,
               ),
             ],
           ),
@@ -101,17 +100,17 @@ Widget recuperarSenha(context) {
         Text('Esqueceu a senha?',
             style: estiloTexto(
               cor: ColorApp.VerdeCinza,
-              TamanhoTela.horizontal(context) > 750 ? 13 : 11,
+              16,
               peso: FontWeight.w600,
             )),
         const SizedBox(width: 3),
         GestureDetector(
-          onTap: () => Navigator.pushNamed(context, '/home'),
+          onTap: () =>
+              //  Navigator.pushNamed(context, '/home'),
+              print(TamanhoTela.vertical(context)),
           child: Text('Clique aqui',
-              style: estiloTexto(
-                  TamanhoTela.horizontal(context) > 750 ? 13 : 11,
-                  cor: ColorApp.VerdePrincipal,
-                  peso: FontWeight.w600)),
+              style: estiloTexto(16,
+                  cor: ColorApp.VerdePrincipal, peso: FontWeight.w600)),
         ),
       ],
     ),
@@ -141,15 +140,14 @@ Widget botaoEntrar(texto, context, formKey, matricula, senha) {
         }
       }
     },
-    style: estiloBotao(context, 0, 0.5, 0, 6),
+    style: estiloBotao(context, 0, 0.5, 0, 0),
     child: SizedBox(
-      height: 20,
+      height: 45,
       width: TamanhoTela.horizontal(context),
       child: Center(
         child: Text(
           texto,
-          style: estiloTexto(TamanhoTela.vertical(context) > 750 ? 18 : 15,
-              cor: Colors.white, peso: FontWeight.w600),
+          style: estiloTexto(18, cor: Colors.white, peso: FontWeight.w600),
         ),
       ),
     ),
