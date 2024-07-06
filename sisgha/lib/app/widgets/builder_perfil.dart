@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sisgha/app/api/repository.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
-import 'package:sisgha/app/widgets/button_edit_perfil.dart';
+
 import 'package:sisgha/app/widgets/progressIndicator.dart';
 
 class FutureBuilderPerfil extends StatefulWidget {
@@ -67,12 +67,6 @@ class _FutureBuilderPerfilState extends State<FutureBuilderPerfil> {
                               ),
                             ),
                           ),
-                          Positioned(
-                            top: 65,
-                            left: 65,
-                            child: BuildButtonEditPerfil(
-                                ColorApp.Preto, ColorApp.Branco, context),
-                          )
                         ],
                       )
                     ],
