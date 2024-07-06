@@ -3,8 +3,10 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
-import 'package:sisgha/app/views/perfil/button_style_edit.dart';
-import 'package:sisgha/app/views/perfil/circle_avatar.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/botton_sheat.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/button_style_edit.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/circle_avatar.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/dados_do_usuario.dart';
 
 class Perfil extends StatelessWidget {
   const Perfil({Key? key}) : super(key: key);
@@ -34,8 +36,8 @@ class Perfil extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: 10,
-                  right: 0,
+                  top: 20,
+                  right: 10,
                   child: ElevatedButton(
                     style: buttonStyleEdit(ColorApp.Branco),
                     child: const Iconify(
@@ -48,11 +50,41 @@ class Perfil extends StatelessWidget {
                 ),
                 Positioned(
                   bottom: 0,
-                  child: circleAvatar(),
+                  child: circleAvatar(context),
                 ),
               ],
             ),
           ),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            child: dadosUsuario(context),
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: 50, right: 50, top: 20),
+            child: Column(
+              children: [
+                formulario(textoFlutuante: 'Nome', informacoes: 'Professor'),
+                const SizedBox(
+                  height: 5,
+                ),
+                formulario(
+                    textoFlutuante: 'Email',
+                    informacoes: 'professorlosninor1234@gmail.com'),
+                const SizedBox(
+                  height: 5,
+                ),
+                Row(
+                  children: [
+                    formularioLinha(
+                        textoFlutuante: 'Matricula', informacoes: '191981989'),
+                    const Spacer(),
+                    formularioLinha(
+                        textoFlutuante: 'Função', informacoes: 'Professor'),
+                  ],
+                )
+              ],
+            ),
+          )
         ],
       ),
     );

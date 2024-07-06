@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
-import 'package:sisgha/app/views/perfil/button_style_edit.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/botton_sheat.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/button_style_edit.dart';
 
-Widget circleAvatar() {
+Widget circleAvatar(BuildContext context) {
   return Container(
     padding: const EdgeInsets.all(4),
     decoration: BoxDecoration(
@@ -34,7 +35,9 @@ Widget circleAvatar() {
           child: SizedBox(
             child: ElevatedButton(
               style: buttonStyleEdit(ColorApp.Preto),
-              onPressed: () => {},
+              onPressed: () => {
+                bottomSheat(context),
+              },
               child: const Iconify(
                 Icones.Lapiz,
                 size: 14,
