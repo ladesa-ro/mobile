@@ -81,7 +81,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
                                 const SizedBox(height: 20),
                                 botaoEntrar('Entrar', context, formKey,
                                     matriculaController, senhaController),
-                                SizedBox(height: 30),
+                                const SizedBox(height: 30),
                               ],
                             ),
                           ),
