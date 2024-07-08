@@ -13,7 +13,7 @@ class _ErroConnectState extends State<ErroConnectLogin> {
     return AlertDialog(
       title: const Text('Erro de Conexão'),
       content: const Text(
-          'O tempo limite da sua conexão foi atingido. Por favor, entre novamente.'),
+          'Estamos tendo problemas com nosso Servidor. Por favor, entre novamente. Se o problema persistir acesse mais tarde.'),
       actions: [
         TextButton(
           onPressed: () {
