@@ -12,7 +12,7 @@ import 'package:sisgha/app/widgets/erro_connect_login.dart';
 Future<bool> login(TextEditingController matriculaController,
     TextEditingController senhaController, BuildContext context) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  var url = Uri.parse("https://luna.sisgha.com/api/autenticacao/login");
+  var url = Uri.parse("https://dev.ladesa.com.br/api/autenticacao/login");
   var resposta = await http.post(url, body: {
     "matriculaSiape": matriculaController.text,
     "senha": senhaController.text,
@@ -37,7 +37,7 @@ Future<bool> login(TextEditingController matriculaController,
 Future<Map<String, dynamic>> buscarUser(BuildContext context) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   var token = sharedPreferences.getString("token");
-  var url = Uri.parse("https://luna.sisgha.com/api/autenticacao/quem-sou-eu");
+  var url = Uri.parse("https://dev.ladesa.com.br/api/autenticacao/quem-sou-eu");
 
   try {
     var response = await http.get(url, headers: {
@@ -90,7 +90,8 @@ Future<bool> refreshToken(BuildContext context) async {
     return false;
   }
 
-  var url = Uri.parse("https://luna.sisgha.com/api/autenticacao/login/refresh");
+  var url =
+      Uri.parse("https://dev.ladesa.com.br/api/autenticacao/login/refresh");
   var resposta = await http.post(url, body: {
     "refreshToken": refreshToken,
   });
