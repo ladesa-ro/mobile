@@ -60,7 +60,7 @@ class Perfil extends StatelessWidget {
             child: dadosUsuario(context),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 50, right: 50, top: 20),
+            margin: const EdgeInsets.only(left: 50, right: 50, top: 10),
             child: Column(
               children: [
                 formulario(textoFlutuante: 'Nome', informacoes: 'Professor'),
@@ -85,10 +85,13 @@ class Perfil extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(
+            height: 15,
+          ),
           Container(
             height: TamanhoTela.vertical(context),
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: NavSwitch(),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: const NavSwitch(),
           )
         ],
       ),
