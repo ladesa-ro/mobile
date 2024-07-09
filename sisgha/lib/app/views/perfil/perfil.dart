@@ -3,6 +3,7 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/botton_sheat.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/button_style_edit.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/circle_avatar.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/dados_do_usuario.dart';
@@ -45,7 +46,9 @@ class Perfil extends StatelessWidget {
                       size: 14,
                       color: ColorApp.Preto,
                     ),
-                    onPressed: () => {},
+                    onPressed: () => {
+                      bottomSheat(context),
+                    },
                   ),
                 ),
                 Positioned(
