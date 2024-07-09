@@ -44,7 +44,6 @@ dependencies:
   iconify_flutter: ^0.0.5
   lottie: ^3.1.0
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

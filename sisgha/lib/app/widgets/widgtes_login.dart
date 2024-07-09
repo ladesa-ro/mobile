@@ -105,9 +105,7 @@ Widget recuperarSenha(context) {
             )),
         const SizedBox(width: 3),
         GestureDetector(
-          onTap: () =>
-              //  Navigator.pushNamed(context, '/home'),
-              print(TamanhoTela.vertical(context)),
+          onTap: () => Navigator.pushNamed(context, '/home'),
           child: Text('Clique aqui',
               style: estiloTexto(16,
                   cor: ColorApp.VerdePrincipal, peso: FontWeight.w600)),

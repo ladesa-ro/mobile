@@ -7,6 +7,7 @@ import 'package:sisgha/app/views/perfil/widgets_perfil/botton_sheat.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/button_style_edit.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/circle_avatar.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/dados_do_usuario.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/navegacao_switch.dart';
 
 class Perfil extends StatelessWidget {
   const Perfil({Key? key}) : super(key: key);
@@ -45,7 +46,9 @@ class Perfil extends StatelessWidget {
                       size: 14,
                       color: ColorApp.Preto,
                     ),
-                    onPressed: () => {},
+                    onPressed: () => {
+                      bottomSheat(context),
+                    },
                   ),
                 ),
                 Positioned(
@@ -60,7 +63,7 @@ class Perfil extends StatelessWidget {
             child: dadosUsuario(context),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 50, right: 50, top: 20),
+            margin: const EdgeInsets.only(left: 50, right: 50, top: 10),
             child: Column(
               children: [
                 formulario(textoFlutuante: 'Nome', informacoes: 'Professor'),
@@ -81,15 +84,25 @@ class Perfil extends StatelessWidget {
                     formularioLinha(
                         textoFlutuante: 'Função', informacoes: 'Professor'),
                   ],
-                )
+                ),
               ],
             ),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Container(
+            height: TamanhoTela.vertical(context),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: const NavSwitch(),
           )
         ],
       ),
     );
   }
 }
+
+
 
 //IconButton(
 //   onPressed: () async {
