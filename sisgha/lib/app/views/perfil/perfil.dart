@@ -8,6 +8,7 @@ import 'package:sisgha/app/views/perfil/widgets_perfil/button_style_edit.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/circle_avatar.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/dados_do_usuario.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/navegacao_switch.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/widgets_perfil.dart';
 
 class Perfil extends StatelessWidget {
   const Perfil({Key? key}) : super(key: key);
@@ -79,10 +80,14 @@ class Perfil extends StatelessWidget {
                 Row(
                   children: [
                     formularioLinha(
-                        textoFlutuante: 'Matricula', informacoes: '191981989'),
+                        textoFlutuante: 'Matricula',
+                        informacoes: '191981989',
+                        context: context),
                     const Spacer(),
                     formularioLinha(
-                        textoFlutuante: 'Função', informacoes: 'Professor'),
+                        textoFlutuante: 'Função',
+                        informacoes: 'Professor',
+                        context: context),
                   ],
                 ),
               ],
