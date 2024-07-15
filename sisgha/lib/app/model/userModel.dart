@@ -1,5 +1,4 @@
-// ignore_for_file: file_names
-
+import 'dart:convert';
 import 'dart:typed_data';
 
 class UserModel {
@@ -21,6 +20,9 @@ class UserModel {
       id: json['id'],
       nome: json['nome'],
       email: json['email'],
-      imgCapa: json['imagemCapa'],
-      imgPerfil: json['imagemPerfil']);
+      imgCapa:
+          json['imagemCapa'] != null ? base64Decode(json['imagemCapa']) : null,
+      imgPerfil: json['imagemPerfil'] != null
+          ? base64Decode(json['imagemPerfil'])
+          : null);
 }
