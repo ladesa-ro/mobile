@@ -41,7 +41,7 @@ Widget campoDeTextoLinha(String texto, BuildContext context) {
     alignment: AlignmentDirectional.center,
     margin: const EdgeInsets.symmetric(vertical: 10),
     height: 50,
-    width: (TamanhoTela.horizontal(context) / 2) - 65,
+    width: (TamanhoTela.horizontal(context) / 2) - 30,
     decoration: BoxDecoration(
       border: Border.all(color: ColorApp.VerdeCinza),
       borderRadius: BorderRadius.circular(10),

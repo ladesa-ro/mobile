@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/widget_ensino.dart';
 
 class NavSwitch extends StatefulWidget {
   const NavSwitch({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
     _tabController.addListener(() {
       setState(() {
         _onOff = _tabController.index == 0 ? true : false;
-        _movendoParaEsquerda = _onOff ? 0 : double.infinity;
+        _movendoParaEsquerda = _onOff ? 0 : TamanhoTela.horizontal(context);
       });
     });
   }
@@ -105,9 +106,9 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
         Expanded(
           child: TabBarView(
             controller: _tabController,
-            children: const [
+            children: [
               Text('Page 1'),
-              Text('Page 2'),
+              widgetEnsino(),
             ],
           ),
         ),

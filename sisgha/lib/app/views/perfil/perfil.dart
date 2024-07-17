@@ -6,7 +6,6 @@ import 'package:sisgha/app/constants/tamanhoTela.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/botton_sheat.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/button_style_edit.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/circle_avatar.dart';
-
 import 'package:sisgha/app/views/perfil/widgets_perfil/navegacao_switch.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/widgets_perfil.dart';
 
@@ -64,7 +63,8 @@ class Perfil extends StatelessWidget {
             child: dadosUsuario(context),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 50, right: 50, top: 10),
+            margin: EdgeInsets.symmetric(
+                horizontal: TamanhoTela.horizontal(context) * 0.050),
             child: Column(
               children: [
                 formulario(textoFlutuante: 'Nome', informacoes: 'Professor'),
@@ -96,9 +96,8 @@ class Perfil extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          Container(
+          SizedBox(
             height: TamanhoTela.vertical(context),
-            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: const NavSwitch(),
           )
         ],
