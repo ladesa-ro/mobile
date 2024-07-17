@@ -96,9 +96,9 @@ class Perfil extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          SizedBox(
-            height: TamanhoTela.vertical(context),
-            child: const NavSwitch(),
+          const SizedBox(
+            height: 500,
+            child: NavSwitch(),
           )
         ],
       ),

@@ -83,7 +83,6 @@ class _HomeState extends State<Home> {
             height: TamanhoTela.vertical(context) * 0.04,
           ),
           //botoes com os dias da semana
-
           Container(
             height: TamanhoTela.vertical(context),
             padding: EdgeInsets.symmetric(
