@@ -36,6 +36,7 @@ class _HomeState extends State<Home> {
             padding: EdgeInsets.symmetric(
                 horizontal: TamanhoTela.horizontal(context) * 0.07),
             height: 52,
+            //botão que ira aparecer na tala com o calendario
             child: ElevatedButton(
               style: estiloBotao(context, 0, 10, 0, 10),
               onPressed: () {
@@ -46,7 +47,6 @@ class _HomeState extends State<Home> {
                   },
                 );
               },
-              //botão que ira aparecer na tala com o calendario
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/widget_ensino.dart';
 
 class NavSwitch extends StatefulWidget {
   const NavSwitch({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
     _tabController.addListener(() {
       setState(() {
         _onOff = _tabController.index == 0 ? true : false;
-        _movendoParaEsquerda = _onOff ? 0 : double.infinity;
+        _movendoParaEsquerda = _onOff ? 0 : TamanhoTela.horizontal(context);
       });
     });
   }
@@ -44,13 +45,12 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
             color: const Color.fromARGB(255, 233, 233, 233),
             borderRadius: BorderRadius.circular(50),
           ),
-          width: TamanhoTela.horizontal(context) > 400 ? 410 : 350,
+          width: TamanhoTela.horizontal(context),
           height: 65,
           child: LayoutBuilder(
             builder: (context, constraints) {
-              double movendoParaDireita = TamanhoTela.horizontal(context) > 410
-                  ? constraints.maxWidth - 180
-                  : constraints.maxWidth - 150;
+              double movendoParaDireita = constraints.maxWidth * 0.50;
+
               return GestureDetector(
                 onHorizontalDragUpdate: (details) {
                   setState(() {
@@ -64,7 +64,6 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
                 },
                 onHorizontalDragEnd: (details) {
                   setState(() {
-                    print(TamanhoTela.horizontal(context));
                     double midpoint = movendoParaDireita / 2;
                     if (_movendoParaEsquerda < midpoint) {
                       _movendoParaEsquerda = 0;
@@ -81,9 +80,9 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
                     AnimatedPositioned(
                       duration: const Duration(milliseconds: 300),
                       left: _movendoParaEsquerda < movendoParaDireita
-                          ? _movendoParaEsquerda + 10
-                          : movendoParaDireita - 10,
-                      child: container(),
+                          ? _movendoParaEsquerda
+                          : movendoParaDireita,
+                      child: container(constraints.maxWidth),
                     ),
                     TabBar(
                       labelColor: ColorApp.Branco,
@@ -94,10 +93,8 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
                       tabs: [
                         Text('Disposição',
                             style: estiloTexto(15, peso: FontWeight.bold)),
-                        Text(
-                          'Ensino',
-                          style: estiloTexto(15, peso: FontWeight.bold),
-                        )
+                        Text('Ensino',
+                            style: estiloTexto(15, peso: FontWeight.bold))
                       ],
                     ),
                   ],
@@ -109,9 +106,9 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
         Expanded(
           child: TabBarView(
             controller: _tabController,
-            children: const [
+            children: [
               Text('Page 1'),
-              Text('Page 2'),
+              widgetEnsino(),
             ],
           ),
         ),
@@ -119,16 +116,14 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
     );
   }
 
-  Widget container() {
+  Widget container(double tamanho) {
     return Container(
-      alignment: _onOff
-          ? AlignmentDirectional.centerStart
-          : AlignmentDirectional.centerEnd,
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
         color: ColorApp.VerdePrincipal,
       ),
-      width: TamanhoTela.horizontal(context) > 400 ? 180 : 150,
+      width: tamanho * 0.50 - 20,
       height: 50,
     );
   }
