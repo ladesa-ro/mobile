@@ -27,6 +27,7 @@ class _HomeState extends State<Home> {
       //aqui mexe no tamnho da barra de cima
       appBar: const CustomAppBar(height: 65),
       body: ListView(
+        physics: NeverScrollableScrollPhysics(),
         padding: EdgeInsets.zero,
         children: [
           SizedBox(
