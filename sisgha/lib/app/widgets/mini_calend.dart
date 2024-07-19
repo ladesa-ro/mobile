@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
-
 import 'package:sisgha/app/constants/tamanhoTela.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -133,7 +132,6 @@ class _MiniCalendarioState extends State<MiniCalendario> {
               final now = DateTime.now();
               final startOfWeek = now.subtract(Duration(days: now.weekday - 1));
               final endOfWeek = startOfWeek.add(const Duration(days: 5));
-
               final isSameWeek =
                   date.isAfter(startOfWeek) && date.isBefore(endOfWeek);
 

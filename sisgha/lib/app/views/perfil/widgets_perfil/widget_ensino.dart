@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sisgha/app/constants/colors.dart';
+import 'package:sisgha/app/constants/estilos.dart';
 
 class WidgetEnsino extends StatefulWidget {
   const WidgetEnsino({super.key});
@@ -97,9 +98,64 @@ class _WidgetEnsino extends State<WidgetEnsino> {
               "assets/img/gtr.jpeg",
               fit: BoxFit.cover,
               alignment: AlignmentDirectional.bottomCenter,
-              height: 60,
+              height: 70,
               width: constraints.maxWidth - 2,
             ),
+            const Divider(
+              height: 1,
+              color: ColorApp.VerdeCinza,
+              thickness: 2,
+            ),
+            Container(
+              width: constraints.maxWidth,
+              padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Técnico em Informatica',
+                    style: estiloTexto(16,
+                        cor: ColorApp.Preto, peso: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    'Turmas: 1A 2B 3C',
+                    style: estiloTexto(16,
+                        cor: ColorApp.VerdeCinza, peso: FontWeight.normal),
+                  ),
+                ],
+              ),
+            ),
+            const Spacer(),
+            SizedBox(
+              height: 40,
+              width: constraints.maxWidth,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 2,
+                itemBuilder: (context, idex) => Container(
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(left: 20),
+                  width: constraints.maxWidth * 0.30,
+                  height: 10,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: index == _paginaSelecionada
+                              ? ColorApp.Preto
+                              : ColorApp.VerdeCinza,
+                          width: 1),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Text(
+                    'testando',
+                    style: estiloTexto(16,
+                        cor: ColorApp.Preto, peso: FontWeight.bold),
+                  ),
+                ),
+              ),
+            ),
+            const Spacer(),
           ],
         ),
       ),

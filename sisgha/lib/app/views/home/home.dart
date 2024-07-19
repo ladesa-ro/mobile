@@ -27,6 +27,7 @@ class _HomeState extends State<Home> {
       //aqui mexe no tamnho da barra de cima
       appBar: const CustomAppBar(height: 65),
       body: ListView(
+        padding: EdgeInsets.zero,
         children: [
           SizedBox(
               height: TamanhoTela.vertical(context) > 810

@@ -96,15 +96,16 @@ class Perfil extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          const SizedBox(
-            height: 500,
-            child: NavSwitch(),
-          )
+          SizedBox(
+            height: TamanhoTela.vertical(context),
+            child: const NavSwitch(),
+          ),
         ],
       ),
     );
   }
 }
+
 
 
 
@@ -121,9 +122,3 @@ class Perfil extends StatelessWidget {
 //       );
 //     }
 //   },
-//   icon: const Icon(
-//     Icons.logout_rounded,
-//     size: 40,
-//     color: Color.fromARGB(255, 0, 0, 0),
-//   ),
-// ),
