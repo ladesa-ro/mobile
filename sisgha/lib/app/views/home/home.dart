@@ -27,6 +27,8 @@ class _HomeState extends State<Home> {
       //aqui mexe no tamnho da barra de cima
       appBar: const CustomAppBar(height: 65),
       body: ListView(
+        physics: NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.zero,
         children: [
           SizedBox(
               height: TamanhoTela.vertical(context) > 810
@@ -83,7 +85,6 @@ class _HomeState extends State<Home> {
             height: TamanhoTela.vertical(context) * 0.04,
           ),
           //botoes com os dias da semana
-
           Container(
             height: TamanhoTela.vertical(context),
             padding: EdgeInsets.symmetric(

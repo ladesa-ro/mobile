@@ -106,9 +106,11 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
         Expanded(
           child: TabBarView(
             controller: _tabController,
-            children: [
-              Text('Page 1'),
-              widgetEnsino(),
+            children: const [
+              Center(
+                child: Text('Em Breve ...'),
+              ),
+              WidgetEnsino(),
             ],
           ),
         ),

@@ -7,6 +7,7 @@ import 'package:sisgha/app/views/perfil/widgets_perfil/botton_sheat.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/button_style_edit.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/circle_avatar.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/navegacao_switch.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/widget_sair.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/widgets_perfil.dart';
 
 class Perfil extends StatelessWidget {
@@ -96,34 +97,21 @@ class Perfil extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
+          const SizedBox(
+            height: 400,
+            child: NavSwitch(),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              widgetQuit(context),
+            ],
+          ),
           SizedBox(
-            height: TamanhoTela.vertical(context),
-            child: const NavSwitch(),
+            height: TamanhoTela.horizontal(context) * 0.15,
           )
         ],
       ),
     );
   }
 }
-
-
-
-//IconButton(
-//   onPressed: () async {
-//     bool saiu = await sair();
-//     if (saiu) {
-//       Navigator.pushReplacement(
-//         // ignore: use_build_context_synchronously
-//         context,
-//         MaterialPageRoute(
-//           builder: (context) => const BoasVindasPage(),
-//         ),
-//       );
-//     }
-//   },
-//   icon: const Icon(
-//     Icons.logout_rounded,
-//     size: 40,
-//     color: Color.fromARGB(255, 0, 0, 0),
-//   ),
-// ),
