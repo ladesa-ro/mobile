@@ -1,10 +1,9 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/api/repository.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
-import 'package:sisgha/app/model/userModel.dart';
+
+import 'package:sisgha/app/widgets/progressIndicator.dart';
 
 class FutureBuilderPerfil extends StatefulWidget {
   const FutureBuilderPerfil({super.key});
@@ -16,7 +15,7 @@ class FutureBuilderPerfil extends StatefulWidget {
 class _FutureBuilderPerfilState extends State<FutureBuilderPerfil> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<UserModel>(
+    return FutureBuilder<Map<String, dynamic>>(
       future: buscarUser(context),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
@@ -24,42 +23,68 @@ class _FutureBuilderPerfilState extends State<FutureBuilderPerfil> {
             child: Text("Erro ao carregar Usuário"),
           );
         }
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
         if (snapshot.hasData) {
-          UserModel user = snapshot.data!;
-          return SizedBox(
-            height: 200,
-            width: TamanhoTela.horizontal(context),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: 10),
-                Text(
-                  user.nome,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+          return FutureBuilder<String?>(
+            future: pegarId(),
+            builder: (context, idSnapshot) {
+              if (idSnapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: Progressindicator(
+                    tamanho: 100,
                   ),
-                ),
-                SizedBox(height: 5),
-                Text(
-                  user.email,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey,
-                  ),
-                ),
-              ],
-            ),
+                );
+              }
+              if (idSnapshot.hasError || idSnapshot.data == null) {
+                return const Center(
+                  child: Text("Erro ao obter ID do usuário"),
+                );
+              }
+              var id = idSnapshot.data!;
+              //se funcionar, mostra isso:
+              // ignore: sized_box_for_whitespace
+              return Container(
+                  height: 200,
+                  width: TamanhoTela.horizontal(context),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Stack(
+                        children: [
+                          Positioned(
+                            child: Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: ColorApp.Branco),
+                              height: 105,
+                              width: 105,
+                              child: CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                backgroundImage: NetworkImage(
+                                  "https://luna.sisgha.com/api/usuarios/$id/imagem/perfil",
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+
+                  //   title: Text(snapshot.data!["nome"]),
+                  //   subtitle: Text(snapshot.data!["email"]),
+                  //   trailing:
+                  //       Text("Matricula: \n${snapshot.data!["matriculaSiape"]}"),
+
+                  );
+            },
           );
         }
         return const Center(
-          child: CircularProgressIndicator(),
+          child: Progressindicator(
+            tamanho: 100,
+          ),
         );
       },
     );

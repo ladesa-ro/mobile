@@ -2,16 +2,12 @@
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:sisgha/app/model/userModel.dart';
 import 'package:sisgha/app/widgets/erro_connect.dart';
 import 'package:sisgha/app/widgets/erro_connect_login.dart';
-import 'package:path/path.dart' as path;
 
 Future<bool> login(TextEditingController matriculaController,
     TextEditingController senhaController, BuildContext context) async {
@@ -38,38 +34,7 @@ Future<bool> login(TextEditingController matriculaController,
   return false;
 }
 
-Future<Map<String, File>> buscarImagens(BuildContext context) async {
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  var id = sharedPreferences.getString("id");
-
-  final capaUrl = "https://dev.ladesa.com.br/api/usuarios/$id/imagem/capa";
-  final perfilUrl = "https://dev.ladesa.com.br/api/usuarios/$id/imagem/perfil";
-
-  final directory = await getApplicationDocumentsDirectory();
-
-  Future<File> downloadAndSaveImage(String url, String imageName) async {
-    final response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      final filePath = path.join(directory.path, imageName);
-      final file = File(filePath);
-      await file.writeAsBytes(response.bodyBytes);
-      return file;
-    } else {
-      throw Exception('Falha ao baixar a imagem $imageName');
-    }
-  }
-
-  try {
-    File capaFile = await downloadAndSaveImage(capaUrl, 'capa.jpg');
-    File perfilFile = await downloadAndSaveImage(perfilUrl, 'perfil.jpg');
-    return {'capa': capaFile, 'perfil': perfilFile};
-  } catch (e) {
-    print(e);
-    throw Exception('Erro ao baixar as imagens');
-  }
-}
-
-Future<UserModel> buscarUser(BuildContext context) async {
+Future<Map<String, dynamic>> buscarUser(BuildContext context) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   var token = sharedPreferences.getString("token");
   var url = Uri.parse("https://dev.ladesa.com.br/api/autenticacao/quem-sou-eu");
@@ -80,7 +45,6 @@ Future<UserModel> buscarUser(BuildContext context) async {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     });
-    print(response.statusCode);
     if (response.statusCode == 403) {
       bool refreshed = await refreshToken(context);
       if (refreshed) {
@@ -97,18 +61,12 @@ Future<UserModel> buscarUser(BuildContext context) async {
 
     if (response.statusCode == 200) {
       var jsondecode = json.decode(response.body)["usuario"];
-      UserModel user = UserModel.fromJson(jsondecode);
-      print(user.nome);
-      await sharedPreferences.setString("id", user.id);
-      await sharedPreferences.setString("matricula", user.matricula);
-      await sharedPreferences.setString("nome", user.nome);
-      await sharedPreferences.setString("email", user.email);
-      return user;
+      await sharedPreferences.setString("id", jsondecode["id"]);
+      return jsondecode;
     } else {
       throw Exception("Falha ao carregar");
     }
   } catch (e) {
-    print(e);
     throw Exception("Erro ao carregar usuário");
   }
 }

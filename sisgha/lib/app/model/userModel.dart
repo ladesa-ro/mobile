@@ -1,21 +1,26 @@
-import 'dart:io';
+// ignore_for_file: file_names
+
+import 'dart:typed_data';
 
 class UserModel {
-  final String matricula;
+  final String id;
   final String nome;
   final String email;
-  final String id;
+  final Uint8List? imgCapa;
+  final Uint8List? imgPerfil;
 
   UserModel({
-    required this.matricula,
+    required this.id,
     required this.nome,
     required this.email,
-    required this.id,
+    required this.imgCapa,
+    required this.imgPerfil,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-      matricula: json['matriculaSiape'] ?? 'Desconhecido',
-      nome: json['nome'] ?? 'Desconhecido',
-      email: json['email'] ?? 'desconhecido@example.com',
-      id: json['id'] ?? '00000');
+      id: json['id'],
+      nome: json['nome'],
+      email: json['email'],
+      imgCapa: json['imagemCapa'],
+      imgPerfil: json['imagemPerfil']);
 }
