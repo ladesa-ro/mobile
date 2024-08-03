@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:sisgha/app/api/repository.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/dias.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
+import 'package:sisgha/app/views/login/login.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
@@ -38,6 +40,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            IconButton(
+              onPressed: () async {
+                if (await sair()) {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    "/login",
+                    (route) => false,
+                  );
+                }
+              },
+              icon: const Icon(Icons.output),
+            ),
             Text(
               DatasFormatadas.diaAtual,
               style: estiloTexto(
