@@ -43,62 +43,60 @@ class _QuadradosHomeState extends State<QuadradosHome>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          SizedBox(
-            height: 100,
-            child: TabBar(
-              splashFactory: NoSplash.splashFactory,
-              labelPadding: const EdgeInsets.all(7),
-              indicator: const BoxDecoration(),
-              dividerHeight: 0,
-              controller: _tabController,
-              tabs: List.generate(
-                6,
-                (index) => _contruindoInterface(index),
-              ),
+    return Column(
+      children: [
+        SizedBox(
+          height: 100,
+          child: TabBar(
+            splashFactory: NoSplash.splashFactory,
+            labelPadding: const EdgeInsets.all(7),
+            indicator: const BoxDecoration(),
+            dividerHeight: 0,
+            controller: _tabController,
+            tabs: List.generate(
+              6,
+              (index) => _contruindoInterface(index),
             ),
           ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: const [
-                Horarios(
-                  materia: 'Matemática',
-                  turma: '3A',
-                  horario: '08:00 - 09:30',
-                ),
-                Horarios(
-                  materia: 'História',
-                  turma: '2B',
-                  horario: '10:00 - 11:30',
-                ),
-                Horarios(
-                  materia: 'Geografia',
-                  turma: '1C',
-                  horario: '13:00 - 14:30',
-                ),
-                Horarios(
-                  materia: 'Lógica de Programação',
-                  turma: '3C',
-                  horario: '13:00 - 14:30',
-                ),
-                Horarios(
-                  materia: 'Geografia',
-                  turma: '1C',
-                  horario: '13:00 - 14:30',
-                ),
-                Horarios(
-                  materia: 'Geografia',
-                  turma: '1C',
-                  horario: '13:00 - 14:30',
-                )
-              ],
-            ),
-          )
-        ],
-      ),
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: const [
+              Horarios(
+                materia: 'Matemática',
+                turma: '3A',
+                horario: '08:00 - 09:30',
+              ),
+              Horarios(
+                materia: 'História',
+                turma: '2B',
+                horario: '10:00 - 11:30',
+              ),
+              Horarios(
+                materia: 'Geografia',
+                turma: '1C',
+                horario: '13:00 - 14:30',
+              ),
+              Horarios(
+                materia: 'Lógica de Programação',
+                turma: '3C',
+                horario: '13:00 - 14:30',
+              ),
+              Horarios(
+                materia: 'Geografia',
+                turma: '1C',
+                horario: '13:00 - 14:30',
+              ),
+              Horarios(
+                materia: 'Geografia',
+                turma: '1C',
+                horario: '13:00 - 14:30',
+              )
+            ],
+          ),
+        )
+      ],
     );
   }
 

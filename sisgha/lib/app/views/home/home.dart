@@ -27,6 +27,8 @@ class _HomeState extends State<Home> {
       //aqui mexe no tamnho da barra de cima
       appBar: const CustomAppBar(height: 65),
       body: ListView(
+        physics: NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.zero,
         children: [
           SizedBox(
               height: TamanhoTela.vertical(context) > 810
@@ -36,6 +38,7 @@ class _HomeState extends State<Home> {
             padding: EdgeInsets.symmetric(
                 horizontal: TamanhoTela.horizontal(context) * 0.07),
             height: 52,
+            //botão que ira aparecer na tala com o calendario
             child: ElevatedButton(
               style: estiloBotao(context, 0, 10, 0, 10),
               onPressed: () {
@@ -46,7 +49,6 @@ class _HomeState extends State<Home> {
                   },
                 );
               },
-              //botão que ira aparecer na tala com o calendario
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -83,7 +85,6 @@ class _HomeState extends State<Home> {
             height: TamanhoTela.vertical(context) * 0.04,
           ),
           //botoes com os dias da semana
-
           Container(
             height: TamanhoTela.vertical(context),
             padding: EdgeInsets.symmetric(

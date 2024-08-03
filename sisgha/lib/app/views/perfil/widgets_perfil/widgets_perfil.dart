@@ -1,65 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/dados_do_usuario.dart';
 
-Widget campoDeTexto(String texto) {
-  return Container(
-    alignment: AlignmentDirectional.centerStart,
-    padding: const EdgeInsets.only(left: 15),
-    margin: const EdgeInsets.symmetric(vertical: 10),
-    height: 50,
-    width: double.maxFinite,
-    decoration: BoxDecoration(
-      border: Border.all(color: ColorApp.VerdeCinza),
-      borderRadius: BorderRadius.circular(10),
-    ),
-    child: Text(
-      texto,
-      style: estiloTexto(16, cor: ColorApp.Preto, peso: FontWeight.w600),
-    ),
+Widget dadosUsuario(BuildContext context) {
+  return Column(
+    children: [
+      Text(
+        'Professor(a) "nome_aqui"',
+        style: estiloTexto(18, cor: ColorApp.Preto, peso: FontWeight.bold),
+      ),
+      Text(
+        'email_aqui',
+        style: estiloTexto(15, cor: ColorApp.VerdeCinza, peso: FontWeight.w500),
+      ),
+    ],
   );
 }
 
-Widget floatLabel(String textoFlutuante) {
-  return Container(
-    alignment: AlignmentDirectional.center,
-    margin: const EdgeInsets.only(left: 25),
-    color: ColorApp.CorDeFundo,
-    width: 70,
-    height: 17,
-    child: Text(
-      textoFlutuante,
-      style: estiloTexto(15, cor: ColorApp.VerdeCinza, peso: FontWeight.w600),
-    ),
+Widget formulario(
+    {required String textoFlutuante, required String informacoes}) {
+  return Stack(
+    alignment: AlignmentDirectional.topStart,
+    children: [
+      campoDeTexto(informacoes),
+      floatLabel(textoFlutuante),
+    ],
   );
 }
 
-Widget campoDeTextoLinha(String texto) {
-  return Container(
-    alignment: AlignmentDirectional.center,
-    margin: const EdgeInsets.symmetric(vertical: 10),
-    height: 50,
-    width: 168,
-    decoration: BoxDecoration(
-      border: Border.all(color: ColorApp.VerdeCinza),
-      borderRadius: BorderRadius.circular(10),
-    ),
-    child: Text(
-      texto,
-      style: estiloTexto(16, cor: ColorApp.VerdeCinza, peso: FontWeight.w600),
-    ),
-  );
-}
-
-Widget floatLabelLinha(String textoFlutuante) {
-  return Container(
-    alignment: AlignmentDirectional.center,
-    padding: const EdgeInsets.symmetric(horizontal: 10),
-    color: ColorApp.CorDeFundo,
-    height: 17,
-    child: Text(
-      textoFlutuante,
-      style: estiloTexto(15, cor: ColorApp.VerdeCinza, peso: FontWeight.w600),
-    ),
+Widget formularioLinha(
+    {required String textoFlutuante,
+    required String informacoes,
+    required BuildContext context}) {
+  return Stack(
+    alignment: AlignmentDirectional.topCenter,
+    children: [
+      campoDeTextoLinha(informacoes, context),
+      floatLabelLinha(textoFlutuante),
+    ],
   );
 }
