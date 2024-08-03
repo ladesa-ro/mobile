@@ -1,28 +1,21 @@
-import 'dart:convert';
-import 'dart:typed_data';
+import 'dart:io';
 
 class UserModel {
-  final String id;
+  final String matricula;
   final String nome;
   final String email;
-  final Uint8List? imgCapa;
-  final Uint8List? imgPerfil;
+  final String id;
 
   UserModel({
-    required this.id,
+    required this.matricula,
     required this.nome,
     required this.email,
-    required this.imgCapa,
-    required this.imgPerfil,
+    required this.id,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-      id: json['id'],
-      nome: json['nome'],
-      email: json['email'],
-      imgCapa:
-          json['imagemCapa'] != null ? base64Decode(json['imagemCapa']) : null,
-      imgPerfil: json['imagemPerfil'] != null
-          ? base64Decode(json['imagemPerfil'])
-          : null);
+      matricula: json['matriculaSiape'] ?? 'Desconhecido',
+      nome: json['nome'] ?? 'Desconhecido',
+      email: json['email'] ?? 'desconhecido@example.com',
+      id: json['id'] ?? '00000');
 }

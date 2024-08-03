@@ -38,28 +38,6 @@ class _FutureBuilderPerfilState extends State<FutureBuilderPerfil> {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Stack(
-                  children: [
-                    Positioned(
-                      child: Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: ColorApp.Branco,
-                        ),
-                        height: 105,
-                        width: 105,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.transparent,
-                          backgroundImage: user.imgPerfil != null
-                              ? MemoryImage(user.imgPerfil!)
-                              : AssetImage('assets/img/gtr.jpeg')
-                                  as ImageProvider,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
                 SizedBox(height: 10),
                 Text(
                   user.nome,

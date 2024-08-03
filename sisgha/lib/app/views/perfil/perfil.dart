@@ -7,7 +7,6 @@ import 'package:sisgha/app/constants/tamanhoTela.dart';
 import 'package:sisgha/app/model/userModel.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/botton_sheat.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/button_style_edit.dart';
-import 'package:sisgha/app/views/perfil/widgets_perfil/circle_avatar.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/dados_do_usuario.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/navegacao_switch.dart';
 
@@ -18,14 +17,14 @@ class Perfil extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<UserModel>(
-        future: buscarUser(
-            context), // Chamada ao método que busca os dados do usuário
+        future: buscarUser(context),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(value: 100),
             );
           } else if (snapshot.hasError) {
+            print(snapshot.error);
             return const Center(
               child: Text("Erro ao carregar Usuário"),
             );
@@ -41,24 +40,6 @@ class Perfil extends StatelessWidget {
                     alignment: AlignmentDirectional.topCenter,
                     children: [
                       Positioned(
-                        child: SizedBox(
-                          height: 175,
-                          width: TamanhoTela.horizontal(context),
-                          // Aqui muda a imagem de fundo com imgCapa do modelo
-                          child: user.imgCapa != null
-                              ? Image.memory(
-                                  user.imgCapa!,
-                                  fit: BoxFit.cover,
-                                  alignment: AlignmentDirectional.bottomCenter,
-                                )
-                              : Image.asset(
-                                  "assets/img/gtr.jpeg",
-                                  fit: BoxFit.cover,
-                                  alignment: AlignmentDirectional.bottomCenter,
-                                ),
-                        ),
-                      ),
-                      Positioned(
                         top: 20,
                         right: 10,
                         child: ElevatedButton(
@@ -69,17 +50,6 @@ class Perfil extends StatelessWidget {
                             color: ColorApp.Preto,
                           ),
                           onPressed: () => bottomSheat(context),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.transparent,
-                          backgroundImage: user.imgPerfil != null
-                              ? MemoryImage(user.imgPerfil!)
-                              : AssetImage('assets/images/default_profile.png')
-                                  as ImageProvider,
-                          radius: 50,
                         ),
                       ),
                     ],
@@ -103,8 +73,8 @@ class Perfil extends StatelessWidget {
                         children: [
                           formularioLinha(
                               textoFlutuante: 'Matricula',
-                              informacoes:
-                                  '191981989'), // Supondo que matrícula venha do modelo
+                              informacoes: user
+                                  .matricula), // Supondo que matrícula venha do modelo
                           const Spacer(),
                           formularioLinha(
                               textoFlutuante: 'Função',
