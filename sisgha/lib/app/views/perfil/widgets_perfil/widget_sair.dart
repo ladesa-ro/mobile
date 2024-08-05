@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sisgha/app/api/repository.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/views/inicio/boasvindas.dart';
@@ -6,12 +7,14 @@ import 'package:sisgha/app/views/inicio/boasvindas.dart';
 ElevatedButton widgetQuit(BuildContext context) {
   return ElevatedButton(
     style: _estiloBotao(),
-    onPressed: () {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => const BoasVindasPage()),
-        (Route<dynamic> route) => false,
-      );
+    onPressed: () async {
+      if (await sair()) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const BoasVindasPage()),
+          (Route<dynamic> route) => false,
+        );
+      }
     },
     child: const Row(
       mainAxisAlignment: MainAxisAlignment.center,

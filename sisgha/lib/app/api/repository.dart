@@ -47,7 +47,7 @@ Future<UserModel> buscarUser(BuildContext context) async {
       'Authorization': 'Bearer $token',
     });
     print(response.statusCode);
-    if (response.statusCode == 403) {
+    if (response.statusCode == 401) {
       bool refreshed = await refreshToken(context);
       if (refreshed) {
         token = sharedPreferences.getString("token");
@@ -64,7 +64,7 @@ Future<UserModel> buscarUser(BuildContext context) async {
     if (response.statusCode == 200) {
       var jsondecode = json.decode(response.body)["usuario"];
       UserModel user = UserModel.fromJson(jsondecode);
-      print(user.nome);
+      print(user.id);
       await sharedPreferences.setString("id", user.id);
       await sharedPreferences.setString("matricula", user.matricula);
       await sharedPreferences.setString("nome", user.nome);

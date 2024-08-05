@@ -4,15 +4,15 @@ import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/dados_do_usuario.dart';
 
-Widget dadosUsuario(BuildContext context) {
+Widget dadosUsuario(BuildContext context, nome, email) {
   return Column(
     children: [
       Text(
-        'Professor(a) "nome_aqui"',
+        'Professor(a) $nome',
         style: estiloTexto(18, cor: ColorApp.Preto, peso: FontWeight.bold),
       ),
       Text(
-        'email_aqui',
+        email,
         style: estiloTexto(15, cor: ColorApp.VerdeCinza, peso: FontWeight.w500),
       ),
     ],
