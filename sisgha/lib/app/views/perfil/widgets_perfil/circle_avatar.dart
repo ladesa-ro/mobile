@@ -5,7 +5,7 @@ import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/botton_sheat.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/button_style_edit.dart';
 
-Widget circleAvatar(BuildContext context) {
+Widget circleAvatar(BuildContext context, link) {
   return Container(
     padding: const EdgeInsets.all(4),
     decoration: BoxDecoration(
@@ -15,17 +15,14 @@ Widget circleAvatar(BuildContext context) {
     child: Stack(
       alignment: AlignmentDirectional.center,
       children: [
-        const Positioned(
+        Positioned(
           child: SizedBox(
             width: 90,
             height: 90,
             child: CircleAvatar(
-              backgroundColor: Color.fromARGB(255, 126, 126, 126),
+              backgroundColor: const Color.fromARGB(255, 126, 126, 126),
               //Aqui muda a imagem que aparece a imagem circular
-              child: Icon(
-                Icons.person,
-                size: 50,
-              ),
+              backgroundImage: NetworkImage(link),
             ),
           ),
         ),
