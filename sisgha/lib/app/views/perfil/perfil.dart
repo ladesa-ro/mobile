@@ -22,6 +22,8 @@ class Perfil extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text("Erro ao carregar Usuário"),
                 OutlinedButton(
