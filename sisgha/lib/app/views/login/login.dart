@@ -46,53 +46,54 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
                 child: SizedBox(
                   width: larguraTela > 700 ? 800 : larguraTela,
                   height: 800,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal:
-                            TamanhoTela.vertical(context) > 1000 ? 70 : 50,
-                        vertical: 20),
-                    child: Column(
-                      children: [
-                        const Spacer(),
-                        Image.asset(
-                          ImageApp.logo_sigha_sem_barra,
-                          width: 250,
-                        ),
-                        const SizedBox(height: 30),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 40),
-                          child: Form(
-                            key: formKey,
-                            child: Column(
-                              children: [
-                                _campoDeEntrada(
-                                    'Matrícula',
-                                    TextInputType.number,
-                                    matriculaController,
-                                    _mostrarErroMatricula),
-                                const SizedBox(height: 20),
-                                _campoDeEntradaSenha(
-                                    'Senha',
-                                    TextInputType.text,
-                                    senhaController,
-                                    _mostrarErroSenha),
-                                const SizedBox(height: 20),
-                                recuperarSenha(context),
-                                const SizedBox(height: 20),
-                                botaoEntrar('Entrar', context, formKey,
-                                    matriculaController, senhaController),
-                                const SizedBox(height: 30),
-                              ],
+                  child: LayoutBuilder(
+                    builder: (context, constraints) => Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: constraints.maxWidth * 0.08,
+                          vertical: 20),
+                      child: Column(
+                        children: [
+                          const Spacer(),
+                          Image.asset(
+                            ImageApp.logo_sigha_sem_barra,
+                            width: 250,
+                          ),
+                          const SizedBox(height: 30),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 40),
+                            child: Form(
+                              key: formKey,
+                              child: Column(
+                                children: [
+                                  _campoDeEntrada(
+                                      'Matrícula',
+                                      TextInputType.number,
+                                      matriculaController,
+                                      _mostrarErroMatricula),
+                                  const SizedBox(height: 20),
+                                  _campoDeEntradaSenha(
+                                      'Senha',
+                                      TextInputType.text,
+                                      senhaController,
+                                      _mostrarErroSenha),
+                                  const SizedBox(height: 20),
+                                  recuperarSenha(context, constraints.maxWidth),
+                                  const SizedBox(height: 20),
+                                  botaoEntrar('Entrar', context, formKey,
+                                      matriculaController, senhaController),
+                                  const SizedBox(height: 30),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        botaoEntrarAluno(context),
-                        SizedBox(
-                            height: TamanhoTela.vertical(context) > 810
-                                ? 0
-                                : TamanhoTela.vertical(context) * 0.13),
-                        const Spacer(),
-                      ],
+                          botaoEntrarAluno(context, constraints.maxWidth),
+                          SizedBox(
+                              height: TamanhoTela.vertical(context) > 810
+                                  ? 0
+                                  : TamanhoTela.vertical(context) * 0.13),
+                          const Spacer(),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -104,8 +105,12 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
     );
   }
 
-  Widget _campoDeEntrada(String labelText, TextInputType inputType,
-      TextEditingController controller, bool mostrarErro) {
+  Widget _campoDeEntrada(
+    String labelText,
+    TextInputType inputType,
+    TextEditingController controller,
+    bool mostrarErro,
+  ) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       height: mostrarErro ? 70 : 50,
