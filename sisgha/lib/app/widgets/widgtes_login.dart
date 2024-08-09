@@ -39,10 +39,10 @@ Widget elementoVerde(Alignment alignment, double width, double height) {
   );
 }
 
-Widget botaoEntrarAluno(context) {
+Widget botaoEntrarAluno(context, double tamanhoHorizontal) {
   return SizedBox(
     height: 45,
-    width: 290,
+    width: tamanhoHorizontal * 0.70,
     child: Center(
       child: FilledButton(
         style: estiloBotao(context, 0, 5, 0, 5),
@@ -91,7 +91,7 @@ Widget botaoEntrarAluno(context) {
   );
 }
 
-Widget recuperarSenha(context) {
+Widget recuperarSenha(context, double tamanho) {
   return Container(
     alignment: Alignment.center,
     child: Row(
@@ -100,14 +100,14 @@ Widget recuperarSenha(context) {
         Text('Esqueceu a senha?',
             style: estiloTexto(
               cor: ColorApp.VerdeCinza,
-              16,
+              tamanho > 200 ? 15 : 13,
               peso: FontWeight.w600,
             )),
         const SizedBox(width: 3),
         GestureDetector(
           onTap: () => Navigator.pushNamed(context, '/home'),
           child: Text('Clique aqui',
-              style: estiloTexto(16,
+              style: estiloTexto(tamanho > 300 ? 16 : 14,
                   cor: ColorApp.VerdePrincipal, peso: FontWeight.w600)),
         ),
       ],
