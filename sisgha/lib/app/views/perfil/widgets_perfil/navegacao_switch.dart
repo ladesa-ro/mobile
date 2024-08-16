@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
-import 'package:sisgha/app/constants/tamanhoTela.dart';
+import 'package:sisgha/app/constants/tamanhotela.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/widget_disponibilidade.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/widget_ensino.dart';
 
 class NavSwitch extends StatefulWidget {
@@ -91,7 +92,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
                       indicatorColor: Colors.transparent,
                       controller: _tabController,
                       tabs: [
-                        Text('Disposição',
+                        Text('Disponibilidade',
                             style: estiloTexto(15, peso: FontWeight.bold)),
                         Text('Ensino',
                             style: estiloTexto(15, peso: FontWeight.bold))
@@ -106,11 +107,9 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
         Expanded(
           child: TabBarView(
             controller: _tabController,
-            children: const [
-              Center(
-                child: Text('Em Breve ...'),
-              ),
-              WidgetEnsino(),
+            children: [
+              disponibilidade(),
+              const WidgetEnsino(),
             ],
           ),
         ),

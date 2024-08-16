@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sisgha/app/constants/tamanhoTela.dart';
+import 'package:sisgha/app/constants/tamanhotela.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

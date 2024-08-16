@@ -10,6 +10,7 @@ ElevatedButton widgetQuit(BuildContext context) {
     onPressed: () async {
       if (await sair()) {
         Navigator.pushAndRemoveUntil(
+          // ignore: use_build_context_synchronously
           context,
           MaterialPageRoute(builder: (context) => const BoasVindasPage()),
           (Route<dynamic> route) => false,

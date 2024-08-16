@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/api/repository.dart';
 import 'package:sisgha/app/constants/colors.dart';
-import 'package:sisgha/app/constants/tamanhoTela.dart';
+import 'package:sisgha/app/constants/tamanhotela.dart';
 import 'package:sisgha/app/model/userModel.dart';
-import 'package:sisgha/app/widgets/progressIndicator.dart';
 
 class FutureBuilderPerfil extends StatefulWidget {
   const FutureBuilderPerfil({super.key});
@@ -30,7 +29,7 @@ class _FutureBuilderPerfilState extends State<FutureBuilderPerfil> {
         }
         if (snapshot.hasData) {
           UserModel user = snapshot.data!;
-          return Container(
+          return SizedBox(
             height: 200,
             width: TamanhoTela.horizontal(context),
             child: Column(

@@ -5,7 +5,7 @@ import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/dias.dart';
 import 'package:sisgha/app/constants/estilos.dart';
-import 'package:sisgha/app/constants/tamanhoTela.dart';
+import 'package:sisgha/app/constants/tamanhotela.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/widget_sair.dart';
 
 class WidgetEnsino extends StatefulWidget {
   const WidgetEnsino({super.key});
@@ -58,7 +59,17 @@ class _WidgetEnsino extends State<WidgetEnsino> {
             itemCount: _quantidadeDePaginas,
             itemBuilder: (context, index) => container(index),
           ),
-        )
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            widgetQuit(context),
+          ],
+        ),
+        const Spacer(),
       ],
     );
   }

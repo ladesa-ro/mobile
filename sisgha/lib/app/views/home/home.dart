@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
-import 'package:sisgha/app/constants/tamanhoTela.dart';
+import 'package:sisgha/app/constants/tamanhotela.dart';
 import 'package:sisgha/app/widgets/mini_calend.dart';
 import 'package:sisgha/app/widgets/quadrados_Home.dart';
 import 'package:sisgha/app/views/home/barra_top.dart';
