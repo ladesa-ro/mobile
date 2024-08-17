@@ -34,6 +34,7 @@ class _PerfilState extends State<Perfil> {
                 onPressed: () async {
                   if (await sair()) {
                     Navigator.pushNamedAndRemoveUntil(
+                      // ignore: use_build_context_synchronously
                       context,
                       "/primeiraTela",
                       (route) => false,
@@ -53,8 +54,7 @@ class _PerfilState extends State<Perfil> {
         if (snapshot.hasData) {
           UserModel user = snapshot.data!;
           return Scaffold(
-            body: ListView(
-              padding: EdgeInsets.zero,
+            body: Column(
               children: [
                 SizedBox(
                   width: TamanhoTela.horizontal(context),
@@ -137,12 +137,11 @@ class _PerfilState extends State<Perfil> {
                 const SizedBox(
                   height: 15,
                 ),
-                const SizedBox(
-                  height: 500,
-                  child: NavSwitch(),
-                ),
-                const SizedBox(
-                  height: 15,
+
+                SizedBox(
+                  height: 488.01,
+                  width: TamanhoTela.horizontal(context),
+                  child: const NavSwitch(),
                 ),
               ],
             ),

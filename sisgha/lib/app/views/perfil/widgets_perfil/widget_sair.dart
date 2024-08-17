@@ -24,7 +24,7 @@ ElevatedButton widgetQuit(BuildContext context) {
         SizedBox(
           width: 10,
         ),
-        Text("Sair"),
+        Text("Sair da página"),
       ],
     ),
   );
@@ -34,7 +34,7 @@ ButtonStyle _estiloBotao() {
   return ButtonStyle(
     foregroundColor: const WidgetStatePropertyAll(ColorApp.Branco),
     fixedSize: const WidgetStatePropertyAll(
-      Size(125, 55),
+      Size(200, 55),
     ),
     backgroundColor: const WidgetStatePropertyAll(ColorApp.VermelhoFechado),
     shape: WidgetStatePropertyAll(

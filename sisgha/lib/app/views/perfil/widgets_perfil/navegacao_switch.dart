@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/tamanhotela.dart';
@@ -39,6 +40,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -64,16 +66,18 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
                   });
                 },
                 onHorizontalDragEnd: (details) {
-                  setState(() {
-                    double midpoint = movendoParaDireita / 2;
-                    if (_movendoParaEsquerda < midpoint) {
-                      _movendoParaEsquerda = 0;
-                      _tabController.animateTo(0);
-                    } else {
-                      _movendoParaEsquerda = 200;
-                      _tabController.animateTo(1);
-                    }
-                  });
+                  setState(
+                    () {
+                      double midpoint = movendoParaDireita / 2;
+                      if (_movendoParaEsquerda < midpoint) {
+                        _movendoParaEsquerda = 0;
+                        _tabController.animateTo(0);
+                      } else {
+                        _movendoParaEsquerda = 200;
+                        _tabController.animateTo(1);
+                      }
+                    },
+                  );
                 },
                 child: Stack(
                   alignment: AlignmentDirectional.center,
@@ -104,7 +108,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
             },
           ),
         ),
-        Expanded(
+        Flexible(
           child: TabBarView(
             controller: _tabController,
             children: [
