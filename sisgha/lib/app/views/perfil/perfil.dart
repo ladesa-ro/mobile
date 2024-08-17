@@ -19,10 +19,9 @@ class Perfil extends StatefulWidget {
 }
 
 class _PerfilState extends State<Perfil> {
-  final ValueNotifier<double> alturaNavSwitch = ValueNotifier<double>(850);
-
   @override
   Widget build(BuildContext context) {
+    final ValueNotifier<double> alturaNavSwitch = ValueNotifier<double>(900);
     return FutureBuilder<UserModel>(
       future: buscarUser(context),
       builder: (context, snapshot) {
@@ -141,7 +140,7 @@ class _PerfilState extends State<Perfil> {
                   valueListenable: alturaNavSwitch,
                   builder: (context, altura, child) {
                     return AnimatedContainer(
-                      duration: Duration(milliseconds: 250),
+                      duration: const Duration(milliseconds: 250),
                       height: altura,
                       width: TamanhoTela.horizontal(context),
                       child: NavSwitch(alturaNotifier: alturaNavSwitch),
@@ -159,11 +158,5 @@ class _PerfilState extends State<Perfil> {
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    alturaNavSwitch.dispose();
-    super.dispose();
   }
 }

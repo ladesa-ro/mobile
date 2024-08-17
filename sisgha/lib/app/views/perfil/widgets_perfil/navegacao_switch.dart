@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/tamanhotela.dart';
@@ -30,7 +28,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
         _onOff = _tabController.index == 0 ? true : false;
         _movendoParaEsquerda = _onOff ? 0 : TamanhoTela.horizontal(context);
 
-        widget.alturaNotifier.value = _tabController.index == 0 ? 850 : 500;
+        widget.alturaNotifier.value = _tabController.index == 0 ? 900 : 500;
       });
     });
   }

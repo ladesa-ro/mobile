@@ -14,4 +14,6 @@ class ColorApp {
   static const Color CorDeFundo = Color.fromARGB(255, 247, 251, 242);
   static const Color CorFundoDisponibilidade =
       Color.fromARGB(87, 154, 182, 158);
+
+  static const Color CorErro = Color.fromARGB(255, 207, 14, 14);
 }

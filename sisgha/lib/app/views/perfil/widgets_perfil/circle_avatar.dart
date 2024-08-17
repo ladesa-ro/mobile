@@ -33,7 +33,8 @@ Widget circleAvatar(BuildContext context, link) {
             child: ElevatedButton(
               style: buttonStyleEdit(ColorApp.Preto),
               onPressed: () => {
-                bottomSheat(context),
+                Navigator.pushNamed(context, '/rotaErro')
+                //bottomSheat(context),
               },
               child: const Iconify(
                 Icones.Lapiz,

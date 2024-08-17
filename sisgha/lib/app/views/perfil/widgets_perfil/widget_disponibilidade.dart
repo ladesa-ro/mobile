@@ -12,7 +12,7 @@ Widget disponibilidade() {
         children: [
           Container(
             margin: tamanho(constraints.maxWidth),
-            height: TamanhoTela.vertical(context) * 0.2,
+            height: 200,
             width: constraints.maxWidth,
             decoration: decoration(),
             child: Row(
@@ -45,7 +45,7 @@ Widget disponibilidade() {
           ),
           Container(
             margin: tamanho(constraints.maxWidth),
-            height: TamanhoTela.vertical(context) * 0.2,
+            height: 200,
             width: constraints.maxWidth,
             decoration: decoration(),
             child: Row(
@@ -78,7 +78,7 @@ Widget disponibilidade() {
           ),
           Container(
             margin: tamanho(constraints.maxWidth),
-            height: TamanhoTela.vertical(context) * 0.2,
+            height: 200,
             width: constraints.maxWidth,
             decoration: decoration(),
             child: Row(
