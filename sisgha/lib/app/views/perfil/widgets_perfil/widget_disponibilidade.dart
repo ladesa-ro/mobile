@@ -8,13 +8,12 @@ Widget disponibilidade() {
   return LayoutBuilder(
     builder: (context, constraints) => Padding(
       padding: const EdgeInsets.only(top: 15),
-      child: ListView(
-        padding: EdgeInsets.zero,
+      child: Column(
         children: [
           Container(
             margin: tamanho(constraints.maxWidth),
             height: TamanhoTela.vertical(context) * 0.2,
-            width: TamanhoTela.horizontal(context) * 0.75,
+            width: constraints.maxWidth,
             decoration: decoration(),
             child: Row(
               children: [

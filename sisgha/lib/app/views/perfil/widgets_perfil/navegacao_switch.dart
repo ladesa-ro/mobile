@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
@@ -7,7 +8,8 @@ import 'package:sisgha/app/views/perfil/widgets_perfil/widget_disponibilidade.da
 import 'package:sisgha/app/views/perfil/widgets_perfil/widget_ensino.dart';
 
 class NavSwitch extends StatefulWidget {
-  const NavSwitch({Key? key}) : super(key: key);
+  NavSwitch({Key? key, required this.alturaNotifier}) : super(key: key);
+  final ValueNotifier<double> alturaNotifier;
 
   @override
   State<NavSwitch> createState() => _NavSwitchState();
@@ -27,6 +29,8 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
       setState(() {
         _onOff = _tabController.index == 0 ? true : false;
         _movendoParaEsquerda = _onOff ? 0 : TamanhoTela.horizontal(context);
+
+        widget.alturaNotifier.value = _tabController.index == 0 ? 850 : 500;
       });
     });
   }

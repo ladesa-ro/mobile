@@ -19,6 +19,8 @@ class Perfil extends StatefulWidget {
 }
 
 class _PerfilState extends State<Perfil> {
+  final ValueNotifier<double> alturaNavSwitch = ValueNotifier<double>(850);
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<UserModel>(
@@ -54,7 +56,8 @@ class _PerfilState extends State<Perfil> {
         if (snapshot.hasData) {
           UserModel user = snapshot.data!;
           return Scaffold(
-            body: Column(
+            body: ListView(
+              padding: EdgeInsets.zero,
               children: [
                 SizedBox(
                   width: TamanhoTela.horizontal(context),
@@ -134,14 +137,16 @@ class _PerfilState extends State<Perfil> {
                 ),
                 //até aqui ta perfeito
 
-                const SizedBox(
-                  height: 15,
-                ),
-
-                SizedBox(
-                  height: 488.01,
-                  width: TamanhoTela.horizontal(context),
-                  child: const NavSwitch(),
+                ValueListenableBuilder<double>(
+                  valueListenable: alturaNavSwitch,
+                  builder: (context, altura, child) {
+                    return AnimatedContainer(
+                      duration: Duration(milliseconds: 250),
+                      height: altura,
+                      width: TamanhoTela.horizontal(context),
+                      child: NavSwitch(alturaNotifier: alturaNavSwitch),
+                    );
+                  },
                 ),
               ],
             ),
@@ -154,5 +159,11 @@ class _PerfilState extends State<Perfil> {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    alturaNavSwitch.dispose();
+    super.dispose();
   }
 }

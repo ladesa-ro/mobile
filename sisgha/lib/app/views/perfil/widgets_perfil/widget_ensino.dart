@@ -18,8 +18,7 @@ class _WidgetEnsino extends State<WidgetEnsino> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.zero,
+    return Column(
       children: [
         const SizedBox(
           height: 20,
@@ -75,7 +74,9 @@ class _WidgetEnsino extends State<WidgetEnsino> {
             widgetQuit(context),
           ],
         ),
-        const Spacer(),
+        const SizedBox(
+          height: 20,
+        ),
       ],
     );
   }
