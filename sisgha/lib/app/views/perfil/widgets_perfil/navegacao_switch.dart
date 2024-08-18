@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
-import 'package:sisgha/app/constants/tamanhoTela.dart';
+import 'package:sisgha/app/constants/tamanhotela.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/widget_disponibilidade.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/widget_ensino.dart';
 
 class NavSwitch extends StatefulWidget {
-  const NavSwitch({Key? key}) : super(key: key);
+  const NavSwitch({Key? key, required this.alturaNotifier}) : super(key: key);
+  final ValueNotifier<double> alturaNotifier;
 
   @override
   State<NavSwitch> createState() => _NavSwitchState();
@@ -25,6 +27,8 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
       setState(() {
         _onOff = _tabController.index == 0 ? true : false;
         _movendoParaEsquerda = _onOff ? 0 : TamanhoTela.horizontal(context);
+
+        widget.alturaNotifier.value = _tabController.index == 0 ? 900 : 500;
       });
     });
   }
@@ -32,12 +36,14 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
   @override
   void dispose() {
     _tabController.dispose();
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -63,16 +69,18 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
                   });
                 },
                 onHorizontalDragEnd: (details) {
-                  setState(() {
-                    double midpoint = movendoParaDireita / 2;
-                    if (_movendoParaEsquerda < midpoint) {
-                      _movendoParaEsquerda = 0;
-                      _tabController.animateTo(0);
-                    } else {
-                      _movendoParaEsquerda = 200;
-                      _tabController.animateTo(1);
-                    }
-                  });
+                  setState(
+                    () {
+                      double midpoint = movendoParaDireita / 2;
+                      if (_movendoParaEsquerda < midpoint) {
+                        _movendoParaEsquerda = 0;
+                        _tabController.animateTo(0);
+                      } else {
+                        _movendoParaEsquerda = 200;
+                        _tabController.animateTo(1);
+                      }
+                    },
+                  );
                 },
                 child: Stack(
                   alignment: AlignmentDirectional.center,
@@ -91,7 +99,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
                       indicatorColor: Colors.transparent,
                       controller: _tabController,
                       tabs: [
-                        Text('Disposição',
+                        Text('Disponibilidade',
                             style: estiloTexto(15, peso: FontWeight.bold)),
                         Text('Ensino',
                             style: estiloTexto(15, peso: FontWeight.bold))
@@ -103,14 +111,13 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
             },
           ),
         ),
-        Expanded(
+        Flexible(
           child: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
             controller: _tabController,
-            children: const [
-              Center(
-                child: Text('Em Breve ...'),
-              ),
-              WidgetEnsino(),
+            children: [
+              disponibilidade(),
+              const WidgetEnsino(),
             ],
           ),
         ),

@@ -46,7 +46,7 @@ Future<UserModel> buscarUser(BuildContext context) async {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     });
-    print(response.statusCode);
+    // print(response.statusCode);
     if (response.statusCode == 401) {
       bool refreshed = await refreshToken(context);
       if (refreshed) {
@@ -64,7 +64,7 @@ Future<UserModel> buscarUser(BuildContext context) async {
     if (response.statusCode == 200) {
       var jsondecode = json.decode(response.body)["usuario"];
       UserModel user = UserModel.fromJson(jsondecode);
-      print(user.id);
+      // print(user.id);
       await sharedPreferences.setString("id", user.id);
       await sharedPreferences.setString("matricula", user.matricula);
       await sharedPreferences.setString("nome", user.nome);
@@ -74,7 +74,7 @@ Future<UserModel> buscarUser(BuildContext context) async {
       throw Exception("Falha ao carregar");
     }
   } catch (e) {
-    print(e);
+    // print(e);
     throw Exception("Erro ao carregar usuário");
   }
 }

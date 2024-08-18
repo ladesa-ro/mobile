@@ -27,8 +27,8 @@ Widget circleAvatar(BuildContext context, link) {
           ),
         ),
         Positioned(
-          left: 50,
-          top: 50,
+          left: 53,
+          top: 53,
           child: SizedBox(
             child: ElevatedButton(
               style: buttonStyleEdit(ColorApp.Preto),

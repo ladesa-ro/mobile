@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/widget_sair.dart';
 
 class WidgetEnsino extends StatefulWidget {
   const WidgetEnsino({super.key});
@@ -47,23 +48,37 @@ class _WidgetEnsino extends State<WidgetEnsino> {
           ),
         ),
         const SizedBox(
-          height: 20,
+          height: 25,
         ),
-        Container(
-          alignment: AlignmentDirectional.center,
-          height: 15,
-          width: (20 * _quantidadeDePaginas) + 12,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: _quantidadeDePaginas,
-            itemBuilder: (context, index) => container(index),
-          ),
-        )
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 15,
+              width: (20 * _quantidadeDePaginas) + 12,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: _quantidadeDePaginas,
+                itemBuilder: (context, index) => contagemDePagina(index),
+              ),
+            )
+          ],
+        ),
+        const SizedBox(
+          height: 25,
+        ),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            widgetQuit(context),
+          ],
+        ),
       ],
     );
   }
 
-  Widget container(int index) {
+  Widget contagemDePagina(int index) {
     return AnimatedContainer(
       margin: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
@@ -93,6 +108,7 @@ class _WidgetEnsino extends State<WidgetEnsino> {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
               "assets/img/gtr.jpeg",
@@ -110,6 +126,7 @@ class _WidgetEnsino extends State<WidgetEnsino> {
               width: constraints.maxWidth,
               padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
