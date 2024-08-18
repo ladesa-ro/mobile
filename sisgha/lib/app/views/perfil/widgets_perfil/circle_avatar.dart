@@ -27,14 +27,13 @@ Widget circleAvatar(BuildContext context, link) {
           ),
         ),
         Positioned(
-          left: 50,
-          top: 50,
+          left: 53,
+          top: 53,
           child: SizedBox(
             child: ElevatedButton(
               style: buttonStyleEdit(ColorApp.Preto),
               onPressed: () => {
-                Navigator.pushNamed(context, '/rotaErro')
-                //bottomSheat(context),
+                bottomSheat(context),
               },
               child: const Iconify(
                 Icones.Lapiz,

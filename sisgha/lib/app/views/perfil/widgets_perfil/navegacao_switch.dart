@@ -6,7 +6,7 @@ import 'package:sisgha/app/views/perfil/widgets_perfil/widget_disponibilidade.da
 import 'package:sisgha/app/views/perfil/widgets_perfil/widget_ensino.dart';
 
 class NavSwitch extends StatefulWidget {
-  NavSwitch({Key? key, required this.alturaNotifier}) : super(key: key);
+  const NavSwitch({Key? key, required this.alturaNotifier}) : super(key: key);
   final ValueNotifier<double> alturaNotifier;
 
   @override

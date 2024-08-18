@@ -77,7 +77,7 @@ class _PerfilState extends State<Perfil> {
                         ),
                       ),
                       Positioned(
-                        top: 20,
+                        top: 10,
                         right: 10,
                         child: ElevatedButton(
                           style: buttonStyleEdit(ColorApp.Branco),

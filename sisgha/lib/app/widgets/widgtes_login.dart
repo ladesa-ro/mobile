@@ -97,18 +97,22 @@ Widget recuperarSenha(context, double tamanho) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Esqueceu a senha?',
-            style: estiloTexto(
-              cor: ColorApp.VerdeCinza,
-              tamanho > 200 ? 15 : 13,
-              peso: FontWeight.w600,
-            )),
+        Text(
+          'Esqueceu a senha?',
+          style: estiloTexto(
+            cor: ColorApp.VerdeCinza,
+            tamanho > 200 ? 15 : 13,
+            peso: FontWeight.w600,
+          ),
+        ),
         const SizedBox(width: 3),
         GestureDetector(
-          onTap: () => Navigator.pushNamed(context, '/home'),
-          child: Text('Clique aqui',
-              style: estiloTexto(tamanho > 300 ? 16 : 14,
-                  cor: ColorApp.VerdePrincipal, peso: FontWeight.w600)),
+          onTap: () => Navigator.pushNamed(context, '/rotaErro'),
+          child: Text(
+            'Clique aqui',
+            style: estiloTexto(tamanho > 300 ? 16 : 14,
+                cor: ColorApp.VerdePrincipal, peso: FontWeight.w600),
+          ),
         ),
       ],
     ),

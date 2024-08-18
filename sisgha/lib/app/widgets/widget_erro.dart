@@ -68,8 +68,8 @@ class _WidgetErroState extends State<WidgetErro> {
                     height: 15,
                   ),
                   ElevatedButton(
-                    style:
-                        _estiloBotao(ColorApp.VerdePrincipal, ColorApp.Branco),
+                    style: _estiloBotao(
+                        ColorApp.VerdePrincipal, ColorApp.Branco, context),
                     onPressed: () {},
                     child: const Text('Tente novamente'),
                   ),
@@ -78,7 +78,7 @@ class _WidgetErroState extends State<WidgetErro> {
                   ),
                   ElevatedButton(
                     style: _estiloBotao(const Color.fromARGB(51, 255, 16, 16),
-                        ColorApp.CorErro),
+                        ColorApp.CorErro, context),
                     onPressed: () {},
                     child: const Text('Talvez mais tarde'),
                   ),
@@ -92,12 +92,12 @@ class _WidgetErroState extends State<WidgetErro> {
   }
 }
 
-ButtonStyle _estiloBotao(Color corFundo, Color corTexto) {
+ButtonStyle _estiloBotao(Color corFundo, Color corTexto, context) {
   return ButtonStyle(
     backgroundColor: WidgetStatePropertyAll(corFundo),
     foregroundColor: WidgetStatePropertyAll(corTexto),
-    minimumSize: const WidgetStatePropertyAll(Size(300, 55)),
-    maximumSize: const WidgetStatePropertyAll(Size(300, 55)),
+    minimumSize: const WidgetStatePropertyAll(Size(300, 50)),
+    maximumSize: const WidgetStatePropertyAll(Size(300, 50)),
     shape: WidgetStateProperty.all<OutlinedBorder>(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0))),
   );
