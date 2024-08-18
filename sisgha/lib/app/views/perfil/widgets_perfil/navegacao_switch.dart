@@ -36,6 +36,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
   @override
   void dispose() {
     _tabController.dispose();
+
     super.dispose();
   }
 
@@ -112,6 +113,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
         ),
         Flexible(
           child: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
             controller: _tabController,
             children: [
               disponibilidade(),

@@ -7,7 +7,8 @@ Widget disponibilidade() {
   return LayoutBuilder(
     builder: (context, constraints) => Padding(
       padding: const EdgeInsets.only(top: 15),
-      child: Column(
+      child: ListView(
+        physics: const NeverScrollableScrollPhysics(),
         children: [
           Container(
             margin: tamanho(constraints.maxWidth),

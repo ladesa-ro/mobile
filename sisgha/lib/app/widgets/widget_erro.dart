@@ -77,8 +77,8 @@ class _WidgetErroState extends State<WidgetErro> {
                     height: 15,
                   ),
                   ElevatedButton(
-                    style: _estiloBotao(const Color.fromARGB(51, 255, 16, 16),
-                        ColorApp.CorErro, context),
+                    style: _estiloBotao(
+                        ColorApp.Branco, ColorApp.VerdePrincipal, context),
                     onPressed: () {},
                     child: const Text('Talvez mais tarde'),
                   ),

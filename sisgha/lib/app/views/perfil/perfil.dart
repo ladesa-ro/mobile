@@ -140,7 +140,7 @@ class _PerfilState extends State<Perfil> {
                   valueListenable: alturaNavSwitch,
                   builder: (context, altura, child) {
                     return AnimatedContainer(
-                      duration: const Duration(milliseconds: 250),
+                      duration: const Duration(milliseconds: 300),
                       height: altura,
                       width: TamanhoTela.horizontal(context),
                       child: NavSwitch(alturaNotifier: alturaNavSwitch),
