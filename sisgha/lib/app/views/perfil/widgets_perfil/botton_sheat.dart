@@ -13,6 +13,7 @@ Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
         await imagePicker.pickImage(source: ImageSource.camera);
     if (imagem != null) {
       onImageSelected(File(imagem.path));
+      Navigator.pop(context);
     }
   }
 
@@ -21,6 +22,7 @@ Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
         await imagePicker.pickImage(source: ImageSource.gallery);
     if (imagem != null) {
       onImageSelected(File(imagem.path));
+      Navigator.pop(context);
     }
   }
 
