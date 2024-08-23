@@ -1,9 +1,29 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/bottonstyle_bottonsheat.dart';
 
-Future bottomSheat(BuildContext context) {
+Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
+  final ImagePicker imagePicker = ImagePicker();
+
+  Future<void> _capturarFoto() async {
+    final XFile? imagem =
+        await imagePicker.pickImage(source: ImageSource.camera);
+    if (imagem != null) {
+      onImageSelected(File(imagem.path));
+    }
+  }
+
+  Future<void> _selecionarFoto() async {
+    final XFile? imagem =
+        await imagePicker.pickImage(source: ImageSource.gallery);
+    if (imagem != null) {
+      onImageSelected(File(imagem.path));
+    }
+  }
+
   return showModalBottomSheet(
     context: context,
     builder: (BuildContext context) {
@@ -17,17 +37,16 @@ Future bottomSheat(BuildContext context) {
               width: 70,
               height: 6,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: ColorApp.VerdeCinza),
+                borderRadius: BorderRadius.circular(50),
+                color: ColorApp.VerdeCinza,
+              ),
             ),
             Text(
               'Editar foto de perfil',
               style:
                   estiloTexto(16, cor: ColorApp.Preto, peso: FontWeight.bold),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Text(
               'Escolha uma foto, imagem ou',
               style: estiloTexto(16,
@@ -41,7 +60,7 @@ Future bottomSheat(BuildContext context) {
             const Spacer(),
             ElevatedButton(
               style: botaoButtonSheat(),
-              onPressed: () => {},
+              onPressed: _capturarFoto,
               child: const Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -54,7 +73,7 @@ Future bottomSheat(BuildContext context) {
             ),
             ElevatedButton(
               style: botaoButtonSheat(),
-              onPressed: () => {},
+              onPressed: _selecionarFoto,
               child: const Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -65,9 +84,7 @@ Future bottomSheat(BuildContext context) {
                 ],
               ),
             ),
-            const Spacer(
-              flex: 2,
-            ),
+            const Spacer(flex: 2),
           ],
         ),
       );
