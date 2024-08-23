@@ -1,14 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:sisgha/app/api/repository.dart'; // Certifique-se de que os métodos para enviar imagens estejam aqui
+import 'package:sisgha/app/api/repository.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/tamanhotela.dart';
 import 'package:sisgha/app/model/userModel.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/botton_sheat.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/button_style_edit.dart';
-import 'package:sisgha/app/views/perfil/widgets_perfil/circle_avatar.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/navegacao_switch.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/widgets_perfil.dart';
 import 'package:sisgha/app/widgets/erro_connect.dart';
@@ -30,8 +29,8 @@ class _PerfilState extends State<Perfil> {
       setState(() {
         imagemPerfil = imagem;
       });
+      _recarregarDadosUsuario();
     } else {
-      // Exibir erro se falhar
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -43,13 +42,12 @@ class _PerfilState extends State<Perfil> {
 
   Future<void> _atualizarImagemCapa(File imagem) async {
     bool sucesso = await atualizarImagemCapa(imagem, context);
-    print("${sucesso}");
     if (sucesso) {
       setState(() {
         imagemCapa = imagem;
       });
+      _recarregarDadosUsuario();
     } else {
-      // Exibir erro se falhar
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -57,6 +55,10 @@ class _PerfilState extends State<Perfil> {
         },
       );
     }
+  }
+
+  Future<void> _recarregarDadosUsuario() async {
+    setState(() {});
   }
 
   @override

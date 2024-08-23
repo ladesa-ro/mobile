@@ -29,11 +29,16 @@ Future<bool> atualizarImagemPerfil(
   try {
     var request = http.MultipartRequest('PUT', url)
       ..headers['Authorization'] = 'Bearer $token'
-      ..files.add(
-          await http.MultipartFile.fromPath('imagemPerfil', imagemPerfil.path));
+      ..files.add(await http.MultipartFile.fromPath(
+        'file',
+        imagemPerfil.path,
+      ));
 
     var response = await request.send();
+
+    var responseData = await http.Response.fromStream(response);
     print("Status Code: ${response.statusCode}");
+    print("Response Body: ${responseData.body}");
 
     if (response.statusCode == 200) {
       return true;
@@ -43,7 +48,9 @@ Future<bool> atualizarImagemPerfil(
         token = sharedPreferences.getString("token");
         request.headers['Authorization'] = 'Bearer $token';
         response = await request.send();
+        var responseData = await http.Response.fromStream(response);
         print("Status Code após refresh: ${response.statusCode}");
+        print("Response Body após refresh: ${responseData.body}");
         return response.statusCode == 200;
       }
     }
@@ -75,11 +82,15 @@ Future<bool> atualizarImagemCapa(File imagemCapa, BuildContext context) async {
   try {
     var request = http.MultipartRequest('PUT', url)
       ..headers['Authorization'] = 'Bearer $token'
-      ..files.add(
-          await http.MultipartFile.fromPath('imagemCapa', imagemCapa.path));
+      ..files.add(await http.MultipartFile.fromPath(
+        'file',
+        imagemCapa.path,
+      ));
 
     var response = await request.send();
+    var responseData = await http.Response.fromStream(response);
     print("Status Code: ${response.statusCode}");
+    print("Response Body: ${responseData.body}");
 
     if (response.statusCode == 200) {
       return true;
@@ -89,7 +100,9 @@ Future<bool> atualizarImagemCapa(File imagemCapa, BuildContext context) async {
         token = sharedPreferences.getString("token");
         request.headers['Authorization'] = 'Bearer $token';
         response = await request.send();
+        var responseData = await http.Response.fromStream(response);
         print("Status Code após refresh: ${response.statusCode}");
+        print("Response Body após refresh: ${responseData.body}");
         return response.statusCode == 200;
       }
     }
