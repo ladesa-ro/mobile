@@ -2,13 +2,109 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:image/image.dart' as img;
 import 'package:sisgha/app/model/userModel.dart';
 import 'package:sisgha/app/widgets/erro_connect.dart';
 import 'package:sisgha/app/widgets/erro_connect_login.dart';
+
+Future<bool> atualizarImagemPerfil(
+    File imagemPerfil, BuildContext context) async {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  String? token = sharedPreferences.getString("token");
+  String? id = sharedPreferences.getString("id");
+
+  if (token == null || id == null) {
+    print("Token ou ID não encontrado.");
+    return false;
+  }
+
+  var url =
+      Uri.parse("https://dev.ladesa.com.br/api/usuarios/$id/imagem/perfil");
+
+  try {
+    var request = http.MultipartRequest('PUT', url)
+      ..headers['Authorization'] = 'Bearer $token'
+      ..files.add(
+          await http.MultipartFile.fromPath('imagemPerfil', imagemPerfil.path));
+
+    var response = await request.send();
+    print("Status Code: ${response.statusCode}");
+
+    if (response.statusCode == 200) {
+      return true;
+    } else if (response.statusCode == 401) {
+      bool refreshed = await refreshToken(context);
+      if (refreshed) {
+        token = sharedPreferences.getString("token");
+        request.headers['Authorization'] = 'Bearer $token';
+        response = await request.send();
+        print("Status Code após refresh: ${response.statusCode}");
+        return response.statusCode == 200;
+      }
+    }
+  } catch (e) {
+    print("Erro ao atualizar imagem: $e");
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return ErroConnect();
+      },
+    );
+  }
+
+  return false;
+}
+
+Future<bool> atualizarImagemCapa(File imagemCapa, BuildContext context) async {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  String? token = sharedPreferences.getString("token");
+  String? id = sharedPreferences.getString("id");
+
+  if (token == null || id == null) {
+    print("Token ou ID não encontrado.");
+    return false;
+  }
+
+  var url = Uri.parse("https://dev.ladesa.com.br/api/usuarios/$id/imagem/capa");
+
+  try {
+    var request = http.MultipartRequest('PUT', url)
+      ..headers['Authorization'] = 'Bearer $token'
+      ..files.add(
+          await http.MultipartFile.fromPath('imagemCapa', imagemCapa.path));
+
+    var response = await request.send();
+    print("Status Code: ${response.statusCode}");
+
+    if (response.statusCode == 200) {
+      return true;
+    } else if (response.statusCode == 401) {
+      bool refreshed = await refreshToken(context);
+      if (refreshed) {
+        token = sharedPreferences.getString("token");
+        request.headers['Authorization'] = 'Bearer $token';
+        response = await request.send();
+        print("Status Code após refresh: ${response.statusCode}");
+        return response.statusCode == 200;
+      }
+    }
+  } catch (e) {
+    print("Erro ao atualizar imagem: $e");
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return ErroConnect();
+      },
+    );
+  }
+
+  return false;
+}
 
 Future<bool> login(TextEditingController matriculaController,
     TextEditingController senhaController, BuildContext context) async {

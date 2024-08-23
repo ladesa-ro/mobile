@@ -1,6 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:sisgha/app/api/repository.dart';
+import 'package:sisgha/app/api/repository.dart'; // Certifique-se de que os métodos para enviar imagens estejam aqui
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/tamanhotela.dart';
@@ -10,6 +11,7 @@ import 'package:sisgha/app/views/perfil/widgets_perfil/button_style_edit.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/circle_avatar.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/navegacao_switch.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/widgets_perfil.dart';
+import 'package:sisgha/app/widgets/erro_connect.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({Key? key}) : super(key: key);
@@ -19,6 +21,44 @@ class Perfil extends StatefulWidget {
 }
 
 class _PerfilState extends State<Perfil> {
+  File? imagemCapa;
+  File? imagemPerfil;
+
+  Future<void> _atualizarImagemPerfil(File imagem) async {
+    bool sucesso = await atualizarImagemPerfil(imagem, context);
+    if (sucesso) {
+      setState(() {
+        imagemPerfil = imagem;
+      });
+    } else {
+      // Exibir erro se falhar
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return ErroConnect();
+        },
+      );
+    }
+  }
+
+  Future<void> _atualizarImagemCapa(File imagem) async {
+    bool sucesso = await atualizarImagemCapa(imagem, context);
+    print("${sucesso}");
+    if (sucesso) {
+      setState(() {
+        imagemCapa = imagem;
+      });
+    } else {
+      // Exibir erro se falhar
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return ErroConnect();
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final ValueNotifier<double> alturaNavSwitch = ValueNotifier<double>(900);
@@ -26,6 +66,7 @@ class _PerfilState extends State<Perfil> {
       future: buscarUser(context),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
+          print("Erro ao carregar usuário: ${snapshot.error}");
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -35,7 +76,6 @@ class _PerfilState extends State<Perfil> {
                 onPressed: () async {
                   if (await sair()) {
                     Navigator.pushNamedAndRemoveUntil(
-                      // ignore: use_build_context_synchronously
                       context,
                       "/primeiraTela",
                       (route) => false,
@@ -64,16 +104,22 @@ class _PerfilState extends State<Perfil> {
                   child: Stack(
                     alignment: AlignmentDirectional.topCenter,
                     children: [
+                      // Capa
                       Positioned(
                         child: SizedBox(
                           height: 175,
                           width: TamanhoTela.horizontal(context),
-                          //aqui muda a imagem de fundo
-                          child: Image.network(
-                            "https://dev.ladesa.com.br/api/usuarios/${user.id}/imagem/capa",
-                            fit: BoxFit.cover,
-                            alignment: AlignmentDirectional.bottomCenter,
-                          ),
+                          child: imagemCapa != null
+                              ? Image.file(
+                                  imagemCapa!,
+                                  fit: BoxFit.cover,
+                                  alignment: AlignmentDirectional.bottomCenter,
+                                )
+                              : Image.network(
+                                  "https://dev.ladesa.com.br/api/usuarios/${user.id}/imagem/capa",
+                                  fit: BoxFit.cover,
+                                  alignment: AlignmentDirectional.bottomCenter,
+                                ),
                         ),
                       ),
                       Positioned(
@@ -86,15 +132,20 @@ class _PerfilState extends State<Perfil> {
                             size: 14,
                             color: ColorApp.Preto,
                           ),
-                          onPressed: () => {
-                            bottomSheat(context),
-                          },
+                          onPressed: () =>
+                              bottomSheat(context, _atualizarImagemCapa),
                         ),
                       ),
+                      // Avatar
                       Positioned(
                         bottom: 0,
-                        child: circleAvatar(context,
-                            "https://dev.ladesa.com.br/api/usuarios/${user.id}/imagem/perfil"),
+                        child: circleAvatar(
+                          context,
+                          imagemPerfil != null
+                              ? imagemPerfil!.path
+                              : "https://dev.ladesa.com.br/api/usuarios/${user.id}/imagem/perfil",
+                          _atualizarImagemPerfil,
+                        ),
                       ),
                     ],
                   ),
@@ -134,8 +185,6 @@ class _PerfilState extends State<Perfil> {
                     ],
                   ),
                 ),
-                //até aqui ta perfeito
-
                 ValueListenableBuilder<double>(
                   valueListenable: alturaNavSwitch,
                   builder: (context, altura, child) {
@@ -152,11 +201,52 @@ class _PerfilState extends State<Perfil> {
           );
         }
         return const Center(
-          child: CircularProgressIndicator(
-            value: 100,
-          ),
+          child: CircularProgressIndicator(),
         );
       },
     );
   }
+}
+
+Widget circleAvatar(
+    BuildContext context, String link, Function(File) atualizarImagemPerfil) {
+  return Container(
+    padding: const EdgeInsets.all(4),
+    decoration: BoxDecoration(
+      color: const Color.fromARGB(255, 255, 255, 255),
+      borderRadius: BorderRadius.circular(100),
+    ),
+    child: Stack(
+      alignment: AlignmentDirectional.center,
+      children: [
+        Positioned(
+          child: SizedBox(
+            width: 90,
+            height: 90,
+            child: CircleAvatar(
+              backgroundColor: const Color.fromARGB(255, 126, 126, 126),
+              backgroundImage: link.startsWith('http')
+                  ? NetworkImage(link) as ImageProvider
+                  : FileImage(File(link)),
+            ),
+          ),
+        ),
+        Positioned(
+          left: 53,
+          top: 53,
+          child: SizedBox(
+            child: ElevatedButton(
+              style: buttonStyleEdit(ColorApp.Preto),
+              onPressed: () => bottomSheat(context, atualizarImagemPerfil),
+              child: const Iconify(
+                Icones.Lapiz,
+                size: 14,
+                color: ColorApp.Branco,
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }
