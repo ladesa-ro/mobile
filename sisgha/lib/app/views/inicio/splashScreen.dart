@@ -68,7 +68,7 @@ class _SplashScreen extends State<SplashScreen> {
                 ),
               ),
               duration: const Duration(milliseconds: 1000),
-              curve: Curves.easeIn,
+              curve: Curves.ease,
               height: temporizador
                   ? temporizador2
                       ? TamanhoTela.vertical(context)
@@ -96,7 +96,7 @@ class _SplashScreen extends State<SplashScreen> {
                 ),
               ),
               duration: const Duration(milliseconds: 1000),
-              curve: Curves.easeIn,
+              curve: Curves.ease,
               height: temporizador
                   ? temporizador2
                       ? TamanhoTela.vertical(context)
