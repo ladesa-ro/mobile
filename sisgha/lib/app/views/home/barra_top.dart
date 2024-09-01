@@ -17,19 +17,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-
-    //utimo dia da semana, SABADO
-    DateTime date = now.add(Duration(days: 6 - now.weekday));
-    final diaDoMes = DateFormat('dd').format(date);
-
-    //primeiro dia da semana, SEGUNDA
-    DateTime dia1 = now.add(Duration(days: 1 - now.weekday));
-    final dateTeste = DateFormat('dd').format(dia1);
-
-    // corrige um erro de o numero ficar negativo
-    final corrigeErro = int.parse(dateTeste) < 0 ? dateTeste * -1 : dateTeste;
-
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Theme.of(context).colorScheme.primary,
@@ -60,10 +47,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       peso: FontWeight.bold),
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 5,
                 ),
                 Text(
-                  '${DatasFormatadas.mesAtual[0].toUpperCase() + DatasFormatadas.mesAtual.substring(1)} - $corrigeErro a $diaDoMes',
+                  '${DatasFormatadas.mesAtual[0].toUpperCase() + DatasFormatadas.mesAtual.substring(1)} - ${DatasFormatadas.obterPrimeiroDiaSemana()} a ${DatasFormatadas.obterUltimoDiaSemana()}',
                   style: estiloTexto(
                       TamanhoTela.vertical(context) > 810 ? 20 : 18,
                       cor: ColorApp.Branco,

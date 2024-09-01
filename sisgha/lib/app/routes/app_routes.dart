@@ -6,7 +6,6 @@ import 'package:sisgha/app/views/home/navegacao.dart';
 import 'package:sisgha/app/views/login/login.dart';
 import 'package:sisgha/app/views/perfil/perfil.dart';
 import 'package:sisgha/app/views/inicio/splashScreen.dart';
-import 'package:sisgha/app/widgets/widget_erro.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> rotas() {
@@ -18,7 +17,6 @@ class AppRoutes {
       '/perfilProf': (context) => const Perfil(),
       '/calendario': (context) => const Calendar(),
       '/primeiraTela': (context) => const SplashScreen(),
-      '/rotaErro': (context) => const WidgetErro()
     };
   }
 }

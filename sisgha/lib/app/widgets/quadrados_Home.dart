@@ -25,6 +25,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
         DateTime.now().weekday == 7 ? 0 : DateTime.now().weekday - 1;
 
     _tabController = TabController(
+        animationDuration: const Duration(milliseconds: 500),
         length: 6,
         vsync: this,
         initialIndex: _quadradoSelecionado == -1 ? 0 : _quadradoSelecionado);

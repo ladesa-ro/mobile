@@ -6,6 +6,7 @@ import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/tamanhotela.dart';
 import 'package:sisgha/app/views/home/navegacao.dart';
 import 'package:sisgha/app/views/login/aluno.dart';
+import 'package:sisgha/app/widgets/widget_erro.dart';
 
 Widget elementoVerde(Alignment alignment, double width, double height) {
   BorderRadiusGeometry borderRadius = BorderRadius.zero;
@@ -107,7 +108,10 @@ Widget recuperarSenha(context, double tamanho) {
         ),
         const SizedBox(width: 3),
         GestureDetector(
-          onTap: () => Navigator.pushNamed(context, '/rotaErro'),
+          onTap: () => showDialog(
+            context: context,
+            builder: (context) => dialogoDeErro(context),
+          ),
           child: Text(
             'Clique aqui',
             style: estiloTexto(tamanho > 300 ? 16 : 14,
