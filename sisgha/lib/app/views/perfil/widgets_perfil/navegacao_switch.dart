@@ -115,9 +115,9 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
           child: TabBarView(
             physics: const NeverScrollableScrollPhysics(),
             controller: _tabController,
-            children: [
-              disponibilidade(),
-              const WidgetEnsino(),
+            children: const [
+              WidgetDisponibilidade(),
+              WidgetEnsino(),
             ],
           ),
         ),
