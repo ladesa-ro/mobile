@@ -102,7 +102,7 @@ Widget recuperarSenha(context, double tamanho) {
           'Esqueceu a senha?',
           style: estiloTexto(
             cor: ColorApp.VerdeCinza,
-            tamanho > 200 ? 15 : 13,
+            tamanho > 200 ? 14 : 12,
             peso: FontWeight.w600,
           ),
         ),
@@ -114,7 +114,7 @@ Widget recuperarSenha(context, double tamanho) {
           ),
           child: Text(
             'Clique aqui',
-            style: estiloTexto(tamanho > 300 ? 16 : 14,
+            style: estiloTexto(tamanho > 300 ? 14 : 12,
                 cor: ColorApp.VerdePrincipal, peso: FontWeight.w600),
           ),
         ),
