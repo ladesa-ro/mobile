@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TamanhoTela {
+  TamanhoTela(BuildContext context);
+
   static double horizontal(BuildContext context) {
     return MediaQuery.sizeOf(context).width;
   }
