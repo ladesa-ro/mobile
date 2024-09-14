@@ -30,6 +30,9 @@ class _MiniCalendarioState extends State<MiniCalendario> {
           focusedDay: DatasFormatadas.diaAtualEmNumero,
           calendarFormat: CalendarFormat.month,
           locale: 'pt-BR',
+          shouldFillViewport: true,
+          daysOfWeekHeight: 25,
+          daysOfWeekStyle: estiloParteSuperior(),
           headerStyle: estiloCabessario(),
         ),
       ),
@@ -38,7 +41,7 @@ class _MiniCalendarioState extends State<MiniCalendario> {
 
   HeaderStyle estiloCabessario() {
     return HeaderStyle(
-      headerMargin: EdgeInsets.zero,
+      headerMargin: const EdgeInsets.only(bottom: 15),
       headerPadding: const EdgeInsets.all(5),
       decoration: const BoxDecoration(
         color: ColorApp.RoxoEscuro,
@@ -63,6 +66,33 @@ class _MiniCalendarioState extends State<MiniCalendario> {
       ),
       titleTextFormatter: (date, locale) =>
           DateFormat.MMMM(locale).format(date).toUpperCase(),
+    );
+  }
+
+  DaysOfWeekStyle estiloParteSuperior() {
+    return DaysOfWeekStyle(
+      weekdayStyle: estiloTexto(15, peso: FontWeight.bold, cor: ColorApp.Preto),
+      weekendStyle: estiloTexto(15, peso: FontWeight.bold, cor: ColorApp.Preto),
+      dowTextFormatter: (date, locale) {
+        switch (date.weekday) {
+          case DateTime.monday:
+            return 'Seg';
+          case DateTime.tuesday:
+            return 'Ter';
+          case DateTime.wednesday:
+            return 'Qua';
+          case DateTime.thursday:
+            return 'Qui';
+          case DateTime.friday:
+            return 'Sex';
+          case DateTime.saturday:
+            return 'Sab';
+          case DateTime.sunday:
+            return 'Dom';
+          default:
+            return '';
+        }
+      },
     );
   }
 }
