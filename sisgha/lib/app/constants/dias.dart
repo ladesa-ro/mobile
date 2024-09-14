@@ -1,6 +1,9 @@
 import 'package:intl/intl.dart';
 
 class DatasFormatadas {
+  static DateTime primeiroDiaDoAno = DateTime(DateTime.now().year, 1, 1);
+  static DateTime ultimoDiaDoAno = DateTime(DateTime.now().year, 12, 31);
+
   static DateTime diaAtualEmNumero = DateTime.now();
   //dia atual
   static String diaAtual = DateFormat('dd').format(DateTime.now());
