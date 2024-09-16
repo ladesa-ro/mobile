@@ -187,6 +187,9 @@ class _PerfilState extends State<Perfil> {
                     ],
                   ),
                 ),
+                const SizedBox(
+                  height: 15,
+                ),
                 ValueListenableBuilder<double>(
                   valueListenable: alturaNavSwitch,
                   builder: (context, altura, child) {
