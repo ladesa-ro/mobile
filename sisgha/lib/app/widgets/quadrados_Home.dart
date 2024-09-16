@@ -112,7 +112,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
     ];
 
     DateTime now = DateTime.now();
-    DateTime date = now.add(Duration(days: index - now.weekday + 1));
+    DateTime date = now.add(Duration(days: (now.weekday - 7) + index));
     final diaDaSemanaSoQueEmNumeros = DateFormat('dd').format(date);
 
     bool qualselecionado = _quadradoSelecionado == index;
@@ -122,12 +122,11 @@ class _QuadradosHomeState extends State<QuadradosHome>
           ? const EdgeInsets.only(bottom: 10)
           : const EdgeInsets.all(0),
       decoration: BoxDecoration(
-          color: qualselecionado ? ColorApp.VerdeEscuro : null,
-          border: Border.all(
-              color: ColorApp.VerdeEscuro,
-              width: 1.0,
-              style: BorderStyle.solid),
-          borderRadius: const BorderRadius.all(Radius.circular(12))),
+        color: qualselecionado ? ColorApp.VerdeEscuro : null,
+        border: Border.all(
+            color: ColorApp.VerdeEscuro, width: 1.0, style: BorderStyle.solid),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+      ),
       width: 50,
       height: TamanhoTela.vertical(context) > 810 ? 75 : 70,
       child: Column(

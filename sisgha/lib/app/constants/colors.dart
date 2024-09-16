@@ -11,9 +11,11 @@ class ColorApp {
   static const Color Preto = Color(0xFF000000);
   static const Color RoxoEscuro = Color.fromRGBO(83, 0, 166, 1);
   static const Color VermelhoFechado = Color.fromRGBO(178, 10, 51, 1);
-  static const Color CorDeFundo = Color.fromARGB(255, 247, 251, 242);
+  static const Color CorDeFundo = Color.fromARGB(255, 255, 255, 255);
   static const Color CorFundoDisponibilidade =
       Color.fromARGB(87, 154, 182, 158);
 
   static const Color CorErro = Color.fromARGB(255, 207, 14, 14);
+
+  static const Color VerdeFraco = Color(0xFFEBF8EF);
 }

@@ -6,7 +6,7 @@ import 'package:sisgha/app/views/perfil/widgets_perfil/widget_disponibilidade.da
 import 'package:sisgha/app/views/perfil/widgets_perfil/widget_ensino.dart';
 
 class NavSwitch extends StatefulWidget {
-  const NavSwitch({Key? key, required this.alturaNotifier}) : super(key: key);
+  const NavSwitch({super.key, required this.alturaNotifier});
   final ValueNotifier<double> alturaNotifier;
 
   @override
@@ -14,29 +14,23 @@ class NavSwitch extends StatefulWidget {
 }
 
 class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
-  late TabController _tabController;
-  bool _onOff = true;
-  double _movendoParaEsquerda = 0;
+  late TabController _controller;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
+    _controller = TabController(length: 2, vsync: this, initialIndex: 0);
 
-    _tabController.addListener(() {
+    _controller.addListener(() {
       setState(() {
-        _onOff = _tabController.index == 0 ? true : false;
-        _movendoParaEsquerda = _onOff ? 0 : TamanhoTela.horizontal(context);
-
-        widget.alturaNotifier.value = _tabController.index == 0 ? 900 : 500;
+        widget.alturaNotifier.value = _controller.index == 0 ? 900 : 500;
       });
     });
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
-
+    _controller.dispose();
     super.dispose();
   }
 
@@ -47,74 +41,21 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
       children: [
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 233, 233, 233),
-            borderRadius: BorderRadius.circular(50),
-          ),
           width: TamanhoTela.horizontal(context),
-          height: 65,
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              double movendoParaDireita = constraints.maxWidth * 0.50;
-
-              return GestureDetector(
-                onHorizontalDragUpdate: (details) {
-                  setState(() {
-                    _movendoParaEsquerda += details.delta.dx;
-                    if (_movendoParaEsquerda < 0) {
-                      _movendoParaEsquerda = 0;
-                    } else if (_movendoParaEsquerda > 200) {
-                      _movendoParaEsquerda = 200;
-                    }
-                  });
-                },
-                onHorizontalDragEnd: (details) {
-                  setState(
-                    () {
-                      double midpoint = movendoParaDireita / 2;
-                      if (_movendoParaEsquerda < midpoint) {
-                        _movendoParaEsquerda = 0;
-                        _tabController.animateTo(0);
-                      } else {
-                        _movendoParaEsquerda = 200;
-                        _tabController.animateTo(1);
-                      }
-                    },
-                  );
-                },
-                child: Stack(
-                  alignment: AlignmentDirectional.center,
-                  children: [
-                    AnimatedPositioned(
-                      duration: const Duration(milliseconds: 300),
-                      left: _movendoParaEsquerda < movendoParaDireita
-                          ? _movendoParaEsquerda
-                          : movendoParaDireita,
-                      child: container(constraints.maxWidth),
-                    ),
-                    TabBar(
-                      labelColor: ColorApp.Branco,
-                      unselectedLabelColor: ColorApp.VerdeCinza,
-                      dividerColor: Colors.transparent,
-                      indicatorColor: Colors.transparent,
-                      controller: _tabController,
-                      tabs: [
-                        Text('Disponibilidade',
-                            style: estiloTexto(15, peso: FontWeight.bold)),
-                        Text('Ensino',
-                            style: estiloTexto(15, peso: FontWeight.bold))
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
+          height: 55,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _estiloTabs('Disponibilidade', 0,
+                  bordaEsquerda: true, bordaDireita: false),
+              _estiloTabs('Ensino', 1,
+                  bordaEsquerda: false, bordaDireita: true),
+            ],
           ),
         ),
         Flexible(
           child: TabBarView(
-            physics: const NeverScrollableScrollPhysics(),
-            controller: _tabController,
+            controller: _controller,
             children: const [
               WidgetDisponibilidade(),
               WidgetEnsino(),
@@ -125,15 +66,40 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
     );
   }
 
-  Widget container(double tamanho) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        color: ColorApp.VerdePrincipal,
+  Widget _estiloTabs(String texto, int index,
+      {required bool bordaEsquerda, required bool bordaDireita}) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          _controller.animateTo(index);
+        },
+        child: AnimatedContainer(
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 0),
+          decoration: BoxDecoration(
+            color: _controller.index == index
+                ? ColorApp.VerdeFraco
+                : ColorApp.Branco,
+            borderRadius: BorderRadius.horizontal(
+              left: bordaEsquerda ? const Radius.circular(10) : Radius.zero,
+              right: bordaDireita ? const Radius.circular(10) : Radius.zero,
+            ),
+            border: Border.all(
+              color: _controller.index == index
+                  ? ColorApp.VerdePrincipal
+                  : ColorApp.VerdeCinza,
+            ),
+          ),
+          child: Text(
+            texto,
+            style: estiloTexto(15,
+                cor: _controller.index == index
+                    ? ColorApp.VerdePrincipal
+                    : ColorApp.VerdeCinza,
+                peso: FontWeight.bold),
+          ),
+        ),
       ),
-      width: tamanho * 0.50 - 20,
-      height: 50,
     );
   }
 }

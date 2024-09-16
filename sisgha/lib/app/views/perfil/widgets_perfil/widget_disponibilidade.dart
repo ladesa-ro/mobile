@@ -41,10 +41,10 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) => ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          const SizedBox(height: 15),
+          const SizedBox(height: 25),
           Container(
             decoration: BoxDecoration(
               color: ColorApp.VerdePrincipal,
@@ -81,7 +81,7 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
               ],
             ),
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 25),
           _buildHorario(constraints.maxWidth, '$diaIndex', [
             '07:30 - 08:20',
             '08:20 - 09:10',
