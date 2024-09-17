@@ -24,12 +24,9 @@ class _HorariosState extends State<Horarios> {
       body: ListView.builder(
           primary: true,
           padding: const EdgeInsets.only(bottom: 60),
-          itemCount: 10,
+          itemCount: 3,
           itemBuilder: (context, index) {
-            return Disciplinaprof(
-                materia: widget.materia,
-                turma: widget.turma,
-                horario: widget.horario);
+            return disciplinaprof(widget.materia, widget.turma, widget.horario);
           }),
     );
   }
