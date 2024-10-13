@@ -103,13 +103,6 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
             '21:50 - 22:40',
             '22:40 - 23:30',
           ]),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              widgetQuit(context),
-            ],
-          ),
-          const SizedBox(height: 15),
         ],
       ),
     );

@@ -26,7 +26,7 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
               context,
               MaterialPageRoute(
                 builder: (context) => const Navigation(
-                  initialIndex: 0,
+                  initialIndex: 1,
                 ),
               ));
         } else {

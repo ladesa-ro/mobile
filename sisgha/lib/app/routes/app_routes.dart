@@ -12,7 +12,7 @@ class AppRoutes {
     return {
       '/bemvindo': (context) => const BoasVindasPage(),
       '/login': (context) => const PaginaLogin(),
-      '/navegação': (context) => const Navigation(initialIndex: 0),
+      '/navegação': (context) => const Navigation(initialIndex: 1),
       '/home': (context) => const Home(),
       '/perfilProf': (context) => const Perfil(),
       '/calendario': (context) => const Calendar(),

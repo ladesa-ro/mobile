@@ -67,13 +67,6 @@ class _WidgetEnsino extends State<WidgetEnsino> {
         const SizedBox(
           height: 25,
         ),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            widgetQuit(context),
-          ],
-        ),
       ],
     );
   }

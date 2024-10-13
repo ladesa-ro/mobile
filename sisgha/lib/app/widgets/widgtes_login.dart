@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/api/repository.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
@@ -62,7 +63,7 @@ Widget botaoEntrarAluno(context, double tamanhoHorizontal) {
                 child: Row(
                   children: [
                     const SizedBox(width: 19),
-                    const Icon(
+                    const Iconify(
                       Icones.PersonCheio,
                       color: ColorApp.Branco,
                       size: 30,
@@ -134,12 +135,13 @@ Widget botaoEntrar(texto, context, formKey, matricula, senha) {
         }
         if (deuCerto) {
           Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Navigation(
-                  initialIndex: 0,
-                ),
-              ));
+            context,
+            MaterialPageRoute(
+              builder: (context) => const Navigation(
+                initialIndex: 1,
+              ),
+            ),
+          );
         } else {
           senha.clear();
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
