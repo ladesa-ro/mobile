@@ -36,16 +36,16 @@ class _NavigationState extends State<Navigation> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _buildIconButton(
-                iconVazio: Icones.HomeVazio,
-                iconCheio: Icones.HomeCheio,
-                index: 0),
-            _buildIconButton(
-                iconVazio1: Icones.PersonVazio,
-                iconCheio1: Icones.PersonCheio,
-                index: 1),
-            _buildIconButton(
                 iconVazio1: Icones.CalendarVazio,
                 iconCheio1: Icones.CalendarCheio,
+                index: 0),
+            _buildIconButton(
+                iconVazio1: Icones.IconeSisgha,
+                iconCheio1: Icones.IconeSisgha,
+                index: 1),
+            _buildIconButton(
+                iconVazio: Icones.PersonVazio,
+                iconCheio: Icones.PersonCheio,
                 index: 2),
           ],
         ),
@@ -57,18 +57,18 @@ class _NavigationState extends State<Navigation> {
     switch (index) {
       case 0:
         return const Center(
-          child: Home(),
+          child: Calendar(),
         );
       case 1:
         return const Center(
-          child: Perfil(),
+          child: Home(),
         );
       case 2:
         return const Center(
-          child: Calendar(),
+          child: Perfil(),
         );
       default:
-        return Container();
+        return const Home();
     }
   }
 

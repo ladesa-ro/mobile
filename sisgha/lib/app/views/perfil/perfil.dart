@@ -9,11 +9,12 @@ import 'package:sisgha/app/model/userModel.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/botton_sheat.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/button_style_edit.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/navegacao_switch.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/widget_sair.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/widgets_perfil.dart';
 import 'package:sisgha/app/widgets/erro_connect.dart';
 
 class Perfil extends StatefulWidget {
-  const Perfil({Key? key}) : super(key: key);
+  const Perfil({super.key});
 
   @override
   State<Perfil> createState() => _PerfilState();
@@ -32,9 +33,10 @@ class _PerfilState extends State<Perfil> {
       _recarregarDadosUsuario();
     } else {
       showDialog(
+        // ignore: use_build_context_synchronously
         context: context,
         builder: (BuildContext context) {
-          return ErroConnect();
+          return const ErroConnect();
         },
       );
     }
@@ -49,9 +51,10 @@ class _PerfilState extends State<Perfil> {
       _recarregarDadosUsuario();
     } else {
       showDialog(
+        // ignore: use_build_context_synchronously
         context: context,
         builder: (BuildContext context) {
-          return ErroConnect();
+          return const ErroConnect();
         },
       );
     }
@@ -68,7 +71,6 @@ class _PerfilState extends State<Perfil> {
       future: buscarUser(context),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          print("Erro ao carregar usuário: ${snapshot.error}");
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -78,6 +80,7 @@ class _PerfilState extends State<Perfil> {
                 onPressed: () async {
                   if (await sair()) {
                     Navigator.pushNamedAndRemoveUntil(
+                      // ignore: use_build_context_synchronously
                       context,
                       "/primeiraTela",
                       (route) => false,
@@ -126,13 +129,33 @@ class _PerfilState extends State<Perfil> {
                       ),
                       Positioned(
                         top: 10,
+                        left: 10,
+                        child: ElevatedButton(
+                          style: buttonStyleEdit(ColorApp.CorSair),
+                          onPressed: () async {
+                            widgetQuit(context);
+                          },
+                          child: const Row(
+                            children: [
+                              Icon(
+                                Icones.Sair,
+                                color: ColorApp.Branco,
+                                size: 12,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 10,
                         right: 10,
                         child: ElevatedButton(
-                          style: buttonStyleEdit(ColorApp.Branco),
+                          style: buttonStyleEdit(
+                              const Color.fromRGBO(60, 60, 60, 0.1)),
                           child: const Iconify(
                             Icones.Lapiz,
-                            size: 14,
-                            color: ColorApp.Preto,
+                            size: 10,
+                            color: ColorApp.Branco,
                           ),
                           onPressed: () =>
                               bottomSheat(context, _atualizarImagemCapa),
@@ -154,38 +177,8 @@ class _PerfilState extends State<Perfil> {
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
-                  child: dadosUsuario(context, user.nome, user.email),
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(
-                      horizontal: TamanhoTela.horizontal(context) * 0.050),
-                  child: Column(
-                    children: [
-                      formulario(
-                          textoFlutuante: 'Nome', informacoes: user.nome),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      formulario(
-                          textoFlutuante: 'Email', informacoes: user.email),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Row(
-                        children: [
-                          formularioLinha(
-                              textoFlutuante: 'Matricula',
-                              informacoes: user.matricula,
-                              context: context),
-                          const Spacer(),
-                          formularioLinha(
-                              textoFlutuante: 'Função',
-                              informacoes: 'Professor',
-                              context: context),
-                        ],
-                      ),
-                    ],
-                  ),
+                  child: dadosUsuario(
+                      context, user.nome, user.email, user.matricula),
                 ),
                 const SizedBox(
                   height: 15,
@@ -226,8 +219,8 @@ Widget circleAvatar(
       children: [
         Positioned(
           child: SizedBox(
-            width: 90,
-            height: 90,
+            width: 100,
+            height: 100,
             child: CircleAvatar(
               backgroundColor: const Color.fromARGB(255, 126, 126, 126),
               backgroundImage: link.startsWith('http')
@@ -237,15 +230,15 @@ Widget circleAvatar(
           ),
         ),
         Positioned(
-          left: 53,
-          top: 53,
+          left: 63,
+          top: 63,
           child: SizedBox(
             child: ElevatedButton(
               style: buttonStyleEdit(ColorApp.Preto),
               onPressed: () => bottomSheat(context, atualizarImagemPerfil),
               child: const Iconify(
                 Icones.Lapiz,
-                size: 14,
+                size: 10,
                 color: ColorApp.Branco,
               ),
             ),

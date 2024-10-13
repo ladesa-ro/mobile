@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/tamanhotela.dart';
@@ -46,9 +47,9 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _estiloTabs('Disponibilidade', 0,
+              _estiloTabs('Disponibilidade', Icones.IconeSisgha, 0,
                   bordaEsquerda: true, bordaDireita: false),
-              _estiloTabs('Ensino', 1,
+              _estiloTabs('Ensino', Icones.IconeSisgha, 1,
                   bordaEsquerda: false, bordaDireita: true),
             ],
           ),
@@ -66,7 +67,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
     );
   }
 
-  Widget _estiloTabs(String texto, int index,
+  Widget _estiloTabs(String texto, IconData icone, int index,
       {required bool bordaEsquerda, required bool bordaDireita}) {
     return Expanded(
       child: GestureDetector(
@@ -90,13 +91,28 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
                   : ColorApp.VerdeCinza,
             ),
           ),
-          child: Text(
-            texto,
-            style: estiloTexto(15,
-                cor: _controller.index == index
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                texto,
+                style: estiloTexto(15,
+                    cor: _controller.index == index
+                        ? ColorApp.VerdePrincipal
+                        : ColorApp.VerdeCinza,
+                    peso: FontWeight.bold),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Icon(
+                icone,
+                color: _controller.index == index
                     ? ColorApp.VerdePrincipal
                     : ColorApp.VerdeCinza,
-                peso: FontWeight.bold),
+                size: 20,
+              ),
+            ],
           ),
         ),
       ),
