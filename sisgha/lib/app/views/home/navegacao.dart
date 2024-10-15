@@ -44,8 +44,8 @@ class _NavigationState extends State<Navigation> {
                 iconCheio1: Icones.IconeSisgha,
                 index: 1),
             _buildIconButton(
-                iconVazio: Icones.PersonVazio,
-                iconCheio: Icones.PersonCheio,
+                iconVazio1: Icones.PersonVazio,
+                iconCheio1: Icones.PersonCheio,
                 index: 2),
           ],
         ),

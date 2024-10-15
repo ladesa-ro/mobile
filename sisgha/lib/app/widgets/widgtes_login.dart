@@ -63,7 +63,7 @@ Widget botaoEntrarAluno(context, double tamanhoHorizontal) {
                 child: Row(
                   children: [
                     const SizedBox(width: 19),
-                    const Iconify(
+                    const Icon(
                       Icones.PersonCheio,
                       color: ColorApp.Branco,
                       size: 30,

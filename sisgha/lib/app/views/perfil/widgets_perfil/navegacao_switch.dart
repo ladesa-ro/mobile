@@ -49,7 +49,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
             children: [
               _estiloTabs('Disponibilidade', Icones.IconeSisgha, 0,
                   bordaEsquerda: true, bordaDireita: false),
-              _estiloTabs('Ensino', Icones.IconeSisgha, 1,
+              _estiloTabs('Ensino', Icones.Disciplina, 1,
                   bordaEsquerda: false, bordaDireita: true),
             ],
           ),
@@ -110,7 +110,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
                 color: _controller.index == index
                     ? ColorApp.VerdePrincipal
                     : ColorApp.VerdeCinza,
-                size: 20,
+                size: index == 0 ? 20 : 25,
               ),
             ],
           ),
