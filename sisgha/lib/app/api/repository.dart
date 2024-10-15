@@ -9,8 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as img;
 import 'package:sisgha/app/model/userModel.dart';
-import 'package:sisgha/app/widgets/erro_connect.dart';
-import 'package:sisgha/app/widgets/erro_connect_login.dart';
+import 'package:sisgha/app/widgets/widget_erro.dart';
 
 Future<bool> atualizarImagemPerfil(
     File imagemPerfil, BuildContext context) async {
@@ -59,7 +58,7 @@ Future<bool> atualizarImagemPerfil(
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return ErroConnect();
+        return dialogoDeErro(context);
       },
     );
   }
@@ -111,7 +110,7 @@ Future<bool> atualizarImagemCapa(File imagemCapa, BuildContext context) async {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return ErroConnect();
+        return dialogoDeErro(context);
       },
     );
   }
@@ -133,11 +132,13 @@ Future<bool> login(TextEditingController matriculaController,
     await sharedPreferences.setString('token', body['access_token']);
     await sharedPreferences.setString('refreshToken', body['refresh_token']);
     return true;
+  } else if (resposta.statusCode == 403) {
+    return false;
   } else {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return ErroConnect();
+        return dialogoDeErro(context);
       },
     );
   }
@@ -221,7 +222,7 @@ Future<bool> refreshToken(BuildContext context) async {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return ErroConnectLogin();
+        return dialogoDeErro(context);
       },
     );
     return false;
