@@ -11,7 +11,7 @@ import 'package:sisgha/app/views/perfil/widgets_perfil/button_style_edit.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/navegacao_switch.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/widget_sair.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/widgets_perfil.dart';
-import 'package:sisgha/app/widgets/erro_connect.dart';
+import 'package:sisgha/app/widgets/widget_erro.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({super.key});
@@ -36,7 +36,7 @@ class _PerfilState extends State<Perfil> {
         // ignore: use_build_context_synchronously
         context: context,
         builder: (BuildContext context) {
-          return const ErroConnect();
+          return dialogoDeErro(context);
         },
       );
     }
@@ -54,7 +54,7 @@ class _PerfilState extends State<Perfil> {
         // ignore: use_build_context_synchronously
         context: context,
         builder: (BuildContext context) {
-          return const ErroConnect();
+          return dialogoDeErro(context);
         },
       );
     }
