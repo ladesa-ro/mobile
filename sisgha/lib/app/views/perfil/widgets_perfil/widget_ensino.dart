@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
-import 'package:sisgha/app/views/perfil/widgets_perfil/widget_sair.dart';
 
 class WidgetEnsino extends StatefulWidget {
   const WidgetEnsino({super.key});
@@ -12,163 +11,133 @@ class WidgetEnsino extends StatefulWidget {
 }
 
 class _WidgetEnsino extends State<WidgetEnsino> {
-  int _paginaSelecionada = 0;
-  //altera conforme a quantidade de itens
-  final int _quantidadeDePaginas = 2;
+  final List<Map<String, dynamic>> materias = [
+    {
+      "materia": "Matemática",
+      "cursos": [
+        {
+          "curso": "Informática",
+          "anos": ["1ºA", "1ºB", "2ºA", "3ºA"],
+        },
+        {
+          "curso": "Quimica",
+          "anos": ["1ºA", "2ºA", "3ºA"],
+        },
+        {
+          "curso": "Floresta",
+          "anos": ["1ºA", "2ºA", "3ºA"],
+        }
+      ]
+    },
+    {
+      "materia": "Português",
+      "cursos": [
+        {
+          "curso": "Informática",
+          "anos": ["1ºA", "1ºB", "2ºA", "3ºA"],
+        },
+        {
+          "curso": "Quimica",
+          "anos": ["1ºA", "2ºA", "3ºA"],
+        },
+      ]
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 20,
-        ),
-        CarouselSlider.builder(
-          itemCount: _quantidadeDePaginas,
-          itemBuilder: (context, index, realIdx) {
-            return SizedBox(
-              width: double.maxFinite,
-              child: _conteudo(context, index),
-            );
-          },
-          options: CarouselOptions(
-            enableInfiniteScroll: false,
-            height: 250.0,
-            enlargeCenterPage: true,
-            autoPlay: false,
-            aspectRatio: 16 / 9,
-            viewportFraction: 0.7,
-            onPageChanged: (index, reason) {
-              setState(
-                () {
-                  _paginaSelecionada = index;
-                },
-              );
-            },
-          ),
-        ),
-        const SizedBox(
-          height: 25,
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 15,
-              width: (20 * _quantidadeDePaginas) + 12,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: _quantidadeDePaginas,
-                itemBuilder: (context, index) => contagemDePagina(index),
-              ),
-            )
-          ],
-        ),
-        const SizedBox(
-          height: 25,
-        ),
-      ],
-    );
-  }
-
-  Widget contagemDePagina(int index) {
-    return AnimatedContainer(
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      decoration: BoxDecoration(
-        color: index == _paginaSelecionada
-            ? ColorApp.VerdeEscuro
-            : ColorApp.Branco,
-        border: Border.all(color: ColorApp.VerdeEscuro),
-        borderRadius: BorderRadius.circular(100),
-      ),
-      duration: const Duration(milliseconds: 500),
-      width: 15,
-      height: 15,
-    );
-  }
-
-  Widget _conteudo(BuildContext context, int index) {
     return LayoutBuilder(
-      builder: (context, constraints) => AnimatedContainer(
-        clipBehavior: Clip.antiAlias,
-        height: constraints.maxHeight,
-        duration: const Duration(milliseconds: 500),
-        decoration: BoxDecoration(
-          border: Border.all(
-              color: index == _paginaSelecionada
-                  ? ColorApp.VerdePrincipal
-                  : ColorApp.VerdeCinza),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              "assets/img/gtr.jpeg",
+      builder: (context, constraints) => Column(
+        children: [
+          const SizedBox(
+            height: 15,
+          ),
+          CarouselSlider(
+            items: List.generate(materias.length,
+                (index) => gerador(constraints.maxWidth, index)),
+            options: CarouselOptions(
+              enableInfiniteScroll: false,
+              viewportFraction: 0.8,
+              enlargeCenterPage: false,
+              height: 250,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget gerador(double largura, int index) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10),
+      width: double.infinity,
+      decoration: boxDecoration(),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(9),
+              topRight: Radius.circular(9),
+            ),
+            child: Image.asset(
+              'assets/img/gtr.jpeg',
               fit: BoxFit.cover,
-              alignment: AlignmentDirectional.bottomCenter,
+              alignment: Alignment.bottomCenter,
+              width: largura,
               height: 70,
-              width: constraints.maxWidth - 2,
             ),
-            const Divider(
-              height: 1,
-              color: ColorApp.VerdeCinza,
-              thickness: 2,
-            ),
-            Container(
-              width: constraints.maxWidth,
-              padding: const EdgeInsetsDirectional.only(start: 20, top: 20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Técnico em Informatica',
-                    style: estiloTexto(16,
-                        cor: ColorApp.Preto, peso: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    'Turmas: 1A 2B 3C',
-                    style: estiloTexto(16,
-                        cor: ColorApp.VerdeCinza, peso: FontWeight.normal),
-                  ),
-                ],
-              ),
-            ),
-            const Spacer(),
-            SizedBox(
-              height: 40,
-              width: constraints.maxWidth,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 2,
-                itemBuilder: (context, idex) => Container(
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(left: 20),
-                  width: constraints.maxWidth * 0.30,
-                  height: 10,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          color: index == _paginaSelecionada
-                              ? ColorApp.Preto
-                              : ColorApp.VerdeCinza,
-                          width: 1),
-                      borderRadius: BorderRadius.circular(10)),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
                   child: Text(
-                    'testando',
-                    style: estiloTexto(16,
-                        cor: ColorApp.Preto, peso: FontWeight.bold),
+                    materias[index]["materia"],
+                    style: estiloTexto(14, peso: FontWeight.bold),
                   ),
                 ),
-              ),
+                mostrarInformacoesdaMateria(index),
+              ],
             ),
-            const Spacer(),
-          ],
-        ),
+          ),
+        ],
       ),
+    );
+  }
+
+  Widget mostrarInformacoesdaMateria(int index) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: materias[index]["cursos"].map<Widget>((curso) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 4,
+          ),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            decoration: BoxDecoration(
+              border: Border.all(color: ColorApp.VerdeCinza),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              children: [
+                Text(
+                  curso["curso"],
+                  style: estiloTexto(14, peso: FontWeight.bold),
+                ),
+                const Spacer(),
+                Text(
+                  curso["anos"].join(", "),
+                  style: estiloTexto(14, peso: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 }

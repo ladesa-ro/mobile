@@ -57,6 +57,7 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
               carouselController: _carouselSliderController,
               items: _listaComHorarios(context),
               options: CarouselOptions(
+                enableInfiniteScroll: false,
                 viewportFraction: 1.0,
                 enlargeCenterPage: true,
                 height: constraints.maxHeight,
@@ -92,13 +93,6 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
       icon: Iconify(icone, color: ColorApp.Branco),
     );
   }
-}
-
-BoxDecoration _decoration() {
-  return BoxDecoration(
-    border: Border.all(color: ColorApp.VerdeCinza),
-    borderRadius: BorderRadius.circular(10),
-  );
 }
 
 List<Widget> _listaComHorarios(context) {
@@ -160,7 +154,7 @@ Widget _matutino(context) {
   return Container(
     height: 175,
     width: double.infinity,
-    decoration: _decoration(),
+    decoration: boxDecoration(),
     child: _horariosMatutino(),
   );
 }
@@ -169,7 +163,7 @@ Widget _vespertino(context) {
   return Container(
     height: 175,
     width: double.infinity,
-    decoration: _decoration(),
+    decoration: boxDecoration(),
     child: _horariosVespertino(),
   );
 }
@@ -178,7 +172,7 @@ Widget _noturno(context) {
   return Container(
     height: 175,
     width: double.infinity,
-    decoration: _decoration(),
+    decoration: boxDecoration(),
     child: _horariosNoturno(),
   );
 }

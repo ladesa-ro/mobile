@@ -39,3 +39,10 @@ OutlineInputBorder inputBorder(double bold) {
     borderRadius: const BorderRadius.all(Radius.circular(13)),
   );
 }
+
+BoxDecoration boxDecoration({double? larguraDaBorda}) {
+  return BoxDecoration(
+    border: Border.all(color: ColorApp.VerdeCinza),
+    borderRadius: BorderRadius.circular(10),
+  );
+}
