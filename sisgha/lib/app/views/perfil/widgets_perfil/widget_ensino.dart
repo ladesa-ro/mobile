@@ -48,6 +48,8 @@ class _WidgetEnsino extends State<WidgetEnsino> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(
             height: 15,
@@ -60,6 +62,23 @@ class _WidgetEnsino extends State<WidgetEnsino> {
               viewportFraction: 0.8,
               enlargeCenterPage: false,
               height: 250,
+            ),
+          ),
+          SizedBox(
+            height: 45,
+            width: constraints.maxWidth,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: Colors.amber,
+                  ),
+                  width: 15,
+                ),
+              ],
             ),
           ),
         ],
