@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:sisgha/app/api/repository.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/imagens.dart';
@@ -50,7 +52,13 @@ Widget dialogoDeErro(BuildContext context) {
           ),
           ElevatedButton(
             style: _estiloBotao(ColorApp.VerdePrincipal, ColorApp.Branco),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                "/login",
+                (route) => false,
+              );
+            },
             child: const Text('Tente novamente'),
           ),
           const SizedBox(
@@ -58,7 +66,9 @@ Widget dialogoDeErro(BuildContext context) {
           ),
           ElevatedButton(
             style: _estiloBotao(ColorApp.Branco, ColorApp.VerdePrincipal),
-            onPressed: () {},
+            onPressed: () {
+              SystemNavigator.pop();
+            },
             child: const Text('Talvez mais tarde'),
           ),
           const SizedBox(
