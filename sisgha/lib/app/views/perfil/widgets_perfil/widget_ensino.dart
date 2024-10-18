@@ -42,14 +42,27 @@ class _WidgetEnsino extends State<WidgetEnsino> {
         },
       ]
     },
+    {
+      "materia": "Geografia",
+      "cursos": [
+        {
+          "curso": "Informática",
+          "anos": ["1ºA", "1ºB", "2ºA", "3ºA"],
+        },
+      ]
+    },
   ];
+  int paginaMostrada = 0;
+  void _atualizarIndexDaPaginaMostrada(index) {
+    setState(() {
+      paginaMostrada = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(
             height: 15,
@@ -58,27 +71,24 @@ class _WidgetEnsino extends State<WidgetEnsino> {
             items: List.generate(materias.length,
                 (index) => gerador(constraints.maxWidth, index)),
             options: CarouselOptions(
+              onPageChanged: (index, reason) =>
+                  _atualizarIndexDaPaginaMostrada(index),
               enableInfiniteScroll: false,
               viewportFraction: 0.8,
               enlargeCenterPage: false,
               height: 250,
             ),
           ),
-          SizedBox(
-            height: 45,
-            width: constraints.maxWidth,
+          const SizedBox(
+            height: 15,
+          ),
+          Flexible(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  margin: const EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: Colors.amber,
-                  ),
-                  width: 15,
-                ),
-              ],
+              children: List.generate(
+                materias.length,
+                (index) => _animatedContainer(index),
+              ),
             ),
           ),
         ],
@@ -132,9 +142,7 @@ class _WidgetEnsino extends State<WidgetEnsino> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: materias[index]["cursos"].map<Widget>((curso) {
         return Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 4,
-          ),
+          padding: const EdgeInsets.symmetric(vertical: 4),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             decoration: BoxDecoration(
@@ -157,6 +165,25 @@ class _WidgetEnsino extends State<WidgetEnsino> {
           ),
         );
       }).toList(),
+    );
+  }
+
+  AnimatedContainer _animatedContainer(int index) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 100),
+      margin: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: paginaMostrada == index
+              ? ColorApp.VerdePrincipal
+              : ColorApp.VerdeCinza,
+        ),
+        borderRadius: BorderRadius.circular(100),
+        color:
+            paginaMostrada == index ? ColorApp.VerdePrincipal : ColorApp.Branco,
+      ),
+      width: 15,
+      height: 15,
     );
   }
 }

@@ -4,7 +4,6 @@ import 'package:sisgha/app/constants/colors.dart';
 ButtonStyle estiloBotao(
     context, double left, double top, double right, double bottom) {
   return ButtonStyle(
-    //MaterialStateProperty tava assim antes mas tava dando erro
     padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
         EdgeInsets.fromLTRB(left, top, right, bottom)),
     shape: WidgetStateProperty.all<OutlinedBorder>(
@@ -40,9 +39,11 @@ OutlineInputBorder inputBorder(double bold) {
   );
 }
 
-BoxDecoration boxDecoration({double? larguraDaBorda}) {
+BoxDecoration boxDecoration() {
   return BoxDecoration(
-    border: Border.all(color: ColorApp.VerdeCinza),
+    border: Border.all(
+      color: ColorApp.VerdeCinza,
+    ),
     borderRadius: BorderRadius.circular(10),
   );
 }

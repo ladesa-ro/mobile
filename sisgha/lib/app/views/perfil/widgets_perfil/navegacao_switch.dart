@@ -24,7 +24,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
 
     _controller.addListener(() {
       setState(() {
-        widget.alturaNotifier.value = _controller.index == 0 ? 900 : 500;
+        widget.alturaNotifier.value = _controller.index == 0 ? 750 : 370;
       });
     });
   }
@@ -38,7 +38,6 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
