@@ -12,6 +12,39 @@ class WidgetDisponibilidade extends StatefulWidget {
   State<WidgetDisponibilidade> createState() => _MyWidgetState();
 }
 
+final List<Map<String, dynamic>> horarios = [
+  {
+    "periodo": "Matutino",
+    "horario": [
+      "00:00 - 00:00",
+      "00:00 - 00:00",
+      "00:00 - 00:00",
+      "00:00 - 00:00",
+      "00:00 - 00:00",
+    ]
+  },
+  {
+    "periodo": "Vespertino",
+    "horario": [
+      "00:00 - 00:00",
+      "00:00 - 00:00",
+      "00:00 - 00:00",
+      "00:00 - 00:00",
+      "00:00 - 00:00",
+    ]
+  },
+  {
+    "periodo": "Noturno",
+    "horario": [
+      "00:00 - 00:00",
+      "00:00 - 00:00",
+      "00:00 - 00:00",
+      "00:00 - 00:00",
+      "00:00 - 00:00",
+    ]
+  },
+];
+
 class _MyWidgetState extends State<WidgetDisponibilidade> {
   List<String> dias = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'];
   int diaIndex = 0;
@@ -26,9 +59,7 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          const SizedBox(
-            height: 15,
-          ),
+          const SizedBox(height: 15),
           Container(
             height: 55,
             decoration: BoxDecoration(
@@ -49,9 +80,7 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
               ],
             ),
           ),
-          const SizedBox(
-            height: 15,
-          ),
+          const SizedBox(height: 15),
           Flexible(
             child: CarouselSlider(
               carouselController: _carouselSliderController,
@@ -96,144 +125,41 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
 }
 
 List<Widget> _listaComHorarios(context) {
-  return [
-    //seg
-    Column(
+  return List.generate(
+    5,
+    (index) => Column(
       children: [
-        _matutino(context),
+        _periodo(context, horarios[0]["periodo"], horarios[0]["horario"]),
         const SizedBox(height: 15),
-        _vespertino(context),
+        _periodo(context, horarios[1]["periodo"], horarios[1]["horario"]),
         const SizedBox(height: 15),
-        _noturno(context),
+        _periodo(context, horarios[2]["periodo"], horarios[2]["horario"]),
       ],
     ),
-    //ter
-    Column(
-      children: [
-        _matutino(context),
-        const SizedBox(height: 15),
-        _vespertino(context),
-        const SizedBox(height: 15),
-        _noturno(context),
-      ],
-    ),
-    //qua
-    Column(
-      children: [
-        _matutino(context),
-        const SizedBox(height: 15),
-        _vespertino(context),
-        const SizedBox(height: 15),
-        _noturno(context),
-      ],
-    ),
-    //qui
-    Column(
-      children: [
-        _matutino(context),
-        const SizedBox(height: 15),
-        _vespertino(context),
-        const SizedBox(height: 15),
-        _noturno(context),
-      ],
-    ),
-    //sex
-    Column(
-      children: [
-        _matutino(context),
-        const SizedBox(height: 15),
-        _vespertino(context),
-        const SizedBox(height: 15),
-        _noturno(context),
-      ],
-    ),
-  ];
+  );
 }
 
-Widget _matutino(context) {
+Widget _periodo(BuildContext context, String periodo, List<String> horas) {
   return Container(
     height: 175,
     width: double.infinity,
-    decoration: boxDecoration(),
-    child: _horariosMatutino(),
-  );
-}
-
-Widget _vespertino(context) {
-  return Container(
-    height: 175,
-    width: double.infinity,
-    decoration: boxDecoration(),
-    child: _horariosVespertino(),
-  );
-}
-
-Widget _noturno(context) {
-  return Container(
-    height: 175,
-    width: double.infinity,
-    decoration: boxDecoration(),
-    child: _horariosNoturno(),
-  );
-}
-
-Widget _horariosMatutino() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceAround,
-    children: [
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('00:00 - 00:00', style: _estilo()),
-          Text('00:00 - 00:00', style: _estilo()),
-          Text('00:00 - 00:00', style: _estilo()),
-          Text('00:00 - 00:00', style: _estilo()),
-          Text('00:00 - 00:00', style: _estilo()),
-        ],
-      ),
-      Text('Matutino',
-          style: estiloTexto(16, cor: ColorApp.Preto, peso: FontWeight.bold)),
-    ],
-  );
-}
-
-Widget _horariosVespertino() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceAround,
-    children: [
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('00:00 - 00:00', style: _estilo()),
-          Text('00:00 - 00:00', style: _estilo()),
-          Text('00:00 - 00:00', style: _estilo()),
-          Text('00:00 - 00:00', style: _estilo()),
-          Text('00:00 - 00:00', style: _estilo()),
-        ],
-      ),
-      Text('Vespertino',
-          style: estiloTexto(16, cor: ColorApp.Preto, peso: FontWeight.bold)),
-    ],
-  );
-}
-
-Widget _horariosNoturno() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceAround,
-    children: [
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('00:00 - 00:00', style: _estilo()),
-          Text('00:00 - 00:00', style: _estilo()),
-          Text('00:00 - 00:00', style: _estilo()),
-          Text('00:00 - 00:00', style: _estilo()),
-          Text('00:00 - 00:00', style: _estilo()),
-        ],
-      ),
-      Text('Noturno',
-          style: estiloTexto(16, cor: ColorApp.Preto, peso: FontWeight.bold)),
-    ],
+    decoration: estiloBorda(cor: ColorApp.VerdeCinza, radius: 15),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(
+            horas.length,
+            (index) => Text(horas[index], style: _estilo()),
+          ),
+        ),
+        Text(
+          periodo,
+          style: estiloTexto(16, cor: ColorApp.Preto, peso: FontWeight.bold),
+        ),
+      ],
+    ),
   );
 }
 

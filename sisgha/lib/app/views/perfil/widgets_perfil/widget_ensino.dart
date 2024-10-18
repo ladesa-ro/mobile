@@ -100,7 +100,7 @@ class _WidgetEnsino extends State<WidgetEnsino> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
       width: double.infinity,
-      decoration: boxDecoration(),
+      decoration: estiloBorda(cor: ColorApp.VerdeCinza, radius: 10),
       child: Column(
         children: [
           ClipRRect(
@@ -128,7 +128,7 @@ class _WidgetEnsino extends State<WidgetEnsino> {
                     style: estiloTexto(14, peso: FontWeight.bold),
                   ),
                 ),
-                mostrarInformacoesdaMateria(index),
+                _mostrarInformacoesdaMateria(index),
               ],
             ),
           ),
@@ -137,7 +137,7 @@ class _WidgetEnsino extends State<WidgetEnsino> {
     );
   }
 
-  Widget mostrarInformacoesdaMateria(int index) {
+  Widget _mostrarInformacoesdaMateria(int index) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: materias[index]["cursos"].map<Widget>((curso) {

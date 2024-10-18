@@ -77,20 +77,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
         child: AnimatedContainer(
           alignment: Alignment.center,
           duration: const Duration(milliseconds: 0),
-          decoration: BoxDecoration(
-            color: _controller.index == index
-                ? ColorApp.VerdeFraco
-                : ColorApp.Branco,
-            borderRadius: BorderRadius.horizontal(
-              left: bordaEsquerda ? const Radius.circular(10) : Radius.zero,
-              right: bordaDireita ? const Radius.circular(10) : Radius.zero,
-            ),
-            border: Border.all(
-              color: _controller.index == index
-                  ? ColorApp.VerdePrincipal
-                  : ColorApp.VerdeCinza,
-            ),
-          ),
+          decoration: _boxDecoration(index, bordaEsquerda, bordaDireita),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -115,6 +102,22 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  BoxDecoration _boxDecoration(
+      int index, bool bordaEsquerda, bool bordaDireita) {
+    return BoxDecoration(
+      color: _controller.index == index ? ColorApp.VerdeFraco : ColorApp.Branco,
+      borderRadius: BorderRadius.horizontal(
+        left: bordaEsquerda ? const Radius.circular(10) : Radius.zero,
+        right: bordaDireita ? const Radius.circular(10) : Radius.zero,
+      ),
+      border: Border.all(
+        color: _controller.index == index
+            ? ColorApp.VerdePrincipal
+            : ColorApp.VerdeCinza,
       ),
     );
   }

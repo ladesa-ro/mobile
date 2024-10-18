@@ -39,11 +39,16 @@ OutlineInputBorder inputBorder(double bold) {
   );
 }
 
-BoxDecoration boxDecoration() {
+BoxDecoration estiloBorda({
+  required Color cor,
+  required double radius,
+  double? grossuraBorda,
+}) {
   return BoxDecoration(
     border: Border.all(
-      color: ColorApp.VerdeCinza,
+      color: cor,
+      width: grossuraBorda ?? 1,
     ),
-    borderRadius: BorderRadius.circular(10),
+    borderRadius: BorderRadius.circular(radius),
   );
 }
