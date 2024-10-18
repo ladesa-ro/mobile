@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/api/repository.dart';
-import 'package:sisgha/app/constants/Icones.dart';
-import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/views/inicio/boasvindas.dart';
 
 Future widgetQuit(BuildContext context) async {

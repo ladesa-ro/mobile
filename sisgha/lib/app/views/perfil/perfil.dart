@@ -66,7 +66,7 @@ class _PerfilState extends State<Perfil> {
 
   @override
   Widget build(BuildContext context) {
-    final ValueNotifier<double> alturaNavSwitch = ValueNotifier<double>(900);
+    final ValueNotifier<double> alturaNavSwitch = ValueNotifier<double>(750);
     return FutureBuilder<UserModel>(
       future: buscarUser(context),
       builder: (context, snapshot) {
