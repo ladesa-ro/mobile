@@ -6,7 +6,7 @@ import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/tamanhotela.dart';
 import 'package:sisgha/app/views/home/navegacao.dart';
-import 'package:sisgha/app/views/login/aluno.dart';
+import 'package:sisgha/app/views/aluno/selecionar_turma.dart';
 import 'package:sisgha/app/widgets/widget_erro.dart';
 
 Widget elementoVerde(Alignment alignment, double width, double height) {
@@ -48,12 +48,7 @@ Widget botaoEntrarAluno(context, double tamanhoHorizontal) {
     child: Center(
       child: FilledButton(
         style: estiloBotao(context, 0, 5, 0, 5),
-        onPressed: () => Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const PaginaAluno(),
-            ),
-            (route) => false),
+        onPressed: () => Navigator.pushNamed(context, "/acessoAluno"),
         child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
