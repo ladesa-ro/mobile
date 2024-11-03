@@ -8,7 +8,7 @@ Widget dadosUsuario(BuildContext context, nome, email, matricula) {
     children: [
       Text(
         'Professor(a) $nome',
-        style: estiloTexto(18, cor: ColorApp.Preto, peso: FontWeight.bold),
+        style: estiloTexto(16, cor: ColorApp.Preto, peso: FontWeight.bold),
       ),
       Text(
         'E-mail: $email',

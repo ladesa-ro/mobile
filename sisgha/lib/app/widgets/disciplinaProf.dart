@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
+import 'package:sisgha/app/constants/tamanhoTela.dart';
 
-Widget disciplinaprof(String materia, String turma, String horario) {
+Widget disciplinaprof(
+    String materia, String turma, String horario, BuildContext context) {
   bool ativadoOuNao = _verificar(horario);
 
   return Container(
     margin: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
     padding: const EdgeInsets.only(left: 12, right: 5),
-    height: 105,
+    height: TamanhoTela.vertical(context) * 0.15,
     decoration: BoxDecoration(
       border: Border.all(
           color: ativadoOuNao ? ColorApp.VerdePrincipal : ColorApp.VerdeCinza,

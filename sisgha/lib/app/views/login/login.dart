@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/imagens.dart';
-import 'package:sisgha/app/constants/tamanhotela.dart';
+import 'package:sisgha/app/constants/tamanhoTela.dart';
 import 'package:sisgha/app/widgets/widgtes_login.dart';
 
 class PaginaLogin extends StatefulWidget {
@@ -44,7 +44,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
             Center(
               child: SingleChildScrollView(
                 child: SizedBox(
-                  width: larguraTela > 700 ? 800 : larguraTela,
+                  width: larguraTela,
                   height: 800,
                   child: LayoutBuilder(
                     builder: (context, constraints) => Padding(

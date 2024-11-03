@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
-import 'package:sisgha/app/constants/tamanhotela.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/widget_disponibilidade.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/widget_ensino.dart';
 
 class NavSwitch extends StatefulWidget {
-  const NavSwitch({super.key, required this.alturaNotifier});
-  final ValueNotifier<double> alturaNotifier;
+  const NavSwitch({super.key});
 
   @override
   State<NavSwitch> createState() => _NavSwitchState();
@@ -21,11 +19,8 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _controller = TabController(length: 2, vsync: this, initialIndex: 0);
-
     _controller.addListener(() {
-      setState(() {
-        widget.alturaNotifier.value = _controller.index == 0 ? 750 : 370;
-      });
+      setState(() {});
     });
   }
 
@@ -37,73 +32,76 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          width: TamanhoTela.horizontal(context),
-          height: 55,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _estiloTabs('Disponibilidade', Icones.IconeSisgha, 0,
-                  bordaEsquerda: true, bordaDireita: false),
-              _estiloTabs('Ensino', Icones.Disciplina, 1,
-                  bordaEsquerda: false, bordaDireita: true),
-            ],
+    return LayoutBuilder(
+      builder: (context, constraints) => Column(
+        children: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 35),
+            width: constraints.maxWidth,
+            height: constraints.maxHeight * 0.1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _estiloTabs('Disponibilidade', Icones.IconeSisgha, 0,
+                    bordaEsquerda: true, bordaDireita: false),
+                _estiloTabs('Ensino', Icones.Disciplina, 1,
+                    bordaEsquerda: false, bordaDireita: true),
+              ],
+            ),
           ),
-        ),
-        Flexible(
-          child: TabBarView(
-            physics: const NeverScrollableScrollPhysics(),
-            controller: _controller,
-            children: const [
-              WidgetDisponibilidade(),
-              WidgetEnsino(),
-            ],
+          SizedBox(
+            height: constraints.maxHeight * 0.9,
+            width: constraints.maxWidth,
+            child: TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: _controller,
+              children: const [
+                WidgetDisponibilidade(),
+                WidgetEnsino(),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   Widget _estiloTabs(String texto, IconData icone, int index,
       {required bool bordaEsquerda, required bool bordaDireita}) {
     return Expanded(
-      child: GestureDetector(
-        onTap: () {
-          _controller.animateTo(index);
-        },
-        child: AnimatedContainer(
-          alignment: Alignment.center,
-          duration: const Duration(milliseconds: 0),
-          decoration: _boxDecoration(index, bordaEsquerda, bordaDireita),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                texto,
-                style: estiloTexto(15,
-                    cor: _controller.index == index
-                        ? ColorApp.VerdePrincipal
-                        : ColorApp.VerdeCinza,
-                    peso: FontWeight.bold),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Icon(
-                icone,
-                color: _controller.index == index
+        child: GestureDetector(
+      onTap: () {
+        _controller.animateTo(index);
+      },
+      child: AnimatedContainer(
+        alignment: Alignment.center,
+        duration: const Duration(milliseconds: 300),
+        decoration: _boxDecoration(index, bordaEsquerda, bordaDireita),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              texto,
+              style: estiloTexto(
+                15,
+                cor: _controller.index == index
                     ? ColorApp.VerdePrincipal
                     : ColorApp.VerdeCinza,
-                size: index == 0 ? 20 : 25,
+                peso: FontWeight.bold,
               ),
-            ],
-          ),
+            ),
+            const SizedBox(width: 10),
+            Icon(
+              icone,
+              color: _controller.index == index
+                  ? ColorApp.VerdePrincipal
+                  : ColorApp.VerdeCinza,
+              size: index == 0 ? 20 : 25,
+            ),
+          ],
         ),
       ),
-    );
+    ));
   }
 
   BoxDecoration _boxDecoration(

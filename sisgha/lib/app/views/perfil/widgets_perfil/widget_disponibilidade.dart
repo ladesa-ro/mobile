@@ -55,46 +55,45 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, constraints) => ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          const SizedBox(height: 15),
-          Container(
-            height: 55,
-            decoration: BoxDecoration(
-              color: ColorApp.VerdePrincipal,
-              borderRadius: BorderRadius.circular(10),
+      builder: (context, constraints) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 35),
+        child: Column(
+          children: [
+            SizedBox(height: constraints.maxHeight * 0.05),
+            Container(
+              height: constraints.maxHeight * 0.11,
+              decoration: BoxDecoration(
+                color: ColorApp.VerdePrincipal,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                children: [
+                  _iconButton(1, Icones.setaEsquerda),
+                  const Spacer(),
+                  Text(
+                    dias[diaIndex],
+                    style: estiloTexto(17,
+                        cor: ColorApp.Branco, peso: FontWeight.bold),
+                  ),
+                  const Spacer(),
+                  _iconButton(0, Icones.setaDireita),
+                ],
+              ),
             ),
-            child: Row(
-              children: [
-                _iconButton(1, Icones.setaEsquerda),
-                const Spacer(),
-                Text(
-                  dias[diaIndex],
-                  style: estiloTexto(17,
-                      cor: ColorApp.Branco, peso: FontWeight.bold),
-                ),
-                const Spacer(),
-                _iconButton(0, Icones.setaDireita),
-              ],
-            ),
-          ),
-          const SizedBox(height: 15),
-          Flexible(
-            child: CarouselSlider(
+            SizedBox(height: constraints.maxHeight * 0.05),
+            CarouselSlider(
               carouselController: _carouselSliderController,
               items: _listaComHorarios(context),
               options: CarouselOptions(
                 enableInfiniteScroll: false,
                 viewportFraction: 1.0,
                 enlargeCenterPage: true,
-                height: constraints.maxHeight,
+                height: constraints.maxHeight * 0.74,
                 scrollPhysics: const NeverScrollableScrollPhysics(),
               ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -127,22 +126,44 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
 List<Widget> _listaComHorarios(context) {
   return List.generate(
     5,
-    (index) => Column(
-      children: [
-        _periodo(context, horarios[0]["periodo"], horarios[0]["horario"]),
-        const SizedBox(height: 15),
-        _periodo(context, horarios[1]["periodo"], horarios[1]["horario"]),
-        const SizedBox(height: 15),
-        _periodo(context, horarios[2]["periodo"], horarios[2]["horario"]),
-      ],
+    (index) => LayoutBuilder(
+      builder: (context, constraints) => ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          SizedBox(
+            height: constraints.maxHeight * 0.45,
+            width: constraints.maxWidth,
+            child: Flexible(
+              child: _periodo(
+                  context, horarios[0]["periodo"], horarios[0]["horario"]),
+            ),
+          ),
+          const SizedBox(height: 15),
+          SizedBox(
+            height: constraints.maxHeight * 0.45,
+            width: constraints.maxWidth,
+            child: Flexible(
+              child: _periodo(
+                  context, horarios[1]["periodo"], horarios[1]["horario"]),
+            ),
+          ),
+          const SizedBox(height: 15),
+          SizedBox(
+            height: constraints.maxHeight * 0.45,
+            width: constraints.maxWidth,
+            child: Flexible(
+              child: _periodo(
+                  context, horarios[2]["periodo"], horarios[2]["horario"]),
+            ),
+          ),
+        ],
+      ),
     ),
   );
 }
 
 Widget _periodo(BuildContext context, String periodo, List<String> horas) {
   return Container(
-    height: 175,
-    width: double.infinity,
     decoration: estiloBorda(cor: ColorApp.VerdeCinza, radius: 15),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
