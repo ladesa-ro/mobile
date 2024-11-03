@@ -16,7 +16,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
   final TextEditingController senhaController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  bool _mostrarErroMatricula = false;
+  final bool _mostrarErroMatricula = false;
   bool _mostrarErroSenha = false;
   bool _senhaVisivel = true;
 
@@ -30,7 +30,6 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
   Widget build(BuildContext context) {
     final double larguraTela = TamanhoTela.horizontal(context);
     final double alturaTela = TamanhoTela.vertical(context);
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -45,55 +44,57 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
               child: SingleChildScrollView(
                 child: SizedBox(
                   width: larguraTela,
-                  height: 800,
-                  child: LayoutBuilder(
-                    builder: (context, constraints) => Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: constraints.maxWidth * 0.08,
-                          vertical: 20),
-                      child: Column(
-                        children: [
-                          const Spacer(),
-                          Image.asset(
+                  height: alturaTela,
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: larguraTela * 0.08),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: alturaTela * 0.1,
+                          child: Image.asset(
                             ImageApp.logo_sigha_sem_barra,
-                            width: 250,
+                            width: larguraTela * 0.6,
                           ),
-                          const SizedBox(height: 30),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 40),
-                            child: Form(
-                              key: formKey,
-                              child: Column(
-                                children: [
-                                  _campoDeEntrada(
-                                      'Matrícula',
-                                      TextInputType.number,
-                                      matriculaController,
-                                      _mostrarErroMatricula),
-                                  const SizedBox(height: 20),
-                                  _campoDeEntradaSenha(
-                                      'Senha',
-                                      TextInputType.text,
-                                      senhaController,
-                                      _mostrarErroSenha),
-                                  const SizedBox(height: 20),
-                                  recuperarSenha(context, constraints.maxWidth),
-                                  const SizedBox(height: 20),
-                                  botaoEntrar('Entrar', context, formKey,
-                                      matriculaController, senhaController),
-                                  const SizedBox(height: 30),
-                                ],
-                              ),
+                        ),
+                        SizedBox(height: alturaTela * 0.03),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 40),
+                          child: Form(
+                            key: formKey,
+                            child: Column(
+                              children: [
+                                _campoDeEntrada(
+                                    'Matrícula',
+                                    TextInputType.number,
+                                    matriculaController,
+                                    alturaTela),
+                                _campoDeEntradaSenha(
+                                    'Senha',
+                                    TextInputType.text,
+                                    senhaController,
+                                    alturaTela),
+                                recuperarSenha(context),
+                                SizedBox(
+                                  height: alturaTela * 0.03,
+                                ),
+                                botaoEntrar(
+                                    'Entrar',
+                                    context,
+                                    formKey,
+                                    matriculaController,
+                                    senhaController,
+                                    alturaTela),
+                              ],
                             ),
                           ),
-                          botaoEntrarAluno(context, constraints.maxWidth),
-                          SizedBox(
-                              height: TamanhoTela.vertical(context) > 810
-                                  ? 0
-                                  : TamanhoTela.vertical(context) * 0.13),
-                          const Spacer(),
-                        ],
-                      ),
+                        ),
+                        SizedBox(
+                          height: alturaTela * 0.03,
+                        ),
+                        botaoEntrarAluno(context, alturaTela, larguraTela),
+                      ],
                     ),
                   ),
                 ),
@@ -105,35 +106,15 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
     );
   }
 
-  Widget _campoDeEntrada(
-    String labelText,
-    TextInputType inputType,
-    TextEditingController controller,
-    bool mostrarErro,
-  ) {
+  Widget _campoDeEntrada(String labelText, TextInputType inputType,
+      TextEditingController controller, double altura) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      height: mostrarErro ? 70 : 50,
+      height: altura * 0.08,
       child: TextFormField(
         controller: controller,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            setState(() {
-              _mostrarErroMatricula = true;
-            });
-            return "Campo obrigatório";
-          } else if (value.contains(" ")) {
-            setState(() {
-              _mostrarErroMatricula = true;
-            });
-            return "Matrícula incorreta";
-          } else {
-            setState(() {
-              _mostrarErroMatricula = false;
-            });
-            return null;
-          }
-        },
+        validator: (value) => verificacao(value, "Campo obrigatorio",
+            text2: "Matricula invalida"),
         decoration: inputDecoration(labelText),
         keyboardType: inputType,
       ),
@@ -141,25 +122,13 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
   }
 
   Widget _campoDeEntradaSenha(String labelText, TextInputType inputType,
-      TextEditingController controller, bool mostrarErro) {
+      TextEditingController controller, double altura) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      height: mostrarErro ? 70 : 50,
+      height: altura * 0.08,
       child: TextFormField(
         controller: controller,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            setState(() {
-              _mostrarErroSenha = true;
-            });
-            return "Campo obrigatório";
-          } else {
-            setState(() {
-              _mostrarErroSenha = false;
-            });
-            return null;
-          }
-        },
+        validator: (value) => verificacao(value, "Campo Obrigatorio"),
         obscureText: _senhaVisivel,
         decoration: inputDecoration(labelText,
             suffixIcon: iconeVisibilidadeSenha(
@@ -167,5 +136,24 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
         keyboardType: inputType,
       ),
     );
+  }
+
+  dynamic verificacao(dynamic value, String text1, {String? text2}) {
+    if (value == null || value.isEmpty) {
+      setState(() {
+        _mostrarErroSenha = true;
+      });
+      return text1;
+    } else if (text2 != null && value.contains(" ")) {
+      setState(() {
+        _mostrarErroSenha = true;
+      });
+      return text2;
+    } else {
+      setState(() {
+        _mostrarErroSenha = false;
+      });
+      return null;
+    }
   }
 }
