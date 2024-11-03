@@ -22,12 +22,13 @@ class _HorariosState extends State<Horarios> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView.builder(
-          primary: true,
-          padding: const EdgeInsets.only(bottom: 60),
-          itemCount: 3,
-          itemBuilder: (context, index) {
-            return disciplinaprof(widget.materia, widget.turma, widget.horario);
-          }),
+        padding: EdgeInsets.symmetric(vertical: 10),
+        itemCount: 3,
+        itemBuilder: (context, index) {
+          return disciplinaprof(
+              widget.materia, widget.turma, widget.horario, context);
+        },
+      ),
     );
   }
 }

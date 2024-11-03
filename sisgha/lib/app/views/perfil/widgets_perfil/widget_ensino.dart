@@ -62,10 +62,10 @@ class _WidgetEnsino extends State<WidgetEnsino> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, constraints) => Column(
+      builder: (constext, constraints) => ListView(
         children: [
-          const SizedBox(
-            height: 15,
+          SizedBox(
+            height: constraints.maxHeight * 0.05,
           ),
           CarouselSlider(
             items: List.generate(materias.length,
@@ -79,9 +79,7 @@ class _WidgetEnsino extends State<WidgetEnsino> {
               height: 250,
             ),
           ),
-          const SizedBox(
-            height: 15,
-          ),
+          SizedBox(height: 15),
           Flexible(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

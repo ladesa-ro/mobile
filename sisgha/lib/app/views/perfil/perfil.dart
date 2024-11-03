@@ -6,6 +6,7 @@ import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/tamanhotela.dart';
 import 'package:sisgha/app/model/userModel.dart';
+import 'package:sisgha/app/views/home/navegacao.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/botton_sheat.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/button_style_edit.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/navegacao_switch.dart';
@@ -66,7 +67,7 @@ class _PerfilState extends State<Perfil> {
 
   @override
   Widget build(BuildContext context) {
-    final ValueNotifier<double> alturaNavSwitch = ValueNotifier<double>(750);
+    double tamanho = TamanhoTela.height(context);
     return FutureBuilder<UserModel>(
       future: buscarUser(context),
       builder: (context, snapshot) {
@@ -101,30 +102,36 @@ class _PerfilState extends State<Perfil> {
           UserModel user = snapshot.data!;
           return Scaffold(
             body: ListView(
+              physics: NeverScrollableScrollPhysics(),
               padding: EdgeInsets.zero,
               children: [
                 SizedBox(
                   width: TamanhoTela.horizontal(context),
-                  height: 210,
+                  height: tamanho * 0.25,
                   child: Stack(
                     alignment: AlignmentDirectional.topCenter,
                     children: [
                       // Capa
                       Positioned(
                         child: SizedBox(
-                          height: 175,
+                          height: tamanho * 0.2,
                           width: TamanhoTela.horizontal(context),
-                          child: imagemCapa != null
-                              ? Image.file(
-                                  imagemCapa!,
-                                  fit: BoxFit.cover,
-                                  alignment: AlignmentDirectional.bottomCenter,
-                                )
-                              : Image.network(
-                                  "https://dev.ladesa.com.br/api/usuarios/${user.id}/imagem/capa",
-                                  fit: BoxFit.cover,
-                                  alignment: AlignmentDirectional.bottomCenter,
-                                ),
+                          child: Image.asset(
+                            "assets/img/gtr.jpeg",
+                            fit: BoxFit.cover,
+                            alignment: AlignmentDirectional.bottomCenter,
+                          ),
+                          // child: imagemCapa != null
+                          //     ? Image.file(
+                          //         imagemCapa!,
+                          //         fit: BoxFit.cover,
+                          //         alignment: AlignmentDirectional.bottomCenter,
+                          //       )
+                          //     : Image.network(
+                          //         "https://dev.ladesa.com.br/api/usuarios/${user.id}/imagem/capa",
+                          //         fit: BoxFit.cover,
+                          //         alignment: AlignmentDirectional.bottomCenter,
+                          //       ),
                         ),
                       ),
                       Positioned(
@@ -175,24 +182,13 @@ class _PerfilState extends State<Perfil> {
                     ],
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 10),
-                  child: dadosUsuario(
-                      context, user.nome, user.email, user.matricula),
+                dadosUsuario(context, user.nome, user.email, user.matricula),
+                SizedBox(
+                  height: tamanho * 0.01,
                 ),
-                const SizedBox(
-                  height: 15,
-                ),
-                ValueListenableBuilder<double>(
-                  valueListenable: alturaNavSwitch,
-                  builder: (context, altura, child) {
-                    return AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      height: altura,
-                      width: TamanhoTela.horizontal(context),
-                      child: NavSwitch(alturaNotifier: alturaNavSwitch),
-                    );
-                  },
+                SizedBox(
+                  height: tamanho * 0.74,
+                  child: NavSwitch(),
                 ),
               ],
             ),

@@ -21,7 +21,7 @@ Widget campoDeTexto(String texto) {
   );
 }
 
-Widget floatLabel(String textoFlutuante) {
+Widget floatLabel(String textoFlutuante, context) {
   return Container(
     alignment: AlignmentDirectional.center,
     margin: const EdgeInsets.only(left: 25),
@@ -30,7 +30,11 @@ Widget floatLabel(String textoFlutuante) {
     height: 17,
     child: Text(
       textoFlutuante,
-      style: estiloTexto(15, cor: ColorApp.VerdeCinza, peso: FontWeight.w600),
+      style: estiloTexto(
+        15,
+        cor: ColorApp.VerdeCinza,
+        peso: FontWeight.w600,
+      ),
     ),
   );
 }

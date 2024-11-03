@@ -4,7 +4,6 @@ import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/dias.dart';
 import 'package:sisgha/app/constants/estilos.dart';
-import 'package:sisgha/app/constants/tamanhotela.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
@@ -17,7 +16,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      automaticallyImplyLeading: false,
       backgroundColor: Theme.of(context).colorScheme.primary,
       foregroundColor: ColorApp.Branco,
       title: Row(
@@ -27,7 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             Text(
               DatasFormatadas.diaAtual,
               style: estiloTexto(
-                TamanhoTela.vertical(context) > 810 ? 50 : 43,
+                30,
                 cor: ColorApp.Branco,
                 peso: FontWeight.bold,
               ),
@@ -40,20 +38,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               children: [
                 Text(
                   DatasFormatadas.obterDiaFormatado(),
-                  style: estiloTexto(
-                      TamanhoTela.vertical(context) > 810 ? 20 : 18,
-                      cor: ColorApp.Branco,
-                      peso: FontWeight.bold),
+                  style: estiloTexto(17,
+                      cor: ColorApp.Branco, peso: FontWeight.bold),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Text(
                   '${DatasFormatadas.mesAtual[0].toUpperCase() + DatasFormatadas.mesAtual.substring(1)} - ${DatasFormatadas.obterPrimeiroDiaSemana()} a ${DatasFormatadas.obterUltimoDiaSemana()}',
-                  style: estiloTexto(
-                      TamanhoTela.vertical(context) > 810 ? 20 : 18,
-                      cor: ColorApp.Branco,
-                      peso: FontWeight.bold),
+                  style: estiloTexto(17,
+                      cor: ColorApp.Branco, peso: FontWeight.bold),
                 ),
               ],
             ),

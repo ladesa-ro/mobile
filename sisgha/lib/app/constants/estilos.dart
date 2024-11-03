@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/constants/colors.dart';
+import 'package:sizer/sizer.dart';
 
 ButtonStyle estiloBotao(
     context, double left, double top, double right, double bottom) {
@@ -14,7 +15,10 @@ ButtonStyle estiloBotao(
 
 TextStyle estiloTexto(double tamanho, {Color? cor, FontWeight? peso}) {
   return TextStyle(
-      fontSize: tamanho, color: cor, fontWeight: peso, fontFamily: 'Poppins');
+      fontSize: tamanho.sp,
+      color: cor,
+      fontWeight: peso,
+      fontFamily: 'Poppins');
 }
 
 InputDecoration inputDecoration(String labelText, {Widget? suffixIcon}) {

@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
-import 'package:sisgha/app/constants/tamanhotela.dart';
+import 'package:sisgha/app/constants/tamanhoTela.dart';
 import 'package:sisgha/app/widgets/mini_calend.dart';
 import 'package:sisgha/app/widgets/quadrados_Home.dart';
 import 'package:sisgha/app/views/home/barra_top.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:sizer/sizer.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -21,23 +22,22 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     initializeDateFormatting('pt_BR', null);
 
+    var appBar = CustomAppBar(height: 7.h);
+
+    double tamanho =
+        TamanhoTela.height(context, appBarSize: appBar.preferredSize.height);
     DateTime now = DateTime.now();
 
     return Scaffold(
-      //aqui mexe no tamnho da barra de cima
-      appBar: const CustomAppBar(height: 65),
-      body: ListView(
-        physics: const NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.zero,
+      appBar: appBar,
+      body: Column(
         children: [
           SizedBox(
-              height: TamanhoTela.vertical(context) > 810
-                  ? TamanhoTela.vertical(context) * 0.04
-                  : TamanhoTela.vertical(context) * 0.05),
+            height: tamanho * 0.03,
+          ),
           Container(
-            padding: EdgeInsets.symmetric(
-                horizontal: TamanhoTela.horizontal(context) * 0.07),
-            height: 52,
+            margin: EdgeInsets.symmetric(horizontal: 35),
+            height: tamanho * 0.09,
             //botão que ira aparecer na tala com o calendario
             child: ElevatedButton(
               style: estiloBotao(context, 0, 10, 0, 10),
@@ -50,29 +50,26 @@ class _HomeState extends State<Home> {
                 );
               },
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const SizedBox(
                     width: 16,
                   ),
-                  const Icon(
+                  Icon(
                     Icones.CalendarVazio,
-                    size: 20,
+                    size: 3.h,
                     color: ColorApp.Branco,
                   ),
                   const Spacer(),
                   Text(
                     'Calendário ${now.year}',
-                    style: estiloTexto(
-                        TamanhoTela.vertical(context) > 810 ? 17 : 15,
-                        cor: Colors.white,
-                        peso: FontWeight.bold),
+                    style: estiloTexto(15,
+                        cor: Colors.white, peso: FontWeight.bold),
                   ),
                   const Spacer(),
                   Iconify(
                     Icones.SetaBaixo,
+                    size: 4.h,
                     color: ColorApp.Branco,
-                    size: TamanhoTela.vertical(context) > 810 ? 25 : 20,
                   ),
                   const SizedBox(
                     width: 16,
@@ -82,14 +79,14 @@ class _HomeState extends State<Home> {
             ),
           ),
           SizedBox(
-            height: TamanhoTela.vertical(context) * 0.04,
+            height: tamanho * 0.03,
           ),
           //botoes com os dias da semana
-          Container(
-            height: TamanhoTela.vertical(context),
-            padding: EdgeInsets.symmetric(
-                horizontal: TamanhoTela.horizontal(context) * 0.045),
-            child: const QuadradosHome(),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 35),
+              child: const QuadradosHome(),
+            ),
           ),
         ],
       ),

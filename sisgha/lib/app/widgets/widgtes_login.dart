@@ -8,6 +8,7 @@ import 'package:sisgha/app/constants/tamanhotela.dart';
 import 'package:sisgha/app/views/home/navegacao.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma.dart';
 import 'package:sisgha/app/widgets/widget_erro.dart';
+import 'package:sizer/sizer.dart';
 
 Widget elementoVerde(Alignment alignment, double width, double height) {
   BorderRadiusGeometry borderRadius = BorderRadius.zero;
@@ -41,10 +42,11 @@ Widget elementoVerde(Alignment alignment, double width, double height) {
   );
 }
 
-Widget botaoEntrarAluno(context, double tamanhoHorizontal) {
-  return SizedBox(
-    height: 45,
-    width: tamanhoHorizontal * 0.70,
+Widget botaoEntrarAluno(context, double altura, double largura) {
+  return Container(
+    margin: EdgeInsets.symmetric(horizontal: largura * 0.05),
+    height: altura * 0.067,
+    width: largura,
     child: Center(
       child: FilledButton(
         style: estiloBotao(context, 0, 5, 0, 5),
@@ -58,15 +60,15 @@ Widget botaoEntrarAluno(context, double tamanhoHorizontal) {
                 child: Row(
                   children: [
                     const SizedBox(width: 19),
-                    const Icon(
+                    Icon(
                       Icones.PersonCheio,
                       color: ColorApp.Branco,
-                      size: 30,
+                      size: 3.h,
                     ),
                     const SizedBox(width: 10),
                     Container(
                       width: 2,
-                      height: 30,
+                      height: 3.h,
                       color: ColorApp.Branco,
                     ),
                   ],
@@ -75,7 +77,7 @@ Widget botaoEntrarAluno(context, double tamanhoHorizontal) {
               const Spacer(),
               Text(
                 'Entrar como Aluno',
-                style: estiloTexto(17, peso: FontWeight.w600),
+                style: estiloTexto(16, peso: FontWeight.w600),
               ),
               const Spacer(
                 flex: 2,
@@ -88,7 +90,7 @@ Widget botaoEntrarAluno(context, double tamanhoHorizontal) {
   );
 }
 
-Widget recuperarSenha(context, double tamanho) {
+Widget recuperarSenha(context) {
   return Container(
     alignment: Alignment.center,
     child: Row(
@@ -98,7 +100,7 @@ Widget recuperarSenha(context, double tamanho) {
           'Esqueceu a senha?',
           style: estiloTexto(
             cor: ColorApp.VerdeCinza,
-            tamanho > 200 ? 14 : 12,
+            14,
             peso: FontWeight.w600,
           ),
         ),
@@ -110,7 +112,7 @@ Widget recuperarSenha(context, double tamanho) {
           ),
           child: Text(
             'Clique aqui',
-            style: estiloTexto(tamanho > 300 ? 14 : 12,
+            style: estiloTexto(15,
                 cor: ColorApp.VerdePrincipal, peso: FontWeight.w600),
           ),
         ),
@@ -119,7 +121,7 @@ Widget recuperarSenha(context, double tamanho) {
   );
 }
 
-Widget botaoEntrar(texto, context, formKey, matricula, senha) {
+Widget botaoEntrar(texto, context, formKey, matricula, senha, double altura) {
   return FilledButton(
     onPressed: () async {
       FocusScopeNode currentFocus = FocusScope.of(context);
@@ -145,12 +147,12 @@ Widget botaoEntrar(texto, context, formKey, matricula, senha) {
     },
     style: estiloBotao(context, 0, 0.5, 0, 0),
     child: SizedBox(
-      height: 45,
+      height: altura * 0.065,
       width: TamanhoTela.horizontal(context),
       child: Center(
         child: Text(
           texto,
-          style: estiloTexto(18, cor: Colors.white, peso: FontWeight.w600),
+          style: estiloTexto(16, cor: Colors.white, peso: FontWeight.w600),
         ),
       ),
     ),
