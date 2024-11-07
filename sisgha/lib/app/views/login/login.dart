@@ -109,8 +109,9 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
   Widget _campoDeEntrada(String labelText, TextInputType inputType,
       TextEditingController controller, double altura) {
     return AnimatedContainer(
+      margin: EdgeInsets.only(bottom: 7),
       duration: const Duration(milliseconds: 300),
-      height: altura * 0.08,
+      height: altura * 0.07,
       child: TextFormField(
         controller: controller,
         validator: (value) => verificacao(value, "Campo obrigatorio",
@@ -125,7 +126,8 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
       TextEditingController controller, double altura) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      height: altura * 0.08,
+      height: altura * 0.07,
+      margin: EdgeInsets.only(bottom: 7),
       child: TextFormField(
         controller: controller,
         validator: (value) => verificacao(value, "Campo Obrigatorio"),

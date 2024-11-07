@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
+import 'package:sisgha/app/constants/dias.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
+import 'package:sisgha/app/widgets/appBar.dart';
 import 'package:sisgha/app/widgets/mini_calend.dart';
 import 'package:sisgha/app/widgets/quadrados_Home.dart';
-import 'package:sisgha/app/views/home/barra_top.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:sizer/sizer.dart';
@@ -22,7 +23,11 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     initializeDateFormatting('pt_BR', null);
 
-    var appBar = CustomAppBar(height: 7.h);
+    var appBar = CustomAppBar(
+      height: 7.h,
+      titulo: DatasFormatadas.primeiroAUltimoDia,
+      subtitulo: DatasFormatadas.obterDiaFormatado(),
+    );
 
     double tamanho =
         TamanhoTela.height(context, appBarSize: appBar.preferredSize.height);
@@ -45,7 +50,9 @@ class _HomeState extends State<Home> {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                    return const MiniCalendario();
+                    return const MiniCalendario(
+                      showDialog: true,
+                    );
                   },
                 );
               },
