@@ -116,22 +116,17 @@ class _PerfilState extends State<Perfil> {
                         child: SizedBox(
                           height: tamanho * 0.2,
                           width: TamanhoTela.horizontal(context),
-                          child: Image.asset(
-                            "assets/img/gtr.jpeg",
-                            fit: BoxFit.cover,
-                            alignment: AlignmentDirectional.bottomCenter,
-                          ),
-                          // child: imagemCapa != null
-                          //     ? Image.file(
-                          //         imagemCapa!,
-                          //         fit: BoxFit.cover,
-                          //         alignment: AlignmentDirectional.bottomCenter,
-                          //       )
-                          //     : Image.network(
-                          //         "https://dev.ladesa.com.br/api/usuarios/${user.id}/imagem/capa",
-                          //         fit: BoxFit.cover,
-                          //         alignment: AlignmentDirectional.bottomCenter,
-                          //       ),
+                          child: imagemCapa != null
+                              ? Image.file(
+                                  imagemCapa!,
+                                  fit: BoxFit.cover,
+                                  alignment: AlignmentDirectional.bottomCenter,
+                                )
+                              : Image.network(
+                                  "https://dev.ladesa.com.br/api/usuarios/${user.id}/imagem/capa",
+                                  fit: BoxFit.cover,
+                                  alignment: AlignmentDirectional.bottomCenter,
+                                ),
                         ),
                       ),
                       Positioned(
