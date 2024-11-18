@@ -22,6 +22,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Theme.of(context).colorScheme.primary,
       foregroundColor: ColorApp.Branco,
       title: Row(

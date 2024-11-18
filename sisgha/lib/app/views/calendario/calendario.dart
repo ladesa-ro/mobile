@@ -16,14 +16,16 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  late ScrollController _controller;
-  bool verificacao = true;
+  late final ScrollController _controller;
+  bool _direcao = true;
 
   @override
   void initState() {
     super.initState();
-    _controller = ScrollController(initialScrollOffset: 0.0);
-    Future.delayed(Duration(seconds: 1), () => salvar());
+    _controller = ScrollController();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _iniciarAnimacao();
+    });
   }
 
   @override
@@ -32,27 +34,23 @@ class _CalendarState extends State<Calendar> {
     super.dispose();
   }
 
-  void salvar() {
-    if (_controller.offset >= _controller.position.maxScrollExtent) {
-      verificacao = false;
-      animacao();
-    }
-    if (_controller.offset <= _controller.position.minScrollExtent) {
-      verificacao = true;
-      animacao();
-    }
-  }
+  void _iniciarAnimacao() {
+    if (!_controller.hasClients) return;
 
-  void animacao() {
+    final destino = _direcao
+        ? _controller.position.maxScrollExtent
+        : _controller.position.minScrollExtent;
+
     _controller
         .animateTo(
-            verificacao
-                ? _controller.position.maxScrollExtent
-                : _controller.position.minScrollExtent,
-            duration: Duration(seconds: 10),
-            curve: Curves.easeInOut)
-        .then((funciona) =>
-            Future.delayed(Duration(milliseconds: 1500), () => salvar()));
+      destino,
+      duration: const Duration(seconds: 10),
+      curve: Curves.easeInOut,
+    )
+        .then((_) {
+      _direcao ? _direcao = false : _direcao = true;
+      Future.delayed(const Duration(milliseconds: 1500), _iniciarAnimacao);
+    });
   }
 
   @override
@@ -90,11 +88,7 @@ class _CalendarState extends State<Calendar> {
                   width: tamanho * 0.085,
                   child: ElevatedButton(
                       style: _estiloBotao(),
-                      onPressed: () {
-                        setState(() {
-                          salvar();
-                        });
-                      },
+                      onPressed: () {},
                       child: Icones.Lupa),
                 ),
               ],
