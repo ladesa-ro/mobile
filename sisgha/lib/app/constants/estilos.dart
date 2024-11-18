@@ -23,13 +23,15 @@ TextStyle estiloTexto(double tamanho, {Color? cor, FontWeight? peso}) {
 
 InputDecoration inputDecoration(String labelText, {Widget? suffixIcon}) {
   return InputDecoration(
+    floatingLabelStyle:
+        estiloTexto(15, cor: ColorApp.VerdeCinza, peso: FontWeight.bold),
     labelText: labelText,
     contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-    alignLabelWithHint: true,
+    alignLabelWithHint: false,
     enabledBorder: inputBorder(1.5),
     border: inputBorder(2),
     labelStyle:
-        estiloTexto(14, cor: ColorApp.VerdeCinza, peso: FontWeight.w600),
+        estiloTexto(15, cor: ColorApp.VerdeCinza, peso: FontWeight.w600),
     focusedBorder: inputBorder(2),
     suffixIcon: suffixIcon,
   );

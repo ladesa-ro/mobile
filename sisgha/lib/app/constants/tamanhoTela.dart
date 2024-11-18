@@ -15,6 +15,6 @@ class TamanhoTela {
     return MediaQuery.of(context).size.height -
         (appBarSize ?? 0) -
         MediaQuery.of(context).padding.top -
-        vertical(context) * 0.1;
+        vertical(context) * 0.08;
   }
 }

@@ -8,7 +8,9 @@ class DatasFormatadas {
   //dia atual
   static String diaAtual = DateFormat('dd').format(DateTime.now());
   //mes atual
-  static String mesAtual = DateFormat('MMMM', 'pt-br').format(DateTime.now());
+  static String mesAtual = DateFormat('MMMM', 'pt-br').format(diaAtualEmNumero);
+  static String anoAtual = DateFormat('yyyy', 'pt-Br').format(diaAtualEmNumero);
+
   //dia atual por extenço
   static String diaExtenso = DateFormat('EEEE', 'pt-br').format(DateTime.now());
   //dia atual por extenço formatando 'Feira'
@@ -59,4 +61,8 @@ class DatasFormatadas {
     final ultimoDiaDaSemana = DateFormat('dd').format(date);
     return ultimoDiaDaSemana;
   }
+
+  // 00 a 00
+  static String primeiroAUltimoDia =
+      '${DatasFormatadas.mesAtual[0].toUpperCase() + DatasFormatadas.mesAtual.substring(1)} - ${DatasFormatadas.obterPrimeiroDiaSemana()} a ${DatasFormatadas.obterUltimoDiaSemana()}';
 }
