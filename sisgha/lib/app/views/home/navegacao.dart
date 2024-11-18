@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
-import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
 import 'package:sisgha/app/views/calendario/calendario.dart';
 import 'package:sisgha/app/views/home/home.dart';
@@ -12,7 +11,7 @@ import 'package:sizer/sizer.dart';
 class Navigation extends StatefulWidget {
   final int initialIndex;
 
-  const Navigation({Key? key, required this.initialIndex}) : super(key: key);
+  const Navigation({super.key, required this.initialIndex});
 
   @override
   State<Navigation> createState() => _NavigationState();
