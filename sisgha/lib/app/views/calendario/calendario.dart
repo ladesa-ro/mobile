@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/dias.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
+import 'package:sisgha/app/views/calendario/widgetsCalendario/widgetDrawer.dart';
 import 'package:sisgha/app/widgets/appBar.dart';
 import 'package:sisgha/app/widgets/mini_calend.dart';
 import 'package:sizer/sizer.dart';
@@ -18,6 +20,7 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   late final ScrollController _controller;
   bool _direcao = true;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -63,7 +66,10 @@ class _CalendarState extends State<Calendar> {
     double tamanho =
         TamanhoTela.height(context, appBarSize: appBar.preferredSize.height);
     return Scaffold(
+      key: _scaffoldKey,
+      drawerEnableOpenDragGesture: false,
       appBar: appBar,
+      drawer: menuLateral(context),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 35),
         children: [
@@ -88,7 +94,9 @@ class _CalendarState extends State<Calendar> {
                   width: tamanho * 0.085,
                   child: ElevatedButton(
                       style: _estiloBotao(),
-                      onPressed: () {},
+                      onPressed: () {
+                        _scaffoldKey.currentState?.openDrawer();
+                      },
                       child: Icones.Lupa),
                 ),
               ],
@@ -145,6 +153,27 @@ ButtonStyle _estiloBotao() {
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
+      ),
+    ),
+  );
+}
+
+Drawer menuLateral(context) {
+  return Drawer(
+    width: TamanhoTela.horizontal(context) * 0.8,
+    child: LayoutBuilder(
+      builder: (context, constraints) => Column(
+        children: [
+          SizedBox(
+            height: 30,
+          ),
+          headerDrawer(context, constraints.maxHeight, constraints.maxWidth),
+          Divider(
+            thickness: 2,
+            indent: 15,
+            endIndent: 15,
+          ),
+        ],
       ),
     ),
   );

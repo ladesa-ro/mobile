@@ -38,7 +38,11 @@ class Icones {
   static const String setaDireita =
       '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 20 20"><path fill="currentColor" fill-rule="evenodd" d="M5 2.643v14.765q.138.48.619.572q.48.091.94-.255l8.107-6.993A.94.94 0 0 0 15 10a.94.94 0 0 0-.334-.73L6.58 2.295c-.232-.197-.639-.383-1.061-.253q-.423.13-.519.6"/></svg>';
 
+  static const String setaVoltar =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-6 6l6-6m-6-6l6 6"/></svg>';
+
   //Outros
+// ignore: non_constant_identifier_names
   static Icon Lupa = Icon(
     Icons.search,
     color: ColorApp.Branco,
