@@ -73,7 +73,7 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
                   Text(
                     dias[diaIndex],
                     style: estiloTexto(17,
-                        cor: ColorApp.Branco, peso: FontWeight.bold),
+                        cor: ColorApp.BrancoTexto, peso: FontWeight.bold),
                   ),
                   const Spacer(),
                   _iconButton(0, Icones.setaDireita),
@@ -164,7 +164,7 @@ List<Widget> _listaComHorarios(context) {
 
 Widget _periodo(BuildContext context, String periodo, List<String> horas) {
   return Container(
-    decoration: estiloBorda(cor: ColorApp.VerdeCinza, radius: 15),
+    decoration: estiloBorda(cor: ColorApp.VerdeCinzaBorda, radius: 15),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -177,7 +177,8 @@ Widget _periodo(BuildContext context, String periodo, List<String> horas) {
         ),
         Text(
           periodo,
-          style: estiloTexto(16, cor: ColorApp.Preto, peso: FontWeight.bold),
+          style:
+              estiloTexto(16, cor: ColorApp.PretoTexto, peso: FontWeight.bold),
         ),
       ],
     ),
@@ -185,5 +186,5 @@ Widget _periodo(BuildContext context, String periodo, List<String> horas) {
 }
 
 TextStyle _estilo() {
-  return estiloTexto(16, cor: ColorApp.Preto, peso: FontWeight.w500);
+  return estiloTexto(16, cor: ColorApp.PretoTexto, peso: FontWeight.w500);
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/estilos.dart';
-import 'package:sisgha/app/views/perfil/widgets_perfil/bottonstyle_bottonsheat.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/estilosPerfil.dart';
 
 Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
   final ImagePicker imagePicker = ImagePicker();
@@ -40,7 +40,7 @@ Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
               height: 6,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
-                color: ColorApp.VerdeCinza,
+                color: ColorApp.Cinza,
               ),
             ),
             Text(
@@ -51,13 +51,13 @@ Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
             const SizedBox(height: 10),
             Text(
               'Escolha uma foto, imagem ou',
-              style: estiloTexto(16,
-                  cor: ColorApp.VerdeCinza, peso: FontWeight.w500),
+              style:
+                  estiloTexto(16, cor: ColorApp.Cinza, peso: FontWeight.w500),
             ),
             Text(
               'arquivo .jpeg ou .png de 500x500',
-              style: estiloTexto(16,
-                  cor: ColorApp.VerdeCinza, peso: FontWeight.w500),
+              style:
+                  estiloTexto(16, cor: ColorApp.Cinza, peso: FontWeight.w500),
             ),
             const Spacer(),
             ElevatedButton(

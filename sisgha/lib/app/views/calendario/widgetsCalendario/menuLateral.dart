@@ -23,8 +23,8 @@ Widget headerDrawer(BuildContext context, double height, double width) {
             ),
             Text(
               'Selecione as informações',
-              style:
-                  estiloTexto(15, cor: ColorApp.Cinza, peso: FontWeight.bold),
+              style: estiloTexto(15,
+                  cor: ColorApp.CinzaEscuro, peso: FontWeight.bold),
             ),
           ],
         ),
@@ -52,7 +52,7 @@ Widget quadradoAnoLetivo(
     margin: EdgeInsets.only(right: width * 0.05),
     decoration: BoxDecoration(
         border: Border.all(color: ColorApp.VerdePrincipal),
-        color: ColorApp.CinzaClaro,
+        color: ColorApp.PretoClaroBotao,
         borderRadius: BorderRadius.circular(10)),
     child: Text(
       text,

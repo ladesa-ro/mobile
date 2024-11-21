@@ -70,7 +70,7 @@ class _HomeState extends State<Home> {
                   Text(
                     'Calendário ${now.year}',
                     style: estiloTexto(15,
-                        cor: Colors.white, peso: FontWeight.bold),
+                        cor: ColorApp.BrancoTexto, peso: FontWeight.bold),
                   ),
                   const Spacer(),
                   Iconify(

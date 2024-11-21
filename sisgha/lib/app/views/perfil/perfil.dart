@@ -6,9 +6,8 @@ import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/tamanhotela.dart';
 import 'package:sisgha/app/model/userModel.dart';
-import 'package:sisgha/app/views/home/navegacao.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/botton_sheat.dart';
-import 'package:sisgha/app/views/perfil/widgets_perfil/button_style_edit.dart';
+import 'package:sisgha/app/views/perfil/widgets_perfil/estilosPerfil.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/navegacao_switch.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/widget_sair.dart';
 import 'package:sisgha/app/views/perfil/widgets_perfil/widgets_perfil.dart';
@@ -133,7 +132,7 @@ class _PerfilState extends State<Perfil> {
                         top: 10,
                         left: 10,
                         child: ElevatedButton(
-                          style: buttonStyleEdit(ColorApp.CorSair),
+                          style: buttonStyleEdit(ColorApp.VermelhoFraco),
                           onPressed: () async {
                             widgetQuit(context);
                           },
@@ -202,7 +201,7 @@ Widget circleAvatar(
   return Container(
     padding: const EdgeInsets.all(4),
     decoration: BoxDecoration(
-      color: const Color.fromARGB(255, 255, 255, 255),
+      color: ColorApp.Branco,
       borderRadius: BorderRadius.circular(100),
     ),
     child: Stack(
@@ -213,7 +212,7 @@ Widget circleAvatar(
             width: 100,
             height: 100,
             child: CircleAvatar(
-              backgroundColor: const Color.fromARGB(255, 126, 126, 126),
+              backgroundColor: ColorApp.Cinza,
               backgroundImage: link.startsWith('http')
                   ? NetworkImage(link) as ImageProvider
                   : FileImage(File(link)),

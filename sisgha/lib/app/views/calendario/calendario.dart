@@ -85,7 +85,7 @@ class _CalendarState extends State<Calendar> {
                     height: tamanho * 0.85,
                     width: (TamanhoTela.horizontal(context) - tamanho * 0.085) -
                         85,
-                    child: container()),
+                    child: letreiroRolante()),
                 SizedBox(
                   width: 15,
                 ),
@@ -117,7 +117,7 @@ class _CalendarState extends State<Calendar> {
     );
   }
 
-  Widget container() {
+  Widget letreiroRolante() {
     return LayoutBuilder(
       builder: (context, constraints) => IgnorePointer(
         child: Container(
@@ -125,7 +125,7 @@ class _CalendarState extends State<Calendar> {
           width: constraints.maxWidth,
           padding: EdgeInsets.symmetric(horizontal: 10),
           decoration: estiloBorda(
-              cor: ColorApp.VerdeCinza, radius: 15, grossuraBorda: 2),
+              cor: ColorApp.VerdeCinzaBorda, radius: 15, grossuraBorda: 2),
           child: ListView(
             controller: _controller,
             scrollDirection: Axis.horizontal,
@@ -135,7 +135,7 @@ class _CalendarState extends State<Calendar> {
                 child: Text(
                   'Técnico Integrado - Informática 2023 - 2023',
                   style: estiloTexto(15,
-                      cor: ColorApp.VerdePrincipal, peso: FontWeight.bold),
+                      cor: ColorApp.VerdePrincipalTexto, peso: FontWeight.bold),
                 ),
               )
             ],
