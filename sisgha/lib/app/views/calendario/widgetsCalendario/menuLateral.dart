@@ -7,7 +7,7 @@ import 'package:sizer/sizer.dart';
 
 Widget headerDrawer(BuildContext context, double height, double width) {
   return Container(
-    padding: EdgeInsets.symmetric(horizontal: 20),
+    padding: EdgeInsets.symmetric(horizontal: 15),
     height: height * 0.1,
     width: width,
     child: Row(
@@ -23,9 +23,8 @@ Widget headerDrawer(BuildContext context, double height, double width) {
             ),
             Text(
               'Selecione as informações',
-              style: estiloTexto(15,
-                  cor: const Color.fromARGB(127, 0, 0, 0),
-                  peso: FontWeight.bold),
+              style:
+                  estiloTexto(15, cor: ColorApp.Cinza, peso: FontWeight.bold),
             ),
           ],
         ),
@@ -41,6 +40,23 @@ Widget headerDrawer(BuildContext context, double height, double width) {
           ),
         )
       ],
+    ),
+  );
+}
+
+Widget quadradoAnoLetivo(
+    BuildContext context, double height, double width, String text) {
+  return Container(
+    alignment: Alignment.center,
+    padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+    margin: EdgeInsets.only(right: width * 0.05),
+    decoration: BoxDecoration(
+        border: Border.all(color: ColorApp.VerdePrincipal),
+        color: ColorApp.CinzaClaro,
+        borderRadius: BorderRadius.circular(10)),
+    child: Text(
+      text,
+      style: estiloTexto(14, cor: ColorApp.VerdePrincipal),
     ),
   );
 }

@@ -5,7 +5,7 @@ import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/dias.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
-import 'package:sisgha/app/views/calendario/widgetsCalendario/widgetDrawer.dart';
+import 'package:sisgha/app/views/calendario/widgetsCalendario/menuLateral.dart';
 import 'package:sisgha/app/widgets/appBar.dart';
 import 'package:sisgha/app/widgets/mini_calend.dart';
 import 'package:sizer/sizer.dart';
@@ -162,18 +162,40 @@ Drawer menuLateral(context) {
   return Drawer(
     width: TamanhoTela.horizontal(context) * 0.8,
     child: LayoutBuilder(
-      builder: (context, constraints) => Column(
-        children: [
-          SizedBox(
-            height: 30,
-          ),
-          headerDrawer(context, constraints.maxHeight, constraints.maxWidth),
-          Divider(
-            thickness: 2,
-            indent: 15,
-            endIndent: 15,
-          ),
-        ],
+      builder: (context, constraints) => Container(
+        margin: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.05),
+        height: constraints.maxHeight,
+        width: constraints.maxWidth,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: constraints.maxHeight * 0.03,
+            ),
+            headerDrawer(context, constraints.maxHeight, constraints.maxWidth),
+            Divider(
+              thickness: 2,
+            ),
+            SizedBox(
+              height: constraints.maxHeight * 0.03,
+            ),
+            Text(
+              'Ano Letivo',
+              style: estiloTexto(16,
+                  cor: ColorApp.VerdePrincipal, peso: FontWeight.bold),
+            ),
+            SizedBox(
+              height: constraints.maxHeight * 0.05,
+              width: constraints.maxWidth,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 2,
+                itemBuilder: (context, index) => quadradoAnoLetivo(context,
+                    constraints.maxHeight, constraints.maxWidth, "202$index"),
+              ),
+            )
+          ],
+        ),
       ),
     ),
   );
