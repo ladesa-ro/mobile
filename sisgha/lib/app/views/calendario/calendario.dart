@@ -5,7 +5,7 @@ import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/dias.dart';
 import 'package:sisgha/app/constants/estilos.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
-import 'package:sisgha/app/views/calendario/widgetsCalendario/widgetDrawer.dart';
+import 'package:sisgha/app/views/calendario/widgetsCalendario/menuLateral.dart';
 import 'package:sisgha/app/widgets/appBar.dart';
 import 'package:sisgha/app/widgets/mini_calend.dart';
 import 'package:sizer/sizer.dart';
@@ -20,6 +20,8 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   late final ScrollController _controller;
   bool _direcao = true;
+  int anoSelecionado = 0;
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -69,7 +71,7 @@ class _CalendarState extends State<Calendar> {
       key: _scaffoldKey,
       drawerEnableOpenDragGesture: false,
       appBar: appBar,
-      drawer: menuLateral(context),
+      drawer: menuLateral(),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 35),
         children: [
@@ -85,7 +87,7 @@ class _CalendarState extends State<Calendar> {
                     height: tamanho * 0.85,
                     width: (TamanhoTela.horizontal(context) - tamanho * 0.085) -
                         85,
-                    child: container()),
+                    child: letreiroRolante()),
                 SizedBox(
                   width: 15,
                 ),
@@ -117,7 +119,7 @@ class _CalendarState extends State<Calendar> {
     );
   }
 
-  Widget container() {
+  Widget letreiroRolante() {
     return LayoutBuilder(
       builder: (context, constraints) => IgnorePointer(
         child: Container(
@@ -125,7 +127,7 @@ class _CalendarState extends State<Calendar> {
           width: constraints.maxWidth,
           padding: EdgeInsets.symmetric(horizontal: 10),
           decoration: estiloBorda(
-              cor: ColorApp.VerdeCinza, radius: 15, grossuraBorda: 2),
+              cor: ColorApp.VerdeCinzaBorda, radius: 15, grossuraBorda: 2),
           child: ListView(
             controller: _controller,
             scrollDirection: Axis.horizontal,
@@ -135,8 +137,60 @@ class _CalendarState extends State<Calendar> {
                 child: Text(
                   'Técnico Integrado - Informática 2023 - 2023',
                   style: estiloTexto(15,
-                      cor: ColorApp.VerdePrincipal, peso: FontWeight.bold),
+                      cor: ColorApp.VerdePrincipalTexto, peso: FontWeight.bold),
                 ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Drawer menuLateral() {
+    return Drawer(
+      width: TamanhoTela.horizontal(context) * 0.8,
+      child: LayoutBuilder(
+        builder: (context, constraints) => Container(
+          margin: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.05),
+          height: constraints.maxHeight,
+          width: constraints.maxWidth,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: constraints.maxHeight * 0.03,
+              ),
+              headerDrawer(
+                  context, constraints.maxHeight, constraints.maxWidth),
+              Divider(
+                thickness: 2,
+              ),
+              SizedBox(
+                height: constraints.maxHeight * 0.03,
+              ),
+              Text(
+                'Ano Letivo',
+                style: estiloTexto(16,
+                    cor: ColorApp.VerdePrincipal, peso: FontWeight.bold),
+              ),
+              SizedBox(
+                height: constraints.maxHeight * 0.05,
+                width: constraints.maxWidth,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 2,
+                    itemBuilder: (context, index) => GestureDetector(
+                          onTap: () => setState(() {
+                            anoSelecionado = index;
+                          }),
+                          child: quadradoAnoLetivo(
+                              context,
+                              constraints.maxHeight,
+                              constraints.maxWidth,
+                              "202$index - $anoSelecionado",
+                              anoSelecionado == index ? true : false),
+                        )),
               )
             ],
           ),
@@ -153,27 +207,6 @@ ButtonStyle _estiloBotao() {
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
-      ),
-    ),
-  );
-}
-
-Drawer menuLateral(context) {
-  return Drawer(
-    width: TamanhoTela.horizontal(context) * 0.8,
-    child: LayoutBuilder(
-      builder: (context, constraints) => Column(
-        children: [
-          SizedBox(
-            height: 30,
-          ),
-          headerDrawer(context, constraints.maxHeight, constraints.maxWidth),
-          Divider(
-            thickness: 2,
-            indent: 15,
-            endIndent: 15,
-          ),
-        ],
       ),
     ),
   );

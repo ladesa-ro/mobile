@@ -24,7 +24,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: Theme.of(context).colorScheme.primary,
-      foregroundColor: ColorApp.Branco,
+      foregroundColor: ColorApp.BrancoTexto,
       title: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +33,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               DatasFormatadas.diaAtual,
               style: estiloTexto(
                 30,
-                cor: ColorApp.Branco,
+                cor: ColorApp.BrancoTexto,
                 peso: FontWeight.bold,
               ),
             ),
@@ -46,7 +46,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Text(
                   titulo,
                   style: estiloTexto(17,
-                      cor: ColorApp.Branco, peso: FontWeight.bold),
+                      cor: ColorApp.BrancoTexto, peso: FontWeight.bold),
                 ),
                 const SizedBox(
                   height: 5,
@@ -54,7 +54,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Text(
                   subtitulo,
                   style: estiloTexto(17,
-                      cor: ColorApp.Branco, peso: FontWeight.bold),
+                      cor: ColorApp.BrancoTexto, peso: FontWeight.bold),
                 ),
               ],
             ),

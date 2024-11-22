@@ -90,7 +90,7 @@ class _NavigationState extends State<Navigation> {
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
         decoration: BoxDecoration(
-          color: _selectedIndex == index ? Colors.white : null,
+          color: _selectedIndex == index ? ColorApp.Branco : null,
           borderRadius:
               BorderRadius.circular(TamanhoTela.horizontal(context) * 0.03),
         ),

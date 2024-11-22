@@ -127,9 +127,10 @@ class _QuadradosHomeState extends State<QuadradosHome>
     BoxDecoration boxDecoration(bool selecionado) {
       return BoxDecoration(
         color: retorno(
-            atributo1: ColorApp.VerdePrincipal, atributo2: Colors.transparent),
+            atributo1: ColorApp.VerdePrincipalBotao,
+            atributo2: Colors.transparent),
         border: Border.all(
-            color: ColorApp.VerdePrincipal,
+            color: ColorApp.VerdePrincipalBorda,
             width: 1.0,
             style: BorderStyle.solid),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -155,14 +156,14 @@ class _QuadradosHomeState extends State<QuadradosHome>
                     diasDaSemana[index],
                     style: estiloTexto(15,
                         cor: retorno(
-                            atributo1: ColorApp.Branco,
-                            atributo2: ColorApp.VerdePrincipal),
+                            atributo1: ColorApp.BrancoTexto,
+                            atributo2: ColorApp.VerdePrincipalTexto),
                         peso: FontWeight.w600),
                   ),
                   Container(
                     color: retorno(
-                        atributo1: ColorApp.Branco,
-                        atributo2: ColorApp.VerdePrincipal),
+                        atributo1: ColorApp.BrancoTexto,
+                        atributo2: ColorApp.VerdePrincipalTexto),
                     width: constraints.maxWidth * 0.45,
                     height: 1.5,
                   ),
@@ -170,8 +171,8 @@ class _QuadradosHomeState extends State<QuadradosHome>
                     diaDaSemanaSoQueEmNumeros,
                     style: estiloTexto(15,
                         cor: retorno(
-                            atributo1: ColorApp.Branco,
-                            atributo2: ColorApp.VerdePrincipal),
+                            atributo1: ColorApp.BrancoTexto,
+                            atributo2: ColorApp.VerdePrincipalTexto),
                         peso: FontWeight.w600),
                   )
                 ],

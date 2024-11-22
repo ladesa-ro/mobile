@@ -131,13 +131,10 @@ Widget botaoEntrar(texto, context, formKey, matricula, senha, double altura) {
           currentFocus.unfocus();
         }
         if (deuCerto) {
-          Navigator.pushReplacement(
+          Navigator.pushNamedAndRemoveUntil(
             context,
-            MaterialPageRoute(
-              builder: (context) => const Navigation(
-                initialIndex: 1,
-              ),
-            ),
+            '/navegação',
+            (route) => false,
           );
         } else {
           senha.clear();

@@ -9,7 +9,8 @@ ButtonStyle estiloBotao(
         EdgeInsets.fromLTRB(left, top, right, bottom)),
     shape: WidgetStateProperty.all<OutlinedBorder>(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0))),
-    backgroundColor: WidgetStateProperty.all<Color>(ColorApp.VerdePrincipal),
+    backgroundColor:
+        WidgetStateProperty.all<Color>(ColorApp.VerdePrincipalBotao),
   );
 }
 
@@ -24,14 +25,14 @@ TextStyle estiloTexto(double tamanho, {Color? cor, FontWeight? peso}) {
 InputDecoration inputDecoration(String labelText, {Widget? suffixIcon}) {
   return InputDecoration(
     floatingLabelStyle:
-        estiloTexto(15, cor: ColorApp.VerdeCinza, peso: FontWeight.bold),
+        estiloTexto(15, cor: ColorApp.VerdeCinzaTexto, peso: FontWeight.bold),
     labelText: labelText,
     contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
     alignLabelWithHint: false,
     enabledBorder: inputBorder(1.5),
     border: inputBorder(2),
     labelStyle:
-        estiloTexto(15, cor: ColorApp.VerdeCinza, peso: FontWeight.w600),
+        estiloTexto(15, cor: ColorApp.VerdeCinzaTexto, peso: FontWeight.w600),
     focusedBorder: inputBorder(2),
     suffixIcon: suffixIcon,
   );
@@ -40,7 +41,7 @@ InputDecoration inputDecoration(String labelText, {Widget? suffixIcon}) {
 OutlineInputBorder inputBorder(double bold) {
   return OutlineInputBorder(
     borderSide: BorderSide(
-        color: ColorApp.VerdeCinza, style: BorderStyle.solid, width: bold),
+        color: ColorApp.VerdeCinzaBorda, style: BorderStyle.solid, width: bold),
     borderRadius: const BorderRadius.all(Radius.circular(13)),
   );
 }

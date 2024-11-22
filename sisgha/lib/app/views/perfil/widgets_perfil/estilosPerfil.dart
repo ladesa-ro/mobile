@@ -8,3 +8,7 @@ ButtonStyle buttonStyleEdit(Color corDeFundo) {
     backgroundColor: WidgetStatePropertyAll(corDeFundo),
   );
 }
+
+ButtonStyle botaoButtonSheat() {
+  return const ButtonStyle(elevation: WidgetStatePropertyAll(0));
+}
