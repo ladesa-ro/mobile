@@ -20,6 +20,8 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   late final ScrollController _controller;
   bool _direcao = true;
+  int anoSelecionado = 0;
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -69,7 +71,7 @@ class _CalendarState extends State<Calendar> {
       key: _scaffoldKey,
       drawerEnableOpenDragGesture: false,
       appBar: appBar,
-      drawer: menuLateral(context),
+      drawer: menuLateral(),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 35),
         children: [
@@ -144,6 +146,58 @@ class _CalendarState extends State<Calendar> {
       ),
     );
   }
+
+  Drawer menuLateral() {
+    return Drawer(
+      width: TamanhoTela.horizontal(context) * 0.8,
+      child: LayoutBuilder(
+        builder: (context, constraints) => Container(
+          margin: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.05),
+          height: constraints.maxHeight,
+          width: constraints.maxWidth,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: constraints.maxHeight * 0.03,
+              ),
+              headerDrawer(
+                  context, constraints.maxHeight, constraints.maxWidth),
+              Divider(
+                thickness: 2,
+              ),
+              SizedBox(
+                height: constraints.maxHeight * 0.03,
+              ),
+              Text(
+                'Ano Letivo',
+                style: estiloTexto(16,
+                    cor: ColorApp.VerdePrincipal, peso: FontWeight.bold),
+              ),
+              SizedBox(
+                height: constraints.maxHeight * 0.05,
+                width: constraints.maxWidth,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 2,
+                    itemBuilder: (context, index) => GestureDetector(
+                          onTap: () => setState(() {
+                            anoSelecionado = index;
+                          }),
+                          child: quadradoAnoLetivo(
+                              context,
+                              constraints.maxHeight,
+                              constraints.maxWidth,
+                              "202$index - $anoSelecionado",
+                              anoSelecionado == index ? true : false),
+                        )),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 ButtonStyle _estiloBotao() {
@@ -153,49 +207,6 @@ ButtonStyle _estiloBotao() {
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
-      ),
-    ),
-  );
-}
-
-Drawer menuLateral(context) {
-  return Drawer(
-    width: TamanhoTela.horizontal(context) * 0.8,
-    child: LayoutBuilder(
-      builder: (context, constraints) => Container(
-        margin: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.05),
-        height: constraints.maxHeight,
-        width: constraints.maxWidth,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: constraints.maxHeight * 0.03,
-            ),
-            headerDrawer(context, constraints.maxHeight, constraints.maxWidth),
-            Divider(
-              thickness: 2,
-            ),
-            SizedBox(
-              height: constraints.maxHeight * 0.03,
-            ),
-            Text(
-              'Ano Letivo',
-              style: estiloTexto(16,
-                  cor: ColorApp.VerdePrincipal, peso: FontWeight.bold),
-            ),
-            SizedBox(
-              height: constraints.maxHeight * 0.05,
-              width: constraints.maxWidth,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 2,
-                itemBuilder: (context, index) => quadradoAnoLetivo(context,
-                    constraints.maxHeight, constraints.maxWidth, "202$index"),
-              ),
-            )
-          ],
-        ),
       ),
     ),
   );
