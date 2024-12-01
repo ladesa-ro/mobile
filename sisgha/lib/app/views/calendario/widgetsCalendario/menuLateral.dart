@@ -44,16 +44,16 @@ Widget headerDrawer(BuildContext context, double height, double width) {
   );
 }
 
-Widget quadradoAnoLetivo(BuildContext context, double height, double width,
-    String text, bool selecionado) {
+Widget quadradoAnoLetivo(
+    BuildContext context, double width, String text, bool selecionado) {
   return AnimatedContainer(
     duration: Duration(milliseconds: 300),
     alignment: Alignment.center,
     padding: EdgeInsets.symmetric(horizontal: width * 0.05),
-    margin: EdgeInsets.only(right: width * 0.05),
+    margin: EdgeInsets.only(right: width * 0.02),
     decoration: BoxDecoration(
         color: selecionado
-            ? const Color.fromARGB(97, 154, 182, 158)
+            ? const Color.fromARGB(113, 115, 185, 124)
             : ColorApp.PretoClaroBotao,
         border: Border.all(
           color:
@@ -65,6 +65,29 @@ Widget quadradoAnoLetivo(BuildContext context, double height, double width,
       style: estiloTexto(14,
           cor:
               selecionado ? ColorApp.VerdePrincipal : ColorApp.VerdeCinzaTexto),
+    ),
+  );
+}
+
+Widget quadradoModalidades(bool selecionado, String nome, double width) {
+  return AnimatedContainer(
+    padding:
+        EdgeInsets.symmetric(horizontal: width * 0.05, vertical: width * 0.03),
+    duration: Duration(milliseconds: 300),
+    decoration: BoxDecoration(
+      border: Border.all(
+          color:
+              selecionado ? ColorApp.VerdePrincipalBorda : Colors.transparent),
+      borderRadius: BorderRadius.circular(10),
+      color: selecionado
+          ? const Color.fromARGB(113, 115, 185, 124)
+          : ColorApp.PretoClaroBotao,
+    ),
+    child: Text(
+      nome,
+      style: estiloTexto(14,
+          cor:
+              selecionado ? ColorApp.VerdePrincipalTexto : ColorApp.PretoTexto),
     ),
   );
 }
