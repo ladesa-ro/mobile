@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/dias.dart';
@@ -18,9 +17,16 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
+  int anoSelecionado = 0;
+  int modalidadeSelecionada = 0;
+  static const listaModalidades = [
+    'Técnico Integrado',
+    'Graduação',
+    'Técnico Concomitante',
+    'Técnico Subsequente'
+  ];
   late final ScrollController _controller;
   bool _direcao = true;
-  int anoSelecionado = 0;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -158,17 +164,13 @@ class _CalendarState extends State<Calendar> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: constraints.maxHeight * 0.03,
-              ),
+              SizedBox(height: constraints.maxHeight * 0.03),
               headerDrawer(
                   context, constraints.maxHeight, constraints.maxWidth),
               Divider(
                 thickness: 2,
               ),
-              SizedBox(
-                height: constraints.maxHeight * 0.03,
-              ),
+              SizedBox(height: constraints.maxHeight * 0.03),
               Text(
                 'Ano Letivo',
                 style: estiloTexto(16,
@@ -178,19 +180,68 @@ class _CalendarState extends State<Calendar> {
                 height: constraints.maxHeight * 0.05,
                 width: constraints.maxWidth,
                 child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 2,
-                    itemBuilder: (context, index) => GestureDetector(
-                          onTap: () => setState(() {
-                            anoSelecionado = index;
-                          }),
-                          child: quadradoAnoLetivo(
-                              context,
-                              constraints.maxHeight,
-                              constraints.maxWidth,
-                              "202$index - $anoSelecionado",
-                              anoSelecionado == index ? true : false),
-                        )),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 2,
+                  itemBuilder: (context, index) => GestureDetector(
+                    onTap: () => setState(() {
+                      anoSelecionado = index;
+                    }),
+                    child: quadradoAnoLetivo(
+                        context,
+                        constraints.maxWidth,
+                        "202$index - $anoSelecionado",
+                        anoSelecionado == index ? true : false),
+                  ),
+                ),
+              ),
+              SizedBox(height: constraints.maxHeight * 0.05),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Modalidade',
+                    style: estiloTexto(16,
+                        cor: ColorApp.VerdePrincipal, peso: FontWeight.bold),
+                  ),
+                  Wrap(
+                    spacing: constraints.maxWidth * 0.02,
+                    runSpacing: constraints.maxHeight * 0.01,
+                    children: listaModalidades.asMap().entries.map((entry) {
+                      int index = entry.key;
+                      String modalidade = entry.value;
+
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            modalidadeSelecionada = index;
+                          });
+                        },
+                        child: quadradoModalidades(
+                            modalidadeSelecionada == index,
+                            modalidade,
+                            constraints.maxWidth),
+                      );
+                    }).toList(),
+                  )
+                ],
+              ),
+              Spacer(),
+              SizedBox(
+                height: constraints.maxHeight * 0.07,
+                child: ElevatedButton(
+                    style: _estiloBotao(),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Center(
+                      child: Text(
+                        'Buscar',
+                        style: estiloTexto(15, cor: ColorApp.BrancoTexto),
+                      ),
+                    )),
+              ),
+              SizedBox(
+                height: constraints.maxHeight * 0.02,
               )
             ],
           ),
