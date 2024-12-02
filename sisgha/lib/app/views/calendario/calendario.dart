@@ -18,7 +18,7 @@ class Calendar extends StatefulWidget {
 
 class _CalendarState extends State<Calendar> {
   int anoSelecionado = 0;
-  int selecionado = 0;
+  int modalidadeSelecionada = 0;
   static const listaModalidades = [
     'Técnico Integrado',
     'Graduação',
@@ -195,38 +195,54 @@ class _CalendarState extends State<Calendar> {
                 ),
               ),
               SizedBox(height: constraints.maxHeight * 0.05),
-              Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Modalidade',
-                      style: estiloTexto(16,
-                          cor: ColorApp.VerdePrincipal, peso: FontWeight.bold),
-                    ),
-                    Wrap(
-                      spacing: constraints.maxWidth * 0.02,
-                      runSpacing: constraints.maxHeight * 0.01,
-                      children: listaModalidades.asMap().entries.map((entry) {
-                        int index = entry.key;
-                        String modalidade = entry.value;
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Modalidade',
+                    style: estiloTexto(16,
+                        cor: ColorApp.VerdePrincipal, peso: FontWeight.bold),
+                  ),
+                  Wrap(
+                    spacing: constraints.maxWidth * 0.02,
+                    runSpacing: constraints.maxHeight * 0.01,
+                    children: listaModalidades.asMap().entries.map((entry) {
+                      int index = entry.key;
+                      String modalidade = entry.value;
 
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selecionado = index;
-                            });
-                          },
-                          child: quadradoModalidades(
-                              selecionado == index ? true : false,
-                              modalidade,
-                              constraints.maxWidth),
-                        );
-                      }).toList(),
-                    )
-                  ],
-                ),
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            modalidadeSelecionada = index;
+                          });
+                        },
+                        child: quadradoModalidades(
+                            modalidadeSelecionada == index,
+                            modalidade,
+                            constraints.maxWidth),
+                      );
+                    }).toList(),
+                  )
+                ],
               ),
+              Spacer(),
+              SizedBox(
+                height: constraints.maxHeight * 0.07,
+                child: ElevatedButton(
+                    style: _estiloBotao(),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Center(
+                      child: Text(
+                        'Buscar',
+                        style: estiloTexto(15, cor: ColorApp.BrancoTexto),
+                      ),
+                    )),
+              ),
+              SizedBox(
+                height: constraints.maxHeight * 0.02,
+              )
             ],
           ),
         ),

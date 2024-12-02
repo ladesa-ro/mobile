@@ -86,8 +86,9 @@ Widget quadradoModalidades(bool selecionado, String nome, double width) {
     child: Text(
       nome,
       style: estiloTexto(14,
-          cor:
-              selecionado ? ColorApp.VerdePrincipalTexto : ColorApp.PretoTexto),
+          cor: selecionado
+              ? ColorApp.VerdePrincipalTexto
+              : ColorApp.VerdeCinzaTexto),
     ),
   );
 }
