@@ -107,7 +107,9 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
   BoxDecoration _boxDecoration(
       int index, bool bordaEsquerda, bool bordaDireita) {
     return BoxDecoration(
-      color: _controller.index == index ? ColorApp.VerdeCinza : ColorApp.Branco,
+      color: _controller.index == index
+          ? ColorApp.CorDeFundoClara
+          : ColorApp.Branco,
       borderRadius: BorderRadius.horizontal(
         left: bordaEsquerda ? const Radius.circular(10) : Radius.zero,
         right: bordaDireita ? const Radius.circular(10) : Radius.zero,
