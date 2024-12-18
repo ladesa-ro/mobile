@@ -92,3 +92,27 @@ Widget quadradoModalidades(bool selecionado, String nome, double width) {
     ),
   );
 }
+
+Widget quadradoCursos(bool selecionado, String nome, double width) {
+  return AnimatedContainer(
+    padding:
+        EdgeInsets.symmetric(horizontal: width * 0.05, vertical: width * 0.03),
+    duration: Duration(milliseconds: 300),
+    decoration: BoxDecoration(
+      border: Border.all(
+          color:
+              selecionado ? ColorApp.VerdePrincipalBorda : Colors.transparent),
+      borderRadius: BorderRadius.circular(10),
+      color: selecionado
+          ? const Color.fromARGB(113, 115, 185, 124)
+          : ColorApp.PretoClaroBotao,
+    ),
+    child: Text(
+      nome,
+      style: estiloTexto(14,
+          cor: selecionado
+              ? ColorApp.VerdePrincipalTexto
+              : ColorApp.VerdeCinzaTexto),
+    ),
+  );
+}

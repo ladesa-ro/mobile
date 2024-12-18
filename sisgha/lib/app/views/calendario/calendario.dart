@@ -19,12 +19,14 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   int anoSelecionado = 0;
   int modalidadeSelecionada = 0;
+  int cursoSelecionado = 0;
   static const listaModalidades = [
     'Técnico Integrado',
     'Graduação',
     'Técnico Concomitante',
     'Técnico Subsequente'
   ];
+  static const listaCursos = ['Informática', 'Quimica', 'Floresta'];
   late final ScrollController _controller;
   bool _direcao = true;
 
@@ -225,6 +227,35 @@ class _CalendarState extends State<Calendar> {
                   )
                 ],
               ),
+              SizedBox(height: constraints.maxHeight * 0.05),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Calendário',
+                    style: estiloTexto(16,
+                        cor: ColorApp.VerdePrincipal, peso: FontWeight.bold),
+                  ),
+                  Wrap(
+                    spacing: constraints.maxWidth * 0.02,
+                    runSpacing: constraints.maxHeight * 0.01,
+                    children: listaCursos.asMap().entries.map((entry) {
+                      int index = entry.key;
+                      String curso = entry.value;
+
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            cursoSelecionado = index;
+                          });
+                        },
+                        child: quadradoCursos(cursoSelecionado == index, curso,
+                            constraints.maxWidth),
+                      );
+                    }).toList(),
+                  )
+                ],
+              ),
               Spacer(),
               SizedBox(
                 height: constraints.maxHeight * 0.07,
@@ -240,9 +271,7 @@ class _CalendarState extends State<Calendar> {
                       ),
                     )),
               ),
-              SizedBox(
-                height: constraints.maxHeight * 0.02,
-              )
+              SizedBox(height: constraints.maxHeight * 0.02)
             ],
           ),
         ),
