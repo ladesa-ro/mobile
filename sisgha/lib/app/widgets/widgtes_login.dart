@@ -43,8 +43,7 @@ Widget elementoVerde(Alignment alignment, double width, double height) {
 }
 
 Widget botaoEntrarAluno(context, double altura, double largura) {
-  return Container(
-    margin: EdgeInsets.symmetric(horizontal: largura * 0.05),
+  return SizedBox(
     height: altura * 0.067,
     width: largura,
     child: Center(

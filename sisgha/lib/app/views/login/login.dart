@@ -76,9 +76,7 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
                                     senhaController,
                                     alturaTela),
                                 recuperarSenha(context),
-                                SizedBox(
-                                  height: alturaTela * 0.03,
-                                ),
+                                SizedBox(height: alturaTela * 0.03),
                                 botaoEntrar(
                                     'Entrar',
                                     context,
@@ -86,14 +84,13 @@ class _EstadoPaginaLogin extends State<PaginaLogin> {
                                     matriculaController,
                                     senhaController,
                                     alturaTela),
+                                SizedBox(height: alturaTela * 0.03),
+                                botaoEntrarAluno(
+                                    context, alturaTela, larguraTela),
                               ],
                             ),
                           ),
                         ),
-                        SizedBox(
-                          height: alturaTela * 0.03,
-                        ),
-                        botaoEntrarAluno(context, alturaTela, larguraTela),
                       ],
                     ),
                   ),
