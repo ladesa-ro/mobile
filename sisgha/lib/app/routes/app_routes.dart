@@ -16,7 +16,7 @@ class AppRoutes {
       '/navegação': (context) => const Navigation(initialIndex: 1),
       '/home': (context) => const Home(),
       '/perfilProf': (context) => const Perfil(),
-      '/calendario': (context) => const Calendar(),
+      '/calendario': (context) => Calendar(),
       '/primeiraTela': (context) => const SplashScreen(),
       '/acessoAluno': (context) => const PaginaAlunoSelec(),
     };

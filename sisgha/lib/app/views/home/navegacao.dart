@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:sisgha/app/constants/Icones.dart';
 import 'package:sisgha/app/constants/colors.dart';
 import 'package:sisgha/app/constants/tamanhoTela.dart';
@@ -7,6 +8,8 @@ import 'package:sisgha/app/views/calendario/calendario.dart';
 import 'package:sisgha/app/views/home/home.dart';
 import 'package:sisgha/app/views/perfil/perfil.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../provider/professor/escolha_menu_lateral.dart';
 
 class Navigation extends StatefulWidget {
   final int initialIndex;
@@ -57,8 +60,11 @@ class _NavigationState extends State<Navigation> {
   Widget _buildPage(int index) {
     switch (index) {
       case 0:
-        return const Center(
-          child: Calendar(),
+        return ChangeNotifierProvider(
+          create: (_) => EscolhaCalendario(),
+          child: Center(
+            child: Calendar(),
+          ),
         );
       case 1:
         return const Center(
