@@ -14,6 +14,9 @@ class ColorApp {
   static const Color Cinza = Color(0XFFADADAD);
   static const Color Vermelho = Color(0XFFE9001C);
   static const Color CorDeFundoClara = Color(0XFFEBF8EF);
+  static const Color BracoCinzaFraco = Color(0XFFF0F0F0);
+  static const Color PretoTransparente = Color(0X19000000);
+  static const Color VerdeTransparente = Color(0X1939A048);
 
   //Botao
   static const Color VerdePrincipalBotao = Color(0XFF39A048);
