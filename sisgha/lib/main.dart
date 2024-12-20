@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sisgha/app/constants/theme_app.dart';
-import 'package:sisgha/app/routes/app_routes.dart';
+import 'package:sisgha/app/core/utils/theme_app.dart';
+import 'package:sisgha/app/core/routes/app_routes.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {

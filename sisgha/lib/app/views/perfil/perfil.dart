@@ -1,17 +1,18 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:sisgha/app/api/repository.dart';
-import 'package:sisgha/app/constants/Icones.dart';
-import 'package:sisgha/app/constants/colors.dart';
-import 'package:sisgha/app/constants/tamanhotela.dart';
-import 'package:sisgha/app/model/userModel.dart';
-import 'package:sisgha/app/views/perfil/widgets_perfil/botton_sheat.dart';
-import 'package:sisgha/app/views/perfil/widgets_perfil/estilosPerfil.dart';
-import 'package:sisgha/app/views/perfil/widgets_perfil/navegacao_switch.dart';
-import 'package:sisgha/app/views/perfil/widgets_perfil/widget_sair.dart';
-import 'package:sisgha/app/views/perfil/widgets_perfil/widgets_perfil.dart';
-import 'package:sisgha/app/widgets/widget_erro.dart';
+import 'package:sisgha/app/data/api/repository.dart';
+import 'package:sisgha/app/core/utils/Icones.dart';
+import 'package:sisgha/app/core/utils/colors.dart';
+import 'package:sisgha/app/data/model/userModel.dart';
+import 'package:sisgha/app/views/perfil/widgets/botton_sheat.dart';
+import 'package:sisgha/app/views/perfil/widgets/estilos_perfil.dart';
+import 'package:sisgha/app/views/perfil/widgets/componente_navegacao.dart';
+import 'package:sisgha/app/views/perfil/widgets/widget_sair.dart';
+import 'package:sisgha/app/views/perfil/widgets/dados_professor.dart';
+import 'package:sisgha/app/views/widgets_globais/widget_erro.dart';
+
+import '../../core/utils/responsividade.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({super.key});
