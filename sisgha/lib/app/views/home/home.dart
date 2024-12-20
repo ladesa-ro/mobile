@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:sisgha/app/constants/Icones.dart';
-import 'package:sisgha/app/constants/colors.dart';
-import 'package:sisgha/app/constants/dias.dart';
-import 'package:sisgha/app/constants/tamanhoTela.dart';
-import 'package:sisgha/app/widgets/appBar.dart';
-import 'package:sisgha/app/widgets/mini_calend.dart';
-import 'package:sisgha/app/widgets/quadrados_Home.dart';
-import 'package:sisgha/app/constants/estilos.dart';
+import 'package:sisgha/app/core/utils/Icones.dart';
+import 'package:sisgha/app/core/utils/colors.dart';
+import 'package:sisgha/app/core/utils/dias.dart';
+import 'package:sisgha/app/core/utils/responsividade.dart';
+import 'package:sisgha/app/views/widgets_globais/appbar.dart';
+import 'package:sisgha/app/views/widgets_globais/calendario.dart';
+import 'package:sisgha/app/views/home/widgets/quadrados_home.dart';
+import 'package:sisgha/app/core/utils/estilos.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:sizer/sizer.dart';
 

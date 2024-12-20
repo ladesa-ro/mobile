@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../../constants/Icones.dart';
-import '../../constants/colors.dart';
-import '../../constants/dias.dart';
-import '../../constants/tamanhoTela.dart';
-import '../../widgets/appBar.dart';
-import '../../widgets/mini_calend.dart';
-import 'widgetsCalendario/letreiro_rolante.dart';
-import 'widgetsCalendario/menu_lateral.dart';
+import '../../core/utils/Icones.dart';
+import '../../core/utils/colors.dart';
+import '../../core/utils/dias.dart';
+import '../../core/utils/responsividade.dart';
+import '../widgets_globais/appbar.dart';
+import '../widgets_globais/calendario.dart';
+import 'widgets/letreiro_rolante.dart';
+import 'widgets/menu_lateral.dart';
 
 class Calendar extends StatelessWidget {
   Calendar({super.key});
