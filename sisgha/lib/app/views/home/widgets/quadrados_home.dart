@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
+import '../../../core/utils/tamanhos.dart';
 import 'cards_horarios_disciplinas.dart';
 
 class QuadradosHome extends StatefulWidget {
@@ -49,17 +50,20 @@ class _QuadradosHomeState extends State<QuadradosHome>
         children: [
           SizedBox(
             height: constraints.maxHeight * 0.15,
-            child: TabBar(
-              indicatorWeight: 0,
-              splashFactory: NoSplash.splashFactory,
-              labelPadding:
-                  EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.01),
-              indicator: const BoxDecoration(),
-              dividerHeight: 0,
-              controller: _tabController,
-              tabs: List.generate(
-                6,
-                (index) => _contruindoInterface(index),
+            child: Padding(
+              padding: Tamanhos.margem(context),
+              child: TabBar(
+                indicatorWeight: 0,
+                splashFactory: NoSplash.splashFactory,
+                labelPadding: EdgeInsets.symmetric(
+                    horizontal: constraints.maxWidth * 0.01),
+                indicator: const BoxDecoration(),
+                dividerHeight: 0,
+                controller: _tabController,
+                tabs: List.generate(
+                  6,
+                  (index) => _contruindoInterface(index),
+                ),
               ),
             ),
           ),

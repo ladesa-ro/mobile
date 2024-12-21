@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sisgha/app/core/utils/Icones.dart';
-import 'package:sisgha/app/core/utils/colors.dart';
-import 'package:sisgha/app/core/utils/estilos.dart';
-import 'package:sisgha/app/core/utils/responsividade.dart';
+
+import '../../../core/utils/Icones.dart';
+import '../../../core/utils/colors.dart';
+import '../../../core/utils/estilos.dart';
+import '../../../core/utils/responsividade.dart';
+import '../../../core/utils/tamanhos.dart';
 
 class ConstrutorHorarios extends StatefulWidget {
   final String materia;
@@ -24,13 +26,17 @@ class _ConstrutorHorariosState extends State<ConstrutorHorarios> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-        padding: EdgeInsets.symmetric(vertical: 10),
-        itemCount: 3,
-        itemBuilder: (context, index) {
-          return disciplinaprof(
-              widget.materia, widget.turma, widget.horario, context);
-        },
+      body: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: ListView.builder(
+          padding: Tamanhos.margem(context),
+          physics: RangeMaintainingScrollPhysics(),
+          itemCount: 3,
+          itemBuilder: (context, index) {
+            return disciplinaprof(
+                widget.materia, widget.turma, widget.horario, context);
+          },
+        ),
       ),
     );
   }
@@ -41,9 +47,9 @@ Widget disciplinaprof(
   bool ativadoOuNao = _verificar(horario);
 
   return Container(
-    margin: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
+    margin: const EdgeInsets.only(bottom: 20),
     padding: const EdgeInsets.only(left: 12, right: 5),
-    height: TamanhoTela.vertical(context) * 0.15,
+    height: TamanhoTela.vertical(context) * 0.10,
     decoration: BoxDecoration(
       border: Border.all(
           color: ativadoOuNao

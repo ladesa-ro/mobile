@@ -6,6 +6,7 @@ import '../../core/utils/Icones.dart';
 import '../../core/utils/colors.dart';
 import '../../core/utils/dias.dart';
 import '../../core/utils/responsividade.dart';
+import '../../core/utils/tamanhos.dart';
 import '../widgets_globais/appbar.dart';
 import '../widgets_globais/calendario.dart';
 import 'widgets/letreiro_rolante.dart';
@@ -31,7 +32,7 @@ class Calendar extends StatelessWidget {
       appBar: appBar,
       drawer: MenuLateral(),
       body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 35),
+        padding: Tamanhos.margem(context),
         children: [
           SizedBox(height: tamanho * 0.03),
           SizedBox(
@@ -42,11 +43,9 @@ class Calendar extends StatelessWidget {
                 SizedBox(
                     height: tamanho * 0.85,
                     width: (TamanhoTela.horizontal(context) - tamanho * 0.085) -
-                        85,
+                        80,
                     child: LetreiroRolante()),
-                SizedBox(
-                  width: 15,
-                ),
+                Spacer(),
                 SizedBox(
                   height: tamanho * 0.085,
                   width: tamanho * 0.085,

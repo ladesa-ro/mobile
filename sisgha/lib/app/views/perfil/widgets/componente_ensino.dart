@@ -63,6 +63,7 @@ class _WidgetEnsino extends State<WidgetEnsino> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (constext, constraints) => ListView(
+        physics: BouncingScrollPhysics(),
         children: [
           SizedBox(
             height: constraints.maxHeight * 0.05,
