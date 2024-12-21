@@ -177,12 +177,12 @@ class _PerfilState extends State<Perfil> {
                     ],
                   ),
                 ),
-                dadosUsuario(context, user.nome, user.email, user.matricula),
+                SizedBox(height: tamanho * 0.02),
+                dadosUsuario(context, user.nome, user.email, user.matricula,
+                    tamanho * 0.005),
+                SizedBox(height: tamanho * 0.03),
                 SizedBox(
-                  height: tamanho * 0.01,
-                ),
-                SizedBox(
-                  height: tamanho * 0.74,
+                  height: tamanho * 0.7,
                   child: NavSwitch(),
                 ),
               ],

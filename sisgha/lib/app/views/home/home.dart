@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:sisgha/app/core/utils/Icones.dart';
-import 'package:sisgha/app/core/utils/colors.dart';
-import 'package:sisgha/app/core/utils/dias.dart';
-import 'package:sisgha/app/core/utils/responsividade.dart';
-import 'package:sisgha/app/views/widgets_globais/appbar.dart';
-import 'package:sisgha/app/views/widgets_globais/calendario.dart';
-import 'package:sisgha/app/views/home/widgets/quadrados_home.dart';
-import 'package:sisgha/app/core/utils/estilos.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../core/utils/Icones.dart';
+import '../../core/utils/colors.dart';
+import '../../core/utils/dias.dart';
+import '../../core/utils/estilos.dart';
+import '../../core/utils/responsividade.dart';
+import '../../core/utils/tamanhos.dart';
+import '../widgets_globais/appbar.dart';
+import '../widgets_globais/calendario.dart';
+import 'widgets/quadrados_home.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -37,15 +39,13 @@ class _HomeState extends State<Home> {
       appBar: appBar,
       body: Column(
         children: [
-          SizedBox(
-            height: tamanho * 0.03,
-          ),
+          SizedBox(height: tamanho * 0.03),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 35),
+            padding: Tamanhos.margem(context),
             height: tamanho * 0.09,
             //botão que ira aparecer na tala com o calendario
             child: ElevatedButton(
-              style: estiloBotao(context, 0, 10, 0, 10),
+              style: estiloBotao(context),
               onPressed: () {
                 showDialog(
                   context: context,
@@ -85,15 +85,11 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          SizedBox(
-            height: tamanho * 0.03,
-          ),
           //botoes com os dias da semana
+          SizedBox(height: tamanho * 0.03),
+
           Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 35),
-              child: const QuadradosHome(),
-            ),
+            child: const QuadradosHome(),
           ),
         ],
       ),

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
+import 'package:sisgha/app/core/utils/tamanhos.dart';
 import 'package:sizer/sizer.dart';
 
-ButtonStyle estiloBotao(
-    context, double left, double top, double right, double bottom) {
+ButtonStyle estiloBotao(context) {
   return ButtonStyle(
-    padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
-        EdgeInsets.fromLTRB(left, top, right, bottom)),
     shape: WidgetStateProperty.all<OutlinedBorder>(
         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0))),
     backgroundColor:
@@ -22,12 +20,14 @@ TextStyle estiloTexto(double tamanho, {Color? cor, FontWeight? peso}) {
       fontFamily: 'Poppins');
 }
 
-InputDecoration inputDecoration(String labelText, {Widget? suffixIcon}) {
+InputDecoration inputDecoration(BuildContext context, String labelText,
+    {Widget? suffixIcon}) {
   return InputDecoration(
     floatingLabelStyle:
         estiloTexto(15, cor: ColorApp.VerdeCinzaTexto, peso: FontWeight.bold),
     labelText: labelText,
-    contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+    contentPadding:
+        EdgeInsets.fromLTRB(12, Tamanhos.aluturaBotoes(context) / 2, 12, 0),
     alignLabelWithHint: false,
     enabledBorder: inputBorder(1.5),
     border: inputBorder(2),

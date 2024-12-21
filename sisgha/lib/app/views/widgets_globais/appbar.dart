@@ -4,6 +4,7 @@ import 'package:sisgha/app/core/utils/Icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/dias.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
+import 'package:sisgha/app/core/utils/tamanhos.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
@@ -22,12 +23,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      titleSpacing: 0,
       automaticallyImplyLeading: false,
       backgroundColor: Theme.of(context).colorScheme.primary,
       foregroundColor: ColorApp.BrancoTexto,
-      title: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+      title: Padding(
+        padding: Tamanhos.margem(context),
+        child: Row(
           children: [
             Text(
               DatasFormatadas.diaAtual,
@@ -37,9 +39,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 peso: FontWeight.bold,
               ),
             ),
-            const SizedBox(
-              width: 16,
-            ),
+            const SizedBox(width: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -48,9 +48,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   style: estiloTexto(17,
                       cor: ColorApp.BrancoTexto, peso: FontWeight.bold),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 5),
                 Text(
                   subtitulo,
                   style: estiloTexto(17,
@@ -67,7 +65,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 color: ColorApp.Branco,
               ),
             )
-          ]),
+          ],
+        ),
+      ),
     );
   }
 }
