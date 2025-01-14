@@ -118,7 +118,7 @@ Widget headerDrawer(BuildContext context, double height, double width) {
             Navigator.pop(context);
           },
           icon: Iconify(
-            Icones.setaVoltar,
+            Icones.setaVoltarEsquerda,
             color: ColorApp.VerdePrincipal,
             size: 5.h,
           ),

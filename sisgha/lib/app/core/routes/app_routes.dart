@@ -3,6 +3,7 @@ import 'package:sisgha/app/views/aluno/selecionar_turma/selecionar_turma.dart';
 import 'package:sisgha/app/views/inicio/boas_vindas.dart';
 import 'package:sisgha/app/views/calendario/calendario.dart';
 import 'package:sisgha/app/views/home/home.dart';
+import 'package:sisgha/app/views/notificacao/notificacao.dart';
 import 'package:sisgha/app/views/widgets_globais/botton_app_bar.dart';
 import 'package:sisgha/app/views/inicio/login/login.dart';
 import 'package:sisgha/app/views/perfil/perfil.dart';
@@ -19,6 +20,7 @@ class AppRoutes {
       '/calendario': (context) => Calendar(),
       '/primeiraTela': (context) => const SplashScreen(),
       '/acessoAluno': (context) => const PaginaAlunoSelec(),
+      '/notificacao': (context) => const Notificacao()
     };
   }
 }

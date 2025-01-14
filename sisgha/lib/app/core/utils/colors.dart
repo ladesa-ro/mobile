@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 
 class ColorApp {
-  //cores do figma
   //icones e fundo
+
   static const Color VerdePrincipal = Color(0XFF39A048);
   static const Color VerdeClaro = Color(0XFF1BBA47);
   static const Color VerdeEscuro = Color(0XFF118D3B);
