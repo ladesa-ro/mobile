@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           constraints,
           MediaQuery.of(context).orientation,
           600, // maxMobileWidth
-          900, // maxTabletWidth (opcional)
+          900, // maxTabletWidth
         );
 
         return MaterialApp(

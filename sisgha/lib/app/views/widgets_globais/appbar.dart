@@ -25,8 +25,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       titleSpacing: 0,
       automaticallyImplyLeading: false,
-      backgroundColor: Theme.of(context).colorScheme.primary,
-      foregroundColor: ColorApp.BrancoTexto,
       title: Padding(
         padding: Tamanhos.margem(context),
         child: Row(
@@ -58,7 +56,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             const Spacer(),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed('/notificacao');
+              },
               icon: const Iconify(
                 Icones.Bell,
                 size: 34,
