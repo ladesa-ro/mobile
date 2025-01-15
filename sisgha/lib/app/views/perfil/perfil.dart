@@ -71,28 +71,6 @@ class _PerfilState extends State<Perfil> {
     return FutureBuilder<UserModel>(
       future: buscarUser(context),
       builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text("Erro ao carregar Usuário"),
-              OutlinedButton(
-                onPressed: () async {
-                  if (await sair()) {
-                    Navigator.pushNamedAndRemoveUntil(
-                      // ignore: use_build_context_synchronously
-                      context,
-                      "/primeiraTela",
-                      (route) => false,
-                    );
-                  }
-                },
-                child: const Text("Fazer Login Novamente"),
-              )
-            ],
-          );
-        }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: CircularProgressIndicator(),
@@ -100,6 +78,7 @@ class _PerfilState extends State<Perfil> {
         }
         if (snapshot.hasData) {
           UserModel user = snapshot.data!;
+
           return Scaffold(
             body: ListView(
               physics: NeverScrollableScrollPhysics(),

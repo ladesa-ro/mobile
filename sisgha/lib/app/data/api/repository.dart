@@ -86,9 +86,9 @@ Future<bool> atualizarImagemCapa(File imagemCapa, BuildContext context) async {
       ));
 
     var response = await request.send();
-    var responseData = await http.Response.fromStream(response);
-    print("Status Code: ${response.statusCode}");
-    print("Response Body: ${responseData.body}");
+    // var responseData = await http.Response.fromStream(response);
+    // print("Status Code: ${response.statusCode}");
+    // print("Response Body: ${responseData.body}");
 
     if (response.statusCode == 200) {
       return true;
@@ -144,6 +144,7 @@ Future<bool> login(TextEditingController matriculaController,
   return false;
 }
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
 Future<UserModel> buscarUser(BuildContext context) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   var token = sharedPreferences.getString("token");
@@ -172,8 +173,9 @@ Future<UserModel> buscarUser(BuildContext context) async {
 
     if (response.statusCode == 200) {
       var jsondecode = json.decode(response.body)["usuario"];
+
       UserModel user = UserModel.fromJson(jsondecode);
-      // print(user.id);
+      //print(user.id);
       await sharedPreferences.setString("id", user.id);
       await sharedPreferences.setString("matricula", user.matricula);
       await sharedPreferences.setString("nome", user.nome);
@@ -228,4 +230,30 @@ Future<bool> refreshToken(BuildContext context) async {
   }
 
   return false;
+}
+
+Future<void> teste() async {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  var token = sharedPreferences.getString("token");
+  var id = sharedPreferences.getString("id");
+
+  if (id == null || token == null) {
+    return print('um dos dois é nulo');
+  }
+
+  var url = Uri.parse("https://dev.ladesa.com.br/api/disciplinas/$id");
+
+  try {
+    var response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    });
+    return print(response.statusCode);
+  } catch (e) {
+    return print(e);
+  }
+
+  return Future(() => print(
+      'até aqui tudo bem -------------------------------------------------------------------------------------------- \n $token'));
 }
