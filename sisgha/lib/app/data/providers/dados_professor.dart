@@ -17,8 +17,7 @@ class DadosProfessor with ChangeNotifier {
   dynamic _materiasMinistradas;
   File? _imagemCapa;
   File? _imagemPerfil;
-  Professor professor =
-      Professor(matricula: 'matricula', nome: 'nome', email: 'email', id: 'id');
+  late Professor professor;
 
   dynamic get fotoCapaPerfil => _fotoCapaPerfil;
   dynamic get fotoImagemPerfil => _fotoImagemPerfil;
@@ -27,6 +26,7 @@ class DadosProfessor with ChangeNotifier {
 
   Future<bool> buscarDados(BuildContext context) async {
     final user = await buscarUser(context);
+
     professor = Professor(
         matricula: user.matricula,
         nome: user.nome,
@@ -54,7 +54,6 @@ class DadosProfessor with ChangeNotifier {
     if (sucesso) {
       _imagemCapa = imagem;
       notifyListeners();
-      return;
     } else {
       showDialog(
         context: context,
@@ -84,14 +83,26 @@ class DadosProfessor with ChangeNotifier {
   static void iniciarProvider(BuildContext context) async {
     final dados = DadosProfessor();
     await dados.buscarDados(context);
+
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
-        builder: (context) => ChangeNotifierProvider(
-          create: (context) => dados,
+        builder: (context) => ChangeNotifierProvider.value(
+          value: dados,
           child: Navigation(initialIndex: 1),
         ),
       ),
       (route) => false,
     );
+  }
+
+  void apagarDados() {
+    _fotoCapaPerfil = null;
+    _fotoImagemPerfil = null;
+    _horariosDisponibilidade = null;
+    _materiasMinistradas = null;
+    _imagemCapa = null;
+    _imagemPerfil = null;
+    professor = Professor(matricula: '', nome: '', email: '', id: '');
+    notifyListeners();
   }
 }

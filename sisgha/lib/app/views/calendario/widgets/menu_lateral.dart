@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/data/api/repository.dart';
 import 'package:sizer/sizer.dart';
 import '../../../core/utils/Icones.dart';
 import '../../../core/utils/colors.dart';
@@ -72,8 +71,7 @@ class _MenuLateralState extends State<MenuLateral> {
                 child: ElevatedButton(
                     style: _estiloBotao(),
                     onPressed: () {
-                      // Navigator.pop(context);
-                      teste();
+                      Navigator.pop(context);
                     },
                     child: Center(
                       child: Text(

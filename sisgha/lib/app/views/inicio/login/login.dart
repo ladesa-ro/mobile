@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
 import 'package:sisgha/app/core/utils/imagens.dart';
 import 'package:sisgha/app/core/utils/responsividade.dart';
@@ -9,7 +8,6 @@ import 'package:sisgha/app/core/utils/tamanhos.dart';
 import 'package:sisgha/app/data/providers/dados_professor.dart';
 
 import 'package:sisgha/app/views/inicio/login/widgets_estilos.dart';
-import 'package:sisgha/app/views/widgets_globais/botton_app_bar.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/utils/Icones.dart';
@@ -242,110 +240,3 @@ class _CorpoLoginState extends State<CorpoLogin> {
     }
   }
 }
-
-// Scaffold(
-//   resizeToAvoidBottomInset: false,
-//   backgroundColor: Colors.white,
-//   body: MediaQuery.removeViewInsets(
-//     removeTop: true,
-//     context: context,
-//     child: Stack(
-//       children: [
-//         elementoVerde(Alignment.topLeft, larguraTela, alturaTela),
-//         elementoVerde(Alignment.bottomRight, larguraTela, alturaTela),
-//         Center(
-//           child: SingleChildScrollView(
-//             child: SizedBox(
-//               width: larguraTela,
-//               height: alturaTela,
-//               child: Padding(
-//                 padding:
-//                     EdgeInsets.symmetric(horizontal: larguraTela * 0.08),
-//                 child: Column(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   children: [
-//                     SizedBox(
-//                       height: alturaTela * 0.1,
-//                       child: Image.asset(
-//                         ImageApp.logo_sigha_sem_barra,
-//                         width: larguraTela * 0.6,
-//                       ),
-//                     ),
-//                     SizedBox(height: alturaTela * 0.03),
-//                     Padding(
-//                       padding: const EdgeInsets.symmetric(horizontal: 40),
-//                       child: Form(
-//                         key: formKey,
-//                         child: Column(
-//                           children: [
-//                             _campoDeEntrada(
-//                                 'Matrícula',
-//                                 TextInputType.number,
-//                                 matriculaController,
-//                                 alturaTela),
-//                             _campoDeEntradaSenha(
-//                                 'Senha',
-//                                 TextInputType.text,
-//                                 senhaController,
-//                                 alturaTela),
-     //                        recuperarSenha(context),
-//                             SizedBox(height: alturaTela * 0.03),
-//                             botaoEntrar(
-//                                 'Entrar',
-//                                 context,
-//                                 formKey,
-//                                 matriculaController,
-//                                 senhaController,
-//                                 alturaTela),
-//                             SizedBox(height: alturaTela * 0.03),
-//                             botaoEntrarAluno(
-//                                 context, alturaTela, larguraTela),
-//                           ],
-//                         ),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ],
-//     ),
-//   ),
-// );
-
-// Widget _campoDeEntrada(String labelText, TextInputType inputType,
-//     TextEditingController controller, double altura) {
-//   return AnimatedContainer(
-//     margin: EdgeInsets.only(bottom: 7),
-//     duration: const Duration(milliseconds: 300),
-//     height: altura * 0.07,
-//     child: TextFormField(
-//       controller: controller,
-//       validator: (value) => verificacao(value, "Campo obrigatorio",
-//           text2: "Matricula invalida"),
-//       decoration: inputDecoration(labelText),
-//       keyboardType: inputType,
-//     ),
-//   );
-// }
-
-// Widget _campoDeEntradaSenha(String labelText, TextInputType inputType,
-//     TextEditingController controller, double altura) {
-//   return AnimatedContainer(
-//     duration: const Duration(milliseconds: 300),
-//     height: altura * 0.07,
-//     margin: EdgeInsets.only(bottom: 7),
-//     child: TextFormField(
-//       controller: controller,
-//       validator: (value) => verificacao(value, "Campo Obrigatorio"),
-//       obscureText: _senhaVisivel,
-//       decoration: inputDecoration(labelText,
-//           suffixIcon: iconeVisibilidadeSenha(
-//               alternarVisibilidadeSenha, _senhaVisivel)),
-//       keyboardType: inputType,
-//     ),
-//   );
-// }
-

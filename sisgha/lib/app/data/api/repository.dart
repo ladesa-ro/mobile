@@ -8,8 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:sisgha/app/data/model/professor.dart';
+import 'package:sisgha/app/data/providers/dados_professor.dart';
 import 'package:sisgha/app/views/widgets_globais/widget_erro.dart';
 
+// ----------------------------------------------------------  ATUALIZAR FOTO DE PERFIL DO USUARIO -----------------------------------------------------------------------//
 Future<bool> atualizarImagemPerfil(
     File imagemPerfil, BuildContext context) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -65,6 +67,7 @@ Future<bool> atualizarImagemPerfil(
   return false;
 }
 
+// ------------------------------------------------------------------- ATUALIZAR A IMAGEM DE FUNDO DO USUARIO -------------------------------------------------------------//
 Future<bool> atualizarImagemCapa(File imagemCapa, BuildContext context) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   String? token = sharedPreferences.getString("token");
@@ -117,7 +120,7 @@ Future<bool> atualizarImagemCapa(File imagemCapa, BuildContext context) async {
   return false;
 }
 
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------- BUSCAR O TOKEN DO USUARIO ------------------------------------------------------------------------------------------//
 Future<bool> login(TextEditingController matriculaController,
     TextEditingController senhaController, BuildContext context) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -145,6 +148,7 @@ Future<bool> login(TextEditingController matriculaController,
   return false;
 }
 
+// -------------------------------------------------------------------------- FAZER REQUISIÇÃO NA API PRA BUSCAR O USUARIO -------------------------------------------------------------------------------------//
 Future<Professor> buscarUser(BuildContext context) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   var token = sharedPreferences.getString("token");
@@ -189,17 +193,7 @@ Future<Professor> buscarUser(BuildContext context) async {
   }
 }
 
-Future<bool> sair() async {
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  await sharedPreferences.clear();
-  return true;
-}
-
-Future<String?> pegarId() async {
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  return sharedPreferences.getString("id");
-}
-
+// ---------------------------------------------------------- RECARREGAR TOKEM DE ACESSO DO USUARIO CASO TENHA EXPIRADO ---------------------------------------------------------------------//
 Future<bool> refreshToken(BuildContext context) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   var refreshToken = sharedPreferences.getString("refreshToken");
@@ -231,28 +225,11 @@ Future<bool> refreshToken(BuildContext context) async {
   return false;
 }
 
-Future<void> teste() async {
+// ---------------------------------------------------- APAGAR DADOS SALVOS ----------------------------------------------------------------------------------//
+Future<bool> sair() async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  var token = sharedPreferences.getString("token");
-  var id = sharedPreferences.getString("id");
-
-  if (id == null || token == null) {
-    return print('um dos dois é nulo');
-  }
-
-  var url = Uri.parse("https://dev.ladesa.com.br/api/disciplinas/$id");
-
-  try {
-    var response = await http.get(url, headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
-    });
-    return print(response.statusCode);
-  } catch (e) {
-    return print(e);
-  }
-
-  return Future(() => print(
-      'até aqui tudo bem -------------------------------------------------------------------------------------------- \n $token'));
+  await sharedPreferences.clear();
+  DadosProfessor dados = DadosProfessor();
+  dados.apagarDados();
+  return true;
 }
