@@ -7,7 +7,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:sisgha/app/data/model/userModel.dart';
+import 'package:sisgha/app/data/model/professor.dart';
 import 'package:sisgha/app/views/widgets_globais/widget_erro.dart';
 
 Future<bool> atualizarImagemPerfil(
@@ -117,6 +117,7 @@ Future<bool> atualizarImagemCapa(File imagemCapa, BuildContext context) async {
   return false;
 }
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
 Future<bool> login(TextEditingController matriculaController,
     TextEditingController senhaController, BuildContext context) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -144,8 +145,7 @@ Future<bool> login(TextEditingController matriculaController,
   return false;
 }
 
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------
-Future<UserModel> buscarUser(BuildContext context) async {
+Future<Professor> buscarUser(BuildContext context) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   var token = sharedPreferences.getString("token");
   var url = Uri.parse("https://dev.ladesa.com.br/api/autenticacao/quem-sou-eu");
@@ -156,7 +156,7 @@ Future<UserModel> buscarUser(BuildContext context) async {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     });
-    // print(response.statusCode);
+
     if (response.statusCode == 401) {
       bool refreshed = await refreshToken(context);
       if (refreshed) {
@@ -167,26 +167,25 @@ Future<UserModel> buscarUser(BuildContext context) async {
           'Authorization': 'Bearer $token',
         });
       } else {
-        throw Exception("Erro ao carregar");
+        throw dialogoDeErro(context);
       }
     }
 
     if (response.statusCode == 200) {
       var jsondecode = json.decode(response.body)["usuario"];
 
-      UserModel user = UserModel.fromJson(jsondecode);
-      //print(user.id);
+      Professor user = Professor.fromJson(jsondecode);
+
       await sharedPreferences.setString("id", user.id);
       await sharedPreferences.setString("matricula", user.matricula);
       await sharedPreferences.setString("nome", user.nome);
       await sharedPreferences.setString("email", user.email);
       return user;
     } else {
-      throw Exception("Falha ao carregar");
+      throw dialogoDeErro(context);
     }
   } catch (e) {
-    // print(e);
-    throw Exception("Erro ao carregar usuário");
+    throw dialogoDeErro(context);
   }
 }
 

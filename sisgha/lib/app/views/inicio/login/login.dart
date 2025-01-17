@@ -1,12 +1,15 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
 import 'package:sisgha/app/core/utils/imagens.dart';
 import 'package:sisgha/app/core/utils/responsividade.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
+import 'package:sisgha/app/data/providers/dados_professor.dart';
 
 import 'package:sisgha/app/views/inicio/login/widgets_estilos.dart';
+import 'package:sisgha/app/views/widgets_globais/botton_app_bar.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/utils/Icones.dart';
@@ -152,10 +155,7 @@ class _CorpoLoginState extends State<CorpoLogin> {
             currentFocus.unfocus();
           }
           if (deuCerto) {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-              '/navegação',
-              (route) => false,
-            );
+            DadosProfessor.iniciarProvider(context);
           } else {
             senhaController.clear();
             ScaffoldMessenger.of(context).showSnackBar(snackBar);

@@ -3,9 +3,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sisgha/app/data/providers/dados_professor.dart';
 
 import 'login/login.dart';
-import '../widgets_globais/botton_app_bar.dart';
 import '../widgets_globais/progress_indicator.dart';
 
 class BoasVindasPage extends StatefulWidget {
@@ -25,11 +25,7 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
       );
       verificarToken().then((value) {
         if (value) {
-          Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => const Navigation(
-              initialIndex: 1,
-            ),
-          ));
+          DadosProfessor.iniciarProvider(context);
         } else {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
