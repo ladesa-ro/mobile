@@ -1,14 +1,15 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison
 
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/data/api/repository.dart';
-import 'package:sisgha/app/data/model/professor.dart';
+import 'package:sisgha/app/views/widgets_globais/progress_indicator.dart';
 
 import '../../views/widgets_globais/botton_app_bar.dart';
 import '../../views/widgets_globais/widget_erro.dart';
+import '../api/repository.dart';
+import '../model/professor.dart';
 
 class DadosProfessor with ChangeNotifier {
   dynamic _fotoCapaPerfil;
@@ -32,6 +33,19 @@ class DadosProfessor with ChangeNotifier {
         nome: user.nome,
         email: user.email,
         id: user.id);
+
+    if (professor == null ||
+        professor.id == null ||
+        professor.id.isEmpty ||
+        professor.nome == null ||
+        professor.nome.isEmpty ||
+        professor.email == null ||
+        professor.email.isEmpty ||
+        professor.matricula == null ||
+        professor.matricula.isEmpty) {
+      return false;
+    }
+
     _fotoCapaPerfil = _imagemCapa == null
         ? Image.network(
             "https://dev.ladesa.com.br/api/usuarios/${user.id}/imagem/capa",
@@ -49,50 +63,26 @@ class DadosProfessor with ChangeNotifier {
     return true;
   }
 
-  Future<void> atualizarImagemCap(BuildContext context, File imagem) async {
+  Future<void> atualizarImagemCapaProvider(
+      BuildContext context, File imagem) async {
     bool sucesso = await atualizarImagemCapa(imagem, context);
     if (sucesso) {
       _imagemCapa = imagem;
-      notifyListeners();
+      return notifyListeners();
     } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return dialogoDeErro(context);
-        },
-      );
+      return error(context);
     }
   }
 
-  Future<void> atualizarImagemPerfi(BuildContext context, File imagem) async {
+  Future<void> atualizarImagemPerfilProvider(
+      BuildContext context, File imagem) async {
     bool sucesso = await atualizarImagemPerfil(imagem, context);
     if (sucesso) {
       _imagemPerfil = imagem;
-      notifyListeners();
-      return;
+      return notifyListeners();
     } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return dialogoDeErro(context);
-        },
-      );
+      return error(context);
     }
-  }
-
-  static void iniciarProvider(BuildContext context) async {
-    final dados = DadosProfessor();
-    await dados.buscarDados(context);
-
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(
-        builder: (context) => ChangeNotifierProvider.value(
-          value: dados,
-          child: Navigation(initialIndex: 1),
-        ),
-      ),
-      (route) => false,
-    );
   }
 
   void apagarDados() {
@@ -104,5 +94,46 @@ class DadosProfessor with ChangeNotifier {
     _imagemPerfil = null;
     professor = Professor(matricula: '', nome: '', email: '', id: '');
     notifyListeners();
+  }
+
+  static void iniciarProvider(BuildContext context) async {
+    final dados = DadosProfessor();
+    mostrarDialogoDeLoading(context);
+    bool sucesso = await dados.buscarDados(context);
+    Navigator.of(context).pop();
+    if (sucesso) {
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => ChangeNotifierProvider.value(
+            value: dados,
+            child: Navigation(initialIndex: 1),
+          ),
+        ),
+        (route) => false,
+      );
+    } else {
+      return error(context);
+    }
+  }
+
+  static void error(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return dialogoDeErro(context);
+      },
+    );
+  }
+
+  static void mostrarDialogoDeLoading(BuildContext context) {
+    Container(
+      alignment: Alignment.center,
+      height: double.infinity,
+      width: double.infinity,
+      color: Colors.white,
+      child: Progressindicator(
+        tamanho: 200,
+      ),
+    );
   }
 }

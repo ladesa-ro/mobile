@@ -7,9 +7,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:sisgha/app/data/model/professor.dart';
-import 'package:sisgha/app/data/providers/dados_professor.dart';
-import 'package:sisgha/app/views/widgets_globais/widget_erro.dart';
+
+import '../../views/widgets_globais/widget_erro.dart';
+import '../model/professor.dart';
+import '../providers/dados_professor.dart';
 
 // ----------------------------------------------------------  ATUALIZAR FOTO DE PERFIL DO USUARIO -----------------------------------------------------------------------//
 Future<bool> atualizarImagemPerfil(
@@ -232,4 +233,20 @@ Future<bool> sair() async {
   DadosProfessor dados = DadosProfessor();
   dados.apagarDados();
   return true;
+}
+
+Future<bool> teste() async {
+  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  final token = sharedPreferences.getString("token");
+  var url = Uri.parse("https://dev.ladesa.com.br/api/calendarios-letivos");
+  var resposta = await http.get(url, headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': 'Bearer $token',
+  });
+
+  print(
+      '-----------------------------------------------------------------------');
+  print(resposta.body);
+  return Future(() => true);
 }
