@@ -4,9 +4,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/views/widgets_globais/progress_indicator.dart';
 
 import '../../views/widgets_globais/botton_app_bar.dart';
+import '../../views/widgets_globais/progress_indicator.dart';
 import '../../views/widgets_globais/widget_erro.dart';
 import '../api/repository.dart';
 import '../model/professor.dart';
@@ -26,6 +26,8 @@ class DadosProfessor with ChangeNotifier {
   dynamic get materiasMinistradas => _materiasMinistradas;
 
   Future<bool> buscarDados(BuildContext context) async {
+    Navigator.of(context).pop();
+    mostrarDialogoDeCarregamento(context);
     final user = await buscarUser(context);
 
     professor = Professor(
@@ -98,7 +100,7 @@ class DadosProfessor with ChangeNotifier {
 
   static void iniciarProvider(BuildContext context) async {
     final dados = DadosProfessor();
-    mostrarDialogoDeLoading(context);
+    mostrarCarregamentoTelaInteira(context);
     bool sucesso = await dados.buscarDados(context);
     Navigator.of(context).pop();
     if (sucesso) {
@@ -125,7 +127,7 @@ class DadosProfessor with ChangeNotifier {
     );
   }
 
-  static void mostrarDialogoDeLoading(BuildContext context) {
+  static void mostrarCarregamentoTelaInteira(BuildContext context) {
     Container(
       alignment: Alignment.center,
       height: double.infinity,
@@ -133,6 +135,16 @@ class DadosProfessor with ChangeNotifier {
       color: Colors.white,
       child: Progressindicator(
         tamanho: 200,
+      ),
+    );
+  }
+
+  static void mostrarDialogoDeCarregamento(BuildContext context) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Progressindicator(tamanho: 200),
       ),
     );
   }

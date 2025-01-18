@@ -1,19 +1,19 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:sisgha/app/core/utils/estilos.dart';
-import 'package:sisgha/app/core/utils/imagens.dart';
-import 'package:sisgha/app/core/utils/responsividade.dart';
-import 'package:sisgha/app/core/utils/tamanhos.dart';
-import 'package:sisgha/app/data/providers/dados_professor.dart';
 
-import 'package:sisgha/app/views/inicio/login/widgets_estilos.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/utils/Icones.dart';
 import '../../../core/utils/colors.dart';
+import '../../../core/utils/estilos.dart';
+import '../../../core/utils/imagens.dart';
+import '../../../core/utils/responsividade.dart';
+import '../../../core/utils/tamanhos.dart';
 import '../../../data/api/repository.dart';
+import '../../../data/providers/dados_professor.dart';
 import '../../widgets_globais/widget_erro.dart';
+import 'widgets_estilos.dart';
 
 class PaginaLogin extends StatelessWidget {
   const PaginaLogin({super.key});
@@ -95,48 +95,35 @@ class _CorpoLoginState extends State<CorpoLogin> {
     );
   }
 
-  SizedBox botaoEntrarAluno(BuildContext context) {
-    return SizedBox(
-      height: Tamanhos.aluturaBotoes(context),
-      width: double.infinity,
+  Widget botaoEntrarAluno(BuildContext context) {
+    return ElevatedButton(
+      style: Tamanhos.estiloBotao(),
+      onPressed: () => Navigator.pushNamed(context, "/acessoAluno"),
       child: Center(
-        child: FilledButton(
-          style: estiloBotao(context),
-          onPressed: () => Navigator.pushNamed(context, "/acessoAluno"),
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // ignore: avoid_unnecessary_containers
-                Container(
-                  child: Row(
-                    children: [
-                      const SizedBox(width: 19),
-                      Icon(
-                        Icones.PersonCheio,
-                        color: ColorApp.Branco,
-                        size: 3.h,
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        width: 2,
-                        height: 3.h,
-                        color: ColorApp.Branco,
-                      ),
-                    ],
-                  ),
-                ),
-                const Spacer(),
-                Text(
-                  'Entrar como Aluno',
-                  style: estiloTexto(16, peso: FontWeight.w600),
-                ),
-                const Spacer(
-                  flex: 2,
-                ),
-              ],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(width: 19),
+            Icon(
+              Icones.PersonCheio,
+              color: ColorApp.Branco,
+              size: 3.h,
             ),
-          ),
+            const SizedBox(width: 10),
+            Container(
+              width: 2,
+              height: 3.h,
+              color: ColorApp.Branco,
+            ),
+            const Spacer(),
+            Text(
+              'Entrar como Aluno',
+              style: estiloTexto(16, peso: FontWeight.w600),
+            ),
+            const Spacer(
+              flex: 2,
+            ),
+          ],
         ),
       ),
     );
@@ -147,8 +134,10 @@ class _CorpoLoginState extends State<CorpoLogin> {
       onPressed: () async {
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (formKey.currentState!.validate()) {
+          DadosProfessor.mostrarDialogoDeCarregamento(context);
           bool deuCerto =
               await login(matriculaController, senhaController, context);
+
           if (!currentFocus.hasPrimaryFocus) {
             currentFocus.unfocus();
           }
@@ -160,10 +149,10 @@ class _CorpoLoginState extends State<CorpoLogin> {
           }
         }
       },
-      style: estiloBotao(context),
+      style: Tamanhos.estiloBotao(),
       child: SizedBox(
-        height: Tamanhos.aluturaBotoes(context),
-        width: double.infinity,
+        height: Tamanhos.aluturaBotoes(),
+        width: Tamanhos.larguraGeral(),
         child: Center(
           child: Text(
             'Entrar',

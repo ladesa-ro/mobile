@@ -25,12 +25,11 @@ class MyApp extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         Device.setScreenSize(
-          context,
-          constraints,
-          MediaQuery.of(context).orientation,
-          600, // maxMobileWidth
-          900, // maxTabletWidth
-        );
+            context,
+            constraints,
+            MediaQuery.of(context).orientation,
+            constraints.maxWidth,
+            constraints.minWidth);
 
         return MaterialApp(
           debugShowCheckedModeBanner: false,

@@ -42,6 +42,13 @@ class Icones {
       '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-6 6l6-6m-6-6l6 6"/></svg>';
   static const String setaVoltarDireita =
       '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M244 400L100 256l144-144M120 256h292"/></svg>';
+
+  static const String visibilidadeSenhaOff =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M6.211 6.26Q3.985 7.63 2 10.5Q5.805 16 10.5 16q2.135 0 4.085-1.137m1.588-1.14Q17.643 12.46 19 10.5Q15.195 5 10.5 5q-1.245 0-2.429.387M4 4l13 13.071"/></svg>';
+
+  static const String visibilidadeSenhaOn =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12.005 15.154q1.524 0 2.586-1.067t1.063-2.591t-1.067-2.587t-2.591-1.063t-2.587 1.067t-1.063 2.592t1.067 2.586t2.592 1.063M12 14.2q-1.125 0-1.912-.787T9.3 11.5t.788-1.912T12 8.8t1.913.788t.787 1.912t-.787 1.913T12 14.2m0 3.8q-2.966 0-5.44-1.57t-3.996-4.114q-.125-.207-.178-.407t-.053-.41t.053-.41t.178-.405Q4.087 8.14 6.56 6.57T12 5t5.44 1.57t3.997 4.115q.125.205.178.405t.052.411t-.052.41t-.178.405q-1.523 2.545-3.997 4.115T12 18m0-1q2.825 0 5.188-1.487T20.8 11.5q-1.25-2.525-3.613-4.012T12 6T6.813 7.488T3.2 11.5q1.25 2.525 3.613 4.013T12 17"/></svg>';
+
   //Outros
 // ignore: non_constant_identifier_names
   static Icon Lupa = Icon(

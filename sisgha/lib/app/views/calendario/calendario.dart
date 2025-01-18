@@ -26,6 +26,7 @@ class Calendar extends StatelessWidget {
 
     double tamanho =
         TamanhoTela.height(context, appBarSize: appBar.preferredSize.height);
+    double largura = Tamanhos.larguraGeral();
     return Scaffold(
       key: _scaffoldKey,
       drawerEnableOpenDragGesture: false,
@@ -40,15 +41,14 @@ class Calendar extends StatelessWidget {
             width: TamanhoTela.horizontal(context),
             child: Row(
               children: [
-                // SizedBox(
-                //     height: tamanho * 0.85,
-                //     width: (TamanhoTela.horizontal(context) - tamanho * 0.085) -
-                //         80,
-                //     child: LetreiroRolante()),
+                SizedBox(
+                    height: Tamanhos.aluturaBotoes(),
+                    width: (largura * 0.85) - 80,
+                    child: LetreiroRolante()),
                 Spacer(),
                 SizedBox(
-                  height: tamanho * 0.085,
-                  width: tamanho * 0.085,
+                  height: Tamanhos.aluturaBotoes(),
+                  width: largura * 0.15,
                   child: ElevatedButton(
                       style: _estiloBotao(),
                       onPressed: () {
