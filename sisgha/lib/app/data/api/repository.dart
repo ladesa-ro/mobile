@@ -37,10 +37,6 @@ Future<bool> atualizarImagemPerfil(
 
     var response = await request.send();
 
-    var responseData = await http.Response.fromStream(response);
-    print("Status Code: ${response.statusCode}");
-    print("Response Body: ${responseData.body}");
-
     if (response.statusCode == 200) {
       return true;
     } else if (response.statusCode == 401) {
@@ -90,9 +86,6 @@ Future<bool> atualizarImagemCapa(File imagemCapa, BuildContext context) async {
       ));
 
     var response = await request.send();
-    // var responseData = await http.Response.fromStream(response);
-    // print("Status Code: ${response.statusCode}");
-    // print("Response Body: ${responseData.body}");
 
     if (response.statusCode == 200) {
       return true;
@@ -102,14 +95,11 @@ Future<bool> atualizarImagemCapa(File imagemCapa, BuildContext context) async {
         token = sharedPreferences.getString("token");
         request.headers['Authorization'] = 'Bearer $token';
         response = await request.send();
-        var responseData = await http.Response.fromStream(response);
-        print("Status Code após refresh: ${response.statusCode}");
-        print("Response Body após refresh: ${responseData.body}");
+
         return response.statusCode == 200;
       }
     }
   } catch (e) {
-    print("Erro ao atualizar imagem: $e");
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -125,20 +115,30 @@ Future<bool> atualizarImagemCapa(File imagemCapa, BuildContext context) async {
 Future<bool> login(TextEditingController matriculaController,
     TextEditingController senhaController, BuildContext context) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  var url = Uri.parse("https://dev.ladesa.com.br/api/autenticacao/login");
-  var resposta = await http.post(url, body: {
-    "matriculaSiape": matriculaController.text,
-    "senha": senhaController.text,
-  });
 
-  if (resposta.statusCode == 201) {
-    final body = jsonDecode(resposta.body);
-    await sharedPreferences.setString('token', body['access_token']);
-    await sharedPreferences.setString('refreshToken', body['refresh_token']);
-    return true;
-  } else if (resposta.statusCode == 403) {
-    return false;
-  } else {
+  try {
+    var url = Uri.parse("https://dev.ladesa.com.br/api/autenticacao/login");
+    var resposta = await http.post(url, body: {
+      "matriculaSiape": matriculaController.text,
+      "senha": senhaController.text,
+    });
+
+    if (resposta.statusCode == 201) {
+      final body = jsonDecode(resposta.body);
+      await sharedPreferences.setString('token', body['access_token']);
+      await sharedPreferences.setString('refreshToken', body['refresh_token']);
+      return true;
+    } else if (resposta.statusCode == 403) {
+      return false;
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return dialogoDeErro(context);
+        },
+      );
+    }
+  } catch (e) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -150,7 +150,7 @@ Future<bool> login(TextEditingController matriculaController,
 }
 
 // -------------------------------------------------------------------------- FAZER REQUISIÇÃO NA API PRA BUSCAR O USUARIO -------------------------------------------------------------------------------------//
-Future<Professor> buscarUser(BuildContext context) async {
+Future<dynamic> buscarUser(BuildContext context) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
   var token = sharedPreferences.getString("token");
   var url = Uri.parse("https://dev.ladesa.com.br/api/autenticacao/quem-sou-eu");
@@ -161,20 +161,6 @@ Future<Professor> buscarUser(BuildContext context) async {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     });
-
-    if (response.statusCode == 401) {
-      bool refreshed = await refreshToken(context);
-      if (refreshed) {
-        token = sharedPreferences.getString("token");
-        response = await http.get(url, headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-        });
-      } else {
-        throw dialogoDeErro(context);
-      }
-    }
 
     if (response.statusCode == 200) {
       var jsondecode = json.decode(response.body)["usuario"];
@@ -187,10 +173,38 @@ Future<Professor> buscarUser(BuildContext context) async {
       await sharedPreferences.setString("email", user.email);
       return user;
     } else {
-      throw dialogoDeErro(context);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return dialogoDeErro(context);
+        },
+      );
+    }
+    if (response.statusCode == 401) {
+      bool refreshed = await refreshToken(context);
+      if (refreshed) {
+        token = sharedPreferences.getString("token");
+        response = await http.get(url, headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
+      } else {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return dialogoDeErro(context);
+          },
+        );
+      }
     }
   } catch (e) {
-    throw dialogoDeErro(context);
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return dialogoDeErro(context);
+      },
+    );
   }
 }
 

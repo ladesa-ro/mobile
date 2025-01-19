@@ -134,7 +134,6 @@ class _CorpoLoginState extends State<CorpoLogin> {
       onPressed: () async {
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (formKey.currentState!.validate()) {
-          DadosProfessor.mostrarDialogoDeCarregamento(context);
           bool deuCerto =
               await login(matriculaController, senhaController, context);
 

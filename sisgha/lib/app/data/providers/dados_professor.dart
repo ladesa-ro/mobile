@@ -26,27 +26,24 @@ class DadosProfessor with ChangeNotifier {
   dynamic get materiasMinistradas => _materiasMinistradas;
 
   Future<bool> buscarDados(BuildContext context) async {
-    Navigator.of(context).pop();
-    mostrarDialogoDeCarregamento(context);
+    mostrarDialogoDeCarregmento(context);
     final user = await buscarUser(context);
-
+    if (user == null ||
+        user.id == null ||
+        user.id.isEmpty ||
+        user.nome == null ||
+        user.nome.isEmpty ||
+        user.email == null ||
+        user.email.isEmpty ||
+        user.matricula == null ||
+        user.matricula.isEmpty) {
+      return false;
+    }
     professor = Professor(
         matricula: user.matricula,
         nome: user.nome,
         email: user.email,
         id: user.id);
-
-    if (professor == null ||
-        professor.id == null ||
-        professor.id.isEmpty ||
-        professor.nome == null ||
-        professor.nome.isEmpty ||
-        professor.email == null ||
-        professor.email.isEmpty ||
-        professor.matricula == null ||
-        professor.matricula.isEmpty) {
-      return false;
-    }
 
     _fotoCapaPerfil = _imagemCapa == null
         ? Image.network(
@@ -100,9 +97,9 @@ class DadosProfessor with ChangeNotifier {
 
   static void iniciarProvider(BuildContext context) async {
     final dados = DadosProfessor();
-    mostrarCarregamentoTelaInteira(context);
+
     bool sucesso = await dados.buscarDados(context);
-    Navigator.of(context).pop();
+
     if (sucesso) {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
@@ -127,19 +124,7 @@ class DadosProfessor with ChangeNotifier {
     );
   }
 
-  static void mostrarCarregamentoTelaInteira(BuildContext context) {
-    Container(
-      alignment: Alignment.center,
-      height: double.infinity,
-      width: double.infinity,
-      color: Colors.white,
-      child: Progressindicator(
-        tamanho: 200,
-      ),
-    );
-  }
-
-  static void mostrarDialogoDeCarregamento(BuildContext context) {
+  static void mostrarDialogoDeCarregmento(BuildContext context) {
     showDialog(
       barrierDismissible: false,
       context: context,
