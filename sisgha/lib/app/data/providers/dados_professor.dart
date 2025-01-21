@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/app/data/cache/cache.dart';
 
 import '../../views/widgets_globais/botton_app_bar.dart';
 import '../../views/widgets_globais/progress_indicator.dart';
@@ -45,11 +46,11 @@ class DadosProfessor with ChangeNotifier {
         email: user.email,
         id: user.id);
 
+    File arquivo = await Cache.baixarImagem(
+        "https://dev.ladesa.com.br/api/usuarios/${user.id}/imagem/capa");
     _fotoCapaPerfil = _imagemCapa == null
-        ? Image.network(
-            "https://dev.ladesa.com.br/api/usuarios/${user.id}/imagem/capa",
-            fit: BoxFit.cover,
-            alignment: AlignmentDirectional.bottomCenter)
+        ? Image.file(arquivo,
+            fit: BoxFit.cover, alignment: AlignmentDirectional.bottomCenter)
         : Image.file(_imagemCapa!,
             fit: BoxFit.cover, alignment: AlignmentDirectional.bottomCenter);
 
@@ -92,6 +93,7 @@ class DadosProfessor with ChangeNotifier {
     _imagemCapa = null;
     _imagemPerfil = null;
     professor = Professor(matricula: '', nome: '', email: '', id: '');
+    Cache.limparCache();
     notifyListeners();
   }
 
