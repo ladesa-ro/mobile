@@ -4,27 +4,21 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/data/cache/cache.dart';
 
 import '../../views/widgets_globais/botton_app_bar.dart';
 import '../../views/widgets_globais/progress_indicator.dart';
 import '../../views/widgets_globais/widget_erro.dart';
 import '../api/repository.dart';
+import '../cache/cache.dart';
 import '../model/professor.dart';
 
 class DadosProfessor with ChangeNotifier {
-  dynamic _fotoCapaPerfil;
-  dynamic _fotoImagemPerfil;
-  dynamic _horariosDisponibilidade;
-  dynamic _materiasMinistradas;
-  File? _imagemCapa;
-  File? _imagemPerfil;
+  late File _fotoCapaPerfil;
+  late File _fotoImagemPerfil;
   late Professor professor;
 
-  dynamic get fotoCapaPerfil => _fotoCapaPerfil;
-  dynamic get fotoImagemPerfil => _fotoImagemPerfil;
-  dynamic get horariosDisponibilidade => _horariosDisponibilidade;
-  dynamic get materiasMinistradas => _materiasMinistradas;
+  File get fotoCapaPerfil => _fotoCapaPerfil;
+  File get fotoImagemPerfil => _fotoImagemPerfil;
 
   Future<bool> buscarDados(BuildContext context) async {
     mostrarDialogoDeCarregmento(context);
@@ -46,19 +40,15 @@ class DadosProfessor with ChangeNotifier {
         email: user.email,
         id: user.id);
 
-    File arquivo = await Cache.baixarImagem(
+    final baixarImagemCapa = await Cache.baixarImagem(
         "https://dev.ladesa.com.br/api/usuarios/${user.id}/imagem/capa");
-    _fotoCapaPerfil = _imagemCapa == null
-        ? Image.file(arquivo,
-            fit: BoxFit.cover, alignment: AlignmentDirectional.bottomCenter)
-        : Image.file(_imagemCapa!,
-            fit: BoxFit.cover, alignment: AlignmentDirectional.bottomCenter);
 
-    _fotoImagemPerfil = _imagemPerfil == null
-        ? NetworkImage(
-                "https://dev.ladesa.com.br/api/usuarios/${user.id}/imagem/perfil")
-            as ImageProvider
-        : FileImage(File(_imagemPerfil!.path));
+    final baixarImagemPerfil = await Cache.baixarImagem(
+        "https://dev.ladesa.com.br/api/usuarios/${user.id}/imagem/perfil");
+
+    _fotoCapaPerfil = baixarImagemCapa.absolute;
+    _fotoImagemPerfil = baixarImagemPerfil.absolute;
+
     notifyListeners();
     return true;
   }
@@ -67,7 +57,9 @@ class DadosProfessor with ChangeNotifier {
       BuildContext context, File imagem) async {
     bool sucesso = await atualizarImagemCapa(imagem, context);
     if (sucesso) {
-      _imagemCapa = imagem;
+      Cache.substituirArquivoNoCache(_fotoCapaPerfil.path, imagem);
+      _fotoCapaPerfil = imagem.absolute;
+
       return notifyListeners();
     } else {
       return error(context);
@@ -78,7 +70,7 @@ class DadosProfessor with ChangeNotifier {
       BuildContext context, File imagem) async {
     bool sucesso = await atualizarImagemPerfil(imagem, context);
     if (sucesso) {
-      _imagemPerfil = imagem;
+      _fotoImagemPerfil = imagem.absolute;
       return notifyListeners();
     } else {
       return error(context);
@@ -86,14 +78,10 @@ class DadosProfessor with ChangeNotifier {
   }
 
   void apagarDados() {
-    _fotoCapaPerfil = null;
-    _fotoImagemPerfil = null;
-    _horariosDisponibilidade = null;
-    _materiasMinistradas = null;
-    _imagemCapa = null;
-    _imagemPerfil = null;
-    professor = Professor(matricula: '', nome: '', email: '', id: '');
+    _fotoCapaPerfil = File('');
+    _fotoImagemPerfil = File('');
     Cache.limparCache();
+    professor = Professor(matricula: '', nome: '', email: '', id: '');
     notifyListeners();
   }
 
@@ -121,7 +109,7 @@ class DadosProfessor with ChangeNotifier {
     showDialog(
       context: context,
       builder: (context) {
-        return dialogoDeErro(context);
+        return dialogoDeErro(context, 'error');
       },
     );
   }

@@ -37,12 +37,15 @@ class _PerfilState extends State<Perfil> {
             child: Stack(
               alignment: AlignmentDirectional.topCenter,
               children: [
-                // Capa
+                // Capa type 'Image' is not a subtype of type 'File'
                 Positioned(
                   child: SizedBox(
-                      height: tamanho * 0.2,
-                      width: TamanhoTela.horizontal(context),
-                      child: provider.fotoCapaPerfil),
+                    height: tamanho * 0.2,
+                    width: TamanhoTela.horizontal(context),
+                    child: Image.file(provider.fotoCapaPerfil,
+                        fit: BoxFit.cover,
+                        alignment: AlignmentDirectional.bottomCenter),
+                  ),
                 ),
                 Positioned(
                   top: 10,
@@ -127,7 +130,8 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
             width: 100,
             height: 100,
             child: CircleAvatar(
-                backgroundColor: ColorApp.Cinza, backgroundImage: imagem),
+                backgroundColor: ColorApp.Cinza,
+                backgroundImage: FileImage(imagem)),
           ),
         ),
         Positioned(

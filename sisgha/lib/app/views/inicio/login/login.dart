@@ -180,7 +180,7 @@ class _CorpoLoginState extends State<CorpoLogin> {
           GestureDetector(
             onTap: () => showDialog(
               context: context,
-              builder: (context) => dialogoDeErro(context),
+              builder: (context) => dialogoDeErro(context, 'login'),
             ),
             child: Text(
               'Clique aqui',

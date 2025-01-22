@@ -1,35 +1,46 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
 class Cache {
   static final CacheManager _cacheManager = CacheManager(Config(
     'cache',
     stalePeriod: const Duration(days: 7),
-    maxNrOfCacheObjects: 50,
+    maxNrOfCacheObjects: 10,
   ));
 
-  // Método para baixar e armazenar a imagem
   static Future<File> baixarImagem(String urlImagem) async {
     try {
-      // Baixa ou retorna o arquivo do cache
       final arquivo = await _cacheManager.downloadFile(urlImagem);
-      print(
-          '---------------------------------------------------------------------------------');
-      print('Imagem salva em cache: ${arquivo.file.path}');
       return arquivo.file;
     } catch (e) {
-      print(
-          '---------------------------------------------------------------------------------');
-      print('Erro ao baixar a imagem: $e');
-      throw Exception();
+      throw Exception('erro: $e');
     }
   }
 
-  // Método para limpar o cache (opcional)
   static Future<void> limparCache() async {
     await _cacheManager.emptyCache();
-    print(
-        '---------------------------------------------------------------------------------');
-    print('Cache limpo!');
+    final directory = await getTemporaryDirectory();
+    final cacheDir = Directory('${directory.path}/cache');
+    if (await cacheDir.exists()) {
+      cacheDir.deleteSync(recursive: true);
+    } else {
+      print('Diretório de cache não encontrado.');
+    }
+  }
+
+  static Future<void> substituirArquivoNoCache(
+      String url, File novoArquivo) async {
+    final bytes = await novoArquivo.readAsBytes();
+
+    await _cacheManager.putFile(
+      url,
+      bytes,
+      fileExtension: novoArquivo.path.split('.').last,
+    );
+
+    print('Arquivo no cache substituído com sucesso.');
   }
 }
