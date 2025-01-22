@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/app/core/utils/tamanhos.dart';
 import 'package:sisgha/app/data/api/repository.dart';
 import 'package:sizer/sizer.dart';
 import '../../../core/utils/Icones.dart';
@@ -70,7 +71,7 @@ class _MenuLateralState extends State<MenuLateral> {
               SizedBox(
                 height: constraints.maxHeight * 0.07,
                 child: ElevatedButton(
-                    style: _estiloBotao(),
+                    style: Tamanhos.estiloBotao(),
                     onPressed: () {
                       // Navigator.pop(context);
                       teste();
@@ -78,7 +79,8 @@ class _MenuLateralState extends State<MenuLateral> {
                     child: Center(
                       child: Text(
                         'Buscar',
-                        style: estiloTexto(15, cor: ColorApp.BrancoTexto),
+                        style: estiloTexto(15,
+                            cor: ColorApp.BrancoTexto, peso: FontWeight.bold),
                       ),
                     )),
               ),
@@ -117,7 +119,8 @@ Widget headerDrawer(BuildContext context, double height, double width) {
         Spacer(),
         IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            //Navigator.pop(context);
+            teste();
           },
           icon: Iconify(
             Icones.setaVoltarEsquerda,
@@ -214,18 +217,6 @@ Widget quadradoCurso(BuildContext context, double height) {
         ),
       );
     }).toList(),
-  );
-}
-
-ButtonStyle _estiloBotao() {
-  return ButtonStyle(
-    padding: WidgetStatePropertyAll(EdgeInsets.zero),
-    backgroundColor: WidgetStatePropertyAll(ColorApp.VerdePrincipal),
-    shape: WidgetStatePropertyAll(
-      RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-    ),
   );
 }
 

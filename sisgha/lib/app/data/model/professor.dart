@@ -1,18 +1,17 @@
-// ignore_for_file: file_names
-class UserModel {
+class Professor {
   final String matricula;
   final String nome;
   final String email;
   final String id;
 
-  UserModel({
+  Professor({
     required this.matricula,
     required this.nome,
     required this.email,
     required this.id,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+  factory Professor.fromJson(Map<String, dynamic> json) => Professor(
       matricula: json['matriculaSiape'] ?? 'Desconhecido',
       nome: json['nome'] ?? 'Desconhecido',
       email: json['email'] ?? 'desconhecido@example.com',

@@ -1,18 +1,19 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:sisgha/app/core/utils/estilos.dart';
-import 'package:sisgha/app/core/utils/imagens.dart';
-import 'package:sisgha/app/core/utils/responsividade.dart';
-import 'package:sisgha/app/core/utils/tamanhos.dart';
 
-import 'package:sisgha/app/views/inicio/login/widgets_estilos.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/utils/Icones.dart';
 import '../../../core/utils/colors.dart';
+import '../../../core/utils/estilos.dart';
+import '../../../core/utils/imagens.dart';
+import '../../../core/utils/responsividade.dart';
+import '../../../core/utils/tamanhos.dart';
 import '../../../data/api/repository.dart';
+import '../../../data/providers/dados_professor.dart';
 import '../../widgets_globais/widget_erro.dart';
+import 'widgets_estilos.dart';
 
 class PaginaLogin extends StatelessWidget {
   const PaginaLogin({super.key});
@@ -94,48 +95,35 @@ class _CorpoLoginState extends State<CorpoLogin> {
     );
   }
 
-  SizedBox botaoEntrarAluno(BuildContext context) {
-    return SizedBox(
-      height: Tamanhos.aluturaBotoes(context),
-      width: double.infinity,
+  Widget botaoEntrarAluno(BuildContext context) {
+    return ElevatedButton(
+      style: Tamanhos.estiloBotao(),
+      onPressed: () => Navigator.pushNamed(context, "/acessoAluno"),
       child: Center(
-        child: FilledButton(
-          style: estiloBotao(context),
-          onPressed: () => Navigator.pushNamed(context, "/acessoAluno"),
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // ignore: avoid_unnecessary_containers
-                Container(
-                  child: Row(
-                    children: [
-                      const SizedBox(width: 19),
-                      Icon(
-                        Icones.PersonCheio,
-                        color: ColorApp.Branco,
-                        size: 3.h,
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        width: 2,
-                        height: 3.h,
-                        color: ColorApp.Branco,
-                      ),
-                    ],
-                  ),
-                ),
-                const Spacer(),
-                Text(
-                  'Entrar como Aluno',
-                  style: estiloTexto(16, peso: FontWeight.w600),
-                ),
-                const Spacer(
-                  flex: 2,
-                ),
-              ],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const SizedBox(width: 19),
+            Icon(
+              Icones.PersonCheio,
+              color: ColorApp.Branco,
+              size: 3.h,
             ),
-          ),
+            const SizedBox(width: 10),
+            Container(
+              width: 2,
+              height: 3.h,
+              color: ColorApp.Branco,
+            ),
+            const Spacer(),
+            Text(
+              'Entrar como Aluno',
+              style: estiloTexto(16, peso: FontWeight.w600),
+            ),
+            const Spacer(
+              flex: 2,
+            ),
+          ],
         ),
       ),
     );
@@ -148,24 +136,22 @@ class _CorpoLoginState extends State<CorpoLogin> {
         if (formKey.currentState!.validate()) {
           bool deuCerto =
               await login(matriculaController, senhaController, context);
+
           if (!currentFocus.hasPrimaryFocus) {
             currentFocus.unfocus();
           }
           if (deuCerto) {
-            Navigator.of(context).pushNamedAndRemoveUntil(
-              '/navegação',
-              (route) => false,
-            );
+            DadosProfessor.iniciarProvider(context);
           } else {
             senhaController.clear();
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
         }
       },
-      style: estiloBotao(context),
+      style: Tamanhos.estiloBotao(),
       child: SizedBox(
-        height: Tamanhos.aluturaBotoes(context),
-        width: double.infinity,
+        height: Tamanhos.aluturaBotoes(),
+        width: Tamanhos.larguraGeral(),
         child: Center(
           child: Text(
             'Entrar',
@@ -194,7 +180,7 @@ class _CorpoLoginState extends State<CorpoLogin> {
           GestureDetector(
             onTap: () => showDialog(
               context: context,
-              builder: (context) => dialogoDeErro(context),
+              builder: (context) => dialogoDeErro(context, 'login'),
             ),
             child: Text(
               'Clique aqui',
@@ -242,110 +228,3 @@ class _CorpoLoginState extends State<CorpoLogin> {
     }
   }
 }
-
-// Scaffold(
-//   resizeToAvoidBottomInset: false,
-//   backgroundColor: Colors.white,
-//   body: MediaQuery.removeViewInsets(
-//     removeTop: true,
-//     context: context,
-//     child: Stack(
-//       children: [
-//         elementoVerde(Alignment.topLeft, larguraTela, alturaTela),
-//         elementoVerde(Alignment.bottomRight, larguraTela, alturaTela),
-//         Center(
-//           child: SingleChildScrollView(
-//             child: SizedBox(
-//               width: larguraTela,
-//               height: alturaTela,
-//               child: Padding(
-//                 padding:
-//                     EdgeInsets.symmetric(horizontal: larguraTela * 0.08),
-//                 child: Column(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   children: [
-//                     SizedBox(
-//                       height: alturaTela * 0.1,
-//                       child: Image.asset(
-//                         ImageApp.logo_sigha_sem_barra,
-//                         width: larguraTela * 0.6,
-//                       ),
-//                     ),
-//                     SizedBox(height: alturaTela * 0.03),
-//                     Padding(
-//                       padding: const EdgeInsets.symmetric(horizontal: 40),
-//                       child: Form(
-//                         key: formKey,
-//                         child: Column(
-//                           children: [
-//                             _campoDeEntrada(
-//                                 'Matrícula',
-//                                 TextInputType.number,
-//                                 matriculaController,
-//                                 alturaTela),
-//                             _campoDeEntradaSenha(
-//                                 'Senha',
-//                                 TextInputType.text,
-//                                 senhaController,
-//                                 alturaTela),
-     //                        recuperarSenha(context),
-//                             SizedBox(height: alturaTela * 0.03),
-//                             botaoEntrar(
-//                                 'Entrar',
-//                                 context,
-//                                 formKey,
-//                                 matriculaController,
-//                                 senhaController,
-//                                 alturaTela),
-//                             SizedBox(height: alturaTela * 0.03),
-//                             botaoEntrarAluno(
-//                                 context, alturaTela, larguraTela),
-//                           ],
-//                         ),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ],
-//     ),
-//   ),
-// );
-
-// Widget _campoDeEntrada(String labelText, TextInputType inputType,
-//     TextEditingController controller, double altura) {
-//   return AnimatedContainer(
-//     margin: EdgeInsets.only(bottom: 7),
-//     duration: const Duration(milliseconds: 300),
-//     height: altura * 0.07,
-//     child: TextFormField(
-//       controller: controller,
-//       validator: (value) => verificacao(value, "Campo obrigatorio",
-//           text2: "Matricula invalida"),
-//       decoration: inputDecoration(labelText),
-//       keyboardType: inputType,
-//     ),
-//   );
-// }
-
-// Widget _campoDeEntradaSenha(String labelText, TextInputType inputType,
-//     TextEditingController controller, double altura) {
-//   return AnimatedContainer(
-//     duration: const Duration(milliseconds: 300),
-//     height: altura * 0.07,
-//     margin: EdgeInsets.only(bottom: 7),
-//     child: TextFormField(
-//       controller: controller,
-//       validator: (value) => verificacao(value, "Campo Obrigatorio"),
-//       obscureText: _senhaVisivel,
-//       decoration: inputDecoration(labelText,
-//           suffixIcon: iconeVisibilidadeSenha(
-//               alternarVisibilidadeSenha, _senhaVisivel)),
-//       keyboardType: inputType,
-//     ),
-//   );
-// }
-

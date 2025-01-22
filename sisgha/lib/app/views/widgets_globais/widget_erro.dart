@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
+import 'package:sisgha/app/data/providers/dados_professor.dart';
 
 import '../../core/utils/estilos.dart';
 import '../../core/utils/imagens.dart';
 
-Widget dialogoDeErro(BuildContext context) {
+Widget dialogoDeErro(BuildContext context, String erro) {
+  DadosProfessor dadosProfessor = DadosProfessor();
   return AlertDialog(
     backgroundColor: Colors.white,
     content: FittedBox(
@@ -23,7 +25,7 @@ Widget dialogoDeErro(BuildContext context) {
             height: 15,
           ),
           Text(
-            'Nenhuma conexão com a internet',
+            'Nenhuma conexão com a internet $erro',
             style: estiloTexto(16, cor: ColorApp.Preto, peso: FontWeight.bold),
           ),
           const SizedBox(
@@ -53,6 +55,7 @@ Widget dialogoDeErro(BuildContext context) {
           ElevatedButton(
             style: _estiloBotao(ColorApp.VerdePrincipal, ColorApp.Branco),
             onPressed: () {
+              dadosProfessor.apagarDados();
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 "/login",
@@ -67,6 +70,7 @@ Widget dialogoDeErro(BuildContext context) {
           ElevatedButton(
             style: _estiloBotao(ColorApp.Branco, ColorApp.VerdePrincipal),
             onPressed: () {
+              dadosProfessor.apagarDados();
               SystemNavigator.pop();
             },
             child: const Text('Talvez mais tarde'),

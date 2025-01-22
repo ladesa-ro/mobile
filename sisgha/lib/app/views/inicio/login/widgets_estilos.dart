@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+
 import 'package:sizer/sizer.dart';
 
+import '../../../core/utils/Icones.dart';
 import '../../../core/utils/colors.dart';
 
 Widget elementoVerde(Alignment alignment) {
@@ -43,8 +46,9 @@ const snackBar = SnackBar(
 Widget iconeVisibilidadeSenha(alternarVisibilidadeSenha, senhaVisivel) {
   return IconButton(
     onPressed: alternarVisibilidadeSenha,
-    icon: Icon(senhaVisivel
-        ? Icons.visibility_outlined
-        : Icons.visibility_off_outlined),
+    icon: Iconify(
+      senhaVisivel ? Icones.visibilidadeSenhaOn : Icones.visibilidadeSenhaOff,
+      size: 3.h,
+    ),
   );
 }

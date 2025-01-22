@@ -116,11 +116,11 @@ class _QuadradosHomeState extends State<QuadradosHome>
       'Qua',
       'Qui',
       'Sex',
-      'Sab',
+      'Sáb',
     ];
 
     DateTime now = DateTime.now();
-    DateTime date = now.add(Duration(days: (now.weekday - 7) + index));
+    DateTime date = now.add(Duration(days: (1 - now.weekday) + index));
     final diaDaSemanaSoQueEmNumeros = DateFormat('dd').format(date);
 
     bool selecionado = _quadradoSelecionado == index;

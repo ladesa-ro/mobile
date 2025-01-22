@@ -40,12 +40,11 @@ class _HomeState extends State<Home> {
       body: Column(
         children: [
           SizedBox(height: tamanho * 0.03),
+          //botão que ira aparecer na tala com o calendario
           Container(
             padding: Tamanhos.margem(context),
-            height: tamanho * 0.09,
-            //botão que ira aparecer na tala com o calendario
             child: ElevatedButton(
-              style: estiloBotao(context),
+              style: Tamanhos.estiloBotao(),
               onPressed: () {
                 showDialog(
                   context: context,
