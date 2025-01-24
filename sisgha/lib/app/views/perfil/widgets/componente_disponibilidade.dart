@@ -135,28 +135,22 @@ List<Widget> _listaComHorarios(context) {
           SizedBox(
             height: constraints.maxHeight * 0.45,
             width: constraints.maxWidth,
-            child: Flexible(
-              child: _periodo(
-                  context, horarios[0]["periodo"], horarios[0]["horario"]),
-            ),
+            child: _periodo(
+                context, horarios[0]["periodo"], horarios[0]["horario"]),
           ),
           const SizedBox(height: 15),
           SizedBox(
             height: constraints.maxHeight * 0.45,
             width: constraints.maxWidth,
-            child: Flexible(
-              child: _periodo(
-                  context, horarios[1]["periodo"], horarios[1]["horario"]),
-            ),
+            child: _periodo(
+                context, horarios[1]["periodo"], horarios[1]["horario"]),
           ),
           const SizedBox(height: 15),
           SizedBox(
             height: constraints.maxHeight * 0.45,
             width: constraints.maxWidth,
-            child: Flexible(
-              child: _periodo(
-                  context, horarios[2]["periodo"], horarios[2]["horario"]),
-            ),
+            child: _periodo(
+                context, horarios[2]["periodo"], horarios[2]["horario"]),
           ),
         ],
       ),

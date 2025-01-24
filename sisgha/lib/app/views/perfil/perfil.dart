@@ -37,7 +37,6 @@ class _PerfilState extends State<Perfil> {
             child: Stack(
               alignment: AlignmentDirectional.topCenter,
               children: [
-                // Capa type 'Image' is not a subtype of type 'File'
                 Positioned(
                   child: SizedBox(
                     height: tamanho * 0.2,

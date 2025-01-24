@@ -81,13 +81,11 @@ class _WidgetEnsino extends State<WidgetEnsino> {
             ),
           ),
           SizedBox(height: 15),
-          Flexible(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                materias.length,
-                (index) => _animatedContainer(index),
-              ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(
+              materias.length,
+              (index) => _animatedContainer(index),
             ),
           ),
         ],

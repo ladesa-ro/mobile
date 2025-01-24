@@ -41,10 +41,10 @@ class Calendar extends StatelessWidget {
             width: TamanhoTela.horizontal(context),
             child: Row(
               children: [
-                // SizedBox(
-                //     height: Tamanhos.aluturaBotoes(),
-                //     width: (largura * 0.85) - 80,
-                //     child: LetreiroRolante()),
+                SizedBox(
+                    height: Tamanhos.aluturaBotoes(),
+                    width: (largura * 0.85) - 80,
+                    child: LetreiroRolante()),
                 Spacer(),
                 SizedBox(
                   height: Tamanhos.aluturaBotoes(),
