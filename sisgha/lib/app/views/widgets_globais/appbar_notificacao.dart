@@ -30,7 +30,7 @@ class CustomAppBarNotificacao extends StatelessWidget
               icon: Iconify(
                 Icones.setaVoltarDireita,
                 size: double.infinity,
-                color: ColorApp.Branco,
+                color: ColorApp.branco,
               ),
             )
           : null,

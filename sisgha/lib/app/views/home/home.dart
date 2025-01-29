@@ -63,19 +63,19 @@ class _HomeState extends State<Home> {
                   Icon(
                     Icones.CalendarVazio,
                     size: 3.h,
-                    color: ColorApp.Branco,
+                    color: ColorApp.branco,
                   ),
                   const Spacer(),
                   Text(
                     'Calendário ${now.year}',
                     style: estiloTexto(15,
-                        cor: ColorApp.BrancoTexto, peso: FontWeight.bold),
+                        cor: ColorApp.brancoTexto, peso: FontWeight.bold),
                   ),
                   const Spacer(),
                   Iconify(
                     Icones.SetaBaixo,
                     size: 4.h,
-                    color: ColorApp.Branco,
+                    color: ColorApp.branco,
                   ),
                   const SizedBox(
                     width: 16,

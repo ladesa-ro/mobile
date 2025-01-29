@@ -36,7 +36,7 @@ class Notificacao extends StatelessWidget {
                       data: '$index dias'),
                   Divider(
                     thickness: 1.5,
-                    color: ColorApp.VerdeCinzaBorda,
+                    color: ColorApp.verdecinzaBorda,
                   )
                 ],
               ),
@@ -67,7 +67,7 @@ Widget cards(BuildContext context,
             Iconify(
               icon,
               size: 30,
-              color: ColorApp.VerdePrincipal,
+              color: ColorApp.verdePrincipal,
             ),
             SizedBox(
               width: 10,
@@ -75,23 +75,23 @@ Widget cards(BuildContext context,
             Text(
               titulo,
               style: estiloTexto(15,
-                  cor: ColorApp.VerdePrincipalTexto, peso: FontWeight.bold),
+                  cor: ColorApp.verdePrincipalTexto, peso: FontWeight.bold),
             ),
             Spacer(),
             Text(
               data,
-              style: estiloTexto(14, cor: ColorApp.VerdeCinzaTexto),
+              style: estiloTexto(14, cor: ColorApp.verdecinzaTexto),
             )
           ],
         ),
         SizedBox(height: 10),
-        Text(menssagem, style: estiloTexto(14, cor: ColorApp.Preto)),
+        Text(menssagem, style: estiloTexto(14, cor: ColorApp.preto)),
         TextButton(
           style: ButtonStyle(padding: WidgetStatePropertyAll(EdgeInsets.zero)),
           onPressed: () {},
           child: Text(
             link,
-            style: estiloTexto(14, cor: ColorApp.VerdePrincipal),
+            style: estiloTexto(14, cor: ColorApp.verdePrincipal),
           ),
         ),
       ],

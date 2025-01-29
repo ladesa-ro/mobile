@@ -97,7 +97,7 @@ class _WidgetEnsino extends State<WidgetEnsino> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
       width: double.infinity,
-      decoration: estiloBorda(cor: ColorApp.VerdeCinzaBorda, radius: 10),
+      decoration: estiloBorda(cor: ColorApp.verdecinzaBorda, radius: 10),
       child: Column(
         children: [
           ClipRRect(
@@ -143,7 +143,7 @@ class _WidgetEnsino extends State<WidgetEnsino> {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             decoration: BoxDecoration(
-              border: Border.all(color: ColorApp.VerdeCinza),
+              border: Border.all(color: ColorApp.verdecinza),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
@@ -172,12 +172,12 @@ class _WidgetEnsino extends State<WidgetEnsino> {
       decoration: BoxDecoration(
         border: Border.all(
           color: paginaMostrada == index
-              ? ColorApp.VerdePrincipalBorda
-              : ColorApp.VerdeCinzaBorda,
+              ? ColorApp.verdePrincipalBorda
+              : ColorApp.verdecinzaBorda,
         ),
         borderRadius: BorderRadius.circular(100),
         color:
-            paginaMostrada == index ? ColorApp.VerdePrincipal : ColorApp.Branco,
+            paginaMostrada == index ? ColorApp.verdePrincipal : ColorApp.branco,
       ),
       width: 15,
       height: 15,

@@ -106,14 +106,14 @@ class _CorpoLoginState extends State<CorpoLogin> {
             const SizedBox(width: 19),
             Icon(
               Icones.PersonCheio,
-              color: ColorApp.Branco,
+              color: ColorApp.branco,
               size: 3.h,
             ),
             const SizedBox(width: 10),
             Container(
               width: 2,
               height: 3.h,
-              color: ColorApp.Branco,
+              color: ColorApp.branco,
             ),
             const Spacer(),
             Text(
@@ -171,7 +171,7 @@ class _CorpoLoginState extends State<CorpoLogin> {
           Text(
             'Esqueceu a senha?',
             style: estiloTexto(
-              cor: ColorApp.VerdeCinza,
+              cor: ColorApp.verdecinza,
               14,
               peso: FontWeight.w600,
             ),
@@ -185,7 +185,7 @@ class _CorpoLoginState extends State<CorpoLogin> {
             child: Text(
               'Clique aqui',
               style: estiloTexto(15,
-                  cor: ColorApp.VerdePrincipal, peso: FontWeight.w600),
+                  cor: ColorApp.verdePrincipal, peso: FontWeight.w600),
             ),
           ),
         ],

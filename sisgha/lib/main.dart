@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'SISGHA',
-          theme: ThemeApp.Tema(),
+          theme: ThemeApp.tema(),
           initialRoute: '/primeiraTela',
           routes: AppRoutes.rotas(),
         );
