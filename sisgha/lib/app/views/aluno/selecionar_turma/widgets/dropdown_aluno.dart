@@ -30,7 +30,7 @@ class _DropdownAlunoState extends State<DropdownAluno> {
         hint: Text(
           widget.descricao,
           style: TextStyle(
-              color: ColorApp.verdecinza,
+              color: ColorsTemaClaro.verdecinza,
               fontSize: 12,
               fontWeight: FontWeight.w600),
         ),
@@ -39,18 +39,18 @@ class _DropdownAlunoState extends State<DropdownAluno> {
               EdgeInsets.fromLTRB(widget.esquerda, 0, widget.direita, 0),
           labelText: widget.nome,
           labelStyle: TextStyle(
-              color: ColorApp.verdecinza, fontWeight: FontWeight.w600),
+              color: ColorsTemaClaro.verdecinza, fontWeight: FontWeight.w600),
           disabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorApp.verdePrincipal),
+            borderSide: BorderSide(color: ColorsTemaClaro.verdePrincipal),
             borderRadius: BorderRadius.circular(10.0),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorApp.verdePrincipal),
+            borderSide: BorderSide(color: ColorsTemaClaro.verdePrincipal),
             borderRadius: BorderRadius.circular(10.0),
           ),
           border: OutlineInputBorder(),
         ),
-        iconEnabledColor: ColorApp.verdePrincipal,
+        iconEnabledColor: ColorsTemaClaro.verdePrincipal,
         value: selectedValue,
         onChanged: (String? newValue) {
           setState(() {

@@ -78,7 +78,7 @@ class Calendar extends StatelessWidget {
 ButtonStyle _estiloBotao() {
   return ButtonStyle(
     padding: WidgetStatePropertyAll(EdgeInsets.zero),
-    backgroundColor: WidgetStatePropertyAll(ColorApp.verdePrincipal),
+    backgroundColor: WidgetStatePropertyAll(ColorsTemaClaro.verdePrincipal),
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),

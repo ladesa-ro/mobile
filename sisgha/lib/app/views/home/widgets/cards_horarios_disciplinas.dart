@@ -53,8 +53,8 @@ Widget disciplinaprof(
     decoration: BoxDecoration(
       border: Border.all(
           color: ativadoOuNao
-              ? ColorApp.verdePrincipalBorda
-              : ColorApp.verdecinzaBorda,
+              ? ColorsTemaClaro.verdePrincipalBorda
+              : ColorsTemaClaro.verdecinzaBorda,
           width: 2),
       borderRadius: const BorderRadius.all(
         Radius.circular(12),
@@ -70,24 +70,24 @@ Widget disciplinaprof(
               materia,
               style: estiloTexto(15,
                   cor: ativadoOuNao
-                      ? ColorApp.pretoTexto
-                      : ColorApp.verdecinzaTexto,
+                      ? ColorsTemaClaro.pretoTexto
+                      : ColorsTemaClaro.verdecinzaTexto,
                   peso: ativadoOuNao ? FontWeight.bold : FontWeight.normal),
             ),
             Text(
               turma,
               style: estiloTexto(15,
                   cor: ativadoOuNao
-                      ? ColorApp.pretoTexto
-                      : ColorApp.verdecinzaTexto,
+                      ? ColorsTemaClaro.pretoTexto
+                      : ColorsTemaClaro.verdecinzaTexto,
                   peso: ativadoOuNao ? FontWeight.bold : FontWeight.normal),
             ),
             Text(
               'Horario: $horario',
               style: estiloTexto(15,
                   cor: ativadoOuNao
-                      ? ColorApp.pretoTexto
-                      : ColorApp.verdecinzaTexto,
+                      ? ColorsTemaClaro.pretoTexto
+                      : ColorsTemaClaro.verdecinzaTexto,
                   peso: ativadoOuNao ? FontWeight.bold : FontWeight.normal),
             ),
           ],
@@ -96,7 +96,7 @@ Widget disciplinaprof(
         ativadoOuNao
             ? const Icon(
                 Icones.Relogio,
-                color: ColorApp.verdeEscuro,
+                color: ColorsTemaClaro.verdeEscuro,
               )
             : Container(),
         const SizedBox(

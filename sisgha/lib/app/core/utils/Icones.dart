@@ -53,7 +53,7 @@ class Icones {
 // ignore: non_constant_identifier_names
   static Icon Lupa = Icon(
     Icons.search,
-    color: ColorApp.branco,
+    color: ColorsTemaClaro.branco,
     size: 4.h,
   );
 }
