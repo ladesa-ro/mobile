@@ -26,7 +26,7 @@ Widget dialogoDeErro(BuildContext context, String erro) {
           ),
           Text(
             'Nenhuma conexão com a internet $erro',
-            style: estiloTexto(16, cor: ColorApp.preto, peso: FontWeight.bold),
+            style: estiloTexto(16, cor: ColorsTemaClaro.preto, peso: FontWeight.bold),
           ),
           const SizedBox(
             height: 10,
@@ -35,7 +35,7 @@ Widget dialogoDeErro(BuildContext context, String erro) {
             'Verifique sua conexão ou',
             style: estiloTexto(
               15,
-              cor: ColorApp.preto,
+              cor: ColorsTemaClaro.preto,
             ),
             textAlign: TextAlign.center,
           ),
@@ -46,14 +46,14 @@ Widget dialogoDeErro(BuildContext context, String erro) {
             'tente novamente',
             style: estiloTexto(
               15,
-              cor: ColorApp.preto,
+              cor: ColorsTemaClaro.preto,
             ),
           ),
           const SizedBox(
             height: 15,
           ),
           ElevatedButton(
-            style: _estiloBotao(ColorApp.verdePrincipal, ColorApp.branco),
+            style: _estiloBotao(ColorsTemaClaro.verdePrincipal, ColorsTemaClaro.branco),
             onPressed: () {
               dadosProfessor.apagarDados();
               Navigator.pushNamedAndRemoveUntil(
@@ -68,7 +68,7 @@ Widget dialogoDeErro(BuildContext context, String erro) {
             height: 15,
           ),
           ElevatedButton(
-            style: _estiloBotao(ColorApp.branco, ColorApp.verdePrincipal),
+            style: _estiloBotao(ColorsTemaClaro.branco, ColorsTemaClaro.verdePrincipal),
             onPressed: () {
               dadosProfessor.apagarDados();
               SystemNavigator.pop();

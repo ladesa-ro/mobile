@@ -25,7 +25,7 @@ class Tamanhos {
         shape: WidgetStateProperty.all<OutlinedBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.w))),
         backgroundColor:
-            WidgetStateProperty.all<Color>(ColorApp.verdePrincipalBotao),
-        foregroundColor: WidgetStatePropertyAll(ColorApp.brancoTexto));
+            WidgetStateProperty.all<Color>(ColorsTemaClaro.verdePrincipalBotao),
+        foregroundColor: WidgetStatePropertyAll(ColorsTemaClaro.brancoTexto));
   }
 }

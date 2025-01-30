@@ -50,7 +50,7 @@ class _PerfilState extends State<Perfil> {
                   top: 10,
                   left: 10,
                   child: ElevatedButton(
-                    style: buttonStyleEdit(ColorApp.vermelhoFraco),
+                    style: buttonStyleEdit(ColorsTemaClaro.vermelhoFraco),
                     onPressed: () async {
                       widgetQuit(context);
                     },
@@ -58,7 +58,7 @@ class _PerfilState extends State<Perfil> {
                       children: [
                         Icon(
                           Icones.Sair,
-                          color: ColorApp.branco,
+                          color: ColorsTemaClaro.branco,
                           size: 12,
                         ),
                       ],
@@ -74,7 +74,7 @@ class _PerfilState extends State<Perfil> {
                     child: const Iconify(
                       Icones.Lapiz,
                       size: 10,
-                      color: ColorApp.branco,
+                      color: ColorsTemaClaro.branco,
                     ),
                     onPressed: () => bottomSheat(
                         context,
@@ -118,7 +118,7 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
   return Container(
     padding: const EdgeInsets.all(4),
     decoration: BoxDecoration(
-      color: ColorApp.branco,
+      color: ColorsTemaClaro.branco,
       borderRadius: BorderRadius.circular(100),
     ),
     child: Stack(
@@ -129,7 +129,7 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
             width: 100,
             height: 100,
             child: CircleAvatar(
-                backgroundColor: ColorApp.cinza,
+                backgroundColor: ColorsTemaClaro.cinza,
                 backgroundImage: FileImage(imagem)),
           ),
         ),
@@ -138,12 +138,12 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
           top: 63,
           child: SizedBox(
             child: ElevatedButton(
-              style: buttonStyleEdit(ColorApp.preto),
+              style: buttonStyleEdit(ColorsTemaClaro.preto),
               onPressed: () => bottomSheat(context, atualizarImagemPerfil),
               child: const Iconify(
                 Icones.Lapiz,
                 size: 10,
-                color: ColorApp.branco,
+                color: ColorsTemaClaro.branco,
               ),
             ),
           ),
