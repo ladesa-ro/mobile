@@ -40,7 +40,7 @@ class ColorsTemaClaro {
   static const Color vermelhoFracoCalendario = Color.fromARGB(165, 181, 0, 21);
   static const Color verdecinzaCalendario = Color(0xFF9AB69E);
   
-  //nova cores do modo claro 
+  //novas cores do modo claro 
 
   //principal 
   static const Color verdePrincipal = Color(0XFF2F9E41);
@@ -62,6 +62,31 @@ class ColorsTemaClaro {
   static const Color vermelhobotao = Color(0XFFcd191e);
   static const Color pretobotao = Color(0XFF050F07);
   static const Color verdebotao = Color(0XFF2F9E41);
+ 
+}
 
+class ColorsTemaEscuro {
+  //cores modo escuro 
+
+  //principal 
+  static const Color verdePrincipalTemaEscuro = Color(0XFF066436);
+  static const Color verdeClaroTemaEscuro = Color(0XFF1D935A);
+  static const Color pretoTemaEscuro = Color(0xFF191B22);
+
+  //texto
+  static const Color brancoTextoTemaEscuro = Color(0XFFD4DEDE);
+  static const Color cinzaTextoTemaEscuro = Color(0XFF555D6E);
+  static const Color vermelhoTextoTemaEscuro = Color(0XFFA00F25);
+  static const Color verdeTextoTemaEscuro = Color(0XFF1D935A);
+
+  //Bordas 
+  static const Color cinzaBordasTemaEscuro = Color(0XFF555D6E);
+  static const Color verdeBordasTemaEscuro = Color(0XFF066436);
+  static const Color verdeClaroBordaTemaEscuro = Color(0xFF1D935A);
+
+  //botão 
+  static const Color vermelhoBotaoTemaEscuro = Color(0XFFA00F25);
+  static const Color brancoBotaoTemaEscuro = Color(0XFFD4DEDE);
+  static const Color verdeBotaoTemaEscuro = Color(0XFF066436);
 
 }
