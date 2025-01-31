@@ -5,13 +5,13 @@ class ThemeApp {
   static ThemeData tema() {
     return ThemeData(
       appBarTheme: AppBarTheme(
-          color: ColorApp.verdePrincipal,
-          foregroundColor: ColorApp.brancoTexto),
+          color: ColorsTemaClaro.verdePrincipal,
+          foregroundColor: ColorsTemaClaro.brancoTexto),
       fontFamily: 'Poppins',
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-        primary: ColorApp.verdePrincipal,
-        seedColor: ColorApp.verdeClaro,
+        primary: ColorsTemaClaro.verdePrincipal,
+        seedColor: ColorsTemaClaro.verdeClaro,
       ).copyWith(surface: Colors.white),
     );
   }
