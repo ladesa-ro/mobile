@@ -34,6 +34,7 @@ class DadosProfessor with ChangeNotifier {
         user.matricula.isEmpty) {
       return false;
     }
+
     professor = Professor(
         matricula: user.matricula,
         nome: user.nome,
@@ -41,10 +42,10 @@ class DadosProfessor with ChangeNotifier {
         id: user.id);
 
     final baixarImagemCapa = await Cache.baixarImagem(
-        "https://dev.ladesa.com.br/api/usuarios/${user.id}/imagem/capa");
+        "https://dev.ladesa.com.br/api/v1/usuarios/${user.id}/imagem/capa");
 
     final baixarImagemPerfil = await Cache.baixarImagem(
-        "https://dev.ladesa.com.br/api/usuarios/${user.id}/imagem/perfil");
+        "https://dev.ladesa.com.br/api/v1/usuarios/${user.id}/imagem/perfil");
 
     _fotoCapaPerfil = baixarImagemCapa.absolute;
     _fotoImagemPerfil = baixarImagemPerfil.absolute;
