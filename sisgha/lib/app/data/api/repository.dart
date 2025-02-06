@@ -2,11 +2,13 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:sisgha/app/data/model/nivel_formacao.dart';
 
 import '../../views/widgets_globais/widget_erro.dart';
 import '../model/professor.dart';
@@ -254,14 +256,31 @@ Future<bool> sair() async {
   return true;
 }
 
-Future<bool> teste() async {
-//  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-//  final token = sharedPreferences.getString("token");
-  var url = Uri.parse("https://dev.ladesa.com.br/api/usuarios");
-  var resposta = await http.get(url);
+// ----------------------------------------------------------------------
+Future<List<NiveisFormacao>> buscarNiveisDeFormacao() async {
+  try {
+    var url = Uri.parse("https://dev.ladesa.com.br/api/v1/niveis-formacoes");
+    var resposta = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+    if (resposta.statusCode == 200) {
+      final bodyDecode = jsonDecode(resposta.body)["data"];
 
-  print(
-      '-----------------------------------------------------------------------');
-  print(resposta.body[34]);
-  return Future(() => true);
+      var listaFormacoes = <NiveisFormacao>[];
+
+      for (var teste in bodyDecode) {
+        print('até aqui $teste');
+        NiveisFormacao niveisFormacao = NiveisFormacao.fromJson(teste);
+
+        listaFormacoes.add(niveisFormacao);
+      }
+
+      return listaFormacoes;
+    } else {
+      throw Exception();
+    }
+  } catch (e) {
+    throw Exception();
+  }
 }
