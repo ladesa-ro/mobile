@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
-import 'package:sisgha/app/data/api/repository.dart';
 import 'package:sizer/sizer.dart';
+
 import '../../../core/utils/Icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
@@ -39,7 +39,8 @@ class _MenuLateralState extends State<MenuLateral> {
               Text(
                 'Ano Letivo',
                 style: estiloTexto(16,
-                    cor: ColorsTemaClaro.verdePrincipalTexto, peso: FontWeight.bold),
+                    cor: ColorsTemaClaro.verdePrincipalTexto,
+                    peso: FontWeight.bold),
               ),
               SizedBox(height: constraints.maxHeight * 0.02),
               SizedBox(
@@ -52,7 +53,8 @@ class _MenuLateralState extends State<MenuLateral> {
               Text(
                 'Modalidade',
                 style: estiloTexto(16,
-                    cor: ColorsTemaClaro.verdePrincipalTexto, peso: FontWeight.bold),
+                    cor: ColorsTemaClaro.verdePrincipalTexto,
+                    peso: FontWeight.bold),
               ),
               SizedBox(height: constraints.maxHeight * 0.02),
               quadradosModalidade(context, constraints.maxHeight * 0.05),
@@ -61,7 +63,8 @@ class _MenuLateralState extends State<MenuLateral> {
               Text(
                 'Calendário',
                 style: estiloTexto(16,
-                    cor: ColorsTemaClaro.verdePrincipalTexto, peso: FontWeight.bold),
+                    cor: ColorsTemaClaro.verdePrincipalTexto,
+                    peso: FontWeight.bold),
               ),
               SizedBox(height: constraints.maxHeight * 0.02),
               quadradoCurso(context, constraints.maxHeight * 0.05),
@@ -73,14 +76,14 @@ class _MenuLateralState extends State<MenuLateral> {
                 child: ElevatedButton(
                     style: Tamanhos.estiloBotao(),
                     onPressed: () {
-                      // Navigator.pop(context);
-                      teste();
+                      Navigator.pop(context);
                     },
                     child: Center(
                       child: Text(
                         'Buscar',
                         style: estiloTexto(15,
-                            cor: ColorsTemaClaro.brancoTexto, peso: FontWeight.bold),
+                            cor: ColorsTemaClaro.brancoTexto,
+                            peso: FontWeight.bold),
                       ),
                     )),
               ),
@@ -119,8 +122,7 @@ Widget headerDrawer(BuildContext context, double height, double width) {
         Spacer(),
         IconButton(
           onPressed: () {
-            //Navigator.pop(context);
-            teste();
+            Navigator.pop(context);
           },
           icon: Iconify(
             Icones.setaVoltarEsquerda,
