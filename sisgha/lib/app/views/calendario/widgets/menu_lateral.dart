@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
+import 'package:sisgha/app/data/api/repository.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/utils/Icones.dart';
@@ -122,7 +123,8 @@ Widget headerDrawer(BuildContext context, double height, double width) {
         Spacer(),
         IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            //Navigator.pop(context);
+            buscarCursos();
           },
           icon: Iconify(
             Icones.setaVoltarEsquerda,
