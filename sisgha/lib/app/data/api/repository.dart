@@ -2,12 +2,12 @@
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:sisgha/app/data/model/cursos.dart';
 import 'package:sisgha/app/data/model/nivel_formacao.dart';
 
 import '../../views/widgets_globais/widget_erro.dart';
@@ -269,14 +269,41 @@ Future<List<NiveisFormacao>> buscarNiveisDeFormacao() async {
 
       var listaFormacoes = <NiveisFormacao>[];
 
-      for (var teste in bodyDecode) {
-        print('até aqui $teste');
-        NiveisFormacao niveisFormacao = NiveisFormacao.fromJson(teste);
+      for (var item in bodyDecode) {
+        print('até aqui $item');
+        NiveisFormacao niveisFormacao = NiveisFormacao.fromJson(item);
 
         listaFormacoes.add(niveisFormacao);
       }
 
       return listaFormacoes;
+    } else {
+      throw Exception();
+    }
+  } catch (e) {
+    throw Exception();
+  }
+}
+
+Future<List<Cursos>> buscarCursos() async {
+  try {
+    var url = Uri.parse("https://dev.ladesa.com.br/api/v1/cursos");
+    var resposta = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+    if (resposta.statusCode == 200) {
+      final bodyDecode = jsonDecode(resposta.body)["data"];
+
+      var listaCursos = <Cursos>[];
+
+      for (var item in bodyDecode) {
+        Cursos cursos = Cursos.fromJson(item);
+
+        listaCursos.add(cursos);
+      }
+
+      return listaCursos;
     } else {
       throw Exception();
     }
