@@ -50,6 +50,7 @@ dependencies:
   provider: ^6.1.2
   flutter_cache_manager: ^3.4.1
   path_provider: ^2.1.5
+  crypto: ^3.0.6
 
 dev_dependencies:
   flutter_test:

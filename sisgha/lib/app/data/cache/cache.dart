@@ -43,4 +43,8 @@ class Cache {
 
     print('Arquivo no cache substituído com sucesso.');
   }
+
+  static Future<void> teste(
+    File localCache,
+  ) async {}
 }

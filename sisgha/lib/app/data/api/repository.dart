@@ -15,7 +15,7 @@ import '../model/professor.dart';
 import '../providers/dados_professor.dart';
 
 class Repository {
-  static final String api = "https://dev.ladesa.com.br/api/v1";
+  static final String _api = "https://dev.ladesa.com.br/api/v1";
 
   static void erro(BuildContext context, String text) {
     showDialog(
@@ -34,25 +34,26 @@ class Repository {
     }
   }
 
-  static void recarregarToken(BuildContext context, Function metodo) async {
-    return await refreshToken(context).then((_) => metodo);
+  static void recarregarToken(
+    BuildContext context,
+  ) async {
+    await refreshToken(context);
   }
 
-  static void escolherCaminho(
-      BuildContext context, int statusCode, Function metodo) {
+  static void escolherCaminho(BuildContext context, int statusCode) {
     if (statusCode <= 199) {
-      erro(context, 'erro no codigo');
+      return erro(context, 'erro no codigo');
     }
     if (statusCode >= 300 && statusCode <= 399) {
-      erro(context, 'erro no cliente');
+      return erro(context, 'erro no cliente');
     }
     if (statusCode >= 400 && statusCode <= 499) {
-      recarregarToken(context, metodo);
+      return recarregarToken(context);
     }
     if (statusCode >= 500) {
-      erro(context, 'erro no servidor');
+      return erro(context, 'erro no servidor');
     } else {
-      erro(context, 'algo de errado nao esta certo');
+      return erro(context, 'algo de errado nao esta certo');
     }
   }
 
@@ -68,7 +69,7 @@ class Repository {
       erro(context, 'token ou id nulos');
     }
 
-    var url = Uri.parse("$api/usuarios/$id/imagem/perfil");
+    var url = Uri.parse("$_api/usuarios/$id/imagem/perfil");
 
     var request = http.MultipartRequest('PUT', url)
       ..headers['Authorization'] = 'Bearer $token'
@@ -80,8 +81,7 @@ class Repository {
     var response = await request.send();
 
     if (verificarStatusCode(response.statusCode) == false) {
-      escolherCaminho(context, response.statusCode,
-          () => atualizarImagemPerfil(imagemPerfil, context));
+      escolherCaminho(context, response.statusCode);
     }
     return;
   }
@@ -98,7 +98,7 @@ class Repository {
       erro(context, 'token ou id nulos');
     }
 
-    var url = Uri.parse("$api/usuarios/$id/imagem/capa");
+    var url = Uri.parse("$_api/usuarios/$id/imagem/capa");
 
     var request = http.MultipartRequest('PUT', url)
       ..headers['Authorization'] = 'Bearer $token'
@@ -110,8 +110,7 @@ class Repository {
     var response = await request.send();
 
     if (verificarStatusCode(response.statusCode) == false) {
-      escolherCaminho(context, response.statusCode,
-          () => atualizarImagemCapa(imagemCapa, context));
+      escolherCaminho(context, response.statusCode);
     }
     return;
   }
@@ -121,7 +120,7 @@ class Repository {
       TextEditingController senhaController, BuildContext context) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-    var url = Uri.parse("$api/autenticacao/login");
+    var url = Uri.parse("$_api/autenticacao/login");
     var resposta = await http.post(url, body: {
       "matriculaSiape": matriculaController.text,
       "senha": senhaController.text,
@@ -133,18 +132,19 @@ class Repository {
       await sharedPreferences.setString('refreshToken', body['refresh_token']);
       return true;
     } else if (resposta.statusCode == 403) {
-      return false;
+      false;
     } else {
-      erro(context, 'bucar token de usuario 1');
+      escolherCaminho(context, resposta.statusCode);
+      return false;
     }
     return false;
   }
 
   // -------------------------------------------------------------------------- FAZER REQUISIÇÃO NA API PRA BUSCAR O USUARIO -------------------------------------------------------------------------------------//
-  static Future<dynamic> buscarUser(BuildContext context) async {
+  static Future<Professor> buscarUser(BuildContext context) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
-    var url = Uri.parse("$api/autenticacao/quem-sou-eu");
+    var url = Uri.parse("$_api/autenticacao/quem-sou-eu");
 
     var response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -163,34 +163,33 @@ class Repository {
       await sharedPreferences.setString("email", user.email);
       return user;
     } else {
-      escolherCaminho(context, response.statusCode, () => buscarUser(context));
+      escolherCaminho(context, response.statusCode);
+      return buscarUser(context);
     }
   }
 
   // ---------------------------------------------------------- RECARREGAR TOKEM DE ACESSO DO USUARIO CASO TENHA EXPIRADO ---------------------------------------------------------------------//
   static Future<bool> refreshToken(BuildContext context) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var refreshToken = sharedPreferences.getString("refreshToken");
+    var recarregarToken = sharedPreferences.getString("refreshToken");
 
-    if (refreshToken == null) {
-      return false;
+    if (recarregarToken == null) {
+      erro(context, 'token nulo');
     }
 
-    var url = Uri.parse("$api/autenticacao/login/refresh");
+    var url = Uri.parse("$_api/autenticacao/login/refresh");
     var response = await http.post(url, body: {
-      "refreshToken": refreshToken,
+      "refreshToken": recarregarToken,
     });
 
     if (verificarStatusCode(response.statusCode)) {
       final body = jsonDecode(response.body);
       await sharedPreferences.setString("token", body["access_token"]);
       return true;
-    } else if (response.statusCode == 403) {
-      erro(context, 'recarregar token');
-      return false;
+    } else {
+      escolherCaminho(context, response.statusCode);
+      return refreshToken(context);
     }
-
-    return false;
   }
 
   // ---------------------------------------------------- APAGAR DADOS SALVOS ----------------------------------------------------------------------------------//
@@ -204,7 +203,7 @@ class Repository {
 
   // ----------------------------------------------------------------------
   static Future<List<NiveisFormacao>> buscarNiveisDeFormacao(context) async {
-    var url = Uri.parse("$api/niveis-formacoes");
+    var url = Uri.parse("$_api/niveis-formacoes");
     var response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -223,14 +222,13 @@ class Repository {
 
       return listaFormacoes;
     } else {
-      escolherCaminho(
-          context, response.statusCode, () => buscarNiveisDeFormacao(context));
+      escolherCaminho(context, response.statusCode);
+      return buscarNiveisDeFormacao(context);
     }
-    throw Exception();
   }
 
   static Future<List<Cursos>> buscarCursos(BuildContext context) async {
-    var url = Uri.parse("$api/cursos");
+    var url = Uri.parse("$_api/cursos");
     var response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -248,9 +246,8 @@ class Repository {
 
       return listaCursos;
     } else {
-      escolherCaminho(
-          context, response.statusCode, () => buscarCursos(context));
+      escolherCaminho(context, response.statusCode);
+      return buscarCursos(context);
     }
-    return buscarCursos(context);
   }
 }
