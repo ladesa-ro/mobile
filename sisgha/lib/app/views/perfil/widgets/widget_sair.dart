@@ -6,7 +6,7 @@ import '../../../data/api/repository.dart';
 import '../../inicio/boas_vindas.dart';
 
 Future widgetQuit(BuildContext context) async {
-  if (await sair()) {
+  if (await Repository.sair()) {
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => const BoasVindasPage()),
       (Route<dynamic> route) => false,

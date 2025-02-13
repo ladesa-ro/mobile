@@ -22,7 +22,7 @@ class DadosProfessor with ChangeNotifier {
 
   Future<bool> buscarDados(BuildContext context) async {
     mostrarDialogoDeCarregmento(context);
-    final user = await buscarUser(context);
+    final user = await Repository.buscarUser(context);
     if (user == null ||
         user.id == null ||
         user.id.isEmpty ||
@@ -56,26 +56,20 @@ class DadosProfessor with ChangeNotifier {
 
   Future<void> atualizarImagemCapaProvider(
       BuildContext context, File imagem) async {
-    bool sucesso = await atualizarImagemCapa(imagem, context);
-    if (sucesso) {
-      Cache.substituirArquivoNoCache(_fotoCapaPerfil.path, imagem);
-      _fotoCapaPerfil = imagem.absolute;
+    await Repository.atualizarImagemCapa(imagem, context);
 
-      return notifyListeners();
-    } else {
-      return error(context);
-    }
+    Cache.substituirArquivoNoCache(_fotoCapaPerfil.path, imagem);
+    _fotoCapaPerfil = imagem.absolute;
+
+    return notifyListeners();
   }
 
   Future<void> atualizarImagemPerfilProvider(
       BuildContext context, File imagem) async {
-    bool sucesso = await atualizarImagemPerfil(imagem, context);
-    if (sucesso) {
-      _fotoImagemPerfil = imagem.absolute;
-      return notifyListeners();
-    } else {
-      return error(context);
-    }
+    await Repository.atualizarImagemPerfil(imagem, context);
+
+    _fotoImagemPerfil = imagem.absolute;
+    return notifyListeners();
   }
 
   void apagarDados() {

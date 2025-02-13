@@ -124,7 +124,7 @@ Widget headerDrawer(BuildContext context, double height, double width) {
         IconButton(
           onPressed: () {
             //Navigator.pop(context);
-            buscarCursos();
+            Repository.buscarCursos(context);
           },
           icon: Iconify(
             Icones.setaVoltarEsquerda,
