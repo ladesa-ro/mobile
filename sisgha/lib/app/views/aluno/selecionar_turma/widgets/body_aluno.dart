@@ -1,7 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_aluno.dart';
+import 'package:sisgha/app/core/utils/colors.dart';
+import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdomn-turmas.dart';
+import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown-ano.dart';
+import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_curso.dart';
+import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_formacao.dart';
 
 class BodyAluno extends StatefulWidget {
   const BodyAluno({super.key});
@@ -16,81 +20,94 @@ class _BodyAlunoState extends State<BodyAluno> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          //
-          Center(
-            child: Text(
-              "Selecione sua Turma",
-              style: TextStyle(fontSize: 23, fontWeight: FontWeight.w700),
-            ),
-          ),
-          //
           SizedBox(
-            height: 20,
+            height: 70,
           ),
-          //
-          DropdownAluno(
-            nome: "Formação",
-            direita: 6,
-            esquerda: 6,
-            descricao: "Selecione um nível de formação",
-          ),
-          //
-          SizedBox(
-            height: 20,
-          ),
-          //
+
           Row(
-            children: const [
-              SizedBox(
-                width: 180,
-                child: DropdownAluno(
-                  nome: "Curso",
-                  direita: 0,
-                  esquerda: 10,
-                  descricao: "Selecione o curso",
-                ),
-              ),
+            children: [
+              Icon(Icons.loupe_sharp), // temporario ainda n achei o certo kkkkk 
               SizedBox(
                 width: 8,
               ),
-              //
-              SizedBox(
-                width: 160,
-                child: DropdownAluno(
-                  nome: "Turma",
-                  direita: 0,
-                  esquerda: 5,
-                  descricao: "Turmas",
-                ),
+              Text(
+                "Selecionar Horário",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
               ),
             ],
+          ),
+
+          SizedBox(
+            height: 20,
+          ),
+
+          //
+          DropdownFormacao(
+            nome: "",
+            direita: 6,
+            esquerda: 6,
+            descricao: "formação",
           ),
           //
           SizedBox(
             height: 20,
           ),
           //
+
+          DropdownCurso(
+            nome: "",
+            direita: 0,
+            esquerda: 10,
+            descricao: "curso",
+          ),
+
+          SizedBox(
+            height: 20,
+          ),
+
+          DropdownAno(
+            nome: "",
+            direita: 0,
+            esquerda: 5,
+            descricao: "Ano",
+          ),
+
+          SizedBox(
+            height: 20,
+          ),
+          DropdownTurmas(
+            nome: "",
+            direita: 0,
+            esquerda: 5,
+            descricao: "Turmas",
+          ),
+
+          SizedBox(
+            height: 20,
+          ),
+
           Row(
             children: [
               Expanded(
                 child: FilledButton(
                   onPressed: () {},
-                  style: ButtonStyle(
-                    shape: WidgetStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
+                  style: ElevatedButton.styleFrom(
+                    // Use ElevatedButton.styleFrom
+                    backgroundColor:
+                        ColorsTemaClaro.cinza, // Set background color here
+                    foregroundColor: Colors.white, // Text color (optional)
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 25, horizontal: 24),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: Icon(
-                    Icons.search,
-                    size: 40,
-                  ),
+                  child: const Text("Ver Horário"),
                 ),
-              )
+              ),
             ],
           )
         ],

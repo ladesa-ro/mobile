@@ -3,12 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 
-class DropdownAluno extends StatefulWidget {
+class DropdownTurmas extends StatefulWidget {
   final String nome;
   final double direita;
   final double esquerda;
   final String descricao;
-  const DropdownAluno({
+  const DropdownTurmas({
     super.key,
     required this.nome,
     required this.direita,
@@ -17,10 +17,10 @@ class DropdownAluno extends StatefulWidget {
   });
 
   @override
-  State<DropdownAluno> createState() => _DropdownAlunoState();
+  State<DropdownTurmas> createState() => _DropdownTurmaState();
 }
 
-class _DropdownAlunoState extends State<DropdownAluno> {
+class _DropdownTurmaState extends State<DropdownTurmas> {
   @override
   Widget build(BuildContext context) {
     var selectedValue;
@@ -30,27 +30,29 @@ class _DropdownAlunoState extends State<DropdownAluno> {
         hint: Text(
           widget.descricao,
           style: TextStyle(
-              color: ColorsTemaClaro.verdecinza,
+              color: ColorsTemaClaro.cinzatexto,
               fontSize: 12,
               fontWeight: FontWeight.w600),
         ),
+
+        
         decoration: InputDecoration(
           contentPadding:
               EdgeInsets.fromLTRB(widget.esquerda, 0, widget.direita, 0),
           labelText: widget.nome,
           labelStyle: TextStyle(
-              color: ColorsTemaClaro.verdecinza, fontWeight: FontWeight.w600),
+              color: ColorsTemaClaro.pretoTexto, fontWeight: FontWeight.w600),
           disabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorsTemaClaro.verdePrincipal),
-            borderRadius: BorderRadius.circular(10.0),
-          ),
+              borderSide: BorderSide(color: ColorsTemaClaro.verdePrincipal),
+              borderRadius: BorderRadius.circular(10.0),            
+              ),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorsTemaClaro.verdePrincipal),
+            borderSide: BorderSide(color: ColorsTemaClaro.cinzaBordas),
             borderRadius: BorderRadius.circular(10.0),
           ),
           border: OutlineInputBorder(),
-        ),
-        iconEnabledColor: ColorsTemaClaro.verdePrincipal,
+        ),//
+        iconEnabledColor: ColorsTemaClaro.cinza,
         value: selectedValue,
         onChanged: (String? newValue) {
           setState(() {
