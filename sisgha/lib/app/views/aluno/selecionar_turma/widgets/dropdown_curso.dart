@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_typing_uninitialized_variables, prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 
@@ -21,55 +19,86 @@ class DropdownCurso extends StatefulWidget {
 }
 
 class _DropdownAlunoState extends State<DropdownCurso> {
+  var selectedValue;
+  bool isExpanded = false;
+
   @override
   Widget build(BuildContext context) {
-    var selectedValue;
-    return SizedBox(
-      height: 42,
-      child: DropdownButtonFormField<String>(
-        hint: Text(
-          widget.descricao,
-          style: TextStyle(
-              color: ColorsTemaClaro.cinzatexto,
-              fontSize: 12,
-              fontWeight: FontWeight.w600),
-        ),
-        decoration: InputDecoration(
-          contentPadding:
-              EdgeInsets.fromLTRB(widget.esquerda, 0, widget.direita, 0),
-          labelText: widget.nome,
-          labelStyle: TextStyle(
-              color: ColorsTemaClaro.verdecinza, fontWeight: FontWeight.w600),
-          disabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorsTemaClaro.verdePrincipal),
-            borderRadius: BorderRadius.circular(10.0),
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isExpanded = !isExpanded;
+        });
+      },
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300),
+        width: MediaQuery.of(context).size.width * 0.9,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: selectedValue != null
+                ? ColorsTemaClaro.verdePrincipal  // Verde se tiver algo selecionado
+                : ColorsTemaClaro.cinzaBordas,    // Cinza se não tiver nada
           ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorsTemaClaro.cinzaBordas),
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          border: OutlineInputBorder(),
+          borderRadius: BorderRadius.circular(10.0),
         ),
-        iconEnabledColor: ColorsTemaClaro.verdePrincipal,
-        value: selectedValue,
-        onChanged: (String? newValue) {
-          setState(() {
-            selectedValue = newValue!;
-          });
-        },
-        items: <String>['Ensino Médio', 'Graduação', 'Pós-Graduação']
-            .map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            alignment: Alignment.center,
-            value: value,
-            child: Text(
-              value,
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+        padding: EdgeInsets.fromLTRB(widget.esquerda, 0, widget.direita, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 42,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    selectedValue ?? widget.descricao,
+                    style: TextStyle(
+                      color: ColorsTemaClaro.cinzatexto,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Icon(
+                    isExpanded
+                        ? Icons.arrow_drop_up
+                        : Icons.arrow_drop_down,
+                    color: ColorsTemaClaro.verdePrincipal,
+                  ),
+                ],
+              ),
             ),
-          );
-        }).toList(),
-        validator: (value) =>
-            value == null ? 'Por favor, selecione uma opção' : null,
+            AnimatedContainer(
+              duration: Duration(milliseconds: 300),
+              height: isExpanded ? 80 : 0,  // Expande um pouco mais para baixo
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: <String>['Informática', 'Química', 'Floresta']
+                      .map((option) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                            child: ChoiceChip(
+                              label: Text(option),
+                              labelStyle: TextStyle(
+                                color: selectedValue == option
+                                    ? Colors.white
+                                    : ColorsTemaClaro.cinzatexto,
+                              ),
+                              selected: selectedValue == option,
+                              selectedColor: ColorsTemaClaro.verdePrincipal,
+                              onSelected: (bool selected) {
+                                setState(() {
+                                  selectedValue = selected ? option : null;
+                                  isExpanded = false;
+                                });
+                              },
+                            ),
+                          ))
+                      .toList(),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

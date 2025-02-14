@@ -15,24 +15,20 @@ class BodyAluno extends StatefulWidget {
 }
 
 class _BodyAlunoState extends State<BodyAluno> {
+  bool isClicked = false;
+  
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.start,
+      child: ListView(  // Usando ListView para tornar o conteúdo rolável
         children: [
-          SizedBox(
-            height: 70,
-          ),
+          SizedBox(height: 70),
 
           Row(
             children: [
-              Icon(Icons.loupe_sharp), // temporario ainda n achei o certo kkkkk 
-              SizedBox(
-                width: 8,
-              ),
+              Icon(Icons.loupe_sharp), // Temporário
+              SizedBox(width: 8),
               Text(
                 "Selecionar Horário",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
@@ -40,23 +36,19 @@ class _BodyAlunoState extends State<BodyAluno> {
             ],
           ),
 
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 20),
 
-          //
+          // Dropdown de Formação
           DropdownFormacao(
             nome: "",
             direita: 6,
             esquerda: 6,
             descricao: "formação",
           ),
-          //
-          SizedBox(
-            height: 20,
-          ),
-          //
 
+          SizedBox(height: 20),
+
+          // Dropdown de Curso
           DropdownCurso(
             nome: "",
             direita: 0,
@@ -64,10 +56,9 @@ class _BodyAlunoState extends State<BodyAluno> {
             descricao: "curso",
           ),
 
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 20),
 
+          // Dropdown de Ano
           DropdownAno(
             nome: "",
             direita: 0,
@@ -75,9 +66,9 @@ class _BodyAlunoState extends State<BodyAluno> {
             descricao: "Ano",
           ),
 
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 20),
+
+          // Dropdown de Turmas
           DropdownTurmas(
             nome: "",
             direita: 0,
@@ -85,22 +76,23 @@ class _BodyAlunoState extends State<BodyAluno> {
             descricao: "Turmas",
           ),
 
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 20),
 
           Row(
             children: [
               Expanded(
                 child: FilledButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      isClicked = !isClicked; // Alterna o estado do botão
+                    });
+                  },
                   style: ElevatedButton.styleFrom(
-                    // Use ElevatedButton.styleFrom
-                    backgroundColor:
-                        ColorsTemaClaro.cinza, // Set background color here
-                    foregroundColor: Colors.white, // Text color (optional)
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 25, horizontal: 24),
+                    backgroundColor: isClicked
+                        ? ColorsTemaClaro.verdePrincipal  // Cor verde quando clicado
+                        : ColorsTemaClaro.cinza,  // Cor cinza quando não clicado
+                    foregroundColor: Colors.white,  // Cor do texto
+                    padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 24),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -109,7 +101,7 @@ class _BodyAlunoState extends State<BodyAluno> {
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
