@@ -36,8 +36,9 @@ class _DropdownAlunoState extends State<DropdownTurmas> {
         decoration: BoxDecoration(
           border: Border.all(
             color: selectedValue != null
-                ? ColorsTemaClaro.verdePrincipal  // Verde se tiver algo selecionado
-                : ColorsTemaClaro.cinzaBordas,    // Cinza se não tiver nada
+                ? ColorsTemaClaro
+                    .verdePrincipal // Verde se tiver algo selecionado
+                : ColorsTemaClaro.cinzaBordas, // Cinza se não tiver nada
           ),
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -53,23 +54,29 @@ class _DropdownAlunoState extends State<DropdownTurmas> {
                   Text(
                     selectedValue ?? widget.descricao,
                     style: TextStyle(
-                      color: ColorsTemaClaro.cinzatexto,
+                      color: selectedValue == null
+                          ? ColorsTemaClaro
+                              .cinza // Texto cinza quando não selecionado
+                          : ColorsTemaClaro
+                              .pretoTexto, // Texto preto quando selecionado
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   Icon(
-                    isExpanded
-                        ? Icons.arrow_drop_up
-                        : Icons.arrow_drop_down,
-                    color: ColorsTemaClaro.verdePrincipal,
+                    isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                    color: selectedValue != null
+                        ? ColorsTemaClaro
+                            .verdePrincipal // Verde se tiver algo selecionado
+                        : ColorsTemaClaro
+                            .cinzaBordas, // Cinza se não tiver nada
                   ),
                 ],
               ),
             ),
             AnimatedContainer(
               duration: Duration(milliseconds: 300),
-              height: isExpanded ? 80 : 0,  // Ajusta a altura do conteúdo
+              height: isExpanded ? 80 : 0, // Ajusta a altura do conteúdo
               curve: Curves.easeInOut, // Animação suave
               child: isExpanded
                   ? SingleChildScrollView(
@@ -77,7 +84,8 @@ class _DropdownAlunoState extends State<DropdownTurmas> {
                       child: Row(
                         children: <String>['A', 'B']
                             .map((option) => Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 4.0),
                                   child: ChoiceChip(
                                     label: Text(option),
                                     labelStyle: TextStyle(
@@ -86,11 +94,14 @@ class _DropdownAlunoState extends State<DropdownTurmas> {
                                           : ColorsTemaClaro.cinzatexto,
                                     ),
                                     selected: selectedValue == option,
-                                    selectedColor: ColorsTemaClaro.verdePrincipal,
+                                    selectedColor:
+                                        ColorsTemaClaro.verdePrincipal,
                                     onSelected: (bool selected) {
                                       setState(() {
-                                        selectedValue = selected ? option : null;
-                                        isExpanded = false;  // Fecha o dropdown após seleção
+                                        selectedValue =
+                                            selected ? option : null;
+                                        isExpanded =
+                                            true; // Continua expandido após selecionar
                                       });
                                     },
                                   ),
