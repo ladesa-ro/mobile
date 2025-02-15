@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:sisgha/app/core/utils/Icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdomn-turmas.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown-ano.dart';
@@ -21,13 +22,13 @@ class _BodyAlunoState extends State<BodyAluno> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: ListView(  // Usando ListView para tornar o conteúdo rolável
+      child: ListView( 
         children: [
           SizedBox(height: 70),
 
           Row(
             children: [
-              Icon(Icons.loupe_sharp), // Temporário
+              Icon(Icones.Relogio), 
               SizedBox(width: 8),
               Text(
                 "Selecionar Horário",
