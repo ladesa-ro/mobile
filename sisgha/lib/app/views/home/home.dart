@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
       body: Column(
         children: [
           SizedBox(height: tamanho * 0.03),
-          //botão que ira aparecer na tala com o calendário
+          //botão que ira aparecer na tela com o calendário
           Container(
             padding: Tamanhos.margem(context),
             child: ElevatedButton(
