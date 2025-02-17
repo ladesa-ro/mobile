@@ -8,6 +8,7 @@ import 'package:sisgha/app/views/widgets_globais/botton_app_bar.dart';
 import 'package:sisgha/app/views/inicio/login/login.dart';
 import 'package:sisgha/app/views/perfil/perfil.dart';
 import 'package:sisgha/app/views/inicio/splash_screen.dart';
+import 'package:sisgha/app/views/widgets_globais/botton_app_bar_alunos.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> rotas() {
@@ -15,6 +16,7 @@ class AppRoutes {
       '/bemvindo': (context) => const BoasVindasPage(),
       '/login': (context) => const PaginaLogin(),
       '/navegação': (context) => const Navigation(initialIndex: 1),
+      '/navegaçãoAluno' : (context) => const NavigationAlunos(initialIndex: 1),
       '/home': (context) => const Home(),
       '/perfilProf': (context) => const Perfil(),
       '/calendario': (context) => Calendar(),
