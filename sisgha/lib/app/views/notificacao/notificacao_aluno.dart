@@ -24,15 +24,15 @@ class Notificacao extends StatelessWidget {
           child: Flexible(
             child: ListView.builder(
               padding: EdgeInsets.zero,
-              itemCount: 2,
+              itemCount: 1,
               itemBuilder: (context, index) => Column(
                 children: [
                   cards(context,
-                      titulo: 'Funciona $index',
+                      titulo: 'Novo horário!',
                       menssagem:
-                          'O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão.',
-                      link: 'clique aqui e confira',
-                      icon: Icones.Bell,
+                          'A aula das 13h de Filosofia II foi cancelada, aula vaga',
+                      link: 'Clique aqui e confira',
+                      icon: Icon(Icones.IconeSisgha),
                       data: '$index dias'),
                   Divider(
                     thickness: 1.5,
