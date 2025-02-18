@@ -32,7 +32,7 @@ class Notificacao extends StatelessWidget {
                       menssagem:
                           'A aula das 13h de Filosofia II foi cancelada, aula vaga',
                       link: 'Clique aqui e confira',
-                      icon: Icon(Icones.IconeSisgha),
+                      icon: Icones.IconeSisgha, // Passe apenas a String
                       data: '$index dias'),
                   Divider(
                     thickness: 1.5,
@@ -64,8 +64,8 @@ Widget cards(BuildContext context,
       children: [
         Row(
           children: [
-            Iconify(
-              icon,
+            Icon(
+              icon, // Aqui, 'icon' é um IconData agora
               size: 30,
               color: ColorsTemaClaro.verdePrincipal,
             ),
@@ -75,7 +75,8 @@ Widget cards(BuildContext context,
             Text(
               titulo,
               style: estiloTexto(15,
-                  cor: ColorsTemaClaro.verdePrincipalTexto, peso: FontWeight.bold),
+                  cor: ColorsTemaClaro.verdePrincipalTexto,
+                  peso: FontWeight.bold),
             ),
             Spacer(),
             Text(

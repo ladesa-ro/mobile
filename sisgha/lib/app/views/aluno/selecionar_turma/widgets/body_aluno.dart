@@ -7,7 +7,7 @@ import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdomn-turmas.
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown-ano.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_curso.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_formacao.dart';
-import 'package:sisgha/app/views/home/home_alunos/home_alunos.dart';
+import 'package:sisgha/app/views/widgets_globais/botton_app_bar_alunos.dart';
 
 class BodyAluno extends StatefulWidget {
   const BodyAluno({super.key});
@@ -90,7 +90,7 @@ class _BodyAlunoState extends State<BodyAluno> {
                     });
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomeAlunos()),
+                      MaterialPageRoute(builder: (context) => NavigationAlunos(initialIndex: 1,)),
                     );
                   },
                   style: ElevatedButton.styleFrom(

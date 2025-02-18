@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/Icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/responsividade.dart';
-import 'package:sisgha/app/views/calendario/calendario.dart';
-import 'package:sisgha/app/views/home/home.dart';
-import 'package:sisgha/app/views/perfil/perfil.dart';
+import 'package:sisgha/app/views/home/home_alunos/home_alunos.dart';
+import 'package:sisgha/app/views/notificacao/notificacao_aluno.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../data/providers/escolha_menu_lateral.dart';
 
 class NavigationAlunos extends StatefulWidget {
   final int initialIndex;
@@ -46,36 +42,39 @@ class _NavigationState extends State<NavigationAlunos> {
               iconCheio1: Icones.IconeSisgha,
               index: 1),
           _buildIconButton(
-              iconVazio1: Icones.PersonVazio,
-              iconCheio1: Icones.PersonCheio,
+              iconVazio: Icones.Sino,
+              iconCheio: Icones.Sino,
               index: 2),
         ],
       ),
     );
 
     return Scaffold(
-        body: _buildPage(_selectedIndex), bottomNavigationBar: bottomAppBarAluno);
+        body: _buildPage(_selectedIndex),
+        bottomNavigationBar: bottomAppBarAluno);
   }
 
   Widget _buildPage(int index) {
     switch (index) {
-      case 0:
+      //case 0:
+      /*
         return ChangeNotifierProvider(
           create: (_) => EscolhaCalendario(),
           child: Center(
-            child: Calendar(),
+            child: Calendar(), // esperar o braga fazer a tela de calendario dos alunos pra colocar aqui 
           ),
         );
+        */
       case 1:
         return const Center(
-          child: Home(),
+          child: HomeAlunos(),
         );
       case 2:
         return const Center(
-          child: Perfil(),
+          child: Notificacao(),
         );
       default:
-        return const Home();
+        return const HomeAlunos();
     }
   }
 
@@ -111,7 +110,7 @@ class _NavigationState extends State<NavigationAlunos> {
                   )
                 : Iconify(
                     iconCheio!,
-                    size: 3.h,
+                    size: 1.h,
                     color: ColorsTemaClaro.verdePrincipal,
                   ))
             : (iconVazio1 != null
@@ -122,7 +121,7 @@ class _NavigationState extends State<NavigationAlunos> {
                   )
                 : Iconify(
                     iconVazio!,
-                    size: 3.h,
+                    size: 1.h,
                     color: ColorsTemaClaro.branco,
                   )),
       ),
