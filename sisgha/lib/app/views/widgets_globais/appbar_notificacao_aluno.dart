@@ -3,6 +3,7 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/core/utils/Icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
+import 'package:sisgha/app/views/widgets_globais/botton_app_bar_alunos.dart';
 
 class CustomAppBarNotificacao extends StatelessWidget
     implements PreferredSizeWidget {
@@ -25,7 +26,10 @@ class CustomAppBarNotificacao extends StatelessWidget
       leading: seta
           ? IconButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => NavigationAlunos(initialIndex: 1,)),
+                    );
               },
               icon: Iconify(
                 Icones.setaVoltarDireita,

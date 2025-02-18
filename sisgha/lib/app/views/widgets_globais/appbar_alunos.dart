@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:sisgha/app/core/utils/Icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/dias.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBarAluno extends StatelessWidget implements PreferredSizeWidget {
   final double height;
   final String titulo;
   final String subtitulo;
 
-  const CustomAppBar(
+  const CustomAppBarAluno(
       {super.key,
       required this.height,
       required this.titulo,
@@ -55,16 +53,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ],
             ),
             const Spacer(),
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/notificacao');
-              },
-              icon: const Iconify(
-                Icones.Sino,
-                size: 34,
-                color: ColorsTemaClaro.branco,
-              ),
-            )
+
           ],
         ),
       ),

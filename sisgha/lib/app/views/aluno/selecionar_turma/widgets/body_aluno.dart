@@ -7,6 +7,7 @@ import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdomn-turmas.
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown-ano.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_curso.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_formacao.dart';
+import 'package:sisgha/app/views/widgets_globais/botton_app_bar_alunos.dart';
 
 class BodyAluno extends StatefulWidget {
   const BodyAluno({super.key});
@@ -17,18 +18,18 @@ class BodyAluno extends StatefulWidget {
 
 class _BodyAlunoState extends State<BodyAluno> {
   bool isClicked = false;
-  
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: ListView( 
+      child: ListView(
         children: [
           SizedBox(height: 70),
 
           Row(
             children: [
-              Icon(Icones.Relogio), 
+              Icon(Icones.Relogio),
               SizedBox(width: 8),
               Text(
                 "Selecionar Horário",
@@ -87,13 +88,19 @@ class _BodyAlunoState extends State<BodyAluno> {
                     setState(() {
                       isClicked = !isClicked; // Alterna o estado do botão
                     });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => NavigationAlunos(initialIndex: 1,)),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: isClicked
-                        ? ColorsTemaClaro.verdePrincipal  // Cor verde quando clicado
-                        : ColorsTemaClaro.cinza,  // Cor cinza quando não clicado
-                    foregroundColor: Colors.white,  // Cor do texto
-                    padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 24),
+                        ? ColorsTemaClaro
+                            .verdePrincipal // Cor verde quando clicado
+                        : ColorsTemaClaro.cinza, // Cor cinza quando não clicado
+                    foregroundColor: Colors.white, // Cor do texto
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 25, horizontal: 24),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),

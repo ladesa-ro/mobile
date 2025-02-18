@@ -32,7 +32,7 @@ class Notificacao extends StatelessWidget {
                       menssagem:
                           'O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão.',
                       link: 'clique aqui e confira',
-                      icon: Icones.Bell,
+                      icon: Icones.Sino,
                       data: '$index dias'),
                   Divider(
                     thickness: 1.5,
