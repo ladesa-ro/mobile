@@ -4,8 +4,9 @@ import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
 
-import 'package:sisgha/app/views/widgets_globais/appbar_notificacao_aluno.dart';
 import 'package:sizer/sizer.dart';
+
+import '../widgets_globais/appbar_notificacao.dart';
 
 class Notificacao extends StatelessWidget {
   const Notificacao({super.key});
