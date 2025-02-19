@@ -7,12 +7,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:sisgha/app/data/model/cursos.dart';
-import 'package:sisgha/app/data/model/nivel_formacao.dart';
+import 'package:sisgha/app/domain/model/cursos.dart';
+import 'package:sisgha/app/domain/model/nivel_formacao.dart';
 
 import '../../views/widgets_globais/widget_erro.dart';
 import '../model/professor.dart';
-import '../providers/dados_professor.dart';
+import '../../data/providers/dados_professor.dart';
 
 class Repository {
   static final String _api = "https://dev.ladesa.com.br/api/v1";

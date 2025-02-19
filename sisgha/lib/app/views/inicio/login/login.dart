@@ -10,7 +10,7 @@ import '../../../core/utils/estilos.dart';
 import '../../../core/utils/imagens.dart';
 import '../../../core/utils/responsividade.dart';
 import '../../../core/utils/tamanhos.dart';
-import '../../../data/api/repository.dart';
+import '../../../domain/api/repository.dart';
 import '../../../data/providers/dados_professor.dart';
 import '../../widgets_globais/widget_erro.dart';
 import 'widgets_estilos.dart';

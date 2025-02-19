@@ -8,9 +8,9 @@ import 'package:provider/provider.dart';
 import '../../views/widgets_globais/botton_app_bar.dart';
 import '../../views/widgets_globais/progress_indicator.dart';
 import '../../views/widgets_globais/widget_erro.dart';
-import '../api/repository.dart';
+import '../../domain/api/repository.dart';
 import '../cache/cache.dart';
-import '../model/professor.dart';
+import '../../domain/model/professor.dart';
 
 class DadosProfessor with ChangeNotifier {
   late File _fotoCapaPerfil;

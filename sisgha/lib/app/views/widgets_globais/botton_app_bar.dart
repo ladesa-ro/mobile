@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/core/utils/Icones.dart';
-import 'package:sisgha/app/core/utils/colors.dart';
-import 'package:sisgha/app/core/utils/responsividade.dart';
-import 'package:sisgha/app/views/calendario/calendario.dart';
-import 'package:sisgha/app/views/home/home.dart';
-import 'package:sisgha/app/views/perfil/perfil.dart';
+
 import 'package:sizer/sizer.dart';
 
+import '../../core/utils/Icones.dart';
+import '../../core/utils/colors.dart';
+import '../../core/utils/responsividade.dart';
 import '../../data/providers/escolha_menu_lateral.dart';
+import '../../domain/logic/verificar_token_ativo.dart';
+import '../calendario/calendario.dart';
+import '../home/home.dart';
+import '../home/home_alunos/home_alunos.dart';
+import '../notificacao/notificacao.dart';
+import '../perfil/perfil.dart';
 
 class Navigation extends StatefulWidget {
   final int initialIndex;
@@ -22,11 +26,18 @@ class Navigation extends StatefulWidget {
 
 class _NavigationState extends State<Navigation> {
   late int _selectedIndex;
+  bool tokenAtivo = false;
 
   @override
   void initState() {
     super.initState();
     _selectedIndex = widget.initialIndex;
+
+    verificarTokenAtivo().then((retorno) {
+      setState(() {
+        tokenAtivo = retorno;
+      });
+    });
   }
 
   @override
@@ -37,55 +48,87 @@ class _NavigationState extends State<Navigation> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildIconButton(
+          construirBarraDeNavegacao(
+              tokenAtivo: tokenAtivo,
               iconVazio1: Icones.CalendarVazio,
               iconCheio1: Icones.CalendarCheio,
               index: 0),
-          _buildIconButton(
+          construirBarraDeNavegacao(
+              tokenAtivo: tokenAtivo,
               iconVazio1: Icones.IconeSisgha,
               iconCheio1: Icones.IconeSisgha,
               index: 1),
-          _buildIconButton(
-              iconVazio1: Icones.PersonVazio,
-              iconCheio1: Icones.PersonCheio,
+          construirBarraDeNavegacao(
+              tokenAtivo: tokenAtivo,
+              iconVazio1: tokenAtivo ? Icones.PersonVazio : null,
+              iconCheio1: tokenAtivo ? Icones.PersonCheio : null,
+              iconCheio: tokenAtivo ? null : Icones.Sino,
+              iconVazio: tokenAtivo ? null : Icones.Sino,
               index: 2),
         ],
       ),
     );
 
     return Scaffold(
-        body: _buildPage(_selectedIndex), bottomNavigationBar: bottomAppBar);
+        body: _buildPage(_selectedIndex, tokenAtivo),
+        bottomNavigationBar: bottomAppBar);
   }
 
-  Widget _buildPage(int index) {
-    switch (index) {
-      case 0:
-        return ChangeNotifierProvider(
-          create: (_) => EscolhaCalendario(),
-          child: Center(
-            child: Calendar(),
-          ),
-        );
-      case 1:
-        return const Center(
-          child: Home(),
-        );
-      case 2:
-        return const Center(
-          child: Perfil(),
-        );
-      default:
-        return const Home();
+  Widget _buildPage(int index, bool tokenAtivo) {
+    if (tokenAtivo) {
+      switch (index) {
+        case 0:
+          return ChangeNotifierProvider(
+            create: (_) => EscolhaCalendario(),
+            child: Center(
+              child: Calendar(),
+            ),
+          );
+
+        case 1:
+          return const Center(
+            child: Home(),
+          );
+        case 2:
+          return const Center(
+            child: Perfil(),
+          );
+        default:
+          return const Home();
+      }
+    } else {
+      switch (index) {
+        case 0:
+          return Container();
+
+        // ChangeNotifierProvider(
+        //   create: (_) => EscolhaCalendario(),
+        //   child: Center(
+        //     child: Calendar(),
+        //   ),
+        // );
+
+        case 1:
+          return const Center(
+            child: HomeAlunos(),
+          );
+        case 2:
+          return const Center(
+            child: Notificacao(),
+          );
+        default:
+          return const HomeAlunos();
+      }
     }
   }
 
-  Widget _buildIconButton({
-    String? iconVazio,
-    String? iconCheio,
-    IconData? iconVazio1,
-    IconData? iconCheio1,
-    required int index,
-  }) {
+  Widget construirBarraDeNavegacao(
+      {String? iconVazio,
+      String? iconCheio,
+      IconData? iconVazio1,
+      IconData? iconCheio1,
+      required int index,
+      required bool tokenAtivo}) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -95,14 +138,10 @@ class _NavigationState extends State<Navigation> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
-        decoration: BoxDecoration(
-          color: _selectedIndex == index ? ColorsTemaClaro.branco : null,
-          borderRadius:
-              BorderRadius.circular(TamanhoTela.horizontal(context) * 0.03),
-        ),
+        decoration: _decoretion(index),
         width: TamanhoTela.horizontal(context) * 0.13,
         height: TamanhoTela.vertical(context) * 0.05,
-        child: _selectedIndex == index
+        child: verificarIndex(index)
             ? (iconCheio1 != null
                 ? Icon(
                     iconCheio1,
@@ -126,6 +165,18 @@ class _NavigationState extends State<Navigation> {
                     color: ColorsTemaClaro.branco,
                   )),
       ),
+    );
+  }
+
+  bool verificarIndex(int index) {
+    return _selectedIndex == index;
+  }
+
+  BoxDecoration _decoretion(int index) {
+    return BoxDecoration(
+      color: _selectedIndex == index ? ColorsTemaClaro.branco : null,
+      borderRadius:
+          BorderRadius.circular(TamanhoTela.horizontal(context) * 0.03),
     );
   }
 }
