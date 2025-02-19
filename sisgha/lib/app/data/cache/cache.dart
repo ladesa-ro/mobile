@@ -1,8 +1,10 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: use_build_context_synchronously
 
+import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:sisgha/app/views/widgets_globais/widget_erro.dart';
 
 class Cache {
   static final CacheManager _cacheManager = CacheManager(Config(
@@ -11,28 +13,32 @@ class Cache {
     maxNrOfCacheObjects: 10,
   ));
 
-  static Future<File> baixarImagem(String urlImagem) async {
+  static Future<dynamic> baixarImagem(BuildContext ctx, urlImagem) async {
     try {
       final arquivo = await _cacheManager.downloadFile(urlImagem);
       return arquivo.file;
     } catch (e) {
-      throw Exception('erro: $e');
+      showDialog(
+          context: ctx,
+          builder: (context) => dialogoDeErro(context, "Erro ao Limpar cache"));
     }
   }
 
-  static Future<void> limparCache() async {
+  static Future<void> limparCache(BuildContext ctx) async {
     await _cacheManager.emptyCache();
     final directory = await getTemporaryDirectory();
     final cacheDir = Directory('${directory.path}/cache');
     if (await cacheDir.exists()) {
       cacheDir.deleteSync(recursive: true);
     } else {
-      print('Diretório de cache não encontrado.');
+      showDialog(
+          context: ctx,
+          builder: (context) => dialogoDeErro(context, "Erro ao Limpar cache"));
     }
   }
 
   static Future<void> substituirArquivoNoCache(
-      String url, File novoArquivo) async {
+      BuildContext ctx, String url, File novoArquivo) async {
     final bytes = await novoArquivo.readAsBytes();
 
     await _cacheManager.putFile(
@@ -41,10 +47,8 @@ class Cache {
       fileExtension: novoArquivo.path.split('.').last,
     );
 
-    print('Arquivo no cache substituído com sucesso.');
+    showDialog(
+        context: ctx,
+        builder: (context) => dialogoDeErro(context, "Erro ao substitu cache"));
   }
-
-  static Future<void> teste(
-    File localCache,
-  ) async {}
 }

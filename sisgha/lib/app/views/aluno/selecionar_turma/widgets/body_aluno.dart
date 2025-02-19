@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/core/utils/Icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
-import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdomn-turmas.dart';
+import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdomn_turmas.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown-ano.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_curso.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_formacao.dart';
@@ -90,7 +90,10 @@ class _BodyAlunoState extends State<BodyAluno> {
                     });
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => NavigationAlunos(initialIndex: 1,)),
+                      MaterialPageRoute(
+                          builder: (context) => NavigationAlunos(
+                                initialIndex: 1,
+                              )),
                     );
                   },
                   style: ElevatedButton.styleFrom(

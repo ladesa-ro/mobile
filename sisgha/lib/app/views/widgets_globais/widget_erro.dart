@@ -26,7 +26,8 @@ Widget dialogoDeErro(BuildContext context, String erro) {
           ),
           Text(
             'Nenhuma conexão com a internet $erro',
-            style: estiloTexto(16, cor: ColorsTemaClaro.preto, peso: FontWeight.bold),
+            style: estiloTexto(16,
+                cor: ColorsTemaClaro.preto, peso: FontWeight.bold),
           ),
           const SizedBox(
             height: 10,
@@ -53,9 +54,10 @@ Widget dialogoDeErro(BuildContext context, String erro) {
             height: 15,
           ),
           ElevatedButton(
-            style: _estiloBotao(ColorsTemaClaro.verdePrincipal, ColorsTemaClaro.branco),
+            style: _estiloBotao(
+                ColorsTemaClaro.verdePrincipal, ColorsTemaClaro.branco),
             onPressed: () {
-              dadosProfessor.apagarDados();
+              dadosProfessor.apagarDados(context);
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 "/login",
@@ -68,9 +70,10 @@ Widget dialogoDeErro(BuildContext context, String erro) {
             height: 15,
           ),
           ElevatedButton(
-            style: _estiloBotao(ColorsTemaClaro.branco, ColorsTemaClaro.verdePrincipal),
+            style: _estiloBotao(
+                ColorsTemaClaro.branco, ColorsTemaClaro.verdePrincipal),
             onPressed: () {
-              dadosProfessor.apagarDados();
+              dadosProfessor.apagarDados(context);
               SystemNavigator.pop();
             },
             child: const Text('Talvez mais tarde'),

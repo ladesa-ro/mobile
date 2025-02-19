@@ -40,7 +40,7 @@ class Repository {
     await refreshToken(context);
   }
 
-  static void escolherCaminho(BuildContext context, int statusCode) {
+  static void mostrarErro(BuildContext context, int statusCode) {
     if (statusCode <= 199) {
       return erro(context, 'erro no codigo');
     }
@@ -81,7 +81,7 @@ class Repository {
     var response = await request.send();
 
     if (verificarStatusCode(response.statusCode) == false) {
-      escolherCaminho(context, response.statusCode);
+      mostrarErro(context, response.statusCode);
     }
     return;
   }
@@ -110,7 +110,7 @@ class Repository {
     var response = await request.send();
 
     if (verificarStatusCode(response.statusCode) == false) {
-      escolherCaminho(context, response.statusCode);
+      mostrarErro(context, response.statusCode);
     }
     return;
   }
@@ -134,7 +134,7 @@ class Repository {
     } else if (resposta.statusCode == 403) {
       false;
     } else {
-      escolherCaminho(context, resposta.statusCode);
+      mostrarErro(context, resposta.statusCode);
       return false;
     }
     return false;
@@ -163,7 +163,7 @@ class Repository {
       await sharedPreferences.setString("email", user.email);
       return user;
     } else {
-      escolherCaminho(context, response.statusCode);
+      mostrarErro(context, response.statusCode);
       return buscarUser(context);
     }
   }
@@ -187,17 +187,17 @@ class Repository {
       await sharedPreferences.setString("token", body["access_token"]);
       return true;
     } else {
-      escolherCaminho(context, response.statusCode);
+      mostrarErro(context, response.statusCode);
       return refreshToken(context);
     }
   }
 
   // ---------------------------------------------------- APAGAR DADOS SALVOS ----------------------------------------------------------------------------------//
-  static Future<bool> sair() async {
+  static Future<bool> sair(BuildContext context) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.clear();
     DadosProfessor dados = DadosProfessor();
-    dados.apagarDados();
+    dados.apagarDados(context);
     return true;
   }
 
@@ -222,7 +222,7 @@ class Repository {
 
       return listaFormacoes;
     } else {
-      escolherCaminho(context, response.statusCode);
+      mostrarErro(context, response.statusCode);
       return buscarNiveisDeFormacao(context);
     }
   }
@@ -246,7 +246,7 @@ class Repository {
 
       return listaCursos;
     } else {
-      escolherCaminho(context, response.statusCode);
+      mostrarErro(context, response.statusCode);
       return buscarCursos(context);
     }
   }

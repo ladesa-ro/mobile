@@ -41,10 +41,10 @@ class DadosProfessor with ChangeNotifier {
         email: user.email,
         id: user.id);
 
-    final baixarImagemCapa = await Cache.baixarImagem(
+    final baixarImagemCapa = await Cache.baixarImagem(context,
         "https://dev.ladesa.com.br/api/v1/usuarios/${user.id}/imagem/capa");
 
-    final baixarImagemPerfil = await Cache.baixarImagem(
+    final baixarImagemPerfil = await Cache.baixarImagem(context,
         "https://dev.ladesa.com.br/api/v1/usuarios/${user.id}/imagem/perfil");
 
     _fotoCapaPerfil = baixarImagemCapa.absolute;
@@ -58,7 +58,7 @@ class DadosProfessor with ChangeNotifier {
       BuildContext context, File imagem) async {
     await Repository.atualizarImagemCapa(imagem, context);
 
-    Cache.substituirArquivoNoCache(_fotoCapaPerfil.path, imagem);
+    Cache.substituirArquivoNoCache(context, _fotoCapaPerfil.path, imagem);
     _fotoCapaPerfil = imagem.absolute;
 
     return notifyListeners();
@@ -72,10 +72,10 @@ class DadosProfessor with ChangeNotifier {
     return notifyListeners();
   }
 
-  void apagarDados() {
+  void apagarDados(BuildContext context) {
     _fotoCapaPerfil = File('');
     _fotoImagemPerfil = File('');
-    Cache.limparCache();
+    Cache.limparCache(context);
     professor = Professor(matricula: '', nome: '', email: '', id: '');
     notifyListeners();
   }
