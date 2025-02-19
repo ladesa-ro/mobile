@@ -22,10 +22,10 @@ class _MenuLateralState extends State<MenuLateral> {
   @override
   Drawer build(BuildContext context) {
     return Drawer(
-      width: TamanhoTela.horizontal(context) * 0.8,
+      width: TamanhoTela.horizontal(context) * 0.82,
       child: LayoutBuilder(
         builder: (context, constraints) => Container(
-          margin: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.05),
+          margin: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.03),
           height: constraints.maxHeight,
           width: constraints.maxWidth,
           child: Column(

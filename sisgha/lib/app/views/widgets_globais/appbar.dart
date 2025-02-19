@@ -60,7 +60,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Navigator.of(context).pushNamed('/notificacao');
               },
               icon: const Iconify(
-                Icones.Bell,
+                Icones.Sino,
                 size: 34,
                 color: ColorsTemaClaro.branco,
               ),

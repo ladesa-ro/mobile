@@ -1,7 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_aluno.dart';
+import 'package:sisgha/app/core/utils/Icones.dart';
+import 'package:sisgha/app/core/utils/colors.dart';
+import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdomn-turmas.dart';
+import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown-ano.dart';
+import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_curso.dart';
+import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_formacao.dart';
+import 'package:sisgha/app/views/widgets_globais/botton_app_bar_alunos.dart';
 
 class BodyAluno extends StatefulWidget {
   const BodyAluno({super.key});
@@ -11,88 +17,99 @@ class BodyAluno extends StatefulWidget {
 }
 
 class _BodyAlunoState extends State<BodyAluno> {
+  bool isClicked = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: ListView(
         children: [
-          //
-          Center(
-            child: Text(
-              "Selecione sua Turma",
-              style: TextStyle(fontSize: 23, fontWeight: FontWeight.w700),
-            ),
-          ),
-          //
-          SizedBox(
-            height: 20,
-          ),
-          //
-          DropdownAluno(
-            nome: "Formação",
-            direita: 6,
-            esquerda: 6,
-            descricao: "Selecione um nível de formação",
-          ),
-          //
-          SizedBox(
-            height: 20,
-          ),
-          //
+          SizedBox(height: 70),
+
           Row(
-            children: const [
-              SizedBox(
-                width: 180,
-                child: DropdownAluno(
-                  nome: "Curso",
-                  direita: 0,
-                  esquerda: 10,
-                  descricao: "Selecione o curso",
-                ),
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              //
-              SizedBox(
-                width: 160,
-                child: DropdownAluno(
-                  nome: "Turma",
-                  direita: 0,
-                  esquerda: 5,
-                  descricao: "Turmas",
-                ),
+            children: [
+              Icon(Icones.Relogio),
+              SizedBox(width: 8),
+              Text(
+                "Selecionar Horário",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
               ),
             ],
           ),
-          //
-          SizedBox(
-            height: 20,
+
+          SizedBox(height: 20),
+
+          // Dropdown de Formação
+          DropdownFormacao(
+            nome: "",
+            direita: 6,
+            esquerda: 6,
+            descricao: "formação",
           ),
-          //
+
+          SizedBox(height: 20),
+
+          // Dropdown de Curso
+          DropdownCurso(
+            nome: "",
+            direita: 0,
+            esquerda: 10,
+            descricao: "curso",
+          ),
+
+          SizedBox(height: 20),
+
+          // Dropdown de Ano
+          DropdownAno(
+            nome: "",
+            direita: 0,
+            esquerda: 5,
+            descricao: "Ano",
+          ),
+
+          SizedBox(height: 20),
+
+          // Dropdown de Turmas
+          DropdownTurmas(
+            nome: "",
+            direita: 0,
+            esquerda: 5,
+            descricao: "Turmas",
+          ),
+
+          SizedBox(height: 20),
+
           Row(
             children: [
               Expanded(
                 child: FilledButton(
-                  onPressed: () {},
-                  style: ButtonStyle(
-                    shape: WidgetStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
+                  onPressed: () {
+                    setState(() {
+                      isClicked = !isClicked; // Alterna o estado do botão
+                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => NavigationAlunos(initialIndex: 1,)),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: isClicked
+                        ? ColorsTemaClaro
+                            .verdePrincipal // Cor verde quando clicado
+                        : ColorsTemaClaro.cinza, // Cor cinza quando não clicado
+                    foregroundColor: Colors.white, // Cor do texto
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 25, horizontal: 24),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  child: Icon(
-                    Icons.search,
-                    size: 40,
-                  ),
+                  child: const Text("Ver Horário"),
                 ),
-              )
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
