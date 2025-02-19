@@ -14,22 +14,63 @@ import '../../views/widgets_globais/widget_erro.dart';
 import '../model/professor.dart';
 import '../providers/dados_professor.dart';
 
-// ----------------------------------------------------------  ATUALIZAR FOTO DE PERFIL DO USUARIO -----------------------------------------------------------------------//
-Future<bool> atualizarImagemPerfil(
-    File imagemPerfil, BuildContext context) async {
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  String? token = sharedPreferences.getString("token");
-  String? id = sharedPreferences.getString("id");
+class Repository {
+  static final String _api = "https://dev.ladesa.com.br/api/v1";
 
-  if (token == null || id == null) {
-    print("Token ou ID não encontrado.");
-    return false;
+  static void erro(BuildContext context, String text) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return dialogoDeErro(context, 'erro no codigo');
+      },
+    );
   }
 
-  var url =
-      Uri.parse("https://dev.ladesa.com.br/api/v1/usuarios/$id/imagem/perfil");
+  static bool verificarStatusCode(int statusCode) {
+    if (statusCode >= 200 && statusCode <= 299) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
-  try {
+  static void recarregarToken(
+    BuildContext context,
+  ) async {
+    await refreshToken(context);
+  }
+
+  static void mostrarErro(BuildContext context, int statusCode) {
+    if (statusCode <= 199) {
+      return erro(context, 'erro no codigo');
+    }
+    if (statusCode >= 300 && statusCode <= 399) {
+      return erro(context, 'erro no cliente');
+    }
+    if (statusCode >= 400 && statusCode <= 499) {
+      return recarregarToken(context);
+    }
+    if (statusCode >= 500) {
+      return erro(context, 'erro no servidor');
+    } else {
+      return erro(context, 'algo de errado nao esta certo');
+    }
+  }
+
+  // ----------------------------------------------------------  ATUALIZAR FOTO DE PERFIL DO USUARIO -----------------------------------------------------------------------//
+  static Future<void> atualizarImagemPerfil(
+      File imagemPerfil, BuildContext context) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? token = sharedPreferences.getString("token");
+    String? id = sharedPreferences.getString("id");
+
+    if (token == null || id == null) {
+      print("Token ou ID não encontrado.");
+      erro(context, 'token ou id nulos');
+    }
+
+    var url = Uri.parse("$_api/usuarios/$id/imagem/perfil");
+
     var request = http.MultipartRequest('PUT', url)
       ..headers['Authorization'] = 'Bearer $token'
       ..files.add(await http.MultipartFile.fromPath(
@@ -39,48 +80,26 @@ Future<bool> atualizarImagemPerfil(
 
     var response = await request.send();
 
-    if (response.statusCode == 200) {
-      return true;
-    } else if (response.statusCode == 401) {
-      bool refreshed = await refreshToken(context);
-      if (refreshed) {
-        token = sharedPreferences.getString("token");
-        request.headers['Authorization'] = 'Bearer $token';
-        response = await request.send();
-        var responseData = await http.Response.fromStream(response);
-        print("Status Code após refresh: ${response.statusCode}");
-        print("Response Body após refresh: ${responseData.body}");
-        return response.statusCode == 200;
-      }
+    if (verificarStatusCode(response.statusCode) == false) {
+      mostrarErro(context, response.statusCode);
     }
-  } catch (e) {
-    print("Erro ao atualizar imagem: $e");
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return dialogoDeErro(context, 'ATUALIZAR FOTO DE PERFIL DO USUARIO');
-      },
-    );
+    return;
   }
 
-  return false;
-}
+  // ------------------------------------------------------------------- ATUALIZAR A IMAGEM DE FUNDO DO USUARIO -------------------------------------------------------------//
+  static Future<void> atualizarImagemCapa(
+      File imagemCapa, BuildContext context) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? token = sharedPreferences.getString("token");
+    String? id = sharedPreferences.getString("id");
 
-// ------------------------------------------------------------------- ATUALIZAR A IMAGEM DE FUNDO DO USUARIO -------------------------------------------------------------//
-Future<bool> atualizarImagemCapa(File imagemCapa, BuildContext context) async {
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  String? token = sharedPreferences.getString("token");
-  String? id = sharedPreferences.getString("id");
+    if (token == null || id == null) {
+      print("Token ou ID não encontrado.");
+      erro(context, 'token ou id nulos');
+    }
 
-  if (token == null || id == null) {
-    print("Token ou ID não encontrado.");
-    return false;
-  }
+    var url = Uri.parse("$_api/usuarios/$id/imagem/capa");
 
-  var url =
-      Uri.parse("https://dev.ladesa.com.br/api/v1/usuarios/$id/imagem/capa");
-
-  try {
     var request = http.MultipartRequest('PUT', url)
       ..headers['Authorization'] = 'Bearer $token'
       ..files.add(await http.MultipartFile.fromPath(
@@ -90,83 +109,50 @@ Future<bool> atualizarImagemCapa(File imagemCapa, BuildContext context) async {
 
     var response = await request.send();
 
-    if (response.statusCode == 200) {
-      return true;
-    } else if (response.statusCode == 401) {
-      bool refreshed = await refreshToken(context);
-      if (refreshed) {
-        token = sharedPreferences.getString("token");
-        request.headers['Authorization'] = 'Bearer $token';
-        response = await request.send();
-
-        return response.statusCode == 200;
-      }
+    if (verificarStatusCode(response.statusCode) == false) {
+      mostrarErro(context, response.statusCode);
     }
-  } catch (e) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return dialogoDeErro(context, 'ATUALIZAR A IMAGEM DE FUNDO DO USUARIO');
-      },
-    );
+    return;
   }
 
-  return false;
-}
+  //-------------------------------------------------------------------- BUSCAR O TOKEN DO USUARIO ------------------------------------------------------------------------------------------//
+  static Future<bool> login(TextEditingController matriculaController,
+      TextEditingController senhaController, BuildContext context) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-//-------------------------------------------------------------------- BUSCAR O TOKEN DO USUARIO ------------------------------------------------------------------------------------------//
-Future<bool> login(TextEditingController matriculaController,
-    TextEditingController senhaController, BuildContext context) async {
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
-  try {
-    var url = Uri.parse("https://dev.ladesa.com.br/api/v1/autenticacao/login");
+    var url = Uri.parse("$_api/autenticacao/login");
     var resposta = await http.post(url, body: {
       "matriculaSiape": matriculaController.text,
       "senha": senhaController.text,
     });
 
-    if (resposta.statusCode == 201) {
+    if (verificarStatusCode(resposta.statusCode)) {
       final body = jsonDecode(resposta.body);
       await sharedPreferences.setString('token', body['access_token']);
       await sharedPreferences.setString('refreshToken', body['refresh_token']);
       return true;
     } else if (resposta.statusCode == 403) {
-      return false;
+      false;
     } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return dialogoDeErro(context, 'BUSCAR O TOKEN DO USUARIO1');
-        },
-      );
+      mostrarErro(context, resposta.statusCode);
+      return false;
     }
-  } catch (e) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return dialogoDeErro(context, 'BUSCAR O TOKEN DO USUARIO 2');
-      },
-    );
+    return false;
   }
-  return false;
-}
 
-// -------------------------------------------------------------------------- FAZER REQUISIÇÃO NA API PRA BUSCAR O USUARIO -------------------------------------------------------------------------------------//
-Future<dynamic> buscarUser(BuildContext context) async {
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  var token = sharedPreferences.getString("token");
-  var url =
-      Uri.parse("https://dev.ladesa.com.br/api/v1/autenticacao/quem-sou-eu");
+  // -------------------------------------------------------------------------- FAZER REQUISIÇÃO NA API PRA BUSCAR O USUARIO -------------------------------------------------------------------------------------//
+  static Future<Professor> buscarUser(BuildContext context) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString("token");
+    var url = Uri.parse("$_api/autenticacao/quem-sou-eu");
 
-  try {
     var response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
     });
 
-    if (response.statusCode == 200) {
+    if (verificarStatusCode(response.statusCode)) {
       var jsondecode = json.decode(response.body)["usuario"];
 
       Professor user = Professor.fromJson(jsondecode);
@@ -177,95 +163,53 @@ Future<dynamic> buscarUser(BuildContext context) async {
       await sharedPreferences.setString("email", user.email);
       return user;
     } else {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return dialogoDeErro(
-              context, 'FAZER REQUISIÇÃO NA API PRA BUSCAR O USUARIO 1');
-        },
-      );
+      mostrarErro(context, response.statusCode);
+      return buscarUser(context);
     }
-    if (response.statusCode == 401) {
-      bool refreshed = await refreshToken(context);
-      if (refreshed) {
-        token = sharedPreferences.getString("token");
-        response = await http.get(url, headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer $token',
-        });
-      } else {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return dialogoDeErro(
-                context, 'FAZER REQUISIÇÃO NA API PRA BUSCAR O USUARIO 2');
-          },
-        );
-      }
-    }
-  } catch (e) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return dialogoDeErro(
-            context, 'FAZER REQUISIÇÃO NA API PRA BUSCAR O USUARIO 3');
-      },
-    );
-  }
-}
-
-// ---------------------------------------------------------- RECARREGAR TOKEM DE ACESSO DO USUARIO CASO TENHA EXPIRADO ---------------------------------------------------------------------//
-Future<bool> refreshToken(BuildContext context) async {
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  var refreshToken = sharedPreferences.getString("refreshToken");
-
-  if (refreshToken == null) {
-    return false;
   }
 
-  var url =
-      Uri.parse("https://dev.ladesa.com.br/api/v1/autenticacao/login/refresh");
-  var resposta = await http.post(url, body: {
-    "refreshToken": refreshToken,
-  });
+  // ---------------------------------------------------------- RECARREGAR TOKEM DE ACESSO DO USUARIO CASO TENHA EXPIRADO ---------------------------------------------------------------------//
+  static Future<bool> refreshToken(BuildContext context) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var recarregarToken = sharedPreferences.getString("refreshToken");
 
-  if (resposta.statusCode == 201) {
-    final body = jsonDecode(resposta.body);
-    await sharedPreferences.setString("token", body["access_token"]);
+    if (recarregarToken == null) {
+      erro(context, 'token nulo');
+    }
+
+    var url = Uri.parse("$_api/autenticacao/login/refresh");
+    var response = await http.post(url, body: {
+      "refreshToken": recarregarToken,
+    });
+
+    if (verificarStatusCode(response.statusCode)) {
+      final body = jsonDecode(response.body);
+      await sharedPreferences.setString("token", body["access_token"]);
+      return true;
+    } else {
+      mostrarErro(context, response.statusCode);
+      return refreshToken(context);
+    }
+  }
+
+  // ---------------------------------------------------- APAGAR DADOS SALVOS ----------------------------------------------------------------------------------//
+  static Future<bool> sair(BuildContext context) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.clear();
+    DadosProfessor dados = DadosProfessor();
+    dados.apagarDados(context);
     return true;
-  } else if (resposta.statusCode == 403) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return dialogoDeErro(context, 'recarregar token');
-      },
-    );
-    return false;
   }
 
-  return false;
-}
-
-// ---------------------------------------------------- APAGAR DADOS SALVOS ----------------------------------------------------------------------------------//
-Future<bool> sair() async {
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  await sharedPreferences.clear();
-  DadosProfessor dados = DadosProfessor();
-  dados.apagarDados();
-  return true;
-}
-
-// ----------------------------------------------------------------------
-Future<List<NiveisFormacao>> buscarNiveisDeFormacao() async {
-  try {
-    var url = Uri.parse("https://dev.ladesa.com.br/api/v1/niveis-formacoes");
-    var resposta = await http.get(url, headers: {
+  // ----------------------------------------------------------------------
+  static Future<List<NiveisFormacao>> buscarNiveisDeFormacao(context) async {
+    var url = Uri.parse("$_api/niveis-formacoes");
+    var response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     });
-    if (resposta.statusCode == 200) {
-      final bodyDecode = jsonDecode(resposta.body)["data"];
+    if (verificarStatusCode(response.statusCode)) {
+      final bodyDecode = jsonDecode(response.body)["data"];
 
       var listaFormacoes = <NiveisFormacao>[];
 
@@ -278,22 +222,19 @@ Future<List<NiveisFormacao>> buscarNiveisDeFormacao() async {
 
       return listaFormacoes;
     } else {
-      throw Exception();
+      mostrarErro(context, response.statusCode);
+      return buscarNiveisDeFormacao(context);
     }
-  } catch (e) {
-    throw Exception();
   }
-}
 
-Future<List<Cursos>> buscarCursos() async {
-  try {
-    var url = Uri.parse("https://dev.ladesa.com.br/api/v1/cursos");
-    var resposta = await http.get(url, headers: {
+  static Future<List<Cursos>> buscarCursos(BuildContext context) async {
+    var url = Uri.parse("$_api/cursos");
+    var response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     });
-    if (resposta.statusCode == 200) {
-      final bodyDecode = jsonDecode(resposta.body)["data"];
+    if (verificarStatusCode(response.statusCode)) {
+      final bodyDecode = jsonDecode(response.body)["data"];
 
       var listaCursos = <Cursos>[];
 
@@ -305,9 +246,8 @@ Future<List<Cursos>> buscarCursos() async {
 
       return listaCursos;
     } else {
-      throw Exception();
+      mostrarErro(context, response.statusCode);
+      return buscarCursos(context);
     }
-  } catch (e) {
-    throw Exception();
   }
 }

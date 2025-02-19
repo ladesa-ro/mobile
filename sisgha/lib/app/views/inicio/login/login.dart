@@ -134,8 +134,8 @@ class _CorpoLoginState extends State<CorpoLogin> {
       onPressed: () async {
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (formKey.currentState!.validate()) {
-          bool deuCerto =
-              await login(matriculaController, senhaController, context);
+          bool deuCerto = await Repository.login(
+              matriculaController, senhaController, context);
 
           if (!currentFocus.hasPrimaryFocus) {
             currentFocus.unfocus();
