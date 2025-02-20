@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../../core/utils/Icones.dart';
-import '../../core/utils/colors.dart';
-import '../../core/utils/dias.dart';
-import '../../core/utils/responsividade.dart';
-import '../../core/utils/tamanhos.dart';
-import '../widgets_globais/appbar.dart';
-import '../widgets_globais/calendario.dart';
+import '../../../core/utils/Icones.dart';
+import '../../../core/utils/colors.dart';
+import '../../../core/utils/dias.dart';
+import '../../../core/utils/responsividade.dart';
+import '../../../core/utils/tamanhos.dart';
+import '../../components/appbar.dart';
+import '../../components/calendario.dart';
 import 'widgets/letreiro_rolante.dart';
 import 'widgets/menu_lateral.dart';
 

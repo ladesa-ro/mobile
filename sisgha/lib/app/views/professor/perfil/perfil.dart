@@ -5,13 +5,13 @@ import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/Icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/data/providers/dados_professor.dart';
-import 'package:sisgha/app/views/perfil/widgets/botton_sheat.dart';
-import 'package:sisgha/app/views/perfil/widgets/estilos_perfil.dart';
-import 'package:sisgha/app/views/perfil/widgets/componente_navegacao.dart';
-import 'package:sisgha/app/views/perfil/widgets/widget_sair.dart';
-import 'package:sisgha/app/views/perfil/widgets/dados_professor.dart';
+import 'package:sisgha/app/views/professor/perfil/widgets/botton_sheat.dart';
+import 'package:sisgha/app/views/professor/perfil/widgets/estilos_perfil.dart';
+import 'package:sisgha/app/views/professor/perfil/widgets/componente_navegacao.dart';
+import 'package:sisgha/app/views/professor/perfil/widgets/widget_sair.dart';
+import 'package:sisgha/app/views/professor/perfil/widgets/dados_professor.dart';
 
-import '../../core/utils/responsividade.dart';
+import '../../../core/utils/responsividade.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({super.key});

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
-import 'package:sisgha/app/views/perfil/widgets/estilos_perfil.dart';
+import 'package:sisgha/app/views/professor/perfil/widgets/estilos_perfil.dart';
 
 Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
   final ImagePicker imagePicker = ImagePicker();

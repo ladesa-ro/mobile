@@ -5,9 +5,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../views/widgets_globais/botton_app_bar.dart';
-import '../../views/widgets_globais/progress_indicator.dart';
-import '../../views/widgets_globais/widget_erro.dart';
+import '../../views/components/botton_app_bar.dart';
+import '../../views/components/progress_indicator.dart';
+import '../../views/components/widget_erro.dart';
 import '../../domain/api/repository.dart';
 import '../cache/cache.dart';
 import '../../domain/model/professor.dart';

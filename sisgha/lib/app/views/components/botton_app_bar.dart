@@ -9,11 +9,11 @@ import '../../core/utils/colors.dart';
 import '../../core/utils/responsividade.dart';
 import '../../data/providers/escolha_menu_lateral.dart';
 import '../../domain/logic/verificar_token_ativo.dart';
-import '../calendario/calendario.dart';
-import '../home/home.dart';
-import '../aluno/home_alunos/home_alunos.dart';
+import '../professor/calendario/calendario.dart';
+import '../professor/home/home.dart';
+import '../aluno/home_alunos.dart';
 import '../notificacao/notificacao.dart';
-import '../perfil/perfil.dart';
+import '../professor/perfil/perfil.dart';
 
 class Navigation extends StatefulWidget {
   final int initialIndex;

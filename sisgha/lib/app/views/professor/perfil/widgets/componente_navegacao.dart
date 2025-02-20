@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/Icones.dart';
-import '../../../core/utils/colors.dart';
-import '../../../core/utils/estilos.dart';
+import '../../../../core/utils/Icones.dart';
+import '../../../../core/utils/colors.dart';
+import '../../../../core/utils/estilos.dart';
 import 'componente_disponibilidade.dart';
 import 'componente_ensino.dart';
 

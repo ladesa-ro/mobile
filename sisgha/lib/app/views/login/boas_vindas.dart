@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sisgha/app/data/providers/dados_professor.dart';
 
 import 'login/login.dart';
-import '../widgets_globais/progress_indicator.dart';
+import '../components/progress_indicator.dart';
 
 class BoasVindasPage extends StatefulWidget {
   const BoasVindasPage({super.key});

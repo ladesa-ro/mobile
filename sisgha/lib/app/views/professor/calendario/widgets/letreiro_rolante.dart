@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/colors.dart';
-import '../../../core/utils/estilos.dart';
+import '../../../../core/utils/colors.dart';
+import '../../../../core/utils/estilos.dart';
 
 class LetreiroRolante extends StatefulWidget {
   const LetreiroRolante({super.key});
@@ -57,7 +57,9 @@ class _LetreiroRolanteState extends State<LetreiroRolante> {
           width: constraints.maxWidth,
           padding: EdgeInsets.symmetric(horizontal: 10),
           decoration: estiloBorda(
-              cor: ColorsTemaClaro.verdecinzaBorda, radius: 15, grossuraBorda: 2),
+              cor: ColorsTemaClaro.verdecinzaBorda,
+              radius: 15,
+              grossuraBorda: 2),
           child: ListView(
             controller: _controller,
             scrollDirection: Axis.horizontal,
@@ -67,7 +69,8 @@ class _LetreiroRolanteState extends State<LetreiroRolante> {
                 child: Text(
                   'Técnico Integrado - Informática 2023 - 2023',
                   style: estiloTexto(15,
-                      cor: ColorsTemaClaro.verdePrincipalTexto, peso: FontWeight.bold),
+                      cor: ColorsTemaClaro.verdePrincipalTexto,
+                      peso: FontWeight.bold),
                 ),
               )
             ],

@@ -4,11 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../core/utils/Icones.dart';
-import '../../../core/utils/colors.dart';
-import '../../../core/utils/estilos.dart';
-import '../../../core/utils/responsividade.dart';
-import '../../../data/providers/escolha_menu_lateral.dart';
+import '../../../../core/utils/Icones.dart';
+import '../../../../core/utils/colors.dart';
+import '../../../../core/utils/estilos.dart';
+import '../../../../core/utils/responsividade.dart';
+import '../../../../data/providers/escolha_menu_lateral.dart';
 
 class MenuLateral extends StatefulWidget {
   const MenuLateral({super.key});

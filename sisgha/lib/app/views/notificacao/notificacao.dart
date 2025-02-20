@@ -5,7 +5,7 @@ import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
 
-import 'package:sisgha/app/views/widgets_globais/appbar_notificacao.dart';
+import 'package:sisgha/app/views/components/appbar_notificacao.dart';
 import 'package:sizer/sizer.dart';
 
 class Notificacao extends StatelessWidget {
@@ -75,7 +75,8 @@ Widget cards(BuildContext context,
             Text(
               titulo,
               style: estiloTexto(15,
-                  cor: ColorsTemaClaro.verdePrincipalTexto, peso: FontWeight.bold),
+                  cor: ColorsTemaClaro.verdePrincipalTexto,
+                  peso: FontWeight.bold),
             ),
             Spacer(),
             Text(
