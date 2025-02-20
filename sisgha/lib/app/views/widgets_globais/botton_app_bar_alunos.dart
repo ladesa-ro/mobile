@@ -71,7 +71,7 @@ class _NavigationState extends State<NavigationAlunos> {
         );
       case 2:
         return const Center(
-          child: Notificacao(),
+          child: NotificacaoAluno(),
         );
       default:
         return const HomeAlunos();

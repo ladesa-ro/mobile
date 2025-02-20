@@ -8,8 +8,8 @@ import 'package:sizer/sizer.dart';
 
 import '../widgets_globais/appbar_notificacao.dart';
 
-class Notificacao extends StatelessWidget {
-  const Notificacao({super.key});
+class NotificacaoAluno extends StatelessWidget {
+  const NotificacaoAluno({super.key});
 
   @override
   Widget build(BuildContext context) {
