@@ -20,9 +20,11 @@ class Calendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appBar = CustomAppBar(
-        height: 7.h,
-        titulo: "Calendário Parcial",
-        subtitulo: '${DatasFormatadas.mesAtual} - ${DatasFormatadas.anoAtual}');
+      height: 7.h,
+      titulo: "Calendário Parcial",
+      subtitulo: '${DatasFormatadas.mesAtual} - ${DatasFormatadas.anoAtual}',
+      alunoProfessor: true,
+    );
 
     double tamanho =
         TamanhoTela.height(context, appBarSize: appBar.preferredSize.height);

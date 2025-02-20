@@ -11,7 +11,7 @@ import '../../data/providers/escolha_menu_lateral.dart';
 import '../../domain/logic/verificar_token_ativo.dart';
 import '../calendario/calendario.dart';
 import '../home/home.dart';
-import '../home/home_alunos/home_alunos.dart';
+import '../aluno/home_alunos/home_alunos.dart';
 import '../notificacao/notificacao.dart';
 import '../perfil/perfil.dart';
 

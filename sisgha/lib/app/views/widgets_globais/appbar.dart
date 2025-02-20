@@ -10,12 +10,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
   final String titulo;
   final String subtitulo;
+  final bool alunoProfessor;
 
   const CustomAppBar(
       {super.key,
       required this.height,
       required this.titulo,
-      required this.subtitulo});
+      required this.subtitulo,
+      required this.alunoProfessor});
 
   @override
   Size get preferredSize => Size.fromHeight(height);
@@ -55,16 +57,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ],
             ),
             const Spacer(),
-            IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/notificacao');
-              },
-              icon: const Iconify(
-                Icones.Sino,
-                size: 34,
-                color: ColorsTemaClaro.branco,
-              ),
-            )
+            alunoProfessor
+                ? IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/notificacao');
+                    },
+                    icon: const Iconify(
+                      Icones.Sino,
+                      size: 34,
+                      color: ColorsTemaClaro.branco,
+                    ),
+                  )
+                : Container()
           ],
         ),
       ),

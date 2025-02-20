@@ -29,6 +29,7 @@ class _HomeState extends State<Home> {
       height: 7.h,
       titulo: DatasFormatadas.primeiroAUltimoDia,
       subtitulo: DatasFormatadas.obterDiaFormatado(),
+      alunoProfessor: true,
     );
 
     double tamanho =
@@ -69,7 +70,8 @@ class _HomeState extends State<Home> {
                   Text(
                     'Calendário ${now.year}',
                     style: estiloTexto(15,
-                        cor: ColorsTemaClaro.brancoTexto, peso: FontWeight.bold),
+                        cor: ColorsTemaClaro.brancoTexto,
+                        peso: FontWeight.bold),
                   ),
                   const Spacer(),
                   Iconify(

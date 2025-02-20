@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:sisgha/app/views/home/home_alunos/widgests/quandrados_home_alunos.dart';
-import 'package:sisgha/app/views/widgets_globais/appbar_alunos.dart';
+import 'package:sisgha/app/views/aluno/home_alunos/widgests/quandrados_home_alunos.dart';
+import 'package:sisgha/app/views/widgets_globais/appbar.dart';
 import 'package:sizer/sizer.dart';
 //ainda tenho que mudar pra ficar de acordo com o dos alunos ...
 import '../../../core/utils/Icones.dart';
@@ -25,10 +25,11 @@ class _HomeState extends State<HomeAlunos> {
   Widget build(BuildContext context) {
     initializeDateFormatting('pt_BR', null);
 
-    var appBar = CustomAppBarAluno(
+    var appBar = CustomAppBar(
       height: 7.h,
       titulo: DatasFormatadas.primeiroAUltimoDia,
       subtitulo: DatasFormatadas.obterDiaFormatado(),
+      alunoProfessor: false,
     );
 
     double tamanho =
@@ -69,7 +70,8 @@ class _HomeState extends State<HomeAlunos> {
                   Text(
                     'Calendário ${now.year}',
                     style: estiloTexto(15,
-                        cor: ColorsTemaClaro.brancoTexto, peso: FontWeight.bold),
+                        cor: ColorsTemaClaro.brancoTexto,
+                        peso: FontWeight.bold),
                   ),
                   const Spacer(),
                   Iconify(
@@ -92,7 +94,6 @@ class _HomeState extends State<HomeAlunos> {
           ),
         ],
       ),
-      
     );
   }
 }

@@ -74,7 +74,8 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
                   Text(
                     dias[diaIndex],
                     style: estiloTexto(17,
-                        cor: ColorsTemaClaro.brancoTexto, peso: FontWeight.bold),
+                        cor: ColorsTemaClaro.brancoTexto,
+                        peso: FontWeight.bold),
                   ),
                   const Spacer(),
                   _iconButton(0, Icones.setaDireita),
@@ -173,8 +174,8 @@ Widget _periodo(BuildContext context, String periodo, List<String> horas) {
         ),
         Text(
           periodo,
-          style:
-              estiloTexto(16, cor: ColorsTemaClaro.pretoTexto, peso: FontWeight.bold),
+          style: estiloTexto(16,
+              cor: ColorsTemaClaro.pretoTexto, peso: FontWeight.bold),
         ),
       ],
     ),
@@ -182,5 +183,6 @@ Widget _periodo(BuildContext context, String periodo, List<String> horas) {
 }
 
 TextStyle _estilo() {
-  return estiloTexto(16, cor: ColorsTemaClaro.pretoTexto, peso: FontWeight.w500);
+  return estiloTexto(16,
+      cor: ColorsTemaClaro.pretoTexto, peso: FontWeight.w500);
 }

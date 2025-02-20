@@ -47,19 +47,19 @@ Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
             ),
             Text(
               'Editar foto de perfil',
-              style:
-                  estiloTexto(16, cor: ColorsTemaClaro.preto, peso: FontWeight.bold),
+              style: estiloTexto(16,
+                  cor: ColorsTemaClaro.preto, peso: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             Text(
               'Escolha uma foto, imagem ou',
-              style:
-                  estiloTexto(16, cor: ColorsTemaClaro.cinza, peso: FontWeight.w500),
+              style: estiloTexto(16,
+                  cor: ColorsTemaClaro.cinza, peso: FontWeight.w500),
             ),
             Text(
               'arquivo .jpeg ou .png de 500x500',
-              style:
-                  estiloTexto(16, cor: ColorsTemaClaro.cinza, peso: FontWeight.w500),
+              style: estiloTexto(16,
+                  cor: ColorsTemaClaro.cinza, peso: FontWeight.w500),
             ),
             const Spacer(),
             ElevatedButton(
