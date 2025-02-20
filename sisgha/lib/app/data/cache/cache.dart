@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'package:sisgha/app/views/widgets_globais/widget_erro.dart';
+import 'package:sisgha/app/views/components/widget_erro.dart';
 
 class Cache {
   static final CacheManager _cacheManager = CacheManager(Config(

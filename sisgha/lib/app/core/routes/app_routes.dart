@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/selecionar_turma.dart';
-import 'package:sisgha/app/views/inicio/boas_vindas.dart';
-import 'package:sisgha/app/views/calendario/calendario.dart';
-import 'package:sisgha/app/views/home/home.dart';
+import 'package:sisgha/app/views/login/boas_vindas.dart';
+import 'package:sisgha/app/views/professor/calendario/calendario.dart';
+import 'package:sisgha/app/views/professor/home/home.dart';
 import 'package:sisgha/app/views/notificacao/notificacao.dart';
-import 'package:sisgha/app/views/widgets_globais/botton_app_bar.dart';
-import 'package:sisgha/app/views/inicio/login/login.dart';
-import 'package:sisgha/app/views/perfil/perfil.dart';
-import 'package:sisgha/app/views/inicio/splash_screen.dart';
+import 'package:sisgha/app/views/components/botton_app_bar.dart';
+import 'package:sisgha/app/views/login/login/login.dart';
+import 'package:sisgha/app/views/professor/perfil/perfil.dart';
+import 'package:sisgha/app/views/login/splash_screen.dart';
 
 class AppRoutes {
   static Map<String, WidgetBuilder> rotas() {

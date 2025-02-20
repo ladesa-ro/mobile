@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:sisgha/app/domain/model/cursos.dart';
 import 'package:sisgha/app/domain/model/nivel_formacao.dart';
 
-import '../../views/widgets_globais/widget_erro.dart';
+import '../../views/components/widget_erro.dart';
 import '../model/professor.dart';
 import '../../data/providers/dados_professor.dart';
 

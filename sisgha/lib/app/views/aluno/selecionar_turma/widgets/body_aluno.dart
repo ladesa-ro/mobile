@@ -8,7 +8,7 @@ import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown-ano.dar
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_curso.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_formacao.dart';
 
-import '../../../widgets_globais/botton_app_bar.dart';
+import '../../../components/botton_app_bar.dart';
 
 class BodyAluno extends StatefulWidget {
   const BodyAluno({super.key});
@@ -44,7 +44,7 @@ class _BodyAlunoState extends State<BodyAluno> {
           // Dropdown de Formação
           DropdownFormacao(
             nome: "",
-            direita: 6,
+            direita: 0,
             esquerda: 6,
             descricao: "formação",
           ),
