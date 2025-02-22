@@ -6,6 +6,7 @@ class DropdownAno extends StatefulWidget {
   final double direita;
   final double esquerda;
   final String descricao;
+  final Function(String?) onChanged; // Aqui está correto
 
   const DropdownAno({
     super.key,
@@ -13,6 +14,7 @@ class DropdownAno extends StatefulWidget {
     required this.direita,
     required this.esquerda,
     required this.descricao,
+    required this.onChanged, // Aqui também
   });
 
   @override
@@ -67,7 +69,8 @@ class _DropdownAlunoState extends State<DropdownAno> {
                     isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
                     color: isFocused
                         ? ColorsTemaClaro.verdePrincipal // Verde quando focado
-                        : ColorsTemaClaro.cinzaBordas, // Cinza quando não focado
+                        : ColorsTemaClaro
+                            .cinzaBordas, // Cinza quando não focado
                   ),
                 ],
               ),
@@ -82,36 +85,45 @@ class _DropdownAlunoState extends State<DropdownAno> {
                       child: Row(
                         children: <String>['1°Ano', '2°Ano', '3°Ano']
                             .map((option) => Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 4.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 4.0),
                                   child: ChoiceChip(
                                     label: Text(
                                       option,
                                       style: TextStyle(
                                         color: selectedValue == option
-                                            ? ColorsTemaClaro.verdePrincipal // Texto verde quando selecionado
-                                            : ColorsTemaClaro.cinzatexto, // Texto cinza quando não selecionado
+                                            ? ColorsTemaClaro
+                                                .verdePrincipal // Texto verde quando selecionado
+                                            : ColorsTemaClaro
+                                                .cinzatexto, // Texto cinza quando não selecionado
                                       ),
                                     ),
                                     selected: selectedValue == option,
-                                    showCheckmark: false, // 🔥 Remove o ícone de confere!
+                                    showCheckmark:
+                                        false, // 🔥 Remove o ícone de confere!
                                     selectedColor: selectedValue == option
-                                        ? const Color.fromARGB(61, 60, 192, 82) // Fundo verde claro
+                                        ? const Color.fromARGB(61, 60, 192,
+                                            82) // Fundo verde claro
                                         : Colors.transparent,
                                     shape: RoundedRectangleBorder(
                                       side: BorderSide(
                                         color: selectedValue == option
-                                            ? ColorsTemaClaro.verdePrincipal // Borda verde
-                                            : ColorsTemaClaro.cinzaBordas, // Cinza quando não selecionado
+                                            ? ColorsTemaClaro
+                                                .verdePrincipal // Borda verde
+                                            : ColorsTemaClaro
+                                                .cinzaBordas, // Cinza quando não selecionado
                                       ),
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     onSelected: (bool selected) {
                                       setState(() {
-                                        selectedValue = selected ? option : null;
+                                        selectedValue =
+                                            selected ? option : null;
                                         isExpanded = true;
                                         isFocused = true;
                                       });
+                                      widget.onChanged(
+                                          selectedValue); // Notifica o BodyAluno
                                     },
                                   ),
                                 ))

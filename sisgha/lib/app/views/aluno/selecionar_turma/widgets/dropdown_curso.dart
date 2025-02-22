@@ -6,6 +6,7 @@ class DropdownCurso extends StatefulWidget {
   final double direita;
   final double esquerda;
   final String descricao;
+   final Function(String?) onChanged; // Aqui está correto
 
   const DropdownCurso({
     super.key,
@@ -13,6 +14,7 @@ class DropdownCurso extends StatefulWidget {
     required this.direita,
     required this.esquerda,
     required this.descricao,
+        required this.onChanged, // Aqui também
   });
 
   @override
@@ -106,12 +108,15 @@ class _DropdownAlunoState extends State<DropdownCurso> {
                                       ),
                                       borderRadius: BorderRadius.circular(5),
                                     ),
-                                    onSelected: (bool selected) {
+                                      onSelected: (bool selected) {
                                       setState(() {
-                                        selectedValue = selected ? option : null;
+                                        selectedValue =
+                                            selected ? option : null;
                                         isExpanded = true;
                                         isFocused = true;
                                       });
+                                      widget.onChanged(
+                                          selectedValue); // Notifica o BodyAluno
                                     },
                                   ),
                                 ))

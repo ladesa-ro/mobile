@@ -19,6 +19,17 @@ class BodyAluno extends StatefulWidget {
 
 class _BodyAlunoState extends State<BodyAluno> {
   bool isClicked = false;
+  String? selectedFormacao;
+  String? selectedCurso;
+  String? selectedAno;
+  String? selectedTurma;
+
+  bool tudoSelecionado() {
+    return selectedFormacao != null &&
+        selectedCurso != null &&
+        selectedAno != null &&
+        selectedTurma != null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +58,11 @@ class _BodyAlunoState extends State<BodyAluno> {
             direita: 0,
             esquerda: 6,
             descricao: "formação",
+            onChanged: (value) {
+              setState(() {
+                selectedFormacao = value;
+              });
+            },
           ),
 
           SizedBox(height: 20),
@@ -57,6 +73,11 @@ class _BodyAlunoState extends State<BodyAluno> {
             direita: 0,
             esquerda: 10,
             descricao: "curso",
+            onChanged: (value) {
+              setState(() {
+                selectedCurso = value;
+              });
+            },
           ),
 
           SizedBox(height: 20),
@@ -67,6 +88,11 @@ class _BodyAlunoState extends State<BodyAluno> {
             direita: 0,
             esquerda: 5,
             descricao: "Ano",
+            onChanged: (value) {
+              setState(() {
+                selectedAno = value;
+              });
+            },
           ),
 
           SizedBox(height: 20),
@@ -77,6 +103,11 @@ class _BodyAlunoState extends State<BodyAluno> {
             direita: 0,
             esquerda: 5,
             descricao: "Turmas",
+            onChanged: (value) {
+              setState(() {
+                selectedTurma = value;
+              });
+            },
           ),
 
           SizedBox(height: 20),
@@ -85,30 +116,28 @@ class _BodyAlunoState extends State<BodyAluno> {
             children: [
               Expanded(
                 child: FilledButton(
-                  onPressed: () {
-                    setState(() {
-                      isClicked = !isClicked; // Alterna o estado do botão
-                    });
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Navigation(
-                                initialIndex: 1,
-                              )),
-                    );
-                  },
+                  onPressed: tudoSelecionado()
+                      ? () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Navigation(initialIndex: 1),
+                            ),
+                          );
+                        }
+                      : null, // Se não tiver tudo selecionado, o botão fica desativado
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: isClicked
-                        ? ColorsTemaClaro
-                            .verdePrincipal // Cor verde quando clicado
-                        : ColorsTemaClaro.cinza, // Cor cinza quando não clicado
-                    foregroundColor: Colors.white, // Cor do texto
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 25, horizontal: 24),
+                    backgroundColor: tudoSelecionado()
+                        ? ColorsTemaClaro.verdePrincipal
+                        : ColorsTemaClaro.cinza,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(
+                          8), // Bordas levemente arredondadas
                     ),
+                    padding: EdgeInsets.symmetric(
+                        vertical: 30), // Aumenta pra cima e pra baixo
                   ),
+
                   child: const Text("Ver Horário"),
                 ),
               ),

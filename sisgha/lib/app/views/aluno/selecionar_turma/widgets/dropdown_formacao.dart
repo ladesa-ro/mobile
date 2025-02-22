@@ -6,6 +6,7 @@ class DropdownFormacao extends StatefulWidget {
   final double direita;
   final double esquerda;
   final String descricao;
+   final Function(String?) onChanged; // Aqui está correto
 
   const DropdownFormacao({
     super.key,
@@ -13,6 +14,7 @@ class DropdownFormacao extends StatefulWidget {
     required this.direita,
     required this.esquerda,
     required this.descricao,
+    required this.onChanged, // Aqui também
   });
 
   @override
@@ -93,12 +95,15 @@ class _DropdownFormacaoState extends State<DropdownFormacao> {
                                       ),
                                       borderRadius: BorderRadius.circular(5),
                                     ),
-                                    onSelected: (bool selected) {
+                                      onSelected: (bool selected) {
                                       setState(() {
-                                        selectedValue = selected ? option : null;
+                                        selectedValue =
+                                            selected ? option : null;
                                         isExpanded = true;
                                         isFocused = true;
                                       });
+                                      widget.onChanged(
+                                          selectedValue); // Notifica o BodyAluno
                                     },
                                   ),
                                 ))
