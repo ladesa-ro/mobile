@@ -6,7 +6,8 @@ class DropdownTurmas extends StatefulWidget {
   final double direita;
   final double esquerda;
   final String descricao;
-   final Function(String?) onChanged; // Aqui está correto
+  final Function(String?) onChanged; 
+  final bool abrirDropdown;
 
   const DropdownTurmas({
     super.key,
@@ -14,7 +15,8 @@ class DropdownTurmas extends StatefulWidget {
     required this.direita,
     required this.esquerda,
     required this.descricao,
-    required this.onChanged, // Aqui também
+    required this.onChanged, 
+    this.abrirDropdown = false,
   });
 
   @override
@@ -25,6 +27,24 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
   String? selectedValue;
   bool isExpanded = false;
   bool isFocused = false;
+
+  @override
+  void didUpdateWidget(covariant DropdownTurmas oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.abrirDropdown != oldWidget.abrirDropdown) {
+      setState(() {
+        isExpanded = widget.abrirDropdown;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.abrirDropdown) {
+      isExpanded = true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +60,9 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
           border: Border.all(
-            color: isFocused ? ColorsTemaClaro.verdePrincipal : ColorsTemaClaro.cinzaBordas,
+            color: selectedValue != null
+                ? ColorsTemaClaro.verdePrincipal
+                : ColorsTemaClaro.cinzaBordas,
           ),
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -54,16 +76,20 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.descricao,
+                    widget.descricao, 
                     style: TextStyle(
-                      color: isFocused ? ColorsTemaClaro.pretoTexto : ColorsTemaClaro.cinza,
+                      color: selectedValue != null
+                          ? ColorsTemaClaro.pretoTexto
+                          : ColorsTemaClaro.cinza,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   Icon(
                     isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-                    color: isFocused ? ColorsTemaClaro.verdePrincipal : ColorsTemaClaro.cinzaBordas,
+                    color: selectedValue != null
+                        ? ColorsTemaClaro.verdePrincipal
+                        : ColorsTemaClaro.cinzaBordas,
                   ),
                 ],
               ),
@@ -78,24 +104,30 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
                       child: Row(
                         children: <String>['A', 'B']
                             .map((option) => Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 4.0),
                                   child: ChoiceChip(
                                     label: Text(
                                       option,
                                       style: TextStyle(
-                                        color: selectedValue == option ? ColorsTemaClaro.verdePrincipal : ColorsTemaClaro.cinzatexto,
+                                        color: selectedValue == option
+                                            ? ColorsTemaClaro.verdePrincipal
+                                            : ColorsTemaClaro.cinzatexto,
                                       ),
                                     ),
                                     selected: selectedValue == option,
                                     showCheckmark: false,
-                                    selectedColor: const Color.fromARGB(61, 60, 192, 82),
+                                    selectedColor:
+                                        const Color.fromARGB(61, 60, 192, 82),
                                     shape: RoundedRectangleBorder(
                                       side: BorderSide(
-                                        color: selectedValue == option ? ColorsTemaClaro.verdePrincipal : ColorsTemaClaro.cinzaBordas,
+                                        color: selectedValue == option
+                                            ? ColorsTemaClaro.verdePrincipal
+                                            : ColorsTemaClaro.cinzaBordas,
                                       ),
                                       borderRadius: BorderRadius.circular(5),
                                     ),
-                                      onSelected: (bool selected) {
+                                    onSelected: (bool selected) {
                                       setState(() {
                                         selectedValue =
                                             selected ? option : null;
@@ -103,7 +135,7 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
                                         isFocused = true;
                                       });
                                       widget.onChanged(
-                                          selectedValue); // Notifica o BodyAluno
+                                          selectedValue); 
                                     },
                                   ),
                                 ))

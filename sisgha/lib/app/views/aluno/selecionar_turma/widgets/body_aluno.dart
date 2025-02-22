@@ -18,11 +18,22 @@ class BodyAluno extends StatefulWidget {
 }
 
 class _BodyAlunoState extends State<BodyAluno> {
+  bool abrirCurso = false;
+
+  void abrirDropdownCurso() {
+    setState(() {
+      abrirCurso = true;
+    });
+  }
+
   bool isClicked = false;
   String? selectedFormacao;
   String? selectedCurso;
   String? selectedAno;
   String? selectedTurma;
+
+  bool abrirAno = false;
+  bool abrirTurma = false;
 
   bool tudoSelecionado() {
     return selectedFormacao != null &&
@@ -54,13 +65,18 @@ class _BodyAlunoState extends State<BodyAluno> {
 
           // Dropdown de Formação
           DropdownFormacao(
-            nome: "",
-            direita: 0,
-            esquerda: 6,
+            nome: "Formação",
+            direita: 10,
+            esquerda: 10,
             descricao: "formação",
             onChanged: (value) {
               setState(() {
                 selectedFormacao = value;
+              });
+            },
+            abrirDropdownCurso: () {
+              setState(() {
+                abrirCurso = true;
               });
             },
           ),
@@ -76,13 +92,14 @@ class _BodyAlunoState extends State<BodyAluno> {
             onChanged: (value) {
               setState(() {
                 selectedCurso = value;
+                abrirAno = true; 
               });
             },
+            abrirDropdown: abrirCurso, 
           ),
 
-          SizedBox(height: 20),
-
-          // Dropdown de Ano
+            SizedBox(height: 20),
+            //dropdow do ano
           DropdownAno(
             nome: "",
             direita: 0,
@@ -91,13 +108,14 @@ class _BodyAlunoState extends State<BodyAluno> {
             onChanged: (value) {
               setState(() {
                 selectedAno = value;
+                abrirTurma = true;
               });
             },
+            abrirDropdown: abrirAno,
           ),
 
-          SizedBox(height: 20),
-
-          // Dropdown de Turmas
+            SizedBox(height: 20),
+            //dropdown da turma
           DropdownTurmas(
             nome: "",
             direita: 0,
@@ -108,6 +126,7 @@ class _BodyAlunoState extends State<BodyAluno> {
                 selectedTurma = value;
               });
             },
+            abrirDropdown: abrirTurma, 
           ),
 
           SizedBox(height: 20),
@@ -125,17 +144,15 @@ class _BodyAlunoState extends State<BodyAluno> {
                             ),
                           );
                         }
-                      : null, // Se não tiver tudo selecionado, o botão fica desativado
+                      : null,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: tudoSelecionado()
                         ? ColorsTemaClaro.verdePrincipal
                         : ColorsTemaClaro.cinza,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          8), // Bordas levemente arredondadas
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    padding: EdgeInsets.symmetric(
-                        vertical: 30), // Aumenta pra cima e pra baixo
+                    padding: EdgeInsets.symmetric(vertical: 30),
                   ),
 
                   child: const Text("Ver Horário"),
