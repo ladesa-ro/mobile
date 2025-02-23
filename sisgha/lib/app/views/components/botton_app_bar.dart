@@ -13,7 +13,6 @@ import '../../domain/logic/verificar_token_ativo.dart';
 import '../professor/calendario/calendario.dart';
 import '../professor/home/home.dart';
 import '../aluno/home_alunos.dart';
-import '../notificacao/notificacao.dart';
 import '../professor/perfil/perfil.dart';
 
 class Navigation extends StatefulWidget {
