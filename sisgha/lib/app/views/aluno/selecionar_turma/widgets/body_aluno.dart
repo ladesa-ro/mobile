@@ -18,7 +18,29 @@ class BodyAluno extends StatefulWidget {
 }
 
 class _BodyAlunoState extends State<BodyAluno> {
+  bool abrirCurso = false;
+
+  void abrirDropdownCurso() {
+    setState(() {
+      abrirCurso = true;
+    });
+  }
+
   bool isClicked = false;
+  String? selectedFormacao;
+  String? selectedCurso;
+  String? selectedAno;
+  String? selectedTurma;
+
+  bool abrirAno = false;
+  bool abrirTurma = false;
+
+  bool tudoSelecionado() {
+    return selectedFormacao != null &&
+        selectedCurso != null &&
+        selectedAno != null &&
+        selectedTurma != null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +65,20 @@ class _BodyAlunoState extends State<BodyAluno> {
 
           // Dropdown de Formação
           DropdownFormacao(
-            nome: "",
-            direita: 0,
-            esquerda: 6,
+            nome: "Formação",
+            direita: 10,
+            esquerda: 10,
             descricao: "formação",
+            onChanged: (value) {
+              setState(() {
+                selectedFormacao = value;
+              });
+            },
+            abrirDropdownCurso: () {
+              setState(() {
+                abrirCurso = true;
+              });
+            },
           ),
 
           SizedBox(height: 20),
@@ -57,26 +89,44 @@ class _BodyAlunoState extends State<BodyAluno> {
             direita: 0,
             esquerda: 10,
             descricao: "curso",
+            onChanged: (value) {
+              setState(() {
+                selectedCurso = value;
+                abrirAno = true; 
+              });
+            },
+            abrirDropdown: abrirCurso, 
           ),
 
-          SizedBox(height: 20),
-
-          // Dropdown de Ano
+            SizedBox(height: 20),
+            //dropdow do ano
           DropdownAno(
             nome: "",
             direita: 0,
             esquerda: 5,
             descricao: "Ano",
+            onChanged: (value) {
+              setState(() {
+                selectedAno = value;
+                abrirTurma = true;
+              });
+            },
+            abrirDropdown: abrirAno,
           ),
 
-          SizedBox(height: 20),
-
-          // Dropdown de Turmas
+            SizedBox(height: 20),
+            //dropdown da turma
           DropdownTurmas(
             nome: "",
             direita: 0,
             esquerda: 5,
             descricao: "Turmas",
+            onChanged: (value) {
+              setState(() {
+                selectedTurma = value;
+              });
+            },
+            abrirDropdown: abrirTurma, 
           ),
 
           SizedBox(height: 20),
@@ -85,30 +135,26 @@ class _BodyAlunoState extends State<BodyAluno> {
             children: [
               Expanded(
                 child: FilledButton(
-                  onPressed: () {
-                    setState(() {
-                      isClicked = !isClicked; // Alterna o estado do botão
-                    });
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Navigation(
-                                initialIndex: 1,
-                              )),
-                    );
-                  },
+                  onPressed: tudoSelecionado()
+                      ? () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Navigation(initialIndex: 1),
+                            ),
+                          );
+                        }
+                      : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: isClicked
-                        ? ColorsTemaClaro
-                            .verdePrincipal // Cor verde quando clicado
-                        : ColorsTemaClaro.cinza, // Cor cinza quando não clicado
-                    foregroundColor: Colors.white, // Cor do texto
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 25, horizontal: 24),
+                    backgroundColor: tudoSelecionado()
+                        ? ColorsTemaClaro.verdePrincipal
+                        : ColorsTemaClaro.cinza,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(8),
                     ),
+                    padding: EdgeInsets.symmetric(vertical: 30),
                   ),
+
                   child: const Text("Ver Horário"),
                 ),
               ),

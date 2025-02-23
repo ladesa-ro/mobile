@@ -6,6 +6,8 @@ class DropdownCurso extends StatefulWidget {
   final double direita;
   final double esquerda;
   final String descricao;
+  final Function(String?) onChanged;
+  final bool abrirDropdown;
 
   const DropdownCurso({
     super.key,
@@ -13,6 +15,8 @@ class DropdownCurso extends StatefulWidget {
     required this.direita,
     required this.esquerda,
     required this.descricao,
+    required this.onChanged, 
+    this.abrirDropdown = false, 
   });
 
   @override
@@ -25,12 +29,30 @@ class _DropdownAlunoState extends State<DropdownCurso> {
   bool isFocused = false;
 
   @override
+  void didUpdateWidget(covariant DropdownCurso oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.abrirDropdown != oldWidget.abrirDropdown) {
+      setState(() {
+        isExpanded = widget.abrirDropdown;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.abrirDropdown) {
+      isExpanded = true;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         setState(() {
           isExpanded = !isExpanded;
-          isFocused = true; // Define como focado ao clicar
+          isFocused = true; 
         });
       },
       child: AnimatedContainer(
@@ -38,9 +60,9 @@ class _DropdownAlunoState extends State<DropdownCurso> {
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
           border: Border.all(
-            color: isFocused
-                ? ColorsTemaClaro.verdePrincipal // Verde quando focado
-                : ColorsTemaClaro.cinzaBordas, // Cinza quando não focado
+            color: selectedValue != null
+                ? ColorsTemaClaro.verdePrincipal
+                : ColorsTemaClaro.cinzaBordas,
           ),
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -54,20 +76,20 @@ class _DropdownAlunoState extends State<DropdownCurso> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.descricao, // Mantém a descrição fixa
+                    widget.descricao, 
                     style: TextStyle(
-                      color: isFocused
-                          ? ColorsTemaClaro.pretoTexto // Preto quando focado
-                          : ColorsTemaClaro.cinza, // Cinza quando não focado
+                      color: selectedValue != null
+                          ? ColorsTemaClaro.pretoTexto
+                          : ColorsTemaClaro.cinza,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   Icon(
                     isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-                    color: isFocused
-                        ? ColorsTemaClaro.verdePrincipal // Verde quando focado
-                        : ColorsTemaClaro.cinzaBordas, // Cinza quando não focado
+                    color: selectedValue != null
+                        ? ColorsTemaClaro.verdePrincipal
+                        : ColorsTemaClaro.cinzaBordas,
                   ),
                 ],
               ),
@@ -82,36 +104,42 @@ class _DropdownAlunoState extends State<DropdownCurso> {
                       child: Row(
                         children: <String>['Informática', 'Química', 'Floresta']
                             .map((option) => Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 4.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 4.0),
                                   child: ChoiceChip(
                                     label: Text(
                                       option,
                                       style: TextStyle(
                                         color: selectedValue == option
-                                            ? ColorsTemaClaro.verdePrincipal // Texto verde
+                                            ? ColorsTemaClaro
+                                                .verdePrincipal 
                                             : ColorsTemaClaro.cinzatexto,
                                       ),
                                     ),
                                     selected: selectedValue == option,
-                                    showCheckmark: false, 
+                                    showCheckmark: false,
                                     selectedColor: selectedValue == option
-                                        ? const Color.fromARGB(61, 60, 192, 82) // Fundo verde claro
+                                        ? const Color.fromARGB(61, 60, 192,
+                                            82)
                                         : Colors.transparent,
                                     shape: RoundedRectangleBorder(
                                       side: BorderSide(
                                         color: selectedValue == option
-                                            ? ColorsTemaClaro.verdePrincipal // Borda verde
+                                            ? ColorsTemaClaro
+                                                .verdePrincipal 
                                             : ColorsTemaClaro.cinzaBordas,
                                       ),
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     onSelected: (bool selected) {
                                       setState(() {
-                                        selectedValue = selected ? option : null;
+                                        selectedValue =
+                                            selected ? option : null;
                                         isExpanded = true;
                                         isFocused = true;
                                       });
+                                      widget.onChanged(
+                                          selectedValue); 
                                     },
                                   ),
                                 ))

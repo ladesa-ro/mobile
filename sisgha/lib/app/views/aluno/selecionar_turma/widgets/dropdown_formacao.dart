@@ -6,6 +6,8 @@ class DropdownFormacao extends StatefulWidget {
   final double direita;
   final double esquerda;
   final String descricao;
+  final Function(String?) onChanged; 
+  final Function() abrirDropdownCurso;
 
   const DropdownFormacao({
     super.key,
@@ -13,6 +15,8 @@ class DropdownFormacao extends StatefulWidget {
     required this.direita,
     required this.esquerda,
     required this.descricao,
+    required this.onChanged, 
+    required this.abrirDropdownCurso,
   });
 
   @override
@@ -21,8 +25,8 @@ class DropdownFormacao extends StatefulWidget {
 
 class _DropdownFormacaoState extends State<DropdownFormacao> {
   String? selectedValue;
-  bool isExpanded = false;
-  bool isFocused = false; // Controla o foco no campo
+  bool isExpanded = true;
+  bool isFocused = false; 
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +42,9 @@ class _DropdownFormacaoState extends State<DropdownFormacao> {
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
           border: Border.all(
-            color: isFocused ? ColorsTemaClaro.verdePrincipal : ColorsTemaClaro.cinzaBordas,
+            color: selectedValue != null
+                ? ColorsTemaClaro.verdePrincipal
+                : ColorsTemaClaro.cinzaBordas,
           ),
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -52,16 +58,20 @@ class _DropdownFormacaoState extends State<DropdownFormacao> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.descricao, // Mantém a descrição fixa
+                    widget.descricao, 
                     style: TextStyle(
-                      color: isFocused ? ColorsTemaClaro.pretoTexto : ColorsTemaClaro.cinza,
+                      color: selectedValue != null
+                          ? ColorsTemaClaro.pretoTexto
+                          : ColorsTemaClaro.cinza,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   Icon(
                     isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-                    color: isFocused ? ColorsTemaClaro.verdePrincipal : ColorsTemaClaro.cinzaBordas,
+                    color: selectedValue != null
+                        ? ColorsTemaClaro.verdePrincipal
+                        : ColorsTemaClaro.cinzaBordas,
                   ),
                 ],
               ),
@@ -74,31 +84,47 @@ class _DropdownFormacaoState extends State<DropdownFormacao> {
                   ? SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: <String>['Técnico', 'Graduação', 'Concomitante']
+                        children: <String>[
+                          'Técnico',
+                          'Graduação',
+                          'Concomitante'
+                        ]
                             .map((option) => Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 4.0),
                                   child: ChoiceChip(
                                     label: Text(
                                       option,
                                       style: TextStyle(
-                                        color: selectedValue == option ? ColorsTemaClaro.verdePrincipal : ColorsTemaClaro.cinzatexto,
+                                        color: selectedValue == option
+                                            ? ColorsTemaClaro.verdePrincipal
+                                            : ColorsTemaClaro.cinzatexto,
                                       ),
                                     ),
                                     selected: selectedValue == option,
                                     showCheckmark: false,
-                                    selectedColor: const Color.fromARGB(61, 60, 192, 82),
+                                    selectedColor:
+                                        const Color.fromARGB(61, 60, 192, 82),
                                     shape: RoundedRectangleBorder(
                                       side: BorderSide(
-                                        color: selectedValue == option ? ColorsTemaClaro.verdePrincipal : ColorsTemaClaro.cinzaBordas,
+                                        color: selectedValue == option
+                                            ? ColorsTemaClaro.verdePrincipal
+                                            : ColorsTemaClaro.cinzaBordas,
                                       ),
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     onSelected: (bool selected) {
                                       setState(() {
-                                        selectedValue = selected ? option : null;
+                                        selectedValue =
+                                            selected ? option : null;
                                         isExpanded = true;
                                         isFocused = true;
                                       });
+                                      widget.onChanged(selectedValue);
+                                      if (selectedValue != null) {
+                                        widget
+                                            .abrirDropdownCurso(); 
+                                      }
                                     },
                                   ),
                                 ))
