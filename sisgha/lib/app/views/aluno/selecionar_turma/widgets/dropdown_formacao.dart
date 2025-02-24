@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
+import 'package:sisgha/app/core/utils/tamanhos.dart';
+import 'package:sisgha/app/data/providers/escolha_horarios_alunos.dart';
 
 class DropdownFormacao extends StatefulWidget {
-  final String nome;
   final double direita;
   final double esquerda;
   final String descricao;
-  final Function(String?) onChanged; 
-  final Function() abrirDropdownCurso;
+  final Function(String?) onChanged;
 
   const DropdownFormacao({
     super.key,
-    required this.nome,
     required this.direita,
     required this.esquerda,
     required this.descricao,
-    required this.onChanged, 
-    required this.abrirDropdownCurso,
+    required this.onChanged,
   });
 
   @override
@@ -26,10 +25,12 @@ class DropdownFormacao extends StatefulWidget {
 class _DropdownFormacaoState extends State<DropdownFormacao> {
   String? selectedValue;
   bool isExpanded = true;
-  bool isFocused = false; 
+  bool isFocused = false;
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<EscolhaHorariosAlunos>(context);
+    var listaFormacoes = provider.listaNivelFormacao;
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -58,7 +59,7 @@ class _DropdownFormacaoState extends State<DropdownFormacao> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.descricao, 
+                    widget.descricao,
                     style: TextStyle(
                       color: selectedValue != null
                           ? ColorsTemaClaro.pretoTexto
@@ -80,61 +81,104 @@ class _DropdownFormacaoState extends State<DropdownFormacao> {
               duration: const Duration(milliseconds: 300),
               height: isExpanded ? 80 : 0,
               curve: Curves.easeInOut,
-              child: isExpanded
-                  ? SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: <String>[
-                          'Técnico',
-                          'Graduação',
-                          'Concomitante'
-                        ]
-                            .map((option) => Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 4.0),
-                                  child: ChoiceChip(
-                                    label: Text(
-                                      option,
-                                      style: TextStyle(
-                                        color: selectedValue == option
-                                            ? ColorsTemaClaro.verdePrincipal
-                                            : ColorsTemaClaro.cinzatexto,
-                                      ),
-                                    ),
-                                    selected: selectedValue == option,
-                                    showCheckmark: false,
-                                    selectedColor:
-                                        const Color.fromARGB(61, 60, 192, 82),
-                                    shape: RoundedRectangleBorder(
-                                      side: BorderSide(
-                                        color: selectedValue == option
-                                            ? ColorsTemaClaro.verdePrincipal
-                                            : ColorsTemaClaro.cinzaBordas,
-                                      ),
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    onSelected: (bool selected) {
-                                      setState(() {
-                                        selectedValue =
-                                            selected ? option : null;
-                                        isExpanded = true;
-                                        isFocused = true;
-                                      });
-                                      widget.onChanged(selectedValue);
-                                      if (selectedValue != null) {
-                                        widget
-                                            .abrirDropdownCurso(); 
-                                      }
-                                    },
-                                  ),
-                                ))
-                            .toList(),
-                      ),
-                    )
-                  : null,
+              child: ListView.builder(
+                  physics: Tamanhos.efeitoDeRolagem(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: listaFormacoes.length,
+                  itemBuilder: (context, index) =>
+                      construirQuadrados(listaFormacoes[index].slug)),
+              // child: isExpanded
+              //     ? SingleChildScrollView(
+              //         scrollDirection: Axis.horizontal,
+              //         child:
+
+              //  Row(
+              //   children: <String>[
+              //     'Técnico',
+              //     'Graduação',
+              //     'Concomitante'
+              //   ]
+              //       .map(
+              //         (option) => Padding(
+              //           padding:
+              //               const EdgeInsets.symmetric(horizontal: 4.0),
+              //           child: ChoiceChip(
+              //             label: Text(
+              //               option,
+              //               style: TextStyle(
+              //                 color: selectedValue == option
+              //                     ? ColorsTemaClaro.verdePrincipal
+              //                     : ColorsTemaClaro.cinzatexto,
+              //               ),
+              //             ),
+              //             selected: selectedValue == option,
+              //             showCheckmark: false,
+              //             selectedColor:
+              //                 const Color.fromARGB(61, 60, 192, 82),
+              //             shape: RoundedRectangleBorder(
+              //               side: BorderSide(
+              //                 color: selectedValue == option
+              //                     ? ColorsTemaClaro.verdePrincipal
+              //                     : ColorsTemaClaro.cinzaBordas,
+              //               ),
+              //               borderRadius: BorderRadius.circular(5),
+              //             ),
+              //             onSelected: (bool selected) {
+              //               setState(() {
+              //                 selectedValue = selected ? option : null;
+              //                 isExpanded = true;
+              //                 isFocused = true;
+              //               });
+              //               widget.onChanged(selectedValue);
+              //               if (selectedValue != null) {
+              //                 widget.abrirDropdownCurso();
+              //               }
+              //             },
+              //           ),
+              //         ),
+              //       )
+              //       .toList(),
+              // ),
+              //     )
+              //  : null,
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget construirQuadrados(option) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: ChoiceChip(
+        label: Text(
+          option,
+          style: TextStyle(
+            color: selectedValue == option
+                ? ColorsTemaClaro.verdePrincipal
+                : ColorsTemaClaro.cinzatexto,
+          ),
+        ),
+        selected: selectedValue == option,
+        showCheckmark: false,
+        selectedColor: const Color.fromARGB(61, 60, 192, 82),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: selectedValue == option
+                ? ColorsTemaClaro.verdePrincipal
+                : ColorsTemaClaro.cinzaBordas,
+          ),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        onSelected: (bool selected) {
+          setState(() {
+            selectedValue = selected ? option : null;
+            isExpanded = true;
+            isFocused = true;
+          });
+          widget.onChanged(selectedValue);
+        },
       ),
     );
   }

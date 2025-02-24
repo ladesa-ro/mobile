@@ -1,14 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/Icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
+import 'package:sisgha/app/core/utils/tamanhos.dart';
+import 'package:sisgha/app/data/providers/escolha_horarios_alunos.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdomn_turmas.dart';
-import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown-ano.dart';
+import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_ano.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_curso.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_formacao.dart';
-
-import '../../../components/botton_app_bar.dart';
 
 class BodyAluno extends StatefulWidget {
   const BodyAluno({super.key});
@@ -26,30 +27,18 @@ class _BodyAlunoState extends State<BodyAluno> {
     });
   }
 
-  bool isClicked = false;
-  String? selectedFormacao;
-  String? selectedCurso;
-  String? selectedAno;
-  String? selectedTurma;
-
   bool abrirAno = false;
   bool abrirTurma = false;
 
-  bool tudoSelecionado() {
-    return selectedFormacao != null &&
-        selectedCurso != null &&
-        selectedAno != null &&
-        selectedTurma != null;
-  }
-
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<EscolhaHorariosAlunos>(context);
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: ListView(
+        physics: Tamanhos.efeitoDeRolagem(),
         children: [
           SizedBox(height: 70),
-
           Row(
             children: [
               Icon(Icones.Relogio),
@@ -65,19 +54,12 @@ class _BodyAlunoState extends State<BodyAluno> {
 
           // Dropdown de Formação
           DropdownFormacao(
-            nome: "Formação",
             direita: 10,
             esquerda: 10,
-            descricao: "formação",
+            descricao: "Formação",
             onChanged: (value) {
-              setState(() {
-                selectedFormacao = value;
-              });
-            },
-            abrirDropdownCurso: () {
-              setState(() {
-                abrirCurso = true;
-              });
+              provider.selecionarFormacao(value);
+              abrirCurso = true;
             },
           ),
 
@@ -85,48 +67,39 @@ class _BodyAlunoState extends State<BodyAluno> {
 
           // Dropdown de Curso
           DropdownCurso(
-            nome: "",
             direita: 0,
             esquerda: 10,
-            descricao: "curso",
+            descricao: "Curso",
             onChanged: (value) {
-              setState(() {
-                selectedCurso = value;
-                abrirAno = true; 
-              });
+              provider.selecionarCurso(value);
+              abrirAno = true;
             },
-            abrirDropdown: abrirCurso, 
+            abrirDropdown: abrirCurso,
           ),
 
-            SizedBox(height: 20),
-            //dropdow do ano
+          SizedBox(height: 20),
+          //dropdow do ano
           DropdownAno(
-            nome: "",
             direita: 0,
             esquerda: 5,
             descricao: "Ano",
             onChanged: (value) {
-              setState(() {
-                selectedAno = value;
-                abrirTurma = true;
-              });
+              provider.selecionarAno(value);
+              abrirTurma = true;
             },
             abrirDropdown: abrirAno,
           ),
 
-            SizedBox(height: 20),
-            //dropdown da turma
+          SizedBox(height: 20),
+          //dropdown da turma
           DropdownTurmas(
-            nome: "",
             direita: 0,
             esquerda: 5,
             descricao: "Turmas",
             onChanged: (value) {
-              setState(() {
-                selectedTurma = value;
-              });
+              provider.selecionarTurma(value);
             },
-            abrirDropdown: abrirTurma, 
+            abrirDropdown: abrirTurma,
           ),
 
           SizedBox(height: 20),
@@ -137,24 +110,10 @@ class _BodyAlunoState extends State<BodyAluno> {
                 child: FilledButton(
                   onPressed: tudoSelecionado()
                       ? () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Navigation(initialIndex: 1),
-                            ),
-                          );
+                          Navigator.of(context).pushNamed('/navegação');
                         }
                       : null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: tudoSelecionado()
-                        ? ColorsTemaClaro.verdePrincipal
-                        : ColorsTemaClaro.cinza,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 30),
-                  ),
-
+                  style: _estiloBotao(),
                   child: const Text("Ver Horário"),
                 ),
               ),
@@ -163,5 +122,25 @@ class _BodyAlunoState extends State<BodyAluno> {
         ],
       ),
     );
+  }
+
+  ButtonStyle _estiloBotao() {
+    return ElevatedButton.styleFrom(
+      backgroundColor: tudoSelecionado()
+          ? ColorsTemaClaro.verdePrincipal
+          : ColorsTemaClaro.cinza,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      padding: EdgeInsets.symmetric(vertical: 30),
+    );
+  }
+
+  bool tudoSelecionado() {
+    var provider = Provider.of<EscolhaHorariosAlunos>(context);
+    return provider.formacaoSelecionada != null &&
+        provider.cursoSelecionado != null &&
+        provider.anoSelecionado != null &&
+        provider.turmaSelecionada != null;
   }
 }

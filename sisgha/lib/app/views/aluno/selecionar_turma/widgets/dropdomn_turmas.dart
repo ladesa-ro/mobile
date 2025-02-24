@@ -2,20 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 
 class DropdownTurmas extends StatefulWidget {
-  final String nome;
   final double direita;
   final double esquerda;
   final String descricao;
-  final Function(String?) onChanged; 
+  final Function(String?) onChanged;
   final bool abrirDropdown;
 
   const DropdownTurmas({
     super.key,
-    required this.nome,
     required this.direita,
     required this.esquerda,
     required this.descricao,
-    required this.onChanged, 
+    required this.onChanged,
     this.abrirDropdown = false,
   });
 
@@ -76,7 +74,7 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.descricao, 
+                    widget.descricao,
                     style: TextStyle(
                       color: selectedValue != null
                           ? ColorsTemaClaro.pretoTexto
@@ -134,8 +132,7 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
                                         isExpanded = true;
                                         isFocused = true;
                                       });
-                                      widget.onChanged(
-                                          selectedValue); 
+                                      widget.onChanged(selectedValue);
                                     },
                                   ),
                                 ))

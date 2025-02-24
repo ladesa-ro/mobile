@@ -2,21 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 
 class DropdownAno extends StatefulWidget {
-  final String nome;
   final double direita;
   final double esquerda;
   final String descricao;
-  final Function(String?) onChanged; 
+  final Function(String?) onChanged;
   final bool abrirDropdown;
 
   const DropdownAno({
     super.key,
-    required this.nome,
     required this.direita,
     required this.esquerda,
     required this.descricao,
     required this.onChanged,
-    this.abrirDropdown = false, 
+    this.abrirDropdown = false,
   });
 
   @override
@@ -26,7 +24,7 @@ class DropdownAno extends StatefulWidget {
 class _DropdownAlunoState extends State<DropdownAno> {
   String? selectedValue;
   bool isExpanded = false;
-  bool isFocused = false; 
+  bool isFocused = false;
 
   @override
   void didUpdateWidget(covariant DropdownAno oldWidget) {
@@ -52,7 +50,7 @@ class _DropdownAlunoState extends State<DropdownAno> {
       onTap: () {
         setState(() {
           isExpanded = !isExpanded;
-          isFocused = true; 
+          isFocused = true;
         });
       },
       child: AnimatedContainer(
@@ -76,7 +74,7 @@ class _DropdownAlunoState extends State<DropdownAno> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.descricao, 
+                    widget.descricao,
                     style: TextStyle(
                       color: selectedValue != null
                           ? ColorsTemaClaro.pretoTexto
@@ -111,26 +109,20 @@ class _DropdownAlunoState extends State<DropdownAno> {
                                       option,
                                       style: TextStyle(
                                         color: selectedValue == option
-                                            ? ColorsTemaClaro
-                                                .verdePrincipal 
-                                            : ColorsTemaClaro
-                                                .cinzatexto,
+                                            ? ColorsTemaClaro.verdePrincipal
+                                            : ColorsTemaClaro.cinzatexto,
                                       ),
                                     ),
                                     selected: selectedValue == option,
-                                    showCheckmark:
-                                        false, 
+                                    showCheckmark: false,
                                     selectedColor: selectedValue == option
-                                        ? const Color.fromARGB(61, 60, 192,
-                                            82) 
+                                        ? const Color.fromARGB(61, 60, 192, 82)
                                         : Colors.transparent,
                                     shape: RoundedRectangleBorder(
                                       side: BorderSide(
                                         color: selectedValue == option
-                                            ? ColorsTemaClaro
-                                                .verdePrincipal 
-                                            : ColorsTemaClaro
-                                                .cinzaBordas, 
+                                            ? ColorsTemaClaro.verdePrincipal
+                                            : ColorsTemaClaro.cinzaBordas,
                                       ),
                                       borderRadius: BorderRadius.circular(5),
                                     ),
@@ -141,8 +133,7 @@ class _DropdownAlunoState extends State<DropdownAno> {
                                         isExpanded = true;
                                         isFocused = true;
                                       });
-                                      widget.onChanged(
-                                          selectedValue); 
+                                      widget.onChanged(selectedValue);
                                     },
                                   ),
                                 ))
