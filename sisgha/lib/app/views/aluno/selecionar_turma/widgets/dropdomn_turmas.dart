@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
+import 'package:provider/provider.dart';
+import 'package:sisgha/app/core/utils/tamanhos.dart';
+import 'package:sisgha/app/data/providers/escolha_horarios_alunos.dart';
 
 class DropdownTurmas extends StatefulWidget {
   final double direita;
@@ -46,6 +49,8 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<EscolhaHorariosAlunos>(context);
+    var listaTumas = provider.listaTurmas;
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -54,16 +59,15 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
         });
       },
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(microseconds: 300),
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
-          border: Border.all(
-            color: selectedValue != null
-                ? ColorsTemaClaro.verdePrincipal
-                : ColorsTemaClaro.cinzaBordas,
-          ),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
+            border: Border.all(
+              color: selectedValue != null
+                  ? ColorsTemaClaro.verdePrincipal
+                  : ColorsTemaClaro.cinzaBordas,
+            ),
+            borderRadius: BorderRadius.circular(10.0)),
         padding: EdgeInsets.fromLTRB(widget.esquerda, 10, widget.direita, 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,69 +80,32 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
                   Text(
                     widget.descricao,
                     style: TextStyle(
-                      color: selectedValue != null
-                          ? ColorsTemaClaro.pretoTexto
-                          : ColorsTemaClaro.cinza,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                    ),
+                        color: selectedValue != null
+                            ? ColorsTemaClaro.pretoTexto
+                            : ColorsTemaClaro.cinza,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600),
                   ),
                   Icon(
                     isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
                     color: selectedValue != null
                         ? ColorsTemaClaro.verdePrincipal
                         : ColorsTemaClaro.cinzaBordas,
-                  ),
+                  )
                 ],
               ),
             ),
-            AnimatedContainer(
+              AnimatedContainer(
               duration: const Duration(milliseconds: 300),
               height: isExpanded ? 80 : 0,
               curve: Curves.easeInOut,
               child: isExpanded
-                  ? SingleChildScrollView(
+                  ? ListView.builder(
+                      physics: Tamanhos.efeitoDeRolagem(),
                       scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: <String>['A', 'B']
-                            .map((option) => Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 4.0),
-                                  child: ChoiceChip(
-                                    label: Text(
-                                      option,
-                                      style: TextStyle(
-                                        color: selectedValue == option
-                                            ? ColorsTemaClaro.verdePrincipal
-                                            : ColorsTemaClaro.cinzatexto,
-                                      ),
-                                    ),
-                                    selected: selectedValue == option,
-                                    showCheckmark: false,
-                                    selectedColor:
-                                        const Color.fromARGB(61, 60, 192, 82),
-                                    shape: RoundedRectangleBorder(
-                                      side: BorderSide(
-                                        color: selectedValue == option
-                                            ? ColorsTemaClaro.verdePrincipal
-                                            : ColorsTemaClaro.cinzaBordas,
-                                      ),
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    onSelected: (bool selected) {
-                                      setState(() {
-                                        selectedValue =
-                                            selected ? option : null;
-                                        isExpanded = true;
-                                        isFocused = true;
-                                      });
-                                      widget.onChanged(selectedValue);
-                                    },
-                                  ),
-                                ))
-                            .toList(),
-                      ),
-                    )
+                      itemCount: listaTumas.length,
+                      itemBuilder: (context, index) =>
+                          construirQuadrados(listaTumas[index]))
                   : null,
             ),
           ],
@@ -146,4 +113,42 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
       ),
     );
   }
+
+      
+   Widget construirQuadrados(option) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: ChoiceChip(
+        label: Text(
+          option,
+          style: TextStyle(
+            color: selectedValue == option
+                ? ColorsTemaClaro.verdePrincipal
+                : ColorsTemaClaro.cinzatexto,
+          ),
+        ),
+        selected: selectedValue == option,
+        showCheckmark: false,
+        selectedColor: const Color.fromARGB(61, 60, 192, 82),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: selectedValue == option
+                ? ColorsTemaClaro.verdePrincipal
+                : ColorsTemaClaro.cinzaBordas,
+          ),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        onSelected: (bool selected) {
+          setState(() {
+            selectedValue = selected ? option : null;
+            isExpanded = true;
+            isFocused = true;
+          });
+          widget.onChanged(selectedValue);
+        },
+      ),
+    );
+  }
 }
+
+
