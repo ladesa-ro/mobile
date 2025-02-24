@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:provider/provider.dart';
+import 'package:sisgha/app/data/providers/escolha_horarios_alunos.dart';
+import 'package:sisgha/app/data/providers/escolha_menu_lateral.dart';
 
 import 'package:sizer/sizer.dart';
 

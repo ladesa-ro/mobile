@@ -67,7 +67,7 @@ class _BodyAlunoState extends State<BodyAluno> {
 
           // Dropdown de Curso
           DropdownCurso(
-            direita: 0,
+            direita: 10,
             esquerda: 10,
             descricao: "Curso",
             onChanged: (value) {
@@ -80,8 +80,8 @@ class _BodyAlunoState extends State<BodyAluno> {
           SizedBox(height: 20),
           //dropdow do ano
           DropdownAno(
-            direita: 0,
-            esquerda: 5,
+            direita: 10,
+            esquerda: 10,
             descricao: "Ano",
             onChanged: (value) {
               provider.selecionarAno(value);
@@ -93,8 +93,8 @@ class _BodyAlunoState extends State<BodyAluno> {
           SizedBox(height: 20),
           //dropdown da turma
           DropdownTurmas(
-            direita: 0,
-            esquerda: 5,
+            direita: 10,
+            esquerda: 10,
             descricao: "Turmas",
             onChanged: (value) {
               provider.selecionarTurma(value);

@@ -13,6 +13,8 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
 
   List<NiveisFormacao> listaNivelFormacao = [];
   List<Cursos> listaCursos = [];
+  List<String> listaAnos = ["1° Ano", "2° Ano", "3° Ano"];
+  List<String> listaTurmas = ["A", "B"];
 
   pucharOpcoes(BuildContext context) async {
     listaNivelFormacao = await Repository.buscarNiveisDeFormacao(context);

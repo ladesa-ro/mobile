@@ -81,66 +81,14 @@ class _DropdownFormacaoState extends State<DropdownFormacao> {
               duration: const Duration(milliseconds: 300),
               height: isExpanded ? 80 : 0,
               curve: Curves.easeInOut,
-              child: ListView.builder(
-                  physics: Tamanhos.efeitoDeRolagem(),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: listaFormacoes.length,
-                  itemBuilder: (context, index) =>
-                      construirQuadrados(listaFormacoes[index].slug)),
-              // child: isExpanded
-              //     ? SingleChildScrollView(
-              //         scrollDirection: Axis.horizontal,
-              //         child:
-
-              //  Row(
-              //   children: <String>[
-              //     'Técnico',
-              //     'Graduação',
-              //     'Concomitante'
-              //   ]
-              //       .map(
-              //         (option) => Padding(
-              //           padding:
-              //               const EdgeInsets.symmetric(horizontal: 4.0),
-              //           child: ChoiceChip(
-              //             label: Text(
-              //               option,
-              //               style: TextStyle(
-              //                 color: selectedValue == option
-              //                     ? ColorsTemaClaro.verdePrincipal
-              //                     : ColorsTemaClaro.cinzatexto,
-              //               ),
-              //             ),
-              //             selected: selectedValue == option,
-              //             showCheckmark: false,
-              //             selectedColor:
-              //                 const Color.fromARGB(61, 60, 192, 82),
-              //             shape: RoundedRectangleBorder(
-              //               side: BorderSide(
-              //                 color: selectedValue == option
-              //                     ? ColorsTemaClaro.verdePrincipal
-              //                     : ColorsTemaClaro.cinzaBordas,
-              //               ),
-              //               borderRadius: BorderRadius.circular(5),
-              //             ),
-              //             onSelected: (bool selected) {
-              //               setState(() {
-              //                 selectedValue = selected ? option : null;
-              //                 isExpanded = true;
-              //                 isFocused = true;
-              //               });
-              //               widget.onChanged(selectedValue);
-              //               if (selectedValue != null) {
-              //                 widget.abrirDropdownCurso();
-              //               }
-              //             },
-              //           ),
-              //         ),
-              //       )
-              //       .toList(),
-              // ),
-              //     )
-              //  : null,
+              child: isExpanded
+                  ? ListView.builder(
+                      physics: Tamanhos.efeitoDeRolagem(),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: listaFormacoes.length,
+                      itemBuilder: (context, index) =>
+                          construirQuadrados(listaFormacoes[index].slug))
+                  : null,
             ),
           ],
         ),
