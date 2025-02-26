@@ -22,8 +22,8 @@ class CustomAppBarNotificacao extends StatelessWidget
   Widget build(BuildContext context) {
     return AppBar(
       titleSpacing: 0,
-      leading: seta
-          ? IconButton(
+        leading: seta
+            ? IconButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },

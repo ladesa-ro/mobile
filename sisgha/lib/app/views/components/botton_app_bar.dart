@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/app/views/aluno/notificacao_alunos/notificacoes_alunos.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -12,7 +13,6 @@ import '../../domain/logic/verificar_token_ativo.dart';
 import '../professor/calendario/calendario.dart';
 import '../professor/home/home.dart';
 import '../aluno/home_alunos.dart';
-import '../notificacao/notificacao.dart';
 import '../professor/perfil/perfil.dart';
 
 class Navigation extends StatefulWidget {
@@ -113,8 +113,8 @@ class _NavigationState extends State<Navigation> {
             child: HomeAlunos(),
           );
         case 2:
-          return const Center(
-            child: Notificacao(),
+          return Center(
+            child: NotificacoesAlunos(),
           );
         default:
           return const HomeAlunos();
