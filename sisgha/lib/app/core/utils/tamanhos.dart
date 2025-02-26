@@ -28,4 +28,9 @@ class Tamanhos {
             WidgetStateProperty.all<Color>(ColorsTemaClaro.verdePrincipalBotao),
         foregroundColor: WidgetStatePropertyAll(ColorsTemaClaro.brancoTexto));
   }
+
+  //sempre implementar no physics dos ListViews ou outro tipo de widget de rolagem
+  static BouncingScrollPhysics efeitoDeRolagem() {
+    return BouncingScrollPhysics();
+  }
 }
