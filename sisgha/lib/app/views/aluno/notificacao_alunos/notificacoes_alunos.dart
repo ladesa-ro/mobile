@@ -1,6 +1,6 @@
 //A tela de notificações tem que ser stateful (porque ao receber alguma notificação haverá uma mudança na tela)
 //As notificações precisam de um ícone, título, tempo, texto, link
-//Por agora irei realizar a tela sem alteração com influência da API
+//Por agora irei realizar a tela sem alteração da API (stateless)
 
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/core/utils/Icones.dart';

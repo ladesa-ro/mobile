@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/app/views/aluno/calendario_alunos/calendario_alunos.dart';
 import 'package:sisgha/app/views/aluno/notificacao_alunos/notificacoes_alunos.dart';
 
 import 'package:sizer/sizer.dart';
@@ -99,14 +100,12 @@ class _NavigationState extends State<Navigation> {
     } else {
       switch (index) {
         case 0:
-          return Container();
-
-        // ChangeNotifierProvider(
-        //   create: (_) => EscolhaCalendario(),
-        //   child: Center(
-        //     child: Calendar(),
-        //   ),
-        // );
+          return ChangeNotifierProvider(
+            create: (_) => EscolhaCalendario(),
+            child: Center(
+              child: CalendarAlunos(),
+            ),
+          );
 
         case 1:
           return const Center(
