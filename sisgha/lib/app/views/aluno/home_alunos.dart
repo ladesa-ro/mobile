@@ -37,6 +37,7 @@ class HomeAlunos extends StatelessWidget {
           botaoMiniCalendario(context),
           SizedBox(height: tamanho * 0.03),
           Expanded(child: const QuadradosHome()),
+          SizedBox(height: tamanho * 0.03),
         ],
       ),
     );

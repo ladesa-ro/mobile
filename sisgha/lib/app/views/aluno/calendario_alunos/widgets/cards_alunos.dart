@@ -1,0 +1,147 @@
+import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:sisgha/app/core/utils/Icones.dart';
+import 'package:sisgha/app/core/utils/colors.dart';
+import 'package:sisgha/app/core/utils/estilos.dart';
+import 'package:sisgha/app/core/utils/tamanhos.dart';
+
+class CardsAlunos extends StatelessWidget {
+  CardsAlunos({super.key});
+  final Cards = [
+    ElementosCards(
+      cor: ColorsTemaClaro.roxo,
+      titulo: "2º Etapa",
+      icone: Icones.Sino,
+      iconebotao: ElevatedButton(
+        style: estiloBotaoCard(),
+        onPressed: () {},
+        child: Iconify(
+          Icones.Sino,
+          color: ColorsTemaClaro.branco,
+        ),
+      ),
+      inicio: "Início: 00/00 ás 00:00",
+      terminio: "Término: 00/00 ás 00:00",
+      tempo: "Começa daqui 0 dias.",
+      local: "Local: Ji-Paraná",
+    ),
+    ElementosCards(
+      cor: ColorsTemaClaro.vermelho,
+      titulo: "Recuperação do 1º Semestre",
+      icone: Icones.Sino,
+      iconebotao: ElevatedButton(
+        style: estiloBotaoCard(),
+        onPressed: () {},
+        child: Iconify(
+          Icones.Sino,
+          color: ColorsTemaClaro.branco,
+        ),
+      ),
+      inicio: "Início: 00/00 ás 00:00",
+      terminio: "Término: 00/00 ás 00:00",
+      tempo: "Começa daqui 0 dias.",
+      local: "Local: Ji-Paraná",
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    double largura = Tamanhos.larguraGeral();
+    return ListView.builder(
+      itemCount: Cards.length,
+      itemBuilder: (ctx, index) => Card(
+        margin: EdgeInsets.all(10),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          side: BorderSide(color: ColorsTemaClaro.cinzaBordas),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    Cards[index].titulo,
+                    style: estiloTexto(
+                      16,
+                      cor: Cards[index].cor,
+                      peso: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    Cards[index].inicio,
+                    style: estiloTexto(
+                      15,
+                    ),
+                  ),
+                  Text(
+                    Cards[index].terminio,
+                    style: estiloTexto(
+                      15,
+                    ),
+                  ),
+                  Text(
+                    Cards[index].tempo,
+                    style: estiloTexto(
+                      15,
+                    ),
+                  ),
+                  Text(
+                    Cards[index].local,
+                    style: estiloTexto(
+                      15,
+                    ),
+                  ),
+                ],
+              ),
+              Spacer(),
+              SizedBox(
+                  height: 42,
+                  width: largura * 0.11,
+                  child: Cards[index].iconebotao),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ElementosCards {
+  final Color cor;
+  final String titulo;
+  final String icone;
+  final ElevatedButton iconebotao;
+  final String inicio;
+  final String terminio;
+  final String tempo;
+  final String local;
+  ElementosCards({
+    required this.cor,
+    required this.titulo,
+    required this.icone,
+    required this.iconebotao,
+    required this.inicio,
+    required this.terminio,
+    required this.tempo,
+    required this.local,
+  });
+}
+
+ButtonStyle estiloBotaoCard() {
+  return ButtonStyle(
+    padding: WidgetStatePropertyAll(EdgeInsets.zero),
+    backgroundColor: WidgetStatePropertyAll(ColorsTemaClaro.verdePrincipal),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+    ),
+  );
+}
