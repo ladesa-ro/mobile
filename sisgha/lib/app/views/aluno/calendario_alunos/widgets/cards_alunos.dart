@@ -43,6 +43,7 @@ class CardsAlunos extends StatelessWidget {
       local: "Local: Ji-Paraná",
     ),
   ];
+
   @override
   Widget build(BuildContext context) {
     double largura = Tamanhos.larguraGeral();
@@ -50,6 +51,10 @@ class CardsAlunos extends StatelessWidget {
       itemCount: Cards.length,
       itemBuilder: (ctx, index) => Card(
         margin: EdgeInsets.all(10),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          side: BorderSide(color: ColorsTemaClaro.cinzaBordas),
+        ),
         child: Padding(
           padding: EdgeInsets.all(10),
           child: Row(
@@ -65,6 +70,9 @@ class CardsAlunos extends StatelessWidget {
                       cor: Cards[index].cor,
                       peso: FontWeight.bold,
                     ),
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   Text(
                     Cards[index].inicio,
@@ -94,8 +102,8 @@ class CardsAlunos extends StatelessWidget {
               ),
               Spacer(),
               SizedBox(
-                  height: 50,
-                  width: largura * 0.12,
+                  height: 42,
+                  width: largura * 0.11,
                   child: Cards[index].iconebotao),
             ],
           ),
