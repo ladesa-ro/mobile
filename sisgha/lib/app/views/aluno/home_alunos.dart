@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
-
-
 import 'package:sizer/sizer.dart';
-
 import '../../core/utils/dias.dart';
 import '../../core/utils/responsividade.dart';
 import '../components/appbar.dart';
