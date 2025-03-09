@@ -18,6 +18,7 @@ class AppbarNotificacaoAlunos extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      titleSpacing: 0,
       title: Text(
         "Notificações",
         style: estiloTexto(
