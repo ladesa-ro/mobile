@@ -17,6 +17,8 @@ class NotificacoesAlunos extends StatelessWidget {
 //List com as informações prensentes na notificação
 //(List provisória só para fazer/entender a parte visual da tela, depois ela vai ser retirada para se dar a entrada dos dados da API)
 
+// alias é provavelmente dessa maneira que os dados vao vir da api e tambem é mais ou menos dessa forma que serão tratados no app, parabens
+
   final List notificacoes = [
     ItensNotificacoes(
       icone: Icones.CalendarVazio,

@@ -1,8 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:sisgha/app/data/providers/escolha_horarios_alunos.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -22,7 +20,6 @@ class PaginaLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<EscolhaHorariosAlunos>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
@@ -137,8 +134,8 @@ class _CorpoLoginState extends State<CorpoLogin> {
       onPressed: () async {
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (formKey.currentState!.validate()) {
-          bool deuCerto = await Repository.login(
-              matriculaController, senhaController, context);
+          bool deuCerto =
+              await Repository.login(matriculaController, senhaController);
 
           if (!currentFocus.hasPrimaryFocus) {
             currentFocus.unfocus();

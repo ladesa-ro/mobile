@@ -4,12 +4,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/app/data/armazenamento/shared_preferences.dart';
+import 'package:sisgha/app/domain/logic/verificar_imagem_armazenada.dart';
 
 import '../../views/components/botton_app_bar.dart';
 import '../../views/components/progress_indicator.dart';
 import '../../views/components/widget_erro.dart';
 import '../../domain/api/repository.dart';
-import '../cache/cache.dart';
 import '../../domain/model/professor.dart';
 
 class DadosProfessor with ChangeNotifier {
@@ -19,6 +20,8 @@ class DadosProfessor with ChangeNotifier {
 
   File get fotoCapaPerfil => _fotoCapaPerfil;
   File get fotoImagemPerfil => _fotoImagemPerfil;
+  File AlterarFotoCapaPerfil(File value) => _fotoCapaPerfil = value;
+  File AlterarFotoImagemPerfil(File value) => _fotoImagemPerfil = value;
 
   Future<bool> buscarDados(BuildContext context) async {
     mostrarDialogoDeCarregmento(context);
@@ -41,14 +44,10 @@ class DadosProfessor with ChangeNotifier {
         email: user.email,
         id: user.id);
 
-    final baixarImagemCapa = await Cache.baixarImagem(context,
-        "https://dev.ladesa.com.br/api/v1/usuarios/${user.id}/imagem/capa");
-
-    final baixarImagemPerfil = await Cache.baixarImagem(context,
-        "https://dev.ladesa.com.br/api/v1/usuarios/${user.id}/imagem/perfil");
-
-    _fotoCapaPerfil = baixarImagemCapa.absolute;
-    _fotoImagemPerfil = baixarImagemPerfil.absolute;
+    _fotoCapaPerfil = await VerificarImagemArmazenada.verificador(
+        Armazenamento().localImagemCapa, 0);
+    _fotoImagemPerfil = await VerificarImagemArmazenada.verificador(
+        Armazenamento().localImagemPerfil, 1);
 
     notifyListeners();
     return true;
@@ -58,7 +57,6 @@ class DadosProfessor with ChangeNotifier {
       BuildContext context, File imagem) async {
     await Repository.atualizarImagemCapa(imagem, context);
 
-    Cache.substituirArquivoNoCache(context, _fotoCapaPerfil.path, imagem);
     _fotoCapaPerfil = imagem.absolute;
 
     return notifyListeners();
@@ -75,7 +73,6 @@ class DadosProfessor with ChangeNotifier {
   void apagarDados(BuildContext context) {
     _fotoCapaPerfil = File('');
     _fotoImagemPerfil = File('');
-    Cache.limparCache(context);
     professor = Professor(matricula: '', nome: '', email: '', id: '');
     notifyListeners();
   }
