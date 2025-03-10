@@ -1,8 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:sisgha/app/data/providers/escolha_horarios_alunos.dart';
+import 'package:sisgha/app/data/armazenamento/shared_preferences.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -22,7 +21,6 @@ class PaginaLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<EscolhaHorariosAlunos>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(

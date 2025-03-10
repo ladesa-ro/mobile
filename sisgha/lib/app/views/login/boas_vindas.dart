@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sisgha/app/data/providers/dados_professor.dart';
 import 'package:sisgha/app/data/providers/escolha_horarios_alunos.dart';
 
+import '../../data/armazenamento/shared_preferences.dart';
 import 'login/login.dart';
 import '../components/progress_indicator.dart';
 
@@ -21,34 +22,28 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
   @override
   void initState() {
     super.initState();
+    iniciarAplicacao();
+  }
 
-    Timer(const Duration(milliseconds: 2550), () {
-      const Progressindicator(
-        tamanho: 200,
+  Future<void> iniciarAplicacao() async {
+    await Armazenamento.iniciar();
+    bool tokenValido = await verificarToken();
+
+    if (tokenValido) {
+      DadosProfessor.iniciarProvider(context);
+    } else {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const PaginaLogin()),
       );
-      verificarToken().then((value) {
-        if (value) {
-          DadosProfessor.iniciarProvider(context);
-        } else {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => const PaginaLogin(),
-            ),
-          );
-        }
-      });
-    });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Provider.of<EscolhaHorariosAlunos>(context).pucharOpcoes(context),
-      builder: (context, snapshot) => Scaffold(
-        body: Center(
-          child: Progressindicator(
-            tamanho: 200,
-          ),
+    return Scaffold(
+      body: Center(
+        child: Progressindicator(
+          tamanho: 200,
         ),
       ),
     );
@@ -56,10 +51,6 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
 }
 
 Future<bool> verificarToken() async {
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  if (sharedPreferences.getString("token") == null) {
-    return false;
-  } else {
-    return true;
-  }
+  Armazenamento arm = Armazenamento();
+  return arm.token.isNotEmpty;
 }

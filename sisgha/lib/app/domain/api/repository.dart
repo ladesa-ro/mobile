@@ -5,8 +5,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:sisgha/app/data/armazenamento/shared_preferences.dart';
 import 'package:sisgha/app/domain/model/cursos.dart';
 import 'package:sisgha/app/domain/model/nivel_formacao.dart';
 
@@ -16,6 +17,7 @@ import '../../data/providers/dados_professor.dart';
 
 class Repository {
   static final String _api = "https://dev.ladesa.com.br/api/v1";
+  static final Armazenamento sharedPreferences = Armazenamento();
 
   static void erro(BuildContext context, String text) {
     showDialog(
@@ -60,19 +62,10 @@ class Repository {
   // ----------------------------------------------------------  ATUALIZAR FOTO DE PERFIL DO USUARIO -----------------------------------------------------------------------//
   static Future<void> atualizarImagemPerfil(
       File imagemPerfil, BuildContext context) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    String? token = sharedPreferences.getString("token");
-    String? id = sharedPreferences.getString("id");
-
-    if (token == null || id == null) {
-      print("Token ou ID não encontrado.");
-      erro(context, 'token ou id nulos');
-    }
-
-    var url = Uri.parse("$_api/usuarios/$id/imagem/perfil");
+    var url = Uri.parse("$_api/usuarios/${sharedPreferences.id}/imagem/perfil");
 
     var request = http.MultipartRequest('PUT', url)
-      ..headers['Authorization'] = 'Bearer $token'
+      ..headers['Authorization'] = 'Bearer ${sharedPreferences.token}'
       ..files.add(await http.MultipartFile.fromPath(
         'file',
         imagemPerfil.path,
@@ -86,22 +79,34 @@ class Repository {
     return;
   }
 
+  static Future<File> baixarImagemPerfil() async {
+    final url =
+        Uri.parse("$_api/usuarios/${sharedPreferences.id}/imagem/perfil");
+
+    var request = await http.get(url);
+    if (verificarStatusCode(request.statusCode)) {
+      final tempDir = await getTemporaryDirectory();
+      final filePath = '${tempDir.path}/downloaded_image_perfil.png';
+
+      // Salva os bytes no arquivo
+      final file = File(filePath);
+      await file.writeAsBytes(request.bodyBytes);
+      sharedPreferences.salvarLocalImagemPerfil(filePath);
+      print(
+          "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb${sharedPreferences.tamanhoImagemPerfil}");
+      return file;
+    } else {
+      throw Exception();
+    }
+  }
+
   // ------------------------------------------------------------------- ATUALIZAR A IMAGEM DE FUNDO DO USUARIO -------------------------------------------------------------//
   static Future<void> atualizarImagemCapa(
       File imagemCapa, BuildContext context) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    String? token = sharedPreferences.getString("token");
-    String? id = sharedPreferences.getString("id");
-
-    if (token == null || id == null) {
-      print("Token ou ID não encontrado.");
-      erro(context, 'token ou id nulos');
-    }
-
-    var url = Uri.parse("$_api/usuarios/$id/imagem/capa");
+    var url = Uri.parse("$_api/usuarios/${sharedPreferences.id}/imagem/capa");
 
     var request = http.MultipartRequest('PUT', url)
-      ..headers['Authorization'] = 'Bearer $token'
+      ..headers['Authorization'] = 'Bearer ${sharedPreferences.token}'
       ..files.add(await http.MultipartFile.fromPath(
         'file',
         imagemCapa.path,
@@ -115,11 +120,29 @@ class Repository {
     return;
   }
 
+  static Future<File> baixarImagemCapa() async {
+    final url = Uri.parse("$_api/usuarios/${sharedPreferences.id}/imagem/capa");
+
+    var request = await http.get(url);
+    if (verificarStatusCode(request.statusCode)) {
+      final tempDir = await getTemporaryDirectory();
+      final filePath = '${tempDir.path}/downloaded_image_capa.png';
+
+      final file = File(filePath);
+      await file.writeAsBytes(request.bodyBytes);
+      sharedPreferences.salvarTamanhoImagemCapa(request.contentLength ?? 0);
+      sharedPreferences.salvarLocalImagemCapa(file.absolute.path);
+      print(
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa${sharedPreferences.tamanhoImagemCapa}");
+      return file;
+    } else {
+      throw Exception();
+    }
+  }
+
   //-------------------------------------------------------------------- BUSCAR O TOKEN DO USUARIO ------------------------------------------------------------------------------------------//
   static Future<bool> login(TextEditingController matriculaController,
       TextEditingController senhaController, BuildContext context) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
     var url = Uri.parse("$_api/autenticacao/login");
     var resposta = await http.post(url, body: {
       "matriculaSiape": matriculaController.text,
@@ -128,8 +151,9 @@ class Repository {
 
     if (verificarStatusCode(resposta.statusCode)) {
       final body = jsonDecode(resposta.body);
-      await sharedPreferences.setString('token', body['access_token']);
-      await sharedPreferences.setString('refreshToken', body['refresh_token']);
+
+      await sharedPreferences.salvarToken(body['access_token']);
+      await sharedPreferences.salvarRefreshToken(body['refresh_token']);
       return true;
     } else if (resposta.statusCode == 403) {
       false;
@@ -142,14 +166,12 @@ class Repository {
 
   // -------------------------------------------------------------------------- FAZER REQUISIÇÃO NA API PRA BUSCAR O USUARIO -------------------------------------------------------------------------------------//
   static Future<Professor> buscarUser(BuildContext context) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString("token");
     var url = Uri.parse("$_api/autenticacao/quem-sou-eu");
 
     var response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
+      'Authorization': 'Bearer ${sharedPreferences.token}',
     });
 
     if (verificarStatusCode(response.statusCode)) {
@@ -157,10 +179,8 @@ class Repository {
 
       Professor user = Professor.fromJson(jsondecode);
 
-      await sharedPreferences.setString("id", user.id);
-      await sharedPreferences.setString("matricula", user.matricula);
-      await sharedPreferences.setString("nome", user.nome);
-      await sharedPreferences.setString("email", user.email);
+      await sharedPreferences.salvarId(user.id);
+
       return user;
     } else {
       mostrarErro(context, response.statusCode);
@@ -170,13 +190,6 @@ class Repository {
 
   // ---------------------------------------------------------- RECARREGAR TOKEM DE ACESSO DO USUARIO CASO TENHA EXPIRADO ---------------------------------------------------------------------//
   static Future<bool> refreshToken(BuildContext context) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var recarregarToken = sharedPreferences.getString("refreshToken");
-
-    if (recarregarToken == null) {
-      erro(context, 'token nulo');
-    }
-
     var url = Uri.parse("$_api/autenticacao/login/refresh");
     var response = await http.post(url, body: {
       "refreshToken": recarregarToken,
@@ -184,7 +197,7 @@ class Repository {
 
     if (verificarStatusCode(response.statusCode)) {
       final body = jsonDecode(response.body);
-      await sharedPreferences.setString("token", body["access_token"]);
+      await sharedPreferences.salvarToken(body["access_token"]);
       return true;
     } else {
       mostrarErro(context, response.statusCode);
@@ -194,8 +207,7 @@ class Repository {
 
   // ---------------------------------------------------- APAGAR DADOS SALVOS ----------------------------------------------------------------------------------//
   static Future<bool> sair(BuildContext context) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.clear();
+    sharedPreferences.apagarDados();
     DadosProfessor dados = DadosProfessor();
     dados.apagarDados(context);
     return true;
@@ -214,7 +226,6 @@ class Repository {
       var listaFormacoes = <NiveisFormacao>[];
 
       for (var item in bodyDecode) {
-        print('até aqui $item');
         NiveisFormacao niveisFormacao = NiveisFormacao.fromJson(item);
 
         listaFormacoes.add(niveisFormacao);
