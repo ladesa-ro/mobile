@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, use_build_context_synchronously, avoid_print
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'dart:async';
 import 'dart:convert';
@@ -91,9 +91,9 @@ class Repository {
       // Salva os bytes no arquivo
       final file = File(filePath);
       await file.writeAsBytes(request.bodyBytes);
+      sharedPreferences.salvarTamanhoImagemPerfil(request.contentLength ?? 0);
       sharedPreferences.salvarLocalImagemPerfil(filePath);
-      print(
-          "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb${sharedPreferences.tamanhoImagemPerfil}");
+
       return file;
     } else {
       throw Exception();
@@ -132,8 +132,6 @@ class Repository {
       await file.writeAsBytes(request.bodyBytes);
       sharedPreferences.salvarTamanhoImagemCapa(request.contentLength ?? 0);
       sharedPreferences.salvarLocalImagemCapa(file.absolute.path);
-      print(
-          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa${sharedPreferences.tamanhoImagemCapa}");
       return file;
     } else {
       throw Exception();
@@ -142,7 +140,7 @@ class Repository {
 
   //-------------------------------------------------------------------- BUSCAR O TOKEN DO USUARIO ------------------------------------------------------------------------------------------//
   static Future<bool> login(TextEditingController matriculaController,
-      TextEditingController senhaController, BuildContext context) async {
+      TextEditingController senhaController) async {
     var url = Uri.parse("$_api/autenticacao/login");
     var resposta = await http.post(url, body: {
       "matriculaSiape": matriculaController.text,
@@ -158,7 +156,6 @@ class Repository {
     } else if (resposta.statusCode == 403) {
       false;
     } else {
-      mostrarErro(context, resposta.statusCode);
       return false;
     }
     return false;
@@ -192,7 +189,7 @@ class Repository {
   static Future<bool> refreshToken(BuildContext context) async {
     var url = Uri.parse("$_api/autenticacao/login/refresh");
     var response = await http.post(url, body: {
-      "refreshToken": recarregarToken,
+      "refreshToken": sharedPreferences.refreshToken,
     });
 
     if (verificarStatusCode(response.statusCode)) {

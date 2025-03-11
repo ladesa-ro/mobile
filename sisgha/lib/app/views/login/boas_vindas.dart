@@ -2,12 +2,9 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sisgha/app/data/providers/dados_professor.dart';
-import 'package:sisgha/app/data/providers/escolha_horarios_alunos.dart';
 
 import '../../data/armazenamento/shared_preferences.dart';
+import '../../data/providers/dados_professor.dart';
 import 'login/login.dart';
 import '../components/progress_indicator.dart';
 

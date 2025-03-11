@@ -9,7 +9,7 @@ class AppbarNotificacaoAlunos extends StatelessWidget
 //Utiliza-se o PreferredSizeWidget porque o Scaffold exige
 {
   final double height;
-  const AppbarNotificacaoAlunos({required this.height});
+  const AppbarNotificacaoAlunos({super.key, required this.height});
 
   @override
   Size get preferredSize => Size.fromHeight(height);
