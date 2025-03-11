@@ -21,9 +21,9 @@ class Calendar extends StatelessWidget {
   Widget build(BuildContext context) {
     var appBar = CustomAppBar(
       height: 7.h,
-      titulo: "Calendário Parcial",
-      subtitulo: '${DatasFormatadas.mesAtual} - ${DatasFormatadas.anoAtual}',
-      ealunos: false,
+      mes: "Calendário Parcial",
+      diaHoje: '${DatasFormatadas.mesAtual} - ${DatasFormatadas.anoAtual}',
+      profOuAluno: false,
     );
 
     double tamanho =

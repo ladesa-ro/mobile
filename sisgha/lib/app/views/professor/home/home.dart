@@ -17,9 +17,9 @@ class Home extends StatelessWidget {
 
     var appBar = CustomAppBar(
       height: 7.h,
-      titulo: DatasFormatadas.primeiroAUltimoDia,
-      subtitulo: DatasFormatadas.obterDiaFormatado(),
-      ealunos: false,
+      mes: DatasFormatadas.primeiroAUltimoDia,
+      diaHoje: DatasFormatadas.obterDiaFormatado(),
+      profOuAluno: false,
     );
 
     double tamanho =

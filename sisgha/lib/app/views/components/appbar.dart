@@ -8,18 +8,18 @@ import 'package:sisgha/app/core/utils/tamanhos.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
-  final String titulo;
-  final String subtitulo;
+  final String mes;
+  final String diaHoje;
 
   final bool
-      ealunos; //se for alunos colocar trur e se  for o professor colocar false
+      profOuAluno; //se for alunos colocar trur e se  for o professor colocar false
 
   const CustomAppBar(
       {super.key,
       required this.height,
-      required this.titulo,
-      required this.subtitulo,
-      required this.ealunos});
+      required this.mes,
+      required this.diaHoje,
+      required this.profOuAluno});
 
   @override
   Size get preferredSize => Size.fromHeight(height);
@@ -33,7 +33,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         padding: Tamanhos.margem(context),
         child: Row(
           children: [
-            if (ealunos == true)
+            if (profOuAluno == true)
               IconButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -57,20 +57,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  titulo,
+                  diaHoje,
                   style: estiloTexto(17,
                       cor: ColorsTemaClaro.brancoTexto, peso: FontWeight.bold),
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  subtitulo,
+                  mes,
                   style: estiloTexto(17,
                       cor: ColorsTemaClaro.brancoTexto, peso: FontWeight.bold),
                 ),
               ],
             ),
             const Spacer(),
-            if (!ealunos)
+            if (!profOuAluno)
               IconButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed('/notificacao');
