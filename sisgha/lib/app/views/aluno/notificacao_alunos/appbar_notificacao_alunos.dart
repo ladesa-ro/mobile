@@ -33,7 +33,7 @@ class AppbarNotificacaoAlunos extends StatelessWidget
         icon: Iconify(
           Icones.setaVoltarDireita,
           size: double.infinity,
-          color: ColorsTemaClaro.branco,
+          color: CoresClaras.branco,
         ),
       ),
     );

@@ -4,15 +4,12 @@ import 'package:sisgha/app/core/utils/colors.dart';
 class ThemeApp {
   static ThemeData tema() {
     return ThemeData(
+      bottomAppBarTheme: BottomAppBarTheme(color: CoresClaras.verdePrincipal),
       appBarTheme: AppBarTheme(
-          color: ColorsTemaClaro.verdePrincipal,
-          foregroundColor: ColorsTemaClaro.brancoTexto),
+          color: CoresClaras.verdePrincipal,
+          foregroundColor: CoresClaras.brancoTexto),
       fontFamily: 'Poppins',
       useMaterial3: true,
-      colorScheme: ColorScheme.fromSeed(
-        primary: ColorsTemaClaro.verdePrincipal,
-        seedColor: ColorsTemaClaro.verdeClaro,
-      ).copyWith(surface: Colors.white),
     );
   }
 }

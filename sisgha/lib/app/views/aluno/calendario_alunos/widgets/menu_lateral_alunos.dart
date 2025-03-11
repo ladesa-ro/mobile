@@ -39,7 +39,7 @@ class _MenuLateralAlunosState extends State<MenuLateralAlunos> {
               Text(
                 'Ano Letivo',
                 style: estiloTexto(16,
-                    cor: ColorsTemaClaro.verdePrincipalTexto,
+                    cor: CoresClaras.verdePrincipalTexto,
                     peso: FontWeight.bold),
               ),
               SizedBox(height: constraints.maxHeight * 0.02),
@@ -53,7 +53,7 @@ class _MenuLateralAlunosState extends State<MenuLateralAlunos> {
               Text(
                 'Modalidade',
                 style: estiloTexto(16,
-                    cor: ColorsTemaClaro.verdePrincipalTexto,
+                    cor: CoresClaras.verdePrincipalTexto,
                     peso: FontWeight.bold),
               ),
               SizedBox(height: constraints.maxHeight * 0.02),
@@ -63,7 +63,7 @@ class _MenuLateralAlunosState extends State<MenuLateralAlunos> {
               Text(
                 'Calendário',
                 style: estiloTexto(16,
-                    cor: ColorsTemaClaro.verdePrincipalTexto,
+                    cor: CoresClaras.verdePrincipalTexto,
                     peso: FontWeight.bold),
               ),
               SizedBox(height: constraints.maxHeight * 0.02),
@@ -82,7 +82,7 @@ class _MenuLateralAlunosState extends State<MenuLateralAlunos> {
                       child: Text(
                         'Buscar',
                         style: estiloTexto(15,
-                            cor: ColorsTemaClaro.brancoTexto,
+                            cor: CoresClaras.brancoTexto,
                             peso: FontWeight.bold),
                       ),
                     )),
@@ -110,12 +110,12 @@ Widget headerDrawer(BuildContext context, double height, double width) {
             Text(
               'Calendário Parcial',
               style: estiloTexto(16,
-                  cor: ColorsTemaClaro.verdePrincipal, peso: FontWeight.bold),
+                  cor: CoresClaras.verdePrincipal, peso: FontWeight.bold),
             ),
             Text(
               'Selecione as informações',
               style: estiloTexto(15,
-                  cor: ColorsTemaClaro.cinzaEscuro, peso: FontWeight.bold),
+                  cor: CoresClaras.cinzaEscuro, peso: FontWeight.bold),
             ),
           ],
         ),
@@ -126,7 +126,7 @@ Widget headerDrawer(BuildContext context, double height, double width) {
           },
           icon: Iconify(
             Icones.setaVoltarEsquerda,
-            color: ColorsTemaClaro.verdePrincipal,
+            color: CoresClaras.verdePrincipal,
             size: 5.h,
           ),
         )
@@ -154,8 +154,8 @@ Widget quadradosAnos(BuildContext context) {
           listaAnos[index],
           style: estiloTexto(15,
               cor: index == provider.anoSelecionado
-                  ? ColorsTemaClaro.verdePrincipalTexto
-                  : ColorsTemaClaro.verdecinzaTexto,
+                  ? CoresClaras.verdePrincipalTexto
+                  : CoresClaras.verdecinzaTexto,
               peso: FontWeight.bold),
         ),
       ),
@@ -182,8 +182,8 @@ Widget quadradosModalidade(BuildContext context, double height) {
             listaModalidade[index],
             style: estiloTexto(15,
                 cor: index == provider.cursoSelecionado
-                    ? ColorsTemaClaro.verdePrincipalTexto
-                    : ColorsTemaClaro.verdecinzaTexto,
+                    ? CoresClaras.verdePrincipalTexto
+                    : CoresClaras.verdecinzaTexto,
                 peso: FontWeight.bold),
           ),
         ),
@@ -212,8 +212,8 @@ Widget quadradoCurso(BuildContext context, double height) {
             listaCurso[index],
             style: estiloTexto(15,
                 cor: index == provider.modalidadeSelecionada
-                    ? ColorsTemaClaro.verdePrincipalTexto
-                    : ColorsTemaClaro.verdecinzaTexto,
+                    ? CoresClaras.verdePrincipalTexto
+                    : CoresClaras.verdecinzaTexto,
                 peso: FontWeight.bold),
           ),
         ),
@@ -225,12 +225,12 @@ Widget quadradoCurso(BuildContext context, double height) {
 BoxDecoration _decoration(int indexAtual, int indexSelecionado) {
   return BoxDecoration(
     color: indexAtual == indexSelecionado
-        ? ColorsTemaClaro.verdeTransparente
-        : ColorsTemaClaro.pretoTransparente,
+        ? CoresClaras.verdeTransparente
+        : CoresClaras.pretoTransparente,
     border: Border.all(
       width: 1.5,
       color: indexAtual == indexSelecionado
-          ? ColorsTemaClaro.verdePrincipalBorda
+          ? CoresClaras.verdePrincipalBorda
           : Colors.transparent,
     ),
     borderRadius: BorderRadius.circular(12),

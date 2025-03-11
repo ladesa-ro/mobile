@@ -25,8 +25,8 @@ class Tamanhos {
         shape: WidgetStateProperty.all<OutlinedBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.w))),
         backgroundColor:
-            WidgetStateProperty.all<Color>(ColorsTemaClaro.verdePrincipalBotao),
-        foregroundColor: WidgetStatePropertyAll(ColorsTemaClaro.brancoTexto));
+            WidgetStateProperty.all<Color>(CoresClaras.verdePrincipalBotao),
+        foregroundColor: WidgetStatePropertyAll(CoresClaras.brancoTexto));
   }
 
   //sempre implementar no physics dos ListViews ou outro tipo de widget de rolagem

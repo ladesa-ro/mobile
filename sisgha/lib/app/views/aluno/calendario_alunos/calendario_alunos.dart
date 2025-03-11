@@ -90,7 +90,7 @@ class CalendarAlunos extends StatelessWidget {
 ButtonStyle _estiloBotao() {
   return ButtonStyle(
     padding: WidgetStatePropertyAll(EdgeInsets.zero),
-    backgroundColor: WidgetStatePropertyAll(ColorsTemaClaro.verdePrincipal),
+    backgroundColor: WidgetStatePropertyAll(CoresClaras.verdePrincipal),
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),

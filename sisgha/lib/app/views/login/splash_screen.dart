@@ -59,8 +59,8 @@ class _SplashScreen extends State<SplashScreen> {
             child: AnimatedContainer(
               decoration: BoxDecoration(
                 gradient: const LinearGradient(colors: [
-                  ColorsTemaClaro.verdeClaro,
-                  ColorsTemaClaro.verdePrincipal
+                  CoresClaras.verdeClaro,
+                  CoresClaras.verdePrincipal
                 ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(
@@ -87,8 +87,8 @@ class _SplashScreen extends State<SplashScreen> {
             child: AnimatedContainer(
               decoration: BoxDecoration(
                 gradient: const LinearGradient(colors: [
-                  ColorsTemaClaro.verdePrincipal,
-                  ColorsTemaClaro.verdeClaro
+                  CoresClaras.verdePrincipal,
+                  CoresClaras.verdeClaro
                 ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(

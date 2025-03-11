@@ -63,8 +63,8 @@ class _DropdownAlunoState extends State<DropdownCurso> {
         decoration: BoxDecoration(
           border: Border.all(
             color: selectedValue != null
-                ? ColorsTemaClaro.verdePrincipal
-                : ColorsTemaClaro.cinzaBordas,
+                ? CoresClaras.verdePrincipal
+                : CoresClaras.cinzaBordas,
           ),
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -81,8 +81,8 @@ class _DropdownAlunoState extends State<DropdownCurso> {
                     widget.descricao,
                     style: TextStyle(
                       color: selectedValue != null
-                          ? ColorsTemaClaro.pretoTexto
-                          : ColorsTemaClaro.cinza,
+                          ? CoresClaras.pretoTexto
+                          : CoresClaras.cinza,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),
@@ -90,8 +90,8 @@ class _DropdownAlunoState extends State<DropdownCurso> {
                   Icon(
                     isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
                     color: selectedValue != null
-                        ? ColorsTemaClaro.verdePrincipal
-                        : ColorsTemaClaro.cinzaBordas,
+                        ? CoresClaras.verdePrincipal
+                        : CoresClaras.cinzaBordas,
                   ),
                 ],
               ),
@@ -124,8 +124,8 @@ class _DropdownAlunoState extends State<DropdownCurso> {
           option,
           style: TextStyle(
             color: selectedValue == option
-                ? ColorsTemaClaro.verdePrincipal
-                : ColorsTemaClaro.cinzatexto,
+                ? CoresClaras.verdePrincipal
+                : CoresClaras.cinzatexto,
           ),
         ),
         selected: selectedValue == option,
@@ -136,8 +136,8 @@ class _DropdownAlunoState extends State<DropdownCurso> {
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: selectedValue == option
-                ? ColorsTemaClaro.verdePrincipal
-                : ColorsTemaClaro.cinzaBordas,
+                ? CoresClaras.verdePrincipal
+                : CoresClaras.cinzaBordas,
           ),
           borderRadius: BorderRadius.circular(5),
         ),

@@ -66,27 +66,27 @@ class NotificacoesAlunos extends StatelessWidget {
                     children: [
                       Icon(
                         notificacoes[index].icone,
-                        color: ColorsTemaClaro.verdePrincipal,
+                        color: CoresClaras.verdePrincipal,
                         size: 20,
                       ),
                       SizedBox(width: 10),
                       Text(
                         notificacoes[index].titulo,
                         style: estiloTexto(15,
-                            cor: ColorsTemaClaro.verdePrincipalTexto,
+                            cor: CoresClaras.verdePrincipalTexto,
                             peso: FontWeight.bold),
                       ),
                       Spacer(),
                       Text(
                         notificacoes[index].tempo,
-                        style: TextStyle(color: ColorsTemaClaro.cinzatexto),
+                        style: TextStyle(color: CoresClaras.cinzatexto),
                       ),
                     ],
                   ),
                   SizedBox(height: 15),
                   Text(
                     notificacoes[index].texto,
-                    style: estiloTexto(15, cor: ColorsTemaClaro.pretoTexto),
+                    style: estiloTexto(15, cor: CoresClaras.pretoTexto),
                   ),
                   TextButton(
                     onPressed: () {},
@@ -96,7 +96,7 @@ class NotificacoesAlunos extends StatelessWidget {
                     child: Text(
                       notificacoes[index].link,
                       style: TextStyle(
-                        color: ColorsTemaClaro.verdePrincipal,
+                        color: CoresClaras.verdePrincipal,
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
@@ -107,7 +107,7 @@ class NotificacoesAlunos extends StatelessWidget {
             ),
             Divider(
               thickness: 1.5,
-              color: ColorsTemaClaro.verdecinzaBorda,
+              color: CoresClaras.verdecinzaBorda,
             ),
           ],
         ),

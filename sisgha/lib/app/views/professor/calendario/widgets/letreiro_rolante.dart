@@ -57,9 +57,7 @@ class _LetreiroRolanteState extends State<LetreiroRolante> {
           width: constraints.maxWidth,
           padding: EdgeInsets.symmetric(horizontal: 10),
           decoration: estiloBorda(
-              cor: ColorsTemaClaro.verdecinzaBorda,
-              radius: 15,
-              grossuraBorda: 2),
+              cor: CoresClaras.verdecinzaBorda, radius: 15, grossuraBorda: 2),
           child: ListView(
             controller: _controller,
             scrollDirection: Axis.horizontal,
@@ -69,7 +67,7 @@ class _LetreiroRolanteState extends State<LetreiroRolante> {
                 child: Text(
                   'Técnico Integrado - Informática 2023 - 2023',
                   style: estiloTexto(15,
-                      cor: ColorsTemaClaro.verdePrincipalTexto,
+                      cor: CoresClaras.verdePrincipalTexto,
                       peso: FontWeight.bold),
                 ),
               )

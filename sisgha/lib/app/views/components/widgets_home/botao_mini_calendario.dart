@@ -32,19 +32,19 @@ Widget botaoMiniCalendario(BuildContext context) {
           Icon(
             Icones.CalendarVazio,
             size: 3.h,
-            color: ColorsTemaClaro.branco,
+            color: CoresClaras.branco,
           ),
           const Spacer(),
           Text(
             'Calendário ${now.year}',
             style: estiloTexto(15,
-                cor: ColorsTemaClaro.brancoTexto, peso: FontWeight.bold),
+                cor: CoresClaras.brancoTexto, peso: FontWeight.bold),
           ),
           const Spacer(),
           Iconify(
             Icones.SetaBaixo,
             size: 4.h,
-            color: ColorsTemaClaro.branco,
+            color: CoresClaras.branco,
           ),
           const SizedBox(
             width: 16,

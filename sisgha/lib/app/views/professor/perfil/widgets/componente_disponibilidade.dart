@@ -64,7 +64,7 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
             Container(
               height: constraints.maxHeight * 0.11,
               decoration: BoxDecoration(
-                color: ColorsTemaClaro.verdePrincipal,
+                color: CoresClaras.verdePrincipal,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
@@ -74,8 +74,7 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
                   Text(
                     dias[diaIndex],
                     style: estiloTexto(17,
-                        cor: ColorsTemaClaro.brancoTexto,
-                        peso: FontWeight.bold),
+                        cor: CoresClaras.brancoTexto, peso: FontWeight.bold),
                   ),
                   const Spacer(),
                   _iconButton(0, Icones.setaDireita),
@@ -121,7 +120,7 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
       onPressed: () {
         _alternarEntreDias(index);
       },
-      icon: Iconify(icone, color: ColorsTemaClaro.branco),
+      icon: Iconify(icone, color: CoresClaras.branco),
     );
   }
 }
@@ -161,7 +160,7 @@ List<Widget> _listaComHorarios(context) {
 
 Widget _periodo(BuildContext context, String periodo, List<String> horas) {
   return Container(
-    decoration: estiloBorda(cor: ColorsTemaClaro.verdecinzaBorda, radius: 15),
+    decoration: estiloBorda(cor: CoresClaras.verdecinzaBorda, radius: 15),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -175,7 +174,7 @@ Widget _periodo(BuildContext context, String periodo, List<String> horas) {
         Text(
           periodo,
           style: estiloTexto(16,
-              cor: ColorsTemaClaro.pretoTexto, peso: FontWeight.bold),
+              cor: CoresClaras.pretoTexto, peso: FontWeight.bold),
         ),
       ],
     ),
@@ -183,6 +182,5 @@ Widget _periodo(BuildContext context, String periodo, List<String> horas) {
 }
 
 TextStyle _estilo() {
-  return estiloTexto(16,
-      cor: ColorsTemaClaro.pretoTexto, peso: FontWeight.w500);
+  return estiloTexto(16, cor: CoresClaras.pretoTexto, peso: FontWeight.w500);
 }

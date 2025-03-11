@@ -126,9 +126,8 @@ class _BodyAlunoState extends State<BodyAluno> {
 
   ButtonStyle _estiloBotao() {
     return ElevatedButton.styleFrom(
-      backgroundColor: tudoSelecionado()
-          ? ColorsTemaClaro.verdePrincipal
-          : ColorsTemaClaro.cinza,
+      backgroundColor:
+          tudoSelecionado() ? CoresClaras.verdePrincipal : CoresClaras.cinza,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),

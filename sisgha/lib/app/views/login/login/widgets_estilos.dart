@@ -20,8 +20,8 @@ Widget elementoVerde(Alignment alignment) {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            ColorsTemaClaro.verdePrincipal,
-            ColorsTemaClaro.verdeClaro,
+            CoresClaras.verdePrincipal,
+            CoresClaras.verdeClaro,
           ],
         ),
         borderRadius: borderRadius,

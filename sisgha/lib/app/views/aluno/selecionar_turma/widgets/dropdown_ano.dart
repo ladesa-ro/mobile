@@ -29,7 +29,6 @@ class _DropdownAlunoState extends State<DropdownAno> {
   bool isExpanded = false;
   bool isFocused = false;
 
-  
   @override
   void didUpdateWidget(covariant DropdownAno oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -48,53 +47,56 @@ class _DropdownAlunoState extends State<DropdownAno> {
     }
   }
 
-
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     var provider = Provider.of<EscolhaHorariosAlunos>(context);
     var listaAnos = provider.listaAnos;
     return GestureDetector(
-      onTap: (){
-          setState(() {
-            isExpanded = ! isExpanded;
-            isFocused = true;
-          });
+      onTap: () {
+        setState(() {
+          isExpanded = !isExpanded;
+          isFocused = true;
+        });
       },
-      child: AnimatedContainer(duration: const Duration(microseconds: 300),
-      width: MediaQuery.of(context).size.width*0.9,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: selectedValue != null? ColorsTemaClaro.verdePrincipal:ColorsTemaClaro.cinzaBordas,
-        ),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-       padding: EdgeInsets.fromLTRB(widget.esquerda, 10, widget.direita, 10),
-       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 42,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  widget.descricao,
-                  style: TextStyle(
-                    color: selectedValue !=null?ColorsTemaClaro.pretoTexto:ColorsTemaClaro.cinza,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600
-                ),
-                ),
-                Icon(
-                  isExpanded?Icons.arrow_drop_up:Icons.arrow_drop_down,
-                   color: selectedValue != null
-                        ? ColorsTemaClaro.verdePrincipal
-                        : ColorsTemaClaro.cinzaBordas,
-                )
-              ],
-            ),
+      child: AnimatedContainer(
+        duration: const Duration(microseconds: 300),
+        width: MediaQuery.of(context).size.width * 0.9,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: selectedValue != null
+                ? CoresClaras.verdePrincipal
+                : CoresClaras.cinzaBordas,
           ),
-           AnimatedContainer(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        padding: EdgeInsets.fromLTRB(widget.esquerda, 10, widget.direita, 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 42,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    widget.descricao,
+                    style: TextStyle(
+                        color: selectedValue != null
+                            ? CoresClaras.pretoTexto
+                            : CoresClaras.cinza,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  Icon(
+                    isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                    color: selectedValue != null
+                        ? CoresClaras.verdePrincipal
+                        : CoresClaras.cinzaBordas,
+                  )
+                ],
+              ),
+            ),
+            AnimatedContainer(
               duration: const Duration(milliseconds: 300),
               height: isExpanded ? 80 : 0,
               curve: Curves.easeInOut,
@@ -107,12 +109,12 @@ class _DropdownAlunoState extends State<DropdownAno> {
                           construirQuadrados(listaAnos[index]))
                   : null,
             ),
-        ],
-       ),
+          ],
+        ),
       ),
     );
   }
-  
+
   Widget construirQuadrados(option) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -121,8 +123,8 @@ class _DropdownAlunoState extends State<DropdownAno> {
           option,
           style: TextStyle(
             color: selectedValue == option
-                ? ColorsTemaClaro.verdePrincipal
-                : ColorsTemaClaro.cinzatexto,
+                ? CoresClaras.verdePrincipal
+                : CoresClaras.cinzatexto,
           ),
         ),
         selected: selectedValue == option,
@@ -131,8 +133,8 @@ class _DropdownAlunoState extends State<DropdownAno> {
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: selectedValue == option
-                ? ColorsTemaClaro.verdePrincipal
-                : ColorsTemaClaro.cinzaBordas,
+                ? CoresClaras.verdePrincipal
+                : CoresClaras.cinzaBordas,
           ),
           borderRadius: BorderRadius.circular(5),
         ),

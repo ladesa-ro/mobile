@@ -5,6 +5,7 @@ import 'package:sisgha/app/core/utils/theme_app.dart';
 import 'package:sisgha/app/core/routes/app_routes.dart';
 import 'package:sisgha/app/data/providers/dados_professor.dart';
 import 'package:sisgha/app/data/providers/escolha_horarios_alunos.dart';
+import 'package:sisgha/app/data/providers/tema.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -12,7 +13,8 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => DadosProfessor()),
-        ChangeNotifierProvider(create: (_) => EscolhaHorariosAlunos())
+        ChangeNotifierProvider(create: (_) => EscolhaHorariosAlunos()),
+        ChangeNotifierProvider(create: (_) => TemasProvider())
       ],
       child: const MyApp(),
     ),
@@ -24,6 +26,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final temaProvider = Provider.of<TemasProvider>(context);
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return LayoutBuilder(
@@ -38,7 +41,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'SISGHA',
-          theme: ThemeApp.tema(),
+          theme: temaProvider.temaAtivo,
           initialRoute: '/primeiraTela',
           routes: AppRoutes.rotas(),
         );

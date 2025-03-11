@@ -12,9 +12,9 @@ class LetreiroRolanteAlunos extends StatefulWidget {
 }
 
 class _LetreiroRolanteAlunosState extends State<LetreiroRolanteAlunos> {
-  late final ScrollController _controller; 
+  late final ScrollController _controller;
   //late final = Uma variavel que vai ser inicializada depois
-  //E que não vai sofrer alteração 
+  //E que não vai sofrer alteração
 
   bool _direcao = true;
 
@@ -61,9 +61,7 @@ class _LetreiroRolanteAlunosState extends State<LetreiroRolanteAlunos> {
           width: constraints.maxWidth,
           padding: EdgeInsets.symmetric(horizontal: 10),
           decoration: estiloBorda(
-              cor: ColorsTemaClaro.verdecinzaBorda,
-              radius: 15,
-              grossuraBorda: 2),
+              cor: CoresClaras.verdecinzaBorda, radius: 15, grossuraBorda: 2),
           child: ListView(
             controller: _controller,
             scrollDirection: Axis.horizontal,
@@ -73,7 +71,7 @@ class _LetreiroRolanteAlunosState extends State<LetreiroRolanteAlunos> {
                 child: Text(
                   'Técnico Integrado - Informática 2023 - 2023',
                   style: estiloTexto(15,
-                      cor: ColorsTemaClaro.verdePrincipalTexto,
+                      cor: CoresClaras.verdePrincipalTexto,
                       peso: FontWeight.bold),
                 ),
               )

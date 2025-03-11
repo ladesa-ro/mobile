@@ -9,7 +9,7 @@ class CardsAlunos extends StatelessWidget {
   CardsAlunos({super.key});
   final Cards = [
     ElementosCards(
-      cor: ColorsTemaClaro.roxo,
+      cor: CoresClaras.roxo,
       titulo: "2º Etapa",
       icone: Icones.Sino,
       iconebotao: ElevatedButton(
@@ -17,7 +17,7 @@ class CardsAlunos extends StatelessWidget {
         onPressed: () {},
         child: Iconify(
           Icones.Sino,
-          color: ColorsTemaClaro.branco,
+          color: CoresClaras.branco,
         ),
       ),
       inicio: "Início: 00/00 ás 00:00",
@@ -26,7 +26,7 @@ class CardsAlunos extends StatelessWidget {
       local: "Local: Ji-Paraná",
     ),
     ElementosCards(
-      cor: ColorsTemaClaro.vermelho,
+      cor: CoresClaras.vermelho,
       titulo: "Recuperação do 1º Semestre",
       icone: Icones.Sino,
       iconebotao: ElevatedButton(
@@ -34,7 +34,7 @@ class CardsAlunos extends StatelessWidget {
         onPressed: () {},
         child: Iconify(
           Icones.Sino,
-          color: ColorsTemaClaro.branco,
+          color: CoresClaras.branco,
         ),
       ),
       inicio: "Início: 00/00 ás 00:00",
@@ -53,7 +53,7 @@ class CardsAlunos extends StatelessWidget {
         margin: EdgeInsets.all(10),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
-          side: BorderSide(color: ColorsTemaClaro.cinzaBordas),
+          side: BorderSide(color: CoresClaras.cinzaBordas),
         ),
         child: Padding(
           padding: EdgeInsets.all(10),
@@ -137,7 +137,7 @@ class ElementosCards {
 ButtonStyle estiloBotaoCard() {
   return ButtonStyle(
     padding: WidgetStatePropertyAll(EdgeInsets.zero),
-    backgroundColor: WidgetStatePropertyAll(ColorsTemaClaro.verdePrincipal),
+    backgroundColor: WidgetStatePropertyAll(CoresClaras.verdePrincipal),
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),

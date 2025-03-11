@@ -64,8 +64,8 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
         decoration: BoxDecoration(
             border: Border.all(
               color: selectedValue != null
-                  ? ColorsTemaClaro.verdePrincipal
-                  : ColorsTemaClaro.cinzaBordas,
+                  ? CoresClaras.verdePrincipal
+                  : CoresClaras.cinzaBordas,
             ),
             borderRadius: BorderRadius.circular(10.0)),
         padding: EdgeInsets.fromLTRB(widget.esquerda, 10, widget.direita, 10),
@@ -81,21 +81,21 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
                     widget.descricao,
                     style: TextStyle(
                         color: selectedValue != null
-                            ? ColorsTemaClaro.pretoTexto
-                            : ColorsTemaClaro.cinza,
+                            ? CoresClaras.pretoTexto
+                            : CoresClaras.cinza,
                         fontSize: 12,
                         fontWeight: FontWeight.w600),
                   ),
                   Icon(
                     isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
                     color: selectedValue != null
-                        ? ColorsTemaClaro.verdePrincipal
-                        : ColorsTemaClaro.cinzaBordas,
+                        ? CoresClaras.verdePrincipal
+                        : CoresClaras.cinzaBordas,
                   )
                 ],
               ),
             ),
-              AnimatedContainer(
+            AnimatedContainer(
               duration: const Duration(milliseconds: 300),
               height: isExpanded ? 80 : 0,
               curve: Curves.easeInOut,
@@ -114,8 +114,7 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
     );
   }
 
-      
-   Widget construirQuadrados(option) {
+  Widget construirQuadrados(option) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: ChoiceChip(
@@ -123,8 +122,8 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
           option,
           style: TextStyle(
             color: selectedValue == option
-                ? ColorsTemaClaro.verdePrincipal
-                : ColorsTemaClaro.cinzatexto,
+                ? CoresClaras.verdePrincipal
+                : CoresClaras.cinzatexto,
           ),
         ),
         selected: selectedValue == option,
@@ -133,8 +132,8 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: selectedValue == option
-                ? ColorsTemaClaro.verdePrincipal
-                : ColorsTemaClaro.cinzaBordas,
+                ? CoresClaras.verdePrincipal
+                : CoresClaras.cinzaBordas,
           ),
           borderRadius: BorderRadius.circular(5),
         ),
@@ -150,5 +149,3 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
     );
   }
 }
-
-

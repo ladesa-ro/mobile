@@ -22,15 +22,15 @@ class CustomAppBarNotificacao extends StatelessWidget
   Widget build(BuildContext context) {
     return AppBar(
       titleSpacing: 0,
-        leading: seta
-            ? IconButton(
+      leading: seta
+          ? IconButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
               icon: Iconify(
                 Icones.setaVoltarDireita,
                 size: double.infinity,
-                color: ColorsTemaClaro.branco,
+                color: CoresClaras.branco,
               ),
             )
           : null,

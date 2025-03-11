@@ -27,7 +27,7 @@ class _MiniCalendarioState extends State<MiniCalendario> {
               child: Container(
                 padding: EdgeInsets.only(bottom: 15),
                 decoration: estiloBorda(
-                    cor: ColorsTemaClaro.verdecinzaBorda,
+                    cor: CoresClaras.verdecinzaBorda,
                     radius: 15,
                     grossuraBorda: 1.5),
                 width: constraints.maxWidth * 0.85,
@@ -52,7 +52,7 @@ class _MiniCalendarioState extends State<MiniCalendario> {
               child: Container(
                 padding: EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
                 decoration: estiloBorda(
-                    cor: ColorsTemaClaro.verdecinzaBorda,
+                    cor: CoresClaras.verdecinzaBorda,
                     radius: 15,
                     grossuraBorda: 2),
                 child: TableCalendar(
@@ -92,7 +92,7 @@ Widget _estiloDoBlocoDoDiaDeHoje(
       padding: const EdgeInsets.all(2.0),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: ColorsTemaClaro.brancoBorda, width: 1.5),
+          border: Border.all(color: CoresClaras.brancoBorda, width: 1.5),
           borderRadius: const BorderRadius.all(
             Radius.circular(10),
           ),
@@ -130,14 +130,14 @@ Widget _estiloDosBlocosDosDiasDoMesDesabilitados(double height) {
     width: height * 0.04,
     height: height * 0.04,
     decoration: BoxDecoration(
-      color: ColorsTemaClaro.verdecinzaCalendario,
+      color: CoresClaras.verdecinzaCalendario,
       borderRadius: BorderRadius.circular(10),
     ),
   );
 }
 
 TextStyle _estiloTextoNumeros() {
-  return estiloTexto(15, cor: ColorsTemaClaro.brancoTexto, peso: FontWeight.bold);
+  return estiloTexto(15, cor: CoresClaras.brancoTexto, peso: FontWeight.bold);
 }
 
 HeaderStyle _estiloCabessario() {
@@ -145,7 +145,7 @@ HeaderStyle _estiloCabessario() {
     headerMargin: const EdgeInsets.only(bottom: 7),
     headerPadding: EdgeInsets.all(1.h),
     decoration: const BoxDecoration(
-      color: ColorsTemaClaro.roxo,
+      color: CoresClaras.roxo,
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(15),
         topRight: Radius.circular(15),
@@ -154,15 +154,15 @@ HeaderStyle _estiloCabessario() {
     titleCentered: true,
     formatButtonVisible: false,
     titleTextStyle:
-        estiloTexto(16, cor: ColorsTemaClaro.brancoTexto, peso: FontWeight.bold),
+        estiloTexto(16, cor: CoresClaras.brancoTexto, peso: FontWeight.bold),
     leftChevronIcon: Iconify(
       Icones.setaEsquerda,
-      color: ColorsTemaClaro.branco,
+      color: CoresClaras.branco,
       size: 3.h,
     ),
     rightChevronIcon: Iconify(
       Icones.setaDireita,
-      color: ColorsTemaClaro.branco,
+      color: CoresClaras.branco,
       size: 3.h,
     ),
     titleTextFormatter: (date, locale) =>
@@ -173,9 +173,9 @@ HeaderStyle _estiloCabessario() {
 DaysOfWeekStyle _estiloParteSuperior() {
   return DaysOfWeekStyle(
     weekdayStyle:
-        estiloTexto(15, peso: FontWeight.bold, cor: ColorsTemaClaro.pretoTexto),
+        estiloTexto(15, peso: FontWeight.bold, cor: CoresClaras.pretoTexto),
     weekendStyle:
-        estiloTexto(15, peso: FontWeight.bold, cor: ColorsTemaClaro.pretoTexto),
+        estiloTexto(15, peso: FontWeight.bold, cor: CoresClaras.pretoTexto),
     dowTextFormatter: (date, locale) {
       switch (date.weekday) {
         case DateTime.monday:
@@ -210,19 +210,19 @@ CalendarBuilders _calendarBuilder(double heigth) {
         color = const Color(0xFF08C17F);
       } else if (date.isAfter(DateTime(now.year, 4, 17)) &&
           date.isBefore(DateTime(now.year, 6, 20))) {
-        color = ColorsTemaClaro.roxo;
+        color = CoresClaras.roxo;
       } else if (date.isAfter(DateTime(now.year, 6, 19)) &&
           date.isBefore(DateTime(now.year, 7, 23))) {
-        color = ColorsTemaClaro.vermelhoFracoCalendario;
+        color = CoresClaras.vermelhoFracoCalendario;
       } else if (date.isAfter(DateTime(now.year, 7, 22)) &&
           date.isBefore(DateTime(now.year, 9, 25))) {
-        color = ColorsTemaClaro.vermelhoCalendario;
+        color = CoresClaras.vermelhoCalendario;
       } else if (date.isAfter(DateTime(now.year, 9, 24)) &&
           date.isBefore(DateTime(now.year, 11, 29))) {
         color = Colors.amber;
       } else {
         const TextStyle(color: Colors.transparent);
-        color = ColorsTemaClaro.cinza;
+        color = CoresClaras.cinza;
       }
       return _estiloDosBlocosDosDiasDoMes(color, date, heigth);
     },

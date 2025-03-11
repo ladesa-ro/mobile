@@ -17,14 +17,14 @@ InputDecoration inputDecoration(BuildContext context, String labelText,
   return InputDecoration(
     contentPadding: EdgeInsets.only(
         top: Tamanhos.aluturaBotoes() / 1.5, left: 12, right: 12),
-    floatingLabelStyle:
-        estiloTexto(15, cor: ColorsTemaClaro.verdecinzaTexto, peso: FontWeight.bold),
+    floatingLabelStyle: estiloTexto(15,
+        cor: CoresClaras.verdecinzaTexto, peso: FontWeight.bold),
     labelText: labelText,
     alignLabelWithHint: false,
     enabledBorder: inputBorder(1.5),
     border: inputBorder(2),
-    labelStyle:
-        estiloTexto(15, cor: ColorsTemaClaro.verdecinzaTexto, peso: FontWeight.w600),
+    labelStyle: estiloTexto(15,
+        cor: CoresClaras.verdecinzaTexto, peso: FontWeight.w600),
     focusedBorder: inputBorder(2),
     suffixIcon: suffixIcon,
   );
@@ -33,7 +33,9 @@ InputDecoration inputDecoration(BuildContext context, String labelText,
 OutlineInputBorder inputBorder(double bold) {
   return OutlineInputBorder(
     borderSide: BorderSide(
-        color: ColorsTemaClaro.verdecinzaBorda, style: BorderStyle.solid, width: bold),
+        color: CoresClaras.verdecinzaBorda,
+        style: BorderStyle.solid,
+        width: bold),
     borderRadius: BorderRadius.all(Radius.circular(3.w)),
   );
 }

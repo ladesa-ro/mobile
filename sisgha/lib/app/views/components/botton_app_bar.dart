@@ -45,7 +45,6 @@ class _NavigationState extends State<Navigation> {
   Widget build(BuildContext context) {
     BottomAppBar bottomAppBar = BottomAppBar(
       height: TamanhoTela.vertical(context) * 0.08,
-      color: ColorsTemaClaro.verdePrincipal,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -144,24 +143,24 @@ class _NavigationState extends State<Navigation> {
             ? (iconCheio1 != null
                 ? Icon(
                     iconCheio1,
-                    color: ColorsTemaClaro.verdePrincipal,
+                    color: CoresClaras.verdePrincipal,
                     size: 3.h,
                   )
                 : Iconify(
                     iconCheio!,
                     size: 3.h,
-                    color: ColorsTemaClaro.verdePrincipal,
+                    color: CoresClaras.verdePrincipal,
                   ))
             : (iconVazio1 != null
                 ? Icon(
                     iconVazio1,
-                    color: ColorsTemaClaro.branco,
+                    color: CoresClaras.branco,
                     size: 3.h,
                   )
                 : Iconify(
                     iconVazio!,
                     size: 3.h,
-                    color: ColorsTemaClaro.branco,
+                    color: CoresClaras.branco,
                   )),
       ),
     );
@@ -173,7 +172,7 @@ class _NavigationState extends State<Navigation> {
 
   BoxDecoration _decoretion(int index) {
     return BoxDecoration(
-      color: _selectedIndex == index ? ColorsTemaClaro.branco : null,
+      color: _selectedIndex == index ? CoresClaras.branco : null,
       borderRadius:
           BorderRadius.circular(TamanhoTela.horizontal(context) * 0.03),
     );

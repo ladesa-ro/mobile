@@ -132,10 +132,10 @@ class _QuadradosHomeState extends State<QuadradosHome>
     BoxDecoration boxDecoration(bool selecionado) {
       return BoxDecoration(
         color: retorno(
-            atributo1: ColorsTemaClaro.verdePrincipalBotao,
+            atributo1: CoresClaras.verdePrincipalBotao,
             atributo2: Colors.transparent),
         border: Border.all(
-            color: ColorsTemaClaro.verdePrincipalBorda,
+            color: CoresClaras.verdePrincipalBorda,
             width: 1.0,
             style: BorderStyle.solid),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -161,14 +161,14 @@ class _QuadradosHomeState extends State<QuadradosHome>
                     diasDaSemana[index],
                     style: estiloTexto(15,
                         cor: retorno(
-                            atributo1: ColorsTemaClaro.brancoTexto,
-                            atributo2: ColorsTemaClaro.verdePrincipalTexto),
+                            atributo1: CoresClaras.brancoTexto,
+                            atributo2: CoresClaras.verdePrincipalTexto),
                         peso: FontWeight.w600),
                   ),
                   Container(
                     color: retorno(
-                        atributo1: ColorsTemaClaro.brancoTexto,
-                        atributo2: ColorsTemaClaro.verdePrincipalTexto),
+                        atributo1: CoresClaras.brancoTexto,
+                        atributo2: CoresClaras.verdePrincipalTexto),
                     width: constraints.maxWidth * 0.45,
                     height: 1.5,
                   ),
@@ -176,8 +176,8 @@ class _QuadradosHomeState extends State<QuadradosHome>
                     diaDaSemanaSoQueEmNumeros,
                     style: estiloTexto(15,
                         cor: retorno(
-                            atributo1: ColorsTemaClaro.brancoTexto,
-                            atributo2: ColorsTemaClaro.verdePrincipalTexto),
+                            atributo1: CoresClaras.brancoTexto,
+                            atributo2: CoresClaras.verdePrincipalTexto),
                         peso: FontWeight.w600),
                   )
                 ],

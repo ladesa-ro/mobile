@@ -44,8 +44,8 @@ class _DropdownFormacaoState extends State<DropdownFormacao> {
         decoration: BoxDecoration(
           border: Border.all(
             color: selectedValue != null
-                ? ColorsTemaClaro.verdePrincipal
-                : ColorsTemaClaro.cinzaBordas,
+                ? CoresClaras.verdePrincipal
+                : CoresClaras.cinzaBordas,
           ),
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -62,8 +62,8 @@ class _DropdownFormacaoState extends State<DropdownFormacao> {
                     widget.descricao,
                     style: TextStyle(
                       color: selectedValue != null
-                          ? ColorsTemaClaro.pretoTexto
-                          : ColorsTemaClaro.cinza,
+                          ? CoresClaras.pretoTexto
+                          : CoresClaras.cinza,
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),
@@ -71,8 +71,8 @@ class _DropdownFormacaoState extends State<DropdownFormacao> {
                   Icon(
                     isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
                     color: selectedValue != null
-                        ? ColorsTemaClaro.verdePrincipal
-                        : ColorsTemaClaro.cinzaBordas,
+                        ? CoresClaras.verdePrincipal
+                        : CoresClaras.cinzaBordas,
                   ),
                 ],
               ),
@@ -104,8 +104,8 @@ class _DropdownFormacaoState extends State<DropdownFormacao> {
           option,
           style: TextStyle(
             color: selectedValue == option
-                ? ColorsTemaClaro.verdePrincipal
-                : ColorsTemaClaro.cinzatexto,
+                ? CoresClaras.verdePrincipal
+                : CoresClaras.cinzatexto,
           ),
         ),
         selected: selectedValue == option,
@@ -114,8 +114,8 @@ class _DropdownFormacaoState extends State<DropdownFormacao> {
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: selectedValue == option
-                ? ColorsTemaClaro.verdePrincipal
-                : ColorsTemaClaro.cinzaBordas,
+                ? CoresClaras.verdePrincipal
+                : CoresClaras.cinzaBordas,
           ),
           borderRadius: BorderRadius.circular(5),
         ),
