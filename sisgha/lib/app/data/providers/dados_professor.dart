@@ -8,7 +8,6 @@ import 'package:sisgha/app/data/armazenamento/shared_preferences.dart';
 import 'package:sisgha/app/domain/logic/verificar_imagem_armazenada.dart';
 
 import '../../views/components/botton_app_bar.dart';
-import '../../views/components/progress_indicator.dart';
 import '../../views/components/widget_erro.dart';
 import '../../domain/api/repository.dart';
 import '../../domain/model/professor.dart';
@@ -24,7 +23,6 @@ class DadosProfessor with ChangeNotifier {
   File AlterarFotoImagemPerfil(File value) => _fotoImagemPerfil = value;
 
   Future<bool> buscarDados(BuildContext context) async {
-    mostrarDialogoDeCarregmento(context);
     final user = await Repository.buscarUser(context);
     if (user == null ||
         user.id == null ||
@@ -70,7 +68,7 @@ class DadosProfessor with ChangeNotifier {
     return notifyListeners();
   }
 
-  void apagarDados(BuildContext context) {
+  void apagarDados() {
     _fotoCapaPerfil = File('');
     _fotoImagemPerfil = File('');
     professor = Professor(matricula: '', nome: '', email: '', id: '');
@@ -103,16 +101,6 @@ class DadosProfessor with ChangeNotifier {
       builder: (context) {
         return dialogoDeErro(context, 'error');
       },
-    );
-  }
-
-  static void mostrarDialogoDeCarregmento(BuildContext context) {
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (context) => AlertDialog(
-        content: Progressindicator(tamanho: 200),
-      ),
     );
   }
 }

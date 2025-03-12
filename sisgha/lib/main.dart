@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/core/utils/theme_app.dart';
 import 'package:sisgha/app/core/routes/app_routes.dart';
 import 'package:sisgha/app/data/providers/dados_professor.dart';
 import 'package:sisgha/app/data/providers/escolha_horarios_alunos.dart';

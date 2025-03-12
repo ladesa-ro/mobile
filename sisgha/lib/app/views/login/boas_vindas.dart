@@ -2,9 +2,11 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../data/armazenamento/shared_preferences.dart';
 import '../../data/providers/dados_professor.dart';
+import '../../data/providers/escolha_horarios_alunos.dart';
 import 'login/login.dart';
 import '../components/progress_indicator.dart';
 
@@ -16,21 +18,17 @@ class BoasVindasPage extends StatefulWidget {
 }
 
 class _BoasVindasPageState extends State<BoasVindasPage> {
-  @override
-  void initState() {
-    super.initState();
-    iniciarAplicacao();
-  }
-
-  Future<void> iniciarAplicacao() async {
-    await Armazenamento.iniciar();
-    bool tokenValido = await verificarToken();
-
-    if (tokenValido) {
-      DadosProfessor.iniciarProvider(context);
+  Future<void> iniciarApp(BuildContext context) async {
+    await Provider.of<EscolhaHorariosAlunos>(context).pucharOpcoes();
+    Armazenamento.iniciar();
+    bool tokenAtivo = await verificarToken();
+    if (tokenAtivo) {
+      return DadosProfessor.iniciarProvider(context);
     } else {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const PaginaLogin()),
+        MaterialPageRoute(
+          builder: (context) => const PaginaLogin(),
+        ),
       );
     }
   }
@@ -38,16 +36,17 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Progressindicator(
-          tamanho: 200,
-        ),
-      ),
-    );
+        body: FutureBuilder(
+            future: iniciarApp(context),
+            builder: (ctx, snapshot) =>
+                Center(child: Progressindicator(tamanho: 200))));
   }
 }
 
 Future<bool> verificarToken() async {
-  Armazenamento arm = Armazenamento();
-  return arm.token.isNotEmpty;
+  if (Armazenamento().token == "") {
+    return false;
+  } else {
+    return true;
+  }
 }

@@ -206,12 +206,12 @@ class Repository {
   static Future<bool> sair(BuildContext context) async {
     sharedPreferences.apagarDados();
     DadosProfessor dados = DadosProfessor();
-    dados.apagarDados(context);
+    dados.apagarDados();
     return true;
   }
 
   // ----------------------------------------------------------------------
-  static Future<List<NiveisFormacao>> buscarNiveisDeFormacao(context) async {
+  static Future<List<NiveisFormacao>> buscarNiveisDeFormacao() async {
     var url = Uri.parse("$_api/niveis-formacoes");
     var response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -230,12 +230,11 @@ class Repository {
 
       return listaFormacoes;
     } else {
-      mostrarErro(context, response.statusCode);
-      return buscarNiveisDeFormacao(context);
+      return buscarNiveisDeFormacao();
     }
   }
 
-  static Future<List<Cursos>> buscarCursos(BuildContext context) async {
+  static Future<List<Cursos>> buscarCursos() async {
     var url = Uri.parse("$_api/cursos");
     var response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -254,8 +253,7 @@ class Repository {
 
       return listaCursos;
     } else {
-      mostrarErro(context, response.statusCode);
-      return buscarCursos(context);
+      return buscarCursos();
     }
   }
 }

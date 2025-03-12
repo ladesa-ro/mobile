@@ -23,7 +23,6 @@ class Armazenamento {
   int get tamanhoImagemPerfil => instance.getInt("tamanhoImagemPerfil") ?? 0;
   int get tamanhoImagemCapa => instance.getInt("tamanhoImagemCapa") ?? 0;
 
-  // Salvar Localmente
   Future<void> salvarId(String value) async =>
       await instance.setString("id", value);
   Future<void> salvarToken(String value) async =>

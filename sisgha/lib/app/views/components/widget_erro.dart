@@ -56,7 +56,7 @@ Widget dialogoDeErro(BuildContext context, String erro) {
           ElevatedButton(
             style: _estiloBotao(CoresClaras.verdePrincipal, CoresClaras.branco),
             onPressed: () {
-              dadosProfessor.apagarDados(context);
+              dadosProfessor.apagarDados();
               Navigator.pushNamedAndRemoveUntil(
                 context,
                 "/login",
@@ -71,7 +71,7 @@ Widget dialogoDeErro(BuildContext context, String erro) {
           ElevatedButton(
             style: _estiloBotao(CoresClaras.branco, CoresClaras.verdePrincipal),
             onPressed: () {
-              dadosProfessor.apagarDados(context);
+              dadosProfessor.apagarDados();
               SystemNavigator.pop();
             },
             child: const Text('Talvez mais tarde'),
