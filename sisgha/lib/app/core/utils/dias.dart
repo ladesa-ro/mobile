@@ -11,6 +11,9 @@ class DatasFormatadas {
   static String mesAtual = DateFormat('MMMM', 'pt-br').format(diaAtualEmNumero);
   static String anoAtual = DateFormat('yyyy', 'pt-Br').format(diaAtualEmNumero);
 
+  static String mesAtualFormatado =
+      mesAtual[0].toUpperCase() + mesAtual.substring(1);
+
   //dia atual por extenço
   static String diaExtenso = DateFormat('EEEE', 'pt-br').format(DateTime.now());
   //metodo que verifica se hoje é sabado ou domingo

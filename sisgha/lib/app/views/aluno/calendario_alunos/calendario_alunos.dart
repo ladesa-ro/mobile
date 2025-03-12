@@ -23,8 +23,8 @@ class CalendarAlunos extends StatelessWidget {
     //deixei como false pois aparecia a seta de voltar na appbar do calendário
     var appBar = CustomAppBar(
       height: 7.h,
-      mes: "Calendário Parcial",
-      diaHoje: '${DatasFormatadas.mesAtual} - ${DatasFormatadas.anoAtual}',
+      mes: '${DatasFormatadas.mesAtualFormatado} - ${DatasFormatadas.anoAtual}',
+      diaHoje: "Calendário Parcial",
       profOuAluno: false,
     );
 

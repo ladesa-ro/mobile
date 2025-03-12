@@ -42,7 +42,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: const Iconify(Icones.setaVoltarDireita, size: 40),
+                icon: Iconify(
+                  Icones.setaVoltarDireita,
+                  size: 40,
+                  color: temaProvider.corDosIcones(),
+                ),
               ),
             Text(
               DatasFormatadas.diaAtual,
@@ -64,11 +68,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ],
             ),
             const Spacer(),
+            IconButton(
+                onPressed: () {
+                  temaProvider.muldarTema();
+                },
+                icon: Iconify(
+                  Icones.sol,
+                  size: 40,
+                  color: temaProvider.corDosIcones(),
+                )),
             if (!profOuAluno)
               IconButton(
                 onPressed: () {
-                  temaProvider.muldarTema();
-                  // Navigator.of(context).pushNamed('/notificacao');
+                  Navigator.of(context).pushNamed('/notificacao');
                 },
                 icon: Iconify(
                   Icones.Sino,

@@ -5,6 +5,8 @@ import '../../core/utils/colors.dart';
 class Temas {
   //claro
   static final temaClaro = ThemeData(
+    // textTheme:
+    //     TextTheme(bodyLarge: TextStyle(color: CoresClaras.brancoTexto)), codigo que mulda a cor dos textos
     brightness: Brightness.light,
     primaryColor: CoresClaras.verdePrincipal,
     fontFamily: 'Poppins',
@@ -21,6 +23,8 @@ class Temas {
 
   //tema escuro
   static final ThemeData temaEscuro = ThemeData(
+    // textTheme:
+    //     TextTheme(bodyLarge: TextStyle(color: CoresEscuras.brancoTextoEscuro)), codigo que mulda a cor dos textos
     brightness: Brightness.dark,
     primaryColor: CoresEscuras.verdePrincipalEscuro,
     fontFamily: 'Poppins',
@@ -29,7 +33,7 @@ class Temas {
         BottomAppBarTheme(color: CoresEscuras.verdePrincipalEscuro),
     appBarTheme: AppBarTheme(
         color: CoresEscuras.verdePrincipalEscuro,
-        foregroundColor: CoresEscuras.pretoEscuro),
+        foregroundColor: CoresEscuras.brancoTextoEscuro),
     colorScheme: ColorScheme.dark(
       primary: CoresEscuras.verdePrincipalEscuro,
       secondary: CoresEscuras.verdeClaroEscuro,
