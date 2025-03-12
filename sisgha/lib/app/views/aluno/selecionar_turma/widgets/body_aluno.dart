@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/Icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
+import 'package:sisgha/app/core/utils/responsividade.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
 import 'package:sisgha/app/data/providers/escolha_horarios_alunos.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdomn_turmas.dart';
@@ -38,19 +39,19 @@ class _BodyAlunoState extends State<BodyAluno> {
       child: ListView(
         physics: Tamanhos.efeitoDeRolagem(),
         children: [
-          SizedBox(height: 70),
+          SizedBox(height: TamanhoTela.vertical(context) * 0.1),
           Row(
             children: [
               Icon(Icones.Relogio),
-              SizedBox(width: 8),
-              Text(
-                "Selecionar Horário",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
-              ),
+              SizedBox(width: TamanhoTela.horizontal(context) * 0.08),
+              Text("Selecionar Horário",
+                  style: TextStyle(
+                      fontSize: TamanhoTela.horizontal(context) * 0.05,
+                      fontWeight: FontWeight.w700)),
             ],
           ),
 
-          SizedBox(height: 20),
+          SizedBox(height: TamanhoTela.vertical(context) * 0.02),
 
           // Dropdown de Formação
           DropdownFormacao(
@@ -63,7 +64,7 @@ class _BodyAlunoState extends State<BodyAluno> {
             },
           ),
 
-          SizedBox(height: 20),
+          SizedBox(height: TamanhoTela.vertical(context) * 0.02),
 
           // Dropdown de Curso
           DropdownCurso(
@@ -77,7 +78,7 @@ class _BodyAlunoState extends State<BodyAluno> {
             abrirDropdown: abrirCurso,
           ),
 
-          SizedBox(height: 20),
+          SizedBox(height: TamanhoTela.vertical(context) * 0.02),
           //dropdow do ano
           DropdownAno(
             direita: 10,
@@ -90,7 +91,7 @@ class _BodyAlunoState extends State<BodyAluno> {
             abrirDropdown: abrirAno,
           ),
 
-          SizedBox(height: 20),
+          SizedBox(height: TamanhoTela.vertical(context) * 0.02),
           //dropdown da turma
           DropdownTurmas(
             direita: 10,
@@ -102,7 +103,7 @@ class _BodyAlunoState extends State<BodyAluno> {
             abrirDropdown: abrirTurma,
           ),
 
-          SizedBox(height: 20),
+          SizedBox(height: TamanhoTela.vertical(context) * 0.02),
 
           Row(
             children: [
@@ -131,7 +132,8 @@ class _BodyAlunoState extends State<BodyAluno> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      padding: EdgeInsets.symmetric(vertical: 30),
+      padding:
+          EdgeInsets.symmetric(vertical: TamanhoTela.vertical(context) * 0.04),
     );
   }
 
