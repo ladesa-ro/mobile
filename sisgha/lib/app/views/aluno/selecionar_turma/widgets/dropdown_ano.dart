@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/app/core/utils/responsividade.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
 import 'package:sisgha/app/data/providers/escolha_horarios_alunos.dart';
 
@@ -60,7 +61,7 @@ class _DropdownAlunoState extends State<DropdownAno> {
       },
       child: AnimatedContainer(
         duration: const Duration(microseconds: 300),
-        width: MediaQuery.of(context).size.width * 0.9,
+        width: TamanhoTela.horizontal(context) * 0.9,
         decoration: BoxDecoration(
           border: Border.all(
             color: selectedValue != null
@@ -69,7 +70,12 @@ class _DropdownAlunoState extends State<DropdownAno> {
           ),
           borderRadius: BorderRadius.circular(10.0),
         ),
-        padding: EdgeInsets.fromLTRB(widget.esquerda, 10, widget.direita, 10),
+        padding: EdgeInsets.fromLTRB(
+          TamanhoTela.horizontal(context) * 0.03,
+          TamanhoTela.vertical(context) * 0.01,
+          TamanhoTela.horizontal(context) * 0.03,
+          TamanhoTela.vertical(context) * 0.01,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -84,7 +90,7 @@ class _DropdownAlunoState extends State<DropdownAno> {
                         color: selectedValue != null
                             ? CoresClaras.pretoTexto
                             : CoresClaras.cinza,
-                        fontSize: 12,
+                        fontSize: TamanhoTela.horizontal(context) * 0.03,
                         fontWeight: FontWeight.w600),
                   ),
                   Icon(
@@ -98,7 +104,7 @@ class _DropdownAlunoState extends State<DropdownAno> {
             ),
             AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              height: isExpanded ? 80 : 0,
+              height: isExpanded ? TamanhoTela.vertical(context) * 0.1 : 0,
               curve: Curves.easeInOut,
               child: isExpanded
                   ? ListView.builder(
@@ -122,6 +128,7 @@ class _DropdownAlunoState extends State<DropdownAno> {
         label: Text(
           option,
           style: TextStyle(
+            fontSize: TamanhoTela.horizontal(context) * 0.03,
             color: selectedValue == option
                 ? CoresClaras.verdePrincipal
                 : CoresClaras.cinzatexto,
