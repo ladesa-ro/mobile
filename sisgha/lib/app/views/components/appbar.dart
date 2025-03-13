@@ -6,6 +6,7 @@ import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/dias.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
+import 'package:sisgha/app/views/components/dialogo_troca_de_tema.dart';
 
 import '../../data/providers/tema.dart';
 
@@ -70,7 +71,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             const Spacer(),
             IconButton(
                 onPressed: () {
-                  temaProvider.muldarTema();
+                  showDialog(
+                      context: context,
+                      builder: (ctx) => mostrarDialogoDeTrocaDeTema(
+                          ctx,
+                          temaProvider.temaAtivo.brightness == Brightness.light
+                              ? "claro"
+                              : "escuro"));
                 },
                 icon: Iconify(
                   Icones.sol,

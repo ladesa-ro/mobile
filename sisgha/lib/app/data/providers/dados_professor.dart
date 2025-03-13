@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/data/armazenamento/shared_preferences.dart';
 import 'package:sisgha/app/domain/logic/verificar_imagem_armazenada.dart';
+import 'package:sisgha/app/views/components/progress_indicator.dart';
 
 import '../../views/components/botton_app_bar.dart';
 import '../../views/components/widget_erro.dart';
@@ -46,7 +47,6 @@ class DadosProfessor with ChangeNotifier {
         Armazenamento().localImagemCapa, 0);
     _fotoImagemPerfil = await VerificarImagemArmazenada.verificador(
         Armazenamento().localImagemPerfil, 1);
-
     notifyListeners();
     return true;
   }
@@ -76,6 +76,7 @@ class DadosProfessor with ChangeNotifier {
   }
 
   static void iniciarProvider(BuildContext context) async {
+    mostrarDialogoDeCarregmento(context);
     final dados = DadosProfessor();
 
     bool sucesso = await dados.buscarDados(context);
@@ -101,6 +102,16 @@ class DadosProfessor with ChangeNotifier {
       builder: (context) {
         return dialogoDeErro(context, 'error');
       },
+    );
+  }
+
+  static void mostrarDialogoDeCarregmento(BuildContext context) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Progressindicator(tamanho: 200),
+      ),
     );
   }
 }

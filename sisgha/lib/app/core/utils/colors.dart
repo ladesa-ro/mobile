@@ -54,7 +54,7 @@ class CoresClaras {
   static const Color brancoBorda = Color(0xFFFFFFFF);
 
   //botão
-  static const Color vermelhobotao = Color(0XFFcd191e);
+  static const Color vermelhoBotao = Color(0XFFcd191e);
   static const Color pretobotao = Color(0XFF050F07);
   static const Color verdebotao = Color(0XFF2F9E41);
 }
