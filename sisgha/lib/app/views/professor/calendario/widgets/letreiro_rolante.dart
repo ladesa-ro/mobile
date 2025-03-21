@@ -66,7 +66,7 @@ class _LetreiroRolanteState extends State<LetreiroRolante> {
                 alignment: Alignment.center,
                 child: Text(
                   'Técnico Integrado - Informática 2023 - 2023',
-                  style: estiloTexto(15,
+                  style: estiloTexto(17,
                       cor: CoresClaras.verdePrincipalTexto,
                       peso: FontWeight.bold),
                 ),
