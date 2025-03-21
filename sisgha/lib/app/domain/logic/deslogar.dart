@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../../domain/api/repository.dart';
-import '../../../login/boas_vindas.dart';
+import '../api/repository.dart';
+import '../../views/login/boas_vindas.dart';
 
 Future widgetQuit(BuildContext context) async {
   if (await Repository.sair(context)) {
