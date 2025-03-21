@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/views/aluno/calendario_alunos/calendario_alunos.dart';
 import 'package:sisgha/app/views/aluno/notificacao_alunos/notificacoes_alunos.dart';

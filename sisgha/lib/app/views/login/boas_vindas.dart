@@ -24,12 +24,16 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
     iniciarApp();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Future<void> iniciarApp() async {
     if (mounted) {
       await context.read<EscolhaHorariosAlunos>().pucharOpcoes();
     }
 
-    // Inicializa armazenamento
     await Armazenamento.iniciar();
     bool tokenAtivo = await verificarToken();
 
