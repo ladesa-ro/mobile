@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/views/aluno/calendario_alunos/calendario_alunos.dart';
-import 'package:sisgha/app/views/aluno/notificacao_alunos/notificacoes_alunos.dart';
+import 'package:sisgha/app/views/notificacao/notificacao.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -106,7 +106,7 @@ class _NavigationState extends State<Navigation> {
           page = const Center(child: HomeAlunos());
           break;
         case 2:
-          page = Center(child: NotificacoesAlunos());
+          page = Center(child: Notificacao());
           break;
         default:
           page = const HomeAlunos();

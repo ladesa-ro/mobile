@@ -10,7 +10,29 @@ import 'package:sizer/sizer.dart';
 
 class Notificacao extends StatelessWidget {
   const Notificacao({super.key});
-
+  static final List<ItensNotificacoes> notificacoes = [
+    ItensNotificacoes(
+      icone: Icones.CalendarVazio,
+      titulo: "Novo evento!",
+      tempo: "2 dias",
+      texto: "O evento IFRO Party foi agendado para o dia 10 de setembro",
+      link: "Clique aqui e confira",
+    ),
+    ItensNotificacoes(
+      icone: Icones.IconeSisgha,
+      titulo: "Novo horário",
+      tempo: "5 dias",
+      texto: "A aula das 13h de Filosofia II foi cancelada, aula vaga",
+      link: "Clique aqui e confira",
+    ),
+    ItensNotificacoes(
+      icone: Icones.IconeSisgha,
+      titulo: "Alteração no horário",
+      tempo: "15 dias",
+      texto: "A aula de Filosofia II foi trocada pela aula de Banco de Dados I",
+      link: "Clique aqui e confira",
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     final appBar = CustomAppBarNotificacao(height: 6.h, seta: true);
@@ -24,16 +46,15 @@ class Notificacao extends StatelessWidget {
           child: Flexible(
             child: ListView.builder(
               padding: EdgeInsets.zero,
-              itemCount: 2,
+              itemCount: notificacoes.length,
               itemBuilder: (context, index) => Column(
                 children: [
                   cards(context,
-                      titulo: 'Funciona $index',
-                      menssagem:
-                          'O Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão.',
-                      link: 'clique aqui e confira',
+                      titulo: notificacoes[index].titulo,
+                      menssagem: notificacoes[index].texto,
+                      link: notificacoes[index].link,
                       icon: Icones.Sino,
-                      data: '$index dias'),
+                      data: notificacoes[index].tempo),
                   Divider(
                     thickness: 1.5,
                     color: CoresClaras.verdecinzaBorda,
@@ -97,4 +118,20 @@ Widget cards(BuildContext context,
       ],
     ),
   );
+}
+
+class ItensNotificacoes {
+  final IconData icone;
+  final String titulo;
+  final String tempo;
+  final String texto;
+  final String link;
+
+  ItensNotificacoes({
+    required this.icone,
+    required this.titulo,
+    required this.tempo,
+    required this.texto,
+    required this.link,
+  });
 }
