@@ -18,28 +18,43 @@ class BoasVindasPage extends StatefulWidget {
 }
 
 class _BoasVindasPageState extends State<BoasVindasPage> {
-  Future<void> iniciarApp(BuildContext context) async {
-    await Provider.of<EscolhaHorariosAlunos>(context).pucharOpcoes();
-    Armazenamento.iniciar();
+  @override
+  void initState() {
+    super.initState();
+    iniciarApp();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  Future<void> iniciarApp() async {
+    if (mounted) {
+      await context.read<EscolhaHorariosAlunos>().pucharOpcoes();
+    }
+
+    await Armazenamento.iniciar();
     bool tokenAtivo = await verificarToken();
+
     if (tokenAtivo) {
-      return DadosProfessor.iniciarProvider(context);
+      if (mounted) {
+        await context.read<DadosProfessor>().iniciarProvider(context);
+      }
     } else {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const PaginaLogin(),
-        ),
-      );
+      if (mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const PaginaLogin()),
+        );
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: FutureBuilder(
-            future: iniciarApp(context),
-            builder: (ctx, snapshot) =>
-                Center(child: Progressindicator(tamanho: 200))));
+    return const Scaffold(
+      body: Center(child: Progressindicator(tamanho: 200)),
+    );
   }
 }
 

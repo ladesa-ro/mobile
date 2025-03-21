@@ -75,7 +75,7 @@ class DadosProfessor with ChangeNotifier {
     notifyListeners();
   }
 
-  static void iniciarProvider(BuildContext context) async {
+  Future<void> iniciarProvider(BuildContext context) async {
     mostrarDialogoDeCarregmento(context);
     final dados = DadosProfessor();
 

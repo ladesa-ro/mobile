@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -141,7 +142,7 @@ class _CorpoLoginState extends State<CorpoLogin> {
             currentFocus.unfocus();
           }
           if (deuCerto) {
-            DadosProfessor.iniciarProvider(context);
+            await context.read<DadosProfessor>().iniciarProvider(context);
           } else {
             senhaController.clear();
             ScaffoldMessenger.of(context).showSnackBar(snackBar);

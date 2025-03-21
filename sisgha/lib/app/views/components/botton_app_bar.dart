@@ -75,49 +75,45 @@ class _NavigationState extends State<Navigation> {
   }
 
   Widget _buildPage(int index, bool tokenAtivo) {
+    Widget page;
+
     if (tokenAtivo) {
       switch (index) {
         case 0:
-          return ChangeNotifierProvider(
+          page = ChangeNotifierProvider(
             create: (_) => EscolhaCalendario(),
-            child: Center(
-              child: Calendar(),
-            ),
+            child: Center(child: Calendar()),
           );
-
+          break;
         case 1:
-          return const Center(
-            child: Home(),
-          );
+          page = const Center(child: Home());
+          break;
         case 2:
-          return const Center(
-            child: Perfil(),
-          );
+          page = const Center(child: Perfil());
+          break;
         default:
-          return const Home();
+          page = const Home();
       }
     } else {
       switch (index) {
         case 0:
-          return ChangeNotifierProvider(
+          page = ChangeNotifierProvider(
             create: (_) => EscolhaCalendario(),
-            child: Center(
-              child: CalendarAlunos(),
-            ),
+            child: Center(child: CalendarAlunos()),
           );
-
+          break;
         case 1:
-          return const Center(
-            child: HomeAlunos(),
-          );
+          page = const Center(child: HomeAlunos());
+          break;
         case 2:
-          return Center(
-            child: NotificacoesAlunos(),
-          );
+          page = Center(child: NotificacoesAlunos());
+          break;
         default:
-          return const HomeAlunos();
+          page = const HomeAlunos();
       }
     }
+
+    return page;
   }
 
   Widget construirBarraDeNavegacao(
