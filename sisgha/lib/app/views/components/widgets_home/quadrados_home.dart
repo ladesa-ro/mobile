@@ -49,7 +49,8 @@ class _QuadradosHomeState extends State<QuadradosHome>
       builder: (context, constraints) => Column(
         children: [
           SizedBox(
-            height: constraints.maxHeight * 0.15,
+            height: constraints.maxHeight *
+                0.13, //so pra saber onde eu tenho que mexe
             child: Padding(
               padding: Tamanhos.margem(context),
               child: TabBar(
@@ -154,32 +155,45 @@ class _QuadradosHomeState extends State<QuadradosHome>
               width: constraints.maxWidth,
               height: constraints.maxHeight * 0.8,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment:
+                    MainAxisAlignment.center, // Centraliza tudo 
                 children: [
-                  Text(
-                    diasDaSemana[index],
-                    style: estiloTexto(15,
-                        cor: retorno(
-                            atributo1: CoresClaras.brancoTexto,
-                            atributo2: CoresClaras.verdePrincipalTexto),
-                        peso: FontWeight.w600),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        bottom: constraints.maxHeight *
+                            0.02), // Dá espaço antes da barrinha
+                    child: Text(
+                      diasDaSemana[index],
+                      style: estiloTexto(15,
+                          cor: retorno(
+                              atributo1: CoresClaras.brancoTexto,
+                              atributo2: CoresClaras.verdePrincipalTexto),
+                          peso: FontWeight.w600),
+                    ),
                   ),
                   Container(
+                    margin: EdgeInsets.symmetric(
+                        vertical: constraints.maxHeight *
+                            0.01), // Espaçamento dinâmico
                     color: retorno(
                         atributo1: CoresClaras.brancoTexto,
                         atributo2: CoresClaras.verdePrincipalTexto),
                     width: constraints.maxWidth * 0.45,
                     height: 1.5,
                   ),
-                  Text(
-                    diaDaSemanaSoQueEmNumeros,
-                    style: estiloTexto(15,
-                        cor: retorno(
-                            atributo1: CoresClaras.brancoTexto,
-                            atributo2: CoresClaras.verdePrincipalTexto),
-                        peso: FontWeight.w600),
-                  )
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: constraints.maxHeight *
+                            0.010), // Dá espaço depois da barrinha
+                    child: Text(
+                      diaDaSemanaSoQueEmNumeros,
+                      style: estiloTexto(15,
+                          cor: retorno(
+                              atributo1: CoresClaras.brancoTexto,
+                              atributo2: CoresClaras.verdePrincipalTexto),
+                          peso: FontWeight.w600),
+                    ),
+                  ),
                 ],
               ),
             ),
