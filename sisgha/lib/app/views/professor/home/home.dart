@@ -29,9 +29,9 @@ class Home extends StatelessWidget {
       appBar: appBar,
       body: Column(
         children: [
-          SizedBox(height: tamanho * 0.10), // mudar ainda 
+          SizedBox(height: tamanho * 0.10), // ja ta certo 
           botaoMiniCalendario(context),
-          SizedBox(height: tamanho * 0.04), // mudar ainda 
+          SizedBox(height: tamanho * 0.02), // ja ta certo 
           Expanded(
             child: const QuadradosHome(),
           ),
