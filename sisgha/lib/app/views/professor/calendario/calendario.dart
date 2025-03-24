@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sisgha/app/views/professor/calendario/widgets/card_professor.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -70,6 +71,14 @@ class Calendar extends StatelessWidget {
             child: MiniCalendario(
               showDialog: false,
             ),
+          ),
+            SizedBox(
+            height: tamanho * 0.03,
+          ),
+            SizedBox(
+            height: tamanho * 0.55,
+            width: TamanhoTela.horizontal(context),
+            child: CardsProfessor(),
           ),
         ],
       ),
