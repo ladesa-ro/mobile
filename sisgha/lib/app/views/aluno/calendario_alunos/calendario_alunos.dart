@@ -47,7 +47,7 @@ class CalendarAlunos extends StatelessWidget {
               children: [
                 SizedBox(
                     height: Tamanhos.aluturaBotoes(),
-                    width: (largura * 0.85) - 80,
+                    width: (largura * 0.93) - 80,
                     child: LetreiroRolanteAlunos()),
                 Spacer(),
                 SizedBox(

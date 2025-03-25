@@ -3,11 +3,11 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/core/utils/Icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
-import 'package:sisgha/app/core/utils/tamanhos.dart';
 
 class CardsAlunos extends StatelessWidget {
   CardsAlunos({super.key});
-  final Cards = [
+
+  final List<ElementosCards> Cards = [
     ElementosCards(
       cor: CoresClaras.roxo,
       titulo: "2º Etapa",
@@ -20,8 +20,8 @@ class CardsAlunos extends StatelessWidget {
           color: CoresClaras.branco,
         ),
       ),
-      inicio: "Início: 00/00 ás 00:00",
-      terminio: "Término: 00/00 ás 00:00",
+      inicio: "Início: 00/00 às 00:00",
+      terminio: "Término: 00/00 às 00:00",
       tempo: "Começa daqui 0 dias.",
       local: "Local: Ji-Paraná",
     ),
@@ -37,8 +37,8 @@ class CardsAlunos extends StatelessWidget {
           color: CoresClaras.branco,
         ),
       ),
-      inicio: "Início: 00/00 ás 00:00",
-      terminio: "Término: 00/00 ás 00:00",
+      inicio: "Início: 00/00 às 00:00",
+      terminio: "Término: 00/00 às 00:00",
       tempo: "Começa daqui 0 dias.",
       local: "Local: Ji-Paraná",
     ),
@@ -46,69 +46,74 @@ class CardsAlunos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double largura = Tamanhos.larguraGeral();
+    double largura = MediaQuery.of(context).size.width;
+
     return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
+      padding: EdgeInsets.zero,
       itemCount: Cards.length,
-      itemBuilder: (ctx, index) => Card(
-        margin: EdgeInsets.all(10),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-          side: BorderSide(color: CoresClaras.cinzaBordas),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(10),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    Cards[index].titulo,
-                    style: estiloTexto(
-                      16,
-                      cor: Cards[index].cor,
-                      peso: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    Cards[index].inicio,
-                    style: estiloTexto(
-                      15,
-                    ),
-                  ),
-                  Text(
-                    Cards[index].terminio,
-                    style: estiloTexto(
-                      15,
-                    ),
-                  ),
-                  Text(
-                    Cards[index].tempo,
-                    style: estiloTexto(
-                      15,
-                    ),
-                  ),
-                  Text(
-                    Cards[index].local,
-                    style: estiloTexto(
-                      15,
-                    ),
-                  ),
-                ],
-              ),
-              Spacer(),
-              SizedBox(
-                  height: 42,
-                  width: largura * 0.11,
-                  child: Cards[index].iconebotao),
-            ],
+      itemBuilder: (ctx, index) {
+        return Card(
+          margin: EdgeInsets.symmetric(
+            horizontal: 0,
+            vertical: 8,
           ),
-        ),
-      ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+            side: BorderSide(color: CoresClaras.cinzaBordas),
+          ),
+          child: ClipRRect(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 8,
+                  constraints: BoxConstraints(minHeight: 120, maxHeight: 160),
+                  decoration: BoxDecoration(
+                    color: Cards[index].cor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      bottomLeft: Radius.circular(12),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          Cards[index].titulo,
+                          style: estiloTexto(
+                            16,
+                            cor: Cards[index].cor,
+                            peso: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 15),
+                        Text(Cards[index].inicio, style: estiloTexto(16)),
+                        Text(Cards[index].terminio, style: estiloTexto(16)),
+                        Text(Cards[index].tempo, style: estiloTexto(16)),
+                        Text(Cards[index].local, style: estiloTexto(16)),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(10),
+                  child: SizedBox(
+                    height: 45,
+                    width: largura * 0.115,
+                    child: Cards[index].iconebotao,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -122,6 +127,7 @@ class ElementosCards {
   final String terminio;
   final String tempo;
   final String local;
+
   ElementosCards({
     required this.cor,
     required this.titulo,
