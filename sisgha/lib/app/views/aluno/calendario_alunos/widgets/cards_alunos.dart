@@ -3,7 +3,6 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/core/utils/Icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
-import 'package:sisgha/app/core/utils/tamanhos.dart';
 
 class CardsAlunos extends StatelessWidget {
   CardsAlunos({super.key});
@@ -50,6 +49,7 @@ class CardsAlunos extends StatelessWidget {
     double largura = MediaQuery.of(context).size.width;
 
     return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.zero,
       itemCount: Cards.length,
       itemBuilder: (ctx, index) {
