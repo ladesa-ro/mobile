@@ -10,7 +10,7 @@ import '../../../core/utils/responsividade.dart';
 import '../../../core/utils/tamanhos.dart';
 import '../../components/appbar.dart';
 import '../../components/calendario.dart';
-import 'widgets/letreiro_rolante_alunos.dart';
+import '../../components/letreiro_rolante.dart';
 import 'widgets/menu_lateral_alunos.dart';
 
 class CalendarAlunos extends StatelessWidget {
@@ -30,14 +30,16 @@ class CalendarAlunos extends StatelessWidget {
 
     double tamanho =
         TamanhoTela.height(context, appBarSize: appBar.preferredSize.height);
-    double largura = Tamanhos.larguraGeral();
+    EdgeInsets margem = Tamanhos.margem();
+    double largura = Tamanhos.larguraGeral() - margem.horizontal;
+
     return Scaffold(
       key: _scaffoldKey,
       drawerEnableOpenDragGesture: false,
       appBar: appBar,
       drawer: MenuLateralAlunos(),
       body: ListView(
-        padding: Tamanhos.margem(context),
+        padding: margem,
         children: [
           SizedBox(height: tamanho * 0.03),
           SizedBox(
@@ -47,12 +49,12 @@ class CalendarAlunos extends StatelessWidget {
               children: [
                 SizedBox(
                     height: Tamanhos.aluturaBotoes(),
-                    width: (largura * 0.93) - 80,
-                    child: LetreiroRolanteAlunos()),
+                    width: largura * 0.80,
+                    child: LetreiroRolante()),
                 Spacer(),
                 SizedBox(
                   height: Tamanhos.aluturaBotoes(),
-                  width: largura * 0.15,
+                  width: largura * 0.17,
                   child: ElevatedButton(
                       style: _estiloBotao(),
                       onPressed: () {

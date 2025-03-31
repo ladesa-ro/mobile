@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/colors.dart';
-import '../../../../core/utils/estilos.dart';
+import '../../core/utils/colors.dart';
+import '../../core/utils/estilos.dart';
 
 class LetreiroRolante extends StatefulWidget {
   const LetreiroRolante({super.key});

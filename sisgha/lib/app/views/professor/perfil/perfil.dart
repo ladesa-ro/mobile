@@ -4,6 +4,7 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/Icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
+import 'package:sisgha/app/core/utils/tamanhos.dart';
 import 'package:sisgha/app/data/providers/dados_professor.dart';
 import 'package:sisgha/app/views/professor/perfil/widgets/botton_sheat.dart';
 import 'package:sisgha/app/views/professor/perfil/widgets/estilos_perfil.dart';
@@ -103,8 +104,9 @@ class _PerfilState extends State<Perfil> {
               provider.professor.matricula,
               tamanho * 0.005),
           SizedBox(height: tamanho * 0.03),
-          SizedBox(
-            height: tamanho * 0.7,
+          Container(
+            padding: Tamanhos.margem(),
+            height: tamanho * 0.70,
             child: NavSwitch(),
           ),
         ],

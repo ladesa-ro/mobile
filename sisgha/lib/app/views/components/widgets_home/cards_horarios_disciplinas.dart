@@ -4,7 +4,6 @@ import '../../../core/utils/Icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/responsividade.dart';
-import '../../../core/utils/tamanhos.dart';
 
 class ConstrutorHorarios extends StatefulWidget {
   final String materia;
@@ -29,7 +28,6 @@ class _ConstrutorHorariosState extends State<ConstrutorHorarios> {
       body: Padding(
         padding: const EdgeInsets.only(top: 20),
         child: ListView.builder(
-          padding: Tamanhos.margem(context),
           physics: RangeMaintainingScrollPhysics(),
           itemCount: 3,
           itemBuilder: (context, index) {

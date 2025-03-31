@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:sisgha/app/core/utils/tamanhos.dart';
 import 'package:sisgha/app/views/components/widgets_home/botao_mini_calendario.dart';
 import 'package:sizer/sizer.dart';
 
@@ -27,15 +28,18 @@ class Home extends StatelessWidget {
 
     return Scaffold(
       appBar: appBar,
-      body: Column(
-        children: [
-          SizedBox(height: tamanho * 0.10), // ja ta certo 
-          botaoMiniCalendario(context),
-          SizedBox(height: tamanho * 0.02), // ja ta certo 
-          Expanded(
-            child: const QuadradosHome(),
-          ),
-        ],
+      body: Padding(
+        padding: Tamanhos.margem(),
+        child: Column(
+          children: [
+            SizedBox(height: tamanho * 0.03), // ja ta certo
+            botaoMiniCalendario(context),
+            SizedBox(height: tamanho * 0.03), // ja ta certo
+            Expanded(
+              child: const QuadradosHome(),
+            ),
+          ],
+        ),
       ),
     );
   }

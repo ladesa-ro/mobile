@@ -16,7 +16,7 @@ Widget mostrarDialogoDeTrocaDeTema(BuildContext context, String text) {
       children: [
         SizedBox(height: 2.h),
         Iconify(
-          Icones.sol,
+          temaAtual ? Icones.lua : Icones.sol,
           color: temaAtual ? CoresClaras.preto : CoresEscuras.brancoTextoEscuro,
           size: 3.h,
         ),

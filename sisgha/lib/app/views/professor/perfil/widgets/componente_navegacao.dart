@@ -36,8 +36,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
     return LayoutBuilder(
       builder: (context, constraints) => Column(
         children: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 30),
+          SizedBox(
             width: constraints.maxWidth,
             height: constraints.maxHeight * 0.1,
             child: Row(
