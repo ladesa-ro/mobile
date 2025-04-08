@@ -115,7 +115,9 @@ class _BodyAlunoState extends State<BodyAluno> {
                         }
                       : null,
                   style: _estiloBotao(),
+
                   child: const Text("Ver Horário"),
+                  //style: Tamanhos.estiloBotao(),
                 ),
               ),
             ],
@@ -132,8 +134,14 @@ class _BodyAlunoState extends State<BodyAluno> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      padding:
-          EdgeInsets.symmetric(vertical: TamanhoTela.vertical(context) * 0.04),
+      minimumSize: Size(
+        Tamanhos.larguraGeral(),
+        Tamanhos.aluturaBotoes(),
+      ),
+      maximumSize: Size(
+        Tamanhos.larguraGeral(),
+        Tamanhos.aluturaBotoes(),
+      ),
     );
   }
 
