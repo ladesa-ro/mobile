@@ -80,9 +80,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 },
                 icon: Iconify(
                   temaProvider.temaAtivo.brightness == Brightness.light
+
                       ? Icones.lua
                       : Icones.sol,
                   size: 34,
+
                   color: temaProvider.corDosIcones(),
                 )),
             if (!profOuAluno)
