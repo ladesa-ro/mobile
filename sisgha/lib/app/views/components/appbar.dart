@@ -34,7 +34,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       titleSpacing: 0,
       automaticallyImplyLeading: false,
       title: Padding(
-        padding: Tamanhos.margem(context),
+        padding: Tamanhos.margem(),
         child: Row(
           children: [
             if (profOuAluno == true)
@@ -79,13 +79,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                               : "claro"));
                 },
                 icon: Iconify(
-                  // usei a msm logica que ta ai em cima pra poder trocar o icon vi que no prototico o icon mudava de acordo com o tema ai fiz essa pequena alteração ass:victor
                   temaProvider.temaAtivo.brightness == Brightness.light
-                      ? Icones.sol
-                      : Icones
-                          .Lapiz, // não achei o icon da lua então coloquei esse temporario :)
-                  size:
-                      34, // mudei o tamnaho do icon pra ficar com o msm tamanho do outro ali de baixo, o tamnaho antigo tava dano um erro na tela pois olcupava muito espaço
+
+                      ? Icones.lua
+                      : Icones.sol,
+                  size: 34,
+
                   color: temaProvider.corDosIcones(),
                 )),
             if (!profOuAluno)

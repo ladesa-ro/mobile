@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/views/aluno/calendario_alunos/widgets/cards_alunos.dart';
+import 'package:sisgha/app/views/components/letreiro_rolante.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -10,7 +11,6 @@ import '../../../core/utils/responsividade.dart';
 import '../../../core/utils/tamanhos.dart';
 import '../../components/appbar.dart';
 import '../../components/calendario.dart';
-import 'widgets/letreiro_rolante_alunos.dart';
 import 'widgets/menu_lateral_alunos.dart';
 
 class CalendarAlunos extends StatelessWidget {
@@ -37,7 +37,7 @@ class CalendarAlunos extends StatelessWidget {
       appBar: appBar,
       drawer: MenuLateralAlunos(),
       body: ListView(
-        padding: Tamanhos.margem(context),
+        padding: Tamanhos.margem(),
         children: [
           SizedBox(height: tamanho * 0.03),
           SizedBox(
@@ -48,7 +48,7 @@ class CalendarAlunos extends StatelessWidget {
                 SizedBox(
                     height: Tamanhos.aluturaBotoes(),
                     width: (largura * 0.93) - 80,
-                    child: LetreiroRolanteAlunos()),
+                    child: LetreiroRolante()),
                 Spacer(),
                 SizedBox(
                   height: Tamanhos.aluturaBotoes(),

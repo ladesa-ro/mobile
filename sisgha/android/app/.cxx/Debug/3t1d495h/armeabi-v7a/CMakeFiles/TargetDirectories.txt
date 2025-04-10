@@ -1,0 +1,2 @@
+C:/Users/yurig/repositorios/mobile/sisgha/android/app/.cxx/Debug/3t1d495h/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/yurig/repositorios/mobile/sisgha/android/app/.cxx/Debug/3t1d495h/armeabi-v7a/CMakeFiles/rebuild_cache.dir

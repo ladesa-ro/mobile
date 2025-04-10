@@ -77,9 +77,7 @@ Widget cards(BuildContext context,
     required String data}) {
   return Padding(
     padding: EdgeInsets.only(
-        left: Tamanhos.margem(context).left,
-        right: Tamanhos.margem(context).right,
-        top: 20),
+        left: Tamanhos.margem().left, right: Tamanhos.margem().right, top: 20),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

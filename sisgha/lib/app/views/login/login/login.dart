@@ -62,14 +62,14 @@ class _CorpoLoginState extends State<CorpoLogin> {
           height: TamanhoTela.vertical(context),
           width: TamanhoTela.horizontal(context),
           child: Padding(
-            padding: Tamanhos.margem(context) * 2.5,
+            padding: Tamanhos.margem() * 2.5,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
                   ImageApp.logo_sigha_sem_barra,
                   width: TamanhoTela.horizontal(context) -
-                      (Tamanhos.margem(context).horizontal * 4),
+                      (Tamanhos.margem().horizontal * 4),
                 ),
                 Form(
                   key: formKey,

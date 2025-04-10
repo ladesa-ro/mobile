@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import 'colors.dart';
-import 'responsividade.dart';
 
 class Tamanhos {
-  static EdgeInsets margem(BuildContext context) {
-    return EdgeInsets.symmetric(
-        horizontal: TamanhoTela.horizontal(context) * 0.05);
+  static EdgeInsets margem() {
+    return EdgeInsets.symmetric(horizontal: larguraGeral() * 0.05);
   }
 
   static double aluturaBotoes() {

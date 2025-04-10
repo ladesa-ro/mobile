@@ -56,46 +56,43 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, constraints) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 35),
-        child: Column(
-          children: [
-            SizedBox(height: constraints.maxHeight * 0.05),
-            Container(
-              height: constraints.maxHeight * 0.11,
-              decoration: BoxDecoration(
-                color: CoresClaras.verdePrincipal,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                children: [
-                  _iconButton(1, Icones.setaEsquerda),
-                  const Spacer(),
-                  Text(
-                    dias[diaIndex],
-                    style: estiloTexto(17,
-                        cor: CoresClaras.brancoTexto, peso: FontWeight.bold),
-                  ),
-                  const Spacer(),
-                  _iconButton(0, Icones.setaDireita),
-                ],
-              ),
+      builder: (context, constraints) => Column(
+        children: [
+          SizedBox(height: constraints.maxHeight * 0.05),
+          Container(
+            height: constraints.maxHeight * 0.11,
+            decoration: BoxDecoration(
+              color: CoresClaras.verdePrincipal,
+              borderRadius: BorderRadius.circular(10),
             ),
-            SizedBox(height: constraints.maxHeight * 0.05),
-            CarouselSlider(
-              carouselController: _carouselSliderController,
-              items: _listaComHorarios(context),
-              options: CarouselOptions(
-                enableInfiniteScroll: false,
-                viewportFraction: 1.0,
-                enlargeCenterPage: true,
-                height: constraints.maxHeight * 0.70,
-                scrollPhysics: const NeverScrollableScrollPhysics(),
-              ),
+            child: Row(
+              children: [
+                _iconButton(1, Icones.setaEsquerda),
+                const Spacer(),
+                Text(
+                  dias[diaIndex],
+                  style: estiloTexto(17,
+                      cor: CoresClaras.brancoTexto, peso: FontWeight.bold),
+                ),
+                const Spacer(),
+                _iconButton(0, Icones.setaDireita),
+              ],
             ),
-            SizedBox(height: constraints.maxHeight * 0.04)
-          ],
-        ),
+          ),
+          SizedBox(height: constraints.maxHeight * 0.05),
+          CarouselSlider(
+            carouselController: _carouselSliderController,
+            items: _listaComHorarios(context),
+            options: CarouselOptions(
+              enableInfiniteScroll: false,
+              viewportFraction: 1.0,
+              enlargeCenterPage: true,
+              height: constraints.maxHeight * 0.70,
+              scrollPhysics: const NeverScrollableScrollPhysics(),
+            ),
+          ),
+          SizedBox(height: constraints.maxHeight * 0.04)
+        ],
       ),
     );
   }

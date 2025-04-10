@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:sisgha/app/core/utils/tamanhos.dart';
 import 'package:sizer/sizer.dart';
 import '../../core/utils/dias.dart';
 import '../../core/utils/responsividade.dart';
@@ -26,14 +27,17 @@ class HomeAlunos extends StatelessWidget {
 
     return Scaffold(
       appBar: appBar,
-      body: Column(
-        children: [
-          SizedBox(height: tamanho * 0.03),
-          botaoMiniCalendario(context),
-          SizedBox(height: tamanho * 0.03),
-          Expanded(child: const QuadradosHome()),
-          SizedBox(height: tamanho * 0.03),
-        ],
+      body: Padding(
+        padding: Tamanhos.margem(),
+        child: Column(
+          children: [
+            SizedBox(height: tamanho * 0.03),
+            botaoMiniCalendario(context),
+            SizedBox(height: tamanho * 0.03),
+            Expanded(child: const QuadradosHome()),
+            SizedBox(height: tamanho * 0.03),
+          ],
+        ),
       ),
     );
   }

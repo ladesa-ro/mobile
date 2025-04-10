@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
-import '../../../core/utils/tamanhos.dart';
 import 'cards_horarios_disciplinas.dart';
 
 class QuadradosHome extends StatefulWidget {
@@ -51,20 +50,17 @@ class _QuadradosHomeState extends State<QuadradosHome>
           SizedBox(
             height: constraints.maxHeight *
                 0.13, //so pra saber onde eu tenho que mexe
-            child: Padding(
-              padding: Tamanhos.margem(context),
-              child: TabBar(
-                indicatorWeight: 0,
-                splashFactory: NoSplash.splashFactory,
-                labelPadding: EdgeInsets.symmetric(
-                    horizontal: constraints.maxWidth * 0.01),
-                indicator: const BoxDecoration(),
-                dividerHeight: 0,
-                controller: _tabController,
-                tabs: List.generate(
-                  6,
-                  (index) => _contruindoInterface(index),
-                ),
+            child: TabBar(
+              indicatorWeight: 0,
+              splashFactory: NoSplash.splashFactory,
+              labelPadding:
+                  EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.01),
+              indicator: const BoxDecoration(),
+              dividerHeight: 0,
+              controller: _tabController,
+              tabs: List.generate(
+                6,
+                (index) => _contruindoInterface(index),
               ),
             ),
           ),
@@ -155,8 +151,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
               width: constraints.maxWidth,
               height: constraints.maxHeight * 0.8,
               child: Column(
-                mainAxisAlignment:
-                    MainAxisAlignment.center, // Centraliza tudo 
+                mainAxisAlignment: MainAxisAlignment.center, // Centraliza tudo
                 children: [
                   Padding(
                     padding: EdgeInsets.only(
