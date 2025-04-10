@@ -1,0 +1,2 @@
+C:/Users/yurig/repositorios/mobile/sisgha/android/app/.cxx/RelWithDebInfo/1k127247/x86/CMakeFiles/edit_cache.dir
+C:/Users/yurig/repositorios/mobile/sisgha/android/app/.cxx/RelWithDebInfo/1k127247/x86/CMakeFiles/rebuild_cache.dir

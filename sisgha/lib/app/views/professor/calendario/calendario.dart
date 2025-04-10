@@ -31,6 +31,7 @@ class CalendarioProfessor extends StatelessWidget {
     double tamanho =
         TamanhoTela.height(context, appBarSize: appBar.preferredSize.height);
     EdgeInsets margem = Tamanhos.margem();
+
     double largura = Tamanhos.larguraGeral() - margem.horizontal;
 
     return Scaffold(
