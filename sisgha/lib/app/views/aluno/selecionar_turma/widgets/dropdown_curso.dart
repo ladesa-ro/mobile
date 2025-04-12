@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/app/core/utils/Icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/responsividade.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
@@ -93,11 +95,15 @@ class _DropdownAlunoState extends State<DropdownCurso> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  Icon(
-                    isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
-                    color: selectedValue != null
-                        ? CoresClaras.verdePrincipal
-                        : CoresClaras.cinzaBordas,
+                  Transform.rotate(
+                    angle: isExpanded ? 3.14 : 0, // gira 180° pq n achei o msm icon com seta pra cima ai a solução mais simples foi gira ela 
+                    child: Iconify(
+                      Icones.SetaBaixo,
+                      color: selectedValue != null
+                          ? CoresClaras.verdePrincipal
+                          : CoresClaras.cinzaBordas,
+                      size: 36,
+                    ),
                   ),
                 ],
               ),
