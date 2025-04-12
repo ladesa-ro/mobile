@@ -43,7 +43,7 @@ class _BodyAlunoState extends State<BodyAluno> {
           Row(
             children: [
               Icon(Icones.Relogio),
-              SizedBox(width: TamanhoTela.horizontal(context) * 0.08),
+              SizedBox(width: TamanhoTela.horizontal(context) * 0.02),
               Text("Selecionar Horário",
                   style: TextStyle(
                       fontSize: TamanhoTela.horizontal(context) * 0.05,
@@ -135,6 +135,7 @@ class _BodyAlunoState extends State<BodyAluno> {
         borderRadius: BorderRadius.circular(8),
       ),
       minimumSize: Size(
+        
         Tamanhos.larguraGeral(),
         Tamanhos.aluturaBotoes(),
       ),
