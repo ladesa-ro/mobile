@@ -77,7 +77,7 @@ class _DropdownFormacaoState extends State<DropdownFormacao> {
                     ),
                   ),
                   Transform.rotate(
-                    angle: isExpanded ? 3.14 : 0, // gira 180° pq n achei o msm icon com seta pra cima ai a solução mais simples foi gira ela 
+                    angle: isExpanded ? 3.14 : 0, // gira 180° pq n achei o msm icon com seta pra cima ai a solução mais simples foi girar o  icon 
                     child: Iconify(
                       Icones.SetaBaixo,
                       color: selectedValue != null
