@@ -80,7 +80,7 @@ class _DropdownAlunoState extends State<DropdownAno> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 42,
+              height: 36,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -90,7 +90,7 @@ class _DropdownAlunoState extends State<DropdownAno> {
                         color: selectedValue != null
                             ? CoresClaras.pretoTexto
                             : CoresClaras.cinza,
-                        fontSize: TamanhoTela.horizontal(context) * 0.03,
+                        fontSize: TamanhoTela.horizontal(context) * 0.04,
                         fontWeight: FontWeight.w600),
                   ),
                   Icon(
@@ -104,7 +104,7 @@ class _DropdownAlunoState extends State<DropdownAno> {
             ),
             AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              height: isExpanded ? TamanhoTela.vertical(context) * 0.1 : 0,
+              height: isExpanded ? TamanhoTela.vertical(context) * 0.06 : 0,
               curve: Curves.easeInOut,
               child: isExpanded
                   ? ListView.builder(
