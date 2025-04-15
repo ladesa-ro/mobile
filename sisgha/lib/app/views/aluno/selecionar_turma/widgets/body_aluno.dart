@@ -30,6 +30,26 @@ class _BodyAlunoState extends State<BodyAluno> {
 
   bool abrirAno = false;
   bool abrirTurma = false;
+  @override
+  void initState() {
+    super.initState();
+   
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final provider =
+          Provider.of<EscolhaHorariosAlunos>(context, listen: false);
+      provider.selecionarFormacao(null);
+      provider.selecionarCurso(null);
+      provider.selecionarAno(null);
+      provider.selecionarTurma(null);
+
+      setState(() {
+        abrirCurso = false;
+        abrirAno = false;
+        abrirTurma = false;
+      });
+      debugPrint('Provider resetado com sucesso');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +155,6 @@ class _BodyAlunoState extends State<BodyAluno> {
         borderRadius: BorderRadius.circular(8),
       ),
       minimumSize: Size(
-        
         Tamanhos.larguraGeral(),
         Tamanhos.aluturaBotoes(),
       ),
