@@ -11,22 +11,13 @@ class LetreiroRolante extends StatefulWidget {
 }
 
 class _LetreiroRolanteState extends State<LetreiroRolante> {
-  late final ScrollController _controller;
+  final ScrollController _controller = ScrollController();
   bool _direcao = true;
 
   @override
   void initState() {
     super.initState();
-    _controller = ScrollController();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _iniciarAnimacao();
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _iniciarAnimacao());
   }
 
   void _iniciarAnimacao() {
@@ -43,36 +34,42 @@ class _LetreiroRolanteState extends State<LetreiroRolante> {
       curve: Curves.easeInOut,
     )
         .then((_) {
-      _direcao ? _direcao = false : _direcao = true;
+      _direcao = !_direcao;
       Future.delayed(const Duration(milliseconds: 1500), _iniciarAnimacao);
     });
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) => IgnorePointer(
-        child: Container(
-          height: constraints.maxHeight,
-          width: constraints.maxWidth,
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          decoration: estiloBorda(
-              cor: CoresClaras.verdecinzaBorda, radius: 15, grossuraBorda: 2),
-          child: ListView(
-            controller: _controller,
-            scrollDirection: Axis.horizontal,
-            children: [
-              Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'Técnico Integrado - Informática 2023 - 2023',
-                  style: estiloTexto(17,
-                      cor: CoresClaras.verdePrincipalTexto,
-                      peso: FontWeight.bold),
+    return IgnorePointer(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        decoration: estiloBorda(
+          cor: CoresClaras.verdecinzaBorda,
+          radius: 15,
+          grossuraBorda: 2,
+        ),
+        child: ListView(
+          controller: _controller,
+          scrollDirection: Axis.horizontal,
+          children: [
+            Center(
+              child: Text(
+                'Técnico Integrado - Informática 2023 - 2023',
+                style: estiloTexto(
+                  17,
+                  cor: CoresClaras.verdePrincipalTexto,
+                  peso: FontWeight.bold,
                 ),
-              )
-            ],
-          ),
+              ),
+            ),
+          ],
         ),
       ),
     );
