@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/app/domain/model/token.dart';
 
 import '../../data/armazenamento/shared_preferences.dart';
 import '../../data/providers/dados_professor.dart';
@@ -34,7 +35,6 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
       await context.read<EscolhaHorariosAlunos>().pucharOpcoes();
     }
 
-    await Armazenamento.iniciar();
     bool tokenAtivo = await verificarToken();
 
     if (tokenAtivo) {
@@ -59,7 +59,7 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
 }
 
 Future<bool> verificarToken() async {
-  if (Armazenamento().token == "") {
+  if (Token.token == "") {
     return false;
   } else {
     return true;

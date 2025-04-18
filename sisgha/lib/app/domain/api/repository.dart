@@ -7,9 +7,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:sisgha/app/data/armazenamento/shared_preferences.dart';
 import 'package:sisgha/app/domain/model/cursos.dart';
 import 'package:sisgha/app/domain/model/nivel_formacao.dart';
+import 'package:sisgha/app/domain/model/token.dart';
 
 import '../../views/components/widget_erro.dart';
 import '../model/professor.dart';
@@ -17,7 +17,6 @@ import '../../data/providers/dados_professor.dart';
 
 class Repository {
   static final String _api = "https://dev.ladesa.com.br/api/v1";
-  static final Armazenamento sharedPreferences = Armazenamento();
 
   static void erro(BuildContext context, String text) {
     showDialog(
@@ -62,10 +61,11 @@ class Repository {
   // ----------------------------------------------------------  ATUALIZAR FOTO DE PERFIL DO USUARIO -----------------------------------------------------------------------//
   static Future<void> atualizarImagemPerfil(
       File imagemPerfil, BuildContext context) async {
-    var url = Uri.parse("$_api/usuarios/${sharedPreferences.id}/imagem/perfil");
+    var url = Uri.parse(
+        "$_api/usuarios/${DadosProfessor().professor.id}/imagem/perfil");
 
     var request = http.MultipartRequest('PUT', url)
-      ..headers['Authorization'] = 'Bearer ${sharedPreferences.token}'
+      ..headers['Authorization'] = 'Bearer ${Token.token}'
       ..files.add(await http.MultipartFile.fromPath(
         'file',
         imagemPerfil.path,
@@ -80,8 +80,8 @@ class Repository {
   }
 
   static Future<File> baixarImagemPerfil() async {
-    final url =
-        Uri.parse("$_api/usuarios/${sharedPreferences.id}/imagem/perfil");
+    final url = Uri.parse(
+        "$_api/usuarios/${DadosProfessor().professor.id}/imagem/perfil");
 
     var request = await http.get(url);
     if (verificarStatusCode(request.statusCode)) {
@@ -91,8 +91,6 @@ class Repository {
       // Salva os bytes no arquivo
       final file = File(filePath);
       await file.writeAsBytes(request.bodyBytes);
-      sharedPreferences.salvarTamanhoImagemPerfil(request.contentLength ?? 0);
-      sharedPreferences.salvarLocalImagemPerfil(filePath);
 
       return file;
     } else {
@@ -103,10 +101,11 @@ class Repository {
   // ------------------------------------------------------------------- ATUALIZAR A IMAGEM DE FUNDO DO USUARIO -------------------------------------------------------------//
   static Future<void> atualizarImagemCapa(
       File imagemCapa, BuildContext context) async {
-    var url = Uri.parse("$_api/usuarios/${sharedPreferences.id}/imagem/capa");
+    var url = Uri.parse(
+        "$_api/usuarios/${DadosProfessor().professor.id}}/imagem/capa");
 
     var request = http.MultipartRequest('PUT', url)
-      ..headers['Authorization'] = 'Bearer ${sharedPreferences.token}'
+      ..headers['Authorization'] = 'Bearer ${Token.token}'
       ..files.add(await http.MultipartFile.fromPath(
         'file',
         imagemCapa.path,
@@ -121,7 +120,8 @@ class Repository {
   }
 
   static Future<File> baixarImagemCapa() async {
-    final url = Uri.parse("$_api/usuarios/${sharedPreferences.id}/imagem/capa");
+    final url = Uri.parse(
+        "$_api/usuarios/${DadosProfessor().professor.id}/imagem/capa");
 
     var request = await http.get(url);
     if (verificarStatusCode(request.statusCode)) {
@@ -130,8 +130,7 @@ class Repository {
 
       final file = File(filePath);
       await file.writeAsBytes(request.bodyBytes);
-      sharedPreferences.salvarTamanhoImagemCapa(request.contentLength ?? 0);
-      sharedPreferences.salvarLocalImagemCapa(file.absolute.path);
+
       return file;
     } else {
       throw Exception();
@@ -148,10 +147,15 @@ class Repository {
     });
 
     if (verificarStatusCode(resposta.statusCode)) {
-      final body = jsonDecode(resposta.body);
+      final body = await jsonDecode(resposta.body);
 
-      await sharedPreferences.salvarToken(body['access_token']);
-      await sharedPreferences.salvarRefreshToken(body['refresh_token']);
+      Token.setToken(body['access_token']);
+      Token.setRefreshToken(body['refresh_token']);
+
+      print(Token.token);
+      print("------------------------------------------------");
+      print(body['access_token']);
+
       return true;
     } else if (resposta.statusCode == 403) {
       false;
@@ -168,15 +172,13 @@ class Repository {
     var response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Bearer ${sharedPreferences.token}',
+      'Authorization': 'Bearer ${Token.token}',
     });
 
     if (verificarStatusCode(response.statusCode)) {
       var jsondecode = json.decode(response.body)["usuario"];
 
       Professor user = Professor.fromJson(jsondecode);
-
-      await sharedPreferences.salvarId(user.id);
 
       return user;
     } else {
@@ -189,12 +191,12 @@ class Repository {
   static Future<bool> refreshToken(BuildContext context) async {
     var url = Uri.parse("$_api/autenticacao/login/refresh");
     var response = await http.post(url, body: {
-      "refreshToken": sharedPreferences.refreshToken,
+      "refreshToken": Token.refreshToken,
     });
 
     if (verificarStatusCode(response.statusCode)) {
       final body = jsonDecode(response.body);
-      await sharedPreferences.salvarToken(body["access_token"]);
+      Token.setToken(body["access_token"]);
       return true;
     } else {
       mostrarErro(context, response.statusCode);
@@ -204,7 +206,6 @@ class Repository {
 
   // ---------------------------------------------------- APAGAR DADOS SALVOS ----------------------------------------------------------------------------------//
   static Future<bool> sair(BuildContext context) async {
-    sharedPreferences.apagarDados();
     DadosProfessor dados = DadosProfessor();
     dados.apagarDados();
     return true;

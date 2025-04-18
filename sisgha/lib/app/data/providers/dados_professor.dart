@@ -4,8 +4,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/data/armazenamento/shared_preferences.dart';
-import 'package:sisgha/app/domain/logic/verificar_imagem_armazenada.dart';
 import 'package:sisgha/app/views/components/progress_indicator.dart';
 
 import '../../views/components/botton_app_bar.dart';
@@ -43,10 +41,8 @@ class DadosProfessor with ChangeNotifier {
         email: user.email,
         id: user.id);
 
-    _fotoCapaPerfil = await VerificarImagemArmazenada.verificador(
-        Armazenamento().localImagemCapa, 0);
-    _fotoImagemPerfil = await VerificarImagemArmazenada.verificador(
-        Armazenamento().localImagemPerfil, 1);
+    _fotoCapaPerfil = await Repository.baixarImagemCapa();
+    _fotoImagemPerfil = await Repository.baixarImagemPerfil();
     notifyListeners();
     return true;
   }
