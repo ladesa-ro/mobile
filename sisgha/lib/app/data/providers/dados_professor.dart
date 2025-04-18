@@ -4,9 +4,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/views/components/progress_indicator.dart';
 
 import '../../views/components/botton_app_bar.dart';
+import '../../views/components/progress_indicator.dart';
 import '../../views/components/widget_erro.dart';
 import '../../domain/api/repository.dart';
 import '../../domain/model/professor.dart';
@@ -14,98 +14,93 @@ import '../../domain/model/professor.dart';
 class DadosProfessor with ChangeNotifier {
   late File _fotoCapaPerfil;
   late File _fotoImagemPerfil;
-  late Professor professor;
+  late Professor _professor;
 
+  Professor get professor => _professor;
   File get fotoCapaPerfil => _fotoCapaPerfil;
   File get fotoImagemPerfil => _fotoImagemPerfil;
-  File AlterarFotoCapaPerfil(File value) => _fotoCapaPerfil = value;
-  File AlterarFotoImagemPerfil(File value) => _fotoImagemPerfil = value;
+
+  void alterarFotoCapaPerfil(File value) {
+    _fotoCapaPerfil = value;
+    notifyListeners();
+  }
+
+  void alterarFotoImagemPerfil(File value) {
+    _fotoImagemPerfil = value;
+    notifyListeners();
+  }
+
+  void carregarDadosDoUsuario(Professor user) {
+    _professor = user;
+  }
 
   Future<bool> buscarDados(BuildContext context) async {
     final user = await Repository.buscarUser(context);
-    if (user == null ||
-        user.id == null ||
-        user.id.isEmpty ||
-        user.nome == null ||
-        user.nome.isEmpty ||
-        user.email == null ||
-        user.email.isEmpty ||
-        user.matricula == null ||
-        user.matricula.isEmpty) {
-      return false;
-    }
+    carregarDadosDoUsuario(user);
 
-    professor = Professor(
-        matricula: user.matricula,
-        nome: user.nome,
-        email: user.email,
-        id: user.id);
-
-    _fotoCapaPerfil = await Repository.baixarImagemCapa();
-    _fotoImagemPerfil = await Repository.baixarImagemPerfil();
+    await carregarImagens();
     notifyListeners();
+
     return true;
   }
 
-  Future<void> atualizarImagemCapaProvider(
-      BuildContext context, File imagem) async {
-    await Repository.atualizarImagemCapa(imagem, context);
-
-    _fotoCapaPerfil = imagem.absolute;
-
-    return notifyListeners();
+  Future<void> carregarImagens() async {
+    _fotoCapaPerfil = await Repository.baixarImagemCapa(_professor.id);
+    _fotoImagemPerfil = await Repository.baixarImagemPerfil(_professor.id);
   }
 
-  Future<void> atualizarImagemPerfilProvider(
-      BuildContext context, File imagem) async {
-    await Repository.atualizarImagemPerfil(imagem, context);
+  Future<void> atualizarImagemCapa(BuildContext context, File imagem) async {
+    await Repository.atualizarImagemCapa(imagem, context);
+    alterarFotoCapaPerfil(imagem);
+  }
 
-    _fotoImagemPerfil = imagem.absolute;
-    return notifyListeners();
+  Future<void> atualizarImagemPerfil(BuildContext context, File imagem) async {
+    await Repository.atualizarImagemPerfil(imagem, context);
+    alterarFotoImagemPerfil(imagem);
   }
 
   void apagarDados() {
     _fotoCapaPerfil = File('');
     _fotoImagemPerfil = File('');
-    professor = Professor(matricula: '', nome: '', email: '', id: '');
+    _professor = Professor.empty();
     notifyListeners();
   }
 
   Future<void> iniciarProvider(BuildContext context) async {
-    mostrarDialogoDeCarregmento(context);
-    final dados = DadosProfessor();
+    _mostrarDialogoDeCarregamento(context);
 
-    bool sucesso = await dados.buscarDados(context);
+    final dados = DadosProfessor();
+    final sucesso = await dados.buscarDados(context);
+
+    Navigator.of(context).pop(); // fecha o diálogo de carregamento
 
     if (sucesso) {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
-          builder: (context) => ChangeNotifierProvider.value(
+          builder: (_) => ChangeNotifierProvider.value(
             value: dados,
             child: Navigation(initialIndex: 1),
           ),
         ),
-        (route) => false,
+        (_) => false,
       );
     } else {
-      return error(context);
+      _mostrarErro(context);
     }
   }
 
-  static void error(BuildContext context) {
+  static void _mostrarErro(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) {
-        return dialogoDeErro(context, 'error');
-      },
+      builder: (_) => dialogoDeErro(context, 'Erro ao carregar dados.'),
     );
   }
 
-  static void mostrarDialogoDeCarregmento(BuildContext context) {
+  static void _mostrarDialogoDeCarregamento(BuildContext context) {
     showDialog(
       barrierDismissible: false,
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (_) => const AlertDialog(
         content: Progressindicator(tamanho: 200),
       ),
     );

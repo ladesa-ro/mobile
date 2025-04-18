@@ -1,9 +1,7 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sisgha/app/domain/model/token.dart';
 
 Future<bool> verificarTokenAtivo() async {
-  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  var token = sharedPreferences.getString("token");
-  if (token != null) {
+  if (Token.token != "") {
     return true;
   } else {
     return false;
