@@ -134,7 +134,7 @@ class _NavigationState extends State<Navigation> {
         curve: Curves.easeInOut,
         decoration: _decoretion(index),
         width: TamanhoTela.horizontal(context) * 0.13,
-        height: TamanhoTela.vertical(context) * 0.05,
+        height: TamanhoTela.vertical(context) * 0.05, //Influencia o tamanho do ícone de notificação
         child: verificarIndex(index)
             ? (iconCheio1 != null
                 ? Icon(

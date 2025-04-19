@@ -52,7 +52,7 @@ class CalendarAlunos extends StatelessWidget {
                 Spacer(),
                 SizedBox(
                   height: Tamanhos.aluturaBotoes(),
-                  width: largura * 0.15,
+                  width: largura * 0.15, //Motivo do erro de respansividade
                   child: ElevatedButton(
                       style: _estiloBotao(),
                       onPressed: () {
