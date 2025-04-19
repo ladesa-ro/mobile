@@ -6,7 +6,7 @@ import '../../core/utils/Icones.dart';
 import '../../core/utils/dias.dart';
 import '../../core/utils/estilos.dart';
 import '../../core/utils/tamanhos.dart';
-import '../../data/providers/tema.dart';
+import '../../providers/tema.dart';
 import 'dialogo_troca_de_tema.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -14,15 +14,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String mes;
   final String diaHoje;
 
-  final bool
-      profOuAluno; //se for alunos colocar trur e se  for o professor colocar false
+  final bool icones;
 
   const CustomAppBar(
       {super.key,
       required this.height,
       required this.mes,
       required this.diaHoje,
-      required this.profOuAluno});
+      required this.icones});
 
   @override
   Size get preferredSize => Size.fromHeight(height);
@@ -37,7 +36,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         padding: Tamanhos.margem(),
         child: Row(
           children: [
-            if (profOuAluno == true)
+            if (icones == true)
               IconButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -80,14 +79,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 },
                 icon: Iconify(
                   temaProvider.temaAtivo.brightness == Brightness.light
-
                       ? Icones.lua
                       : Icones.sol,
                   size: 34,
-
                   color: temaProvider.corDosIcones(),
                 )),
-            if (!profOuAluno)
+            if (!icones)
               IconButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed('/notificacao');

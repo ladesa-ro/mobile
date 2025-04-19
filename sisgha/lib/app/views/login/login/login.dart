@@ -12,7 +12,8 @@ import '../../../core/utils/imagens.dart';
 import '../../../core/utils/responsividade.dart';
 import '../../../core/utils/tamanhos.dart';
 import '../../../domain/api/repository.dart';
-import '../../../data/providers/dados_professor.dart';
+import '../../../providers/dados_professor.dart';
+import '../../components/progress_indicator.dart';
 import '../../components/widget_erro.dart';
 import 'widgets_estilos.dart';
 
@@ -133,6 +134,7 @@ class _CorpoLoginState extends State<CorpoLogin> {
   FilledButton botaoEntrar(BuildContext context) {
     return FilledButton(
       onPressed: () async {
+        _mostrarDialogoDeCarregamento(context);
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (formKey.currentState!.validate()) {
           bool deuCerto =
@@ -146,6 +148,7 @@ class _CorpoLoginState extends State<CorpoLogin> {
                 .read<DadosProfessor>()
                 .iniciarProvider(context, false);
           } else {
+            Navigator.of(context).pop();
             senhaController.clear();
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
@@ -229,5 +232,15 @@ class _CorpoLoginState extends State<CorpoLogin> {
       setState(() {});
       return null;
     }
+  }
+
+  static void _mostrarDialogoDeCarregamento(BuildContext context) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (_) => const AlertDialog(
+        content: Progressindicator(tamanho: 200),
+      ),
+    );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
-import 'package:sisgha/app/data/providers/dados_professor.dart';
+import 'package:sisgha/app/providers/dados_professor.dart';
 
 import '../../core/utils/estilos.dart';
 import '../../core/utils/imagens.dart';

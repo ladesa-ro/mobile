@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../views/components/botton_app_bar.dart';
-import '../../domain/api/repository.dart';
-import '../../domain/model/professor.dart';
+import '../views/components/botton_app_bar.dart';
+import '../domain/api/repository.dart';
+import '../domain/model/professor.dart';
 
 class DadosProfessor with ChangeNotifier {
   late File _fotoCapaPerfil;
@@ -78,7 +78,7 @@ class DadosProfessor with ChangeNotifier {
   Future<void> iniciarProvider(BuildContext context, bool verificado) async {
     final dados = DadosProfessor();
     verificado ? await dados.carregarDados() : await dados.buscarDados(context);
-
+    Navigator.of(context).pop();
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (_) => ChangeNotifierProvider<DadosProfessor>.value(
@@ -89,14 +89,4 @@ class DadosProfessor with ChangeNotifier {
       (_) => false,
     );
   }
-
-  // static void _mostrarDialogoDeCarregamento(BuildContext context) {
-  //   showDialog(
-  //     barrierDismissible: false,
-  //     context: context,
-  //     builder: (_) => const AlertDialog(
-  //       content: Progressindicator(tamanho: 200),
-  //     ),
-  //   );
-  // }
 }

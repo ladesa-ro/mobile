@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/Icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
-import 'package:sisgha/app/data/providers/tema.dart';
+import 'package:sisgha/app/providers/tema.dart';
 import 'package:sizer/sizer.dart';
 
 Widget mostrarDialogoDeTrocaDeTema(BuildContext context, String text) {

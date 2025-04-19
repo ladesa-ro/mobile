@@ -8,7 +8,6 @@ import '../../core/utils/responsividade.dart';
 import '../components/appbar.dart';
 import '../components/widgets_home/botao_mini_calendario.dart';
 
-
 class HomeAlunos extends StatelessWidget {
   const HomeAlunos({super.key});
 
@@ -20,7 +19,7 @@ class HomeAlunos extends StatelessWidget {
       height: 7.h,
       mes: DatasFormatadas.primeiroAUltimoDia,
       diaHoje: DatasFormatadas.obterDiaFormatado(),
-      profOuAluno: true,
+      icones: true,
     );
 
     double tamanho =

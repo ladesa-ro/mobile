@@ -6,7 +6,7 @@ import 'package:sisgha/app/core/utils/Icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/responsividade.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
-import 'package:sisgha/app/data/providers/escolha_horarios_alunos.dart';
+import 'package:sisgha/app/providers/escolha_horarios_alunos.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdomn_turmas.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_ano.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_curso.dart';
@@ -33,7 +33,7 @@ class _BodyAlunoState extends State<BodyAluno> {
   @override
   void initState() {
     super.initState();
-   
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final provider =
           Provider.of<EscolhaHorariosAlunos>(context, listen: false);
