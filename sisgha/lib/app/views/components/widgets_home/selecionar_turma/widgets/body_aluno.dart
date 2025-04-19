@@ -7,10 +7,10 @@ import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/responsividade.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
 import 'package:sisgha/app/data/providers/escolha_horarios_alunos.dart';
-import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdomn_turmas.dart';
-import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_ano.dart';
-import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_curso.dart';
-import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_formacao.dart';
+import 'package:sisgha/app/views/components/widgets_home/selecionar_turma/widgets/dropdomn_turmas.dart';
+import 'package:sisgha/app/views/components/widgets_home/selecionar_turma/widgets/dropdown_ano.dart';
+import 'package:sisgha/app/views/components/widgets_home/selecionar_turma/widgets/dropdown_curso.dart';
+import 'package:sisgha/app/views/components/widgets_home/selecionar_turma/widgets/dropdown_formacao.dart';
 
 class BodyAluno extends StatefulWidget {
   const BodyAluno({super.key});
@@ -30,6 +30,26 @@ class _BodyAlunoState extends State<BodyAluno> {
 
   bool abrirAno = false;
   bool abrirTurma = false;
+  @override
+  void initState() {
+    super.initState();
+   
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final provider =
+          Provider.of<EscolhaHorariosAlunos>(context, listen: false);
+      provider.selecionarFormacao(null);
+      provider.selecionarCurso(null);
+      provider.selecionarAno(null);
+      provider.selecionarTurma(null);
+
+      setState(() {
+        abrirCurso = false;
+        abrirAno = false;
+        abrirTurma = false;
+      });
+      debugPrint('Provider resetado com sucesso');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +155,6 @@ class _BodyAlunoState extends State<BodyAluno> {
         borderRadius: BorderRadius.circular(8),
       ),
       minimumSize: Size(
-        
         Tamanhos.larguraGeral(),
         Tamanhos.aluturaBotoes(),
       ),

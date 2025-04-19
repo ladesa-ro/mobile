@@ -41,4 +41,13 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
     turmaSelecionada = value;
     notifyListeners();
   }
+
+  void resetarTudo() {
+  formacaoSelecionada = null;
+  cursoSelecionado = null;
+  anoSelecionado = null;
+  turmaSelecionada = null;
+  notifyListeners();
+}
+
 }

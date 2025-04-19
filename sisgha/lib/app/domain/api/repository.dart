@@ -1,148 +1,59 @@
-// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:sisgha/app/data/armazenamento/shared_preferences.dart';
-import 'package:sisgha/app/domain/model/cursos.dart';
-import 'package:sisgha/app/domain/model/nivel_formacao.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../views/components/widget_erro.dart';
 import '../model/professor.dart';
+import '../model/cursos.dart';
+import '../model/nivel_formacao.dart';
 import '../../data/providers/dados_professor.dart';
 
 class Repository {
   static final String _api = "https://dev.ladesa.com.br/api/v1";
-  static final Armazenamento sharedPreferences = Armazenamento();
 
-  static void erro(BuildContext context, String text) {
+  // ---------------------------------------------------- VERIFICADORES0 ------------------------------------------------------------------//
+
+  static bool verificarStatusCode(int statusCode) =>
+      statusCode >= 200 && statusCode <= 299;
+
+  static void _mostrarErro(BuildContext context, int statusCode) async {
+    if (statusCode < 200) {
+      return _erro(context, 'Erro no código');
+    } else if (statusCode < 400) {
+      return _erro(context, 'Erro no cliente');
+    } else if (statusCode < 500) {
+      return await _recarregarToken(context);
+    } else {
+      return _erro(context, 'Erro no servidor');
+    }
+  }
+
+  static void _erro(BuildContext context, String texto) {
     showDialog(
       context: context,
-      builder: (BuildContext context) {
-        return dialogoDeErro(context, 'erro no codigo');
-      },
+      builder: (context) => dialogoDeErro(context, texto),
     );
   }
 
-  static bool verificarStatusCode(int statusCode) {
-    if (statusCode >= 200 && statusCode <= 299) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  static void recarregarToken(
-    BuildContext context,
-  ) async {
+  static Future<void> _recarregarToken(BuildContext context) async {
     await refreshToken(context);
   }
 
-  static void mostrarErro(BuildContext context, int statusCode) {
-    if (statusCode <= 199) {
-      return erro(context, 'erro no codigo');
-    }
-    if (statusCode >= 300 && statusCode <= 399) {
-      return erro(context, 'erro no cliente');
-    }
-    if (statusCode >= 400 && statusCode <= 499) {
-      return recarregarToken(context);
-    }
-    if (statusCode >= 500) {
-      return erro(context, 'erro no servidor');
-    } else {
-      return erro(context, 'algo de errado nao esta certo');
-    }
-  }
+  // -------------------------------------------------- LOGIN / TOKEN -------------------------------------------------------------//
 
-  // ----------------------------------------------------------  ATUALIZAR FOTO DE PERFIL DO USUARIO -----------------------------------------------------------------------//
-  static Future<void> atualizarImagemPerfil(
-      File imagemPerfil, BuildContext context) async {
-    var url = Uri.parse("$_api/usuarios/${sharedPreferences.id}/imagem/perfil");
-
-    var request = http.MultipartRequest('PUT', url)
-      ..headers['Authorization'] = 'Bearer ${sharedPreferences.token}'
-      ..files.add(await http.MultipartFile.fromPath(
-        'file',
-        imagemPerfil.path,
-      ));
-
-    var response = await request.send();
-
-    if (verificarStatusCode(response.statusCode) == false) {
-      mostrarErro(context, response.statusCode);
-    }
-    return;
-  }
-
-  static Future<File> baixarImagemPerfil() async {
-    final url =
-        Uri.parse("$_api/usuarios/${sharedPreferences.id}/imagem/perfil");
-
-    var request = await http.get(url);
-    if (verificarStatusCode(request.statusCode)) {
-      final tempDir = await getTemporaryDirectory();
-      final filePath = '${tempDir.path}/downloaded_image_perfil.png';
-
-      // Salva os bytes no arquivo
-      final file = File(filePath);
-      await file.writeAsBytes(request.bodyBytes);
-      sharedPreferences.salvarTamanhoImagemPerfil(request.contentLength ?? 0);
-      sharedPreferences.salvarLocalImagemPerfil(filePath);
-
-      return file;
-    } else {
-      throw Exception();
-    }
-  }
-
-  // ------------------------------------------------------------------- ATUALIZAR A IMAGEM DE FUNDO DO USUARIO -------------------------------------------------------------//
-  static Future<void> atualizarImagemCapa(
-      File imagemCapa, BuildContext context) async {
-    var url = Uri.parse("$_api/usuarios/${sharedPreferences.id}/imagem/capa");
-
-    var request = http.MultipartRequest('PUT', url)
-      ..headers['Authorization'] = 'Bearer ${sharedPreferences.token}'
-      ..files.add(await http.MultipartFile.fromPath(
-        'file',
-        imagemCapa.path,
-      ));
-
-    var response = await request.send();
-
-    if (verificarStatusCode(response.statusCode) == false) {
-      mostrarErro(context, response.statusCode);
-    }
-    return;
-  }
-
-  static Future<File> baixarImagemCapa() async {
-    final url = Uri.parse("$_api/usuarios/${sharedPreferences.id}/imagem/capa");
-
-    var request = await http.get(url);
-    if (verificarStatusCode(request.statusCode)) {
-      final tempDir = await getTemporaryDirectory();
-      final filePath = '${tempDir.path}/downloaded_image_capa.png';
-
-      final file = File(filePath);
-      await file.writeAsBytes(request.bodyBytes);
-      sharedPreferences.salvarTamanhoImagemCapa(request.contentLength ?? 0);
-      sharedPreferences.salvarLocalImagemCapa(file.absolute.path);
-      return file;
-    } else {
-      throw Exception();
-    }
-  }
-
-  //-------------------------------------------------------------------- BUSCAR O TOKEN DO USUARIO ------------------------------------------------------------------------------------------//
   static Future<bool> login(TextEditingController matriculaController,
       TextEditingController senhaController) async {
-    var url = Uri.parse("$_api/autenticacao/login");
-    var resposta = await http.post(url, body: {
+    SharedPreferences armazenamento = await SharedPreferences.getInstance();
+
+    final url = Uri.parse("$_api/autenticacao/login");
+    final resposta = await http.post(url, body: {
       "matriculaSiape": matriculaController.text,
       "senha": senhaController.text,
     });
@@ -150,110 +61,162 @@ class Repository {
     if (verificarStatusCode(resposta.statusCode)) {
       final body = jsonDecode(resposta.body);
 
-      await sharedPreferences.salvarToken(body['access_token']);
-      await sharedPreferences.salvarRefreshToken(body['refresh_token']);
+      armazenamento.setString('token', body['access_token']);
+      armazenamento.setString('refreshToken', body['refresh_token']);
+
       return true;
-    } else if (resposta.statusCode == 403) {
-      false;
-    } else {
-      return false;
     }
+
     return false;
   }
 
-  // -------------------------------------------------------------------------- FAZER REQUISIÇÃO NA API PRA BUSCAR O USUARIO -------------------------------------------------------------------------------------//
-  static Future<Professor> buscarUser(BuildContext context) async {
-    var url = Uri.parse("$_api/autenticacao/quem-sou-eu");
-
-    var response = await http.get(url, headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': 'Bearer ${sharedPreferences.token}',
-    });
-
-    if (verificarStatusCode(response.statusCode)) {
-      var jsondecode = json.decode(response.body)["usuario"];
-
-      Professor user = Professor.fromJson(jsondecode);
-
-      await sharedPreferences.salvarId(user.id);
-
-      return user;
-    } else {
-      mostrarErro(context, response.statusCode);
-      return buscarUser(context);
-    }
-  }
-
-  // ---------------------------------------------------------- RECARREGAR TOKEM DE ACESSO DO USUARIO CASO TENHA EXPIRADO ---------------------------------------------------------------------//
   static Future<bool> refreshToken(BuildContext context) async {
-    var url = Uri.parse("$_api/autenticacao/login/refresh");
-    var response = await http.post(url, body: {
-      "refreshToken": sharedPreferences.refreshToken,
+    final armazenamento = await SharedPreferences.getInstance();
+    final url = Uri.parse("$_api/autenticacao/login/refresh");
+    final response = await http.post(url, body: {
+      "refreshToken": armazenamento.getString('refreshToken'),
     });
 
     if (verificarStatusCode(response.statusCode)) {
       final body = jsonDecode(response.body);
-      await sharedPreferences.salvarToken(body["access_token"]);
+      armazenamento.setString('token', body["access_token"]);
       return true;
-    } else {
-      mostrarErro(context, response.statusCode);
-      return refreshToken(context);
     }
+
+    _mostrarErro(context, response.statusCode);
+    return refreshToken(context);
   }
 
-  // ---------------------------------------------------- APAGAR DADOS SALVOS ----------------------------------------------------------------------------------//
+  // --------------------------------------------------- USUÁRIO ------------------------------------------------------------------//
+  static Future<Professor> buscarUser(BuildContext context) async {
+    SharedPreferences armazenamento = await SharedPreferences.getInstance();
+    final url = Uri.parse("$_api/autenticacao/quem-sou-eu");
+
+    final response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${armazenamento.getString('token')}'
+    });
+
+    if (verificarStatusCode(response.statusCode)) {
+      final data = json.decode(response.body)["usuario"];
+
+      final user = Professor.fromJson(data);
+
+      armazenamento.setString('id', user.id);
+      armazenamento.setString('email', user.email);
+      armazenamento.setString('matricula', user.matricula);
+      armazenamento.setString('nome', user.nome);
+      return user;
+    }
+
+    _mostrarErro(context, response.statusCode);
+    return buscarUser(context);
+  }
+
   static Future<bool> sair(BuildContext context) async {
-    sharedPreferences.apagarDados();
-    DadosProfessor dados = DadosProfessor();
+    final armazenamento = await SharedPreferences.getInstance();
+    await armazenamento.clear();
+    final dados = DadosProfessor();
     dados.apagarDados();
     return true;
   }
 
-  // ----------------------------------------------------------------------
-  static Future<List<NiveisFormacao>> buscarNiveisDeFormacao() async {
-    var url = Uri.parse("$_api/niveis-formacoes");
-    var response = await http.get(url, headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    });
-    if (verificarStatusCode(response.statusCode)) {
-      final bodyDecode = jsonDecode(response.body)["data"];
+  // --------------------------------------------------- IMAGENS ------------------------------------------------------------------//
+  static Future<void> atualizarImagemPerfil(
+      File imagemPerfil, BuildContext context) async {
+    SharedPreferences armazenamento = await SharedPreferences.getInstance();
+    final id = DadosProfessor().professor.id;
+    final url = Uri.parse("$_api/usuarios/$id/imagem/perfil");
 
-      var listaFormacoes = <NiveisFormacao>[];
+    final request = http.MultipartRequest('PUT', url)
+      ..headers['Authorization'] = 'Bearer ${armazenamento.getString('token')}'
+      ..files.add(await http.MultipartFile.fromPath('file', imagemPerfil.path));
 
-      for (var item in bodyDecode) {
-        NiveisFormacao niveisFormacao = NiveisFormacao.fromJson(item);
-
-        listaFormacoes.add(niveisFormacao);
-      }
-
-      return listaFormacoes;
-    } else {
-      return buscarNiveisDeFormacao();
+    final response = await request.send();
+    if (!verificarStatusCode(response.statusCode)) {
+      _mostrarErro(context, response.statusCode);
     }
   }
 
-  static Future<List<Cursos>> buscarCursos() async {
-    var url = Uri.parse("$_api/cursos");
-    var response = await http.get(url, headers: {
+  static Future<void> atualizarImagemCapa(
+      File imagemCapa, BuildContext context) async {
+    SharedPreferences armazenamento = await SharedPreferences.getInstance();
+    final id = DadosProfessor().professor.id;
+    final url = Uri.parse("$_api/usuarios/$id/imagem/capa");
+
+    final request = http.MultipartRequest('PUT', url)
+      ..headers['Authorization'] = 'Bearer ${armazenamento.getString('token')}'
+      ..files.add(await http.MultipartFile.fromPath('file', imagemCapa.path));
+
+    final response = await request.send();
+    if (!verificarStatusCode(response.statusCode)) {
+      _mostrarErro(context, response.statusCode);
+    }
+  }
+
+  static Future<File> baixarImagemPerfil(String id) async {
+    final url = Uri.parse("$_api/usuarios/$id/imagem/perfil");
+
+    final response = await http.get(url);
+    if (verificarStatusCode(response.statusCode)) {
+      return _salvarImagemTemporaria(
+          response.bodyBytes, 'downloaded_image_perfil.png');
+    }
+
+    throw Exception("Erro ao baixar imagem de perfil");
+  }
+
+  static Future<File> baixarImagemCapa(String id) async {
+    final url = Uri.parse("$_api/usuarios/$id/imagem/capa");
+
+    final response = await http.get(url);
+    if (verificarStatusCode(response.statusCode)) {
+      return _salvarImagemTemporaria(
+          response.bodyBytes, 'downloaded_image_capa.png');
+    }
+
+    throw Exception("Erro ao baixar imagem de capa");
+  }
+
+  static Future<File> _salvarImagemTemporaria(
+      List<int> bytes, String fileName) async {
+    final tempDir = await getTemporaryDirectory();
+    final file = File('${tempDir.path}/$fileName');
+    await file.writeAsBytes(bytes);
+    return file;
+  }
+
+  // ----------------------------------------------- LISTAGENS (Cursos / Nível) ---------------------------------------------------//
+  static Future<List<NiveisFormacao>> buscarNiveisDeFormacao() async {
+    final url = Uri.parse("$_api/niveis-formacoes");
+    final response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     });
+
     if (verificarStatusCode(response.statusCode)) {
-      final bodyDecode = jsonDecode(response.body)["data"];
-
-      var listaCursos = <Cursos>[];
-
-      for (var item in bodyDecode) {
-        Cursos cursos = Cursos.fromJson(item);
-
-        listaCursos.add(cursos);
-      }
-
-      return listaCursos;
-    } else {
-      return buscarCursos();
+      final data = jsonDecode(response.body)["data"];
+      return data
+          .map<NiveisFormacao>((e) => NiveisFormacao.fromJson(e))
+          .toList();
     }
+
+    throw Exception();
+  }
+
+  static Future<List<Cursos>> buscarCursos() async {
+    final url = Uri.parse("$_api/cursos");
+    final response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+
+    if (verificarStatusCode(response.statusCode)) {
+      final data = jsonDecode(response.body)["data"];
+      return data.map<Cursos>((e) => Cursos.fromJson(e)).toList();
+    }
+
+    throw Exception();
   }
 }

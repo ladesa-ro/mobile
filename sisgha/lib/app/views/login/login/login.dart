@@ -142,7 +142,9 @@ class _CorpoLoginState extends State<CorpoLogin> {
             currentFocus.unfocus();
           }
           if (deuCerto) {
-            await context.read<DadosProfessor>().iniciarProvider(context);
+            await context
+                .read<DadosProfessor>()
+                .iniciarProvider(context, false);
           } else {
             senhaController.clear();
             ScaffoldMessenger.of(context).showSnackBar(snackBar);

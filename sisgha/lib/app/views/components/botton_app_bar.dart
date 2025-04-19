@@ -134,7 +134,7 @@ class _NavigationState extends State<Navigation> {
         curve: Curves.easeInOut,
         decoration: _decoretion(index),
         width: TamanhoTela.horizontal(context) * 0.13,
-        height: TamanhoTela.vertical(context) * 0.05, //Influencia o tamanho do ícone de notificação
+        height: TamanhoTela.vertical(context) * 0.05,
         child: verificarIndex(index)
             ? (iconCheio1 != null
                 ? Icon(
@@ -168,7 +168,7 @@ class _NavigationState extends State<Navigation> {
 
   BoxDecoration _decoretion(int index) {
     return BoxDecoration(
-      color: _selectedIndex == index ? CoresClaras.branco : null,
+      color: _selectedIndex == index ? CoresClaras.verdeClaro : null,
       borderRadius:
           BorderRadius.circular(TamanhoTela.horizontal(context) * 0.03),
     );
