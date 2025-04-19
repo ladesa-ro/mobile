@@ -9,7 +9,7 @@ import 'package:sizer/sizer.dart';
 import '../../core/utils/Icones.dart';
 import '../../core/utils/colors.dart';
 import '../../core/utils/responsividade.dart';
-import '../../data/providers/escolha_menu_lateral.dart';
+import '../../providers/escolha_menu_lateral.dart';
 import '../../domain/logic/verificar_token_ativo.dart';
 import '../professor/calendario/calendario.dart';
 import '../professor/home/home.dart';
@@ -138,13 +138,13 @@ class _NavigationState extends State<Navigation> {
         child: iconVazio1 != null
             ? Icon(
                 iconVazio1,
-                color: CoresClaras.branco, 
+                color: CoresClaras.branco,
                 size: 3.h,
               )
             : Iconify(
                 iconVazio!,
                 size: 3.h,
-                color: CoresClaras.branco, 
+                color: CoresClaras.branco,
               ),
       ),
     );

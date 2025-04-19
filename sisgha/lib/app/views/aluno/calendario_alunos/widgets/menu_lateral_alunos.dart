@@ -8,7 +8,7 @@ import '../../../../core/utils/Icones.dart';
 import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/estilos.dart';
 import '../../../../core/utils/responsividade.dart';
-import '../../../../data/providers/escolha_menu_lateral.dart';
+import '../../../../providers/escolha_menu_lateral.dart';
 
 class MenuLateralAlunos extends StatefulWidget {
   const MenuLateralAlunos({super.key});

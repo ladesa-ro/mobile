@@ -20,12 +20,11 @@ class CalendarioProfessor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //deixei como false pois aparecia a seta de voltar na appbar do calendário
     var appBar = CustomAppBar(
       height: 7.h,
       mes: '${DatasFormatadas.mesAtualFormatado} - ${DatasFormatadas.anoAtual}',
       diaHoje: "Calendário Parcial",
-      profOuAluno: false,
+      icones: false,
     );
 
     double tamanho =

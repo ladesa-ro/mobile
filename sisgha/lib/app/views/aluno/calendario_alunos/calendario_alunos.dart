@@ -25,7 +25,7 @@ class CalendarAlunos extends StatelessWidget {
       height: 7.h,
       mes: '${DatasFormatadas.mesAtualFormatado} - ${DatasFormatadas.anoAtual}',
       diaHoje: "Calendário Parcial",
-      profOuAluno: false,
+      icones: false,
     );
 
     double tamanho =

@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/domain/logic/verificar_dados_armazenados.dart';
 
-import '../../data/providers/dados_professor.dart';
-import '../../data/providers/escolha_horarios_alunos.dart';
+import '../../providers/dados_professor.dart';
+import '../../providers/escolha_horarios_alunos.dart';
 import '../components/progress_indicator.dart';
+
 import 'login/login.dart';
 
 class BoasVindasPage extends StatefulWidget {
@@ -26,8 +27,6 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
   Future<void> _iniciar() async {
     await context.read<EscolhaHorariosAlunos>().pucharOpcoes();
 
-    print(await verificarDadosBaixados());
-    print('------------------------------------');
     if (await verificarDadosBaixados()) {
       await context.read<DadosProfessor>().iniciarProvider(context, true);
     } else {
@@ -39,8 +38,11 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Progressindicator(tamanho: 200)),
+    return Scaffold(
+      body: Center(
+          child: Progressindicator(
+        tamanho: 200,
+      )),
     );
   }
 }
