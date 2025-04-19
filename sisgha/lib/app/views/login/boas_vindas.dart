@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/app/domain/logic/verificar_dados_armazenados.dart';
 
 import '../../data/providers/dados_professor.dart';
 import '../../data/providers/escolha_horarios_alunos.dart';
-import '../../domain/model/token.dart';
 import '../components/progress_indicator.dart';
 import 'login/login.dart';
 
@@ -26,8 +26,10 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
   Future<void> _iniciar() async {
     await context.read<EscolhaHorariosAlunos>().pucharOpcoes();
 
-    if (Token.token.isNotEmpty) {
-      await context.read<DadosProfessor>().iniciarProvider(context);
+    print(await verificarDadosBaixados());
+    print('------------------------------------');
+    if (await verificarDadosBaixados()) {
+      await context.read<DadosProfessor>().iniciarProvider(context, true);
     } else {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) => const PaginaLogin()),

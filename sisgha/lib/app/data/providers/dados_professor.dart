@@ -4,10 +4,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../views/components/botton_app_bar.dart';
-import '../../views/components/progress_indicator.dart';
-import '../../views/components/widget_erro.dart';
 import '../../domain/api/repository.dart';
 import '../../domain/model/professor.dart';
 
@@ -34,14 +33,24 @@ class DadosProfessor with ChangeNotifier {
     _professor = user;
   }
 
-  Future<bool> buscarDados(BuildContext context) async {
+  Future buscarDados(BuildContext context) async {
     final user = await Repository.buscarUser(context);
     carregarDadosDoUsuario(user);
 
     await carregarImagens();
     notifyListeners();
+  }
 
-    return true;
+  Future carregarDados() async {
+    SharedPreferences armazenamento = await SharedPreferences.getInstance();
+    final user = Professor(
+        matricula: armazenamento.getString("matricula")!,
+        nome: armazenamento.getString("nome")!,
+        email: armazenamento.getString("email")!,
+        id: armazenamento.getString("id")!);
+    carregarDadosDoUsuario(user);
+    await carregarImagens();
+    notifyListeners();
   }
 
   Future<void> carregarImagens() async {
@@ -66,43 +75,28 @@ class DadosProfessor with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> iniciarProvider(BuildContext context) async {
-    _mostrarDialogoDeCarregamento(context);
-
+  Future<void> iniciarProvider(BuildContext context, bool verificado) async {
     final dados = DadosProfessor();
-    final sucesso = await dados.buscarDados(context);
+    verificado ? await dados.carregarDados() : await dados.buscarDados(context);
 
-    Navigator.of(context).pop(); // fecha o diálogo de carregamento
-
-    if (sucesso) {
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(
-          builder: (_) => ChangeNotifierProvider.value(
-            value: dados,
-            child: Navigation(initialIndex: 1),
-          ),
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(
+        builder: (_) => ChangeNotifierProvider<DadosProfessor>.value(
+          value: dados,
+          child: Navigation(initialIndex: 1),
         ),
-        (_) => false,
-      );
-    } else {
-      _mostrarErro(context);
-    }
-  }
-
-  static void _mostrarErro(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) => dialogoDeErro(context, 'Erro ao carregar dados.'),
-    );
-  }
-
-  static void _mostrarDialogoDeCarregamento(BuildContext context) {
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (_) => const AlertDialog(
-        content: Progressindicator(tamanho: 200),
       ),
+      (_) => false,
     );
   }
+
+  // static void _mostrarDialogoDeCarregamento(BuildContext context) {
+  //   showDialog(
+  //     barrierDismissible: false,
+  //     context: context,
+  //     builder: (_) => const AlertDialog(
+  //       content: Progressindicator(tamanho: 200),
+  //     ),
+  //   );
+  // }
 }

@@ -7,23 +7,18 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../views/components/widget_erro.dart';
 import '../model/professor.dart';
 import '../model/cursos.dart';
 import '../model/nivel_formacao.dart';
-import '../model/token.dart';
 import '../../data/providers/dados_professor.dart';
 
 class Repository {
   static final String _api = "https://dev.ladesa.com.br/api/v1";
 
-  // ---------------------------------------------------- HEADERS ------------------------------------------------------------------//
-  static Map<String, String> _defaultHeaders() => {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ${Token.token}',
-      };
+  // ---------------------------------------------------- VERIFICADORES0 ------------------------------------------------------------------//
 
   static bool verificarStatusCode(int statusCode) =>
       statusCode >= 200 && statusCode <= 299;
@@ -52,8 +47,11 @@ class Repository {
   }
 
   // -------------------------------------------------- LOGIN / TOKEN -------------------------------------------------------------//
+
   static Future<bool> login(TextEditingController matriculaController,
       TextEditingController senhaController) async {
+    SharedPreferences armazenamento = await SharedPreferences.getInstance();
+
     final url = Uri.parse("$_api/autenticacao/login");
     final resposta = await http.post(url, body: {
       "matriculaSiape": matriculaController.text,
@@ -62,8 +60,10 @@ class Repository {
 
     if (verificarStatusCode(resposta.statusCode)) {
       final body = jsonDecode(resposta.body);
-      Token.setToken(body['access_token']);
-      Token.setRefreshToken(body['refresh_token']);
+
+      armazenamento.setString('token', body['access_token']);
+      armazenamento.setString('refreshToken', body['refresh_token']);
+
       return true;
     }
 
@@ -71,14 +71,15 @@ class Repository {
   }
 
   static Future<bool> refreshToken(BuildContext context) async {
+    final armazenamento = await SharedPreferences.getInstance();
     final url = Uri.parse("$_api/autenticacao/login/refresh");
     final response = await http.post(url, body: {
-      "refreshToken": Token.refreshToken,
+      "refreshToken": armazenamento.getString('refreshToken'),
     });
 
     if (verificarStatusCode(response.statusCode)) {
       final body = jsonDecode(response.body);
-      Token.setToken(body["access_token"]);
+      armazenamento.setString('token', body["access_token"]);
       return true;
     }
 
@@ -88,13 +89,25 @@ class Repository {
 
   // --------------------------------------------------- USUÁRIO ------------------------------------------------------------------//
   static Future<Professor> buscarUser(BuildContext context) async {
+    SharedPreferences armazenamento = await SharedPreferences.getInstance();
     final url = Uri.parse("$_api/autenticacao/quem-sou-eu");
 
-    final response = await http.get(url, headers: _defaultHeaders());
+    final response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ${armazenamento.getString('token')}'
+    });
 
     if (verificarStatusCode(response.statusCode)) {
       final data = json.decode(response.body)["usuario"];
-      return Professor.fromJson(data);
+
+      final user = Professor.fromJson(data);
+
+      armazenamento.setString('id', user.id);
+      armazenamento.setString('email', user.email);
+      armazenamento.setString('matricula', user.matricula);
+      armazenamento.setString('nome', user.nome);
+      return user;
     }
 
     _mostrarErro(context, response.statusCode);
@@ -102,6 +115,8 @@ class Repository {
   }
 
   static Future<bool> sair(BuildContext context) async {
+    final armazenamento = await SharedPreferences.getInstance();
+    await armazenamento.clear();
     final dados = DadosProfessor();
     dados.apagarDados();
     return true;
@@ -110,11 +125,12 @@ class Repository {
   // --------------------------------------------------- IMAGENS ------------------------------------------------------------------//
   static Future<void> atualizarImagemPerfil(
       File imagemPerfil, BuildContext context) async {
+    SharedPreferences armazenamento = await SharedPreferences.getInstance();
     final id = DadosProfessor().professor.id;
     final url = Uri.parse("$_api/usuarios/$id/imagem/perfil");
 
     final request = http.MultipartRequest('PUT', url)
-      ..headers['Authorization'] = 'Bearer ${Token.token}'
+      ..headers['Authorization'] = 'Bearer ${armazenamento.getString('token')}'
       ..files.add(await http.MultipartFile.fromPath('file', imagemPerfil.path));
 
     final response = await request.send();
@@ -125,11 +141,12 @@ class Repository {
 
   static Future<void> atualizarImagemCapa(
       File imagemCapa, BuildContext context) async {
+    SharedPreferences armazenamento = await SharedPreferences.getInstance();
     final id = DadosProfessor().professor.id;
     final url = Uri.parse("$_api/usuarios/$id/imagem/capa");
 
     final request = http.MultipartRequest('PUT', url)
-      ..headers['Authorization'] = 'Bearer ${Token.token}'
+      ..headers['Authorization'] = 'Bearer ${armazenamento.getString('token')}'
       ..files.add(await http.MultipartFile.fromPath('file', imagemCapa.path));
 
     final response = await request.send();
@@ -173,7 +190,10 @@ class Repository {
   // ----------------------------------------------- LISTAGENS (Cursos / Nível) ---------------------------------------------------//
   static Future<List<NiveisFormacao>> buscarNiveisDeFormacao() async {
     final url = Uri.parse("$_api/niveis-formacoes");
-    final response = await http.get(url, headers: _defaultHeaders());
+    final response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
 
     if (verificarStatusCode(response.statusCode)) {
       final data = jsonDecode(response.body)["data"];
@@ -182,18 +202,21 @@ class Repository {
           .toList();
     }
 
-    return buscarNiveisDeFormacao();
+    throw Exception();
   }
 
   static Future<List<Cursos>> buscarCursos() async {
     final url = Uri.parse("$_api/cursos");
-    final response = await http.get(url, headers: _defaultHeaders());
+    final response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
 
     if (verificarStatusCode(response.statusCode)) {
       final data = jsonDecode(response.body)["data"];
       return data.map<Cursos>((e) => Cursos.fromJson(e)).toList();
     }
 
-    return buscarCursos();
+    throw Exception();
   }
 }
