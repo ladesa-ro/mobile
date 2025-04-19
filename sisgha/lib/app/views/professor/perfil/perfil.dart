@@ -79,8 +79,8 @@ class _PerfilState extends State<Perfil> {
                     ),
                     onPressed: () => bottomSheat(
                         context,
-                        (File imagem) => provider.atualizarImagemCapaProvider(
-                            context, imagem)),
+                        (File imagem) =>
+                            provider.atualizarImagemCapa(context, imagem)),
                   ),
                 ),
                 // Avatar
@@ -90,7 +90,7 @@ class _PerfilState extends State<Perfil> {
                     context,
                     provider.fotoImagemPerfil,
                     (File imagem) =>
-                        provider.atualizarImagemPerfilProvider(context, imagem),
+                        provider.atualizarImagemPerfil(context, imagem),
                   ),
                 ),
               ],

@@ -1,14 +1,13 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/app/domain/logic/verificar_dados_armazenados.dart';
 
-import '../../data/armazenamento/shared_preferences.dart';
 import '../../data/providers/dados_professor.dart';
 import '../../data/providers/escolha_horarios_alunos.dart';
-import 'login/login.dart';
 import '../components/progress_indicator.dart';
+import 'login/login.dart';
 
 class BoasVindasPage extends StatefulWidget {
   const BoasVindasPage({super.key});
@@ -21,32 +20,20 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
   @override
   void initState() {
     super.initState();
-    iniciarApp();
+    _iniciar();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  Future<void> _iniciar() async {
+    await context.read<EscolhaHorariosAlunos>().pucharOpcoes();
 
-  Future<void> iniciarApp() async {
-    if (mounted) {
-      await context.read<EscolhaHorariosAlunos>().pucharOpcoes();
-    }
-
-    await Armazenamento.iniciar();
-    bool tokenAtivo = await verificarToken();
-
-    if (tokenAtivo) {
-      if (mounted) {
-        await context.read<DadosProfessor>().iniciarProvider(context);
-      }
+    print(await verificarDadosBaixados());
+    print('------------------------------------');
+    if (await verificarDadosBaixados()) {
+      await context.read<DadosProfessor>().iniciarProvider(context, true);
     } else {
-      if (mounted) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const PaginaLogin()),
-        );
-      }
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => const PaginaLogin()),
+      );
     }
   }
 
@@ -55,13 +42,5 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
     return const Scaffold(
       body: Center(child: Progressindicator(tamanho: 200)),
     );
-  }
-}
-
-Future<bool> verificarToken() async {
-  if (Armazenamento().token == "") {
-    return false;
-  } else {
-    return true;
   }
 }
