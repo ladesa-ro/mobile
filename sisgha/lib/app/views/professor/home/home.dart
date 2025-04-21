@@ -20,7 +20,7 @@ class Home extends StatelessWidget {
       height: 7.h,
       mes: DatasFormatadas.primeiroAUltimoDia,
       diaHoje: DatasFormatadas.obterDiaFormatado(),
-      profOuAluno: false,
+      icones: false,
     );
 
     double tamanho =

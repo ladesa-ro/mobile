@@ -5,7 +5,7 @@ import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/responsividade.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
-import 'package:sisgha/app/data/providers/escolha_horarios_alunos.dart';
+import 'package:sisgha/app/providers/escolha_horarios_alunos.dart';
 
 class DropdownAno extends StatefulWidget {
   final double direita;
@@ -95,8 +95,10 @@ class _DropdownAlunoState extends State<DropdownAno> {
                         fontSize: TamanhoTela.horizontal(context) * 0.04,
                         fontWeight: FontWeight.w600),
                   ),
-                   Transform.rotate(
-                    angle: isExpanded ? 3.14 : 0, // gira 180° pq n achei o msm icon com seta pra cima ai a solução mais simples foi gira ela 
+                  Transform.rotate(
+                    angle: isExpanded
+                        ? 3.14
+                        : 0, // gira 180° pq n achei o msm icon com seta pra cima ai a solução mais simples foi gira ela
                     child: Iconify(
                       Icones.SetaBaixo,
                       color: selectedValue != null

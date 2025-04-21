@@ -13,7 +13,7 @@ import '../../views/components/widget_erro.dart';
 import '../model/professor.dart';
 import '../model/cursos.dart';
 import '../model/nivel_formacao.dart';
-import '../../data/providers/dados_professor.dart';
+import '../../providers/dados_professor.dart';
 
 class Repository {
   static final String _api = "https://dev.ladesa.com.br/api/v1";
