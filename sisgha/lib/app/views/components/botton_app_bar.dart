@@ -135,17 +135,29 @@ class _NavigationState extends State<Navigation> {
         decoration: _decoretion(index),
         width: TamanhoTela.horizontal(context) * 0.13,
         height: TamanhoTela.vertical(context) * 0.05,
-        child: iconVazio1 != null
-            ? Icon(
-                iconVazio1,
-                color: CoresClaras.branco,
-                size: 3.h,
-              )
-            : Iconify(
-                iconVazio!,
-                size: 3.h,
-                color: CoresClaras.branco,
-              ),
+        child: verificarIndex(index)
+            ? (iconCheio1 != null
+                ? Icon(
+                    iconCheio1,
+                    color: CoresClaras.verdePrincipal,
+                    size: 3.h,
+                  )
+                : Iconify(
+                    iconCheio!,
+                    size: 3.h,
+                    color: CoresClaras.verdePrincipal,
+                  ))
+            : (iconVazio1 != null
+                ? Icon(
+                    iconVazio1,
+                    color: CoresClaras.branco,
+                    size: 3.h,
+                  )
+                : Iconify(
+                    iconVazio!,
+                    size: 3.h,
+                    color: CoresClaras.branco,
+                  )),
       ),
     );
   }
