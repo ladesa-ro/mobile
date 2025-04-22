@@ -5,13 +5,13 @@ import 'package:sizer/sizer.dart';
 import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
-import '../../../core/utils/tamanhos.dart';
+import '../../../core/utils/padroes.dart';
 import '../calendario.dart';
 
 Widget botaoMiniCalendario(BuildContext context) {
   DateTime now = DateTime.now();
   return ElevatedButton(
-    style: Tamanhos.estiloBotao(),
+    style: Padroes.estiloBotao(),
     onPressed: () {
       showDialog(
         context: context,

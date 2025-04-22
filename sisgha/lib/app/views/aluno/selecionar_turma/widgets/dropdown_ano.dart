@@ -3,8 +3,8 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/core/utils/responsividade.dart';
-import 'package:sisgha/app/core/utils/tamanhos.dart';
+
+import 'package:sisgha/app/core/utils/padroes.dart';
 import 'package:sisgha/app/providers/escolha_horarios_alunos.dart';
 
 class DropdownAno extends StatefulWidget {
@@ -63,7 +63,7 @@ class _DropdownAlunoState extends State<DropdownAno> {
       },
       child: AnimatedContainer(
         duration: const Duration(microseconds: 300),
-        width: TamanhoTela.horizontal(context) * 0.9,
+        width: Padroes.larguraGeral() * 0.9,
         decoration: BoxDecoration(
           border: Border.all(
             color: selectedValue != null
@@ -73,10 +73,10 @@ class _DropdownAlunoState extends State<DropdownAno> {
           borderRadius: BorderRadius.circular(10.0),
         ),
         padding: EdgeInsets.fromLTRB(
-          TamanhoTela.horizontal(context) * 0.03,
-          TamanhoTela.vertical(context) * 0.01,
-          TamanhoTela.horizontal(context) * 0.03,
-          TamanhoTela.vertical(context) * 0.01,
+          Padroes.larguraGeral() * 0.03,
+          Padroes.alturaGeral() * 0.01,
+          Padroes.larguraGeral() * 0.03,
+          Padroes.alturaGeral() * 0.01,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,7 +92,7 @@ class _DropdownAlunoState extends State<DropdownAno> {
                         color: selectedValue != null
                             ? CoresClaras.pretoTexto
                             : CoresClaras.cinza,
-                        fontSize: TamanhoTela.horizontal(context) * 0.04,
+                        fontSize: Padroes.larguraGeral() * 0.04,
                         fontWeight: FontWeight.w600),
                   ),
                   Transform.rotate(
@@ -112,11 +112,11 @@ class _DropdownAlunoState extends State<DropdownAno> {
             ),
             AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              height: isExpanded ? TamanhoTela.vertical(context) * 0.06 : 0,
+              height: isExpanded ? Padroes.alturaGeral() * 0.06 : 0,
               curve: Curves.easeInOut,
               child: isExpanded
                   ? ListView.builder(
-                      physics: Tamanhos.efeitoDeRolagem(),
+                      physics: Padroes.efeitoDeRolagem(),
                       scrollDirection: Axis.horizontal,
                       itemCount: listaAnos.length,
                       itemBuilder: (context, index) =>
@@ -136,7 +136,7 @@ class _DropdownAlunoState extends State<DropdownAno> {
         label: Text(
           option,
           style: TextStyle(
-            fontSize: TamanhoTela.horizontal(context) * 0.03,
+            fontSize: Padroes.larguraGeral() * 0.03,
             color: selectedValue == option
                 ? CoresClaras.verdePrincipal
                 : CoresClaras.cinzatexto,

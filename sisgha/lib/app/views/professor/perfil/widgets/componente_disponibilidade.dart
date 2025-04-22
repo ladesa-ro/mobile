@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:sisgha/app/core/utils/padroes.dart';
 
 import '../../../../core/utils/icones.dart';
 import '../../../../core/utils/colors.dart';
@@ -91,7 +92,6 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
               scrollPhysics: const NeverScrollableScrollPhysics(),
             ),
           ),
-          SizedBox(height: constraints.maxHeight * 0.04)
         ],
       ),
     );
@@ -127,6 +127,7 @@ List<Widget> _listaComHorarios(context) {
     5,
     (index) => LayoutBuilder(
       builder: (context, constraints) => ListView(
+        physics: Padroes.efeitoDeRolagem(),
         padding: EdgeInsets.zero,
         children: [
           SizedBox(

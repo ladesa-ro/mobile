@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sisgha/app/views/aluno/calendario_alunos/widgets/cards_alunos.dart';
+import 'package:sisgha/app/views/aluno/calendario/widgets/cards_alunos.dart';
 import 'package:sisgha/app/views/components/letreiro_rolante.dart';
 
 import 'package:sizer/sizer.dart';
@@ -7,8 +7,7 @@ import 'package:sizer/sizer.dart';
 import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/dias.dart';
-import '../../../core/utils/responsividade.dart';
-import '../../../core/utils/tamanhos.dart';
+import '../../../core/utils/padroes.dart';
 import '../../components/appbar.dart';
 import '../../components/calendario.dart';
 import 'widgets/menu_lateral_alunos.dart';
@@ -28,30 +27,30 @@ class CalendarAlunos extends StatelessWidget {
       icones: false,
     );
 
-    double tamanho =
-        TamanhoTela.height(context, appBarSize: appBar.preferredSize.height);
-    double largura = Tamanhos.larguraGeral();
+    double tamanho = Padroes.calcularAlturaAppBar(context,
+        appBarSize: appBar.preferredSize.height);
+    double largura = Padroes.larguraGeral();
     return Scaffold(
       key: _scaffoldKey,
       drawerEnableOpenDragGesture: false,
       appBar: appBar,
       drawer: MenuLateralAlunos(),
       body: ListView(
-        padding: Tamanhos.margem(),
+        padding: Padroes.margem(),
         children: [
           SizedBox(height: tamanho * 0.03),
           SizedBox(
             height: tamanho * 0.085,
-            width: TamanhoTela.horizontal(context),
+            width: Padroes.larguraGeral(),
             child: Row(
               children: [
                 SizedBox(
-                    height: Tamanhos.aluturaBotoes(),
+                    height: Padroes.aluturaBotoes(),
                     width: (largura * 0.93) - 80,
                     child: LetreiroRolante()),
                 Spacer(),
                 SizedBox(
-                  height: Tamanhos.aluturaBotoes(),
+                  height: Padroes.aluturaBotoes(),
                   width: largura * 0.15, //Motivo do erro de respansividade
                   child: ElevatedButton(
                       style: _estiloBotao(),
@@ -68,7 +67,7 @@ class CalendarAlunos extends StatelessWidget {
           ),
           SizedBox(
             height: tamanho * 0.55,
-            width: TamanhoTela.horizontal(context),
+            width: Padroes.larguraGeral(),
             child: MiniCalendario(
               showDialog: false,
             ),
@@ -78,7 +77,7 @@ class CalendarAlunos extends StatelessWidget {
           ),
           SizedBox(
             height: tamanho * 0.55,
-            width: TamanhoTela.horizontal(context),
+            width: Padroes.larguraGeral(),
             child: CardsAlunos(),
           ),
         ],

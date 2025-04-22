@@ -4,15 +4,13 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
-import 'package:sisgha/app/core/utils/tamanhos.dart';
+import 'package:sisgha/app/core/utils/padroes.dart';
 import 'package:sisgha/app/providers/dados_professor.dart';
 import 'package:sisgha/app/views/professor/perfil/widgets/botton_sheat.dart';
 import 'package:sisgha/app/views/professor/perfil/widgets/estilos_perfil.dart';
 import 'package:sisgha/app/views/professor/perfil/widgets/componente_navegacao.dart';
 import 'package:sisgha/app/domain/logic/deslogar.dart';
 import 'package:sisgha/app/views/professor/perfil/widgets/dados_professor.dart';
-
-import '../../../core/utils/responsividade.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({super.key});
@@ -25,15 +23,13 @@ class _PerfilState extends State<Perfil> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<DadosProfessor>(context);
-    double tamanho = TamanhoTela.height(context);
+    double tamanho = Padroes.calcularAlturaAppBar(context);
 
     return Scaffold(
-      body: ListView(
-        physics: NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.zero,
+      body: Column(
         children: [
           SizedBox(
-            width: TamanhoTela.horizontal(context),
+            width: Padroes.larguraGeral(),
             height: tamanho * 0.25,
             child: Stack(
               alignment: AlignmentDirectional.topCenter,
@@ -41,7 +37,7 @@ class _PerfilState extends State<Perfil> {
                 Positioned(
                   child: SizedBox(
                     height: tamanho * 0.2,
-                    width: TamanhoTela.horizontal(context),
+                    width: Padroes.larguraGeral(),
                     child: Image.file(provider.fotoCapaPerfil,
                         fit: BoxFit.cover,
                         alignment: AlignmentDirectional.bottomCenter),
@@ -105,8 +101,8 @@ class _PerfilState extends State<Perfil> {
               tamanho * 0.005),
           SizedBox(height: tamanho * 0.03),
           Container(
-            padding: Tamanhos.margem(),
-            height: tamanho * 0.70,
+            padding: Padroes.margem(),
+            height: tamanho * 0.60,
             child: NavSwitch(),
           ),
         ],

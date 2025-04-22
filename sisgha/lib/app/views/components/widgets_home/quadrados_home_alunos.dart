@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:sisgha/app/views/components/widgets_home/cards_horarios_disciplinas_alunos.dart';
 
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
+import 'cards_horarios_disciplinas.dart';
 
 class QuadradosHomeAlunos extends StatefulWidget {
   const QuadradosHomeAlunos({super.key});
@@ -68,34 +68,34 @@ class _QuadradosHomeAlunosState extends State<QuadradosHomeAlunos>
             child: TabBarView(
               controller: _tabController,
               children: const [
-                ConstrutorHorariosAlunos(
+                ConstrutorHorarios(
                   materia: 'Matemática',
-                  nomeProfessor: 'Mauro',
+                  informacao: 'Mauro',
                   horario: '08:00 - 09:30',
                 ),
-                ConstrutorHorariosAlunos(
+                ConstrutorHorarios(
                   materia: 'História',
-                  nomeProfessor: 'Maria',
+                  informacao: 'Maria',
                   horario: '10:00 - 11:30',
                 ),
-                ConstrutorHorariosAlunos(
+                ConstrutorHorarios(
                   materia: 'Geografia',
-                  nomeProfessor: 'Jania',
+                  informacao: 'Jania',
                   horario: '13:00 - 14:30',
                 ),
-                ConstrutorHorariosAlunos(
+                ConstrutorHorarios(
                   materia: 'Lógica de Programação',
-                  nomeProfessor: 'Danilo',
+                  informacao: 'Danilo',
                   horario: '13:00 - 14:30',
                 ),
-                ConstrutorHorariosAlunos(
+                ConstrutorHorarios(
                   materia: 'Geografia',
-                  nomeProfessor: 'Jania',
+                  informacao: 'Jania',
                   horario: '13:00 - 14:30',
                 ),
-                ConstrutorHorariosAlunos(
+                ConstrutorHorarios(
                   materia: 'Geografia',
-                  nomeProfessor: 'Jania',
+                  informacao: 'Jania',
                   horario: '13:00 - 14:30',
                 )
               ],

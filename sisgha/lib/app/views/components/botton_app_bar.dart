@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/views/aluno/calendario_alunos/calendario_alunos.dart';
+import 'package:sisgha/app/views/aluno/calendario/calendario_alunos.dart';
 import 'package:sisgha/app/views/notificacao/notificacao.dart';
 
 import 'package:sizer/sizer.dart';
 
 import '../../core/utils/icones.dart';
 import '../../core/utils/colors.dart';
-import '../../core/utils/responsividade.dart';
+
+import '../../core/utils/padroes.dart';
 import '../../providers/escolha_menu_lateral.dart';
 import '../../domain/logic/verificar_token_ativo.dart';
 import '../professor/calendario/calendario.dart';
@@ -44,7 +45,7 @@ class _NavigationState extends State<Navigation> {
   @override
   Widget build(BuildContext context) {
     BottomAppBar bottomAppBar = BottomAppBar(
-      height: TamanhoTela.vertical(context) * 0.08,
+      height: Padroes.alturaGeral() * 0.08,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -123,8 +124,8 @@ class _NavigationState extends State<Navigation> {
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
         decoration: _decoretion(index),
-        width: TamanhoTela.horizontal(context) * 0.13,
-        height: TamanhoTela.vertical(context) * 0.05,
+        width: Padroes.larguraGeral() * 0.13,
+        height: Padroes.alturaGeral() * 0.05,
         child: (iconData != null
             ? Icon(
                 iconData,
@@ -147,8 +148,7 @@ class _NavigationState extends State<Navigation> {
   BoxDecoration _decoretion(int index) {
     return BoxDecoration(
       color: _selectedIndex == index ? CoresClaras.verdeClaro : null,
-      borderRadius:
-          BorderRadius.circular(TamanhoTela.horizontal(context) * 0.03),
+      borderRadius: BorderRadius.circular(Padroes.larguraGeral() * 0.03),
     );
   }
 }

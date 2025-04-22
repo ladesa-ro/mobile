@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/core/utils/tamanhos.dart';
+import 'package:sisgha/app/core/utils/padroes.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../core/utils/icones.dart';
 import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/estilos.dart';
-import '../../../../core/utils/responsividade.dart';
+
 import '../../../../providers/escolha_menu_lateral.dart';
 
 class MenuLateralAlunos extends StatefulWidget {
@@ -21,7 +21,7 @@ class _MenuLateralAlunosState extends State<MenuLateralAlunos> {
   @override
   Drawer build(BuildContext context) {
     return Drawer(
-      width: TamanhoTela.horizontal(context) * 0.82,
+      width: Padroes.larguraGeral() * 0.82,
       child: LayoutBuilder(
         builder: (context, constraints) => Container(
           margin: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.03),
@@ -74,7 +74,7 @@ class _MenuLateralAlunosState extends State<MenuLateralAlunos> {
               SizedBox(
                 height: constraints.maxHeight * 0.07,
                 child: ElevatedButton(
-                    style: Tamanhos.estiloBotao(),
+                    style: Padroes.estiloBotao(),
                     onPressed: () {
                       Navigator.pop(context);
                     },

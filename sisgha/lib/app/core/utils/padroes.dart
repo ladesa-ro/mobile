@@ -3,13 +3,17 @@ import 'package:sizer/sizer.dart';
 
 import 'colors.dart';
 
-class Tamanhos {
+class Padroes {
   static EdgeInsets margem() {
     return EdgeInsets.symmetric(horizontal: larguraGeral() * 0.05);
   }
 
   static double aluturaBotoes() {
     return 6.5.h;
+  }
+
+  static double alturaGeral() {
+    return 100.h;
   }
 
   static double larguraGeral() {
@@ -30,5 +34,13 @@ class Tamanhos {
   //sempre implementar no physics dos ListViews ou outro tipo de widget de rolagem
   static BouncingScrollPhysics efeitoDeRolagem() {
     return BouncingScrollPhysics();
+  }
+
+  static double calcularAlturaAppBar(BuildContext context,
+      {double? appBarSize}) {
+    return MediaQuery.of(context).size.height -
+        (appBarSize ?? 0) -
+        MediaQuery.of(context).padding.top -
+        larguraGeral() * 0.08;
   }
 }

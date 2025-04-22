@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../core/utils/icones.dart';
 import '../../core/utils/dias.dart';
 import '../../core/utils/estilos.dart';
-import '../../core/utils/tamanhos.dart';
+import '../../core/utils/padroes.dart';
 import '../../providers/tema.dart';
 import 'dialogo_troca_de_tema.dart';
 
@@ -33,7 +33,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       titleSpacing: 0,
       automaticallyImplyLeading: false,
       title: Padding(
-        padding: Tamanhos.margem(),
+        padding: Padroes.margem(),
         child: Row(
           children: [
             if (icones == true)

@@ -3,7 +3,7 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
-import 'package:sisgha/app/core/utils/tamanhos.dart';
+import 'package:sisgha/app/core/utils/padroes.dart';
 
 class CardsProfessor extends StatelessWidget {
   CardsProfessor({super.key});
@@ -45,7 +45,7 @@ class CardsProfessor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double largura = Tamanhos.larguraGeral();
+    double largura = Padroes.larguraGeral();
     return Column(
       children: Cards.map((card) => Container(
             margin: EdgeInsets.all(10),

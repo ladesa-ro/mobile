@@ -3,7 +3,7 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
-import 'package:sisgha/app/core/utils/tamanhos.dart';
+import 'package:sisgha/app/core/utils/padroes.dart';
 
 import 'package:sisgha/app/views/components/appbar_notificacao.dart';
 import 'package:sizer/sizer.dart';
@@ -77,7 +77,7 @@ Widget cards(BuildContext context,
     required String data}) {
   return Padding(
     padding: EdgeInsets.only(
-        left: Tamanhos.margem().left, right: Tamanhos.margem().right, top: 20),
+        left: Padroes.margem().left, right: Padroes.margem().right, top: 20),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
