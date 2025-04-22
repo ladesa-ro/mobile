@@ -6,7 +6,7 @@ import 'package:sisgha/app/views/notificacao/notificacao.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../../core/utils/Icones.dart';
+import '../../core/utils/icones.dart';
 import '../../core/utils/colors.dart';
 import '../../core/utils/responsividade.dart';
 import '../../providers/escolha_menu_lateral.dart';
@@ -49,21 +49,13 @@ class _NavigationState extends State<Navigation> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           construirBarraDeNavegacao(
-              tokenAtivo: tokenAtivo,
-              iconVazio1: Icones.CalendarVazio,
-              iconCheio1: Icones.CalendarCheio,
-              index: 0),
+              tokenAtivo: tokenAtivo, iconData: Icones.calendario, index: 0),
+          construirBarraDeNavegacao(
+              tokenAtivo: tokenAtivo, iconData: Icones.iconeSisgha, index: 1),
           construirBarraDeNavegacao(
               tokenAtivo: tokenAtivo,
-              iconVazio1: Icones.IconeSisgha,
-              iconCheio1: Icones.IconeSisgha,
-              index: 1),
-          construirBarraDeNavegacao(
-              tokenAtivo: tokenAtivo,
-              iconVazio1: tokenAtivo ? Icones.PersonVazio : null,
-              iconCheio1: tokenAtivo ? Icones.PersonCheio : null,
-              iconCheio: tokenAtivo ? null : Icones.Sino,
-              iconVazio: tokenAtivo ? null : Icones.Sino,
+              iconData: tokenAtivo ? Icones.usuario : null,
+              iconify: tokenAtivo ? null : Icones.sino,
               index: 2),
         ],
       ),
@@ -117,10 +109,8 @@ class _NavigationState extends State<Navigation> {
   }
 
   Widget construirBarraDeNavegacao(
-      {String? iconVazio,
-      String? iconCheio,
-      IconData? iconVazio1,
-      IconData? iconCheio1,
+      {String? iconify,
+      IconData? iconData,
       required int index,
       required bool tokenAtivo}) {
     return GestureDetector(
@@ -135,29 +125,17 @@ class _NavigationState extends State<Navigation> {
         decoration: _decoretion(index),
         width: TamanhoTela.horizontal(context) * 0.13,
         height: TamanhoTela.vertical(context) * 0.05,
-        child: verificarIndex(index)
-            ? (iconCheio1 != null
-                ? Icon(
-                    iconCheio1,
-                    color: CoresClaras.verdePrincipal,
-                    size: 3.h,
-                  )
-                : Iconify(
-                    iconCheio!,
-                    size: 3.h,
-                    color: CoresClaras.verdePrincipal,
-                  ))
-            : (iconVazio1 != null
-                ? Icon(
-                    iconVazio1,
-                    color: CoresClaras.branco,
-                    size: 3.h,
-                  )
-                : Iconify(
-                    iconVazio!,
-                    size: 3.h,
-                    color: CoresClaras.branco,
-                  )),
+        child: (iconData != null
+            ? Icon(
+                iconData,
+                color: CoresClaras.branco,
+                size: 3.h,
+              )
+            : Iconify(
+                iconify!,
+                size: 3.h,
+                color: CoresClaras.branco,
+              )),
       ),
     );
   }

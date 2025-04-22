@@ -5,7 +5,6 @@ import 'package:sisgha/app/views/components/widgets_home/cards_horarios_discipli
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
 
-
 class QuadradosHomeAlunos extends StatefulWidget {
   const QuadradosHomeAlunos({super.key});
 

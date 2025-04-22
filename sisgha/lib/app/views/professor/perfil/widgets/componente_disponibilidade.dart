@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 
-import '../../../../core/utils/Icones.dart';
+import '../../../../core/utils/icones.dart';
 import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/estilos.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:sisgha/app/core/utils/Icones.dart';
+import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
@@ -12,21 +12,21 @@ class Notificacao extends StatelessWidget {
   const Notificacao({super.key});
   static final List<ItensNotificacoes> notificacoes = [
     ItensNotificacoes(
-      icone: Icones.CalendarVazio,
+      icone: Icones.calendario,
       titulo: "Novo evento!",
       tempo: "2 dias",
       texto: "O evento IFRO Party foi agendado para o dia 10 de setembro",
       link: "Clique aqui e confira",
     ),
     ItensNotificacoes(
-      icone: Icones.IconeSisgha,
+      icone: Icones.iconeSisgha,
       titulo: "Novo horário",
       tempo: "5 dias",
       texto: "A aula das 13h de Filosofia II foi cancelada, aula vaga",
       link: "Clique aqui e confira",
     ),
     ItensNotificacoes(
-      icone: Icones.IconeSisgha,
+      icone: Icones.iconeSisgha,
       titulo: "Alteração no horário",
       tempo: "15 dias",
       texto: "A aula de Filosofia II foi trocada pela aula de Banco de Dados I",
@@ -53,7 +53,7 @@ class Notificacao extends StatelessWidget {
                       titulo: notificacoes[index].titulo,
                       menssagem: notificacoes[index].texto,
                       link: notificacoes[index].link,
-                      icon: Icones.Sino,
+                      icon: Icones.sino,
                       data: notificacoes[index].tempo),
                   Divider(
                     thickness: 1.5,

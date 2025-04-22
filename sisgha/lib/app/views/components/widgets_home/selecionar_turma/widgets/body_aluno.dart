@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/core/utils/Icones.dart';
+import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/responsividade.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
@@ -62,7 +62,7 @@ class _BodyAlunoState extends State<BodyAluno> {
           SizedBox(height: TamanhoTela.vertical(context) * 0.1),
           Row(
             children: [
-              Icon(Icones.Relogio),
+              Icon(Icones.relogio),
               SizedBox(width: TamanhoTela.horizontal(context) * 0.02),
               Text("Selecionar Horário",
                   style: TextStyle(

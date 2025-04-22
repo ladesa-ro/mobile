@@ -3,7 +3,7 @@ import 'package:sisgha/app/views/professor/calendario/widgets/card_professor.dar
 
 import 'package:sizer/sizer.dart';
 
-import '../../../core/utils/Icones.dart';
+import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/dias.dart';
 import '../../../core/utils/responsividade.dart';
@@ -60,7 +60,7 @@ class CalendarioProfessor extends StatelessWidget {
                       onPressed: () {
                         _scaffoldKey.currentState?.openDrawer();
                       },
-                      child: Icones.Lupa),
+                      child: Icones.lupa),
                 ),
               ],
             ),

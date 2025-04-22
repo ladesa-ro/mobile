@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/Icones.dart';
+import '../../../../core/utils/icones.dart';
 import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/estilos.dart';
 import 'componente_disponibilidade.dart';
@@ -42,9 +42,9 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _estiloTabs('Disponibilidade', Icones.IconeSisgha, 0,
+                _estiloTabs('Disponibilidade', Icones.iconeSisgha, 0,
                     bordaEsquerda: true, bordaDireita: false),
-                _estiloTabs('Ensino', Icones.Disciplina, 1,
+                _estiloTabs('Ensino', Icones.disciplina, 1,
                     bordaEsquerda: false, bordaDireita: true),
               ],
             ),

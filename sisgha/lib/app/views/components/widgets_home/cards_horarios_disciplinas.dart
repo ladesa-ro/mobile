@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/Icones.dart';
+import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/responsividade.dart';
@@ -93,7 +93,7 @@ Widget disciplinaprof(
         const Spacer(),
         ativadoOuNao
             ? const Icon(
-                Icones.Relogio,
+                Icones.relogio,
                 color: CoresClaras.verdeEscuro,
               )
             : Container(),

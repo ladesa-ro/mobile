@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/utils/Icones.dart';
+import '../../core/utils/icones.dart';
 import '../../core/utils/dias.dart';
 import '../../core/utils/estilos.dart';
 import '../../core/utils/tamanhos.dart';
@@ -90,7 +90,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   Navigator.of(context).pushNamed('/notificacao');
                 },
                 icon: Iconify(
-                  Icones.Sino,
+                  Icones.sino,
                   size: 34,
                   color: temaProvider.corDosIcones(),
                 ),

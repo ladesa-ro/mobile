@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/core/utils/Icones.dart';
+import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
 import 'package:sisgha/app/providers/dados_professor.dart';
@@ -58,7 +58,7 @@ class _PerfilState extends State<Perfil> {
                     child: const Row(
                       children: [
                         Icon(
-                          Icones.Sair,
+                          Icones.sair,
                           color: CoresClaras.branco,
                           size: 12,
                         ),
@@ -73,7 +73,7 @@ class _PerfilState extends State<Perfil> {
                     style:
                         buttonStyleEdit(const Color.fromRGBO(60, 60, 60, 0.1)),
                     child: const Iconify(
-                      Icones.Lapiz,
+                      Icones.lapiz,
                       size: 10,
                       color: CoresClaras.branco,
                     ),
@@ -143,7 +143,7 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
               style: buttonStyleEdit(CoresClaras.preto),
               onPressed: () => bottomSheat(context, atualizarImagemPerfil),
               child: const Iconify(
-                Icones.Lapiz,
+                Icones.lapiz,
                 size: 10,
                 color: CoresClaras.branco,
               ),

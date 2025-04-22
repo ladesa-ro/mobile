@@ -2,7 +2,7 @@
 //As notificações precisam de um ícone, título, tempo, texto, link
 //Por agora irei realizar a tela sem alteração da API (stateless)
 import 'package:flutter/material.dart';
-import 'package:sisgha/app/core/utils/Icones.dart';
+import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
 import 'package:sisgha/app/views/notificacao/appbar_notificacao_alunos.dart';
@@ -21,21 +21,21 @@ class NotificacoesAlunos extends StatelessWidget {
 
   final List notificacoes = [
     ItensNotificacoes(
-      icone: Icones.CalendarVazio,
+      icone: Icones.calendario,
       titulo: "Novo evento!",
       tempo: "2 dias",
       texto: "O evento IFRO Party foi agendado para o dia 10 de setembro",
       link: "Clique aqui e confira",
     ),
     ItensNotificacoes(
-      icone: Icones.IconeSisgha,
+      icone: Icones.iconeSisgha,
       titulo: "Novo horário",
       tempo: "5 dias",
       texto: "A aula das 13h de Filosofia II foi cancelada, aula vaga",
       link: "Clique aqui e confira",
     ),
     ItensNotificacoes(
-      icone: Icones.IconeSisgha,
+      icone: Icones.iconeSisgha,
       titulo: "Alteração no horário",
       tempo: "15 dias",
       texto: "A aula de Filosofia II foi trocada pela aula de Banco de Dados I",

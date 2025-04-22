@@ -1,37 +1,32 @@
-// ignore_for_file: file_names, constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sizer/sizer.dart';
 
 class Icones {
   //IcoMoon
-  static const IconData PersonVazio = IconData(0xe906, fontFamily: 'IcoMoon');
 
-  static const IconData PersonCheio = IconData(0xe907, fontFamily: 'IcoMoon');
+  static const IconData usuario = IconData(0xe907, fontFamily: 'IcoMoon');
 
-  static const IconData Relogio = IconData(0xe904, fontFamily: 'IcoMoon');
+  static const IconData relogio = IconData(0xe904, fontFamily: 'IcoMoon');
 
-  static const IconData IconeSisgha = IconData(0xe903, fontFamily: 'IcoMoon');
+  static const IconData iconeSisgha = IconData(0xe903, fontFamily: 'IcoMoon');
 
-  static const IconData CalendarVazio = IconData(0xe900, fontFamily: 'IcoMoon');
+  static const IconData calendario = IconData(0xe900, fontFamily: 'IcoMoon');
 
-  static const IconData CalendarCheio = IconData(0xe901, fontFamily: 'IcoMoon');
+  static const IconData sair = IconData(0xe905, fontFamily: 'IcoMoon');
 
-  static const IconData Sair = IconData(0xe905, fontFamily: 'IcoMoon');
-
-  static const IconData Disciplina = IconData(0xe902, fontFamily: 'IcoMoon');
+  static const IconData disciplina = IconData(0xe902, fontFamily: 'IcoMoon');
 
   //iconify
 
   static const String sol =
       '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M11.289 23.287v-2.952a.713.713 0 1 1 1.426 0v2.952a.713.713 0 1 1-1.426 0m8.19-2.804l-2.087-2.086a.713.713 0 1 1 1.008-1.008l2.085 2.089a.713.713 0 0 1-1.009 1.002l.001.001zm-15.962 0a.71.71 0 0 1 0-1.008l2.087-2.087a.713.713 0 1 1 1.008 1.008l-2.087 2.086a.71.71 0 0 1-1.008 0zm2.803-8.485a5.683 5.683 0 1 1 11.366 0a5.683 5.683 0 0 1-11.366 0m1.425 0a4.26 4.26 0 1 0 8.518 0a4.26 4.26 0 0 0-8.518 0m12.591.713a.713.713 0 1 1 0-1.426h2.952a.713.713 0 1 1 0 1.426zm-19.623 0a.713.713 0 1 1 0-1.426h2.953a.713.713 0 1 1 0 1.426zM17.39 6.608a.71.71 0 0 1 0-1.008l2.087-2.087a.713.713 0 1 1 1.008 1.008l-2.087 2.087a.71.71 0 0 1-1.008 0m-11.788 0L3.517 4.523a.713.713 0 1 1 1.008-1.008l2.087 2.087A.713.713 0 1 1 5.604 6.61zm5.685-2.944V.713a.713.713 0 1 1 1.426 0v2.952a.713.713 0 1 1-1.426 0z" stroke-width="0.7" stroke="currentColor"/></svg>';
-  static const String Sino =
+  static const String sino =
       '<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 -10 256 265"><path fill="currentColor" d="M225.29 165.93C216.61 151 212 129.57 212 104a84 84 0 0 0-168 0c0 25.58-4.59 47-13.27 61.93a20.08 20.08 0 0 0-.07 20.07A19.77 19.77 0 0 0 48 196h36.18a44 44 0 0 0 87.64 0H208a19.77 19.77 0 0 0 17.31-10a20.08 20.08 0 0 0-.02-20.07M128 212a20 20 0 0 1-19.6-16h39.2a20 20 0 0 1-19.6 16m-73.34-40C63.51 154 68 131.14 68 104a60 60 0 0 1 120 0c0 27.13 4.48 50 13.33 68Z"/></svg>';
-  static const String SetaBaixo =
+  static const String setaBaixo =
       '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M7 9a1 1 0 0 0-.707 1.707l5 5a1 1 0 0 0 1.414 0l5-5A1 1 0 0 0 17 9z" clip-rule="evenodd"/></svg>';
 
-  static const String Lapiz =
+  static const String lapiz =
       '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 14 14"><path fill="currentColor" d="M10.715-.001a1.5 1.5 0 0 0-1.07.449L1.407 8.645a.5.5 0 0 0-.128.22l-1.26 4.5a.5.5 0 0 0 .616.616l4.5-1.26a.5.5 0 0 0 .22-.128l8.197-8.238l.002-.001a1.5 1.5 0 0 0 0-2.128l-.002-.001L11.786.449a1.499 1.499 0 0 0-1.071-.45"/></svg>';
 
   static const String setaEsquerda =
@@ -55,8 +50,7 @@ class Icones {
       '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992z"/></svg>';
 
   //Outros
-// ignore: non_constant_identifier_names
-  static Icon Lupa = Icon(
+  static Icon lupa = Icon(
     Icons.search,
     color: CoresClaras.branco,
     size: 4.h,

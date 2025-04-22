@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../../../core/utils/Icones.dart';
+import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/imagens.dart';
@@ -107,7 +107,7 @@ class _CorpoLoginState extends State<CorpoLogin> {
           children: [
             const SizedBox(width: 19),
             Icon(
-              Icones.PersonCheio,
+              Icones.usuario,
               color: CoresClaras.branco,
               size: 3.h,
             ),

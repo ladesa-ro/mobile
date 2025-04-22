@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/Icones.dart';
+import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/responsividade.dart';
@@ -18,7 +18,8 @@ class ConstrutorHorariosAlunos extends StatefulWidget {
   });
 
   @override
-  State<ConstrutorHorariosAlunos> createState() => _ConstrutorHorariosAlunosState();
+  State<ConstrutorHorariosAlunos> createState() =>
+      _ConstrutorHorariosAlunosState();
 }
 
 class _ConstrutorHorariosAlunosState extends State<ConstrutorHorariosAlunos> {
@@ -40,8 +41,8 @@ class _ConstrutorHorariosAlunosState extends State<ConstrutorHorariosAlunos> {
   }
 }
 
-Widget disciplinaAlunos(
-    String materia, String nomeProfessor, String horario, BuildContext context) {
+Widget disciplinaAlunos(String materia, String nomeProfessor, String horario,
+    BuildContext context) {
   bool ativadoOuNao = _verificar(horario);
 
   return Container(
@@ -93,7 +94,7 @@ Widget disciplinaAlunos(
         const Spacer(),
         ativadoOuNao
             ? const Icon(
-                Icones.Relogio,
+                Icones.relogio,
                 color: CoresClaras.verdeEscuro,
               )
             : Container(),

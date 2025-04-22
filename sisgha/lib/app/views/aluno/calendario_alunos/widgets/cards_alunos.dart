@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:sisgha/app/core/utils/Icones.dart';
+import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
 
@@ -11,12 +11,12 @@ class CardsAlunos extends StatelessWidget {
     ElementosCards(
       cor: CoresClaras.roxo,
       titulo: "2º Etapa",
-      icone: Icones.Sino,
+      icone: Icones.sino,
       iconebotao: ElevatedButton(
         style: estiloBotaoCard(),
         onPressed: () {},
         child: Iconify(
-          Icones.Sino,
+          Icones.sino,
           color: CoresClaras.branco,
         ),
       ),
@@ -28,12 +28,12 @@ class CardsAlunos extends StatelessWidget {
     ElementosCards(
       cor: CoresClaras.vermelho,
       titulo: "Recuperação do 1º Semestre",
-      icone: Icones.Sino,
+      icone: Icones.sino,
       iconebotao: ElevatedButton(
         style: estiloBotaoCard(),
         onPressed: () {},
         child: Iconify(
-          Icones.Sino,
+          Icones.sino,
           color: CoresClaras.branco,
         ),
       ),

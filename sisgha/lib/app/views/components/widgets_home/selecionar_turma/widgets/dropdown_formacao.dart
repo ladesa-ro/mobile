@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
-import '../../../../../core/utils/Icones.dart';
+import '../../../../../core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/responsividade.dart';
 import 'package:sisgha/app/core/utils/tamanhos.dart';
@@ -81,7 +81,7 @@ class _DropdownFormacaoState extends State<DropdownFormacao> {
                         ? 3.14
                         : 0, // gira 180° pq n achei o msm icon com seta pra cima ai a solução mais simples foi girar o  icon
                     child: Iconify(
-                      Icones.SetaBaixo,
+                      Icones.setaBaixo,
                       color: selectedValue != null
                           ? CoresClaras.verdePrincipal
                           : CoresClaras.cinzaBordas,

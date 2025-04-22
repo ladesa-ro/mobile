@@ -3,7 +3,7 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../../../core/utils/Icones.dart';
+import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 
 Widget elementoVerde(Alignment alignment) {
