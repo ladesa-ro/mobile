@@ -135,7 +135,7 @@ class _NavigationState extends State<Navigation> {
             : Iconify(
                 iconify!,
                 size: 3.h,
-                color: CoresClaras.branco,
+                color: CoresClaras.branco, // eu tirei os icon cheios pois n é mais preciso por causa das mudança de cores no prototipo
               )),
       ),
     );
