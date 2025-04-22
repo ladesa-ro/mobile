@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/core/utils/Icones.dart';
+import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
-import 'package:sisgha/app/core/utils/responsividade.dart';
-import 'package:sisgha/app/core/utils/tamanhos.dart';
+
+import 'package:sisgha/app/core/utils/padroes.dart';
 import 'package:sisgha/app/providers/escolha_horarios_alunos.dart';
 
 class DropdownCurso extends StatefulWidget {
@@ -62,7 +62,7 @@ class _DropdownAlunoState extends State<DropdownCurso> {
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        width: TamanhoTela.horizontal(context) * 0.9,
+        width: Padroes.larguraGeral() * 0.9,
         decoration: BoxDecoration(
           border: Border.all(
             color: selectedValue != null
@@ -72,10 +72,10 @@ class _DropdownAlunoState extends State<DropdownCurso> {
           borderRadius: BorderRadius.circular(10.0),
         ),
         padding: EdgeInsets.fromLTRB(
-          TamanhoTela.horizontal(context) * 0.03,
-          TamanhoTela.vertical(context) * 0.01,
-          TamanhoTela.horizontal(context) * 0.03,
-          TamanhoTela.vertical(context) * 0.01,
+          Padroes.larguraGeral() * 0.03,
+          Padroes.alturaGeral() * 0.01,
+          Padroes.larguraGeral() * 0.03,
+          Padroes.alturaGeral() * 0.01,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +91,7 @@ class _DropdownAlunoState extends State<DropdownCurso> {
                       color: selectedValue != null
                           ? CoresClaras.pretoTexto
                           : CoresClaras.cinza,
-                      fontSize: TamanhoTela.horizontal(context) * 0.04,
+                      fontSize: Padroes.larguraGeral() * 0.04,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -100,7 +100,7 @@ class _DropdownAlunoState extends State<DropdownCurso> {
                         ? 3.14
                         : 0, // gira 180° pq n achei o msm icon com seta pra cima ai a solução mais simples foi gira ela
                     child: Iconify(
-                      Icones.SetaBaixo,
+                      Icones.setaBaixo,
                       color: selectedValue != null
                           ? CoresClaras.verdePrincipal
                           : CoresClaras.cinzaBordas,
@@ -112,11 +112,11 @@ class _DropdownAlunoState extends State<DropdownCurso> {
             ),
             AnimatedContainer(
               duration: const Duration(milliseconds: 300),
-              height: isExpanded ? TamanhoTela.vertical(context) * 0.06 : 0,
+              height: isExpanded ? Padroes.alturaGeral() * 0.06 : 0,
               curve: Curves.easeInOut,
               child: isExpanded
                   ? ListView.builder(
-                      physics: Tamanhos.efeitoDeRolagem(),
+                      physics: Padroes.efeitoDeRolagem(),
                       scrollDirection: Axis.horizontal,
                       itemCount: listaCursos.length,
                       itemBuilder: (context, index) =>
@@ -137,7 +137,7 @@ class _DropdownAlunoState extends State<DropdownCurso> {
         label: Text(
           option,
           style: TextStyle(
-            fontSize: TamanhoTela.horizontal(context) * 0.03,
+            fontSize: Padroes.larguraGeral() * 0.03,
             color: selectedValue == option
                 ? CoresClaras.verdePrincipal
                 : CoresClaras.cinzatexto,

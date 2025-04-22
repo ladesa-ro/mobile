@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../core/utils/colors.dart';
-import '../../core/utils/responsividade.dart';
+import '../../core/utils/padroes.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -63,21 +63,21 @@ class _SplashScreen extends State<SplashScreen> {
                   CoresClaras.verdePrincipal
                 ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
                 borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(
-                      TamanhoTela.vertical(context) < 700 ? 80 : 100),
+                  bottomRight:
+                      Radius.circular(Padroes.alturaGeral() < 700 ? 80 : 100),
                 ),
               ),
               duration: const Duration(milliseconds: 1000),
               curve: Curves.ease,
               height: temporizador
                   ? temporizador2
-                      ? TamanhoTela.vertical(context)
-                      : TamanhoTela.vertical(context) * 0.20
+                      ? Padroes.alturaGeral()
+                      : Padroes.alturaGeral() * 0.20
                   : 0,
               width: temporizador
                   ? temporizador2
-                      ? TamanhoTela.horizontal(context)
-                      : TamanhoTela.horizontal(context) * 0.35
+                      ? Padroes.larguraGeral()
+                      : Padroes.larguraGeral() * 0.35
                   : 0,
             ),
           ),
@@ -91,21 +91,21 @@ class _SplashScreen extends State<SplashScreen> {
                   CoresClaras.verdeClaro
                 ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(
-                      TamanhoTela.vertical(context) < 700 ? 80 : 100),
+                  topLeft:
+                      Radius.circular(Padroes.alturaGeral() < 700 ? 80 : 100),
                 ),
               ),
               duration: const Duration(milliseconds: 1000),
               curve: Curves.ease,
               height: temporizador
                   ? temporizador2
-                      ? TamanhoTela.vertical(context)
-                      : TamanhoTela.vertical(context) * 0.20
+                      ? Padroes.alturaGeral()
+                      : Padroes.alturaGeral() * 0.20
                   : 0,
               width: temporizador
                   ? temporizador2
-                      ? TamanhoTela.horizontal(context)
-                      : TamanhoTela.horizontal(context) * 0.35
+                      ? Padroes.larguraGeral()
+                      : Padroes.larguraGeral() * 0.35
                   : 0,
             ),
           ),

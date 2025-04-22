@@ -5,12 +5,11 @@ import 'package:provider/provider.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../../../core/utils/Icones.dart';
+import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/imagens.dart';
-import '../../../core/utils/responsividade.dart';
-import '../../../core/utils/tamanhos.dart';
+import '../../../core/utils/padroes.dart';
 import '../../../domain/api/repository.dart';
 import '../../../providers/dados_professor.dart';
 import '../../components/progress_indicator.dart';
@@ -60,31 +59,31 @@ class _CorpoLoginState extends State<CorpoLogin> {
     return Center(
       child: SingleChildScrollView(
         child: SizedBox(
-          height: TamanhoTela.vertical(context),
-          width: TamanhoTela.horizontal(context),
+          height: Padroes.alturaGeral(),
+          width: Padroes.larguraGeral(),
           child: Padding(
-            padding: Tamanhos.margem() * 2.5,
+            padding: Padroes.margem() * 2.5,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
                   ImageApp.logo_sigha_sem_barra,
-                  width: TamanhoTela.horizontal(context) -
-                      (Tamanhos.margem().horizontal * 4),
+                  width: Padroes.larguraGeral() -
+                      (Padroes.margem().horizontal * 4),
                 ),
                 Form(
                   key: formKey,
                   child: Column(
                     children: [
-                      SizedBox(height: TamanhoTela.vertical(context) * 0.03),
+                      SizedBox(height: Padroes.alturaGeral() * 0.03),
                       inputMatricula(),
-                      SizedBox(height: TamanhoTela.vertical(context) * 0.02),
+                      SizedBox(height: Padroes.alturaGeral() * 0.02),
                       inputSenha(),
-                      SizedBox(height: TamanhoTela.vertical(context) * 0.01),
+                      SizedBox(height: Padroes.alturaGeral() * 0.01),
                       recuperarSenha(context),
-                      SizedBox(height: TamanhoTela.vertical(context) * 0.01),
+                      SizedBox(height: Padroes.alturaGeral() * 0.01),
                       botaoEntrar(context),
-                      SizedBox(height: TamanhoTela.vertical(context) * 0.02),
+                      SizedBox(height: Padroes.alturaGeral() * 0.02),
                       botaoEntrarAluno(context),
                     ],
                   ),
@@ -99,7 +98,7 @@ class _CorpoLoginState extends State<CorpoLogin> {
 
   Widget botaoEntrarAluno(BuildContext context) {
     return ElevatedButton(
-      style: Tamanhos.estiloBotao(),
+      style: Padroes.estiloBotao(),
       onPressed: () => Navigator.pushNamed(context, "/acessoAluno"),
       child: Center(
         child: Row(
@@ -107,7 +106,7 @@ class _CorpoLoginState extends State<CorpoLogin> {
           children: [
             const SizedBox(width: 19),
             Icon(
-              Icones.PersonCheio,
+              Icones.usuario,
               color: CoresClaras.branco,
               size: 3.h,
             ),
@@ -154,10 +153,10 @@ class _CorpoLoginState extends State<CorpoLogin> {
           }
         }
       },
-      style: Tamanhos.estiloBotao(),
+      style: Padroes.estiloBotao(),
       child: SizedBox(
-        height: Tamanhos.aluturaBotoes(),
-        width: Tamanhos.larguraGeral(),
+        height: Padroes.aluturaBotoes(),
+        width: Padroes.larguraGeral(),
         child: Center(
           child: Text(
             'Entrar',

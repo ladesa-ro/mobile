@@ -3,11 +3,10 @@ import 'package:sisgha/app/views/professor/calendario/widgets/card_professor.dar
 
 import 'package:sizer/sizer.dart';
 
-import '../../../core/utils/Icones.dart';
+import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/dias.dart';
-import '../../../core/utils/responsividade.dart';
-import '../../../core/utils/tamanhos.dart';
+import '../../../core/utils/padroes.dart';
 import '../../components/appbar.dart';
 import '../../components/calendario.dart';
 import '../../components/letreiro_rolante.dart';
@@ -27,11 +26,11 @@ class CalendarioProfessor extends StatelessWidget {
       icones: false,
     );
 
-    double tamanho =
-        TamanhoTela.height(context, appBarSize: appBar.preferredSize.height);
-    EdgeInsets margem = Tamanhos.margem();
+    double tamanho = Padroes.calcularAlturaAppBar(context,
+        appBarSize: appBar.preferredSize.height);
+    EdgeInsets margem = Padroes.margem();
 
-    double largura = Tamanhos.larguraGeral() - margem.horizontal;
+    double largura = Padroes.larguraGeral() - margem.horizontal;
 
     return Scaffold(
       key: _scaffoldKey,
@@ -44,23 +43,23 @@ class CalendarioProfessor extends StatelessWidget {
           SizedBox(height: tamanho * 0.03),
           SizedBox(
             height: tamanho * 0.085,
-            width: TamanhoTela.horizontal(context),
+            width: Padroes.larguraGeral(),
             child: Row(
               children: [
                 SizedBox(
-                    height: Tamanhos.aluturaBotoes(),
+                    height: Padroes.aluturaBotoes(),
                     width: largura * 0.80,
                     child: LetreiroRolante()),
                 Spacer(),
                 SizedBox(
-                  height: Tamanhos.aluturaBotoes(),
+                  height: Padroes.aluturaBotoes(),
                   width: largura * 0.17,
                   child: ElevatedButton(
                       style: _estiloBotao(),
                       onPressed: () {
                         _scaffoldKey.currentState?.openDrawer();
                       },
-                      child: Icones.Lupa),
+                      child: Icones.lupa),
                 ),
               ],
             ),
@@ -70,7 +69,7 @@ class CalendarioProfessor extends StatelessWidget {
           ),
           SizedBox(
             height: tamanho * 0.55,
-            width: TamanhoTela.horizontal(context),
+            width: Padroes.larguraGeral(),
             child: MiniCalendario(
               showDialog: false,
             ),
@@ -80,7 +79,7 @@ class CalendarioProfessor extends StatelessWidget {
           ),
           SizedBox(
             height: tamanho * 0.55,
-            width: TamanhoTela.horizontal(context),
+            width: Padroes.larguraGeral(),
             child: CardsProfessor(),
           ),
         ],

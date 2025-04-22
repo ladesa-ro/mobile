@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../core/utils/Icones.dart';
+import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
-import '../../../core/utils/tamanhos.dart';
+import '../../../core/utils/padroes.dart';
 import '../calendario.dart';
 
 Widget botaoMiniCalendario(BuildContext context) {
   DateTime now = DateTime.now();
   return ElevatedButton(
-    style: Tamanhos.estiloBotao(),
+    style: Padroes.estiloBotao(),
     onPressed: () {
       showDialog(
         context: context,
@@ -28,7 +28,7 @@ Widget botaoMiniCalendario(BuildContext context) {
           width: 16,
         ),
         Icon(
-          Icones.CalendarVazio,
+          Icones.calendario,
           size: 3.h,
           color: CoresClaras.branco,
         ),
@@ -40,7 +40,7 @@ Widget botaoMiniCalendario(BuildContext context) {
         ),
         const Spacer(),
         Iconify(
-          Icones.SetaBaixo,
+          Icones.setaBaixo,
           size: 4.h,
           color: CoresClaras.branco,
         ),

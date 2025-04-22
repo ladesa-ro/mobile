@@ -2,14 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/core/utils/Icones.dart';
+import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
-import 'package:sisgha/app/core/utils/responsividade.dart';
-import 'package:sisgha/app/core/utils/tamanhos.dart';
-import 'package:sisgha/app/views/components/widgets_home/selecionar_turma/widgets/dropdomn_turmas.dart';
-import 'package:sisgha/app/views/components/widgets_home/selecionar_turma/widgets/dropdown_ano.dart';
-import 'package:sisgha/app/views/components/widgets_home/selecionar_turma/widgets/dropdown_curso.dart';
-import 'package:sisgha/app/views/components/widgets_home/selecionar_turma/widgets/dropdown_formacao.dart';
+import 'package:sisgha/app/core/utils/padroes.dart';
+import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdomn_turmas.dart';
+import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_ano.dart';
+import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_curso.dart';
+import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_formacao.dart';
 import 'package:sisgha/app/providers/escolha_horarios_alunos.dart';
 
 class BodyAluno extends StatefulWidget {
@@ -47,7 +46,6 @@ class _BodyAlunoState extends State<BodyAluno> {
         abrirAno = false;
         abrirTurma = false;
       });
-      debugPrint('Provider resetado com sucesso');
     });
   }
 
@@ -57,21 +55,21 @@ class _BodyAlunoState extends State<BodyAluno> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: ListView(
-        physics: Tamanhos.efeitoDeRolagem(),
+        physics: Padroes.efeitoDeRolagem(),
         children: [
-          SizedBox(height: TamanhoTela.vertical(context) * 0.1),
+          SizedBox(height: Padroes.alturaGeral() * 0.1),
           Row(
             children: [
-              Icon(Icones.Relogio),
-              SizedBox(width: TamanhoTela.horizontal(context) * 0.02),
+              Icon(Icones.relogio),
+              SizedBox(width: Padroes.larguraGeral() * 0.02),
               Text("Selecionar Horário",
                   style: TextStyle(
-                      fontSize: TamanhoTela.horizontal(context) * 0.05,
+                      fontSize: Padroes.larguraGeral() * 0.05,
                       fontWeight: FontWeight.w700)),
             ],
           ),
 
-          SizedBox(height: TamanhoTela.vertical(context) * 0.02),
+          SizedBox(height: Padroes.alturaGeral() * 0.02),
 
           // Dropdown de Formação
           DropdownFormacao(
@@ -84,7 +82,7 @@ class _BodyAlunoState extends State<BodyAluno> {
             },
           ),
 
-          SizedBox(height: TamanhoTela.vertical(context) * 0.02),
+          SizedBox(height: Padroes.alturaGeral() * 0.02),
 
           // Dropdown de Curso
           DropdownCurso(
@@ -98,7 +96,7 @@ class _BodyAlunoState extends State<BodyAluno> {
             abrirDropdown: abrirCurso,
           ),
 
-          SizedBox(height: TamanhoTela.vertical(context) * 0.02),
+          SizedBox(height: Padroes.alturaGeral() * 0.02),
           //dropdow do ano
           DropdownAno(
             direita: 10,
@@ -111,7 +109,7 @@ class _BodyAlunoState extends State<BodyAluno> {
             abrirDropdown: abrirAno,
           ),
 
-          SizedBox(height: TamanhoTela.vertical(context) * 0.02),
+          SizedBox(height: Padroes.alturaGeral() * 0.02),
           //dropdown da turma
           DropdownTurmas(
             direita: 10,
@@ -123,7 +121,7 @@ class _BodyAlunoState extends State<BodyAluno> {
             abrirDropdown: abrirTurma,
           ),
 
-          SizedBox(height: TamanhoTela.vertical(context) * 0.02),
+          SizedBox(height: Padroes.alturaGeral() * 0.02),
 
           Row(
             children: [
@@ -137,7 +135,7 @@ class _BodyAlunoState extends State<BodyAluno> {
                   style: _estiloBotao(),
 
                   child: const Text("Ver Horário"),
-                  //style: Tamanhos.estiloBotao(),
+                  //style: Padroes.estiloBotao(),
                 ),
               ),
             ],
@@ -155,12 +153,12 @@ class _BodyAlunoState extends State<BodyAluno> {
         borderRadius: BorderRadius.circular(8),
       ),
       minimumSize: Size(
-        Tamanhos.larguraGeral(),
-        Tamanhos.aluturaBotoes(),
+        Padroes.larguraGeral(),
+        Padroes.aluturaBotoes(),
       ),
       maximumSize: Size(
-        Tamanhos.larguraGeral(),
-        Tamanhos.aluturaBotoes(),
+        Padroes.larguraGeral(),
+        Padroes.aluturaBotoes(),
       ),
     );
   }

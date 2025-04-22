@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:sisgha/app/core/utils/Icones.dart';
+import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
-import 'package:sisgha/app/core/utils/tamanhos.dart';
+import 'package:sisgha/app/core/utils/padroes.dart';
 
 class CardsProfessor extends StatelessWidget {
   CardsProfessor({super.key});
@@ -14,11 +14,9 @@ class CardsProfessor extends StatelessWidget {
       titulo: "2° etapa ",
       iconebotao: ElevatedButton(
         style: estiloBotaoCard(),
-        onPressed: () {
-          
-        },
+        onPressed: () {},
         child: Iconify(
-          Icones.Sino,
+          Icones.sino,
           color: CoresClaras.branco,
         ),
       ),
@@ -34,7 +32,7 @@ class CardsProfessor extends StatelessWidget {
         style: estiloBotaoCard(),
         onPressed: () {},
         child: Iconify(
-          Icones.Sino,
+          Icones.sino,
           color: CoresClaras.branco,
         ),
       ),
@@ -47,7 +45,7 @@ class CardsProfessor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double largura = Tamanhos.larguraGeral();
+    double largura = Padroes.larguraGeral();
     return Column(
       children: Cards.map((card) => Container(
             margin: EdgeInsets.all(10),
@@ -64,7 +62,7 @@ class CardsProfessor extends StatelessWidget {
               border: Border(
                 left: BorderSide(
                   color: card.cor, // cor da borda
-                  width: 5, // a espreçura 
+                  width: 5, // a espreçura
                 ),
               ),
             ),
@@ -76,7 +74,6 @@ class CardsProfessor extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                     
                       Row(
                         children: [
                           Text(
@@ -88,7 +85,6 @@ class CardsProfessor extends StatelessWidget {
                             ),
                           ),
                           SizedBox(width: 8),
-                       
                         ],
                       ),
                       SizedBox(height: 20),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sisgha/app/core/utils/tamanhos.dart';
+import 'package:sisgha/app/core/utils/padroes.dart';
 import 'package:sizer/sizer.dart';
 
 import 'colors.dart';
@@ -16,7 +16,7 @@ InputDecoration inputDecoration(BuildContext context, String labelText,
     {Widget? suffixIcon}) {
   return InputDecoration(
     contentPadding: EdgeInsets.only(
-        top: Tamanhos.aluturaBotoes() / 1.5, left: 12, right: 12),
+        top: Padroes.aluturaBotoes() / 1.5, left: 12, right: 12),
     floatingLabelStyle: estiloTexto(15,
         cor: CoresClaras.verdecinzaTexto, peso: FontWeight.bold),
     labelText: labelText,

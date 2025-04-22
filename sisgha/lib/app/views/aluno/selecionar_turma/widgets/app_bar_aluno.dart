@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
+import 'package:sizer/sizer.dart';
 
 class AppbarAluno extends StatelessWidget implements PreferredSizeWidget {
   const AppbarAluno({super.key});
@@ -8,9 +9,9 @@ class AppbarAluno extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: const BackButton(
+      leading: BackButton(
         style: ButtonStyle(
-          iconSize: WidgetStatePropertyAll(40),
+          iconSize: WidgetStatePropertyAll(4.h),
         ),
         color: Colors.white,
       ),

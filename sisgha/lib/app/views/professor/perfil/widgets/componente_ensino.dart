@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
+import 'package:sisgha/app/core/utils/padroes.dart';
 
 class WidgetEnsino extends StatefulWidget {
   const WidgetEnsino({super.key});
@@ -63,7 +64,7 @@ class _WidgetEnsino extends State<WidgetEnsino> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (constext, constraints) => ListView(
-        physics: BouncingScrollPhysics(),
+        physics: Padroes.efeitoDeRolagem(),
         children: [
           SizedBox(
             height: constraints.maxHeight * 0.05,

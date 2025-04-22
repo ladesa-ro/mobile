@@ -70,32 +70,32 @@ class _QuadradosHomeState extends State<QuadradosHome>
               children: const [
                 ConstrutorHorarios(
                   materia: 'Matemática',
-                  turma: '3A',
+                  informacao: '3A',
                   horario: '08:00 - 09:30',
                 ),
                 ConstrutorHorarios(
                   materia: 'História',
-                  turma: '2B',
+                  informacao: '2B',
                   horario: '10:00 - 11:30',
                 ),
                 ConstrutorHorarios(
                   materia: 'Geografia',
-                  turma: '1C',
+                  informacao: '1C',
                   horario: '13:00 - 14:30',
                 ),
                 ConstrutorHorarios(
                   materia: 'Lógica de Programação',
-                  turma: '3C',
+                  informacao: '3C',
                   horario: '13:00 - 14:30',
                 ),
                 ConstrutorHorarios(
                   materia: 'Geografia',
-                  turma: '1C',
+                  informacao: '1C',
                   horario: '13:00 - 14:30',
                 ),
                 ConstrutorHorarios(
                   materia: 'Geografia',
-                  turma: '1C',
+                  informacao: '1C',
                   horario: '13:00 - 14:30',
                 )
               ],

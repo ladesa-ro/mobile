@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/Icones.dart';
+import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
-import '../../../core/utils/responsividade.dart';
+import '../../../core/utils/padroes.dart';
 
 class ConstrutorHorarios extends StatefulWidget {
   final String materia;
-  final String turma;
+  final String informacao;
   final String horario;
 
   const ConstrutorHorarios({
     super.key,
     required this.materia,
-    required this.turma,
+    required this.informacao,
     required this.horario,
   });
 
@@ -32,7 +32,7 @@ class _ConstrutorHorariosState extends State<ConstrutorHorarios> {
           itemCount: 3,
           itemBuilder: (context, index) {
             return disciplinaprof(
-                widget.materia, widget.turma, widget.horario, context);
+                widget.materia, widget.informacao, widget.horario, context);
           },
         ),
       ),
@@ -47,7 +47,7 @@ Widget disciplinaprof(
   return Container(
     margin: const EdgeInsets.only(bottom: 20),
     padding: const EdgeInsets.only(left: 12, right: 5),
-    height: TamanhoTela.vertical(context) * 0.10,
+    height: Padroes.alturaGeral() * 0.10,
     decoration: BoxDecoration(
       border: Border.all(
           color: ativadoOuNao
@@ -93,7 +93,7 @@ Widget disciplinaprof(
         const Spacer(),
         ativadoOuNao
             ? const Icon(
-                Icones.Relogio,
+                Icones.relogio,
                 color: CoresClaras.verdeEscuro,
               )
             : Container(),
