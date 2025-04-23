@@ -29,14 +29,18 @@ class CalendarAlunos extends StatelessWidget {
 
     double tamanho = Padroes.calcularAlturaAppBar(context,
         appBarSize: appBar.preferredSize.height);
-    double largura = Padroes.larguraGeral();
+
+    EdgeInsets margem = Padroes.margem();
+
+    double largura = Padroes.larguraGeral() - margem.horizontal;
+
     return Scaffold(
       key: _scaffoldKey,
       drawerEnableOpenDragGesture: false,
       appBar: appBar,
       drawer: MenuLateralAlunos(),
       body: ListView(
-        padding: Padroes.margem(),
+        padding: margem,
         children: [
           SizedBox(height: tamanho * 0.03),
           SizedBox(
@@ -46,12 +50,12 @@ class CalendarAlunos extends StatelessWidget {
               children: [
                 SizedBox(
                     height: Padroes.aluturaBotoes(),
-                    width: (largura * 0.93) - 80,
+                    width: largura * 0.80,
                     child: LetreiroRolante()),
                 Spacer(),
                 SizedBox(
                   height: Padroes.aluturaBotoes(),
-                  width: largura * 0.15, //Motivo do erro de respansividade
+                  width: largura * 0.17, 
                   child: ElevatedButton(
                       style: _estiloBotao(),
                       onPressed: () {
