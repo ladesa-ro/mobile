@@ -134,7 +134,7 @@ class _DropdownFormacaoState extends State<DropdownFormacao> {
         ),
         selected: selectedValue == option,
         showCheckmark: false,
-        selectedColor: const Color.fromARGB(61, 60, 192, 82),
+        selectedColor: CoresClaras.verdeTransparente,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: selectedValue == option

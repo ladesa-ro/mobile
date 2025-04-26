@@ -145,9 +145,7 @@ class _DropdownAlunoState extends State<DropdownCurso> {
         ),
         selected: selectedValue == option,
         showCheckmark: false,
-        selectedColor: selectedValue == option
-            ? const Color.fromARGB(61, 60, 192, 82)
-            : Colors.transparent,
+        selectedColor: CoresClaras.verdeTransparente,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             color: selectedValue == option
