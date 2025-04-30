@@ -106,9 +106,10 @@ class _CorpoLoginState extends State<CorpoLogin> {
           children: [
             const SizedBox(width: 19),
             Icon(
-              Icones.usuario,
+              Icons.person, //YURIIIIIII COMO MEXE NESSA PORCARIA MANOOOOOOOOO
+              //Deixei por enquanto esse ícone aqui pra conseguir representar o ícone como cheio (falhei miseravelmente em tentar concertar o outro).
               color: CoresClaras.branco,
-              size: 3.h,
+              size: 3.7.h,
             ),
             const SizedBox(width: 10),
             Container(
