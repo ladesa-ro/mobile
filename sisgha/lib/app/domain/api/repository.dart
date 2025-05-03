@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
@@ -188,8 +189,8 @@ class Repository {
   }
 
   // ----------------------------------------------- LISTAGENS (Cursos / Nível) ---------------------------------------------------//
-  static Future<List<NiveisFormacao>> buscarNiveisDeFormacao() async {
-    final url = Uri.parse("$_api/niveis-formacoes");
+  static Future<List<OfertaFormacao>> buscarNiveisDeFormacao() async {
+    final url = Uri.parse("$_api/ofertas-formacoes");
     final response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -198,7 +199,7 @@ class Repository {
     if (verificarStatusCode(response.statusCode)) {
       final data = jsonDecode(response.body)["data"];
       return data
-          .map<NiveisFormacao>((e) => NiveisFormacao.fromJson(e))
+          .map<OfertaFormacao>((e) => OfertaFormacao.fromJson(e))
           .toList();
     }
 
@@ -218,5 +219,21 @@ class Repository {
     }
 
     throw Exception();
+  }
+
+// ---------------------------------------- testar rotas, clicar no botao de recuperar senha
+  static void teste() async {
+    final url = Uri.parse("$_api/ofertas-formacoes");
+    final response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+    if (verificarStatusCode(response.statusCode)) {
+      final data = jsonDecode(response.body)["data"];
+
+      for (var element in data) {
+        print(element["slug"]);
+      }
+    }
   }
 }

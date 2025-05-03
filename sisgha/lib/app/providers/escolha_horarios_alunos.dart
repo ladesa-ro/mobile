@@ -11,7 +11,7 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
   String? anoSelecionado;
   String? turmaSelecionada;
 
-  List<NiveisFormacao> listaNivelFormacao = [];
+  List<OfertaFormacao> listaNivelFormacao = [];
   List<Cursos> listaCursos = [];
   List<String> listaAnos = ["1° Ano", "2° Ano", "3° Ano"];
   List<String> listaTurmas = ["A", "B"];
@@ -43,11 +43,10 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
   }
 
   void resetarTudo() {
-  formacaoSelecionada = null;
-  cursoSelecionado = null;
-  anoSelecionado = null;
-  turmaSelecionada = null;
-  notifyListeners();
-}
-
+    formacaoSelecionada = null;
+    cursoSelecionado = null;
+    anoSelecionado = null;
+    turmaSelecionada = null;
+    notifyListeners();
+  }
 }
