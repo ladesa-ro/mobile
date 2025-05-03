@@ -1,13 +1,13 @@
-class NiveisFormacao {
+class OfertaFormacao {
   final String id;
   final String slug;
 
-  NiveisFormacao({
+  OfertaFormacao({
     required this.id,
     required this.slug,
   });
 
-  factory NiveisFormacao.fromJson(Map<String, dynamic> json) => NiveisFormacao(
+  factory OfertaFormacao.fromJson(Map<String, dynamic> json) => OfertaFormacao(
         slug: json['slug'],
         id: json['id'],
       );

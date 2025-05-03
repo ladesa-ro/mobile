@@ -184,10 +184,14 @@ class _CorpoLoginState extends State<CorpoLogin> {
           ),
           const SizedBox(width: 3),
           GestureDetector(
-            onTap: () => showDialog(
-              context: context,
-              builder: (context) => dialogoDeErro(context, 'login'),
-            ),
+            onTap: () {
+              Repository.teste();
+            },
+
+            //  showDialog(
+            //   context: context,
+            //   builder: (context) => dialogoDeErro(context, 'login'),
+            // ),
             child: Text(
               'Clique aqui',
               style: estiloTexto(15,
