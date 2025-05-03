@@ -10,7 +10,7 @@ import '../../core/utils/icones.dart';
 import '../../core/utils/colors.dart';
 
 import '../../core/utils/padroes.dart';
-import '../../providers/escolha_menu_lateral.dart';
+import '../../providers/escolha_calendario.dart';
 import '../../domain/logic/verificar_token_ativo.dart';
 import '../professor/calendario/calendario.dart';
 import '../professor/home/home.dart';
@@ -92,7 +92,7 @@ class _NavigationState extends State<Navigation> {
         case 0:
           page = ChangeNotifierProvider(
             create: (_) => EscolhaCalendario(),
-            child: Center(child: CalendarAlunos()),
+            child: Center(child: CalendarioAlunos()),
           );
           break;
         case 1:
@@ -135,7 +135,8 @@ class _NavigationState extends State<Navigation> {
             : Iconify(
                 iconify!,
                 size: 3.h,
-                color: CoresClaras.branco, // eu tirei os icon cheios pois n é mais preciso por causa das mudança de cores no prototipo
+                color: CoresClaras
+                    .branco, // eu tirei os icon cheios pois n é mais preciso por causa das mudança de cores no prototipo
               )),
       ),
     );

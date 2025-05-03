@@ -46,67 +46,51 @@ class CardsProfessor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double largura = Padroes.larguraGeral();
-    return Column(
-      children: Cards.map((card) => Container(
-            margin: EdgeInsets.all(10),
+
+    return SizedBox(
+      height: 400, // Defina altura máxima visível (ajustável)
+      child: ListView.builder(
+        physics: Padroes.efeitoDeRolagem(),
+        itemCount: Cards.length,
+        itemBuilder: (context, index) {
+          final card = Cards[index];
+          return Container(
+            margin: const EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black12,
-                  blurRadius: 4,
-                  offset: Offset(0, 2),
-                ),
-              ],
               border: Border(
                 left: BorderSide(
-                  color: card.cor, // cor da borda
-                  width: 5, // a espreçura
+                  color: card.cor,
+                  width: 5,
                 ),
               ),
             ),
             child: Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            card.titulo,
-                            style: estiloTexto(
-                              16,
-                              cor: card.cor,
-                              peso: FontWeight.bold,
-                            ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          card.titulo,
+                          style: estiloTexto(
+                            16,
+                            cor: card.cor,
+                            peso: FontWeight.bold,
                           ),
-                          SizedBox(width: 8),
-                        ],
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        card.inicio,
-                        style: estiloTexto(15),
-                      ),
-                      Text(
-                        card.terminio,
-                        style: estiloTexto(15),
-                      ),
-                      Text(
-                        card.tempo,
-                        style: estiloTexto(15),
-                      ),
-                      Text(
-                        card.local,
-                        style: estiloTexto(15),
-                      ),
-                    ],
+                        ),
+                        SizedBox(height: 20),
+                        Text(card.inicio, style: estiloTexto(15)),
+                        Text(card.terminio, style: estiloTexto(15)),
+                        Text(card.tempo, style: estiloTexto(15)),
+                        Text(card.local, style: estiloTexto(15)),
+                      ],
+                    ),
                   ),
-                  Spacer(),
                   SizedBox(
                     height: 42,
                     width: largura * 0.11,
@@ -115,7 +99,9 @@ class CardsProfessor extends StatelessWidget {
                 ],
               ),
             ),
-          )).toList(),
+          );
+        },
+      ),
     );
   }
 }

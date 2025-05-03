@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/imagens.dart';
@@ -106,9 +105,11 @@ class _CorpoLoginState extends State<CorpoLogin> {
           children: [
             const SizedBox(width: 19),
             Icon(
-              Icones.usuario,
+              Icons.person, //YURIIIIIII COMO MEXE NESSA PORCARIA MANOOOOOOOOO
+              //Deixei por enquanto esse ícone aqui pra conseguir representar o ícone como cheio (falhei miseravelmente em tentar concertar o outro).
+              //Yuri: kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk fluter 1 x braga 0
               color: CoresClaras.branco,
-              size: 3.h,
+              size: 3.7.h,
             ),
             const SizedBox(width: 10),
             Container(
@@ -183,10 +184,14 @@ class _CorpoLoginState extends State<CorpoLogin> {
           ),
           const SizedBox(width: 3),
           GestureDetector(
-            onTap: () => showDialog(
-              context: context,
-              builder: (context) => dialogoDeErro(context, 'login'),
-            ),
+            onTap: () {
+              Repository.teste();
+            },
+
+            //  showDialog(
+            //   context: context,
+            //   builder: (context) => dialogoDeErro(context, 'login'),
+            // ),
             child: Text(
               'Clique aqui',
               style: estiloTexto(15,
