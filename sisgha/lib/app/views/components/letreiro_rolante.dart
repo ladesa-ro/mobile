@@ -33,13 +33,12 @@ class _LetreiroRolanteState extends State<LetreiroRolante> {
         radius: 15,
         grossuraBorda: 2,
       ),
-      height: 40,
       child: Center(
         child: Consumer<EscolhaCalendario>(
           builder:
               (BuildContext context, EscolhaCalendario value, Widget? child) =>
                   TextScroll(
-            velocity: Velocity(pixelsPerSecond: Offset(5, 0)),
+            velocity: Velocity(pixelsPerSecond: Offset(10, 0)),
             'Técnico Integrado - Informática 2023 - 2023',
             style: estiloTexto(15,
                 cor: CoresClaras.verdePrincipal, peso: FontWeight.bold),

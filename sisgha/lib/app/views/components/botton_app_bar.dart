@@ -92,7 +92,7 @@ class _NavigationState extends State<Navigation> {
         case 0:
           page = ChangeNotifierProvider(
             create: (_) => EscolhaCalendario(),
-            child: Center(child: CalendarAlunos()),
+            child: Center(child: CalendarioAlunos()),
           );
           break;
         case 1:
