@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sisgha/app/providers/escolha_calendario.dart';
 import 'package:text_scroll/text_scroll.dart';
 
 import '../../core/utils/colors.dart';
@@ -33,12 +35,16 @@ class _LetreiroRolanteState extends State<LetreiroRolante> {
       ),
       height: 40,
       child: Center(
-        child: TextScroll(
-          velocity: Velocity(pixelsPerSecond: Offset(10, 0)),
-          'Técnico Integrado - Informática 2023 - 2023',
-          style: estiloTexto(15,
-              cor: CoresClaras.verdePrincipal, peso: FontWeight.bold),
-          mode: TextScrollMode.bouncing,
+        child: Consumer<EscolhaCalendario>(
+          builder:
+              (BuildContext context, EscolhaCalendario value, Widget? child) =>
+                  TextScroll(
+            velocity: Velocity(pixelsPerSecond: Offset(5, 0)),
+            'Técnico Integrado - Informática 2023 - 2023',
+            style: estiloTexto(15,
+                cor: CoresClaras.verdePrincipal, peso: FontWeight.bold),
+            mode: TextScrollMode.bouncing,
+          ),
         ),
       ),
     );

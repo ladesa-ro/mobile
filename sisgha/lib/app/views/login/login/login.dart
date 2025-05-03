@@ -107,6 +107,7 @@ class _CorpoLoginState extends State<CorpoLogin> {
             Icon(
               Icons.person, //YURIIIIIII COMO MEXE NESSA PORCARIA MANOOOOOOOOO
               //Deixei por enquanto esse ícone aqui pra conseguir representar o ícone como cheio (falhei miseravelmente em tentar concertar o outro).
+              //Yuri: kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk fluter 1 x braga 0
               color: CoresClaras.branco,
               size: 3.7.h,
             ),

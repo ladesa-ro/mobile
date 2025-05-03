@@ -49,13 +49,14 @@ class CalendarAlunos extends StatelessWidget {
             child: Row(
               children: [
                 SizedBox(
-                    height: Padroes.aluturaBotoes(),
-                    width: largura * 0.80,
-                    child: LetreiroRolante()),
+                  height: Padroes.aluturaBotoes(),
+                  width: largura * 0.80,
+                  // child: LetreiroRolante()
+                ),
                 Spacer(),
                 SizedBox(
                   height: Padroes.aluturaBotoes(),
-                  width: largura * 0.17, 
+                  width: largura * 0.17,
                   child: ElevatedButton(
                       style: _estiloBotao(),
                       onPressed: () {
@@ -79,11 +80,7 @@ class CalendarAlunos extends StatelessWidget {
           SizedBox(
             height: tamanho * 0.03,
           ),
-          SizedBox(
-            height: tamanho * 0.55,
-            width: Padroes.larguraGeral(),
-            child: CardsAlunos(),
-          ),
+          CardsAlunos(),
         ],
       ),
     );
