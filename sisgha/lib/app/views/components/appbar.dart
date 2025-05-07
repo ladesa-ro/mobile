@@ -16,12 +16,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final bool icones;
 
-  const CustomAppBar(
-      {super.key,
-      required this.height,
-      required this.mes,
-      required this.diaHoje,
-      required this.icones});
+  const CustomAppBar({
+    super.key,
+    required this.height,
+    required this.mes,
+    required this.diaHoje,
+    required this.icones,
+  });
 
   @override
   Size get preferredSize => Size.fromHeight(height);
