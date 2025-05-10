@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:sisgha/app/domain/api/repository.dart';
+import 'package:sisgha/app/domain/model/Turmas.dart';
 import 'package:sisgha/app/domain/model/cursos.dart';
 import 'package:sisgha/app/domain/model/nivel_formacao.dart';
 
@@ -14,7 +15,7 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
   List<OfertaFormacao> listaNivelFormacao = [];
   List<Cursos> listaCursos = [];
   List<String> listaAnos = ["1° Ano", "2° Ano", "3° Ano"];
-  List<String> listaTurmas = ["A", "B"];
+  List<Turma> listaTurmas = [];
 
   pucharOpcoes() async {
     listaNivelFormacao = await Repository.buscarNiveisDeFormacao();
@@ -41,6 +42,12 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
     turmaSelecionada = value;
     notifyListeners();
   }
+
+    void setTurmas(List<Turma> turmas) {
+    listaTurmas = turmas;
+    notifyListeners();
+  }
+  
 
   void resetarTudo() {
     formacaoSelecionada = null;

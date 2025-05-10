@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sisgha/app/domain/model/Turmas.dart';
 
 import '../../views/components/widget_erro.dart';
 import '../model/professor.dart';
@@ -220,7 +221,21 @@ class Repository {
 
     throw Exception();
   }
+// --------------------------------------------------- Turmas ------------------------------------------------------------------//
+static Future<List<Turma>> buscarTurmas() async {
+  final url = Uri.parse("$_api/turmas");
+  final response = await http.get(url, headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  });
 
+  if (verificarStatusCode(response.statusCode)) {
+    final data = jsonDecode(response.body)["data"];
+    return data.map<Turma>((e) => Turma.fromJson(e)).toList();
+  }
+
+  throw Exception("Erro ao buscar turmas");
+}
 // ---------------------------------------- testar rotas, clicar no botao de recuperar senha
   static void teste() async {
     final url = Uri.parse("$_api/ofertas-formacoes");
@@ -233,6 +248,7 @@ class Repository {
 
       for (var element in data) {
         print(element["slug"]);
+        print(element["id"]);
       }
     }
   }

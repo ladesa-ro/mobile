@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/padroes.dart';
+import 'package:sisgha/app/domain/api/repository.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdomn_turmas.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_ano.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_curso.dart';
@@ -40,6 +41,8 @@ class _BodyAlunoState extends State<BodyAluno> {
       provider.selecionarCurso(null);
       provider.selecionarAno(null);
       provider.selecionarTurma(null);
+
+      carregarTurmas(context);
 
       setState(() {
         abrirCurso = false;
@@ -169,5 +172,11 @@ class _BodyAlunoState extends State<BodyAluno> {
         provider.cursoSelecionado != null &&
         provider.anoSelecionado != null &&
         provider.turmaSelecionada != null;
+  }
+
+  void carregarTurmas(BuildContext context) async {
+    final turmas = await Repository.buscarTurmas();
+    Provider.of<EscolhaHorariosAlunos>(context, listen: false)
+        .setTurmas(turmas);
   }
 }
