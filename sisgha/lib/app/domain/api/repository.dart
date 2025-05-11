@@ -223,7 +223,7 @@ class Repository {
 
 // ---------------------------------------- testar rotas, clicar no botao de recuperar senha
   static void teste() async {
-    final url = Uri.parse("$_api/ofertas-formacoes");
+    final url = Uri.parse("$_api/niveis-formacoes");
     final response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',

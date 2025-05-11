@@ -13,15 +13,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
   final String mes;
   final String diaHoje;
-
   final bool icones;
 
-  const CustomAppBar(
-      {super.key,
-      required this.height,
-      required this.mes,
-      required this.diaHoje,
-      required this.icones});
+  const CustomAppBar({
+    super.key,
+    required this.height,
+    required this.mes,
+    required this.diaHoje,
+    required this.icones,
+  });
 
   @override
   Size get preferredSize => Size.fromHeight(height);
@@ -32,6 +32,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       titleSpacing: 0,
       automaticallyImplyLeading: false,
+      actions: [Container()],
       title: Padding(
         padding: Padroes.margem(),
         child: Row(
