@@ -13,7 +13,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
   final String mes;
   final String diaHoje;
-
   final bool icones;
 
   const CustomAppBar({
@@ -33,6 +32,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       titleSpacing: 0,
       automaticallyImplyLeading: false,
+      actions: [Container()],
       title: Padding(
         padding: Padroes.margem(),
         child: Row(
