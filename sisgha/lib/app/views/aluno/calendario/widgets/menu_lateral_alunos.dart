@@ -33,7 +33,10 @@ class _MenuLateralAlunosState extends State<MenuLateralAlunos> {
               SizedBox(height: constraints.maxHeight * 0.03),
               headerDrawer(
                   context, constraints.maxHeight, constraints.maxWidth),
-              Divider(thickness: 2),
+              Divider(
+                thickness: 2,
+                color: CoresClaras.verdecinza,
+              ),
               //ano
               SizedBox(height: constraints.maxHeight * 0.03),
               Text(
