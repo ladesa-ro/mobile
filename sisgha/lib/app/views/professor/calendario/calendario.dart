@@ -37,9 +37,8 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
 
     return Scaffold(
       key: scaffoldKey,
-      drawerEnableOpenDragGesture: false,
       appBar: appBar,
-      drawer: const MenuLateral(),
+      endDrawer: const MenuLateral(),
       body: SingleChildScrollView(
         physics: Padroes.efeitoDeRolagem(),
         padding: margem,
@@ -63,7 +62,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                   child: ElevatedButton(
                     style: _estiloBotao(),
                     onPressed: () {
-                      scaffoldKey.currentState?.openDrawer();
+                      scaffoldKey.currentState?.openEndDrawer();
                     },
                     child: Icones.lupa,
                   ),

@@ -1,13 +1,16 @@
 class Turma {
   final String id;
-  final String? nome;
+  final String slug;
 
-  Turma({required this.id, required this.nome});
+  Turma({
+    required this.id,
+    required this.slug
+  });
 
   factory Turma.fromJson(Map<String, dynamic> json) {
     return Turma(
       id: json['id'].toString(),
-      nome: json['nome'],
+      slug: json['slug'].toString(),
     );
   }
 }

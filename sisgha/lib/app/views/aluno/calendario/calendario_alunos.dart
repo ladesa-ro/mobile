@@ -43,7 +43,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
       key: scaffoldKey,
       drawerEnableOpenDragGesture: false,
       appBar: appBar,
-      drawer: const MenuLateralAlunos(),
+      endDrawer: const MenuLateralAlunos(),
       body: SingleChildScrollView(
         padding: margem,
         child: Column(
@@ -88,7 +88,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                   child: ElevatedButton(
                     style: _estiloBotao(),
                     onPressed: () {
-                      scaffoldKey.currentState?.openDrawer();
+                      scaffoldKey.currentState?.openEndDrawer();
                     },
                     child: Icones.lupa,
                   ),
