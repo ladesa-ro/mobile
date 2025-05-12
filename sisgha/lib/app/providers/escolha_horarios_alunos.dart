@@ -43,11 +43,10 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
     notifyListeners();
   }
 
-    void setTurmas(List<Turma> turmas) {
+  void setTurmas(List<Turma> turmas) {
     listaTurmas = turmas;
     notifyListeners();
   }
-  
 
   void resetarTudo() {
     formacaoSelecionada = null;
