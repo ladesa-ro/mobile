@@ -76,12 +76,8 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                 child:
                     RepaintBoundary(child: MiniCalendario(showDialog: false))),
             SizedBox(height: tamanho * 0.03),
-            SizedBox(
-              height: tamanho * 0.3,
-              width: largura,
-              child: RepaintBoundary(
-                child: CardsProfessor(),
-              ),
+            RepaintBoundary(
+              child: CardsProfessor(),
             ),
           ],
         ),
