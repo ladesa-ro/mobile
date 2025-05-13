@@ -50,6 +50,7 @@ class CardsAlunos extends StatelessWidget {
 
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
       padding: EdgeInsets.zero,
       itemCount: Cards.length,
       itemBuilder: (ctx, index) {

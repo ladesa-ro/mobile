@@ -27,7 +27,7 @@ class CardsProfessor extends StatelessWidget {
     ),
     ElementosCards(
       cor: CoresClaras.vermelho,
-      titulo: "recuperação do 1° semestre ",
+      titulo: "Recuperação do 1° semestre ",
       iconebotao: ElevatedButton(
         style: estiloBotaoCard(),
         onPressed: () {},
@@ -47,61 +47,73 @@ class CardsProfessor extends StatelessWidget {
   Widget build(BuildContext context) {
     double largura = Padroes.larguraGeral();
 
-    return SizedBox(
-      height: 400, // Defina altura máxima visível (ajustável)
-      child: ListView.builder(
-        physics: Padroes.efeitoDeRolagem(),
-        itemCount: Cards.length,
-        itemBuilder: (context, index) {
-          final card = Cards[index];
-          return Container(
-            margin: const EdgeInsets.symmetric(vertical: 10),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              border: Border(
-                left: BorderSide(
-                  color: card.cor,
-                  width: 5,
+    return ListView.builder(
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      padding: EdgeInsets.zero,
+      itemCount: Cards.length,
+      itemBuilder: (ctx, index) {
+        return Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: 0,
+            vertical: 8,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 4,
+                offset: Offset(0, 2),
+              ),
+            ],
+            border: Border(
+              left: BorderSide(
+                color: Cards[index].cor, // cor da borda
+                width: 5, // a espreçura
+              ),
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        Cards[index].titulo,
+                        style: estiloTexto(
+                          16,
+                          cor: Cards[index].cor,
+                          peso: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      Text(Cards[index].inicio, style: estiloTexto(16)),
+                      Text(Cards[index].terminio, style: estiloTexto(16)),
+                      Text(Cards[index].tempo, style: estiloTexto(16)),
+                      Text(Cards[index].local, style: estiloTexto(16)),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          card.titulo,
-                          style: estiloTexto(
-                            16,
-                            cor: card.cor,
-                            peso: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Text(card.inicio, style: estiloTexto(15)),
-                        Text(card.terminio, style: estiloTexto(15)),
-                        Text(card.tempo, style: estiloTexto(15)),
-                        Text(card.local, style: estiloTexto(15)),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 42,
-                    width: largura * 0.11,
-                    child: card.iconebotao,
-                  ),
-                ],
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: SizedBox(
+                  height: 45,
+                  width: largura * 0.115,
+                  child: Cards[index].iconebotao,
+                ),
               ),
-            ),
-          );
-        },
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
