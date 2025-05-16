@@ -56,6 +56,7 @@ class _MiniCalendarioState extends State<MiniCalendario> {
                     radius: 15,
                     grossuraBorda: 2),
                 child: TableCalendar(
+                  availableGestures: AvailableGestures.none,
                   firstDay: DatasFormatadas.primeiroDiaDoAno,
                   lastDay: DatasFormatadas.ultimoDiaDoAno,
                   focusedDay: DatasFormatadas.diaAtualEmNumero,

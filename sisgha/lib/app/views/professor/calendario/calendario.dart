@@ -40,6 +40,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
       appBar: appBar,
       endDrawer: const MenuLateral(),
       body: SingleChildScrollView(
+        primary: true,
         physics: Padroes.efeitoDeRolagem(),
         padding: margem,
         child: Column(
