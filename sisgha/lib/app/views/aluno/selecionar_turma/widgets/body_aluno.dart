@@ -6,7 +6,6 @@ import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/padroes.dart';
 import 'package:sisgha/app/domain/api/repository.dart';
-import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdomn_turmas.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_ano.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_curso.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_formacao.dart';
