@@ -129,7 +129,8 @@ class _DropdownAlunoState extends State<DropdownAno> {
     );
   }
 
-  Widget construirQuadrados(option) {
+  Widget construirQuadrados(String option) {
+    final provider = Provider.of<EscolhaHorariosAlunos>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: ChoiceChip(
@@ -137,29 +138,32 @@ class _DropdownAlunoState extends State<DropdownAno> {
           option,
           style: TextStyle(
             fontSize: Padroes.larguraGeral() * 0.03,
-            color: selectedValue == option
+            color: provider.anoSelecionado == option
                 ? CoresClaras.verdePrincipal
                 : CoresClaras.cinzatexto,
           ),
         ),
-        selected: selectedValue == option,
+        selected: provider.anoSelecionado == option,
         showCheckmark: false,
         selectedColor: CoresClaras.verdeTransparente,
         shape: RoundedRectangleBorder(
           side: BorderSide(
-            color: selectedValue == option
+            color: provider.anoSelecionado == option
                 ? CoresClaras.verdePrincipal
                 : CoresClaras.cinzaBordas,
           ),
           borderRadius: BorderRadius.circular(5),
         ),
         onSelected: (bool selected) {
+          if (selected) {
+            widget.onChanged(option);
+          } else {
+            widget.onChanged(null);
+          }
           setState(() {
-            selectedValue = selected ? option : null;
             isExpanded = true;
             isFocused = true;
           });
-          widget.onChanged(selectedValue);
         },
       ),
     );

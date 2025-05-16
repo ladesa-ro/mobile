@@ -89,14 +89,23 @@ class _BodyAlunoState extends State<BodyAluno> {
 
           // Dropdown de Curso
           DropdownCurso(
+            descricao: 'Curso',
             direita: 10,
             esquerda: 10,
-            descricao: "Curso",
-            onChanged: (value) {
-              provider.selecionarCurso(value);
-              abrirAno = true;
-            },
             abrirDropdown: abrirCurso,
+            onChanged: (valorSelecionado) {
+              if (valorSelecionado != null) {
+                final provider =
+                    Provider.of<EscolhaHorariosAlunos>(context, listen: false);
+                provider.selecionarCurso(
+                    valorSelecionado); // Seta o curso no estado
+                provider.carregarAnosDoCurso(
+                    valorSelecionado); // Chama a API pra puxar os anos
+                setState(() {
+                  abrirAno = true; // Mostra o DropdownAno
+                });
+              }
+            },
           ),
 
           SizedBox(height: Padroes.alturaGeral() * 0.02),
@@ -110,18 +119,6 @@ class _BodyAlunoState extends State<BodyAluno> {
               abrirTurma = true;
             },
             abrirDropdown: abrirAno,
-          ),
-
-          SizedBox(height: Padroes.alturaGeral() * 0.02),
-          //dropdown da turma
-          DropdownTurmas(
-            direita: 10,
-            esquerda: 10,
-            descricao: "Turmas",
-            onChanged: (value) {
-              provider.selecionarTurma(value);
-            },
-            abrirDropdown: abrirTurma,
           ),
 
           SizedBox(height: Padroes.alturaGeral() * 0.02),
@@ -170,8 +167,7 @@ class _BodyAlunoState extends State<BodyAluno> {
     var provider = Provider.of<EscolhaHorariosAlunos>(context);
     return provider.formacaoSelecionada != null &&
         provider.cursoSelecionado != null &&
-        provider.anoSelecionado != null &&
-        provider.turmaSelecionada != null;
+        provider.anoSelecionado != null;
   }
 
   void carregarTurmas(BuildContext context) async {
