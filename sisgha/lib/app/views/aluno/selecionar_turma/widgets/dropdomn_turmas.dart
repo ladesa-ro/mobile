@@ -119,12 +119,13 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
                       scrollDirection: Axis.horizontal,
                       itemCount: listaTumas.length,
                       itemBuilder: (context, index) =>
-                          construirQuadrados(listaTumas[index]))
+                          construirQuadrados(listaTumas[index].id))
                   : null,
             ),
           ],
         ),
       ),
+      
     );
   }
 

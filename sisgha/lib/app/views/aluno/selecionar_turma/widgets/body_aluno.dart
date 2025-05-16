@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/padroes.dart';
-import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdomn_turmas.dart';
+import 'package:sisgha/app/domain/api/repository.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_ano.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_curso.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_formacao.dart';
@@ -40,6 +40,8 @@ class _BodyAlunoState extends State<BodyAluno> {
       provider.selecionarCurso(null);
       provider.selecionarAno(null);
       provider.selecionarTurma(null);
+
+      carregarTurmas(context);
 
       setState(() {
         abrirCurso = false;
@@ -86,14 +88,23 @@ class _BodyAlunoState extends State<BodyAluno> {
 
           // Dropdown de Curso
           DropdownCurso(
+            descricao: 'Curso',
             direita: 10,
             esquerda: 10,
-            descricao: "Curso",
-            onChanged: (value) {
-              provider.selecionarCurso(value);
-              abrirAno = true;
-            },
             abrirDropdown: abrirCurso,
+            onChanged: (valorSelecionado) {
+              if (valorSelecionado != null) {
+                final provider =
+                    Provider.of<EscolhaHorariosAlunos>(context, listen: false);
+                provider.selecionarCurso(
+                    valorSelecionado); // Seta o curso no estado
+                provider.carregarAnosDoCurso(
+                    valorSelecionado); // Chama a API pra puxar os anos
+                setState(() {
+                  abrirAno = true; // Mostra o DropdownAno
+                });
+              }
+            },
           ),
 
           SizedBox(height: Padroes.alturaGeral() * 0.02),
@@ -107,18 +118,6 @@ class _BodyAlunoState extends State<BodyAluno> {
               abrirTurma = true;
             },
             abrirDropdown: abrirAno,
-          ),
-
-          SizedBox(height: Padroes.alturaGeral() * 0.02),
-          //dropdown da turma
-          DropdownTurmas(
-            direita: 10,
-            esquerda: 10,
-            descricao: "Turmas",
-            onChanged: (value) {
-              provider.selecionarTurma(value);
-            },
-            abrirDropdown: abrirTurma,
           ),
 
           SizedBox(height: Padroes.alturaGeral() * 0.02),
@@ -167,7 +166,12 @@ class _BodyAlunoState extends State<BodyAluno> {
     var provider = Provider.of<EscolhaHorariosAlunos>(context);
     return provider.formacaoSelecionada != null &&
         provider.cursoSelecionado != null &&
-        provider.anoSelecionado != null &&
-        provider.turmaSelecionada != null;
+        provider.anoSelecionado != null;
+  }
+
+  void carregarTurmas(BuildContext context) async {
+    final turmas = await Repository.buscarTurmas();
+    Provider.of<EscolhaHorariosAlunos>(context, listen: false)
+        .setTurmas(turmas);
   }
 }
