@@ -157,13 +157,12 @@ class _DropdownAlunoState extends State<DropdownAno> {
         onSelected: (bool selected) {
           if (selected) {
             widget.onChanged(option);
-          } else {
-            widget.onChanged(null);
+            setState(() {
+              selectedValue = option; // ATUALIZA O VALOR SELECIONADO
+              isExpanded = true;
+              isFocused = true;
+            });
           }
-          setState(() {
-            isExpanded = true;
-            isFocused = true;
-          });
         },
       ),
     );

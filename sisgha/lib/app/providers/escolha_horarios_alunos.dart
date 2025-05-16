@@ -16,7 +16,7 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
 
   List<OfertaFormacao> listaNivelFormacao = [];
   List<Cursos> listaCursos = [];
-  List<String> listaAnos = ["1° Ano B", "2° Ano B", "3° Ano B"];
+  List<String> listaAnos = [];
   List<Turma> listaTurmas = [];
 
   String? _cursoSelecionado;
