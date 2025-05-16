@@ -41,6 +41,38 @@ class CardsProfessor extends StatelessWidget {
       tempo: "Começa daqui 3 dias.",
       local: "local: ji-parana",
     ),
+    ElementosCards(
+      cor: CoresClaras.roxo,
+      titulo: "2° etapa ",
+      iconebotao: ElevatedButton(
+        style: estiloBotaoCard(),
+        onPressed: () {},
+        child: Iconify(
+          Icones.sino,
+          color: CoresClaras.branco,
+        ),
+      ),
+      inicio: "Início: 01/04 às 08:00",
+      terminio: "Término: 01/04 às 10:00",
+      tempo: "Começa daqui 3 dias.",
+      local: "Local: ji-parana ",
+    ),
+    ElementosCards(
+      cor: CoresClaras.vermelho,
+      titulo: "Recuperação do 1° semestre ",
+      iconebotao: ElevatedButton(
+        style: estiloBotaoCard(),
+        onPressed: () {},
+        child: Iconify(
+          Icones.sino,
+          color: CoresClaras.branco,
+        ),
+      ),
+      inicio: "Início: 01/04 às 08:00",
+      terminio: "Término: 01/04 às 10:00",
+      tempo: "Começa daqui 3 dias.",
+      local: "local: ji-parana",
+    ),
   ];
 
   @override
@@ -48,6 +80,7 @@ class CardsProfessor extends StatelessWidget {
     double largura = Padroes.larguraGeral();
 
     return ListView.builder(
+      cacheExtent: 500,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       padding: EdgeInsets.zero,

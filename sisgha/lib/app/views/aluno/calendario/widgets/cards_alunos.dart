@@ -4,14 +4,15 @@ import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
 
+import '../../../../core/utils/padroes.dart';
+
 class CardsAlunos extends StatelessWidget {
   CardsAlunos({super.key});
 
-  final List<ElementosCards> Cards = [
+    final List<ElementosCards> Cards = [
     ElementosCards(
       cor: CoresClaras.roxo,
-      titulo: "2º Etapa",
-      icone: Icones.sino,
+      titulo: "2° etapa ",
       iconebotao: ElevatedButton(
         style: estiloBotaoCard(),
         onPressed: () {},
@@ -20,15 +21,14 @@ class CardsAlunos extends StatelessWidget {
           color: CoresClaras.branco,
         ),
       ),
-      inicio: "Início: 00/00 às 00:00",
-      terminio: "Término: 00/00 às 00:00",
-      tempo: "Começa daqui 0 dias.",
-      local: "Local: Ji-Paraná",
+      inicio: "Início: 01/04 às 08:00",
+      terminio: "Término: 01/04 às 10:00",
+      tempo: "Começa daqui 3 dias.",
+      local: "Local: ji-parana ",
     ),
     ElementosCards(
       cor: CoresClaras.vermelho,
-      titulo: "Recuperação do 1º Semestre",
-      icone: Icones.sino,
+      titulo: "Recuperação do 1° semestre ",
       iconebotao: ElevatedButton(
         style: estiloBotaoCard(),
         onPressed: () {},
@@ -37,18 +37,51 @@ class CardsAlunos extends StatelessWidget {
           color: CoresClaras.branco,
         ),
       ),
-      inicio: "Início: 00/00 às 00:00",
-      terminio: "Término: 00/00 às 00:00",
-      tempo: "Começa daqui 0 dias.",
-      local: "Local: Ji-Paraná",
+      inicio: "Início: 01/04 às 08:00",
+      terminio: "Término: 01/04 às 10:00",
+      tempo: "Começa daqui 3 dias.",
+      local: "local: ji-parana",
+    ),
+    ElementosCards(
+      cor: CoresClaras.roxo,
+      titulo: "2° etapa ",
+      iconebotao: ElevatedButton(
+        style: estiloBotaoCard(),
+        onPressed: () {},
+        child: Iconify(
+          Icones.sino,
+          color: CoresClaras.branco,
+        ),
+      ),
+      inicio: "Início: 01/04 às 08:00",
+      terminio: "Término: 01/04 às 10:00",
+      tempo: "Começa daqui 3 dias.",
+      local: "Local: ji-parana "),
+    ElementosCards(
+      cor: CoresClaras.vermelho,
+      titulo: "Recuperação do 1° semestre ",
+      iconebotao: ElevatedButton(
+        style: estiloBotaoCard(),
+        onPressed: () {},
+        child: Iconify(
+          Icones.sino,
+          color: CoresClaras.branco,
+        ),
+      ),
+      inicio: "Início: 01/04 às 08:00",
+      terminio: "Término: 01/04 às 10:00",
+      tempo: "Começa daqui 3 dias.",
+      local: "local: ji-parana",
     ),
   ];
 
+
   @override
   Widget build(BuildContext context) {
-    double largura = MediaQuery.of(context).size.width;
+    double largura = Padroes.larguraGeral();
 
     return ListView.builder(
+      cacheExtent: 500,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       padding: EdgeInsets.zero,
@@ -118,11 +151,9 @@ class CardsAlunos extends StatelessWidget {
     );
   }
 }
-
 class ElementosCards {
   final Color cor;
   final String titulo;
-  final String icone;
   final ElevatedButton iconebotao;
   final String inicio;
   final String terminio;
@@ -132,7 +163,6 @@ class ElementosCards {
   ElementosCards({
     required this.cor,
     required this.titulo,
-    required this.icone,
     required this.iconebotao,
     required this.inicio,
     required this.terminio,
@@ -140,6 +170,7 @@ class ElementosCards {
     required this.local,
   });
 }
+
 
 ButtonStyle estiloBotaoCard() {
   return ButtonStyle(
