@@ -109,8 +109,8 @@ class _DropdownFormacaoState extends State<DropdownFormacao> {
                       physics: Padroes.efeitoDeRolagem(),
                       scrollDirection: Axis.horizontal,
                       itemCount: listaFormacoes.length,
-                      itemBuilder: (context, index) =>
-                          construirQuadrados(listaFormacoes[index].slug))
+                      itemBuilder: (context, index) => construirQuadrados(
+                          listaFormacoes[index].ofertaFormacao['nome']))
                   : null,
             ),
           ],

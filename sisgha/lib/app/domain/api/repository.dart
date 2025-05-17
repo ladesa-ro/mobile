@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sisgha/app/domain/model/Turmas.dart';
+import 'package:sisgha/app/domain/model/turmas.dart';
 
 import '../../views/components/widget_erro.dart';
 import '../model/professor.dart';
@@ -204,11 +204,19 @@ class Repository {
           .toList();
     }
 
-    throw Exception();
+    return <OfertaFormacao>[];
   }
 
-  static Future<List<Cursos>> buscarCursos() async {
-    final url = Uri.parse("$_api/cursos");
+  static Future<List<Cursos>> buscarCursos(
+      {required String ofertaFormacaoId}) async {
+    final url = Uri.https(
+      'dev.ladesa.com.br', // domínio base
+      '/api/v1/cursos', // caminho da API
+      {
+        'filter.ofertaFormacao.id': ofertaFormacaoId, // query parameter
+      },
+    );
+
     final response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -219,23 +227,31 @@ class Repository {
       return data.map<Cursos>((e) => Cursos.fromJson(e)).toList();
     }
 
-    throw Exception();
-  }
-// --------------------------------------------------- Turmas ------------------------------------------------------------------//
-static Future<List<Turma>> buscarTurmas() async {
-  final url = Uri.parse("$_api/turmas");
-  final response = await http.get(url, headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-  });
-
-  if (verificarStatusCode(response.statusCode)) {
-    final data = jsonDecode(response.body)["data"];
-    return data.map<Turma>((e) => Turma.fromJson(e)).toList();
+    return <Cursos>[];
   }
 
-  throw Exception("Erro ao buscar turmas");
-}
+  static Future<List<Turma>> buscarTurmas({required String nomeCurso}) async {
+    final url = Uri.https(
+      'dev.ladesa.com.br',
+      '/api/v1/turmas',
+      {
+        'filter.curso.nome': nomeCurso,
+      },
+    );
+
+    final response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+
+    if (verificarStatusCode(response.statusCode)) {
+      final data = jsonDecode(response.body)["data"];
+      return data.map<Turma>((e) => Turma.fromJson(e)).toList();
+    }
+
+    return <Turma>[];
+  }
+
 // ---------------------------------------- testar rotas, clicar no botao de recuperar senha
   static void teste() async {
     final url = Uri.parse("$_api/niveis-formacoes");
@@ -253,3 +269,25 @@ static Future<List<Turma>> buscarTurmas() async {
     }
   }
 }
+
+  // void carregarAnosDoCurso(String curso) async {
+  //   _cursoSelecionado = curso;
+
+  //   final response = await http.get(Uri.parse("$_api/turmas"));
+  //   final decoded = json.decode(response.body);
+
+  //   if (decoded is Map && decoded.containsKey('data')) {
+  //     final List<dynamic> dataList = decoded['data'];
+  //     listaAnos = dataList
+  //         .map<String>(
+  //             (e) => e['periodo']?.toString() ?? '') // pega o campo 'periodo'
+  //         .where((element) => element.isNotEmpty) // filtra só não vazios
+  //         .toSet() // evita repetições
+  //         .toList();
+  //   } else {
+  //     listaAnos = [];
+  //     print("Formato do JSON inesperado");
+  //   }
+
+  //   notifyListeners();
+  // }
