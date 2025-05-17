@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/padroes.dart';
-import 'package:sisgha/app/domain/api/repository.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_turma.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_curso.dart';
 import 'package:sisgha/app/views/aluno/selecionar_turma/widgets/dropdown_formacao.dart';
@@ -20,24 +19,7 @@ class BodyAluno extends StatefulWidget {
 
 class _BodyAlunoState extends State<BodyAluno> {
   bool abrirCurso = false;
-
-  void abrirDropdownCurso() {
-    setState(() {
-      abrirCurso = true;
-    });
-  }
-
   bool abrirTurma = false;
-  @override
-  void initState() {
-    super.initState();
-
-    setState(() {
-      abrirCurso = false;
-
-      abrirTurma = false;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -118,9 +100,7 @@ class _BodyAlunoState extends State<BodyAluno> {
                           }
                         : null,
                     style: _estiloBotao(),
-
                     child: const Text("Ver Horário"),
-                    //style: Padroes.estiloBotao(),
                   ),
                 ),
               ],
