@@ -7,14 +7,14 @@ import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/padroes.dart';
 import 'package:sisgha/app/providers/escolha_horarios_alunos.dart';
 
-class DropdownTurmas extends StatefulWidget {
+class DropdownTurma extends StatefulWidget {
   final double direita;
   final double esquerda;
   final String descricao;
   final Function(String?) onChanged;
   final bool abrirDropdown;
 
-  const DropdownTurmas({
+  const DropdownTurma({
     super.key,
     required this.direita,
     required this.esquerda,
@@ -24,16 +24,16 @@ class DropdownTurmas extends StatefulWidget {
   });
 
   @override
-  State<DropdownTurmas> createState() => _DropdownTurmasState();
+  State<DropdownTurma> createState() => _DropdownAlunoState();
 }
 
-class _DropdownTurmasState extends State<DropdownTurmas> {
+class _DropdownAlunoState extends State<DropdownTurma> {
   String? selectedValue;
   bool isExpanded = false;
   bool isFocused = false;
 
   @override
-  void didUpdateWidget(covariant DropdownTurmas oldWidget) {
+  void didUpdateWidget(covariant DropdownTurma oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.abrirDropdown != oldWidget.abrirDropdown) {
       setState(() {
@@ -53,7 +53,7 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<EscolhaHorariosAlunos>(context);
-    var listaTumas = provider.listaTurmas;
+    var listaTurmas = provider.listaTurmas;
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -65,12 +65,13 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
         duration: const Duration(microseconds: 300),
         width: Padroes.larguraGeral() * 0.9,
         decoration: BoxDecoration(
-            border: Border.all(
-              color: selectedValue != null
-                  ? CoresClaras.verdePrincipal
-                  : CoresClaras.cinzaBordas,
-            ),
-            borderRadius: BorderRadius.circular(10.0)),
+          border: Border.all(
+            color: selectedValue != null
+                ? CoresClaras.verdePrincipal
+                : CoresClaras.cinzaBordas,
+          ),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
         padding: EdgeInsets.fromLTRB(
           Padroes.larguraGeral() * 0.03,
           Padroes.alturaGeral() * 0.01,
@@ -117,19 +118,19 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
                   ? ListView.builder(
                       physics: Padroes.efeitoDeRolagem(),
                       scrollDirection: Axis.horizontal,
-                      itemCount: listaTumas.length,
+                      itemCount: listaTurmas.length,
                       itemBuilder: (context, index) =>
-                          construirQuadrados(listaTumas[index].id))
+                          construirQuadrados(listaTurmas[index].periodo))
                   : null,
             ),
           ],
         ),
       ),
-      
     );
   }
 
-  Widget construirQuadrados(option) {
+  Widget construirQuadrados(String option) {
+    final provider = Provider.of<EscolhaHorariosAlunos>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: ChoiceChip(
@@ -137,29 +138,31 @@ class _DropdownTurmasState extends State<DropdownTurmas> {
           option,
           style: TextStyle(
             fontSize: Padroes.larguraGeral() * 0.03,
-            color: selectedValue == option
+            color: provider.turmaSelecionada == option
                 ? CoresClaras.verdePrincipal
                 : CoresClaras.cinzatexto,
           ),
         ),
-        selected: selectedValue == option,
+        selected: provider.turmaSelecionada == option,
         showCheckmark: false,
         selectedColor: CoresClaras.verdeTransparente,
         shape: RoundedRectangleBorder(
           side: BorderSide(
-            color: selectedValue == option
+            color: provider.turmaSelecionada == option
                 ? CoresClaras.verdePrincipal
                 : CoresClaras.cinzaBordas,
           ),
           borderRadius: BorderRadius.circular(5),
         ),
         onSelected: (bool selected) {
-          setState(() {
-            selectedValue = selected ? option : null;
-            isExpanded = true;
-            isFocused = true;
-          });
-          widget.onChanged(selectedValue);
+          if (selected) {
+            widget.onChanged(option);
+            setState(() {
+              selectedValue = option; // ATUALIZA O VALOR SELECIONADO
+              isExpanded = true;
+              isFocused = true;
+            });
+          }
         },
       ),
     );

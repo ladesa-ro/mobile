@@ -1,14 +1,8 @@
 class OfertaFormacao {
-  final String id;
-  final String slug;
+  final Map<String, String> ofertaFormacao;
 
-  OfertaFormacao({
-    required this.id,
-    required this.slug,
-  });
+  OfertaFormacao({required this.ofertaFormacao});
 
   factory OfertaFormacao.fromJson(Map<String, dynamic> json) => OfertaFormacao(
-        slug: json['slug'],
-        id: json['id'],
-      );
+      ofertaFormacao: {'nome': '${json['nome']}', 'id': json['id']});
 }
