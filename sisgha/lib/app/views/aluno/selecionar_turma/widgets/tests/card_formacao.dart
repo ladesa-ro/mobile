@@ -17,12 +17,12 @@ class CardFormacao extends StatefulWidget {
 }
 
 class _CardFormacaoState extends State<CardFormacao> {
-  late bool formacaoAtiva;
+  late bool espandido;
 
   @override
   void initState() {
     super.initState();
-    formacaoAtiva = true;
+    espandido = true;
   }
 
   @override
@@ -33,18 +33,19 @@ class _CardFormacaoState extends State<CardFormacao> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<EscolhaHorariosAlunos>(context);
-    bool selecionado = provider.idFormacaoSelecionada != null ? true : false;
+    bool formacaoSelecionada =
+        provider.idFormacaoSelecionada != null ? true : false;
 
     return GestureDetector(
       onTap: () {
         setState(() {
-          formacaoAtiva = !formacaoAtiva;
+          espandido = !espandido;
         });
       },
       child: AnimatedContainer(
         padding: EdgeInsets.symmetric(horizontal: 4.w),
         duration: Duration(milliseconds: 300),
-        decoration: _boxDecoration(selecionado),
+        decoration: _boxDecoration(formacaoSelecionada),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -57,15 +58,15 @@ class _CardFormacaoState extends State<CardFormacao> {
                     'Formação',
                     style: estiloTexto(15,
                         peso: FontWeight.bold,
-                        cor: selecionado
+                        cor: formacaoSelecionada
                             ? CoresClaras.pretoTexto
                             : CoresClaras.cinzatexto),
                   ),
                   Transform.rotate(
-                    angle: formacaoAtiva ? 3.14 : 0,
+                    angle: espandido ? 3.14 : 0,
                     child: Iconify(
                       Icones.setaBaixo,
-                      color: selecionado
+                      color: formacaoSelecionada
                           ? CoresClaras.verdePrincipal
                           : CoresClaras.cinzaBordas,
                       size: 36,
@@ -76,7 +77,7 @@ class _CardFormacaoState extends State<CardFormacao> {
             ),
             AnimatedCrossFade(
               duration: Duration(milliseconds: 300),
-              crossFadeState: formacaoAtiva
+              crossFadeState: espandido
                   ? CrossFadeState.showSecond
                   : CrossFadeState.showFirst,
               firstChild: SizedBox.shrink(), // Quando fechado
@@ -117,7 +118,9 @@ class _CardFormacaoState extends State<CardFormacao> {
         labelPadding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 0.5.h),
         showCheckmark: false,
         selected: selecionado,
-        onSelected: (_) => provider.selecionarFormacao(opcao),
+        onSelected: (_) => selecionado
+            ? provider.selecionarFormacao(null)
+            : provider.selecionarFormacao(opcao),
         selectedColor: CoresClaras.verdeTransparente,
         backgroundColor: Colors.white,
         labelStyle: TextStyle(

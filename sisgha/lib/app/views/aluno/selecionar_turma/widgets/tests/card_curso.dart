@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/estilos.dart';
@@ -16,38 +17,23 @@ class CardCurso extends StatefulWidget {
 }
 
 class _CardCursoState extends State<CardCurso> {
-  bool cursoAtivo = false;
-
-  @override
-  void initState() {
-    super.initState();
-    final provider = Provider.of<EscolhaHorariosAlunos>(context, listen: false);
-
-    print(provider.idFormacaoSelecionada);
-    cursoAtivo = provider.idFormacaoSelecionada != null ||
-            provider.idFormacaoSelecionada != ''
-        ? true
-        : false;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<EscolhaHorariosAlunos>(context);
 
+    bool expandido = provider.cursoExpandido;
+
+    bool cursoSelecionado = provider.cursoSelecionado != null ? true : false;
+
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          cursoAtivo = !cursoAtivo;
-        });
-      },
+      onTap: () => setState(() {
+        provider.idFormacaoSelecionada != null
+            ? provider.expandirCurso(!provider.cursoExpandido)
+            : provider.expandirCurso(false);
+      }),
       child: AnimatedContainer(
         padding: EdgeInsets.symmetric(horizontal: 15),
-        duration: Duration(milliseconds: 500),
+        duration: Duration(milliseconds: 300),
         decoration: BoxDecoration(
             border: Border.all(color: CoresClaras.cinzaBordas, width: 2),
             borderRadius: BorderRadius.circular(15)),
@@ -61,10 +47,14 @@ class _CardCursoState extends State<CardCurso> {
                 children: [
                   Text(
                     'Curso',
-                    style: estiloTexto(15),
+                    style: estiloTexto(15,
+                        peso: FontWeight.bold,
+                        cor: cursoSelecionado
+                            ? CoresClaras.pretoTexto
+                            : CoresClaras.cinzatexto),
                   ),
                   Transform.rotate(
-                    angle: cursoAtivo ? 3.14 : 0,
+                    angle: expandido ? 3.14 : 0,
                     child: Iconify(
                       Icones.setaBaixo,
                       color: CoresClaras.cinzaBordas,
@@ -76,18 +66,18 @@ class _CardCursoState extends State<CardCurso> {
             ),
             AnimatedCrossFade(
               duration: Duration(milliseconds: 300),
-              crossFadeState: cursoAtivo
-                  ? CrossFadeState.showFirst
-                  : CrossFadeState.showSecond,
+              crossFadeState: expandido
+                  ? CrossFadeState.showSecond
+                  : CrossFadeState.showFirst,
               firstChild: SizedBox.shrink(), // Quando fechado
               secondChild: SizedBox(
                 height: Padroes.alturaGeral() * 0.07,
                 child: ListView.builder(
                   physics: Padroes.efeitoDeRolagem(),
                   scrollDirection: Axis.horizontal,
-                  itemCount: provider.listaNivelFormacao.length,
+                  itemCount: provider.listaCursos.length,
                   itemBuilder: (context, index) => quadradoSelecionavel(
-                    provider.listaNivelFormacao[index].ofertaFormacao['nome']!,
+                    provider.listaCursos[index].nome,
                     provider,
                   ),
                 ),
@@ -102,22 +92,40 @@ class _CardCursoState extends State<CardCurso> {
   Widget quadradoSelecionavel(String opcao, EscolhaHorariosAlunos provider) {
     final selecionado = provider.cursoSelecionado == opcao;
 
-    return ChoiceChip(
-      label: Text(opcao),
-      showCheckmark: false,
-      selected: selecionado,
-      onSelected: (_) => provider.selecionarCurso(opcao),
-      selectedColor: CoresClaras.verdecinza,
-      backgroundColor: Colors.white,
-      labelStyle: TextStyle(
-        color: selecionado ? Colors.white : Colors.black,
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-        side: BorderSide(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: ChoiceChip(
+        chipAnimationStyle: ChipAnimationStyle(
+          enableAnimation: AnimationStyle.noAnimation,
+        ),
+        label: Text(
+          opcao,
+          style: estiloTexto(
+            14,
+            cor: selecionado
+                ? CoresClaras.verdePrincipalTexto
+                : CoresClaras.cinzatexto,
+          ),
+        ),
+        labelPadding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 0.5.h),
+        showCheckmark: false,
+        selected: selecionado,
+        onSelected: (_) => selecionado
+            ? provider.selecionarCurso(null)
+            : provider.selecionarCurso(opcao),
+        selectedColor: CoresClaras.verdeTransparente,
+        backgroundColor: Colors.white,
+        labelStyle: TextStyle(
+          color: selecionado ? Colors.white : Colors.black,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          side: BorderSide(
             color: selecionado
                 ? CoresClaras.verdePrincipalBorda
-                : CoresClaras.cinzaBordas),
+                : CoresClaras.cinzaBordas,
+          ),
+        ),
       ),
     );
   }

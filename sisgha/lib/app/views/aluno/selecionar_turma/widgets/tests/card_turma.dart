@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../../../core/utils/colors.dart';
 import '../../../../../core/utils/estilos.dart';
@@ -20,8 +21,14 @@ class _CardTurmaState extends State<CardTurma> {
   Widget build(BuildContext context) {
     final provider = Provider.of<EscolhaHorariosAlunos>(context);
 
-    bool turmaAtiva = provider.cursoSelecionado != null ? true : false;
+    bool expandido = provider.turmaExpandida;
+    bool turmaSelecionada = provider.turmaSelecionada != null ? true : false;
     return GestureDetector(
+      onTap: () => setState(() {
+        provider.cursoSelecionado != null
+            ? provider.expandirTurma(!provider.turmaExpandida)
+            : provider.expandirTurma(false);
+      }),
       child: AnimatedContainer(
         padding: EdgeInsets.symmetric(horizontal: 15),
         duration: Duration(milliseconds: 500),
@@ -38,10 +45,14 @@ class _CardTurmaState extends State<CardTurma> {
                 children: [
                   Text(
                     'Turma',
-                    style: estiloTexto(15),
+                    style: estiloTexto(15,
+                        peso: FontWeight.bold,
+                        cor: turmaSelecionada
+                            ? CoresClaras.pretoTexto
+                            : CoresClaras.cinzatexto),
                   ),
                   Transform.rotate(
-                    angle: turmaAtiva ? 3.14 : 0,
+                    angle: expandido ? 3.14 : 0,
                     child: Iconify(
                       Icones.setaBaixo,
                       color: CoresClaras.cinzaBordas,
@@ -53,7 +64,7 @@ class _CardTurmaState extends State<CardTurma> {
             ),
             AnimatedCrossFade(
               duration: Duration(milliseconds: 300),
-              crossFadeState: turmaAtiva
+              crossFadeState: expandido
                   ? CrossFadeState.showSecond
                   : CrossFadeState.showFirst,
               firstChild: SizedBox.shrink(), // Quando fechado
@@ -62,9 +73,9 @@ class _CardTurmaState extends State<CardTurma> {
                 child: ListView.builder(
                   physics: Padroes.efeitoDeRolagem(),
                   scrollDirection: Axis.horizontal,
-                  itemCount: provider.listaNivelFormacao.length,
+                  itemCount: provider.listaTurmas.length,
                   itemBuilder: (context, index) => quadradoSelecionavel(
-                    provider.listaNivelFormacao[index].ofertaFormacao['nome']!,
+                    provider.listaTurmas[index].nome,
                     provider,
                   ),
                 ),
@@ -79,22 +90,40 @@ class _CardTurmaState extends State<CardTurma> {
   Widget quadradoSelecionavel(String opcao, EscolhaHorariosAlunos provider) {
     final selecionado = provider.turmaSelecionada == opcao;
 
-    return ChoiceChip(
-      label: Text(opcao),
-      showCheckmark: false,
-      selected: selecionado,
-      onSelected: (_) => provider.selecionarTurma(opcao),
-      selectedColor: CoresClaras.verdecinza,
-      backgroundColor: Colors.white,
-      labelStyle: TextStyle(
-        color: selecionado ? Colors.white : Colors.black,
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-        side: BorderSide(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: ChoiceChip(
+        chipAnimationStyle: ChipAnimationStyle(
+          enableAnimation: AnimationStyle.noAnimation,
+        ),
+        label: Text(
+          opcao,
+          style: estiloTexto(
+            14,
+            cor: selecionado
+                ? CoresClaras.verdePrincipalTexto
+                : CoresClaras.cinzatexto,
+          ),
+        ),
+        labelPadding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 0.5.h),
+        showCheckmark: false,
+        selected: selecionado,
+        onSelected: (_) => selecionado
+            ? provider.selecionarTurma(null)
+            : provider.selecionarTurma(opcao),
+        selectedColor: CoresClaras.verdeTransparente,
+        backgroundColor: Colors.white,
+        labelStyle: TextStyle(
+          color: selecionado ? Colors.white : Colors.black,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          side: BorderSide(
             color: selecionado
                 ? CoresClaras.verdePrincipalBorda
-                : CoresClaras.cinzaBordas),
+                : CoresClaras.cinzaBordas,
+          ),
+        ),
       ),
     );
   }

@@ -14,34 +14,75 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
   List<Cursos> listaCursos = [];
   List<Turma> listaTurmas = [];
 
+  bool cursoExpandido = false;
+  bool turmaExpandida = false;
+
+  void expandirCurso(bool value) {
+    cursoExpandido = value;
+    notifyListeners();
+  }
+
+  void expandirTurma(bool value) {
+    turmaExpandida = value;
+    notifyListeners();
+  }
+
   pucharOpcoes() async {
     listaNivelFormacao = await Repository.buscarNiveisDeFormacao();
     notifyListeners();
   }
 
   void selecionarFormacao(String? value) async {
-    final buscaRelacionados = listaNivelFormacao.firstWhere(
-      (e) => e.ofertaFormacao['nome'] == value,
-    );
+    if (value == null || value == '') {
+      idFormacaoSelecionada = null;
+      nomeFormacaoSelecionada = null;
+      cursoSelecionado = null;
+      turmaSelecionada = null;
+      listaCursos.clear();
+      listaTurmas.clear();
+      expandirCurso(false);
+      expandirTurma(false);
+    } else {
+      final buscaRelacionados = listaNivelFormacao
+          .firstWhere((e) => e.ofertaFormacao['nome'] == value);
 
-    idFormacaoSelecionada = buscaRelacionados.ofertaFormacao['id'];
+      idFormacaoSelecionada = buscaRelacionados.ofertaFormacao['id'];
 
-    nomeFormacaoSelecionada = value;
-    listaCursos = await Repository.buscarCursos(
-        ofertaFormacaoId: idFormacaoSelecionada ?? '');
+      nomeFormacaoSelecionada = value;
+      listaCursos = await Repository.buscarCursos(
+          ofertaFormacaoId: idFormacaoSelecionada!);
+      expandirCurso(true);
+      expandirTurma(false);
+      listaTurmas.clear();
+      cursoSelecionado = null;
+      turmaSelecionada = null;
+    }
 
     notifyListeners();
   }
 
   selecionarCurso(String? value) async {
-    cursoSelecionado = value;
-    listaTurmas =
-        await Repository.buscarTurmas(nomeCurso: cursoSelecionado ?? '');
+    if (value == null || value == '') {
+      cursoSelecionado = null;
+      turmaSelecionada = null;
+      listaTurmas.clear();
+      expandirTurma(false);
+    } else {
+      cursoSelecionado = value;
+      listaTurmas = await Repository.buscarTurmas(nomeCurso: cursoSelecionado!);
+      expandirTurma(true);
+      turmaSelecionada = null;
+    }
+
     notifyListeners();
   }
 
   selecionarTurma(String? value) {
-    turmaSelecionada = value;
+    if (value == null || value == '') {
+      turmaSelecionada = null;
+    } else {
+      turmaSelecionada = value;
+    }
     notifyListeners();
   }
 
