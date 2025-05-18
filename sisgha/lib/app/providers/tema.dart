@@ -7,6 +7,9 @@ class Temas {
   static final temaClaro = ThemeData(
     // textTheme:
     //     TextTheme(bodyLarge: TextStyle(color: CoresClaras.brancoTexto)), codigo que mulda a cor dos textos
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
+    hoverColor: Colors.transparent,
     brightness: Brightness.light,
     primaryColor: CoresClaras.verdePrincipal,
     fontFamily: 'Poppins',
@@ -25,6 +28,9 @@ class Temas {
   static final ThemeData temaEscuro = ThemeData(
     // textTheme:
     //     TextTheme(bodyLarge: TextStyle(color: CoresEscuras.brancoTextoEscuro)), codigo que mulda a cor dos textos
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
+    hoverColor: Colors.transparent,
     brightness: Brightness.dark,
     primaryColor: CoresEscuras.verdePrincipalEscuro,
     fontFamily: 'Poppins',

@@ -5,6 +5,7 @@ import 'package:sisgha/app/domain/model/cursos.dart';
 import 'package:sisgha/app/domain/model/nivel_formacao.dart';
 
 class EscolhaHorariosAlunos extends ChangeNotifier {
+  String? nomeFormacaoSelecionada;
   String? idFormacaoSelecionada;
   String? cursoSelecionado;
   String? turmaSelecionada;
@@ -25,9 +26,9 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
 
     idFormacaoSelecionada = buscaRelacionados.ofertaFormacao['id'];
 
+    nomeFormacaoSelecionada = value;
     listaCursos = await Repository.buscarCursos(
         ofertaFormacaoId: idFormacaoSelecionada ?? '');
-    print(idFormacaoSelecionada);
 
     notifyListeners();
   }
