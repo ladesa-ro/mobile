@@ -120,7 +120,7 @@ class _DropdownAlunoState extends State<DropdownTurma> {
                       scrollDirection: Axis.horizontal,
                       itemCount: listaTurmas.length,
                       itemBuilder: (context, index) =>
-                          construirQuadrados(listaTurmas[index].periodo))
+                          construirQuadrados(listaTurmas[index].nome))
                   : null,
             ),
           ],

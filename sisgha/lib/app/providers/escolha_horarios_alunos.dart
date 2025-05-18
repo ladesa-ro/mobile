@@ -21,12 +21,14 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
   void selecionarFormacao(String? value) async {
     final buscaRelacionados = listaNivelFormacao.firstWhere(
       (e) => e.ofertaFormacao['nome'] == value,
-      orElse: () => OfertaFormacao(ofertaFormacao: {'nome': '', 'id': ''}),
     );
 
     idFormacaoSelecionada = buscaRelacionados.ofertaFormacao['id'];
+
     listaCursos = await Repository.buscarCursos(
         ofertaFormacaoId: idFormacaoSelecionada ?? '');
+    print(idFormacaoSelecionada);
+
     notifyListeners();
   }
 
