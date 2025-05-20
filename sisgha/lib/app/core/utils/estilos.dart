@@ -53,3 +53,14 @@ BoxDecoration estiloBorda({
     borderRadius: BorderRadius.circular(radius),
   );
 }
+
+//utilizado na tela de filtragem das turmas para logar como aluno
+BoxDecoration bordasCardsAlunos(bool selecionado) {
+  return BoxDecoration(
+      border: Border.all(
+          color: selecionado
+              ? CoresClaras.verdePrincipalBorda
+              : CoresClaras.cinzaBordas,
+          width: 2),
+      borderRadius: BorderRadius.circular(15));
+}

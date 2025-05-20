@@ -25,7 +25,10 @@ class CustomAppBarNotificacao extends StatelessWidget
       leading: seta
           ? IconButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/acessoAluno',
+                  (route) => false,
+                );
               },
               icon: Iconify(
                 Icones.setaVoltarDireita,

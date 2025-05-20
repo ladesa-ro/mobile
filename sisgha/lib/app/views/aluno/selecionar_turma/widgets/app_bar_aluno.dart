@@ -11,12 +11,15 @@ class AppbarAluno extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<EscolhaHorariosAlunos>(context);
+    final provider = Provider.of<EscolhaHorariosAlunos>(context, listen: false);
     return AppBar(
       leading: BackButton(
         onPressed: () {
-          // provider.resetarTudo();
-          Navigator.of(context).pop();
+          provider.resetarTudo();
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            '/login',
+            (route) => false,
+          );
         },
         style: ButtonStyle(
           iconSize: WidgetStatePropertyAll(4.h),

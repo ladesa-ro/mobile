@@ -40,7 +40,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             if (icones == true)
               IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/acessoAluno',
+                    (route) => false,
+                  );
                 },
                 icon: Iconify(
                   Icones.setaVoltarDireita,

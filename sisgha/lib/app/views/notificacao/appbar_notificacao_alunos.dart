@@ -28,7 +28,10 @@ class AppbarNotificacaoAlunos extends StatelessWidget
       ),
       leading: IconButton(
         onPressed: () {
-          Navigator.of(context).pop();
+          Navigator.of(context).pushNamedAndRemoveUntil(
+            '/acessoAluno',
+            (route) => false,
+          );
         },
         icon: Iconify(
           Icones.setaVoltarDireita,
