@@ -40,8 +40,8 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
       turmaSelecionada = null;
       listaCursos.clear();
       listaTurmas.clear();
-      expandirCurso(false);
-      expandirTurma(false);
+      cursoExpandido = false;
+      turmaExpandida = false;
     } else {
       final buscaRelacionados = listaNivelFormacao
           .firstWhere((e) => e.ofertaFormacao['nome'] == value);
@@ -51,8 +51,8 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
       nomeFormacaoSelecionada = value;
       listaCursos = await Repository.buscarCursos(
           ofertaFormacaoId: idFormacaoSelecionada!);
-      expandirCurso(true);
-      expandirTurma(false);
+      cursoExpandido = true;
+      turmaExpandida = false;
       listaTurmas.clear();
       cursoSelecionado = null;
       turmaSelecionada = null;
@@ -66,11 +66,11 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
       cursoSelecionado = null;
       turmaSelecionada = null;
       listaTurmas.clear();
-      expandirTurma(false);
+      turmaExpandida = false;
     } else {
       cursoSelecionado = value;
       listaTurmas = await Repository.buscarTurmas(nomeCurso: cursoSelecionado!);
-      expandirTurma(true);
+      turmaExpandida = true;
       turmaSelecionada = null;
     }
 
@@ -93,8 +93,13 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
 
   void resetarTudo() {
     idFormacaoSelecionada = null;
+    nomeFormacaoSelecionada = null;
     cursoSelecionado = null;
     turmaSelecionada = null;
+    listaCursos.clear();
+    listaTurmas.clear();
+    cursoExpandido = false;
+    turmaExpandida = false;
     notifyListeners();
   }
 }

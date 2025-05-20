@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:sisgha/app/views/aluno/selecionar_turma/selecionar_turma.dart';
+import 'package:sisgha/app/views/aluno/selecionar_turma/filtragem_de_turmas.dart';
 import 'package:sisgha/app/views/login/boas_vindas.dart';
 import 'package:sisgha/app/views/professor/calendario/calendario.dart';
 import 'package:sisgha/app/views/professor/home/home.dart';
@@ -19,7 +19,7 @@ class AppRoutes {
       '/perfilProf': (context) => const Perfil(),
       '/calendario': (context) => CalendarioProfessor(),
       '/primeiraTela': (context) => const SplashScreen(),
-      '/acessoAluno': (context) => const PaginaAlunoSelec(),
+      '/acessoAluno': (context) => const FiltrargemDeTurmas(),
       '/notificacao': (context) => const Notificacao()
     };
   }
