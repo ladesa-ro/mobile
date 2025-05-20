@@ -3,11 +3,11 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../../core/utils/colors.dart';
-import '../../../../../core/utils/estilos.dart';
-import '../../../../../core/utils/icones.dart';
-import '../../../../../core/utils/padroes.dart';
-import '../../../../../providers/escolha_horarios_alunos.dart';
+import '../../../../core/utils/colors.dart';
+import '../../../../core/utils/estilos.dart';
+import '../../../../core/utils/icones.dart';
+import '../../../../core/utils/padroes.dart';
+import '../../../../providers/escolha_horarios_alunos.dart';
 
 class CardCurso extends StatefulWidget {
   const CardCurso({super.key});
@@ -33,7 +33,7 @@ class _CardCursoState extends State<CardCurso> {
             }
           },
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: EdgeInsets.symmetric(horizontal: 4.w),
             decoration: bordasCardsAlunos(cursoSelecionado),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +60,7 @@ class _CardCursoState extends State<CardCurso> {
                           color: cursoSelecionado
                               ? CoresClaras.verdePrincipal
                               : CoresClaras.cinzaBordas,
-                          size: 36,
+                          size: 3.5.h,
                         ),
                       ),
                     ],
@@ -83,7 +83,7 @@ class _CardCursoState extends State<CardCurso> {
                         final selecionado = provider.cursoSelecionado == nome;
 
                         return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          padding: EdgeInsets.symmetric(horizontal: 1.w),
                           child: ChoiceChip(
                             chipAnimationStyle: ChipAnimationStyle(
                                 enableAnimation: AnimationStyle.noAnimation),
@@ -109,7 +109,7 @@ class _CardCursoState extends State<CardCurso> {
                               color: selecionado ? Colors.white : Colors.black,
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(12.sp),
                               side: BorderSide(
                                 color: selecionado
                                     ? CoresClaras.verdePrincipalBorda

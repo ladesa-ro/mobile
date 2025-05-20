@@ -33,7 +33,7 @@ class _CardTurmaState extends State<CardTurma> {
             }
           },
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: EdgeInsets.symmetric(horizontal: 4.w),
             decoration: bordasCardsAlunos(turmaSelecionada),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +60,7 @@ class _CardTurmaState extends State<CardTurma> {
                           color: turmaSelecionada
                               ? CoresClaras.verdePrincipal
                               : CoresClaras.cinzaBordas,
-                          size: 36,
+                          size: 3.5.h,
                         ),
                       ),
                     ],
@@ -83,7 +83,7 @@ class _CardTurmaState extends State<CardTurma> {
                         final selecionado = provider.turmaSelecionada == nome;
 
                         return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          padding: EdgeInsets.symmetric(horizontal: 1.w),
                           child: ChoiceChip(
                             chipAnimationStyle: ChipAnimationStyle(
                               enableAnimation: AnimationStyle.noAnimation,
@@ -110,7 +110,7 @@ class _CardTurmaState extends State<CardTurma> {
                               color: selecionado ? Colors.white : Colors.black,
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(12.sp),
                               side: BorderSide(
                                 color: selecionado
                                     ? CoresClaras.verdePrincipalBorda
