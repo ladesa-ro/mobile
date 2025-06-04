@@ -78,7 +78,7 @@ class _WidgetEnsino extends State<WidgetEnsino> {
               enableInfiniteScroll: false,
               viewportFraction: 0.8,
               enlargeCenterPage: false,
-              height: 250,
+              height: 270,
             ),
           ),
           SizedBox(height: 15),
