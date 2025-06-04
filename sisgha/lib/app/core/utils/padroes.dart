@@ -33,7 +33,7 @@ class Padroes {
 
   //sempre implementar no physics dos ListViews ou outro tipo de widget de rolagem
   static AlwaysScrollableScrollPhysics efeitoDeRolagem() {
-    return AlwaysScrollableScrollPhysics(parent:ClampingScrollPhysics() );
+    return AlwaysScrollableScrollPhysics(parent: ClampingScrollPhysics());
   }
 
   static double calcularAlturaAppBar(BuildContext context,

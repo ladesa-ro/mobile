@@ -87,8 +87,7 @@ class _TesteState extends State<FiltrargemDeTurmas> {
           ? CoresClaras.verdePrincipalBotao
           : CoresClaras.cinzaBordas),
       shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-          side: BorderSide.none,
-          borderRadius: BorderRadiusGeometry.circular(15))),
+          side: BorderSide.none, borderRadius: BorderRadius.circular(15))),
     );
   }
 }

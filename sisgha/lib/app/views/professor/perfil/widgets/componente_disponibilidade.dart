@@ -14,6 +14,9 @@ class WidgetDisponibilidade extends StatefulWidget {
   State<WidgetDisponibilidade> createState() => _MyWidgetState();
 }
 
+//Vou adicionar uns comentários aqui para ficar mais fácil de entender o código.
+//Pelo menos pra eu entender.
+
 final List<Map<String, dynamic>> horarios = [
   {
     "periodo": "Matutino",
@@ -45,7 +48,7 @@ final List<Map<String, dynamic>> horarios = [
       "00:00 - 00:00",
     ]
   },
-];
+]; //HORÁRIOS
 
 class _MyWidgetState extends State<WidgetDisponibilidade> {
   List<String> dias = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'];
@@ -79,7 +82,7 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
                 _iconButton(0, Icones.setaDireita),
               ],
             ),
-          ),
+          ), //Esse container é o "botão" de selecionar o dia da semana
           SizedBox(height: constraints.maxHeight * 0.05),
           CarouselSlider(
             carouselController: _carouselSliderController,
@@ -90,7 +93,7 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
               enlargeCenterPage: true,
               height: constraints.maxHeight * 0.70,
               scrollPhysics: const NeverScrollableScrollPhysics(),
-            ),
+            ), //Este é os coiso onde aparece os horários
           ),
         ],
       ),
@@ -127,29 +130,15 @@ List<Widget> _listaComHorarios(context) {
     5,
     (index) => LayoutBuilder(
       builder: (context, constraints) => ListView(
+        shrinkWrap: true,
         physics: Padroes.efeitoDeRolagem(),
         padding: EdgeInsets.zero,
         children: [
-          SizedBox(
-            height: constraints.maxHeight * 0.45,
-            width: constraints.maxWidth,
-            child: _periodo(
-                context, horarios[0]["periodo"], horarios[0]["horario"]),
-          ),
+          _periodo(context, horarios[0]["periodo"], horarios[0]["horario"]),
           const SizedBox(height: 15),
-          SizedBox(
-            height: constraints.maxHeight * 0.45,
-            width: constraints.maxWidth,
-            child: _periodo(
-                context, horarios[1]["periodo"], horarios[1]["horario"]),
-          ),
+          _periodo(context, horarios[1]["periodo"], horarios[1]["horario"]),
           const SizedBox(height: 15),
-          SizedBox(
-            height: constraints.maxHeight * 0.45,
-            width: constraints.maxWidth,
-            child: _periodo(
-                context, horarios[2]["periodo"], horarios[2]["horario"]),
-          ),
+          _periodo(context, horarios[2]["periodo"], horarios[2]["horario"]),
         ],
       ),
     ),
