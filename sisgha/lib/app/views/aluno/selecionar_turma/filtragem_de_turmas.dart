@@ -90,6 +90,7 @@ class _TesteState extends State<FiltrargemDeTurmas> {
           side: BorderSide.none,
           borderRadius: BorderRadius.circular(15)),
           ),
+          side: BorderSide.none, borderRadius: BorderRadius.circular(15))),
     );
   }
 }

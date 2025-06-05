@@ -100,10 +100,11 @@ class _PerfilState extends State<Perfil> {
               provider.professor.matricula,
               tamanho * 0.005),
           SizedBox(height: tamanho * 0.03),
-          Container(
-            padding: Padroes.margem(),
-            height: tamanho * 0.60,
-            child: NavSwitch(),
+          Expanded(
+            child: Padding(
+              padding: Padroes.margem(),
+              child: NavSwitch(),
+            ),
           ),
         ],
       ),
