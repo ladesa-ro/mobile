@@ -80,17 +80,20 @@ class _TesteState extends State<FiltrargemDeTurmas> {
   ButtonStyle buttonStyle(bool botaoAtivo) {
     return ButtonStyle(
       minimumSize: WidgetStatePropertyAll(
-          Size(double.infinity, Padroes.aluturaBotoes())),
+        Size(double.infinity, Padroes.aluturaBotoes()),
+      ),
       maximumSize: WidgetStatePropertyAll(
-          Size(double.infinity, Padroes.aluturaBotoes())),
-      backgroundColor: WidgetStatePropertyAll(botaoAtivo
-          ? CoresClaras.verdePrincipalBotao
-          : CoresClaras.cinzaBordas),
-      shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+        Size(double.infinity, Padroes.aluturaBotoes()),
+      ),
+      backgroundColor: WidgetStatePropertyAll(
+        botaoAtivo ? CoresClaras.verdePrincipalBotao : CoresClaras.cinzaBordas,
+      ),
+      shape: WidgetStatePropertyAll(
+        RoundedRectangleBorder(
           side: BorderSide.none,
-          borderRadius: BorderRadius.circular(15)),
-          ),
-          side: BorderSide.none, borderRadius: BorderRadius.circular(15))),
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
     );
   }
 }
