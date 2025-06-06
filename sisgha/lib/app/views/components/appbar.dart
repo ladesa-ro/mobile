@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +11,7 @@ import '../../core/utils/padroes.dart';
 import '../../providers/tema.dart';
 import 'dialogo_troca_de_tema.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final double height;
   final String mes;
   final String diaHoje;
@@ -27,6 +29,32 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(height);
 
   @override
+  State<CustomAppBar> createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<CustomAppBar> {
+  bool mostrarTurma = false;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+      if (mounted) {
+        setState(() {
+          mostrarTurma = !mostrarTurma;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final temaProvider = Provider.of<TemasProvider>(context);
     return AppBar(
@@ -37,7 +65,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         padding: Padroes.margem(),
         child: Row(
           children: [
-            if (icones == true)
+            if (widget.icones)
               IconButton(
                 onPressed: () {
                   Navigator.of(context).pushNamedAndRemoveUntil(
@@ -51,24 +79,80 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   color: temaProvider.corDosIcones(),
                 ),
               ),
-            Text(
-              DatasFormatadas.diaAtual,
-              style: estiloTexto(30, peso: FontWeight.bold),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 800),
+              transitionBuilder: (child, animation) {
+                final inAnimation = Tween<Offset>(
+                  begin: const Offset(0, 1), // entra de baixo
+                  end: Offset.zero,
+                ).animate(CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.easeInOut,
+                ));
+
+                final outAnimation = Tween<Offset>(
+                  begin: Offset.zero,
+                  end: const Offset(0, -1), // sai pra cima
+                ).animate(CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.easeInOut,
+                ));
+
+                return SlideTransition(
+                  position: child.key == ValueKey(mostrarTurma)
+                      ? inAnimation
+                      : outAnimation,
+                  child: child,
+                );
+              },
+              child: Text(
+                mostrarTurma ? '1°A' : DatasFormatadas.diaAtual,
+                key: ValueKey(mostrarTurma),
+                style: estiloTexto(30, peso: FontWeight.bold),
+              ),
             ),
             const SizedBox(width: 16),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  diaHoje,
-                  style: estiloTexto(17, peso: FontWeight.bold),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  mes,
-                  style: estiloTexto(17, peso: FontWeight.bold),
-                ),
-              ],
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 800),
+              transitionBuilder: (child, animation) {
+                final inAnimation = Tween<Offset>(
+                  begin: const Offset(0, 1),
+                  end: Offset.zero,
+                ).animate(CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.easeInOut,
+                ));
+
+                final outAnimation = Tween<Offset>(
+                  begin: Offset.zero,
+                  end: const Offset(0, -1),
+                ).animate(CurvedAnimation(
+                  parent: animation,
+                  curve: Curves.easeInOut,
+                ));
+
+                return SlideTransition(
+                  position: child.key == ValueKey(mostrarTurma)
+                      ? inAnimation
+                      : outAnimation,
+                  child: child,
+                );
+              },
+              child: Column(
+                key: ValueKey(mostrarTurma),
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    mostrarTurma ? 'Técnico' : widget.diaHoje,
+                    style: estiloTexto(15, peso: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    mostrarTurma ? 'Informática 2023' : widget.mes,
+                    style: estiloTexto(15, peso: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
             const Spacer(),
             IconButton(
@@ -88,7 +172,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   size: 34,
                   color: temaProvider.corDosIcones(),
                 )),
-            if (!icones)
+            if (!widget.icones)
               IconButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed('/notificacao');
