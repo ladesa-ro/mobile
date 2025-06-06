@@ -16,6 +16,21 @@ class MiniCalendario extends StatefulWidget {
 }
 
 class _MiniCalendarioState extends State<MiniCalendario> {
+  late DateTime _selectedDay;
+  late DateTime _focusedDay;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedDay = DatasFormatadas.diaAtualEmNumero;
+    _focusedDay = _selectedDay;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -35,7 +50,7 @@ class _MiniCalendarioState extends State<MiniCalendario> {
                 child: TableCalendar(
                   firstDay: DatasFormatadas.primeiroDiaDoAno,
                   lastDay: DatasFormatadas.ultimoDiaDoAno,
-                  focusedDay: DatasFormatadas.diaAtualEmNumero,
+                  focusedDay: _selectedDay,
                   calendarFormat: CalendarFormat.month,
                   locale: 'pt-BR',
                   shouldFillViewport: true,
@@ -59,7 +74,7 @@ class _MiniCalendarioState extends State<MiniCalendario> {
                   availableGestures: AvailableGestures.none,
                   firstDay: DatasFormatadas.primeiroDiaDoAno,
                   lastDay: DatasFormatadas.ultimoDiaDoAno,
-                  focusedDay: DatasFormatadas.diaAtualEmNumero,
+                  focusedDay: _focusedDay,
                   calendarFormat: CalendarFormat.month,
                   locale: 'pt-BR',
                   shouldFillViewport: true,
@@ -69,7 +84,16 @@ class _MiniCalendarioState extends State<MiniCalendario> {
                   calendarBuilders:
                       _calendarBuilder(constraints.maxHeight * 2.3),
                   pageAnimationCurve: Curves.linear,
-                  pageAnimationDuration: const Duration(milliseconds: 500),
+                  pageAnimationDuration: const Duration(milliseconds: 300),
+                  selectedDayPredicate: (day) {
+                    return isSameDay(_selectedDay, day);
+                  },
+                  onDaySelected: (selectedDay, focusedDay) {
+                    setState(() {
+                      _selectedDay = selectedDay;
+                      _focusedDay = focusedDay;
+                    });
+                  },
                 ),
               ),
             ),
@@ -121,6 +145,31 @@ Widget _estiloDosBlocosDosDiasDoMes(Color color, DateTime day, double height) {
       child: Text(
         '${day.day}',
         style: _estiloTextoNumeros(),
+      ),
+    ),
+  );
+}
+
+Widget _estiloBlocoDiaSelecionado(DateTime day, double height) {
+  return Container(
+    width: height * 0.045,
+    height: height * 0.045,
+    decoration: BoxDecoration(
+      color: CoresClaras.verdePrincipal,
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(
+        color: CoresClaras.brancoBorda,
+        width: 2,
+      ),
+    ),
+    child: Center(
+      child: Text(
+        '${day.day}',
+        style: estiloTexto(
+          15,
+          peso: FontWeight.bold,
+          cor: CoresClaras.brancoTexto,
+        ),
       ),
     ),
   );
@@ -203,6 +252,9 @@ DaysOfWeekStyle _estiloParteSuperior() {
 CalendarBuilders _calendarBuilder(double heigth) {
   Color color = Colors.black;
   return CalendarBuilders(
+    selectedBuilder: (context, date, _) {
+      return _estiloBlocoDiaSelecionado(date, heigth);
+    },
     defaultBuilder: (context, date, events) {
       final now = DateTime.now();
 
