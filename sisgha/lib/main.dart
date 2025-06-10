@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
             constraints.minWidth);
 
         return MaterialApp(
-          showPerformanceOverlay: true,
+          showPerformanceOverlay: false,
           debugShowCheckedModeBanner: false,
           title: 'SISGHA',
           theme: temaProvider.temaAtivo,
