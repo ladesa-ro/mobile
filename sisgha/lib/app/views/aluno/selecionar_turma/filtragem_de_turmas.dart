@@ -25,52 +25,48 @@ class _TesteState extends State<FiltrargemDeTurmas> {
     final tamanho = Padroes.alturaGeral();
     return Scaffold(
       appBar: AppbarAluno(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
+        physics: Padroes.efeitoDeRolagem(),
+        padding: Padroes.margem().copyWith(
+            top: tamanho *
+                0.15), 
         children: [
-          ListView(
-            shrinkWrap: true,
-            physics: Padroes.efeitoDeRolagem(),
-            padding: Padroes.margem(),
+          Row(
             children: [
-              Row(
-                children: [
-                  Text(
-                    'Selecionar Horario',
-                    style: estiloTexto(18, peso: FontWeight.bold),
-                  ),
-                  SizedBox(width: Padroes.larguraGeral() * 0.015),
-                  Icon(Icones.relogio, size: 3.h)
-                ],
+              Text(
+                'Selecionar Horario',
+                style: estiloTexto(18, peso: FontWeight.bold),
               ),
-              SizedBox(height: tamanho * 0.02),
-              CardFormacao(),
-              SizedBox(height: tamanho * 0.02),
-              CardCurso(),
-              SizedBox(height: tamanho * 0.02),
-              CardTurma(),
-              SizedBox(height: tamanho * 0.02),
-              Consumer<EscolhaHorariosAlunos>(
-                builder: (context, provider, child) {
-                  final botaoAtivo = provider.idFormacaoSelecionada != null &&
-                      provider.cursoSelecionado != null &&
-                      provider.turmaSelecionada != null;
-
-                  return ElevatedButton(
-                    style: buttonStyle(botaoAtivo),
-                    onPressed: () => botaoAtivo
-                        ? Navigator.of(context).pushNamedAndRemoveUntil(
-                            '/navegação', (route) => false)
-                        : null,
-                    child: Text(
-                      'Ver Horário',
-                      style: estiloTexto(16,
-                          cor: CoresClaras.brancoTexto, peso: FontWeight.bold),
-                    ),
-                  );
-                },
-              ),
+              SizedBox(width: Padroes.larguraGeral() * 0.015),
+              Icon(Icones.relogio, size: 3.h)
             ],
+          ),
+          SizedBox(height: tamanho * 0.02),
+          CardFormacao(),
+          SizedBox(height: tamanho * 0.02),
+          CardCurso(),
+          SizedBox(height: tamanho * 0.02),
+          CardTurma(),
+          SizedBox(height: tamanho * 0.02),
+          Consumer<EscolhaHorariosAlunos>(
+            builder: (context, provider, child) {
+              final botaoAtivo = provider.idFormacaoSelecionada != null &&
+                  provider.cursoSelecionado != null &&
+                  provider.turmaSelecionada != null;
+
+              return ElevatedButton(
+                style: buttonStyle(botaoAtivo),
+                onPressed: () => botaoAtivo
+                    ? Navigator.of(context)
+                        .pushNamedAndRemoveUntil('/navegação', (route) => false)
+                    : null,
+                child: Text(
+                  'Ver Horário',
+                  style: estiloTexto(16,
+                      cor: CoresClaras.brancoTexto, peso: FontWeight.bold),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -80,14 +76,20 @@ class _TesteState extends State<FiltrargemDeTurmas> {
   ButtonStyle buttonStyle(bool botaoAtivo) {
     return ButtonStyle(
       minimumSize: WidgetStatePropertyAll(
-          Size(double.infinity, Padroes.aluturaBotoes())),
+        Size(double.infinity, Padroes.aluturaBotoes()),
+      ),
       maximumSize: WidgetStatePropertyAll(
-          Size(double.infinity, Padroes.aluturaBotoes())),
-      backgroundColor: WidgetStatePropertyAll(botaoAtivo
-          ? CoresClaras.verdePrincipalBotao
-          : CoresClaras.cinzaBordas),
-      shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-          side: BorderSide.none, borderRadius: BorderRadius.circular(15))),
+        Size(double.infinity, Padroes.aluturaBotoes()),
+      ),
+      backgroundColor: WidgetStatePropertyAll(
+        botaoAtivo ? CoresClaras.verdePrincipalBotao : CoresClaras.cinzaBordas,
+      ),
+      shape: WidgetStatePropertyAll(
+        RoundedRectangleBorder(
+          side: BorderSide.none,
+          borderRadius: BorderRadius.circular(15),
+        ),
+      ),
     );
   }
 }
