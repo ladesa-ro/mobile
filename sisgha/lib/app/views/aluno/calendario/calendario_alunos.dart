@@ -32,6 +32,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
       mes: '${DatasFormatadas.mesAtualFormatado} - ${DatasFormatadas.anoAtual}',
       diaHoje: "Calendário Parcial",
       icones: false,
+      animacaoAtiva: true,
     );
 
     double tamanho = Padroes.calcularAlturaAppBar(context,
