@@ -1,13 +1,12 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/utils/icones.dart';
-import '../../core/utils/dias.dart';
 import '../../core/utils/estilos.dart';
 import '../../core/utils/padroes.dart';
 import '../../providers/tema.dart';
+import '../components/widgets_home/appbar_animacoes.dart';
 import 'dialogo_troca_de_tema.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -23,7 +22,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
     required this.mes,
     required this.diaHoje,
     required this.icones,
-    required this.animacaoAtiva,
+    required this.animacaoAtiva, // se for na appbar dos alunos deixa como tru e dos prof false 
   });
 
   @override
@@ -35,103 +34,25 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _CustomAppBarState extends State<CustomAppBar>
     with TickerProviderStateMixin {
-  bool mostrarTurma = false;
+  late AppBarAnimacoes animacoes;
 
-  late AnimationController _controllerTextoPrincipal;
-  late Animation<Offset> _slideTextoPrincipal;
-  late Animation<double> _fadeTextoPrincipal;
-  String _textoPrincipal = '';
-
-  late AnimationController _controllerSubTexto;
-  late Animation<Offset> _slideSubTexto;
-  late Animation<double> _fadeSubTexto;
-  String _linha1 = '';
-  String _linha2 = '';
-
-  Timer? _timer;
-
-  @override
   @override
   void initState() {
     super.initState();
-
-    _textoPrincipal = DatasFormatadas.diaAtual;
-    _linha1 = widget.diaHoje;
-    _linha2 = widget.mes;
-
-    _controllerTextoPrincipal = AnimationController(
+    animacoes = AppBarAnimacoes(
       vsync: this,
-      duration: const Duration(milliseconds: 400),
+      diaHoje: widget.diaHoje,
+      mes: widget.mes,
+      animacaoAtiva: widget.animacaoAtiva,
+      onUpdate: () {
+        setState(() {});
+      },
     );
-
-    _slideTextoPrincipal = Tween<Offset>(
-      begin: Offset.zero,
-      end: const Offset(0, -1),
-    ).animate(CurvedAnimation(
-        parent: _controllerTextoPrincipal, curve: Curves.easeInOut));
-    _fadeTextoPrincipal = Tween<double>(
-      begin: 1.0,
-      end: 0.0,
-    ).animate(CurvedAnimation(
-        parent: _controllerTextoPrincipal, curve: Curves.easeInOut));
-
-    _controllerSubTexto = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 400),
-    );
-
-    _slideSubTexto = Tween<Offset>(
-      begin: Offset.zero,
-      end: const Offset(0, -1),
-    ).animate(
-        CurvedAnimation(parent: _controllerSubTexto, curve: Curves.easeInOut));
-    _fadeSubTexto = Tween<double>(
-      begin: 1.0,
-      end: 0.0,
-    ).animate(
-        CurvedAnimation(parent: _controllerSubTexto, curve: Curves.easeInOut));
-
-    if (widget.animacaoAtiva) {
-      _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
-        if (mounted) {
-          _trocarTextos();
-        }
-      });
-    }
-  }
-
-  Future<void> _trocarTextos() async {
-    if (!widget.animacaoAtiva) return; 
-
-    await Future.wait([
-      _controllerTextoPrincipal.forward(),
-      _controllerSubTexto.forward(),
-    ]);
-
-    setState(() {
-      mostrarTurma = !mostrarTurma;
-
-      _textoPrincipal = mostrarTurma ? '1°A' : DatasFormatadas.diaAtual;
-      _linha1 = mostrarTurma ? 'Técnico' : widget.diaHoje;
-      _linha2 = mostrarTurma ? 'Informática 2023' : widget.mes;
-    });
-
-    _controllerTextoPrincipal.reset();
-    _controllerSubTexto.reset();
-
-    await Future.delayed(const Duration(milliseconds: 50));
-
-    await Future.wait([
-      _controllerTextoPrincipal.reverse(),
-      _controllerSubTexto.reverse(),
-    ]);
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
-    _controllerTextoPrincipal.dispose();
-    _controllerSubTexto.dispose();
+    animacoes.dispose();
     super.dispose();
   }
 
@@ -161,30 +82,30 @@ class _CustomAppBarState extends State<CustomAppBar>
                 ),
               ),
             SlideTransition(
-              position: _slideTextoPrincipal,
+              position: animacoes.slideTextoPrincipal,
               child: FadeTransition(
-                opacity: _fadeTextoPrincipal,
+                opacity: animacoes.fadeTextoPrincipal,
                 child: Text(
-                  _textoPrincipal,
+                  animacoes.textoPrincipal,
                   style: estiloTexto(30, peso: FontWeight.bold),
                 ),
               ),
             ),
             const SizedBox(width: 16),
             SlideTransition(
-              position: _slideSubTexto,
+              position: animacoes.slideSubTexto,
               child: FadeTransition(
-                opacity: _fadeSubTexto,
+                opacity: animacoes.fadeSubTexto,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      _linha1,
+                      animacoes.linha1,
                       style: estiloTexto(16, peso: FontWeight.bold),
                     ),
                     const SizedBox(height: 1),
                     Text(
-                      _linha2,
+                      animacoes.linha2,
                       style: estiloTexto(16, peso: FontWeight.bold),
                     ),
                   ],
