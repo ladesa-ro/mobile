@@ -20,6 +20,7 @@ class HomeAlunos extends StatelessWidget {
       mes: DatasFormatadas.primeiroAUltimoDia,
       diaHoje: DatasFormatadas.obterDiaFormatado(),
       icones: true,
+      animacaoAtiva: true,
     );
 
     double tamanho = Padroes.calcularAlturaAppBar(context,

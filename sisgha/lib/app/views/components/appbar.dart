@@ -15,6 +15,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String mes;
   final String diaHoje;
   final bool icones;
+  final bool animacaoAtiva;
 
   const CustomAppBar({
     super.key,
@@ -22,6 +23,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
     required this.mes,
     required this.diaHoje,
     required this.icones,
+    required this.animacaoAtiva,
   });
 
   @override
@@ -31,7 +33,8 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   State<CustomAppBar> createState() => _CustomAppBarState();
 }
 
-class _CustomAppBarState extends State<CustomAppBar> with TickerProviderStateMixin {
+class _CustomAppBarState extends State<CustomAppBar>
+    with TickerProviderStateMixin {
   bool mostrarTurma = false;
 
   late AnimationController _controllerTextoPrincipal;
@@ -48,6 +51,7 @@ class _CustomAppBarState extends State<CustomAppBar> with TickerProviderStateMix
   Timer? _timer;
 
   @override
+  @override
   void initState() {
     super.initState();
 
@@ -63,11 +67,13 @@ class _CustomAppBarState extends State<CustomAppBar> with TickerProviderStateMix
     _slideTextoPrincipal = Tween<Offset>(
       begin: Offset.zero,
       end: const Offset(0, -1),
-    ).animate(CurvedAnimation(parent: _controllerTextoPrincipal, curve: Curves.easeInOut));
+    ).animate(CurvedAnimation(
+        parent: _controllerTextoPrincipal, curve: Curves.easeInOut));
     _fadeTextoPrincipal = Tween<double>(
       begin: 1.0,
       end: 0.0,
-    ).animate(CurvedAnimation(parent: _controllerTextoPrincipal, curve: Curves.easeInOut));
+    ).animate(CurvedAnimation(
+        parent: _controllerTextoPrincipal, curve: Curves.easeInOut));
 
     _controllerSubTexto = AnimationController(
       vsync: this,
@@ -77,20 +83,26 @@ class _CustomAppBarState extends State<CustomAppBar> with TickerProviderStateMix
     _slideSubTexto = Tween<Offset>(
       begin: Offset.zero,
       end: const Offset(0, -1),
-    ).animate(CurvedAnimation(parent: _controllerSubTexto, curve: Curves.easeInOut));
+    ).animate(
+        CurvedAnimation(parent: _controllerSubTexto, curve: Curves.easeInOut));
     _fadeSubTexto = Tween<double>(
       begin: 1.0,
       end: 0.0,
-    ).animate(CurvedAnimation(parent: _controllerSubTexto, curve: Curves.easeInOut));
+    ).animate(
+        CurvedAnimation(parent: _controllerSubTexto, curve: Curves.easeInOut));
 
-    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
-      if (mounted) {
-        _trocarTextos();
-      }
-    });
+    if (widget.animacaoAtiva) {
+      _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+        if (mounted) {
+          _trocarTextos();
+        }
+      });
+    }
   }
 
   Future<void> _trocarTextos() async {
+    if (!widget.animacaoAtiva) return; 
+
     await Future.wait([
       _controllerTextoPrincipal.forward(),
       _controllerSubTexto.forward(),
@@ -168,12 +180,12 @@ class _CustomAppBarState extends State<CustomAppBar> with TickerProviderStateMix
                   children: [
                     Text(
                       _linha1,
-                      style: estiloTexto(15, peso: FontWeight.bold),
+                      style: estiloTexto(16, peso: FontWeight.bold),
                     ),
-                    const SizedBox(height: 5),
+                    const SizedBox(height: 1),
                     Text(
                       _linha2,
-                      style: estiloTexto(15, peso: FontWeight.bold),
+                      style: estiloTexto(16, peso: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -186,12 +198,16 @@ class _CustomAppBarState extends State<CustomAppBar> with TickerProviderStateMix
                   context: context,
                   builder: (ctx) => mostrarDialogoDeTrocaDeTema(
                     ctx,
-                    temaProvider.temaAtivo.brightness == Brightness.light ? "escuro" : "claro",
+                    temaProvider.temaAtivo.brightness == Brightness.light
+                        ? "escuro"
+                        : "claro",
                   ),
                 );
               },
               icon: Iconify(
-                temaProvider.temaAtivo.brightness == Brightness.light ? Icones.lua : Icones.sol,
+                temaProvider.temaAtivo.brightness == Brightness.light
+                    ? Icones.lua
+                    : Icones.sol,
                 size: 34,
                 color: temaProvider.corDosIcones(),
               ),
