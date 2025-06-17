@@ -20,7 +20,7 @@ import '../../providers/dados_professor.dart';
 class Repository {
   static final String _api = "https://dev.ladesa.com.br/api/v1";
 
-  // ---------------------------------------------------- VERIFICADORES0 ------------------------------------------------------------------//
+  // ---------------------------------------------------- VERIFICADORES ------------------------------------------------------------------//
 
   static bool verificarStatusCode(int statusCode) =>
       statusCode >= 200 && statusCode <= 299;
@@ -254,7 +254,7 @@ class Repository {
 
 // ---------------------------------------- testar rotas, clicar no botao de recuperar senha
   static void teste() async {
-    final url = Uri.parse("$_api/niveis-formacoes");
+    final url = Uri.parse("$_api/turmas");
     final response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -263,7 +263,7 @@ class Repository {
       final data = jsonDecode(response.body)["data"];
 
       for (var element in data) {
-        print(element["slug"]);
+        print(element["periodo"]);
         print(element["id"]);
       }
     }

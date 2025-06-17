@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:sisgha/app/providers/escolha_horarios_alunos.dart';
 
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
@@ -45,7 +47,11 @@ class _QuadradosHomeState extends State<QuadradosHome>
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, constraints) => Column(
+      builder: (
+        context,
+        constraints,
+      ) =>
+          Column(
         children: [
           SizedBox(
             height: constraints.maxHeight *
@@ -67,38 +73,22 @@ class _QuadradosHomeState extends State<QuadradosHome>
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: const [
-                ConstrutorHorarios(
-                  materia: 'Matemática',
-                  informacao: '3A',
-                  horario: '08:00 - 09:30',
-                ),
-                ConstrutorHorarios(
-                  materia: 'História',
-                  informacao: '2B',
-                  horario: '10:00 - 11:30',
-                ),
-                ConstrutorHorarios(
-                  materia: 'Geografia',
-                  informacao: '1C',
-                  horario: '13:00 - 14:30',
-                ),
-                ConstrutorHorarios(
-                  materia: 'Lógica de Programação',
-                  informacao: '3C',
-                  horario: '13:00 - 14:30',
-                ),
-                ConstrutorHorarios(
-                  materia: 'Geografia',
-                  informacao: '1C',
-                  horario: '13:00 - 14:30',
-                ),
-                ConstrutorHorarios(
-                  materia: 'Geografia',
-                  informacao: '1C',
-                  horario: '13:00 - 14:30',
-                )
-              ],
+              children: List.generate(6, (index) {
+                return Consumer<EscolhaHorariosAlunos>(
+                  builder: (context, provider, _) {
+                    final turma = index < provider.listaTurmas.length
+                        ? provider.listaTurmas[index]
+                        : null;
+
+                    return ConstrutorHorarios(
+                      materia:
+                          'Disciplina ${index + 1}', // substituir se tiver isso
+                      informacao: turma?.nome ?? 'Sem turma',
+                      horario: '08:00 - 09:30', // substituir se tiver isso
+                    );
+                  },
+                );
+              }),
             ),
           )
         ],
