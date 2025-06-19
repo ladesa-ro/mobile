@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/app/providers/escolha_horarios_alunos.dart';
 
 import '../../core/utils/icones.dart';
 import '../../core/utils/estilos.dart';
@@ -22,7 +23,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
     required this.mes,
     required this.diaHoje,
     required this.icones,
-    required this.animacaoAtiva, // se for na appbar dos alunos deixa como tru e dos prof false 
+    required this.animacaoAtiva, // se for na appbar dos alunos deixa como tru e dos prof false
   });
 
   @override
@@ -39,6 +40,8 @@ class _CustomAppBarState extends State<CustomAppBar>
   @override
   void initState() {
     super.initState();
+    final provider = Provider.of<EscolhaHorariosAlunos>(context, listen: false);
+
     animacoes = AppBarAnimacoes(
       vsync: this,
       diaHoje: widget.diaHoje,
@@ -47,6 +50,9 @@ class _CustomAppBarState extends State<CustomAppBar>
       onUpdate: () {
         setState(() {});
       },
+      formacao: provider.nomeFormacaoSelecionada ?? '',
+      curso: provider.cursoSelecionado ?? '',
+      turma: provider.turmaSelecionada ?? '',
     );
   }
 
