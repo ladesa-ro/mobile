@@ -79,12 +79,11 @@ class _QuadradosHomeState extends State<QuadradosHome>
                     final turma = index < provider.listaTurmas.length
                         ? provider.listaTurmas[index]
                         : null;
-
                     return ConstrutorHorarios(
                       materia:
-                          'Disciplina ${index + 1}', // substituir se tiver isso
+                          'Disciplina ${index + 1}', 
                       informacao: turma?.nome ?? 'Sem turma',
-                      horario: '08:00 - 09:30', // substituir se tiver isso
+                      horario: '08:00 - 09:30', 
                     );
                   },
                 );
