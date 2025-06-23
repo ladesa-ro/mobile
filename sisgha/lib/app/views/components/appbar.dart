@@ -53,7 +53,7 @@ class _CustomAppBarState extends State<CustomAppBar>
         setState(() {});
       },
       formacao: provider.nomeFormacaoSelecionada ?? '',
-      curso: provider.cursoSelecionado ?? '',
+      curso: provider.cursoSelecionado ?? '', // 
       turma: provider.turmaSelecionada ?? '',
     );
   }
