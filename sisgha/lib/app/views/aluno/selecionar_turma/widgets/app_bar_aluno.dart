@@ -13,6 +13,7 @@ class AppbarAluno extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<EscolhaHorariosAlunos>(context, listen: false);
     return AppBar(
+      centerTitle: true,
       leading: BackButton(
         onPressed: () {
           provider.resetarTudo();
@@ -22,17 +23,19 @@ class AppbarAluno extends StatelessWidget implements PreferredSizeWidget {
           );
         },
         style: ButtonStyle(
-          iconSize: WidgetStatePropertyAll(4.h),
+          iconSize: WidgetStatePropertyAll(6.h),
         ),
         color: Colors.white,
       ),
       title: const Text(
         "Acesso de Aluno",
         style: TextStyle(
-          fontSize: 16,
+          
+          fontSize: 22,
           fontWeight: FontWeight.bold,
           color: Colors.white,
         ),
+        
       ),
       backgroundColor: CoresClaras.verdePrincipal,
     );

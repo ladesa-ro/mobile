@@ -8,6 +8,9 @@ class AppBarAnimacoes {
   final String mes;
   final bool animacaoAtiva;
   final VoidCallback onUpdate;
+  final String formacao;
+  final String curso;
+  final String turma;
 
   late AnimationController controllerTextoPrincipal;
   late Animation<Offset> slideTextoPrincipal;
@@ -29,6 +32,9 @@ class AppBarAnimacoes {
     required this.mes,
     required this.animacaoAtiva,
     required this.onUpdate,
+    required this.formacao,
+    required this.curso,
+    required this.turma,
   }) {
     textoPrincipal = DatasFormatadas.diaAtual;
     linha1 = diaHoje;
@@ -92,9 +98,16 @@ class AppBarAnimacoes {
     ]);
 
     mostrarTurma = !mostrarTurma;
-    textoPrincipal = mostrarTurma ? '1°A' : DatasFormatadas.diaAtual;
-    linha1 = mostrarTurma ? 'Técnico' : diaHoje;
-    linha2 = mostrarTurma ? 'Informática 2023' : mes;
+
+    if (mostrarTurma) {
+      textoPrincipal = turma; // Exemplo: "2B"
+      linha1 = formacao; // Exemplo: "Técnico Integrado"
+      linha2 = curso; // Exemplo: "Informática"
+    } else {
+      textoPrincipal = DatasFormatadas.diaAtual;
+      linha1 = diaHoje;
+      linha2 = mes;
+    }
 
     onUpdate();
 

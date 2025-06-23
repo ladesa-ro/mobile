@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:marquee/marquee.dart';
+import 'package:sisgha/app/views/components/widgets_home/auto_font_size_text.dart';
 
 import '../../core/utils/icones.dart';
 import '../../core/utils/estilos.dart';
@@ -8,6 +10,7 @@ import '../../core/utils/padroes.dart';
 import '../../providers/tema.dart';
 import '../components/widgets_home/appbar_animacoes.dart';
 import 'dialogo_troca_de_tema.dart';
+import '../../providers/escolha_horarios_alunos.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final double height;
@@ -22,7 +25,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
     required this.mes,
     required this.diaHoje,
     required this.icones,
-    required this.animacaoAtiva, // se for na appbar dos alunos deixa como tru e dos prof false 
+    required this.animacaoAtiva,
   });
 
   @override
@@ -39,6 +42,8 @@ class _CustomAppBarState extends State<CustomAppBar>
   @override
   void initState() {
     super.initState();
+    final provider = Provider.of<EscolhaHorariosAlunos>(context, listen: false);
+
     animacoes = AppBarAnimacoes(
       vsync: this,
       diaHoje: widget.diaHoje,
@@ -47,6 +52,9 @@ class _CustomAppBarState extends State<CustomAppBar>
       onUpdate: () {
         setState(() {});
       },
+      formacao: provider.nomeFormacaoSelecionada ?? '',
+      curso: provider.cursoSelecionado ?? '', // 
+      turma: provider.turmaSelecionada ?? '',
     );
   }
 
@@ -56,9 +64,42 @@ class _CustomAppBarState extends State<CustomAppBar>
     super.dispose();
   }
 
+  Widget buildLinha1() {
+    return SizedBox(
+      height: 20,
+      width: 160,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return AutoFontSizeText(
+            text: animacoes.linha1,
+            style: estiloTexto(16, peso: FontWeight.bold),
+            maxWidth: constraints.maxWidth,
+          );
+        },
+      ),
+    );
+  }
+
+  Widget buildLinha2() {
+    return SizedBox(
+      height: 20,
+      width: 160,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return AutoFontSizeText(
+            text: animacoes.linha2,
+            style: estiloTexto(16, peso: FontWeight.bold),
+            maxWidth: constraints.maxWidth,
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final temaProvider = Provider.of<TemasProvider>(context);
+
     return AppBar(
       titleSpacing: 0,
       automaticallyImplyLeading: false,
@@ -91,7 +132,7 @@ class _CustomAppBarState extends State<CustomAppBar>
                 ),
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: 5),
             SlideTransition(
               position: animacoes.slideSubTexto,
               child: FadeTransition(
@@ -99,15 +140,8 @@ class _CustomAppBarState extends State<CustomAppBar>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      animacoes.linha1,
-                      style: estiloTexto(16, peso: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 1),
-                    Text(
-                      animacoes.linha2,
-                      style: estiloTexto(16, peso: FontWeight.bold),
-                    ),
+                    buildLinha1(),
+                    buildLinha2(),
                   ],
                 ),
               ),
