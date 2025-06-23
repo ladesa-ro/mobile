@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:marquee/marquee.dart';
+import 'package:sisgha/app/views/components/widgets_home/auto_font_size_text.dart';
 
 import '../../core/utils/icones.dart';
 import '../../core/utils/estilos.dart';
@@ -64,47 +65,35 @@ class _CustomAppBarState extends State<CustomAppBar>
   }
 
   Widget buildLinha1() {
-    if (animacoes.mostrarTurma) {
-      return SizedBox(
-        height: 20,
-        width: 160,
-        child: Marquee(
-          text: animacoes.linha1,
-          style: estiloTexto(16, peso: FontWeight.bold),
-          blankSpace: 20,
-          velocity: 30,
-          pauseAfterRound: Duration(seconds: 1),
-           startAfter: Duration(seconds: 2),
-        ),
-      );
-    } else {
-      return Text(
-        animacoes.linha1,
-        style: estiloTexto(16, peso: FontWeight.bold),
-      );
-    }
+    return SizedBox(
+      height: 20,
+      width: 160,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return AutoFontSizeText(
+            text: animacoes.linha1,
+            style: estiloTexto(16, peso: FontWeight.bold),
+            maxWidth: constraints.maxWidth,
+          );
+        },
+      ),
+    );
   }
 
   Widget buildLinha2() {
-    if (animacoes.mostrarTurma) {
-      return SizedBox(
-        height: 20,
-        width: 160,
-        child: Marquee(
-          text: animacoes.linha2,
-          style: estiloTexto(16, peso: FontWeight.bold),
-          blankSpace: 20,
-          velocity: 30,
-          pauseAfterRound: Duration(seconds: 1),
-           startAfter: Duration(seconds: 2)
-        ),
-      );
-    } else {
-      return Text(
-        animacoes.linha2,
-        style: estiloTexto(16, peso: FontWeight.bold),
-      );
-    }
+    return SizedBox(
+      height: 20,
+      width: 160,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return AutoFontSizeText(
+            text: animacoes.linha2,
+            style: estiloTexto(16, peso: FontWeight.bold),
+            maxWidth: constraints.maxWidth,
+          );
+        },
+      ),
+    );
   }
 
   @override
@@ -143,7 +132,7 @@ class _CustomAppBarState extends State<CustomAppBar>
                 ),
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: 5),
             SlideTransition(
               position: animacoes.slideSubTexto,
               child: FadeTransition(
@@ -152,7 +141,6 @@ class _CustomAppBarState extends State<CustomAppBar>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     buildLinha1(),
-                    const SizedBox(height: 1),
                     buildLinha2(),
                   ],
                 ),
