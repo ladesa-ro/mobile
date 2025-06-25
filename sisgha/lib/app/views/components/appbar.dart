@@ -1,20 +1,23 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:marquee/marquee.dart';
+import 'package:sisgha/app/views/components/widgets_home/auto_font_size_text.dart';
 
 import '../../core/utils/icones.dart';
-import '../../core/utils/dias.dart';
 import '../../core/utils/estilos.dart';
 import '../../core/utils/padroes.dart';
 import '../../providers/tema.dart';
+import '../components/widgets_home/appbar_animacoes.dart';
 import 'dialogo_troca_de_tema.dart';
+import '../../providers/escolha_horarios_alunos.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final double height;
   final String mes;
   final String diaHoje;
   final bool icones;
+  final bool animacaoAtiva;
 
   const CustomAppBar({
     super.key,
@@ -22,6 +25,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
     required this.mes,
     required this.diaHoje,
     required this.icones,
+    required this.animacaoAtiva,
   });
 
   @override
@@ -31,101 +35,71 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   State<CustomAppBar> createState() => _CustomAppBarState();
 }
 
-class _CustomAppBarState extends State<CustomAppBar> with TickerProviderStateMixin {
-  bool mostrarTurma = false;
-
-  late AnimationController _controllerTextoPrincipal;
-  late Animation<Offset> _slideTextoPrincipal;
-  late Animation<double> _fadeTextoPrincipal;
-  String _textoPrincipal = '';
-
-  late AnimationController _controllerSubTexto;
-  late Animation<Offset> _slideSubTexto;
-  late Animation<double> _fadeSubTexto;
-  String _linha1 = '';
-  String _linha2 = '';
-
-  Timer? _timer;
+class _CustomAppBarState extends State<CustomAppBar>
+    with TickerProviderStateMixin {
+  late AppBarAnimacoes animacoes;
 
   @override
   void initState() {
     super.initState();
+    final provider = Provider.of<EscolhaHorariosAlunos>(context, listen: false);
 
-    _textoPrincipal = DatasFormatadas.diaAtual;
-    _linha1 = widget.diaHoje;
-    _linha2 = widget.mes;
-
-    _controllerTextoPrincipal = AnimationController(
+    animacoes = AppBarAnimacoes(
       vsync: this,
-      duration: const Duration(milliseconds: 400),
+      diaHoje: widget.diaHoje,
+      mes: widget.mes,
+      animacaoAtiva: widget.animacaoAtiva,
+      onUpdate: () {
+        setState(() {});
+      },
+      formacao: provider.nomeFormacaoSelecionada ?? '',
+      curso: provider.cursoSelecionado ?? '', // 
+      turma: provider.turmaSelecionada ?? '',
     );
-
-    _slideTextoPrincipal = Tween<Offset>(
-      begin: Offset.zero,
-      end: const Offset(0, -1),
-    ).animate(CurvedAnimation(parent: _controllerTextoPrincipal, curve: Curves.easeInOut));
-    _fadeTextoPrincipal = Tween<double>(
-      begin: 1.0,
-      end: 0.0,
-    ).animate(CurvedAnimation(parent: _controllerTextoPrincipal, curve: Curves.easeInOut));
-
-    _controllerSubTexto = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 400),
-    );
-
-    _slideSubTexto = Tween<Offset>(
-      begin: Offset.zero,
-      end: const Offset(0, -1),
-    ).animate(CurvedAnimation(parent: _controllerSubTexto, curve: Curves.easeInOut));
-    _fadeSubTexto = Tween<double>(
-      begin: 1.0,
-      end: 0.0,
-    ).animate(CurvedAnimation(parent: _controllerSubTexto, curve: Curves.easeInOut));
-
-    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
-      if (mounted) {
-        _trocarTextos();
-      }
-    });
-  }
-
-  Future<void> _trocarTextos() async {
-    await Future.wait([
-      _controllerTextoPrincipal.forward(),
-      _controllerSubTexto.forward(),
-    ]);
-
-    setState(() {
-      mostrarTurma = !mostrarTurma;
-
-      _textoPrincipal = mostrarTurma ? '1°A' : DatasFormatadas.diaAtual;
-      _linha1 = mostrarTurma ? 'Técnico' : widget.diaHoje;
-      _linha2 = mostrarTurma ? 'Informática 2023' : widget.mes;
-    });
-
-    _controllerTextoPrincipal.reset();
-    _controllerSubTexto.reset();
-
-    await Future.delayed(const Duration(milliseconds: 50));
-
-    await Future.wait([
-      _controllerTextoPrincipal.reverse(),
-      _controllerSubTexto.reverse(),
-    ]);
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
-    _controllerTextoPrincipal.dispose();
-    _controllerSubTexto.dispose();
+    animacoes.dispose();
     super.dispose();
+  }
+
+  Widget buildLinha1() {
+    return SizedBox(
+      height: 20,
+      width: 160,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return AutoFontSizeText(
+            text: animacoes.linha1,
+            style: estiloTexto(16, peso: FontWeight.bold),
+            maxWidth: constraints.maxWidth,
+          );
+        },
+      ),
+    );
+  }
+
+  Widget buildLinha2() {
+    return SizedBox(
+      height: 20,
+      width: 160,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return AutoFontSizeText(
+            text: animacoes.linha2,
+            style: estiloTexto(16, peso: FontWeight.bold),
+            maxWidth: constraints.maxWidth,
+          );
+        },
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final temaProvider = Provider.of<TemasProvider>(context);
+
     return AppBar(
       titleSpacing: 0,
       automaticallyImplyLeading: false,
@@ -149,32 +123,25 @@ class _CustomAppBarState extends State<CustomAppBar> with TickerProviderStateMix
                 ),
               ),
             SlideTransition(
-              position: _slideTextoPrincipal,
+              position: animacoes.slideTextoPrincipal,
               child: FadeTransition(
-                opacity: _fadeTextoPrincipal,
+                opacity: animacoes.fadeTextoPrincipal,
                 child: Text(
-                  _textoPrincipal,
+                  animacoes.textoPrincipal,
                   style: estiloTexto(30, peso: FontWeight.bold),
                 ),
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: 5),
             SlideTransition(
-              position: _slideSubTexto,
+              position: animacoes.slideSubTexto,
               child: FadeTransition(
-                opacity: _fadeSubTexto,
+                opacity: animacoes.fadeSubTexto,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      _linha1,
-                      style: estiloTexto(15, peso: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      _linha2,
-                      style: estiloTexto(15, peso: FontWeight.bold),
-                    ),
+                    buildLinha1(),
+                    buildLinha2(),
                   ],
                 ),
               ),
@@ -186,12 +153,16 @@ class _CustomAppBarState extends State<CustomAppBar> with TickerProviderStateMix
                   context: context,
                   builder: (ctx) => mostrarDialogoDeTrocaDeTema(
                     ctx,
-                    temaProvider.temaAtivo.brightness == Brightness.light ? "escuro" : "claro",
+                    temaProvider.temaAtivo.brightness == Brightness.light
+                        ? "escuro"
+                        : "claro",
                   ),
                 );
               },
               icon: Iconify(
-                temaProvider.temaAtivo.brightness == Brightness.light ? Icones.lua : Icones.sol,
+                temaProvider.temaAtivo.brightness == Brightness.light
+                    ? Icones.lua
+                    : Icones.sol,
                 size: 34,
                 color: temaProvider.corDosIcones(),
               ),
