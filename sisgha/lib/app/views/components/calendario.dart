@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/dias.dart';
@@ -8,9 +9,13 @@ import 'package:sisgha/app/core/utils/estilos.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../../providers/lista_eventos.dart';
+
 class MiniCalendario extends StatefulWidget {
+  final void Function(DateTime)? onDaySelected;
   final bool showDialog;
-  const MiniCalendario({super.key, this.showDialog = false});
+  const MiniCalendario(
+      {super.key, this.showDialog = false, this.onDaySelected});
   @override
   State<MiniCalendario> createState() => _MiniCalendarioState();
 }
@@ -64,41 +69,83 @@ class _MiniCalendarioState extends State<MiniCalendario> {
               ),
             )
           : SizedBox(
-              child: Container(
-                padding: EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
-                decoration: estiloBorda(
-                    cor: CoresClaras.verdecinzaBorda,
-                    radius: 15,
-                    grossuraBorda: 2),
-                child: TableCalendar(
-                  availableGestures: AvailableGestures.none,
-                  firstDay: DatasFormatadas.primeiroDiaDoAno,
-                  lastDay: DatasFormatadas.ultimoDiaDoAno,
-                  focusedDay: _focusedDay,
-                  calendarFormat: CalendarFormat.month,
-                  locale: 'pt-BR',
-                  shouldFillViewport: true,
-                  daysOfWeekHeight: 23,
-                  daysOfWeekStyle: _estiloParteSuperior(),
-                  headerStyle: _estiloCabessario(),
-                  calendarBuilders:
-                      _calendarBuilder(constraints.maxHeight * 2.3),
-                  pageAnimationCurve: Curves.linear,
-                  pageAnimationDuration: const Duration(milliseconds: 300),
-                  selectedDayPredicate: (day) {
-                    return isSameDay(_selectedDay, day);
-                  },
-                  onDaySelected: (selectedDay, focusedDay) {
-                    setState(() {
-                      _selectedDay = selectedDay;
-                      _focusedDay = focusedDay;
-                    });
-                  },
-                ),
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(bottom: 15),
+                    decoration: estiloBorda(
+                        cor: CoresClaras.verdecinzaBorda,
+                        radius: 15,
+                        grossuraBorda: 2),
+                    child: TableCalendar(
+                      availableGestures: AvailableGestures.none,
+                      firstDay: DatasFormatadas.primeiroDiaDoAno,
+                      lastDay: DatasFormatadas.ultimoDiaDoAno,
+                      focusedDay: _focusedDay,
+                      calendarFormat: CalendarFormat.month,
+                      locale: 'pt-BR',
+                      shouldFillViewport: true,
+                      daysOfWeekHeight: 23,
+                      daysOfWeekStyle: _estiloParteSuperior(),
+                      headerStyle: _estiloCabessario(),
+                      calendarBuilders:
+                          _calendarBuilder(constraints.maxHeight * 2.3),
+                      pageAnimationCurve: Curves.linear,
+                      pageAnimationDuration: const Duration(milliseconds: 300),
+                      selectedDayPredicate: (day) {
+                        return isSameDay(_selectedDay, day);
+                      },
+                      onDaySelected: (selectedDay, focusedDay) {
+                        setState(() {
+                          _selectedDay = selectedDay;
+                          _focusedDay = focusedDay;
+                        });
+                        widget.onDaySelected?.call(selectedDay);
+                      },
+                      eventLoader: (day) {
+                        final provider =
+                            Provider.of<ListaEventos>(context, listen: false);
+                        final dataNormalizada = normalizarData(day);
+                        return provider.teste[dataNormalizada] ?? [];
+                      },
+                    ),
+                  ),
+                  Consumer<ListaEventos>(
+                    builder: (context, provider, _) {
+                      final data = normalizarData(_selectedDay);
+                      final eventos = provider.teste[data] ?? [];
+
+                      if (eventos.isEmpty) {
+                        return const Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Text("Nenhum evento para este dia."),
+                        );
+                      }
+
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: eventos.length,
+                        itemBuilder: (context, index) {
+                          final evento = eventos[index];
+                          return ListTile(
+                            title: Text(evento.titulo),
+                            subtitle: Text(
+                                "Início: ${evento.inicio} • Local: ${evento.local}"),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
     );
   }
+}
+
+DateTime normalizarData(DateTime data) {
+  return DateTime(data.year, data.month, data.day);
 }
 
 Widget _estiloDoBlocoDoDiaDeHoje(

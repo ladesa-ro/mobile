@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/routes/app_routes.dart';
 import 'package:sisgha/app/providers/dados_professor.dart';
 import 'package:sisgha/app/providers/escolha_horarios_alunos.dart';
+import 'package:sisgha/app/providers/lista_eventos.dart';
 import 'package:sisgha/app/providers/tema.dart';
 import 'package:sizer/sizer.dart';
 
@@ -13,7 +14,8 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => DadosProfessor()),
         ChangeNotifierProvider(create: (_) => EscolhaHorariosAlunos()),
-        ChangeNotifierProvider(create: (_) => TemasProvider())
+        ChangeNotifierProvider(create: (_) => TemasProvider()),
+        ChangeNotifierProvider(create: (_) => ListaEventos())
       ],
       child: const MyApp(),
     ),
