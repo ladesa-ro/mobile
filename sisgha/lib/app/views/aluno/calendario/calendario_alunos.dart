@@ -98,10 +98,11 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
             ),
             SizedBox(height: tamanho * 0.03),
             SizedBox(
-                height: tamanho * 0.55,
-                width: largura,
-                child:
-                    RepaintBoundary(child: MiniCalendario(showDialog: false))),
+              height: tamanho * 0.55,
+              width: largura,
+              // child:
+              //     RepaintBoundary(child: MiniCalendario(showDialog: false))
+            ),
             SizedBox(height: tamanho * 0.03),
             RepaintBoundary(
               child: CardsAlunos(),

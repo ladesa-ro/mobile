@@ -1,154 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:sisgha/app/core/utils/icones.dart';
-import 'package:sisgha/app/core/utils/colors.dart';
-import 'package:sisgha/app/core/utils/dias.dart';
-import 'package:sisgha/app/core/utils/estilos.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../providers/lista_eventos.dart';
+import '../../core/utils/colors.dart';
+import '../../core/utils/estilos.dart';
+import '../../core/utils/icones.dart';
 
-class MiniCalendario extends StatefulWidget {
-  final void Function(DateTime)? onDaySelected;
-  final bool showDialog;
-  const MiniCalendario(
-      {super.key, this.showDialog = false, this.onDaySelected});
-  @override
-  State<MiniCalendario> createState() => _MiniCalendarioState();
-}
-
-class _MiniCalendarioState extends State<MiniCalendario> {
-  late DateTime _selectedDay;
-  late DateTime _focusedDay;
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedDay = DatasFormatadas.diaAtualEmNumero;
-    _focusedDay = _selectedDay;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) => widget.showDialog
-          ? Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              insetPadding: EdgeInsets.zero,
-              child: Container(
-                padding: EdgeInsets.only(bottom: 15),
-                decoration: estiloBorda(
-                    cor: CoresClaras.verdecinzaBorda,
-                    radius: 15,
-                    grossuraBorda: 1.5),
-                width: constraints.maxWidth * 0.85,
-                height: constraints.maxHeight * 0.4,
-                child: TableCalendar(
-                  firstDay: DatasFormatadas.primeiroDiaDoAno,
-                  lastDay: DatasFormatadas.ultimoDiaDoAno,
-                  focusedDay: _selectedDay,
-                  calendarFormat: CalendarFormat.month,
-                  locale: 'pt-BR',
-                  shouldFillViewport: true,
-                  daysOfWeekHeight: 23,
-                  daysOfWeekStyle: _estiloParteSuperior(),
-                  headerStyle: _estiloCabessario(),
-                  calendarBuilders: _calendarBuilder(constraints.maxHeight),
-                  pageAnimationCurve: Curves.linear,
-                  pageAnimationDuration: const Duration(milliseconds: 500),
-                ),
-              ),
-            )
-          : SizedBox(
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(bottom: 15),
-                    decoration: estiloBorda(
-                        cor: CoresClaras.verdecinzaBorda,
-                        radius: 15,
-                        grossuraBorda: 2),
-                    child: TableCalendar(
-                      availableGestures: AvailableGestures.none,
-                      firstDay: DatasFormatadas.primeiroDiaDoAno,
-                      lastDay: DatasFormatadas.ultimoDiaDoAno,
-                      focusedDay: _focusedDay,
-                      calendarFormat: CalendarFormat.month,
-                      locale: 'pt-BR',
-                      shouldFillViewport: true,
-                      daysOfWeekHeight: 23,
-                      daysOfWeekStyle: _estiloParteSuperior(),
-                      headerStyle: _estiloCabessario(),
-                      calendarBuilders:
-                          _calendarBuilder(constraints.maxHeight * 2.3),
-                      pageAnimationCurve: Curves.linear,
-                      pageAnimationDuration: const Duration(milliseconds: 300),
-                      selectedDayPredicate: (day) {
-                        return isSameDay(_selectedDay, day);
-                      },
-                      onDaySelected: (selectedDay, focusedDay) {
-                        setState(() {
-                          _selectedDay = selectedDay;
-                          _focusedDay = focusedDay;
-                        });
-                        widget.onDaySelected?.call(selectedDay);
-                      },
-                      eventLoader: (day) {
-                        final provider =
-                            Provider.of<ListaEventos>(context, listen: false);
-                        final dataNormalizada = normalizarData(day);
-                        return provider.teste[dataNormalizada] ?? [];
-                      },
-                    ),
-                  ),
-                  Consumer<ListaEventos>(
-                    builder: (context, provider, _) {
-                      final data = normalizarData(_selectedDay);
-                      final eventos = provider.teste[data] ?? [];
-
-                      if (eventos.isEmpty) {
-                        return const Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Text("Nenhum evento para este dia."),
-                        );
-                      }
-
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: eventos.length,
-                        itemBuilder: (context, index) {
-                          final evento = eventos[index];
-                          return ListTile(
-                            title: Text(evento.titulo),
-                            subtitle: Text(
-                                "Início: ${evento.inicio} • Local: ${evento.local}"),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-    );
-  }
-}
-
-DateTime normalizarData(DateTime data) {
-  return DateTime(data.year, data.month, data.day);
-}
-
-Widget _estiloDoBlocoDoDiaDeHoje(
+Widget estiloDoBlocoDoDiaDeHoje(
     BuildContext context, DateTime day, Color cor, double height) {
   return Container(
     width: height * 0.04,
@@ -172,7 +32,7 @@ Widget _estiloDoBlocoDoDiaDeHoje(
         child: Center(
           child: Text(
             '${day.day}',
-            style: _estiloTextoNumeros(),
+            style: estiloTextoNumeros(),
           ),
         ),
       ),
@@ -180,7 +40,7 @@ Widget _estiloDoBlocoDoDiaDeHoje(
   );
 }
 
-Widget _estiloDosBlocosDosDiasDoMes(Color color, DateTime day, double height) {
+Widget estiloDosBlocosDosDiasDoMes(Color color, DateTime day, double height) {
   return Container(
     width: height * 0.04,
     height: height * 0.04,
@@ -191,13 +51,13 @@ Widget _estiloDosBlocosDosDiasDoMes(Color color, DateTime day, double height) {
     child: Center(
       child: Text(
         '${day.day}',
-        style: _estiloTextoNumeros(),
+        style: estiloTextoNumeros(),
       ),
     ),
   );
 }
 
-Widget _estiloBlocoDiaSelecionado(DateTime day, double height) {
+Widget estiloBlocoDiaSelecionado(DateTime day, double height) {
   return Container(
     width: height * 0.045,
     height: height * 0.045,
@@ -222,7 +82,7 @@ Widget _estiloBlocoDiaSelecionado(DateTime day, double height) {
   );
 }
 
-Widget _estiloDosBlocosDosDiasDoMesDesabilitados(double height) {
+Widget estiloDosBlocosDosDiasDoMesDesabilitados(double height) {
   return Container(
     width: height * 0.04,
     height: height * 0.04,
@@ -233,11 +93,11 @@ Widget _estiloDosBlocosDosDiasDoMesDesabilitados(double height) {
   );
 }
 
-TextStyle _estiloTextoNumeros() {
+TextStyle estiloTextoNumeros() {
   return estiloTexto(15, cor: CoresClaras.brancoTexto, peso: FontWeight.bold);
 }
 
-HeaderStyle _estiloCabessario() {
+HeaderStyle estiloCabessario() {
   return HeaderStyle(
     headerMargin: const EdgeInsets.only(bottom: 7),
     headerPadding: EdgeInsets.all(1.h),
@@ -267,7 +127,7 @@ HeaderStyle _estiloCabessario() {
   );
 }
 
-DaysOfWeekStyle _estiloParteSuperior() {
+DaysOfWeekStyle estiloParteSuperior() {
   return DaysOfWeekStyle(
     weekdayStyle:
         estiloTexto(15, peso: FontWeight.bold, cor: CoresClaras.pretoTexto),
@@ -296,11 +156,11 @@ DaysOfWeekStyle _estiloParteSuperior() {
   );
 }
 
-CalendarBuilders _calendarBuilder(double heigth) {
+CalendarBuilders calendarBuilder(double heigth) {
   Color color = Colors.black;
   return CalendarBuilders(
     selectedBuilder: (context, date, _) {
-      return _estiloBlocoDiaSelecionado(date, heigth);
+      return estiloBlocoDiaSelecionado(date, heigth);
     },
     defaultBuilder: (context, date, events) {
       final now = DateTime.now();
@@ -324,11 +184,11 @@ CalendarBuilders _calendarBuilder(double heigth) {
         const TextStyle(color: Colors.transparent);
         color = CoresClaras.cinza;
       }
-      return _estiloDosBlocosDosDiasDoMes(color, date, heigth);
+      return estiloDosBlocosDosDiasDoMes(color, date, heigth);
     },
     todayBuilder: (context, day, focusedDay) =>
-        _estiloDoBlocoDoDiaDeHoje(context, day, color, heigth),
+        estiloDoBlocoDoDiaDeHoje(context, day, color, heigth),
     outsideBuilder: (context, day, focusedDay) =>
-        _estiloDosBlocosDosDiasDoMesDesabilitados(heigth),
+        estiloDosBlocosDosDiasDoMesDesabilitados(heigth),
   );
 }
