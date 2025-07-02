@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sisgha/app/domain/model/testeTurmas.dart';
 import 'package:sisgha/app/domain/model/turmas.dart';
 
 import '../../views/components/widget_erro.dart';
@@ -20,7 +21,7 @@ import '../../providers/dados_professor.dart';
 class Repository {
   static final String _api = "https://dev.ladesa.com.br/api/v1";
 
-  // ---------------------------------------------------- VERIFICADORES0 ------------------------------------------------------------------//
+  // ---------------------------------------------------- VERIFICADORES ------------------------------------------------------------------//
 
   static bool verificarStatusCode(int statusCode) =>
       statusCode >= 200 && statusCode <= 299;
@@ -207,6 +208,7 @@ class Repository {
     return <OfertaFormacao>[];
   }
 
+  //VERIFICAR braga do futuro
   static Future<List<Cursos>> buscarCursos(
       {required String ofertaFormacaoId}) async {
     final url = Uri.https(
@@ -254,7 +256,7 @@ class Repository {
 
 // ---------------------------------------- testar rotas, clicar no botao de recuperar senha
   static void teste() async {
-    final url = Uri.parse("$_api/niveis-formacoes");
+    final url = Uri.parse("$_api/turmas");
     final response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -263,12 +265,28 @@ class Repository {
       final data = jsonDecode(response.body)["data"];
 
       for (var element in data) {
-        print(element["slug"]);
+        print(element["periodo"]);
         print(element["id"]);
       }
     }
   }
+
+  static Future<void> testeBuscarTurmas() async {
+    final url = Uri.parse("$_api/turmas");
+    final response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+
+    if (verificarStatusCode(response.statusCode)) {
+      final data = jsonDecode(response.body)["data"];
+     TesteTurma().PegarTurmas(data.map<Turma>((e) => Turma.fromJson(e)).toList());
+      print("Turmas carregadas");
+    }
+  }
 }
+
+//
 
   // void carregarAnosDoCurso(String curso) async {
   //   _cursoSelecionado = curso;

@@ -32,7 +32,7 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
     notifyListeners();
   }
 
-  void selecionarFormacao(String? value) async {
+  Future<void> selecionarFormacao(String? value) async {
     if (value == null || value == '') {
       idFormacaoSelecionada = null;
       nomeFormacaoSelecionada = null;
