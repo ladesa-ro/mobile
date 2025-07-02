@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sisgha/app/domain/model/disciplinas.dart';
+import 'package:sisgha/app/domain/model/testeDisciplinas.dart';
 import 'package:sisgha/app/domain/model/testeTurmas.dart';
 import 'package:sisgha/app/domain/model/turmas.dart';
 
@@ -282,6 +284,19 @@ class Repository {
       final data = jsonDecode(response.body)["data"];
      TesteTurma().PegarTurmas(data.map<Turma>((e) => Turma.fromJson(e)).toList());
       print("Turmas carregadas");
+    }
+  }
+   static Future<void> testeBuscarDisciplinas() async {
+    final url = Uri.parse("$_api/disciplinas");
+    final response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+
+    if (verificarStatusCode(response.statusCode)) {
+      final data = jsonDecode(response.body)["data"];
+     TesteDisciplinas().PegarDisciplinas(data.map<Disciplina>((e) => Disciplina.fromJson(e)).toList());
+      print("Disciplinas carregadas");
     }
   }
 }

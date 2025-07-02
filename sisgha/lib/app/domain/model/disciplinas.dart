@@ -7,7 +7,7 @@ class Disciplina {
   factory Disciplina.fromJson(Map<String, dynamic> json) {
     return Disciplina(
       id: json['id'],
-      nome: json['periodo'],
+      nome: json['nome'],
     );
   }
 }

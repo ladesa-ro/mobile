@@ -28,6 +28,7 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
   Future<void> _iniciar() async {
     await context.read<EscolhaHorariosAlunos>().pucharOpcoes();
     await Repository.testeBuscarTurmas();
+    await Repository.testeBuscarDisciplinas();
 
     if (await verificarDadosBaixados()) {
       await context.read<DadosProfessor>().iniciarProvider(context, true);

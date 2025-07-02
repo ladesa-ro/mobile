@@ -8,7 +8,7 @@ class TesteDisciplinas {
 
   List<Disciplina> turmas = [];
 
-  void PegarTurmas(List<Disciplina> pegarTurmas) {
+  void PegarDisciplinas(List<Disciplina> pegarTurmas) {
     turmas = pegarTurmas;
   }
 }
