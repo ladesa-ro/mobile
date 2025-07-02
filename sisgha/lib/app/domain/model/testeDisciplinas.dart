@@ -6,9 +6,9 @@ class TesteDisciplinas {
 
   factory TesteDisciplinas() => _instancia; // Construtor público (sempre retorna a mesma instância)
 
-  List<Disciplina> turmas = [];
+  List<Disciplina> disciplinas = [];
 
-  void PegarDisciplinas(List<Disciplina> pegarTurmas) {
-    turmas = pegarTurmas;
+  void PegarDisciplinas(List<Disciplina> pegarDisciplinas) {
+    disciplinas = pegarDisciplinas;
   }
 }
