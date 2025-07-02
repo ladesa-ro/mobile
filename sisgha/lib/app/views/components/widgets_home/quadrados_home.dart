@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/app/domain/model/testeDisciplinas.dart';
 import 'package:sisgha/app/domain/model/testeTurmas.dart';
 import 'package:sisgha/app/providers/escolha_horarios_alunos.dart';
 import '../../../core/utils/colors.dart';
@@ -49,6 +50,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
   @override
   Widget build(BuildContext context) {
     print("Lista de turmas: ${TesteTurma().turmas.length}");
+    print("Lista de disciplinas: ${TesteDisciplinas().disciplinas.length}");
     return LayoutBuilder(
       builder: (
         context,
@@ -78,8 +80,9 @@ class _QuadradosHomeState extends State<QuadradosHome>
               controller: _tabController,
               children: List.generate(TesteTurma().turmas.length - 1, (index) {
                 final turma = TesteTurma().turmas[index];
+                final disciplina = TesteDisciplinas().disciplinas[index];
                 return ConstrutorHorarios(
-                  materia: 'Disciplina ${index + 1}',
+                  materia: disciplina.nome,
                   informacao: turma.nome,
                   horario: '08:00 - 09:30',
                 );
