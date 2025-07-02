@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/app/domain/api/repository.dart';
 import 'package:sisgha/app/domain/logic/verificar_dados_armazenados.dart';
 
 import '../../providers/dados_professor.dart';
@@ -26,6 +27,7 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
 
   Future<void> _iniciar() async {
     await context.read<EscolhaHorariosAlunos>().pucharOpcoes();
+    await Repository.testeBuscarTurmas();
 
     if (await verificarDadosBaixados()) {
       await context.read<DadosProfessor>().iniciarProvider(context, true);
