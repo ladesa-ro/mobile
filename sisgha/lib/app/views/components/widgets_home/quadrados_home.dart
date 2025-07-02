@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
+import 'package:provider/provider.dart';
+import 'package:sisgha/app/domain/model/testeTurmas.dart';
+import 'package:sisgha/app/providers/escolha_horarios_alunos.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
 import 'cards_horarios_disciplinas.dart';
@@ -20,7 +22,8 @@ class _QuadradosHomeState extends State<QuadradosHome>
   @override
   void initState() {
     super.initState();
-
+    Provider.of<EscolhaHorariosAlunos>(context, listen: false)
+        .selecionarCurso('nome');
     _quadradoSelecionado =
         DateTime.now().weekday == 7 ? 0 : DateTime.now().weekday - 1;
 
@@ -29,6 +32,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
         length: 6,
         vsync: this,
         initialIndex: _quadradoSelecionado == -1 ? 0 : _quadradoSelecionado);
+
     _tabController.addListener(() {
       setState(() {
         _quadradoSelecionado = _tabController.index;
@@ -44,8 +48,13 @@ class _QuadradosHomeState extends State<QuadradosHome>
 
   @override
   Widget build(BuildContext context) {
+    print("Lista de turmas: ${TesteTurma().turmas.length}");
     return LayoutBuilder(
-      builder: (context, constraints) => Column(
+      builder: (
+        context,
+        constraints,
+      ) =>
+          Column(
         children: [
           SizedBox(
             height: constraints.maxHeight *
@@ -67,40 +76,16 @@ class _QuadradosHomeState extends State<QuadradosHome>
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: const [
-                ConstrutorHorarios(
-                  materia: 'Matemática',
-                  informacao: '3A',
+              children: List.generate(TesteTurma().turmas.length - 1, (index) {
+                final turma = TesteTurma().turmas[index];
+                return ConstrutorHorarios(
+                  materia: 'Disciplina ${index + 1}',
+                  informacao: turma.nome,
                   horario: '08:00 - 09:30',
-                ),
-                ConstrutorHorarios(
-                  materia: 'História',
-                  informacao: '2B',
-                  horario: '10:00 - 11:30',
-                ),
-                ConstrutorHorarios(
-                  materia: 'Geografia',
-                  informacao: '1C',
-                  horario: '13:00 - 14:30',
-                ),
-                ConstrutorHorarios(
-                  materia: 'Lógica de Programação',
-                  informacao: '3C',
-                  horario: '13:00 - 14:30',
-                ),
-                ConstrutorHorarios(
-                  materia: 'Geografia',
-                  informacao: '1C',
-                  horario: '13:00 - 14:30',
-                ),
-                ConstrutorHorarios(
-                  materia: 'Geografia',
-                  informacao: '1C',
-                  horario: '13:00 - 14:30',
-                )
-              ],
+                );
+              }),
             ),
-          )
+          ),
         ],
       ),
     );
