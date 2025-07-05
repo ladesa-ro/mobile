@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/padroes.dart';
-import 'package:sisgha/app/providers/dados_professor.dart';
+import 'package:sisgha/app/cache/dados_professor.dart';
 import 'package:sisgha/app/views/professor/perfil/widgets/botton_sheat.dart';
 import 'package:sisgha/app/views/professor/perfil/widgets/estilos_perfil.dart';
 import 'package:sisgha/app/views/professor/perfil/widgets/componente_navegacao.dart';

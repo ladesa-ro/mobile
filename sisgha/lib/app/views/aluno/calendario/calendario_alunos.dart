@@ -9,7 +9,7 @@ import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/dias.dart';
 import '../../../core/utils/padroes.dart';
-import '../../../providers/escolha_calendario.dart';
+import '../../../cache/escolha_calendario.dart';
 import '../../components/appbar.dart';
 import '../../components/calendario.dart';
 import 'widgets/cards_alunos.dart';

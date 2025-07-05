@@ -7,10 +7,10 @@ import 'package:sisgha/app/views/components/widgets_home/auto_font_size_text.dar
 import '../../core/utils/icones.dart';
 import '../../core/utils/estilos.dart';
 import '../../core/utils/padroes.dart';
-import '../../providers/tema.dart';
+import '../../cache/tema.dart';
 import '../components/widgets_home/appbar_animacoes.dart';
 import 'dialogo_troca_de_tema.dart';
-import '../../providers/escolha_horarios_alunos.dart';
+import '../../cache/escolha_horarios_alunos.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final double height;
@@ -53,7 +53,7 @@ class _CustomAppBarState extends State<CustomAppBar>
         setState(() {});
       },
       formacao: provider.nomeFormacaoSelecionada ?? '',
-      curso: provider.cursoSelecionado ?? '', // 
+      curso: provider.cursoSelecionado ?? '', //
       turma: provider.turmaSelecionada ?? '',
     );
   }

@@ -9,7 +9,7 @@ import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/dias.dart';
 import '../../../core/utils/padroes.dart';
-import '../../../providers/lista_eventos.dart';
+import '../../../cache/lista_eventos.dart';
 import '../../components/appbar.dart';
 import '../../components/calendario.dart';
 import '../../components/letreiro_rolante.dart';
@@ -72,8 +72,8 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                 height: Padroes.aluturaBotoes(),
                 width: largura * 0.80,
                 child: RepaintBoundary(
-                    // child: Center(child: LetreiroRolante()),
-                    ),
+                  child: Center(child: LetreiroRolante()),
+                ),
               ),
               const Spacer(),
               SizedBox(
@@ -119,7 +119,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                 },
                 eventLoader: (day) {
                   final provider =
-                      Provider.of<ListaEventos>(context, listen: false);
+                      Provider.of<ListaEventos>(context, listen: true);
                   final dataNormalizada = normalizarData(day);
                   return provider.teste[dataNormalizada] ?? [];
                 },

@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -9,7 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sisgha/app/cache/etapas_calendario.dart';
 import 'package:sisgha/app/domain/model/disciplinas.dart';
+import 'package:sisgha/app/domain/model/etapas.dart';
 import 'package:sisgha/app/domain/model/testeDisciplinas.dart';
 import 'package:sisgha/app/domain/model/testeTurmas.dart';
 import 'package:sisgha/app/domain/model/turmas.dart';
@@ -18,7 +21,7 @@ import '../../views/components/widget_erro.dart';
 import '../model/professor.dart';
 import '../model/cursos.dart';
 import '../model/nivel_formacao.dart';
-import '../../providers/dados_professor.dart';
+import '../../cache/dados_professor.dart';
 
 class Repository {
   static final String _api = "https://dev.ladesa.com.br/api/v1";
@@ -256,6 +259,20 @@ class Repository {
     return <Turma>[];
   }
 
+  // -----------------------------------------------------------------Etapas
+  static Future<List<Etapas>> buscarEtapas() async {
+    final url = Uri.parse('$_api/etapas');
+    final resposta = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+    if (verificarStatusCode(resposta.statusCode)) {
+      final data = jsonDecode(resposta.body)['data'];
+      return data.map<Etapas>((e) => Etapas.fromJson(e)).toList();
+    }
+    return <Etapas>[];
+  }
+
 // ---------------------------------------- testar rotas, clicar no botao de recuperar senha
   static void teste() async {
     final url = Uri.parse("$_api/turmas");
@@ -273,6 +290,7 @@ class Repository {
     }
   }
 
+  // --------------------------------------retirar esses 'testar' -----------------------------------
   static Future<void> testeBuscarTurmas() async {
     final url = Uri.parse("$_api/turmas");
     final response = await http.get(url, headers: {
@@ -282,11 +300,13 @@ class Repository {
 
     if (verificarStatusCode(response.statusCode)) {
       final data = jsonDecode(response.body)["data"];
-     TesteTurma().PegarTurmas(data.map<Turma>((e) => Turma.fromJson(e)).toList());
+      TesteTurma()
+          .PegarTurmas(data.map<Turma>((e) => Turma.fromJson(e)).toList());
       print("Turmas carregadas");
     }
   }
-   static Future<void> testeBuscarDisciplinas() async {
+
+  static Future<void> testeBuscarDisciplinas() async {
     final url = Uri.parse("$_api/disciplinas");
     final response = await http.get(url, headers: {
       'Content-Type': 'application/json',
@@ -295,7 +315,8 @@ class Repository {
 
     if (verificarStatusCode(response.statusCode)) {
       final data = jsonDecode(response.body)["data"];
-     TesteDisciplinas().PegarDisciplinas(data.map<Disciplina>((e) => Disciplina.fromJson(e)).toList());
+      TesteDisciplinas().PegarDisciplinas(
+          data.map<Disciplina>((e) => Disciplina.fromJson(e)).toList());
       print("Disciplinas carregadas");
     }
   }

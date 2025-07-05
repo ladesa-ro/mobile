@@ -2,11 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/app/cache/etapas_calendario.dart';
 import 'package:sisgha/app/domain/api/repository.dart';
 import 'package:sisgha/app/domain/logic/verificar_dados_armazenados.dart';
+import 'package:sisgha/app/domain/model/etapas.dart';
 
-import '../../providers/dados_professor.dart';
-import '../../providers/escolha_horarios_alunos.dart';
+import '../../cache/dados_professor.dart';
+import '../../cache/escolha_horarios_alunos.dart';
 import '../components/progress_indicator.dart';
 
 import 'login/login.dart';
@@ -26,9 +28,11 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
   }
 
   Future<void> _iniciar() async {
+    final etapas = EtapasCalendario();
     await context.read<EscolhaHorariosAlunos>().pucharOpcoes();
     await Repository.testeBuscarTurmas();
     await Repository.testeBuscarDisciplinas();
+    await etapas.adicionarEtapas();
 
     if (await verificarDadosBaixados()) {
       await context.read<DadosProfessor>().iniciarProvider(context, true);

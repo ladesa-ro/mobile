@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/domain/model/testeDisciplinas.dart';
 import 'package:sisgha/app/domain/model/testeTurmas.dart';
-import 'package:sisgha/app/providers/escolha_horarios_alunos.dart';
+import 'package:sisgha/app/cache/escolha_horarios_alunos.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
 import 'cards_horarios_disciplinas.dart';

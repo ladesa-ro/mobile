@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/providers/escolha_horarios_alunos.dart';
+import 'package:sisgha/app/cache/escolha_horarios_alunos.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../core/utils/colors.dart';

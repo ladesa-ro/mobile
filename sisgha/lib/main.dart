@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/app/cache/etapas_calendario.dart';
 import 'package:sisgha/app/core/routes/app_routes.dart';
-import 'package:sisgha/app/providers/dados_professor.dart';
-import 'package:sisgha/app/providers/escolha_horarios_alunos.dart';
-import 'package:sisgha/app/providers/lista_eventos.dart';
-import 'package:sisgha/app/providers/tema.dart';
+import 'package:sisgha/app/cache/dados_professor.dart';
+import 'package:sisgha/app/cache/escolha_horarios_alunos.dart';
+import 'package:sisgha/app/cache/lista_eventos.dart';
+import 'package:sisgha/app/cache/tema.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -15,7 +16,8 @@ void main() {
         ChangeNotifierProvider(create: (_) => DadosProfessor()),
         ChangeNotifierProvider(create: (_) => EscolhaHorariosAlunos()),
         ChangeNotifierProvider(create: (_) => TemasProvider()),
-        ChangeNotifierProvider(create: (_) => ListaEventos())
+        ChangeNotifierProvider(create: (_) => ListaEventos()),
+        ChangeNotifierProvider(create: (_) => EtapasCalendario())
       ],
       child: const MyApp(),
     ),
