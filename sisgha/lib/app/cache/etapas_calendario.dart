@@ -7,23 +7,18 @@ class EtapasCalendario with ChangeNotifier {
 
   adicionarEtapasCalendario(List<Etapas> lista) {
     for (var etapa in lista) {
-      final dataNormalizada = normalizarData(etapa.dataInicio);
+      final inicio = normalizarData(etapa.dataInicio);
+      final fim = normalizarData(etapa.dataTermino);
 
-      if (!etapasCalendario.containsKey(dataNormalizada)) {
-        etapasCalendario[dataNormalizada] = [];
+      for (DateTime dia = inicio;
+          !dia.isAfter(fim);
+          dia = dia.add(const Duration(days: 1))) {
+        if (!etapasCalendario.containsKey(dia)) {
+          etapasCalendario[dia] = [];
+        }
+
+        etapasCalendario[dia]!.add(etapa);
       }
-
-      etapasCalendario[dataNormalizada]!.add(
-        Etapas(
-          numero: etapa.numero,
-          dataInicio: dataNormalizada,
-          dataTermino: normalizarData(etapa.dataTermino),
-          tempo:
-              'Começa em: ${dataNormalizada.difference(DateTime.now()).inDays} dias',
-          local: 'jipa',
-          cor: etapa.cor,
-        ),
-      );
     }
   }
 }

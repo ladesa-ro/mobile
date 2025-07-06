@@ -83,7 +83,7 @@ class DadosProfessor with ChangeNotifier {
   Future<void> iniciarProvider(BuildContext context, bool verificado) async {
     //carregar eventos do calendario
     final listas = Listas();
-    listas.adicionarEtapas();
+    await listas.adicionarEtapas();
     await context
         .read<EtapasCalendario>()
         .adicionarEtapasCalendario(listas.listaEtapas);

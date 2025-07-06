@@ -167,6 +167,7 @@ CalendarBuilders calendarBuilder(double heigth) {
     defaultBuilder: (context, date, events) {
       final etapasProvider = context.read<EtapasCalendario>();
       final etapasDoDia = etapasProvider.etapasCalendario[normalizarData(date)];
+
       final cor = etapasDoDia?.first.cor ?? CoresClaras.cinza;
 
       return estiloDosBlocosDosDiasDoMes(cor, date, heigth);
