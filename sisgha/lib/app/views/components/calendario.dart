@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:sisgha/app/cache/etapas_calendario.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../core/utils/colors.dart';
 import '../../core/utils/estilos.dart';
 import '../../core/utils/icones.dart';
+import '../professor/calendario/calendario.dart';
 
 Widget estiloDoBlocoDoDiaDeHoje(
     BuildContext context, DateTime day, Color cor, double height) {
@@ -157,37 +160,19 @@ DaysOfWeekStyle estiloParteSuperior() {
 }
 
 CalendarBuilders calendarBuilder(double heigth) {
-  Color color = Colors.black;
   return CalendarBuilders(
     selectedBuilder: (context, date, _) {
       return estiloBlocoDiaSelecionado(date, heigth);
     },
     defaultBuilder: (context, date, events) {
-      final now = DateTime.now();
+      final etapasProvider = context.read<EtapasCalendario>();
+      final etapasDoDia = etapasProvider.etapasCalendario[normalizarData(date)];
+      final cor = etapasDoDia?.first.cor ?? CoresClaras.cinza;
 
-      if (date.isAfter(DateTime(now.year, 2, 7)) &&
-          date.isBefore(DateTime(now.year, 4, 18))) {
-        color = const Color(0xFF08C17F);
-      } else if (date.isAfter(DateTime(now.year, 4, 17)) &&
-          date.isBefore(DateTime(now.year, 6, 20))) {
-        color = CoresClaras.roxo;
-      } else if (date.isAfter(DateTime(now.year, 6, 19)) &&
-          date.isBefore(DateTime(now.year, 7, 23))) {
-        color = CoresClaras.vermelhoFracoCalendario;
-      } else if (date.isAfter(DateTime(now.year, 7, 22)) &&
-          date.isBefore(DateTime(now.year, 9, 25))) {
-        color = CoresClaras.vermelhoCalendario;
-      } else if (date.isAfter(DateTime(now.year, 9, 24)) &&
-          date.isBefore(DateTime(now.year, 11, 29))) {
-        color = Colors.amber;
-      } else {
-        const TextStyle(color: Colors.transparent);
-        color = CoresClaras.cinza;
-      }
-      return estiloDosBlocosDosDiasDoMes(color, date, heigth);
+      return estiloDosBlocosDosDiasDoMes(cor, date, heigth);
     },
     todayBuilder: (context, day, focusedDay) =>
-        estiloDoBlocoDoDiaDeHoje(context, day, color, heigth),
+        estiloDoBlocoDoDiaDeHoje(context, day, CoresClaras.preto, heigth),
     outsideBuilder: (context, day, focusedDay) =>
         estiloDosBlocosDosDiasDoMesDesabilitados(heigth),
   );

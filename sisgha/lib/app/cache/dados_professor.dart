@@ -7,8 +7,9 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sisgha/app/cache/escolha_calendario.dart';
 import 'package:sisgha/app/cache/etapas_calendario.dart';
-import 'package:sisgha/app/cache/lista_eventos.dart';
+import 'package:sisgha/app/cache/eventos_calendario.dart';
 
+import '../domain/logic/listas.dart';
 import '../views/components/botton_app_bar.dart';
 import '../domain/api/repository.dart';
 import '../domain/model/professor.dart';
@@ -80,6 +81,13 @@ class DadosProfessor with ChangeNotifier {
   }
 
   Future<void> iniciarProvider(BuildContext context, bool verificado) async {
+    //carregar eventos do calendario
+    final listas = Listas();
+    listas.adicionarEtapas();
+    await context
+        .read<EtapasCalendario>()
+        .adicionarEtapasCalendario(listas.listaEtapas);
+    //carregar dados do professor
     final dados = DadosProfessor();
     verificado ? await dados.carregarDados() : await dados.buscarDados(context);
     Navigator.of(context).pop();

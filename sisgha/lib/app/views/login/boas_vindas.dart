@@ -9,7 +9,7 @@ import 'package:sisgha/app/domain/model/etapas.dart';
 
 import '../../cache/dados_professor.dart';
 import '../../cache/escolha_horarios_alunos.dart';
-import '../../cache/lista_eventos.dart';
+import '../../cache/eventos_calendario.dart';
 import '../components/progress_indicator.dart';
 
 import 'login/login.dart';
@@ -29,12 +29,10 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
   }
 
   Future<void> _iniciar() async {
-    final etapas = context.read<EtapasCalendario>();
     await context.read<EscolhaHorariosAlunos>().pucharOpcoes();
     await Repository.testeBuscarTurmas();
     await Repository.testeBuscarDisciplinas();
-    await etapas.adicionarEtapas();
-    context.read<ListaEventos>().adicionarEventos(etapas.listEtapas);
+
     if (await verificarDadosBaixados()) {
       await context.read<DadosProfessor>().iniciarProvider(context, true);
     } else {

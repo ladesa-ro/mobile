@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sisgha/app/cache/etapas_calendario.dart';
 import 'package:sisgha/app/domain/model/disciplinas.dart';
 import 'package:sisgha/app/domain/model/etapas.dart';
+import 'package:sisgha/app/domain/model/eventos.dart';
 import 'package:sisgha/app/domain/model/testeDisciplinas.dart';
 import 'package:sisgha/app/domain/model/testeTurmas.dart';
 import 'package:sisgha/app/domain/model/turmas.dart';
@@ -259,7 +260,7 @@ class Repository {
     return <Turma>[];
   }
 
-  // -----------------------------------------------------------------Etapas
+  // -----------------------------------------------------------------calendario
   static Future<List<Etapas>> buscarEtapas() async {
     final url = Uri.parse('$_api/etapas');
     final resposta = await http.get(url, headers: {
@@ -271,6 +272,19 @@ class Repository {
       return data.map<Etapas>((e) => Etapas.fromJson(e)).toList();
     }
     return <Etapas>[];
+  }
+
+  static Future<List<Eventos>> buscarEventos() async {
+    final url = Uri.parse('$_api/eventos');
+    final resposta = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+    if (verificarStatusCode(resposta.statusCode)) {
+      final data = jsonDecode(resposta.body)['data'];
+      return data.map<Eventos>((e) => Etapas.fromJson(e)).toList();
+    }
+    return <Eventos>[];
   }
 
 // ---------------------------------------- testar rotas, clicar no botao de recuperar senha
@@ -290,7 +304,7 @@ class Repository {
     }
   }
 
-  // --------------------------------------retirar esses 'testar' -----------------------------------
+  // -------------------------------------- retirar esses 'testar' e trocar por algo mais usual -----------------------------------
   static Future<void> testeBuscarTurmas() async {
     final url = Uri.parse("$_api/turmas");
     final response = await http.get(url, headers: {

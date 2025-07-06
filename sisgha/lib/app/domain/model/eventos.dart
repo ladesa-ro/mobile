@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 
 class Eventos {
-  final String titulo;
-  final String inicio;
-  final String termino;
-  final String tempo;
-  final String local;
+  final String nome;
+  final String rrule;
   final Color cor;
 
-  Eventos(
-      {required this.titulo,
-      required this.inicio,
-      required this.termino,
-      required this.tempo,
-      required this.local,
-      required this.cor});
+  Eventos({required this.nome, required this.rrule, required this.cor});
+
+  factory Eventos.fromJson(Map<String, dynamic> json) {
+    return Eventos(
+      nome: json['nome'],
+      rrule: json['rrule'],
+      cor: Color(int.parse(json['cor'].replaceFirst('#', '0xff'))),
+    );
+  }
 }

@@ -9,7 +9,7 @@ import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/dias.dart';
 import '../../../core/utils/padroes.dart';
-import '../../../cache/lista_eventos.dart';
+import '../../../cache/eventos_calendario.dart';
 import '../../components/appbar.dart';
 import '../../components/calendario.dart';
 import '../../components/letreiro_rolante.dart';
@@ -94,123 +94,129 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
             height: tamanho * 0.55,
             width: largura,
             child: RepaintBoundary(
-              child: TableCalendar(
-                availableGestures: AvailableGestures.none,
-                firstDay: DatasFormatadas.primeiroDiaDoAno,
-                lastDay: DatasFormatadas.ultimoDiaDoAno,
-                focusedDay: _focusedDay,
-                calendarFormat: CalendarFormat.month,
-                locale: 'pt-BR',
-                shouldFillViewport: true,
-                daysOfWeekHeight: 23,
-                daysOfWeekStyle: estiloParteSuperior(),
-                headerStyle: estiloCabessario(),
-                calendarBuilders: calendarBuilder(1000),
-                pageAnimationCurve: Curves.linear,
-                pageAnimationDuration: const Duration(milliseconds: 300),
-                selectedDayPredicate: (day) {
-                  return isSameDay(_selectedDay, day);
-                },
-                onDaySelected: (selectedDay, focusedDay) {
-                  setState(() {
-                    _selectedDay = selectedDay;
-                    _focusedDay = focusedDay;
-                  });
-                },
-                eventLoader: (day) {
-                  final provider = Provider.of<ListaEventos>(context);
-                  final dataNormalizada = normalizarData(day);
-                  return provider.listaEventos[dataNormalizada] ?? [];
-                },
+              child: Container(
+                padding: EdgeInsets.only(bottom: 10),
+                decoration: BoxDecoration(
+                    border: Border.all(color: CoresClaras.cinzaBordas),
+                    borderRadius: BorderRadius.circular(15)),
+                child: TableCalendar(
+                  availableGestures: AvailableGestures.none,
+                  firstDay: DatasFormatadas.primeiroDiaDoAno,
+                  lastDay: DatasFormatadas.ultimoDiaDoAno,
+                  focusedDay: _focusedDay,
+                  calendarFormat: CalendarFormat.month,
+                  locale: 'pt-BR',
+                  shouldFillViewport: true,
+                  daysOfWeekHeight: 23,
+                  daysOfWeekStyle: estiloParteSuperior(),
+                  headerStyle: estiloCabessario(),
+                  calendarBuilders: calendarBuilder(1000),
+                  pageAnimationCurve: Curves.linear,
+                  pageAnimationDuration: const Duration(milliseconds: 300),
+                  selectedDayPredicate: (day) {
+                    return isSameDay(_selectedDay, day);
+                  },
+                  onDaySelected: (selectedDay, focusedDay) {
+                    setState(() {
+                      _selectedDay = selectedDay;
+                      _focusedDay = focusedDay;
+                    });
+                  },
+                  // eventLoader: (day) {
+                  //   final provider = Provider.of<ListaEventos>(context);
+                  //   final dataNormalizada = normalizarData(day);
+                  //   return provider.listaEventos[dataNormalizada] ?? [];
+                  // },
+                ),
               ),
             ),
           ),
           SizedBox(height: tamanho * 0.03),
-          Consumer<ListaEventos>(
-            builder: (context, provider, _) {
-              final data = normalizarData(_selectedDay);
-              final eventos = provider.listaEventos[data] ?? [];
+          // Consumer<ListaEventos>(
+          //   builder: (context, provider, _) {
+          //     final data = normalizarData(_selectedDay);
+          //     final eventos = provider.listaEventos[data] ?? [];
 
-              if (eventos.isEmpty) {
-                return const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text("Nenhum evento para este dia."),
-                );
-              }
+          //     if (eventos.isEmpty) {
+          //       return const Padding(
+          //         padding: EdgeInsets.all(16.0),
+          //         child: Text("Nenhum evento para este dia."),
+          //       );
+          //     }
 
-              return ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: eventos.length,
-                itemBuilder: (context, index) {
-                  final evento = eventos[index];
-                  return Container(
-                    margin: EdgeInsets.symmetric(
-                      horizontal: 0,
-                      vertical: 8,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 4,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                      border: Border(
-                        left: BorderSide(
-                          color: evento.cor, // cor da borda
-                          width: 5, // a espreçura
-                        ),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  evento.titulo,
-                                  style: estiloTexto(
-                                    16,
-                                    cor: CoresClaras.vermelho,
-                                    peso: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(height: 15),
-                                Text(evento.inicio, style: estiloTexto(16)),
-                                Text(evento.termino, style: estiloTexto(16)),
-                                Text(evento.tempo, style: estiloTexto(16)),
-                                Text(evento.local, style: estiloTexto(16)),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(10),
-                          child: SizedBox(
-                            height: 45,
-                            width: largura * 0.115,
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              child: Iconify(Icones.sino),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              );
-            },
-          ),
+          //     return ListView.builder(
+          //       shrinkWrap: true,
+          //       physics: NeverScrollableScrollPhysics(),
+          //       itemCount: eventos.length,
+          //       itemBuilder: (context, index) {
+          //         final evento = eventos[index];
+          //         return Container(
+          //           margin: EdgeInsets.symmetric(
+          //             horizontal: 0,
+          //             vertical: 8,
+          //           ),
+          //           decoration: BoxDecoration(
+          //             color: Colors.white,
+          //             borderRadius: BorderRadius.circular(10),
+          //             boxShadow: [
+          //               BoxShadow(
+          //                 color: Colors.black12,
+          //                 blurRadius: 4,
+          //                 offset: Offset(0, 2),
+          //               ),
+          //             ],
+          //             border: Border(
+          //               left: BorderSide(
+          //                 color: evento.cor, // cor da borda
+          //                 width: 5, // a espreçura
+          //               ),
+          //             ),
+          //           ),
+          //           child: Row(
+          //             mainAxisAlignment: MainAxisAlignment.start,
+          //             crossAxisAlignment: CrossAxisAlignment.start,
+          //             children: [
+          //               Expanded(
+          //                 child: Padding(
+          //                   padding: EdgeInsets.all(10),
+          //                   child: Column(
+          //                     crossAxisAlignment: CrossAxisAlignment.start,
+          //                      children: [
+          //                       Text(
+          //                         evento.titulo,
+          //                         style: estiloTexto(
+          //                         16,
+          //                         cor: evento.cor,
+          //                         peso: FontWeight.bold,
+          //                        ),
+          //                      ),
+          //                       SizedBox(height: 15),
+          //                       Text(evento.inicio, style: estiloTexto(16)),
+          //                       Text(evento.termino, style: estiloTexto(16)),
+          //                       Text(evento.tempo, style: estiloTexto(16)),
+          //                       Text(evento.local, style: estiloTexto(16)),
+          //                     ],
+          //                   ),
+          //                 ),
+          //               ),
+          //               Padding(
+          //                 padding: EdgeInsets.all(10),
+          //                 child: SizedBox(
+          //                   height: 45,
+          //                   width: largura * 0.115,
+          //                   child: ElevatedButton(
+          //                     onPressed: () {},
+          //                     child: Iconify(Icones.sino),
+          //                   ),
+          //                 ),
+          //               ),
+          //             ],
+          //           ),
+          //         );
+          //       },
+          //     );
+          //   },
+          // ),
         ]),
       ),
     );
