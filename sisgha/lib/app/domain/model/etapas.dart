@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:sisgha/app/views/professor/calendario/calendario.dart';
+
 class Etapas {
   final int numero;
   final DateTime dataInicio;
@@ -13,10 +15,13 @@ class Etapas {
       required this.cor});
 
   factory Etapas.fromJson(Map<String, dynamic> json) {
+    final inicio = DateTime.parse(json['dataInicio']);
+    final fim = DateTime.parse(json['dataTermino']);
+
     return Etapas(
         numero: json['numero'],
-        dataInicio: DateTime.parse(json['dataInicio']),
-        dataTermino: DateTime.parse(json['dataTermino']),
+        dataInicio: normalizarData(inicio),
+        dataTermino: normalizarData(fim),
         cor: Color(int.parse(json['cor'].replaceFirst('#', '0xff'))));
   }
 }

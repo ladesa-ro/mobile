@@ -118,10 +118,9 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                   });
                 },
                 eventLoader: (day) {
-                  final provider =
-                      Provider.of<ListaEventos>(context, listen: true);
+                  final provider = Provider.of<ListaEventos>(context);
                   final dataNormalizada = normalizarData(day);
-                  return provider.teste[dataNormalizada] ?? [];
+                  return provider.listaEventos[dataNormalizada] ?? [];
                 },
               ),
             ),
@@ -130,7 +129,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
           Consumer<ListaEventos>(
             builder: (context, provider, _) {
               final data = normalizarData(_selectedDay);
-              final eventos = provider.teste[data] ?? [];
+              final eventos = provider.listaEventos[data] ?? [];
 
               if (eventos.isEmpty) {
                 return const Padding(
@@ -162,7 +161,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                       ],
                       border: Border(
                         left: BorderSide(
-                          color: CoresClaras.roxo, // cor da borda
+                          color: evento.cor, // cor da borda
                           width: 5, // a espreçura
                         ),
                       ),

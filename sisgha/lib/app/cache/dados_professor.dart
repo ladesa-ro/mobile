@@ -5,6 +5,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sisgha/app/cache/escolha_calendario.dart';
+import 'package:sisgha/app/cache/etapas_calendario.dart';
+import 'package:sisgha/app/cache/lista_eventos.dart';
 
 import '../views/components/botton_app_bar.dart';
 import '../domain/api/repository.dart';
@@ -50,6 +53,7 @@ class DadosProfessor with ChangeNotifier {
         id: armazenamento.getString("id")!);
     carregarDadosDoUsuario(user);
     await carregarImagens();
+
     notifyListeners();
   }
 

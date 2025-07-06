@@ -1,23 +1,29 @@
 import 'package:flutter/widgets.dart';
-import 'package:sisgha/app/cache/etapas_calendario.dart';
+import 'package:intl/intl.dart';
+import 'package:sisgha/app/domain/model/etapas.dart';
 import 'package:sisgha/app/domain/model/eventos.dart';
 
 class ListaEventos with ChangeNotifier {
-  final Map<DateTime, List<Eventos>> teste = {};
+  Map<DateTime, List<Eventos>> listaEventos = {};
 
-  adicionarEventos() {
-    final etapasCalendario = EtapasCalendario();
-
-    for (var etapa in etapasCalendario.listEtapas) {
-      if (teste.containsKey(etapa.dataInicio)) {
-        teste[etapa.dataInicio] = [];
+  adicionarEventos(List<Etapas> lista) {
+    final formatador = DateFormat('dd/MM/yyyy');
+    for (var etapa in lista) {
+      if (!listaEventos.containsKey(etapa.dataInicio)) {
+        listaEventos[etapa.dataInicio] = [];
       }
-      teste[etapa.dataInicio]!.add(Eventos(
+      listaEventos[etapa.dataInicio]!.add(
+        Eventos(
           titulo: 'Inicio Etapa ${etapa.numero}',
-          inicio: etapa.dataInicio.toString(),
-          termino: etapa.dataTermino.toString(),
-          tempo: etapa.dataInicio.difference(DateTime.now()).toString(),
-          local: 'jipa'));
+          inicio: formatador.format(etapa.dataInicio),
+          termino: formatador.format(etapa.dataTermino),
+          tempo: etapa.dataInicio.difference(DateTime.now()).inDays.toString(),
+          local: 'jipa',
+          cor: etapa.cor,
+        ),
+      );
     }
+
+    return;
   }
 }
