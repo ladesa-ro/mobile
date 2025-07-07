@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/cache/etapas_calendario.dart';
+import 'package:sisgha/app/cache/calendario_funcionalidades.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -160,21 +160,54 @@ DaysOfWeekStyle estiloParteSuperior() {
 }
 
 CalendarBuilders calendarBuilder(double heigth) {
+  Color cor = Colors.transparent;
   return CalendarBuilders(
-    selectedBuilder: (context, date, _) {
+    //dia selecionado
+    selectedBuilder: (context, date, focusedDay) {
+      // Verifica se o dia selecionado está dentro do mês atual
+      if (date.month != focusedDay.month) {
+        // Retorna o estilo padrão (sem destaque)
+        return estiloDosBlocosDosDiasDoMesDesabilitados(
+            heigth); // ou estilo padrão neutro
+      }
+
+      // Se estiver no mês visível, aplica o estilo de selecionado
       return estiloBlocoDiaSelecionado(date, heigth);
     },
+    // durante o mes selecionado
     defaultBuilder: (context, date, events) {
-      final etapasProvider = context.read<EtapasCalendario>();
+      final etapasProvider = context.read<CalendarioFuncionalidades>();
       final etapasDoDia = etapasProvider.etapasCalendario[normalizarData(date)];
-
-      final cor = etapasDoDia?.first.cor ?? CoresClaras.cinza;
-
+      cor = etapasDoDia?.first.cor ?? CoresClaras.cinza;
       return estiloDosBlocosDosDiasDoMes(cor, date, heigth);
     },
+
+    //hoje
     todayBuilder: (context, day, focusedDay) =>
-        estiloDoBlocoDoDiaDeHoje(context, day, CoresClaras.preto, heigth),
+        estiloDoBlocoDoDiaDeHoje(context, day, cor, heigth),
+
+    //dias dos meses diferentes do selecionado
     outsideBuilder: (context, day, focusedDay) =>
         estiloDosBlocosDosDiasDoMesDesabilitados(heigth),
+    disabledBuilder: (context, day, focusedDay) =>
+        estiloDosBlocosDosDiasDoMesDesabilitados(heigth),
+
+    //notificação de evento no dia
+    markerBuilder: (context, date, events) {
+      if (events.isEmpty) return const SizedBox.shrink();
+
+      return Positioned(
+        bottom: -3,
+        right: 8,
+        child: Container(
+          height: 10,
+          width: 10,
+          decoration: BoxDecoration(
+              color: events[0].cor ?? Colors.transparent,
+              border: Border.all(width: 0.5, color: CoresClaras.cinzaBordas),
+              borderRadius: BorderRadius.circular(10)),
+        ),
+      );
+    },
   );
 }

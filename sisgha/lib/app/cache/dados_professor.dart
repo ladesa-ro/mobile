@@ -5,9 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sisgha/app/cache/escolha_calendario.dart';
-import 'package:sisgha/app/cache/etapas_calendario.dart';
-import 'package:sisgha/app/cache/eventos_calendario.dart';
+import 'package:sisgha/app/cache/calendario_funcionalidades.dart';
 
 import '../domain/logic/listas.dart';
 import '../views/components/botton_app_bar.dart';
@@ -85,8 +83,11 @@ class DadosProfessor with ChangeNotifier {
     final listas = Listas();
     await listas.adicionarEtapas();
     await context
-        .read<EtapasCalendario>()
+        .read<CalendarioFuncionalidades>()
         .adicionarEtapasCalendario(listas.listaEtapas);
+    await context
+        .read<CalendarioFuncionalidades>()
+        .juntarEventosEtapas(listas.listaEtapas);
     //carregar dados do professor
     final dados = DadosProfessor();
     verificado ? await dados.carregarDados() : await dados.buscarDados(context);

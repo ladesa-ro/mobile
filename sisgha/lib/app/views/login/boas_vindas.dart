@@ -2,14 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/cache/etapas_calendario.dart';
 import 'package:sisgha/app/domain/api/repository.dart';
 import 'package:sisgha/app/domain/logic/verificar_dados_armazenados.dart';
-import 'package:sisgha/app/domain/model/etapas.dart';
 
 import '../../cache/dados_professor.dart';
 import '../../cache/escolha_horarios_alunos.dart';
-import '../../cache/eventos_calendario.dart';
 import '../components/progress_indicator.dart';
 
 import 'login/login.dart';

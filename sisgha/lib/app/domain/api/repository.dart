@@ -2,15 +2,12 @@
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sisgha/app/cache/etapas_calendario.dart';
 import 'package:sisgha/app/domain/model/disciplinas.dart';
 import 'package:sisgha/app/domain/model/etapas.dart';
 import 'package:sisgha/app/domain/model/eventos.dart';
@@ -295,12 +292,12 @@ class Repository {
       'Accept': 'application/json',
     });
     if (verificarStatusCode(response.statusCode)) {
-      final data = jsonDecode(response.body)["data"];
+      //final data = jsonDecode(response.body)["data"];
 
-      for (var element in data) {
-        print(element["periodo"]);
-        print(element["id"]);
-      }
+      // for (var element in data) {
+      //   print(element["periodo"]);
+      //   print(element["id"]);
+      // }
     }
   }
 
@@ -316,7 +313,6 @@ class Repository {
       final data = jsonDecode(response.body)["data"];
       TesteTurma()
           .PegarTurmas(data.map<Turma>((e) => Turma.fromJson(e)).toList());
-      print("Turmas carregadas");
     }
   }
 
@@ -331,7 +327,6 @@ class Repository {
       final data = jsonDecode(response.body)["data"];
       TesteDisciplinas().PegarDisciplinas(
           data.map<Disciplina>((e) => Disciplina.fromJson(e)).toList());
-      print("Disciplinas carregadas");
     }
   }
 }
