@@ -10,7 +10,7 @@ import '../../core/utils/icones.dart';
 import '../../core/utils/colors.dart';
 
 import '../../core/utils/padroes.dart';
-import '../../providers/escolha_calendario.dart';
+import '../../cache/escolha_calendario.dart';
 import '../../domain/logic/verificar_token_ativo.dart';
 import '../professor/calendario/calendario.dart';
 import '../professor/home/home.dart';

@@ -10,9 +10,8 @@ import '../../../core/utils/estilos.dart';
 import '../../../core/utils/imagens.dart';
 import '../../../core/utils/padroes.dart';
 import '../../../domain/api/repository.dart';
-import '../../../providers/dados_professor.dart';
+import '../../../cache/dados_professor.dart';
 import '../../components/progress_indicator.dart';
-import '../../components/widget_erro.dart';
 import 'widgets_estilos.dart';
 
 class PaginaLogin extends StatelessWidget {

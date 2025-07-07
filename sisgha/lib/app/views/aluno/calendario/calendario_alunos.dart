@@ -9,7 +9,7 @@ import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/dias.dart';
 import '../../../core/utils/padroes.dart';
-import '../../../providers/escolha_calendario.dart';
+import '../../../cache/escolha_calendario.dart';
 import '../../components/appbar.dart';
 import '../../components/calendario.dart';
 import 'widgets/cards_alunos.dart';
@@ -98,10 +98,11 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
             ),
             SizedBox(height: tamanho * 0.03),
             SizedBox(
-                height: tamanho * 0.55,
-                width: largura,
-                child:
-                    RepaintBoundary(child: MiniCalendario(showDialog: false))),
+              height: tamanho * 0.55,
+              width: largura,
+              // child:
+              //     RepaintBoundary(child: MiniCalendario(showDialog: false))
+            ),
             SizedBox(height: tamanho * 0.03),
             RepaintBoundary(
               child: CardsAlunos(),

@@ -7,7 +7,7 @@ import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/estilos.dart';
 import '../../../../core/utils/icones.dart';
 import '../../../../core/utils/padroes.dart';
-import '../../../../providers/escolha_horarios_alunos.dart';
+import '../../../../cache/escolha_horarios_alunos.dart';
 
 class CardCurso extends StatefulWidget {
   const CardCurso({super.key});

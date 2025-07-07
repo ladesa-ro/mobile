@@ -4,7 +4,7 @@ import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
 import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/padroes.dart';
-import 'package:sisgha/app/providers/escolha_horarios_alunos.dart';
+import 'package:sisgha/app/cache/escolha_horarios_alunos.dart';
 import 'package:sizer/sizer.dart';
 
 import 'widgets/app_bar_aluno.dart';
@@ -27,9 +27,7 @@ class _TesteState extends State<FiltrargemDeTurmas> {
       appBar: AppbarAluno(),
       body: ListView(
         physics: Padroes.efeitoDeRolagem(),
-        padding: Padroes.margem().copyWith(
-            top: tamanho *
-                0.15), 
+        padding: Padroes.margem().copyWith(top: tamanho * 0.15),
         children: [
           Row(
             children: [

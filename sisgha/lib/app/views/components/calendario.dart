@@ -1,83 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:sisgha/app/core/utils/icones.dart';
-import 'package:sisgha/app/core/utils/colors.dart';
-import 'package:sisgha/app/core/utils/dias.dart';
-import 'package:sisgha/app/core/utils/estilos.dart';
+import 'package:provider/provider.dart';
+import 'package:sisgha/app/cache/calendario_funcionalidades.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class MiniCalendario extends StatefulWidget {
-  final bool showDialog;
-  const MiniCalendario({super.key, this.showDialog = false});
-  @override
-  State<MiniCalendario> createState() => _MiniCalendarioState();
-}
+import '../../core/utils/colors.dart';
+import '../../core/utils/estilos.dart';
+import '../../core/utils/icones.dart';
+import '../professor/calendario/calendario.dart';
 
-class _MiniCalendarioState extends State<MiniCalendario> {
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) => widget.showDialog
-          ? Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              insetPadding: EdgeInsets.zero,
-              child: Container(
-                padding: EdgeInsets.only(bottom: 15),
-                decoration: estiloBorda(
-                    cor: CoresClaras.verdecinzaBorda,
-                    radius: 15,
-                    grossuraBorda: 1.5),
-                width: constraints.maxWidth * 0.85,
-                height: constraints.maxHeight * 0.4,
-                child: TableCalendar(
-                  firstDay: DatasFormatadas.primeiroDiaDoAno,
-                  lastDay: DatasFormatadas.ultimoDiaDoAno,
-                  focusedDay: DatasFormatadas.diaAtualEmNumero,
-                  calendarFormat: CalendarFormat.month,
-                  locale: 'pt-BR',
-                  shouldFillViewport: true,
-                  daysOfWeekHeight: 23,
-                  daysOfWeekStyle: _estiloParteSuperior(),
-                  headerStyle: _estiloCabessario(),
-                  calendarBuilders: _calendarBuilder(constraints.maxHeight),
-                  pageAnimationCurve: Curves.linear,
-                  pageAnimationDuration: const Duration(milliseconds: 500),
-                ),
-              ),
-            )
-          : SizedBox(
-              child: Container(
-                padding: EdgeInsets.only(bottom: constraints.maxHeight * 0.05),
-                decoration: estiloBorda(
-                    cor: CoresClaras.verdecinzaBorda,
-                    radius: 15,
-                    grossuraBorda: 2),
-                child: TableCalendar(
-                  availableGestures: AvailableGestures.none,
-                  firstDay: DatasFormatadas.primeiroDiaDoAno,
-                  lastDay: DatasFormatadas.ultimoDiaDoAno,
-                  focusedDay: DatasFormatadas.diaAtualEmNumero,
-                  calendarFormat: CalendarFormat.month,
-                  locale: 'pt-BR',
-                  shouldFillViewport: true,
-                  daysOfWeekHeight: 23,
-                  daysOfWeekStyle: _estiloParteSuperior(),
-                  headerStyle: _estiloCabessario(),
-                  calendarBuilders:
-                      _calendarBuilder(constraints.maxHeight * 2.3),
-                  pageAnimationCurve: Curves.linear,
-                  pageAnimationDuration: const Duration(milliseconds: 500),
-                ),
-              ),
-            ),
-    );
-  }
-}
-
-Widget _estiloDoBlocoDoDiaDeHoje(
+Widget estiloDoBlocoDoDiaDeHoje(
     BuildContext context, DateTime day, Color cor, double height) {
   return Container(
     width: height * 0.04,
@@ -101,7 +35,7 @@ Widget _estiloDoBlocoDoDiaDeHoje(
         child: Center(
           child: Text(
             '${day.day}',
-            style: _estiloTextoNumeros(),
+            style: estiloTextoNumeros(),
           ),
         ),
       ),
@@ -109,7 +43,7 @@ Widget _estiloDoBlocoDoDiaDeHoje(
   );
 }
 
-Widget _estiloDosBlocosDosDiasDoMes(Color color, DateTime day, double height) {
+Widget estiloDosBlocosDosDiasDoMes(Color color, DateTime day, double height) {
   return Container(
     width: height * 0.04,
     height: height * 0.04,
@@ -120,13 +54,38 @@ Widget _estiloDosBlocosDosDiasDoMes(Color color, DateTime day, double height) {
     child: Center(
       child: Text(
         '${day.day}',
-        style: _estiloTextoNumeros(),
+        style: estiloTextoNumeros(),
       ),
     ),
   );
 }
 
-Widget _estiloDosBlocosDosDiasDoMesDesabilitados(double height) {
+Widget estiloBlocoDiaSelecionado(DateTime day, double height) {
+  return Container(
+    width: height * 0.045,
+    height: height * 0.045,
+    decoration: BoxDecoration(
+      color: CoresClaras.verdePrincipal,
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(
+        color: CoresClaras.brancoBorda,
+        width: 2,
+      ),
+    ),
+    child: Center(
+      child: Text(
+        '${day.day}',
+        style: estiloTexto(
+          15,
+          peso: FontWeight.bold,
+          cor: CoresClaras.brancoTexto,
+        ),
+      ),
+    ),
+  );
+}
+
+Widget estiloDosBlocosDosDiasDoMesDesabilitados(double height) {
   return Container(
     width: height * 0.04,
     height: height * 0.04,
@@ -137,11 +96,11 @@ Widget _estiloDosBlocosDosDiasDoMesDesabilitados(double height) {
   );
 }
 
-TextStyle _estiloTextoNumeros() {
+TextStyle estiloTextoNumeros() {
   return estiloTexto(15, cor: CoresClaras.brancoTexto, peso: FontWeight.bold);
 }
 
-HeaderStyle _estiloCabessario() {
+HeaderStyle estiloCabessario() {
   return HeaderStyle(
     headerMargin: const EdgeInsets.only(bottom: 7),
     headerPadding: EdgeInsets.all(1.h),
@@ -171,7 +130,7 @@ HeaderStyle _estiloCabessario() {
   );
 }
 
-DaysOfWeekStyle _estiloParteSuperior() {
+DaysOfWeekStyle estiloParteSuperior() {
   return DaysOfWeekStyle(
     weekdayStyle:
         estiloTexto(15, peso: FontWeight.bold, cor: CoresClaras.pretoTexto),
@@ -200,36 +159,55 @@ DaysOfWeekStyle _estiloParteSuperior() {
   );
 }
 
-CalendarBuilders _calendarBuilder(double heigth) {
-  Color color = Colors.black;
+CalendarBuilders calendarBuilder(double heigth) {
+  Color cor = Colors.transparent;
   return CalendarBuilders(
-    defaultBuilder: (context, date, events) {
-      final now = DateTime.now();
-
-      if (date.isAfter(DateTime(now.year, 2, 7)) &&
-          date.isBefore(DateTime(now.year, 4, 18))) {
-        color = const Color(0xFF08C17F);
-      } else if (date.isAfter(DateTime(now.year, 4, 17)) &&
-          date.isBefore(DateTime(now.year, 6, 20))) {
-        color = CoresClaras.roxo;
-      } else if (date.isAfter(DateTime(now.year, 6, 19)) &&
-          date.isBefore(DateTime(now.year, 7, 23))) {
-        color = CoresClaras.vermelhoFracoCalendario;
-      } else if (date.isAfter(DateTime(now.year, 7, 22)) &&
-          date.isBefore(DateTime(now.year, 9, 25))) {
-        color = CoresClaras.vermelhoCalendario;
-      } else if (date.isAfter(DateTime(now.year, 9, 24)) &&
-          date.isBefore(DateTime(now.year, 11, 29))) {
-        color = Colors.amber;
-      } else {
-        const TextStyle(color: Colors.transparent);
-        color = CoresClaras.cinza;
+    //dia selecionado
+    selectedBuilder: (context, date, focusedDay) {
+      // Verifica se o dia selecionado está dentro do mês atual
+      if (date.month != focusedDay.month) {
+        // Retorna o estilo padrão (sem destaque)
+        return estiloDosBlocosDosDiasDoMesDesabilitados(
+            heigth); // ou estilo padrão neutro
       }
-      return _estiloDosBlocosDosDiasDoMes(color, date, heigth);
+
+      // Se estiver no mês visível, aplica o estilo de selecionado
+      return estiloBlocoDiaSelecionado(date, heigth);
     },
+    // durante o mes selecionado
+    defaultBuilder: (context, date, events) {
+      final etapasProvider = context.read<CalendarioFuncionalidades>();
+      final etapasDoDia = etapasProvider.etapasCalendario[normalizarData(date)];
+      cor = etapasDoDia?.first.cor ?? CoresClaras.cinza;
+      return estiloDosBlocosDosDiasDoMes(cor, date, heigth);
+    },
+
+    //hoje
     todayBuilder: (context, day, focusedDay) =>
-        _estiloDoBlocoDoDiaDeHoje(context, day, color, heigth),
+        estiloDoBlocoDoDiaDeHoje(context, day, cor, heigth),
+
+    //dias dos meses diferentes do selecionado
     outsideBuilder: (context, day, focusedDay) =>
-        _estiloDosBlocosDosDiasDoMesDesabilitados(heigth),
+        estiloDosBlocosDosDiasDoMesDesabilitados(heigth),
+    disabledBuilder: (context, day, focusedDay) =>
+        estiloDosBlocosDosDiasDoMesDesabilitados(heigth),
+
+    //notificação de evento no dia
+    markerBuilder: (context, date, events) {
+      if (events.isEmpty) return const SizedBox.shrink();
+
+      return Positioned(
+        bottom: -3,
+        right: 8,
+        child: Container(
+          height: 10,
+          width: 10,
+          decoration: BoxDecoration(
+              color: events[0].cor ?? Colors.transparent,
+              border: Border.all(width: 0.5, color: CoresClaras.cinzaBordas),
+              borderRadius: BorderRadius.circular(10)),
+        ),
+      );
+    },
   );
 }

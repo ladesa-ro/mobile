@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/app/providers/escolha_calendario.dart';
+import 'package:sisgha/app/cache/escolha_calendario.dart';
 import 'package:text_scroll/text_scroll.dart';
 
 import '../../core/utils/colors.dart';

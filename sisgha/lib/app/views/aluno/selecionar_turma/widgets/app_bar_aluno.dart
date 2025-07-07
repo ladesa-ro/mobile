@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../providers/escolha_horarios_alunos.dart';
+import '../../../../cache/escolha_horarios_alunos.dart';
 
 class AppbarAluno extends StatelessWidget implements PreferredSizeWidget {
   const AppbarAluno({super.key});
@@ -30,12 +30,10 @@ class AppbarAluno extends StatelessWidget implements PreferredSizeWidget {
       title: const Text(
         "Acesso de Aluno",
         style: TextStyle(
-          
           fontSize: 22,
           fontWeight: FontWeight.bold,
           color: Colors.white,
         ),
-        
       ),
       backgroundColor: CoresClaras.verdePrincipal,
     );
