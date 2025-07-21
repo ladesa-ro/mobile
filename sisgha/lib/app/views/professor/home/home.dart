@@ -84,7 +84,7 @@ class _HomeState extends State<Home> {
                           daysOfWeekHeight: 23,
                           daysOfWeekStyle: estiloParteSuperior(),
                           headerStyle: estiloCabessario(),
-                          calendarBuilders: calendarBuilder(100.h),
+                          calendarBuilders: calendarBuilder(100.h, null),
                           pageAnimationCurve: Curves.linear,
                           pageAnimationDuration:
                               const Duration(milliseconds: 500),

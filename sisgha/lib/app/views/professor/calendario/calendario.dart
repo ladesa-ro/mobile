@@ -109,7 +109,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                   daysOfWeekHeight: 23,
                   daysOfWeekStyle: estiloParteSuperior(),
                   headerStyle: estiloCabessario(),
-                  calendarBuilders: calendarBuilder(120.sp),
+                  calendarBuilders: calendarBuilder(120.sp, _focusedDay),
                   pageAnimationCurve: Curves.linear,
                   pageAnimationDuration: const Duration(milliseconds: 300),
                   selectedDayPredicate: (day) {
@@ -138,9 +138,13 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
               final eventos = provider.tudoJunto[data] ?? [];
 
               if (eventos.isEmpty) {
-                return const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text("Nenhum evento para este dia."),
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: tamanho * 0.03),
+                  child: Text(
+                    "Nenhum evento para este dia.",
+                    style: estiloTexto(15,
+                        cor: CoresClaras.verdePrincipal, peso: FontWeight.bold),
+                  ),
                 );
               }
 
@@ -205,9 +209,23 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                           child: SizedBox(
                             height: 45,
                             width: largura * 0.115,
-                            child: ElevatedButton(
+                            child: IconButton(
+                              style: ButtonStyle(
+                                shape: WidgetStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadiusGeometry.circular(10),
+                                    side: BorderSide(
+                                        color: CoresClaras.verdePrincipal),
+                                  ),
+                                ),
+                              ),
                               onPressed: () {},
-                              child: Iconify(Icones.sino),
+                              icon: Iconify(
+                                Icones.sino,
+                                size: tamanho * 0.2,
+                                color: CoresClaras.verdePrincipal,
+                              ),
                             ),
                           ),
                         ),
