@@ -4,35 +4,37 @@ import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/padroes.dart';
+import '../../../domain/model/testeDisciplinas.dart';
+import '../../../domain/model/testeTurmas.dart';
 
 class ConstrutorHorarios extends StatefulWidget {
-  final String materia;
-  final String informacao;
-  final String horario;
-
-  const ConstrutorHorarios({
-    super.key,
-    required this.materia,
-    required this.informacao,
-    required this.horario,
-  });
+  const ConstrutorHorarios({super.key, required this.numero});
+  final int numero;
 
   @override
   State<ConstrutorHorarios> createState() => _ConstrutorHorariosState();
 }
 
 class _ConstrutorHorariosState extends State<ConstrutorHorarios> {
+  // quantidade: TesteTurma().turmas.length,
+  //                 materia: disciplina.nome,
+  //                 informacao: turma.nome,
+  //                 horario: '08:00 - 09:30'
   @override
   Widget build(BuildContext context) {
+    print("Lista de turmas: ${TesteTurma().turmas.length}");
+    print("Lista de disciplinas: ${TesteDisciplinas().disciplinas.length}");
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 20),
         child: ListView.builder(
           physics: RangeMaintainingScrollPhysics(),
-          itemCount: 3,
+          itemCount: TesteTurma().turmas.length - widget.numero,
           itemBuilder: (context, index) {
+            final turma = TesteTurma().turmas[index];
+            final disciplina = TesteDisciplinas().disciplinas[index];
             return disciplinaprof(
-                widget.materia, widget.informacao, widget.horario, context);
+                disciplina.nome, turma.nome, '08:00 - 09:00', context);
           },
         ),
       ),

@@ -49,8 +49,6 @@ class _QuadradosHomeState extends State<QuadradosHome>
 
   @override
   Widget build(BuildContext context) {
-    print("Lista de turmas: ${TesteTurma().turmas.length}");
-    print("Lista de disciplinas: ${TesteDisciplinas().disciplinas.length}");
     return LayoutBuilder(
       builder: (
         context,
@@ -59,8 +57,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
           Column(
         children: [
           SizedBox(
-            height: constraints.maxHeight *
-                0.13, //so pra saber onde eu tenho que mexe
+            height: constraints.maxHeight * 0.13,
             child: TabBar(
               indicatorWeight: 0,
               splashFactory: NoSplash.splashFactory,
@@ -78,14 +75,8 @@ class _QuadradosHomeState extends State<QuadradosHome>
           Expanded(
             child: TabBarView(
               controller: _tabController,
-              children: List.generate(TesteTurma().turmas.length - 1, (index) {
-                final turma = TesteTurma().turmas[index];
-                final disciplina = TesteDisciplinas().disciplinas[index];
-                return ConstrutorHorarios(
-                  materia: disciplina.nome,
-                  informacao: turma.nome,
-                  horario: '08:00 - 09:30',
-                );
+              children: List.generate(6, (index) {
+                return ConstrutorHorarios(numero: index);
               }),
             ),
           ),
