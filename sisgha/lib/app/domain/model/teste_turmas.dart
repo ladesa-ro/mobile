@@ -4,7 +4,8 @@ class TesteTurma {
   static final TesteTurma _instancia = TesteTurma._();
   TesteTurma._(); // Construtor privado
 
-  factory TesteTurma() => _instancia; // Construtor público (sempre retorna a mesma instância)
+  factory TesteTurma() =>
+      _instancia; // Construtor público (sempre retorna a mesma instância)
 
   List<Turma> turmas = [];
 
