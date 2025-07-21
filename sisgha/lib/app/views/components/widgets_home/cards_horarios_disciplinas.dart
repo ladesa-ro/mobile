@@ -4,8 +4,8 @@ import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/padroes.dart';
-import '../../../domain/model/testeDisciplinas.dart';
-import '../../../domain/model/testeTurmas.dart';
+import '../../../domain/model/teste_disciplinas.dart';
+import '../../../domain/model/teste_turmas.dart';
 
 class ConstrutorHorarios extends StatefulWidget {
   const ConstrutorHorarios({super.key, required this.numero});
@@ -16,14 +16,8 @@ class ConstrutorHorarios extends StatefulWidget {
 }
 
 class _ConstrutorHorariosState extends State<ConstrutorHorarios> {
-  // quantidade: TesteTurma().turmas.length,
-  //                 materia: disciplina.nome,
-  //                 informacao: turma.nome,
-  //                 horario: '08:00 - 09:30'
   @override
   Widget build(BuildContext context) {
-    print("Lista de turmas: ${TesteTurma().turmas.length}");
-    print("Lista de disciplinas: ${TesteDisciplinas().disciplinas.length}");
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 20),

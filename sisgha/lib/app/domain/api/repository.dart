@@ -11,8 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sisgha/app/domain/model/disciplinas.dart';
 import 'package:sisgha/app/domain/model/etapas.dart';
 import 'package:sisgha/app/domain/model/eventos.dart';
-import 'package:sisgha/app/domain/model/testeDisciplinas.dart';
-import 'package:sisgha/app/domain/model/testeTurmas.dart';
+import 'package:sisgha/app/domain/model/teste_disciplinas.dart';
+import 'package:sisgha/app/domain/model/teste_turmas.dart';
 import 'package:sisgha/app/domain/model/turmas.dart';
 
 import '../../views/components/widget_erro.dart';

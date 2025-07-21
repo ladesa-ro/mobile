@@ -12,6 +12,7 @@ import '../../../core/utils/dias.dart';
 import '../../../core/utils/padroes.dart';
 import '../../components/appbar.dart';
 import '../../components/calendario.dart';
+import '../../components/letreiro_rolante.dart';
 import 'widgets/menu_lateral.dart';
 
 class CalendarioProfessor extends StatefulWidget {
@@ -70,8 +71,8 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                 height: Padroes.aluturaBotoes(),
                 width: largura * 0.80,
                 child: RepaintBoundary(
-                    // child: Center(child: LetreiroRolante()),
-                    ),
+                  child: Center(child: LetreiroRolante()),
+                ),
               ),
               const Spacer(),
               SizedBox(
