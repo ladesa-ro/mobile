@@ -148,7 +148,7 @@ class _NavigationState extends State<Navigation> {
 
   BoxDecoration _decoretion(int index) {
     return BoxDecoration(
-      color: _selectedIndex == index ? CoresClaras.verdeClaro : null,
+      color: _selectedIndex == index ? Theme.of(context).colorScheme.secondary : null,
       borderRadius: BorderRadius.circular(Padroes.larguraGeral() * 0.03),
     );
   }
