@@ -77,7 +77,7 @@ class _MenuLateralState extends State<MenuLateral> {
               SizedBox(
                 height: constraints.maxHeight * 0.07,
                 child: ElevatedButton(
-                    style: Padroes.estiloBotao(),
+                    style: Padroes.estiloBotao(context),
                     onPressed: () {
                       Navigator.pop(context);
                     },

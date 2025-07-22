@@ -56,8 +56,9 @@ class _HomeState extends State<Home> {
         child: Column(
           children: [
             SizedBox(height: tamanho * 0.03), // ja ta certo
+            // Inicio do botão de calendário
             ElevatedButton(
-              style: Padroes.estiloBotao(),
+              style: Padroes.estiloBotao(context),
               onPressed: () {
                 showDialog(
                   context: context,
@@ -122,6 +123,7 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
+            //fim do botão de calendário
             SizedBox(height: tamanho * 0.03), // ja ta certo
             Expanded(
               child: const QuadradosHome(),

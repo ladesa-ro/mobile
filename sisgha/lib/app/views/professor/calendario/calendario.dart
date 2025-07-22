@@ -214,7 +214,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                                 shape: WidgetStatePropertyAll(
                                   RoundedRectangleBorder(
                                     borderRadius:
-                                        BorderRadiusGeometry.circular(10),
+                                        BorderRadius.circular(10),
                                     side: BorderSide(
                                         color: CoresClaras.verdePrincipal),
                                   ),
