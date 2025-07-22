@@ -96,7 +96,7 @@ class _CorpoLoginState extends State<CorpoLogin> {
 
   Widget botaoEntrarAluno(BuildContext context) {
     return ElevatedButton(
-      style: Padroes.estiloBotao(),
+      style: Padroes.estiloBotao(context),
       onPressed: () => Navigator.pushNamed(context, "/acessoAluno"),
       child: Center(
         child: Row(
@@ -153,7 +153,7 @@ class _CorpoLoginState extends State<CorpoLogin> {
           }
         }
       },
-      style: Padroes.estiloBotao(),
+      style: Padroes.estiloBotao(context),
       child: SizedBox(
         height: Padroes.aluturaBotoes(),
         width: Padroes.larguraGeral(),

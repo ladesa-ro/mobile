@@ -56,7 +56,7 @@ class _HomeAlunosState extends State<HomeAlunos> {
           children: [
             SizedBox(height: tamanho * 0.03),
             ElevatedButton(
-              style: Padroes.estiloBotao(),
+              style: Padroes.estiloBotao(context),
               onPressed: () {
                 showDialog(
                   context: context,

@@ -20,14 +20,14 @@ class Padroes {
     return 100.w;
   }
 
-  static ButtonStyle estiloBotao() {
+  static ButtonStyle estiloBotao(BuildContext context) {
     return ButtonStyle(
         maximumSize: WidgetStatePropertyAll(Size(100.w, 6.5.h)),
         minimumSize: WidgetStatePropertyAll(Size(100.w, 6.5.h)),
         shape: WidgetStateProperty.all<OutlinedBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.w))),
         backgroundColor:
-            WidgetStateProperty.all<Color>(CoresClaras.verdePrincipalBotao),
+            WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
         foregroundColor: WidgetStatePropertyAll(CoresClaras.brancoTexto));
   }
 
