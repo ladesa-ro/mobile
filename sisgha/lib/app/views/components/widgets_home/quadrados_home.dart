@@ -108,10 +108,10 @@ class _QuadradosHomeState extends State<QuadradosHome>
     BoxDecoration boxDecoration(bool selecionado) {
       return BoxDecoration(
         color: retorno(
-            atributo1: CoresClaras.verdePrincipalBotao,
+            atributo1: Theme.of(context).colorScheme.primary,
             atributo2: Colors.transparent),
         border: Border.all(
-            color: CoresClaras.verdePrincipalBorda,
+            color: Theme.of(context).colorScheme.primary,
             width: 1.0,
             style: BorderStyle.solid),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
