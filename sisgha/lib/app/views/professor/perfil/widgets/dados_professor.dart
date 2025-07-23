@@ -9,8 +9,9 @@ Widget dadosUsuario(BuildContext context, String nome, String email,
     children: [
       Text(
         'Professor(a) $nome',
-        style:
-            estiloTexto(16, cor: CoresClaras.pretoTexto, peso: FontWeight.bold),
+        style: estiloTexto(16,
+            cor: Theme.of(context).textTheme.bodyLarge?.color,
+            peso: FontWeight.bold),
       ),
       SizedBox(height: espacamento),
       Text(

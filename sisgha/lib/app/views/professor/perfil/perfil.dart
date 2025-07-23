@@ -121,7 +121,8 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
   return Container(
     padding: const EdgeInsets.all(4),
     decoration: BoxDecoration(
-      color: CoresClaras.branco,
+      color: CoresClaras
+          .branco, // precisa ser modificado para funcionar corretamente no tema escuro
       borderRadius: BorderRadius.circular(100),
     ),
     child: Stack(
@@ -141,7 +142,7 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
           top: 63,
           child: SizedBox(
             child: ElevatedButton(
-              style: buttonStyleEdit(CoresClaras.preto),
+              style: buttonStyleEdit(Theme.of(context).colorScheme.primary),
               onPressed: () => bottomSheat(context, atualizarImagemPerfil),
               child: const Iconify(
                 Icones.lapiz,
