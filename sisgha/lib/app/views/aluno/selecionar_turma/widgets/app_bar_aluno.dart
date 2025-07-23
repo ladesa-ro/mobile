@@ -11,7 +11,7 @@ import '../../../../cache/escolha_horarios_alunos.dart';
 class AppbarAluno extends StatelessWidget implements PreferredSizeWidget {
   const AppbarAluno({super.key});
   @override
-  Size get preferredSize => Size.fromHeight(7.h);
+  Size get preferredSize => Size.fromHeight(6.h);
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<EscolhaHorariosAlunos>(context, listen: false);
@@ -37,7 +37,7 @@ class AppbarAluno extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         "Acesso de Aluno",
         style: estiloTexto(
-          18.sp,
+          17.sp,
           peso: FontWeight.bold,
           cor: CoresClaras.brancoTexto,
         ),
