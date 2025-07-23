@@ -27,10 +27,10 @@ class AppbarAluno extends StatelessWidget implements PreferredSizeWidget {
         ),
         color: Colors.white,
       ),
-      title: const Text(
+      title: Text(
         "Acesso de Aluno",
         style: TextStyle(
-          fontSize: 22,
+          fontSize: 22.sp,
           fontWeight: FontWeight.bold,
           color: Colors.white,
         ),
