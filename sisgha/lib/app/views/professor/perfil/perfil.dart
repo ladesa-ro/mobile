@@ -34,6 +34,7 @@ class _PerfilState extends State<Perfil> {
             child: Stack(
               alignment: AlignmentDirectional.topCenter,
               children: [
+                //Imagem de fundo
                 Positioned(
                   child: SizedBox(
                     height: tamanho * 0.2,
@@ -43,6 +44,7 @@ class _PerfilState extends State<Perfil> {
                         alignment: AlignmentDirectional.bottomCenter),
                   ),
                 ),
+                //Botão de sair
                 Positioned(
                   top: 10,
                   left: 10,
@@ -62,6 +64,7 @@ class _PerfilState extends State<Perfil> {
                     ),
                   ),
                 ),
+                //Botão de editar imagem de capa
                 Positioned(
                   top: 10,
                   right: 10,
@@ -100,6 +103,7 @@ class _PerfilState extends State<Perfil> {
               provider.professor.matricula,
               tamanho * 0.005),
           SizedBox(height: tamanho * 0.03),
+          //Botões de seleção de abas
           Expanded(
             child: Padding(
               padding: Padroes.margem(),

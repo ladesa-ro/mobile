@@ -66,7 +66,7 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
           Container(
             height: constraints.maxHeight * 0.11,
             decoration: BoxDecoration(
-              color: CoresClaras.verdePrincipal,
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
@@ -161,7 +161,7 @@ Widget _periodo(BuildContext context, String periodo, List<String> horas) {
         Text(
           periodo,
           style: estiloTexto(16,
-              cor: CoresClaras.pretoTexto, peso: FontWeight.bold),
+              cor: CoresClaras.pretoTexto, peso: FontWeight.bold), //Conversar com o Yuri sobre as cores dos textos
         ),
       ],
     ),
