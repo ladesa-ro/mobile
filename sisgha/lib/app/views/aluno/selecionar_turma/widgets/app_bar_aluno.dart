@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
+import 'package:sisgha/app/core/utils/estilos.dart';
+import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../cache/escolha_horarios_alunos.dart';
@@ -8,13 +11,17 @@ import '../../../../cache/escolha_horarios_alunos.dart';
 class AppbarAluno extends StatelessWidget implements PreferredSizeWidget {
   const AppbarAluno({super.key});
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(6.h);
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<EscolhaHorariosAlunos>(context, listen: false);
     return AppBar(
-      centerTitle: true,
-      leading: BackButton(
+      leading: IconButton(
+        icon: Iconify(
+          Icones.setaVoltarDireita,
+          size: double.infinity,
+          color: CoresClaras.branco,
+        ),
         onPressed: () {
           provider.resetarTudo();
           Navigator.of(context).pushNamedAndRemoveUntil(
@@ -27,12 +34,12 @@ class AppbarAluno extends StatelessWidget implements PreferredSizeWidget {
         ),
         color: Colors.white,
       ),
-      title: const Text(
+      title: Text(
         "Acesso de Aluno",
-        style: TextStyle(
-          fontSize: 22,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
+        style: estiloTexto(
+          17.sp,
+          peso: FontWeight.bold,
+          cor: CoresClaras.brancoTexto,
         ),
       ),
       backgroundColor: CoresClaras.verdePrincipal,
