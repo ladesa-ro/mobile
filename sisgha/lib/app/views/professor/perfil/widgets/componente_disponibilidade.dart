@@ -155,19 +155,22 @@ Widget _periodo(BuildContext context, String periodo, List<String> horas) {
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(
             horas.length,
-            (index) => Text(horas[index], style: _estilo()),
+            (index) => Text(horas[index], style: _estilo(context)),
           ),
         ),
         Text(
           periodo,
           style: estiloTexto(16,
-              cor: CoresClaras.pretoTexto, peso: FontWeight.bold), //Conversar com o Yuri sobre as cores dos textos
+              cor: Theme.of(context).textTheme.bodyLarge?.color,
+              peso: FontWeight
+                  .bold), //Conversar com o Yuri sobre as cores dos textos
         ),
       ],
     ),
   );
 }
 
-TextStyle _estilo() {
-  return estiloTexto(16, cor: CoresClaras.pretoTexto, peso: FontWeight.w500);
+TextStyle _estilo(BuildContext context) {
+  return estiloTexto(16,
+      cor: Theme.of(context).textTheme.bodyLarge?.color, peso: FontWeight.w500);
 }

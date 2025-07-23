@@ -5,8 +5,11 @@ import '../core/utils/colors.dart';
 class Temas {
   //claro
   static final temaClaro = ThemeData(
-    // textTheme:
-    //     TextTheme(bodyLarge: TextStyle(color: CoresClaras.brancoTexto)), codigo que mulda a cor dos textos
+    textTheme: TextTheme(
+      bodyLarge: TextStyle(
+        color: CoresClaras.pretoTexto,
+      ),
+    ),
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
     hoverColor: Colors.transparent,
@@ -26,8 +29,11 @@ class Temas {
 
   //tema escuro
   static final ThemeData temaEscuro = ThemeData(
-    // textTheme:
-    //     TextTheme(bodyLarge: TextStyle(color: CoresEscuras.brancoTextoEscuro)), codigo que mulda a cor dos textos
+    textTheme: TextTheme(
+      bodyLarge: TextStyle(
+        color: CoresEscuras.brancoTextoEscuro,
+      ),
+    ),
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
     hoverColor: Colors.transparent,
