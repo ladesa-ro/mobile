@@ -48,7 +48,8 @@ Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
             Text(
               'Editar foto de perfil',
               style: estiloTexto(16,
-                  cor: CoresClaras.preto, peso: FontWeight.bold),
+                  cor: Theme.of(context).textTheme.bodyLarge?.color,
+                  peso: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             Text(

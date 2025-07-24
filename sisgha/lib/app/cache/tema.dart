@@ -22,9 +22,11 @@ class Temas {
         color: CoresClaras.verdePrincipal,
         foregroundColor: CoresClaras.brancoTexto),
     colorScheme: ColorScheme.light(
-      primary: CoresClaras.verdePrincipal,
-      secondary: CoresClaras.verdeClaro,
-    ),
+        primary: CoresClaras.verdePrincipal,
+        onPrimary: CoresClaras.cinzatexto,
+        secondary: CoresClaras.verdeClaro,
+        surfaceVariant: CoresClaras.branco,
+        surface: CoresClaras.corDeFundoClara),
   );
 
   //tema escuro
@@ -48,7 +50,10 @@ class Temas {
         foregroundColor: CoresEscuras.brancoTextoEscuro),
     colorScheme: ColorScheme.dark(
       primary: CoresEscuras.verdePrincipalEscuro,
+      onPrimary: CoresEscuras.cinzaTextoEscuro,
       secondary: CoresEscuras.verdeClaroEscuro,
+      surfaceVariant: Colors.transparent,
+      surface: Colors.transparent,
     ),
   );
 }
@@ -70,6 +75,6 @@ class TemasProvider with ChangeNotifier {
   Color corDosIcones() {
     return _temaAtivo.brightness == Brightness.light
         ? CoresClaras.branco
-        : CoresEscuras.pretoEscuro;
+        : CoresEscuras.brancoBotaoEscuro;
   }
 }

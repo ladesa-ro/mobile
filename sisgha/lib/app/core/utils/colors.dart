@@ -82,6 +82,7 @@ class CoresEscuras {
 
   //botão
   static const Color vermelhoBotaoEscuro = Color(0XFFA00F25);
-  static const Color brancoBotaoEscuro = Color(0XFFD4DEDE);
+  static const Color cinzaBotaoEscuro = Color(0XFFD4DEDE);
+  static const Color brancoBotaoEscuro = Color(0XFFFFFFFF);
   static const Color verdeBotaoEscuro = Color(0XFF066436);
 }

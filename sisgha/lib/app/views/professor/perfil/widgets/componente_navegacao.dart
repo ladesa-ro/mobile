@@ -85,8 +85,8 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
               style: estiloTexto(
                 15,
                 cor: _controller.index == index
-                    ? CoresClaras.verdePrincipalTexto
-                    : CoresClaras.verdecinzaTexto,
+                    ? Theme.of(context).colorScheme.primary
+                    : CoresClaras.cinzatexto,
                 peso: FontWeight.bold,
               ),
             ),
@@ -94,8 +94,8 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
             Icon(
               icone,
               color: _controller.index == index
-                  ? CoresClaras.verdePrincipalTexto
-                  : CoresClaras.verdecinzaTexto,
+                  ? Theme.of(context).colorScheme.primary
+                  : CoresClaras.cinzatexto,
               size: index == 0 ? 20 : 25,
             ),
           ],
@@ -108,15 +108,15 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
       int index, bool bordaEsquerda, bool bordaDireita) {
     return BoxDecoration(
       color: _controller.index == index
-          ? CoresClaras.corDeFundoClara
-          : CoresClaras.branco,
+          ? Theme.of(context).colorScheme.surface
+          : Theme.of(context).colorScheme.surfaceVariant,
       borderRadius: BorderRadius.horizontal(
         left: bordaEsquerda ? const Radius.circular(10) : Radius.zero,
         right: bordaDireita ? const Radius.circular(10) : Radius.zero,
       ),
       border: Border.all(
         color: _controller.index == index
-            ? CoresClaras.verdePrincipalBorda
+            ? Theme.of(context).colorScheme.primary
             : CoresClaras.verdecinzaBorda,
       ),
     );

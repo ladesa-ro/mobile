@@ -171,6 +171,9 @@ Widget _periodo(BuildContext context, String periodo, List<String> horas) {
 }
 
 TextStyle _estilo(BuildContext context) {
-  return estiloTexto(16,
-      cor: Theme.of(context).textTheme.bodyLarge?.color, peso: FontWeight.w500);
+  return estiloTexto(
+    16,
+    cor: Theme.of(context).textTheme.bodyLarge?.color,
+    peso: FontWeight.w500,
+  );
 }

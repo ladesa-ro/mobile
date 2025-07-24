@@ -70,7 +70,7 @@ class _PerfilState extends State<Perfil> {
                   right: 10,
                   child: ElevatedButton(
                     style:
-                        buttonStyleEdit(const Color.fromRGBO(60, 60, 60, 0.1)),
+                        buttonStyleEdit(Theme.of(context).colorScheme.primary),
                     child: const Iconify(
                       Icones.lapiz,
                       size: 10,
@@ -82,6 +82,7 @@ class _PerfilState extends State<Perfil> {
                             provider.atualizarImagemCapa(context, imagem)),
                   ),
                 ),
+                //
                 // Avatar
                 Positioned(
                   bottom: 0,
