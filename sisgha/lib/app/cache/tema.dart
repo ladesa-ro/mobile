@@ -53,7 +53,7 @@ class Temas {
       onPrimary: CoresEscuras.cinzaTextoEscuro,
       secondary: CoresEscuras.verdeClaroEscuro,
       surfaceVariant: Colors.transparent,
-      surface: Colors.transparent,
+      surface: CoresEscuras.pretoEscuro,
     ),
   );
 }

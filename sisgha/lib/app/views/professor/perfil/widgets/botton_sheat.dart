@@ -30,6 +30,7 @@ Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
 
   return showModalBottomSheet(
     context: context,
+    backgroundColor: Theme.of(context).colorScheme.surface,
     builder: (BuildContext context) {
       return SizedBox(
         height: 300,
@@ -70,7 +71,7 @@ Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(width: 60),
-                  Icon(Icons.no_photography),
+                  Icon(Icons.camera_alt),
                   SizedBox(width: 20),
                   Text('Capturar foto'),
                 ],
