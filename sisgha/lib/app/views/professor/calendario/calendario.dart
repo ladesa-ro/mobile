@@ -107,7 +107,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                   locale: 'pt-BR',
                   shouldFillViewport: true,
                   daysOfWeekHeight: 23,
-                  daysOfWeekStyle: estiloParteSuperior(),
+                  daysOfWeekStyle: estiloParteSuperior(context),
                   headerStyle: estiloCabessario(),
                   calendarBuilders: calendarBuilder(120.sp, _focusedDay),
                   pageAnimationCurve: Curves.linear,
@@ -132,6 +132,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
             ),
           ),
           SizedBox(height: tamanho * 0.03),
+          //
           Consumer<CalendarioFuncionalidades>(
             builder: (context, provider, _) {
               final data = normalizarData(_selectedDay);
@@ -147,7 +148,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                   ),
                 );
               }
-
+//
               return ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -213,8 +214,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                               style: ButtonStyle(
                                 shape: WidgetStatePropertyAll(
                                   RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(10),
                                     side: BorderSide(
                                         color: CoresClaras.verdePrincipal),
                                   ),
@@ -242,6 +242,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
   }
 }
 
+//
 DateTime normalizarData(DateTime data) {
   return DateTime(data.year, data.month, data.day);
 }

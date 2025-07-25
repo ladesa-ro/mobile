@@ -81,7 +81,7 @@ class _HomeAlunosState extends State<HomeAlunos> {
                           locale: 'pt-BR',
                           shouldFillViewport: true,
                           daysOfWeekHeight: 23,
-                          daysOfWeekStyle: estiloParteSuperior(),
+                          daysOfWeekStyle: estiloParteSuperior(context),
                           headerStyle: estiloCabessario(),
                           calendarBuilders: calendarBuilder(100.h, null),
                           pageAnimationCurve: Curves.linear,
