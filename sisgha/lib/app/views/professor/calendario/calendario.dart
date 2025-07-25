@@ -79,7 +79,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                 height: Padroes.aluturaBotoes(),
                 width: largura * 0.17,
                 child: ElevatedButton(
-                  style: _estiloBotao(),
+                  style: _estiloBotao(context),
                   onPressed: () {
                     scaffoldKey.currentState?.openEndDrawer();
                   },
@@ -247,10 +247,11 @@ DateTime normalizarData(DateTime data) {
   return DateTime(data.year, data.month, data.day);
 }
 
-ButtonStyle _estiloBotao() {
+ButtonStyle _estiloBotao(BuildContext context) {
   return ButtonStyle(
     padding: WidgetStatePropertyAll(EdgeInsets.zero),
-    backgroundColor: WidgetStatePropertyAll(CoresClaras.verdePrincipal),
+    backgroundColor:
+        WidgetStatePropertyAll(Theme.of(context).colorScheme.primary),
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
