@@ -3,133 +3,36 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
-import 'package:sisgha/app/core/utils/padroes.dart';
 
-import 'package:sisgha/app/views/components/appbar_notificacao.dart';
-import 'package:sizer/sizer.dart';
+class CustomAppBarNotificacao extends StatelessWidget implements PreferredSizeWidget {
+  final double height;
+  final bool seta;
 
-class Notificacao extends StatelessWidget {
-  const Notificacao({super.key});
-  static final List<ItensNotificacoes> notificacoes = [
-    ItensNotificacoes(
-      icone: Icones.calendario,
-      titulo: "Novo evento!",
-      tempo: "2 dias",
-      texto: "O evento IFRO Party foi agendado para o dia 10 de setembro",
-      link: "Clique aqui e confira",
-    ),
-    ItensNotificacoes(
-      icone: Icones.iconeSisgha,
-      titulo: "Novo horário",
-      tempo: "5 dias",
-      texto: "A aula das 13h de Filosofia II foi cancelada, aula vaga",
-      link: "Clique aqui e confira",
-    ),
-    ItensNotificacoes(
-      icone: Icones.iconeSisgha,
-      titulo: "Alteração no horário",
-      tempo: "15 dias",
-      texto: "A aula de Filosofia II foi trocada pela aula de Banco de Dados I",
-      link: "Clique aqui e confira",
-    ),
-  ];
+  const CustomAppBarNotificacao({super.key, required this.height, required this.seta});
+
+  @override
+  Size get preferredSize => Size.fromHeight(height);
+
   @override
   Widget build(BuildContext context) {
-    final appBar = CustomAppBarNotificacao(height: 6.h, seta: true);
-
-    return Scaffold(
-      appBar: appBar,
-      body: LayoutBuilder(
-        builder: (context, constraints) => SizedBox(
-          height: constraints.maxHeight,
-          width: constraints.maxWidth,
-          child: Flexible(
-            child: ListView.builder(
-              padding: EdgeInsets.zero,
-              itemCount: notificacoes.length,
-              itemBuilder: (context, index) => Column(
-                children: [
-                  cards(context,
-                      titulo: notificacoes[index].titulo,
-                      menssagem: notificacoes[index].texto,
-                      link: notificacoes[index].link,
-                      icon: Icones.sino,
-                      data: notificacoes[index].tempo),
-                  Divider(
-                    thickness: 1.5,
-                    color: CoresClaras.verdecinzaBorda,
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
+    return AppBar(
+      titleSpacing: 0,
+      title: Text(
+        "Notificações",
+        style: estiloTexto(18, peso: FontWeight.bold),
       ),
+      leading: seta
+          ? IconButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Volta pra tela anterior
+              },
+              icon: Iconify(
+                Icones.setaVoltarDireita,
+                size: double.infinity,
+                color: CoresClaras.branco,
+              ),
+            )
+          : null,
     );
   }
-}
-
-Widget cards(BuildContext context,
-    {required String titulo,
-    required String menssagem,
-    required dynamic link,
-    required dynamic icon,
-    required String data}) {
-  return Padding(
-    padding: EdgeInsets.only(
-        left: Padroes.margem().left, right: Padroes.margem().right, top: 20),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Iconify(
-              icon,
-              size: 30,
-              color: CoresClaras.verdePrincipal,
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              titulo,
-              style: estiloTexto(15,
-                  cor: CoresClaras.verdePrincipalTexto, peso: FontWeight.bold),
-            ),
-            Spacer(),
-            Text(
-              data,
-              style: estiloTexto(14, cor: CoresClaras.verdecinzaTexto),
-            )
-          ],
-        ),
-        SizedBox(height: 10),
-        Text(menssagem, style: estiloTexto(14, cor: CoresClaras.preto)),
-        TextButton(
-          style: ButtonStyle(padding: WidgetStatePropertyAll(EdgeInsets.zero)),
-          onPressed: () {},
-          child: Text(
-            link,
-            style: estiloTexto(14, cor: CoresClaras.verdePrincipal),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-class ItensNotificacoes {
-  final IconData icone;
-  final String titulo;
-  final String tempo;
-  final String texto;
-  final String link;
-
-  ItensNotificacoes({
-    required this.icone,
-    required this.titulo,
-    required this.tempo,
-    required this.texto,
-    required this.link,
-  });
 }

@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/views/aluno/calendario/calendario_alunos.dart';
-import 'package:sisgha/app/views/notificacao/notificacao.dart';
-
+import 'package:sisgha/app/views/aluno/notificacao/notificacoes_alunos.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/utils/icones.dart';
 import '../../core/utils/colors.dart';
-
 import '../../core/utils/padroes.dart';
 import '../../cache/escolha_calendario.dart';
 import '../../domain/logic/verificar_token_ativo.dart';
@@ -27,6 +25,7 @@ class Navigation extends StatefulWidget {
 }
 
 class _NavigationState extends State<Navigation> {
+  int? _indiceAnterior;
   late int _selectedIndex;
   bool tokenAtivo = false;
 
@@ -63,8 +62,9 @@ class _NavigationState extends State<Navigation> {
     );
 
     return Scaffold(
-        body: _buildPage(_selectedIndex, tokenAtivo),
-        bottomNavigationBar: bottomAppBar);
+      body: _buildPage(_selectedIndex, tokenAtivo),
+      bottomNavigationBar: bottomAppBar,
+    );
   }
 
   Widget _buildPage(int index, bool tokenAtivo) {
@@ -75,7 +75,7 @@ class _NavigationState extends State<Navigation> {
         case 0:
           page = ChangeNotifierProvider(
             create: (_) => EscolhaCalendario(),
-            child: Center(child: CalendarioProfessor()),
+            child: const Center(child: CalendarioProfessor()),
           );
           break;
         case 1:
@@ -92,14 +92,20 @@ class _NavigationState extends State<Navigation> {
         case 0:
           page = ChangeNotifierProvider(
             create: (_) => EscolhaCalendario(),
-            child: Center(child: CalendarioAlunos()),
+            child: const Center(child: CalendarioAlunos()),
           );
           break;
         case 1:
           page = const Center(child: HomeAlunos());
           break;
         case 2:
-          page = Center(child: Notificacao());
+          page = NotificacoesAlunos(
+            onVoltar: () {
+              setState(() {
+                _selectedIndex = _indiceAnterior ?? 1;
+              });
+            },
+          );
           break;
         default:
           page = const HomeAlunos();
@@ -109,14 +115,16 @@ class _NavigationState extends State<Navigation> {
     return page;
   }
 
-  Widget construirBarraDeNavegacao(
-      {String? iconify,
-      IconData? iconData,
-      required int index,
-      required bool tokenAtivo}) {
+  Widget construirBarraDeNavegacao({
+    String? iconify,
+    IconData? iconData,
+    required int index,
+    required bool tokenAtivo,
+  }) {
     return GestureDetector(
       onTap: () {
         setState(() {
+          _indiceAnterior = _selectedIndex;
           _selectedIndex = index;
         });
       },
@@ -126,7 +134,7 @@ class _NavigationState extends State<Navigation> {
         decoration: _decoretion(index),
         width: Padroes.larguraGeral() * 0.13,
         height: Padroes.alturaGeral() * 0.05,
-        child: (iconData != null
+        child: iconData != null
             ? Icon(
                 iconData,
                 color: CoresClaras.branco,
@@ -135,9 +143,8 @@ class _NavigationState extends State<Navigation> {
             : Iconify(
                 iconify!,
                 size: 3.h,
-                color: CoresClaras
-                    .branco, // eu tirei os icon cheios pois n é mais preciso por causa das mudança de cores no prototipo
-              )),
+                color: CoresClaras.branco,
+              ),
       ),
     );
   }
@@ -148,7 +155,9 @@ class _NavigationState extends State<Navigation> {
 
   BoxDecoration _decoretion(int index) {
     return BoxDecoration(
-      color: _selectedIndex == index ? Theme.of(context).colorScheme.secondary : null,
+      color: _selectedIndex == index
+          ? Theme.of(context).colorScheme.secondary
+          : null,
       borderRadius: BorderRadius.circular(Padroes.larguraGeral() * 0.03),
     );
   }

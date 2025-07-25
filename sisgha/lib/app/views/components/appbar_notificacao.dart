@@ -4,15 +4,14 @@ import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 import 'package:sisgha/app/core/utils/estilos.dart';
 
-class CustomAppBarNotificacao extends StatelessWidget
-    implements PreferredSizeWidget {
+class AppbarNotificacaoAlunos extends StatelessWidget implements PreferredSizeWidget {
   final double height;
-  final bool seta;
+  final VoidCallback? onVoltar;
 
-  const CustomAppBarNotificacao({
+  const AppbarNotificacaoAlunos({
     super.key,
     required this.height,
-    required this.seta,
+    this.onVoltar,
   });
 
   @override
@@ -22,31 +21,20 @@ class CustomAppBarNotificacao extends StatelessWidget
   Widget build(BuildContext context) {
     return AppBar(
       titleSpacing: 0,
-      leading: seta
-          ? IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                  '/acessoAluno',
-                  (route) => false,
-                );
-              },
-              icon: Iconify(
-                Icones.setaVoltarDireita,
-                size: double.infinity,
-                color: CoresClaras.branco,
-              ),
-            )
-          : null,
-      title: Row(
-        children: [
-          Text(
-            'Notificação',
-            style: estiloTexto(
-              16,
-              peso: FontWeight.bold,
-            ),
-          ),
-        ],
+      title: Text(
+        "Notificações",
+        style: estiloTexto(
+          18,
+          peso: FontWeight.bold,
+        ),
+      ),
+      leading: IconButton(
+        onPressed: onVoltar ?? () => Navigator.of(context).pop(),
+        icon: Iconify(
+          Icones.setaVoltarDireita,
+          size: double.infinity,
+          color: CoresClaras.branco,
+        ),
       ),
     );
   }

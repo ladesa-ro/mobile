@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:marquee/marquee.dart';
 import 'package:sisgha/app/views/components/widgets_home/auto_font_size_text.dart';
 
 import '../../core/utils/icones.dart';
