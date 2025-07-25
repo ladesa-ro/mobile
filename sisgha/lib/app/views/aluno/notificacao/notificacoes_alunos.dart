@@ -15,7 +15,7 @@ class NotificacoesAlunos extends StatefulWidget {
 }
 
 class _NotificacoesAlunosState extends State<NotificacoesAlunos> {
-  // Lista de notificações provisória
+  // Lista de notificações provisórias
   List<ItensNotificacoes> notificacoes = [
     ItensNotificacoes(
       icone: Icones.calendario,

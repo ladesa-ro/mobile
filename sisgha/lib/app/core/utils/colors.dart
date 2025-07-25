@@ -57,6 +57,8 @@ class CoresClaras {
   static const Color vermelhoBotao = Color(0XFFcd191e);
   static const Color pretobotao = Color(0XFF050F07);
   static const Color verdebotao = Color(0XFF2F9E41);
+
+  static var brancoBotao;
 }
 
 class CoresEscuras {
@@ -80,6 +82,7 @@ class CoresEscuras {
 
   //botão
   static const Color vermelhoBotaoEscuro = Color(0XFFA00F25);
-  static const Color brancoBotaoEscuro = Color(0XFFD4DEDE);
+  static const Color cinzaBotaoEscuro = Color(0XFFD4DEDE);
+  static const Color brancoBotaoEscuro = Color(0XFFFFFFFF);
   static const Color verdeBotaoEscuro = Color(0XFF066436);
 }

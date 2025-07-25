@@ -5,8 +5,11 @@ import '../core/utils/colors.dart';
 class Temas {
   //claro
   static final temaClaro = ThemeData(
-    // textTheme:
-    //     TextTheme(bodyLarge: TextStyle(color: CoresClaras.brancoTexto)), codigo que mulda a cor dos textos
+    textTheme: TextTheme(
+      bodyLarge: TextStyle(
+        color: CoresClaras.pretoTexto,
+      ),
+    ),
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
     hoverColor: Colors.transparent,
@@ -19,15 +22,20 @@ class Temas {
         color: CoresClaras.verdePrincipal,
         foregroundColor: CoresClaras.brancoTexto),
     colorScheme: ColorScheme.light(
-      primary: CoresClaras.verdePrincipal,
-      secondary: CoresClaras.verdeClaro,
-    ),
+        primary: CoresClaras.verdePrincipal,
+        onPrimary: CoresClaras.cinzatexto,
+        secondary: CoresClaras.verdeClaro,
+        surfaceVariant: CoresClaras.branco,
+        surface: CoresClaras.corDeFundoClara),
   );
 
   //tema escuro
   static final ThemeData temaEscuro = ThemeData(
-    // textTheme:
-    //     TextTheme(bodyLarge: TextStyle(color: CoresEscuras.brancoTextoEscuro)), codigo que mulda a cor dos textos
+    textTheme: TextTheme(
+      bodyLarge: TextStyle(
+        color: CoresEscuras.brancoTextoEscuro,
+      ),
+    ),
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
     hoverColor: Colors.transparent,
@@ -42,7 +50,10 @@ class Temas {
         foregroundColor: CoresEscuras.brancoTextoEscuro),
     colorScheme: ColorScheme.dark(
       primary: CoresEscuras.verdePrincipalEscuro,
+      onPrimary: CoresEscuras.cinzaTextoEscuro,
       secondary: CoresEscuras.verdeClaroEscuro,
+      surfaceVariant: Colors.transparent,
+      surface: CoresEscuras.pretoEscuro,
     ),
   );
 }
@@ -64,6 +75,6 @@ class TemasProvider with ChangeNotifier {
   Color corDosIcones() {
     return _temaAtivo.brightness == Brightness.light
         ? CoresClaras.branco
-        : CoresEscuras.pretoEscuro;
+        : CoresEscuras.brancoBotaoEscuro;
   }
 }
