@@ -1,6 +1,3 @@
-//A tela de notificações tem que ser stateful (porque ao receber alguma notificação haverá uma mudança na tela)
-//As notificações precisam de um ícone, título, tempo, texto, link
-//Por agora irei realizar a tela sem alteração da API (stateless)
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
@@ -8,18 +5,18 @@ import 'package:sisgha/app/core/utils/estilos.dart';
 import 'package:sisgha/app/views/notificacao/appbar_notificacao_alunos.dart';
 import 'package:sizer/sizer.dart';
 
-class NotificacoesAlunos extends StatelessWidget {
-  NotificacoesAlunos({super.key});
-  final appBarAlunos = AppbarNotificacaoAlunos(
-    height: 6.h,
-  );
+class NotificacoesAlunos extends StatefulWidget {
+  final VoidCallback? onVoltar;
 
-//List com as informações prensentes na notificação
-//(List provisória só para fazer/entender a parte visual da tela, depois ela vai ser retirada para se dar a entrada dos dados da API)
+  const NotificacoesAlunos({super.key, this.onVoltar});
 
-// alias é provavelmente dessa maneira que os dados vao vir da api e tambem é mais ou menos dessa forma que serão tratados no app, parabens
+  @override
+  State<NotificacoesAlunos> createState() => _NotificacoesAlunosState();
+}
 
-  final List notificacoes = [
+class _NotificacoesAlunosState extends State<NotificacoesAlunos> {
+  // Lista de notificações provisórias
+  List<ItensNotificacoes> notificacoes = [
     ItensNotificacoes(
       icone: Icones.calendario,
       titulo: "Novo evento!",
@@ -46,71 +43,74 @@ class NotificacoesAlunos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarAlunos,
+      appBar: AppbarNotificacaoAlunos(
+        height: 6.h,
+        onVoltar: widget.onVoltar ?? () => Navigator.of(context).pop(),
+      ),
       body: ListView.builder(
         itemCount: notificacoes.length,
-        itemBuilder: (ctx, index) => Column(
-          children: [
-            SizedBox(
-              height: 5,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 25,
-                vertical: 15,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        notificacoes[index].icone,
-                        color: CoresClaras.verdePrincipal,
-                        size: 20,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        notificacoes[index].titulo,
-                        style: estiloTexto(15,
+        itemBuilder: (ctx, index) {
+          final item = notificacoes[index];
+          return Column(
+            children: [
+              const SizedBox(height: 5),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          item.icone,
+                          color: CoresClaras.verdePrincipal,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 10),
+                        Text(
+                          item.titulo,
+                          style: estiloTexto(
+                            15,
                             cor: CoresClaras.verdePrincipalTexto,
-                            peso: FontWeight.bold),
-                      ),
-                      Spacer(),
-                      Text(
-                        notificacoes[index].tempo,
-                        style: TextStyle(color: CoresClaras.cinzatexto),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 15),
-                  Text(
-                    notificacoes[index].texto,
-                    style: estiloTexto(15, cor: CoresClaras.pretoTexto),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.zero,
+                            peso: FontWeight.bold,
+                          ),
+                        ),
+                        const Spacer(),
+                        Text(
+                          item.tempo,
+                          style: TextStyle(color: CoresClaras.cinzatexto),
+                        ),
+                      ],
                     ),
-                    child: Text(
-                      notificacoes[index].link,
-                      style: TextStyle(
-                        color: CoresClaras.verdePrincipal,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                    const SizedBox(height: 15),
+                    Text(
+                      item.texto,
+                      style: estiloTexto(15, cor: CoresClaras.pretoTexto),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                       
+                      },
+                      style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                      child: Text(
+                        item.link,
+                        style: TextStyle(
+                          color: CoresClaras.verdePrincipal,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Divider(
-              thickness: 1.5,
-              color: CoresClaras.verdecinzaBorda,
-            ),
-          ],
-        ),
+              Divider(
+                thickness: 1.5,
+                color: CoresClaras.verdecinzaBorda,
+              ),
+            ],
+          );
+        },
       ),
     );
   }

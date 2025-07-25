@@ -11,7 +11,6 @@ import '../../../core/utils/dias.dart';
 import '../../../core/utils/padroes.dart';
 import '../../../cache/escolha_calendario.dart';
 import '../../components/appbar.dart';
-import '../../components/calendario.dart';
 import 'widgets/cards_alunos.dart';
 import 'widgets/menu_lateral_alunos.dart';
 
