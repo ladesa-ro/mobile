@@ -122,8 +122,9 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
   return Container(
     padding: const EdgeInsets.all(4),
     decoration: BoxDecoration(
-      color: CoresClaras
-          .branco, // precisa ser modificado para funcionar corretamente no tema escuro
+      color: Theme.of(context)
+          .colorScheme
+          .surface, 
       borderRadius: BorderRadius.circular(100),
     ),
     child: Stack(
