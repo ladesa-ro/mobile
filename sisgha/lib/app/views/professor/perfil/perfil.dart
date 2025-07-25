@@ -34,6 +34,7 @@ class _PerfilState extends State<Perfil> {
             child: Stack(
               alignment: AlignmentDirectional.topCenter,
               children: [
+                //Imagem de fundo
                 Positioned(
                   child: SizedBox(
                     height: tamanho * 0.2,
@@ -43,6 +44,7 @@ class _PerfilState extends State<Perfil> {
                         alignment: AlignmentDirectional.bottomCenter),
                   ),
                 ),
+                //Botão de sair
                 Positioned(
                   top: 10,
                   left: 10,
@@ -62,12 +64,13 @@ class _PerfilState extends State<Perfil> {
                     ),
                   ),
                 ),
+                //Botão de editar imagem de capa
                 Positioned(
                   top: 10,
                   right: 10,
                   child: ElevatedButton(
                     style:
-                        buttonStyleEdit(const Color.fromRGBO(60, 60, 60, 0.1)),
+                        buttonStyleEdit(Theme.of(context).colorScheme.primary),
                     child: const Iconify(
                       Icones.lapiz,
                       size: 10,
@@ -79,6 +82,7 @@ class _PerfilState extends State<Perfil> {
                             provider.atualizarImagemCapa(context, imagem)),
                   ),
                 ),
+                //
                 // Avatar
                 Positioned(
                   bottom: 0,
@@ -100,6 +104,7 @@ class _PerfilState extends State<Perfil> {
               provider.professor.matricula,
               tamanho * 0.005),
           SizedBox(height: tamanho * 0.03),
+          //Botões de seleção de abas
           Expanded(
             child: Padding(
               padding: Padroes.margem(),
@@ -117,7 +122,9 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
   return Container(
     padding: const EdgeInsets.all(4),
     decoration: BoxDecoration(
-      color: CoresClaras.branco,
+      color: Theme.of(context)
+          .colorScheme
+          .surface, 
       borderRadius: BorderRadius.circular(100),
     ),
     child: Stack(
@@ -137,7 +144,7 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
           top: 63,
           child: SizedBox(
             child: ElevatedButton(
-              style: buttonStyleEdit(CoresClaras.preto),
+              style: buttonStyleEdit(Theme.of(context).colorScheme.primary),
               onPressed: () => bottomSheat(context, atualizarImagemPerfil),
               child: const Iconify(
                 Icones.lapiz,

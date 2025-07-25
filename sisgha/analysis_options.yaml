@@ -11,6 +11,7 @@ analyzer:
   errors:
     prefer_const_constructors: ignore
     non_constant_identifier_names: ignore
+    deprecated_member_use: ignore
     
 include: package:flutter_lints/flutter.yaml
 
