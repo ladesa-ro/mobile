@@ -118,7 +118,8 @@ Widget headerDrawer(BuildContext context, double height, double width) {
             Text(
               'Selecione as informações',
               style: estiloTexto(15,
-                  cor: CoresClaras.cinzaEscuro, peso: FontWeight.bold),
+                  cor: Theme.of(context).textTheme.bodyLarge?.color,
+                  peso: FontWeight.bold),
             ),
           ],
         ),

@@ -130,12 +130,14 @@ HeaderStyle estiloCabessario() {
   );
 }
 
-DaysOfWeekStyle estiloParteSuperior() {
+DaysOfWeekStyle estiloParteSuperior(BuildContext context) {
   return DaysOfWeekStyle(
-    weekdayStyle:
-        estiloTexto(15, peso: FontWeight.bold, cor: CoresClaras.pretoTexto),
-    weekendStyle:
-        estiloTexto(15, peso: FontWeight.bold, cor: CoresClaras.pretoTexto),
+    weekdayStyle: estiloTexto(15,
+        peso: FontWeight.bold,
+        cor: Theme.of(context).textTheme.bodyLarge?.color),
+    weekendStyle: estiloTexto(15,
+        peso: FontWeight.bold,
+        cor: Theme.of(context).textTheme.bodyLarge?.color),
     dowTextFormatter: (date, locale) {
       switch (date.weekday) {
         case DateTime.monday:
