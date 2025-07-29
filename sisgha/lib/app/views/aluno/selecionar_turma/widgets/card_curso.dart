@@ -90,10 +90,11 @@ class _CardCursoState extends State<CardCurso> {
                             label: Text(
                               nome,
                               style: estiloTexto(
-                                14,
+                                15,
                                 cor: selecionado
                                     ? CoresClaras.verdePrincipalTexto
                                     : CoresClaras.cinzatexto,
+                                    peso: FontWeight.bold,
                               ),
                             ),
                             labelPadding: EdgeInsets.symmetric(

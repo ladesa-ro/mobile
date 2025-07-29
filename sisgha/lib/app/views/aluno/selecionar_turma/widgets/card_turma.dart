@@ -91,10 +91,11 @@ class _CardTurmaState extends State<CardTurma> {
                             label: Text(
                               nome,
                               style: estiloTexto(
-                                14,
+                                15,
                                 cor: selecionado
                                     ? CoresClaras.verdePrincipalTexto
                                     : CoresClaras.cinzatexto,
+                                peso: FontWeight.bold,
                               ),
                             ),
                             labelPadding: EdgeInsets.symmetric(

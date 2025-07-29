@@ -31,12 +31,12 @@ class _TesteState extends State<FiltrargemDeTurmas> {
         children: [
           Row(
             children: [
+              Icon(Icones.relogio, size: 3.h),
+              SizedBox(width: Padroes.larguraGeral() * 0.015),
               Text(
                 'Selecionar Horario',
                 style: estiloTexto(18, peso: FontWeight.bold),
               ),
-              SizedBox(width: Padroes.larguraGeral() * 0.015),
-              Icon(Icones.relogio, size: 3.h)
             ],
           ),
           SizedBox(height: tamanho * 0.02),
