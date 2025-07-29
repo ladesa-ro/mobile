@@ -42,7 +42,7 @@ class AppbarAluno extends StatelessWidget implements PreferredSizeWidget {
           cor: CoresClaras.brancoTexto,
         ),
       ),
-      backgroundColor: CoresClaras.verdePrincipal,
+      backgroundColor: Theme.of(context).colorScheme.primary,
     );
   }
 }

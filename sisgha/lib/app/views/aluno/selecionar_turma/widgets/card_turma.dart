@@ -48,9 +48,7 @@ class _CardTurmaState extends State<CardTurma> {
                         style: estiloTexto(
                           15,
                           peso: FontWeight.bold,
-                          cor: turmaSelecionada
-                              ? CoresClaras.pretoTexto
-                              : CoresClaras.cinzatexto,
+                          cor: Theme.of(context).textTheme.bodyLarge?.color,
                         ),
                       ),
                       Transform.rotate(
@@ -91,10 +89,11 @@ class _CardTurmaState extends State<CardTurma> {
                             label: Text(
                               nome,
                               style: estiloTexto(
-                                14,
+                                15,
                                 cor: selecionado
                                     ? CoresClaras.verdePrincipalTexto
                                     : CoresClaras.cinzatexto,
+                                peso: FontWeight.bold,
                               ),
                             ),
                             labelPadding: EdgeInsets.symmetric(
@@ -105,7 +104,8 @@ class _CardTurmaState extends State<CardTurma> {
                                 ? provider.selecionarTurma(null)
                                 : provider.selecionarTurma(nome),
                             selectedColor: CoresClaras.verdeTransparente,
-                            backgroundColor: Colors.white,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.surfaceVariant,
                             labelStyle: TextStyle(
                               color: selecionado ? Colors.white : Colors.black,
                             ),
