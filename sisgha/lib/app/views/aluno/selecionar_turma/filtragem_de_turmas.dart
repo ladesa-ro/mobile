@@ -89,7 +89,9 @@ class _TesteState extends State<FiltrargemDeTurmas> {
         Size(double.infinity, Padroes.aluturaBotoes()),
       ),
       backgroundColor: WidgetStatePropertyAll(
-        botaoAtivo ? CoresClaras.verdePrincipalBotao : CoresClaras.cinzaBordas,
+        botaoAtivo
+            ? Theme.of(context).colorScheme.primary
+            : CoresClaras.cinzaBordas,
       ),
       shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(
