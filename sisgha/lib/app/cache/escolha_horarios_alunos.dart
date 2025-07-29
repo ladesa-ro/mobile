@@ -91,7 +91,11 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
     notifyListeners();
   }
 
-  void resetarTudo() {
+  void resetarEscolhas() {
+    idFormacaoSelecionada = null;
+    cursoSelecionado = null;
+    turmaSelecionada = null;
+    cursoExpandido = false;
     idFormacaoSelecionada = null;
     nomeFormacaoSelecionada = null;
     cursoSelecionado = null;

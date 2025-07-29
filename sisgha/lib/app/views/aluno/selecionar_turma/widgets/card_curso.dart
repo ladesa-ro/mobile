@@ -48,9 +48,7 @@ class _CardCursoState extends State<CardCurso> {
                         style: estiloTexto(
                           15,
                           peso: FontWeight.bold,
-                          cor: cursoSelecionado
-                              ? CoresClaras.pretoTexto
-                              : CoresClaras.cinzatexto,
+                          cor: Theme.of(context).textTheme.bodyLarge?.color,
                         ),
                       ),
                       Transform.rotate(
@@ -94,7 +92,7 @@ class _CardCursoState extends State<CardCurso> {
                                 cor: selecionado
                                     ? CoresClaras.verdePrincipalTexto
                                     : CoresClaras.cinzatexto,
-                                    peso: FontWeight.bold,
+                                peso: FontWeight.bold,
                               ),
                             ),
                             labelPadding: EdgeInsets.symmetric(
@@ -105,7 +103,8 @@ class _CardCursoState extends State<CardCurso> {
                                 ? provider.selecionarCurso(null)
                                 : provider.selecionarCurso(nome),
                             selectedColor: CoresClaras.verdeTransparente,
-                            backgroundColor: Colors.white,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.surfaceVariant,
                             labelStyle: TextStyle(
                               color: selecionado ? Colors.white : Colors.black,
                             ),

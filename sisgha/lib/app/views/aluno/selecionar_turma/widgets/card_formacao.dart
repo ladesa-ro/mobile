@@ -58,9 +58,7 @@ class _CardFormacaoState extends State<CardFormacao> {
                         'Formação',
                         style: estiloTexto(15,
                             peso: FontWeight.bold,
-                            cor: formacaoSelecionada
-                                ? CoresClaras.pretoTexto
-                                : CoresClaras.cinzatexto),
+                            cor: Theme.of(context).textTheme.bodyLarge?.color),
                       ),
                       Transform.rotate(
                         angle: espandido ? 3.14 : 0,
@@ -116,7 +114,8 @@ class _CardFormacaoState extends State<CardFormacao> {
                                 ? provider.selecionarFormacao(null)
                                 : provider.selecionarFormacao(nome),
                             selectedColor: CoresClaras.verdeTransparente,
-                            backgroundColor: Colors.white,
+                            backgroundColor:
+                                Theme.of(context).colorScheme.surfaceVariant,
                             labelStyle: TextStyle(
                               color: selecionado ? Colors.white : Colors.black,
                             ),

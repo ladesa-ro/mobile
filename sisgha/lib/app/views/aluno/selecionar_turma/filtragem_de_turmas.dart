@@ -21,6 +21,15 @@ class FiltrargemDeTurmas extends StatefulWidget {
 
 class _TesteState extends State<FiltrargemDeTurmas> {
   @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      Provider.of<EscolhaHorariosAlunos>(context, listen: false)
+          .resetarEscolhas();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final tamanho = Padroes.alturaGeral();
     return Scaffold(
