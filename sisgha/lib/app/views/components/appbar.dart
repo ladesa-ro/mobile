@@ -120,6 +120,7 @@ class _CustomAppBarState extends State<CustomAppBar>
                   size: 40,
                   color: temaProvider.corDosIcones(),
                 ),
+                padding: const EdgeInsets.only(right: 20),
               ),
             SlideTransition(
               position: animacoes.slideTextoPrincipal,
