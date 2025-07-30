@@ -113,7 +113,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
             ),
             SizedBox(height: tamanho * 0.03),
 
-            // Aqui entra o calendário igual professor
+            
             SizedBox(
               height: tamanho * 0.55,
               width: largura,
@@ -159,11 +159,13 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
 
             SizedBox(height: tamanho * 0.03),
 
-            // Aqui lista os eventos do dia selecionado igual professor
+           
             Consumer<CalendarioFuncionalidades>(
               builder: (context, provider, _) {
                 final data = normalizarData(_selectedDay);
                 final eventos = provider.tudoJunto[data] ?? [];
+
+                print("Eventos carregados: ${provider.tudoJunto.length}");
 
                 if (eventos.isEmpty) {
                   return Padding(
