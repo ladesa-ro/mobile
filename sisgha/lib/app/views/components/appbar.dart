@@ -64,7 +64,7 @@ class _CustomAppBarState extends State<CustomAppBar>
     super.dispose();
   }
 
-// asdfafda
+// Preciso adicionar um comentário pq preciso dar commit
   Widget buildLinha1() {
     return SizedBox(
       height: 20,
