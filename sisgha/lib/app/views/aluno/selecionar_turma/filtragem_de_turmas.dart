@@ -16,14 +16,15 @@ class FiltrargemDeTurmas extends StatefulWidget {
   const FiltrargemDeTurmas({super.key});
 
   @override
-  State<FiltrargemDeTurmas> createState() => _TesteState();
+  State<FiltrargemDeTurmas> createState() => _FiltrargemDeTurmas();
 }
 
-class _TesteState extends State<FiltrargemDeTurmas> {
+class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
+      // ignore: use_build_context_synchronously
       Provider.of<EscolhaHorariosAlunos>(context, listen: false)
           .resetarEscolhas();
     });

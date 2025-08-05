@@ -1,11 +1,13 @@
 // ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison
 
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sisgha/app/cache/calendario_funcionalidades.dart';
+import 'package:sisgha/app/views/components/widget_erro.dart';
 
 import '../domain/logic/listas.dart';
 import '../views/components/botton_app_bar.dart';
@@ -43,17 +45,27 @@ class DadosProfessor with ChangeNotifier {
     notifyListeners();
   }
 
-  Future carregarDados() async {
-    SharedPreferences armazenamento = await SharedPreferences.getInstance();
-    final user = Professor(
-        matricula: armazenamento.getString("matricula")!,
-        nome: armazenamento.getString("nome")!,
-        email: armazenamento.getString("email")!,
-        id: armazenamento.getString("id")!);
-    carregarDadosDoUsuario(user);
-    await carregarImagens();
+  Future<void> carregarDados(BuildContext context) async {
+    try {
+      await Future(() async {
+        SharedPreferences armazenamento = await SharedPreferences.getInstance();
+        final user = Professor(
+          matricula: armazenamento.getString("matricula")!,
+          nome: armazenamento.getString("nome")!,
+          email: armazenamento.getString("email")!,
+          id: armazenamento.getString("id")!,
+        );
 
-    notifyListeners();
+        carregarDadosDoUsuario(user);
+        await carregarImagens();
+
+        notifyListeners();
+      }).timeout(const Duration(seconds: 2));
+    } on TimeoutException catch (_) {
+      dialogoDeErro(context);
+    } catch (e) {
+      dialogoDeErro(context);
+    }
   }
 
   Future<void> carregarImagens() async {
@@ -90,7 +102,9 @@ class DadosProfessor with ChangeNotifier {
         .juntarEventosEtapas(listas.listaEtapas);
     //carregar dados do professor
     final dados = DadosProfessor();
-    verificado ? await dados.carregarDados() : await dados.buscarDados(context);
+    verificado
+        ? await dados.carregarDados(context)
+        : await dados.buscarDados(context);
     Navigator.of(context).pop();
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(

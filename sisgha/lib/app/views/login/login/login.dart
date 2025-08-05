@@ -1,7 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/app/views/components/widget_erro.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -104,9 +107,11 @@ class _CorpoLoginState extends State<CorpoLogin> {
           children: [
             const SizedBox(width: 19),
             Icon(
-              Icons.person, //YURIIIIIII COMO MEXE NESSA PORCARIA MANOOOOOOOOO
+              Icons.person,
+              //Faz o L
+              //YURIIIIIII COMO MEXE NESSA PORCARIA MANOOOOOOOOO
               //Deixei por enquanto esse ícone aqui pra conseguir representar o ícone como cheio (falhei miseravelmente em tentar concertar o outro).
-              //Yuri: kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk fluter 1 x braga 0
+              //Yuri: kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk fluter 2 x braga 0
               color: CoresClaras.branco,
               size: 3.7.h,
             ),
@@ -133,23 +138,42 @@ class _CorpoLoginState extends State<CorpoLogin> {
   FilledButton botaoEntrar(BuildContext context) {
     return FilledButton(
       onPressed: () async {
-        _mostrarDialogoDeCarregamento(context);
         FocusScopeNode currentFocus = FocusScope.of(context);
-        if (formKey.currentState!.validate()) {
-          bool deuCerto =
-              await Repository.login(matriculaController, senhaController);
 
-          if (!currentFocus.hasPrimaryFocus) {
-            currentFocus.unfocus();
-          }
-          if (deuCerto) {
-            await context
-                .read<DadosProfessor>()
-                .iniciarProvider(context, false);
-          } else {
+        // valida os campos
+        if (formKey.currentState!.validate()) {
+          // mostra o dialogo
+          _mostrarDialogoDeCarregamento(context);
+
+          try {
+            // tempo limite para funcionar
+            bool deuCerto =
+                await Repository.login(matriculaController, senhaController)
+                    .timeout(const Duration(seconds: 7));
+
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+
+            if (deuCerto) {
+              await context
+                  .read<DadosProfessor>()
+                  .iniciarProvider(context, false);
+            } else {
+              Navigator.of(context).pop(); // Fecha o loading
+              senhaController.clear();
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            }
+          } on TimeoutException catch (_) {
             Navigator.of(context).pop();
-            senhaController.clear();
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            dialogoDeErro(
+              context,
+            );
+          } catch (e) {
+            Navigator.of(context).pop();
+            dialogoDeErro(
+              context,
+            );
           }
         }
       },
@@ -186,11 +210,6 @@ class _CorpoLoginState extends State<CorpoLogin> {
             onTap: () {
               Repository.teste();
             },
-
-            //  showDialog(
-            //   context: context,
-            //   builder: (context) => dialogoDeErro(context, 'login'),
-            // ),
             child: Text(
               'Clique aqui',
               style: estiloTexto(15,

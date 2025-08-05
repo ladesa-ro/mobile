@@ -31,20 +31,24 @@ class Repository {
 
   static void _mostrarErro(BuildContext context, int statusCode) async {
     if (statusCode < 200) {
-      return _erro(context, 'Erro no código');
+      return _erro(context);
     } else if (statusCode < 400) {
-      return _erro(context, 'Erro no cliente');
+      return _erro(
+        context,
+      );
     } else if (statusCode < 500) {
       return await _recarregarToken(context);
     } else {
-      return _erro(context, 'Erro no servidor');
+      return _erro(
+        context,
+      );
     }
   }
 
-  static void _erro(BuildContext context, String texto) {
+  static void _erro(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => dialogoDeErro(context, texto),
+      builder: (context) => dialogoDeErro(context),
     );
   }
 

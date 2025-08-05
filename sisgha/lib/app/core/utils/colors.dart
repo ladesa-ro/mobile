@@ -32,8 +32,6 @@ class CoresClaras {
 
   //Calendario
   static const Color roxo = Color(0XFF5300A6);
-  static const Color vermelhoCalendario = Color(0XFFE9001C);
-  static const Color vermelhoFracoCalendario = Color.fromARGB(165, 181, 0, 21);
   static const Color verdecinzaCalendario = Color(0xFF9AB69E);
 
   //---------------------------------novas cores do modo claro
@@ -57,8 +55,6 @@ class CoresClaras {
   static const Color vermelhoBotao = Color(0XFFcd191e);
   static const Color pretobotao = Color(0XFF050F07);
   static const Color verdebotao = Color(0XFF2F9E41);
-
-  static var brancoBotao;
 }
 
 class CoresEscuras {
