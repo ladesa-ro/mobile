@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/views/components/widgets_home/auto_font_size_text.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../core/utils/icones.dart';
 import '../../core/utils/estilos.dart';
@@ -63,6 +64,7 @@ class _CustomAppBarState extends State<CustomAppBar>
     super.dispose();
   }
 
+// asdfafda
   Widget buildLinha1() {
     return SizedBox(
       height: 20,
@@ -71,7 +73,7 @@ class _CustomAppBarState extends State<CustomAppBar>
         builder: (context, constraints) {
           return AutoFontSizeText(
             text: animacoes.linha1,
-            style: estiloTexto(16, peso: FontWeight.bold),
+            style: estiloTexto(12.sp, peso: FontWeight.bold),
             maxWidth: constraints.maxWidth,
           );
         },
@@ -87,7 +89,7 @@ class _CustomAppBarState extends State<CustomAppBar>
         builder: (context, constraints) {
           return AutoFontSizeText(
             text: animacoes.linha2,
-            style: estiloTexto(16, peso: FontWeight.bold),
+            style: estiloTexto(12.sp, peso: FontWeight.bold),
             maxWidth: constraints.maxWidth,
           );
         },
