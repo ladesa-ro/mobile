@@ -197,22 +197,6 @@ CalendarBuilders calendarBuilder(double heigth, DateTime? diafocado) {
 
       //notificação de evento no dia
       markerBuilder: (context, date, events) {
-        if (events.isEmpty) {
-          return const SizedBox.shrink();
-        }
-
-        return Positioned(
-          bottom: -3,
-          right: 8,
-          child: Container(
-            height: 10,
-            width: 10,
-            decoration: BoxDecoration(
-              color: events[0].cor ?? Colors.transparent,
-              border: Border.all(width: 0.5, color: CoresClaras.cinzaBordas),
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-        );
+        return Container();
       });
 }
