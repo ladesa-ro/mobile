@@ -157,8 +157,6 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                 final data = normalizarData(_selectedDay);
                 final eventos = provider.tudoJunto[data] ?? [];
 
-                print("Eventos carregados: ${provider.tudoJunto.length}");
-
                 if (eventos.isEmpty) {
                   return Padding(
                     padding: EdgeInsets.symmetric(vertical: tamanho * 0.03),

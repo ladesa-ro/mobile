@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, unnecessary_null_comparison
 
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -43,13 +44,15 @@ class DadosProfessor with ChangeNotifier {
     notifyListeners();
   }
 
-  Future carregarDados() async {
+  Future<void> carregarDados(BuildContext context) async {
     SharedPreferences armazenamento = await SharedPreferences.getInstance();
     final user = Professor(
-        matricula: armazenamento.getString("matricula")!,
-        nome: armazenamento.getString("nome")!,
-        email: armazenamento.getString("email")!,
-        id: armazenamento.getString("id")!);
+      matricula: armazenamento.getString("matricula")!,
+      nome: armazenamento.getString("nome")!,
+      email: armazenamento.getString("email")!,
+      id: armazenamento.getString("id")!,
+    );
+
     carregarDadosDoUsuario(user);
     await carregarImagens();
 
@@ -90,7 +93,9 @@ class DadosProfessor with ChangeNotifier {
         .juntarEventosEtapas(listas.listaEtapas);
     //carregar dados do professor
     final dados = DadosProfessor();
-    verificado ? await dados.carregarDados() : await dados.buscarDados(context);
+    verificado
+        ? await dados.carregarDados(context)
+        : await dados.buscarDados(context);
     Navigator.of(context).pop();
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(

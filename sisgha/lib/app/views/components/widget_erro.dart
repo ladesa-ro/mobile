@@ -6,7 +6,7 @@ import 'package:sisgha/app/cache/dados_professor.dart';
 import '../../core/utils/estilos.dart';
 import '../../core/utils/imagens.dart';
 
-Widget dialogoDeErro(BuildContext context, String erro) {
+Widget dialogoDeErro(BuildContext context) {
   DadosProfessor dadosProfessor = DadosProfessor();
   return AlertDialog(
     backgroundColor: Colors.white,
@@ -25,7 +25,7 @@ Widget dialogoDeErro(BuildContext context, String erro) {
             height: 15,
           ),
           Text(
-            'Nenhuma conexão com a internet $erro',
+            'Nenhuma conexão com a internet ',
             style:
                 estiloTexto(16, cor: CoresClaras.preto, peso: FontWeight.bold),
           ),
