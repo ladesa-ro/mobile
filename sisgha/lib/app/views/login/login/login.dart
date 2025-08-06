@@ -166,14 +166,12 @@ class _CorpoLoginState extends State<CorpoLogin> {
             }
           } on TimeoutException catch (_) {
             Navigator.of(context).pop();
-            dialogoDeErro(
-              context,
-            );
+            showDialog(
+                context: context, builder: (context) => dialogoDeErro(context));
           } catch (e) {
             Navigator.of(context).pop();
-            dialogoDeErro(
-              context,
-            );
+            showDialog(
+                context: context, builder: (context) => dialogoDeErro(context));
           }
         }
       },
