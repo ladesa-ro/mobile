@@ -32,63 +32,38 @@ class CalendarioFuncionalidades with ChangeNotifier {
     final formatador = DateFormat('dd/MM/yyyy');
 
     for (var etapa in listaEtapas) {
-      final inicio = etapa.dataInicio;
-      final fim = etapa.dataTermino;
-      // Evento no dia de início
-      if (!tudoJunto.containsKey(inicio)) {
-        tudoJunto[inicio] = [];
-      }
-      tudoJunto[inicio]!.add(
-        MostrarNoCalendario(
-          titulo: '${etapa.numero}° Etapa - Início',
-          dataInicio: formatador.format(inicio),
-          dataTermino: formatador.format(fim),
-          cor: etapa.cor,
-          tempo: inicio.difference(DateTime.now()).inDays.toString(),
-          local: 'Local',
-        ),
-      );
+      final inicio = normalizarData(etapa.dataInicio);
+      final fim = normalizarData(etapa.dataTermino);
 
-      // Evento no dia de término
-      if (!tudoJunto.containsKey(fim)) {
-        tudoJunto[fim] = [];
+      int totalDias = fim.difference(inicio).inDays;
+
+      for (int i = 0; i <= totalDias; i++) {
+        final dia = inicio.add(Duration(days: i));
+
+        if (!tudoJunto.containsKey(dia)) {
+          tudoJunto[dia] = [];
+        }
+
+        String titulo;
+        if (i == 0) {
+          titulo = '${etapa.numero}° Etapa - Início';
+        } else if (i == totalDias) {
+          titulo = '${etapa.numero}° Etapa - Fim';
+        } else {
+          titulo = '${etapa.numero}° Etapa';
+        }
+
+        tudoJunto[dia]!.add(
+          MostrarNoCalendario(
+            titulo: titulo,
+            dataInicio: formatador.format(inicio),
+            dataTermino: formatador.format(fim),
+            cor: etapa.cor,
+            tempo: dia.difference(DateTime.now()).inDays.toString(),
+            local: 'Local',
+          ),
+        );
       }
-      tudoJunto[fim]!.add(
-        MostrarNoCalendario(
-          titulo: '${etapa.numero}° Etapa - Fim',
-          dataInicio: formatador.format(inicio),
-          dataTermino: formatador.format(fim),
-          cor: etapa.cor,
-          tempo: fim.difference(DateTime.now()).inDays.toString(),
-          local: 'Local',
-        ),
-      );
     }
   }
-
-  // adicionarEventos(
-  //      List<Eventos> lista
-  //     ) {
-  //   final formatador = DateFormat('dd/MM/yyyy');
-  //   for (var etapa in lista) {
-  //     if (!listaEventos.containsKey(etapa.dataInicio)) {
-  //       listaEventos[etapa.dataInicio] = [];
-  //     }
-  //     listaEventos[etapa.dataInicio]!.add(
-  //       Eventos(
-  //         titulo: 'Inicio Etapa ${etapa.numero}',
-  //         inicio: formatador.format(etapa.dataInicio),
-  //         termino: formatador.format(etapa.dataTermino),
-  //         tempo: etapa.dataInicio.difference(DateTime.now()).inDays.toString(),
-  //         local: 'jipa',
-  //         cor: etapa.cor,
-  //       ),
-  //     );
-  //   }
-
-  //   return;
-  // }
-
-
-  
 }
