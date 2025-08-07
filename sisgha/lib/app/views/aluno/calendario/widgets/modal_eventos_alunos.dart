@@ -42,8 +42,8 @@ class _ModalEventosAlunosState extends State<ModalEventosAlunos> {
     return Align(
       alignment: Alignment.bottomCenter,
       child: FractionallySizedBox(
-        heightFactor: 0.6, // fixa em 60% da altura da tela
-        widthFactor: 0.85,
+        heightFactor: 0.6, // 60% da altura da tela
+        widthFactor: 0.85, // 80% da largura do modal
         child: Container(
           decoration: const BoxDecoration(
             color: Colors.white,
@@ -53,7 +53,7 @@ class _ModalEventosAlunosState extends State<ModalEventosAlunos> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Topo com título e botão fechar
+              // Topo
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
                 child: Row(
@@ -84,7 +84,7 @@ class _ModalEventosAlunosState extends State<ModalEventosAlunos> {
                 ),
               ),
 
-              // Campo de busca com "Pesquisar" no topo da linha
+              // Campo de busca
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Stack(
@@ -147,7 +147,6 @@ class _ModalEventosAlunosState extends State<ModalEventosAlunos> {
                   thumbColor: Colors.green.shade400,
                   radius: const Radius.circular(10),
                   thickness: 6,
-                  // isAlwaysShown: true, // no Flutter novo é thumbVisibility
                   child: ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     itemCount: 10,
