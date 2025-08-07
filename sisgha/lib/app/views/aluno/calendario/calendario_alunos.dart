@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/cache/calendario_funcionalidades.dart';
+import 'package:sisgha/app/views/aluno/calendario/widgets/modal_eventos_alunos.dart';
 import 'package:sisgha/app/views/components/calendario.dart';
 import 'package:sisgha/app/views/professor/calendario/calendario.dart';
 import 'package:sizer/sizer.dart';
@@ -15,6 +16,7 @@ import '../../../core/utils/padroes.dart';
 import '../../../cache/escolha_calendario.dart';
 import '../../components/appbar.dart';
 import 'widgets/menu_lateral_alunos.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CalendarioAlunos extends StatefulWidget {
   const CalendarioAlunos({super.key});
@@ -148,6 +150,46 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                       return provider.tudoJunto[dataNormalizada] ?? [];
                     },
                   ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: tamanho * 0.03,
+            ),
+            SizedBox(
+              width: largura,
+              height: Padroes.aluturaBotoes(),
+              child: ElevatedButton(
+                style: _estiloBotao(context),
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isDismissible: true,
+                    isScrollControlled: true,
+                    enableDrag: false,
+                    backgroundColor: Colors.transparent,
+                    builder: (context) => const ModalEventosAlunos(),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Ver todos os eventos",
+                      style: estiloTexto(
+                        16,
+                        cor: Colors.white,
+                        peso: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    SvgPicture.asset(
+                      'assets/icones/Vector.svg',
+                      width: 24,
+                      height: 24,
+                      color: Colors.white,
+                    )
+                  ],
                 ),
               ),
             ),

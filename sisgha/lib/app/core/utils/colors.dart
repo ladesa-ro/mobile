@@ -27,6 +27,8 @@ class CoresClaras {
   static const Color cinzaEscuro = Color.fromARGB(127, 0, 0, 0);
 
   //Borda
+
+  static const Color verdeclarinho = Color.fromARGB(206, 156, 241, 169);
   static const Color verdecinzaBorda = Color(0xFF9AB69E);
   static const Color verdePrincipalBorda = Color(0XFF39A048);
 
