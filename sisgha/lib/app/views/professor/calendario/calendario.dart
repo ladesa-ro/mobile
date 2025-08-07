@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/cache/calendario_funcionalidades.dart';
+import 'package:sisgha/app/views/professor/ListagemDeEventosProfessores/ModalEventoProfessor.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -14,6 +15,7 @@ import '../../components/appbar.dart';
 import '../../components/calendario.dart';
 import '../../components/letreiro_rolante.dart';
 import 'widgets/menu_lateral.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CalendarioProfessor extends StatefulWidget {
   const CalendarioProfessor({super.key});
@@ -131,7 +133,45 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
               ),
             ),
           ),
-          SizedBox(height: tamanho * 0.03),
+          SizedBox(
+            height: tamanho * 0.03,
+          ),
+          SizedBox(
+              width: largura,
+              height: Padroes.aluturaBotoes(),
+              child: ElevatedButton(
+                  style: _estiloBotao(context),
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isDismissible: true,
+                      isScrollControlled: true,
+                      enableDrag: false,
+                      backgroundColor: const Color.fromARGB(88, 0, 0, 0),
+                      builder: (context) => const ModalEventosProfessores(),
+                    );
+                  },
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Ver todos os eventos",
+                          style: estiloTexto(
+                            16,
+                            cor: Colors.white,
+                            peso: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(width: 8),
+                        SvgPicture.asset(
+                          'assets/icones/Vector.svg',
+                          width: 24,
+                          height: 24,
+                          color: Colors.white,
+                        )
+                      ]))),
+
+          SizedBox(height: tamanho * 0.02),
           //
           Consumer<CalendarioFuncionalidades>(
             builder: (context, provider, _) {

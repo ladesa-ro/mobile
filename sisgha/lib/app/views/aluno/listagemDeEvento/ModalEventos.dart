@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
 
-class ModalEventosHeader extends StatelessWidget {
-  const ModalEventosHeader({super.key});
+class ModalEventos extends StatelessWidget {
+  const ModalEventos({super.key});
 
   @override
   Widget build(BuildContext context) {
