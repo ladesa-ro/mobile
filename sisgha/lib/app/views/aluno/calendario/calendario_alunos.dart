@@ -162,9 +162,13 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
               child: ElevatedButton(
                 style: _estiloBotao(context),
                 onPressed: () {
-                  showDialog(
+                  showModalBottomSheet(
                     context: context,
-                    builder: (_) => const ModalEventosAlunos(),
+                    isDismissible: true,
+                    isScrollControlled: true,
+                    enableDrag: false,
+                    backgroundColor: Colors.transparent,
+                    builder: (context) => const ModalEventosAlunos(),
                   );
                 },
                 child: Row(
