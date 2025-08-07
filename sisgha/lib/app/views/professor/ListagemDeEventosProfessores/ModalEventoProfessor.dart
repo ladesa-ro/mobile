@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/app/core/utils/colors.dart';
-import 'package:sisgha/app/views/aluno/calendario/widgets/CampoPesquisaEventos.dart';
-import 'package:sisgha/app/views/aluno/calendario/widgets/EventoCard.dart';
-import 'package:sisgha/app/views/aluno/calendario/widgets/ModalEventos.dart';
+import 'package:sisgha/app/views/professor/ListagemDeEventosProfessores/CampoDePesquisarDosEventosDoProfessor.dart';
+import 'package:sisgha/app/views/professor/ListagemDeEventosProfessores/EventoCardProfessor.dart';
+import 'package:sisgha/app/views/professor/ListagemDeEventosProfessores/Modal.dart';
 
-class ModalEventosAlunos extends StatefulWidget {
-  const ModalEventosAlunos({super.key});
+class ModalEventosProfessores extends StatefulWidget {
+  const ModalEventosProfessores({super.key});
 
   @override
-  State<ModalEventosAlunos> createState() => _ModalEventosAlunosState();
+  State<ModalEventosProfessores> createState() =>
+      _ModalEventosProfessoresState();
 }
 
-class _ModalEventosAlunosState extends State<ModalEventosAlunos> {
+class _ModalEventosProfessoresState extends State<ModalEventosProfessores> {
   final FocusNode _focusNode = FocusNode();
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
@@ -60,8 +61,8 @@ class _ModalEventosAlunosState extends State<ModalEventosAlunos> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ModalEventos(),
-              CampoPesquisaEventos(
+              const ModalEventosProf(),
+              CampoPesquisaEventosProf(
                 focusNode: _focusNode,
                 controller: _controller,
                 isFocused: _isFocused,
@@ -82,7 +83,7 @@ class _ModalEventosAlunosState extends State<ModalEventosAlunos> {
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     itemCount: 10,
                     itemBuilder: (context, index) {
-                      return EventoCard(index: index);
+                      return EventoCardProf(index: index);
                     },
                   ),
                 ),

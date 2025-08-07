@@ -9,7 +9,7 @@ import '../../../../core/utils/padroes.dart';
 class CardsAlunos extends StatelessWidget {
   CardsAlunos({super.key});
 
-    final List<ElementosCards> Cards = [
+  final List<ElementosCards> Cards = [
     ElementosCards(
       cor: CoresClaras.roxo,
       titulo: "2° etapa ",
@@ -43,20 +43,20 @@ class CardsAlunos extends StatelessWidget {
       local: "local: ji-parana",
     ),
     ElementosCards(
-      cor: CoresClaras.roxo,
-      titulo: "2° etapa ",
-      iconebotao: ElevatedButton(
-        style: estiloBotaoCard(),
-        onPressed: () {},
-        child: Iconify(
-          Icones.sino,
-          color: CoresClaras.branco,
+        cor: CoresClaras.roxo,
+        titulo: "2° etapa ",
+        iconebotao: ElevatedButton(
+          style: estiloBotaoCard(),
+          onPressed: () {},
+          child: Iconify(
+            Icones.sino,
+            color: CoresClaras.branco,
+          ),
         ),
-      ),
-      inicio: "Início: 01/04 às 08:00",
-      terminio: "Término: 01/04 às 10:00",
-      tempo: "Começa daqui 3 dias.",
-      local: "Local: ji-parana "),
+        inicio: "Início: 01/04 às 08:00",
+        terminio: "Término: 01/04 às 10:00",
+        tempo: "Começa daqui 3 dias.",
+        local: "Local: ji-parana "),
     ElementosCards(
       cor: CoresClaras.vermelho,
       titulo: "Recuperação do 1° semestre ",
@@ -74,7 +74,6 @@ class CardsAlunos extends StatelessWidget {
       local: "local: ji-parana",
     ),
   ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -151,6 +150,7 @@ class CardsAlunos extends StatelessWidget {
     );
   }
 }
+
 class ElementosCards {
   final Color cor;
   final String titulo;
@@ -170,7 +170,6 @@ class ElementosCards {
     required this.local,
   });
 }
-
 
 ButtonStyle estiloBotaoCard() {
   return ButtonStyle(

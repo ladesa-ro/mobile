@@ -37,7 +37,7 @@ class CampoPesquisaEventos extends StatelessWidget {
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: CoresClaras.cinza),
+                  borderSide: const BorderSide(color: CoresClaras.verdeBordas),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -45,7 +45,7 @@ class CampoPesquisaEventos extends StatelessWidget {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: CoresClaras.cinza),
+                  borderSide: const BorderSide(color: CoresClaras.verdeBordas),
                 ),
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 16),

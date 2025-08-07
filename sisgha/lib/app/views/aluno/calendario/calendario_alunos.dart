@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/app/cache/calendario_funcionalidades.dart';
-import 'package:sisgha/app/views/aluno/calendario/widgets/modal_eventos_alunos.dart';
+import 'package:sisgha/app/views/aluno/listagemDeEvento/modal_eventos_alunos.dart';
 import 'package:sisgha/app/views/components/calendario.dart';
 import 'package:sisgha/app/views/professor/calendario/calendario.dart';
 import 'package:sizer/sizer.dart';
@@ -167,7 +167,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                     isDismissible: true,
                     isScrollControlled: true,
                     enableDrag: false,
-                    backgroundColor: Colors.transparent,
+                    backgroundColor: const Color.fromARGB(88, 0, 0, 0),
                     builder: (context) => const ModalEventosAlunos(),
                   );
                 },
