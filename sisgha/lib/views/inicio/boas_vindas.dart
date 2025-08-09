@@ -11,7 +11,7 @@ import '../../viewmodels/dados_professor.dart';
 import '../../viewmodels/escolha_horarios_alunos.dart';
 import '../../widgets/progress_indicator.dart';
 import '../../widgets/widget_erro.dart';
-import 'login/login.dart';
+import '../login/login/login_page.dart';
 
 class BoasVindasPage extends StatefulWidget {
   const BoasVindasPage({super.key});

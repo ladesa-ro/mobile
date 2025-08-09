@@ -6,6 +6,7 @@ import 'package:sisgha/viewmodels/calendario_funcionalidades.dart';
 import 'package:sisgha/core/routes/app_routes.dart';
 import 'package:sisgha/viewmodels/dados_professor.dart';
 import 'package:sisgha/viewmodels/escolha_horarios_alunos.dart';
+import 'package:sisgha/views/login/login_viewmodel.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -16,6 +17,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => EscolhaHorariosAlunos()),
         ChangeNotifierProvider(create: (_) => TemasProvider()),
         ChangeNotifierProvider(create: (_) => CalendarioFuncionalidades()),
+        ChangeNotifierProvider(create: (_) => LoginViewModel())
       ],
       child: const MyApp(),
     ),

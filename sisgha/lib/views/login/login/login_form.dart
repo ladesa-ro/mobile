@@ -1,61 +1,34 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/views/login/login_viewmodel.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
+import '../../../core/utils/icones.dart';
 import '../../../core/utils/imagens.dart';
 import '../../../core/utils/padroes.dart';
 import '../../../repository/repository.dart';
-import '../../../viewmodels/dados_professor.dart';
 import '../../../widgets/progress_indicator.dart';
-import '../../../widgets/widget_erro.dart';
-import 'widgets_estilos.dart';
 
-class PaginaLogin extends StatelessWidget {
-  const PaginaLogin({super.key});
+class LoginForm extends StatefulWidget {
+  const LoginForm({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: [
-          elementoVerde(Alignment.topLeft),
-          elementoVerde(Alignment.bottomRight),
-          CorpoLogin()
-        ],
-      ),
-    );
-  }
+  State<LoginForm> createState() => _CorpoLoginState();
 }
 
-class CorpoLogin extends StatefulWidget {
-  const CorpoLogin({super.key});
-
-  @override
-  State<CorpoLogin> createState() => _CorpoLoginState();
-}
-
-class _CorpoLoginState extends State<CorpoLogin> {
+class _CorpoLoginState extends State<LoginForm> {
   final TextEditingController matriculaController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  bool _senhaVisivel = true;
-
-  void alternarVisibilidadeSenha() {
-    setState(() {
-      _senhaVisivel = !_senhaVisivel;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final loginVM = Provider.of<LoginViewModel>(context);
     return Center(
       child: SingleChildScrollView(
         child: SizedBox(
@@ -78,11 +51,11 @@ class _CorpoLoginState extends State<CorpoLogin> {
                       SizedBox(height: Padroes.alturaGeral() * 0.03),
                       inputMatricula(),
                       SizedBox(height: Padroes.alturaGeral() * 0.02),
-                      inputSenha(),
+                      inputSenha(loginVM),
                       SizedBox(height: Padroes.alturaGeral() * 0.01),
                       recuperarSenha(context),
                       SizedBox(height: Padroes.alturaGeral() * 0.01),
-                      botaoEntrar(context),
+                      botaoEntrar(context, loginVM),
                       SizedBox(height: Padroes.alturaGeral() * 0.02),
                       botaoEntrarAluno(context),
                     ],
@@ -107,10 +80,6 @@ class _CorpoLoginState extends State<CorpoLogin> {
             const SizedBox(width: 19),
             Icon(
               Icons.person,
-              //Faz o L
-              //YURIIIIIII COMO MEXE NESSA PORCARIA MANOOOOOOOOO
-              //Deixei por enquanto esse ícone aqui pra conseguir representar o ícone como cheio (falhei miseravelmente em tentar concertar o outro).
-              //Yuri: kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk fluter 2 x braga 0
               color: CoresClaras.branco,
               size: 3.7.h,
             ),
@@ -134,44 +103,20 @@ class _CorpoLoginState extends State<CorpoLogin> {
     );
   }
 
-  FilledButton botaoEntrar(BuildContext context) {
+  Widget botaoEntrar(BuildContext context, LoginViewModel loginVM) {
     return FilledButton(
       onPressed: () async {
         FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
 
         // valida os campos
         if (formKey.currentState!.validate()) {
           // mostra o dialogo
           _mostrarDialogoDeCarregamento(context);
-
-          try {
-            // tempo limite para funcionar
-            bool deuCerto =
-                await Repository.login(matriculaController, senhaController)
-                    .timeout(const Duration(seconds: 7));
-
-            if (!currentFocus.hasPrimaryFocus) {
-              currentFocus.unfocus();
-            }
-
-            if (deuCerto) {
-              await context
-                  .read<DadosProfessor>()
-                  .iniciarProvider(context, false);
-            } else {
-              Navigator.of(context).pop(); // Fecha o loading
-              senhaController.clear();
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            }
-          } on TimeoutException catch (_) {
-            Navigator.of(context).pop();
-            showDialog(
-                context: context, builder: (context) => dialogoDeErro(context));
-          } catch (e) {
-            Navigator.of(context).pop();
-            showDialog(
-                context: context, builder: (context) => dialogoDeErro(context));
-          }
+          await loginVM.verificarLogin(
+              matriculaController, senhaController, context);
         }
       },
       style: Padroes.estiloBotao(context),
@@ -228,15 +173,21 @@ class _CorpoLoginState extends State<CorpoLogin> {
     );
   }
 
-  TextFormField inputSenha() {
+  TextFormField inputSenha(LoginViewModel loginVM) {
     return TextFormField(
       controller: senhaController,
       decoration: inputDecoration(context, 'Senha',
-          suffixIcon:
-              iconeVisibilidadeSenha(alternarVisibilidadeSenha, _senhaVisivel)),
+          suffixIcon: IconButton(
+            onPressed: () => loginVM.alternarVisibilidadeSenha(),
+            icon: Iconify(
+              loginVM.senhaVisivel
+                  ? Icones.visibilidadeSenhaOn
+                  : Icones.visibilidadeSenhaOff,
+            ),
+          )),
       validator: (value) => verificacao(value, 'Campo Obrigatorio'),
       keyboardType: TextInputType.text,
-      obscureText: _senhaVisivel,
+      obscureText: !loginVM.senhaVisivel,
     );
   }
 

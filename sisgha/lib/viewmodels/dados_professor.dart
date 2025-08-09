@@ -96,7 +96,7 @@ class DadosProfessor with ChangeNotifier {
     verificado
         ? await dados.carregarDados(context)
         : await dados.buscarDados(context);
-    Navigator.of(context).pop();
+
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (_) => ChangeNotifierProvider<DadosProfessor>.value(
