@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:sisgha/app/core/utils/colors.dart';
+import 'package:sisgha/app/core/utils/estilos.dart';
+import 'package:sisgha/app/core/utils/icones.dart';
+import 'package:sizer/sizer.dart';
 
-
-class AppbarNotificacaoAlunos extends StatelessWidget implements PreferredSizeWidget {
+class AppbarNotificacaoAlunos extends StatelessWidget
+    implements PreferredSizeWidget {
   final double height;
   final VoidCallback onVoltar;
 
@@ -17,10 +22,21 @@ class AppbarNotificacaoAlunos extends StatelessWidget implements PreferredSizeWi
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text("Notificações"),
+      title: Text(
+        "Notificações",
+        style: estiloTexto(
+          17.sp,
+          peso: FontWeight.bold,
+          cor: CoresClaras.brancoTexto,
+        ),
+      ),
       leading: IconButton(
         onPressed: onVoltar,
-        icon: const Icon(Icons.arrow_back),
+        icon: Iconify(
+          Icones.setaVoltarDireita,
+          size: double.infinity,
+          color: CoresClaras.branco,
+        ),
       ),
     );
   }
