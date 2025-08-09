@@ -55,7 +55,8 @@ class _NotificacoesAlunosState extends State<NotificacoesAlunos> {
             children: [
               const SizedBox(height: 5),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -63,7 +64,7 @@ class _NotificacoesAlunosState extends State<NotificacoesAlunos> {
                       children: [
                         Icon(
                           item.icone,
-                          color: CoresClaras.verdePrincipal,
+                          color: Theme.of(context).colorScheme.primary,
                           size: 20,
                         ),
                         const SizedBox(width: 10),
@@ -71,7 +72,7 @@ class _NotificacoesAlunosState extends State<NotificacoesAlunos> {
                           item.titulo,
                           style: estiloTexto(
                             15,
-                            cor: CoresClaras.verdePrincipalTexto,
+                            cor: Theme.of(context).colorScheme.primary,
                             peso: FontWeight.bold,
                           ),
                         ),
@@ -85,17 +86,16 @@ class _NotificacoesAlunosState extends State<NotificacoesAlunos> {
                     const SizedBox(height: 15),
                     Text(
                       item.texto,
-                      style: estiloTexto(15, cor: CoresClaras.pretoTexto),
+                      style: estiloTexto(15,
+                          cor: Theme.of(context).colorScheme.onSurface),
                     ),
                     TextButton(
-                      onPressed: () {
-                       
-                      },
+                      onPressed: () {},
                       style: TextButton.styleFrom(padding: EdgeInsets.zero),
                       child: Text(
                         item.link,
                         style: TextStyle(
-                          color: CoresClaras.verdePrincipal,
+                          color: Theme.of(context).colorScheme.primary,
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                         ),
