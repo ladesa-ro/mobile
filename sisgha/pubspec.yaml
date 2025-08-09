@@ -51,6 +51,7 @@ dependencies:
   path_provider: ^2.1.5
   text_scroll: ^0.2.0  
   marquee: ^2.3.0
+  flutter_svg: ^2.2.0
 
 dev_dependencies:
   flutter_test:

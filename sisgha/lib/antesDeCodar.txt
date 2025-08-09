@@ -1,0 +1,13 @@
+Atente-se as seguintes regras para manter uma arquitetura limpa e legivel:
+    -   cada pasta tem um objetivo especifico, então nada de misturar os arquivos
+    -   pode usar ctrl C ctrl V, não há problemas nisso, mas vc tem que no minimo entender como aquilo funciona para evitar problemas futuros
+    -   mantenha o padrao das nomeclaturas das pastas e arquivos: 
+        -   nome de pasta pode ser em ingles ou em portugues, desde que seu nome faça esteje de acordo com sua função
+        -   na hora da nomeação siga os padroes do proprio flutter, sempre nome em caixa baixa e as palavras separadas por hiffen (_),
+            exemplo: nome_de_teste.dart
+        -   nada de dar pull request com qualquer coisa chamada TESTE
+
+
+cada pasta principal/raiz vai ter um breve comentario sobre sua função
+
+os widgets não vao ser tratados igual era antigamente, agora vai muldar um pouco esse conceito

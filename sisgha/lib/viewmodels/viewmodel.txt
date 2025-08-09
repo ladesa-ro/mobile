@@ -1,0 +1,15 @@
+O viewmodel atua como um "tradutor" entre a UI e o domínio. Ele não deve conter regras de negócio complexas, 
+mas sim gerenciar o fluxo de dados e decisões, garantindo que a interface reaja corretamente às ações do usuário.
+
+resumidamente, tudo que o usuário faz na tela é captado pelo viewmodel, que então processa, delega e atualiza o
+estado da UI conforme os resultados vindos da camada domain.
+
+
+UI > viewmodel > domain > repository
+repository > domain > viewmodel > UI
+
+qualquer coisa fora dessa ordem bagunça a organização do app, os dados devem seguir esse fluxo e nunca pular de uma etapa para 
+a outra ou seja, a UI não pode acessar diretamente o repositorio por exemplo.
+detalhe: nem sempre ele vai precisar passar por todas essas etapas
+
+

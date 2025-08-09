@@ -1,0 +1,4 @@
+A pasta core contem elementos reutilizaveis e comuns do projeto, como temas,
+constantes e infraestruturas que podem ser usadas por várias outras partes do app
+
+não confunca com os widges, pois eles são reutilizaveis visuais, ja dentro da pasta core não sao visuais

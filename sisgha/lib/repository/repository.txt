@@ -1,0 +1,6 @@
+a pasta repository é responsável pela camada de dados, incluindo repositórios, fontes de dados locais (ex: banco de dados, cache) 
+e remotos (ex: APIs).
+
+Aqui ficam as implementações para obter e armazenar dados.
+
+no nosso caso até o momento, essa pasta vai servir exclusivamente para tratar somente com a API

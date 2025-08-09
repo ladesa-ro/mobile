@@ -1,0 +1,9 @@
+As views não vão alterar muito como era antes, apenas sua organização vai ser muldada,
+detalhe
+
+alguns widges antigos que não são reutilizaveis vao voltar pras views
+
+A pasta views é responsável por armazenar as telas (UI) da aplicação — ou seja, os arquivos que definem 
+como o app se apresenta visualmente ao usuário. cada view representa uma interface específica, como 
+uma tela de login, cadastro, home, perfil, etc. Essas telas são compostas por widgets (muitos vindos da pasta widgets) 
+e são conectadas ao ViewModel, que gerencia o estado e as ações da interface.
