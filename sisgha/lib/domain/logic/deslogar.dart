@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../../repository/repository.dart';
-import '../../views/inicio/boas_vindas.dart';
+import '../../views/inicialização/boas_vindas.dart';
 
 Future widgetQuit(BuildContext context) async {
   if (await Repository.sair(context)) {

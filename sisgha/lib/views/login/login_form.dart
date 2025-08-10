@@ -4,15 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/views/login/login_viewmodel.dart';
+import 'package:sisgha/widgets/widget_erro.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../core/utils/colors.dart';
-import '../../../core/utils/estilos.dart';
-import '../../../core/utils/icones.dart';
-import '../../../core/utils/imagens.dart';
-import '../../../core/utils/padroes.dart';
-import '../../../repository/repository.dart';
-import '../../../widgets/progress_indicator.dart';
+import '../../core/utils/colors.dart';
+import '../../core/utils/estilos.dart';
+import '../../core/utils/icones.dart';
+import '../../core/utils/imagens.dart';
+import '../../core/utils/padroes.dart';
+import '../../repository/repository.dart';
+import '../../viewmodels/dados_professor.dart';
+import '../../widgets/progress_indicator.dart';
+import 'widgets_estilos.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -110,13 +113,29 @@ class _CorpoLoginState extends State<LoginForm> {
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
         }
-
-        // valida os campos
         if (formKey.currentState!.validate()) {
-          // mostra o dialogo
           _mostrarDialogoDeCarregamento(context);
-          await loginVM.verificarLogin(
-              matriculaController, senhaController, context);
+          //logica para verificar os dados
+          bool? deuCerto = await loginVM.verificarLogin(
+            matriculaController,
+            senhaController,
+          );
+          if (deuCerto == null) {
+            // erro de conexão
+            showDialog(
+              context: context,
+              builder: (context) => dialogoDeErro(context),
+            );
+          } else if (deuCerto) {
+            // funcionou corretamente
+            await context
+                .read<DadosProfessor>()
+                .iniciarProvider(context, false);
+          } else {
+            // dados invalidos
+            Navigator.of(context).pop();
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
         }
       },
       style: Padroes.estiloBotao(context),
