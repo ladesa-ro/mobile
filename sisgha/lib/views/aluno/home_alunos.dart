@@ -11,7 +11,7 @@ import '../../core/utils/icones.dart';
 import '../../core/utils/padroes.dart';
 import '../../widgets/appbar.dart';
 import '../../widgets/calendario.dart';
-import '../../widgets/widgets_home/quadrados_home_alunos.dart';
+import '../../widgets/widgets_home/quadrados_home.dart';
 
 class HomeAlunos extends StatefulWidget {
   const HomeAlunos({super.key});
@@ -122,7 +122,7 @@ class _HomeAlunosState extends State<HomeAlunos> {
               ),
             ),
             SizedBox(height: tamanho * 0.03),
-            Expanded(child: const QuadradosHomeAlunos()),
+            Expanded(child: const QuadradosHome()),
             SizedBox(height: tamanho * 0.03),
           ],
         ),
