@@ -1,0 +1,7 @@
+a pasta domain representa a camada de domínio da aplicação, responsável por concentrar a lógica de negócio pura. 
+
+a camada domain funciona como o "cérebro" da aplicação, pois é nela que as decisões de negócio são tomadas. 
+tudo que acontece na UI (View) ou no viewmodel é processado por meio dos métodos e classes da domain, que retornam os 
+resultados esperados com base nas regras definidas.
+
+nessa pasta são definidos as entidades(models), casos de uso, acesso ao repositorio

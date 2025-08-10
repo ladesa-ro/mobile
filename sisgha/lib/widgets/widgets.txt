@@ -1,0 +1,11 @@
+aqui a coisa vai muldar um pouco a forma de que com utilizavamos essa pasta
+
+a pasta widgets é responsável por armazenar componentes visuais reutilizáveis da aplicação.
+
+antes nessa pasta era armazenado muita coisa que não é bem reutilizavel, causando grande numero de arquivos,
+o correto seria utilizar so widgets enxutos que vao ser reutilizados, por exemplo alguns botões, a maioria deles mantem o mesmo estilo
+o que mulda é o tamanho e o que contem dentro dele, entao criariamos um widget desse botão e passariamos como atributo seu tamanho e
+conteudo.
+
+
+varios widget que estao nas views podem ser reutilizados.
