@@ -118,6 +118,7 @@ class Repository {
       armazenamento.setString('email', user.email);
       armazenamento.setString('matricula', user.matricula);
       armazenamento.setString('nome', user.nome);
+
       return user;
     }
 
@@ -290,14 +291,23 @@ class Repository {
   }
 
 // ---------------------------------------- testar rotas, clicar no botao de recuperar senha
+
+// id do usuario 0 = 17ed5d7e-79d4-4cfd-811c-263247dc4511
   static void teste() async {
-    final url = Uri.parse("$_api/turmas");
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    final url =
+        Uri.parse("$_api/usuarios/17ed5d7e-79d4-4cfd-811c-263247dc4511/ensino");
     final response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     });
+
+    print(response.statusCode);
     if (verificarStatusCode(response.statusCode)) {
-      //final data = jsonDecode(response.body)["data"];
+      final data = jsonDecode(response.body)['disciplinas'];
+      print(data[0]['disciplina']);
+      print('---------------------------');
 
       // for (var element in data) {
       //   print(element["periodo"]);
@@ -335,27 +345,3 @@ class Repository {
     }
   }
 }
-
-//
-
-  // void carregarAnosDoCurso(String curso) async {
-  //   _cursoSelecionado = curso;
-
-  //   final response = await http.get(Uri.parse("$_api/turmas"));
-  //   final decoded = json.decode(response.body);
-
-  //   if (decoded is Map && decoded.containsKey('data')) {
-  //     final List<dynamic> dataList = decoded['data'];
-  //     listaAnos = dataList
-  //         .map<String>(
-  //             (e) => e['periodo']?.toString() ?? '') // pega o campo 'periodo'
-  //         .where((element) => element.isNotEmpty) // filtra só não vazios
-  //         .toSet() // evita repetições
-  //         .toList();
-  //   } else {
-  //     listaAnos = [];
-  //     print("Formato do JSON inesperado");
-  //   }
-
-  //   notifyListeners();
-  // }
