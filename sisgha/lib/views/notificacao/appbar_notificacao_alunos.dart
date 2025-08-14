@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:sisgha/app/core/utils/colors.dart';
-import 'package:sisgha/app/core/utils/estilos.dart';
-import 'package:sisgha/app/core/utils/icones.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../core/utils/colors.dart';
+import '../../core/utils/estilos.dart';
+import '../../core/utils/icones.dart';
 
 class AppbarNotificacaoAlunos extends StatelessWidget
     implements PreferredSizeWidget {
