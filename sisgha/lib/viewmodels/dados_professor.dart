@@ -6,10 +6,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sisgha/core/utils/imagens.dart';
 import 'package:sisgha/viewmodels/calendario_funcionalidades.dart';
 
 import '../domain/logic/listas.dart';
+import '../domain/tratamento_de_erros/erro_de_imagem_do_perfil.dart';
 import '../widgets/botton_app_bar.dart';
 import '../repository/repository.dart';
 import '../domain/model/professor.dart';
@@ -65,8 +65,8 @@ class DadosProfessor with ChangeNotifier {
       _fotoCapaPerfil = await Repository.baixarImagemCapa(_professor.id);
       _fotoImagemPerfil = await Repository.baixarImagemPerfil(_professor.id);
     } catch (e) {
-      _fotoCapaPerfil = File('assets/img/gtr.jpeg');
-      _fotoImagemPerfil = File('assets/img/gtr.jpeg');
+      _fotoCapaPerfil = await imagemDeErro();
+      _fotoImagemPerfil = await imagemDeErro();
     }
   }
 
