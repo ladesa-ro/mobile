@@ -62,7 +62,8 @@ class Repository {
       TextEditingController senhaController) async {
     SharedPreferences armazenamento = await SharedPreferences.getInstance();
 
-    final url = Uri.parse("$_api/autenticacao/login");
+    final url =
+        Uri.parse("https://dev.ladesa.com.br/api/v1/autenticacao/login");
     final resposta = await http.post(url, body: {
       "matriculaSiape": matriculaController.text,
       "senha": senhaController.text,

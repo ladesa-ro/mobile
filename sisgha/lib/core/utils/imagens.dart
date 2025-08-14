@@ -5,6 +5,5 @@ class ImageApp {
   static const String logo_sigha_sem_barra = "assets/img/Logomarca-Teste.png";
   static const String logo = "img/Logo.png";
   static const String imagemErro = "assets/img/EmptyIcon.png";
-
   static const String imgTeste = "assets/img/gtr.jpeg";
 }
