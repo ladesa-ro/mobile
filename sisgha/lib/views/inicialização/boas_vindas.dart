@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/viewmodels/dados_ensino_professor_provider.dart';
 
 import '../../repository/repository.dart';
 import '../../domain/logic/verificar_dados_armazenados.dart';

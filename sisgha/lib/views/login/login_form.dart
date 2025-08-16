@@ -13,6 +13,7 @@ import '../../core/utils/icones.dart';
 import '../../core/utils/imagens.dart';
 import '../../core/utils/padroes.dart';
 import '../../repository/repository.dart';
+import '../../viewmodels/dados_ensino_professor_provider.dart';
 import '../../viewmodels/dados_professor.dart';
 import '../../widgets/progress_indicator.dart';
 import 'widgets_estilos.dart';
@@ -168,8 +169,10 @@ class _CorpoLoginState extends State<LoginForm> {
           ),
           const SizedBox(width: 3),
           GestureDetector(
-            onTap: () {
-              Repository.teste();
+            onTap: () async {
+              await context
+                  .read<DadosEnsinoProfessorProvider>()
+                  .carregarDados();
             },
             child: Text(
               'Clique aqui',

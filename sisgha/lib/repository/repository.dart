@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sisgha/domain/model/dados_ensino.dart';
 import 'package:sisgha/domain/model/disciplinas.dart';
 import 'package:sisgha/domain/model/etapas.dart';
 import 'package:sisgha/domain/model/eventos.dart';
@@ -294,26 +295,24 @@ class Repository {
 
 // id do usuario 0 = 17ed5d7e-79d4-4cfd-811c-263247dc4511
   static void teste() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    // final url =
+    //     Uri.parse("$_api/usuarios/17ed5d7e-79d4-4cfd-811c-263247dc4511/ensino");
+    // final response = await http.get(url, headers: {
+    //   'Content-Type': 'application/json',
+    //   'Accept': 'application/json',
+    // });
 
-    final url =
-        Uri.parse("$_api/usuarios/17ed5d7e-79d4-4cfd-811c-263247dc4511/ensino");
-    final response = await http.get(url, headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    });
+    // print(response.statusCode);
+    // if (verificarStatusCode(response.statusCode)) {
+    //   final data = jsonDecode(response.body)['disciplinas'];
+    //   print(data[1]['cursos'][0]['turmas'][0]['turma']['periodo']);
+    //   print('---------------------------');
 
-    print(response.statusCode);
-    if (verificarStatusCode(response.statusCode)) {
-      final data = jsonDecode(response.body)['disciplinas'];
-      print(data[0]['disciplina']);
-      print('---------------------------');
-
-      // for (var element in data) {
-      //   print(element["periodo"]);
-      //   print(element["id"]);
-      // }
-    }
+    // for (var element in data) {
+    //   print(element["periodo"]);
+    //   print(element["id"]);
+    // }
+    //  }
   }
 
   // -------------------------------------- retirar esses 'testar' e trocar por algo mais usual -----------------------------------
@@ -343,5 +342,42 @@ class Repository {
       TesteDisciplinas().PegarDisciplinas(
           data.map<Disciplina>((e) => Disciplina.fromJson(e)).toList());
     }
+  }
+
+  // -----------------------
+  static Future<List<DadosEnsino>> buscarEnsinoProfessor() async {
+    final url =
+        Uri.parse("$_api/usuarios/17ed5d7e-79d4-4cfd-811c-263247dc4511/ensino");
+    final response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+
+    if (verificarStatusCode(response.statusCode)) {
+      final data = jsonDecode(response.body)['disciplinas'];
+      List<DadosEnsino> dados = [];
+
+      for (var item in data) {
+        final disciplina = Disciplina.fromJson(item['disciplina']);
+
+        List<CursoComTurmas> cursos = [];
+        final cursosJson = item['cursos'] as List;
+
+        for (var cursoItem in cursosJson) {
+          final curso = Cursos.fromJson(cursoItem['curso']);
+
+          final turmasJson = cursoItem['turmas'] as List;
+          final turmas = turmasJson
+              .map((turmaItem) => Turma.fromJson(turmaItem['turma']))
+              .toList();
+
+          cursos.add(CursoComTurmas(curso: curso, turmas: turmas));
+        }
+
+        dados.add(DadosEnsino(disciplina: disciplina, cursos: cursos));
+      }
+      return dados;
+    }
+    throw Exception();
   }
 }
