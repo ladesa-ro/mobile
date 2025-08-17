@@ -13,6 +13,7 @@ import '../domain/tratamento_de_erros/erro_de_imagem_do_perfil.dart';
 import '../widgets/botton_app_bar.dart';
 import '../repository/repository.dart';
 import '../domain/model/professor.dart';
+import 'dados_ensino_professor_provider.dart';
 
 class DadosProfessor with ChangeNotifier {
   late File _fotoCapaPerfil;
@@ -102,7 +103,7 @@ class DadosProfessor with ChangeNotifier {
     verificado
         ? await dados.carregarDados(context)
         : await dados.buscarDados(context);
-
+    await context.read<DadosEnsinoProfessorProvider>().carregarDados();
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (_) => ChangeNotifierProvider<DadosProfessor>.value(

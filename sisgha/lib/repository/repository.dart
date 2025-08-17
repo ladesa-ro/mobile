@@ -346,8 +346,9 @@ class Repository {
 
   // -----------------------
   static Future<List<DadosEnsino>> buscarEnsinoProfessor() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     final url =
-        Uri.parse("$_api/usuarios/17ed5d7e-79d4-4cfd-811c-263247dc4511/ensino");
+        Uri.parse("$_api/usuarios/${sharedPreferences.getString('id')}/ensino");
     final response = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
