@@ -168,7 +168,7 @@ class _CorpoLoginState extends State<LoginForm> {
           ),
           const SizedBox(width: 3),
           GestureDetector(
-            onTap: () {
+            onTap: () async {
               Repository.teste();
             },
             child: Text(

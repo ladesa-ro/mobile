@@ -33,6 +33,7 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
         await context.read<EscolhaHorariosAlunos>().pucharOpcoes();
         await Repository.testeBuscarTurmas();
         await Repository.testeBuscarDisciplinas();
+
         if (await verificarDadosBaixados()) {
           await context.read<DadosProfessor>().iniciarProvider(context, true);
         } else {
