@@ -8,7 +8,7 @@ class TemasProvider with ChangeNotifier {
 
   ThemeData get temaAtivo => _temaAtivo;
 
-  void muldarTema() {
+  void mudarTema() {
     if (_temaAtivo.brightness == Brightness.light) {
       _temaAtivo = Temas.temaEscuro;
     } else {
