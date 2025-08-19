@@ -4,7 +4,7 @@ import 'package:sizer/sizer.dart';
 
 import 'colors.dart';
 
-TextStyle estiloTexto(double tamanho, {Color? cor, FontWeight? peso}) {
+TextStyle estiloTexto(double tamanho, {Color? cor, FontWeight? peso,}) {
   return TextStyle(
       fontSize: tamanho.sp,
       color: cor,

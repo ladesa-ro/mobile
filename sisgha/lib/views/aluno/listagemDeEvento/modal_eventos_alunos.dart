@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sisgha/views/aluno/listagemDeEvento/EventoCard.dart';
-import 'package:sisgha/views/aluno/listagemDeEvento/ModalEventos.dart';
-
+import 'package:sisgha/views/aluno/listagemDeEvento/evento_card.dart';
+import 'package:sisgha/views/aluno/listagemDeEvento/modal_eventos.dart';
 import '../../../core/utils/colors.dart';
-import 'CampoPesquisaEventos.dart';
+import 'campo_pesquisa_evento.dart';
 
 class ModalEventosAlunos extends StatefulWidget {
   const ModalEventosAlunos({super.key});
@@ -53,34 +52,34 @@ class _ModalEventosAlunosState extends State<ModalEventosAlunos> {
         heightFactor: 0.6,
         widthFactor: 0.90,
         child: Container(
-          decoration: const BoxDecoration(
-            color: CoresClaras.branco,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
           ),
-          padding: const EdgeInsets.only(top: 16),
+          padding: EdgeInsets.only(top: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ModalEventos(),
+              ModalEventos(),
               CampoPesquisaEventos(
                 focusNode: _focusNode,
                 controller: _controller,
                 isFocused: _isFocused,
                 isEmpty: _isEmpty,
               ),
-              const SizedBox(height: 15),
+              SizedBox(height: 15),
               Expanded(
                 child: RawScrollbar(
                   controller: _scrollController,
                   thumbVisibility: true,
                   trackVisibility: true,
                   thickness: 5,
-                  radius: const Radius.circular(10),
+                  radius: Radius.circular(10),
                   trackColor: CoresClaras.verdeclarinho,
                   thumbColor: CoresClaras.verdebotao,
                   child: ListView.builder(
                     controller: _scrollController,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                     itemCount: 10,
                     itemBuilder: (context, index) {
                       return EventoCard(index: index);

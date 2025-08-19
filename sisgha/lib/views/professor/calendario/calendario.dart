@@ -13,7 +13,7 @@ import '../../../viewmodels/calendario_funcionalidades.dart';
 import '../../../widgets/appbar.dart';
 import '../../../widgets/calendario.dart';
 import '../../../widgets/letreiro_rolante.dart';
-import '../ListagemDeEventosProfessores/ModalEventoProfessor.dart';
+import '../ListagemDeEventosProfessores/modal_evento_professor.dart';
 import 'widgets/menu_lateral.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -201,7 +201,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                       vertical: 8,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.surfaceVariant,
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
@@ -256,7 +256,9 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                     side: BorderSide(
-                                        color: CoresClaras.verdePrincipal),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary),
                                   ),
                                 ),
                               ),
@@ -264,7 +266,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                               icon: Iconify(
                                 Icones.sino,
                                 size: tamanho * 0.2,
-                                color: CoresClaras.verdePrincipal,
+                                color: Theme.of(context).colorScheme.primary,
                               ),
                             ),
                           ),

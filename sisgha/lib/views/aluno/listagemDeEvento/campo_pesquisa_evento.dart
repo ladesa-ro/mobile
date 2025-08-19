@@ -57,7 +57,7 @@ class CampoPesquisaEventos extends StatelessWidget {
             left: 12,
             top: 0,
             child: Container(
-              color: CoresClaras.branco,
+              color: Theme.of(context).colorScheme.surface,
               padding: const EdgeInsets.symmetric(horizontal: 4),
               child: Text(
                 'Pesquisar',

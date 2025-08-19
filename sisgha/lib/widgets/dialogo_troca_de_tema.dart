@@ -68,7 +68,7 @@ Widget mostrarDialogoDeTrocaDeTema(BuildContext context, String text) {
                   ? CoresClaras.verdePrincipal
                   : CoresEscuras.verdePrincipalEscuro),
               onPressed: () {
-                provider.muldarTema();
+                provider.mudarTema();
                 Navigator.of(context).pop();
               },
               child: Row(

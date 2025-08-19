@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 import '../../../core/utils/colors.dart';
 
 class EventoCard extends StatelessWidget {
@@ -29,7 +30,7 @@ class EventoCard extends StatelessWidget {
               const SizedBox(width: 6),
               Text(
                 '${index + 1}ª Etapa',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ],
           ),

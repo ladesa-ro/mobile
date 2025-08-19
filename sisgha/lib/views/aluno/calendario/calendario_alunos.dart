@@ -168,8 +168,8 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                     isDismissible: true,
                     isScrollControlled: true,
                     enableDrag: false,
-                    backgroundColor: const Color.fromARGB(88, 0, 0, 0),
-                    builder: (context) => const ModalEventosAlunos(),
+                    backgroundColor: Color.fromARGB(88, 0, 0, 0),
+                    builder: (context) => ModalEventosAlunos(),
                   );
                 },
                 child: Row(
@@ -224,7 +224,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                         vertical: 8,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.surfaceVariant,
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
@@ -282,7 +282,9 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                                     RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                       side: BorderSide(
-                                          color: CoresClaras.verdePrincipal),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary),
                                     ),
                                   ),
                                 ),
@@ -290,7 +292,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                                 icon: Iconify(
                                   Icones.sino,
                                   size: tamanho * 0.2,
-                                  color: CoresClaras.verdePrincipal,
+                                  color: Theme.of(context).colorScheme.primary,
                                 ),
                               ),
                             ),

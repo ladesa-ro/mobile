@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/colors.dart';
-import 'CampoDePesquisarDosEventosDoProfessor.dart';
-import 'EventoCardProfessor.dart';
-import 'Modal.dart';
+import 'campo_de_pesquisar_dos_eventos_do_professor.dart';
+import 'evento_card_professor.dart';
+import 'modal.dart';
 
 class ModalEventosProfessores extends StatefulWidget {
   const ModalEventosProfessores({super.key});
@@ -54,15 +54,15 @@ class _ModalEventosProfessoresState extends State<ModalEventosProfessores> {
         heightFactor: 0.6,
         widthFactor: 0.90,
         child: Container(
-          decoration: const BoxDecoration(
-            color: CoresClaras.branco,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
           ),
-          padding: const EdgeInsets.only(top: 16),
+          padding: EdgeInsets.only(top: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ModalEventosProf(),
+              ModalEventosProf(),
               CampoPesquisaEventosProf(
                 focusNode: _focusNode,
                 controller: _controller,
