@@ -168,8 +168,8 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                     isDismissible: true,
                     isScrollControlled: true,
                     enableDrag: false,
-                    backgroundColor: const Color.fromARGB(88, 0, 0, 0),
-                    builder: (context) => const ModalEventosAlunos(),
+                    backgroundColor: Color.fromARGB(88, 0, 0, 0),
+                    builder: (context) => ModalEventosAlunos(),
                   );
                 },
                 child: Row(

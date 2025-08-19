@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/core/utils/estilos.dart';
 
-import '../../../core/utils/colors.dart';
-
 class ModalEventos extends StatelessWidget {
   const ModalEventos({super.key});
 
@@ -22,7 +20,7 @@ class ModalEventos extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                'Listagem de Eventos',
+                'Listagem de eventos',
                 style: estiloTexto(
                   19,
                   peso: FontWeight.bold,
