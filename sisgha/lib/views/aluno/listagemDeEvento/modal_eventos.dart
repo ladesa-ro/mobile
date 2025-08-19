@@ -20,7 +20,7 @@ class ModalEventos extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                'Listagem de eventos',
+                'Listagem De Eventos',
                 style: estiloTexto(
                   19,
                   peso: FontWeight.bold,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sisgha/core/utils/estilos.dart';
 
 import '../../../core/utils/colors.dart';
 
@@ -17,20 +18,22 @@ class ModalEventosProf extends StatelessWidget {
               Container(
                 width: 4,
                 height: 24,
-                color: CoresClaras.verdeBordas,
+                color: Theme.of(context).colorScheme.primary,
               ),
-              const SizedBox(width: 8),
-              const Text(
-                'Listagem De Enventos',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 19,
+              SizedBox(width: 8),
+              Text(
+                'Listagem De Eventos',
+                style: estiloTexto(
+                  19,
+                  peso: FontWeight.bold,
+                  cor: Theme.of(context).textTheme.bodyLarge?.color,
                 ),
               ),
             ],
           ),
           IconButton(
-            icon: const Icon(Icons.close),
+            color: Theme.of(context).textTheme.bodyLarge?.color,
+            icon: Icon(Icons.close),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ],
