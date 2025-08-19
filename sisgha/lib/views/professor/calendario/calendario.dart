@@ -13,7 +13,7 @@ import '../../../viewmodels/calendario_funcionalidades.dart';
 import '../../../widgets/appbar.dart';
 import '../../../widgets/calendario.dart';
 import '../../../widgets/letreiro_rolante.dart';
-import '../ListagemDeEventosProfessores/ModalEventoProfessor.dart';
+import '../ListagemDeEventosProfessores/modal_evento_professor.dart';
 import 'widgets/menu_lateral.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
