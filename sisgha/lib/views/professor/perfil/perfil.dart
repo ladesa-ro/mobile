@@ -107,10 +107,7 @@ class _PerfilState extends State<Perfil> {
           SizedBox(height: tamanho * 0.03),
           //Botões de seleção de abas
           Expanded(
-            child: Padding(
-              padding: Padroes.margem(),
-              child: NavSwitch(),
-            ),
+            child: NavSwitch(),
           ),
         ],
       ),

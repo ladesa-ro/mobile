@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sisgha/core/utils/padroes.dart';
 
 import '../../../../core/utils/icones.dart';
 import '../../../../core/utils/colors.dart';
@@ -39,14 +40,17 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
           SizedBox(
             width: constraints.maxWidth,
             height: constraints.maxHeight * 0.1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _estiloTabs('Disponibilidade', Icones.iconeSisgha, 0,
-                    bordaEsquerda: true, bordaDireita: false),
-                _estiloTabs('Ensino', Icones.disciplina, 1,
-                    bordaEsquerda: false, bordaDireita: true),
-              ],
+            child: Padding(
+              padding: Padroes.margem(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _estiloTabs('Disponibilidade', Icones.iconeSisgha, 0,
+                      bordaEsquerda: true, bordaDireita: false),
+                  _estiloTabs('Ensino', Icones.disciplina, 1,
+                      bordaEsquerda: false, bordaDireita: true),
+                ],
+              ),
             ),
           ),
           SizedBox(
@@ -55,8 +59,11 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
             child: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
               controller: _controller,
-              children: const [
-                WidgetDisponibilidade(),
+              children: [
+                Padding(
+                  padding: Padroes.margem(),
+                  child: WidgetDisponibilidade(),
+                ),
                 WidgetEnsino(),
               ],
             ),
