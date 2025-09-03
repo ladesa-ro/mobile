@@ -54,14 +54,13 @@ class _PerfilState extends State<Perfil> {
                     onPressed: () async {
                       widgetQuit(context);
                     },
-                    child: const Row(
-                      children: [
-                        Icon(
-                          Icones.sair,
-                          color: CoresClaras.branco,
-                          size: 12,
-                        ),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 5),
+                      child: Icon(
+                        Icones.sair,
+                        color: CoresClaras.branco,
+                        size: 10,
+                      ),
                     ),
                   ),
                 ),

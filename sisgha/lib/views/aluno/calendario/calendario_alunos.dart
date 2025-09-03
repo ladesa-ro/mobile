@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/widgets/cards_calendario.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:text_scroll/text_scroll.dart';
-// só pra dar um commit
+
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/icones.dart';
 import '../../../core/utils/colors.dart';
@@ -195,115 +195,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
               ),
             ),
             SizedBox(height: tamanho * 0.03),
-            Consumer<CalendarioFuncionalidades>(
-              builder: (context, provider, _) {
-                final data = normalizarData(_selectedDay);
-                final eventos = provider.tudoJunto[data] ?? [];
-
-                if (eventos.isEmpty) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(vertical: tamanho * 0.03),
-                    child: Text(
-                      "Nenhum evento para este dia.",
-                      style: estiloTexto(15,
-                          cor: CoresClaras.verdePrincipal,
-                          peso: FontWeight.bold),
-                    ),
-                  );
-                }
-
-                return ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: eventos.length,
-                  itemBuilder: (context, index) {
-                    final evento = eventos[index];
-                    return Container(
-                      margin: EdgeInsets.symmetric(
-                        horizontal: 0,
-                        vertical: 8,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.surfaceVariant,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 4,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
-                        border: Border(
-                          left: BorderSide(
-                            color: evento.cor,
-                            width: 5,
-                          ),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.all(10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    evento.titulo,
-                                    style: estiloTexto(
-                                      16,
-                                      cor: evento.cor,
-                                      peso: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(height: 15),
-                                  Text(evento.dataInicio,
-                                      style: estiloTexto(16)),
-                                  Text(evento.dataTermino ?? '',
-                                      style: estiloTexto(16)),
-                                  Text(evento.tempo ?? '',
-                                      style: estiloTexto(16)),
-                                  Text(evento.local ?? '',
-                                      style: estiloTexto(16)),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                            child: SizedBox(
-                              height: 45,
-                              width: largura * 0.115,
-                              child: IconButton(
-                                style: ButtonStyle(
-                                  shape: MaterialStatePropertyAll(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      side: BorderSide(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary),
-                                    ),
-                                  ),
-                                ),
-                                onPressed: () {},
-                                icon: Iconify(
-                                  Icones.sino,
-                                  size: tamanho * 0.2,
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
+            cardCalendario(_selectedDay, tamanho, largura)
           ],
         ),
       ),
