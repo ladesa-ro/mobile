@@ -177,7 +177,6 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
             builder: (context, provider, _) {
               final data = normalizarData(_selectedDay);
               final eventos = provider.tudoJunto[data] ?? [];
-
               if (eventos.isEmpty) {
                 return Padding(
                   padding: EdgeInsets.symmetric(vertical: tamanho * 0.03),
@@ -188,7 +187,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                   ),
                 );
               }
-//
+
               return ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),

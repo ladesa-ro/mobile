@@ -286,7 +286,7 @@ class Repository {
     });
     if (verificarStatusCode(resposta.statusCode)) {
       final data = jsonDecode(resposta.body)['data'];
-      return data.map<Eventos>((e) => Etapas.fromJson(e)).toList();
+      return data.map<Eventos>((e) => Eventos.fromJson(e)).toList();
     }
     return <Eventos>[];
   }

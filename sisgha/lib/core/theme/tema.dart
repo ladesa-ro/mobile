@@ -17,7 +17,7 @@ class Temas {
     primaryColor: CoresClaras.verdePrincipal,
     fontFamily: 'Poppins',
     useMaterial3: true,
-    bottomAppBarTheme: BottomAppBarTheme(color: CoresClaras.verdePrincipal),
+    bottomAppBarTheme: BottomAppBarThemeData(color: CoresClaras.verdePrincipal),
     appBarTheme: AppBarTheme(
         color: CoresClaras.verdePrincipal,
         foregroundColor: CoresClaras.brancoTexto),
@@ -44,7 +44,7 @@ class Temas {
     fontFamily: 'Poppins',
     useMaterial3: true,
     bottomAppBarTheme:
-        BottomAppBarTheme(color: CoresEscuras.verdePrincipalEscuro),
+        BottomAppBarThemeData(color: CoresEscuras.verdePrincipalEscuro),
     appBarTheme: AppBarTheme(
         color: CoresEscuras.verdePrincipalEscuro,
         foregroundColor: CoresEscuras.brancoTextoEscuro),

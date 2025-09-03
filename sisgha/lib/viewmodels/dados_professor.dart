@@ -92,12 +92,13 @@ class DadosProfessor with ChangeNotifier {
     //carregar eventos do calendario
     final listas = Listas();
     await listas.adicionarEtapas();
+    await listas.adicionarEventos();
     await context
         .read<CalendarioFuncionalidades>()
         .adicionarEtapasCalendario(listas.listaEtapas);
     await context
         .read<CalendarioFuncionalidades>()
-        .juntarEventosEtapas(listas.listaEtapas);
+        .juntarEventosEtapas(listas.listaEtapas, listas.listaEventos);
     //carregar dados do professor
     final dados = DadosProfessor();
     verificado

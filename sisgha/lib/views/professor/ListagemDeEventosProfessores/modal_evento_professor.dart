@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/colors.dart';
+import 'Modal.dart';
 import 'campo_de_pesquisar_dos_eventos_do_professor.dart';
 import 'evento_card_professor.dart';
-import 'modal.dart';
 
 class ModalEventosProfessores extends StatefulWidget {
   const ModalEventosProfessores({super.key});

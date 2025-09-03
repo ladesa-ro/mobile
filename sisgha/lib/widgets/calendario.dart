@@ -162,7 +162,6 @@ DaysOfWeekStyle estiloParteSuperior(BuildContext context) {
 }
 
 CalendarBuilders calendarBuilder(double heigth, DateTime? diafocado) {
-  Color cor = Colors.transparent;
   return CalendarBuilders(
       //dia selecionado
       selectedBuilder: (context, date, focusedDay) {
@@ -178,16 +177,25 @@ CalendarBuilders calendarBuilder(double heigth, DateTime? diafocado) {
       },
       // durante o mes selecionado
       defaultBuilder: (context, date, events) {
-        final etapasProvider = context.read<CalendarioFuncionalidades>();
-        final etapasDoDia =
-            etapasProvider.etapasCalendario[normalizarData(date)];
-        cor = etapasDoDia?.first.cor ?? CoresClaras.cinza;
+        final provider = context.read<CalendarioFuncionalidades>();
+        final eventoDoDia = provider.tudoJunto[normalizarData(date)];
+        final cor = eventoDoDia?.first.cor ?? CoresClaras.cinza;
+
         return estiloDosBlocosDosDiasDoMes(cor, date, heigth);
       },
 
       //hoje
-      todayBuilder: (context, day, focusedDay) =>
-          estiloDoBlocoDoDiaDeHoje(context, day, cor, heigth),
+      todayBuilder: (context, day, focusedDay) {
+        final provider = context.read<CalendarioFuncionalidades>();
+        final eventoDoDia = provider.tudoJunto[normalizarData(day)];
+        final cor = eventoDoDia?.first.cor ?? CoresClaras.cinza;
+        if (day.month != focusedDay.month) {
+          // Retorna o estilo padrão (sem destaque)
+          return estiloDosBlocosDosDiasDoMesDesabilitados(
+              heigth); // ou estilo padrão neutro
+        }
+        return estiloDoBlocoDoDiaDeHoje(context, day, cor, heigth);
+      },
 
       //dias dos meses diferentes do selecionado
       outsideBuilder: (context, day, focusedDay) =>
