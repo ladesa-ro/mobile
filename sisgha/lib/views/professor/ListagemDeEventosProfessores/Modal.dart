@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/core/utils/estilos.dart';
 
-import '../../../core/utils/colors.dart';
-
 class ModalEventosProf extends StatelessWidget {
   const ModalEventosProf({super.key});
 
