@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/widgets/cards_calendario.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -137,146 +137,46 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
             height: tamanho * 0.03,
           ),
           SizedBox(
-              width: largura,
-              height: Padroes.aluturaBotoes(),
-              child: ElevatedButton(
-                  style: _estiloBotao(context),
-                  onPressed: () {
-                    showModalBottomSheet(
-                      context: context,
-                      isDismissible: true,
-                      isScrollControlled: true,
-                      enableDrag: false,
-                      backgroundColor: const Color.fromARGB(88, 0, 0, 0),
-                      builder: (context) => const ModalEventosProfessores(),
-                    );
-                  },
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Ver todos os eventos",
-                          style: estiloTexto(
-                            16,
-                            cor: Colors.white,
-                            peso: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(width: 8),
-                        SvgPicture.asset(
-                          'assets/icones/Vector.svg',
-                          width: 24,
-                          height: 24,
-                          color: Colors.white,
-                        )
-                      ]))),
-
-          SizedBox(height: tamanho * 0.02),
-          //
-          Consumer<CalendarioFuncionalidades>(
-            builder: (context, provider, _) {
-              final data = normalizarData(_selectedDay);
-              final eventos = provider.tudoJunto[data] ?? [];
-              if (eventos.isEmpty) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(vertical: tamanho * 0.03),
-                  child: Text(
-                    "Nenhum evento para este dia.",
-                    style: estiloTexto(15,
-                        cor: CoresClaras.verdePrincipal, peso: FontWeight.bold),
-                  ),
+            width: largura,
+            height: Padroes.aluturaBotoes(),
+            child: ElevatedButton(
+              style: _estiloBotao(context),
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  isDismissible: true,
+                  isScrollControlled: true,
+                  enableDrag: false,
+                  backgroundColor: const Color.fromARGB(88, 0, 0, 0),
+                  builder: (context) => const ModalEventosProfessores(),
                 );
-              }
-
-              return ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: eventos.length,
-                itemBuilder: (context, index) {
-                  final evento = eventos[index];
-                  return Container(
-                    margin: EdgeInsets.symmetric(
-                      horizontal: 0,
-                      vertical: 8,
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Ver todos os eventos",
+                    style: estiloTexto(
+                      16,
+                      cor: Colors.white,
+                      peso: FontWeight.bold,
                     ),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceVariant,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 4,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                      border: Border(
-                        left: BorderSide(
-                          color: evento.cor, // cor da borda
-                          width: 5, // a espreçura
-                        ),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  evento.titulo,
-                                  style: estiloTexto(
-                                    16,
-                                    cor: evento.cor,
-                                    peso: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(height: 15),
-                                Text(evento.dataInicio, style: estiloTexto(16)),
-                                Text(evento.dataTermino!,
-                                    style: estiloTexto(16)),
-                                Text(evento.tempo!, style: estiloTexto(16)),
-                                Text(evento.local!, style: estiloTexto(16)),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(10),
-                          child: SizedBox(
-                            height: 45,
-                            width: largura * 0.115,
-                            child: IconButton(
-                              style: ButtonStyle(
-                                shape: WidgetStatePropertyAll(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    side: BorderSide(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary),
-                                  ),
-                                ),
-                              ),
-                              onPressed: () {},
-                              icon: Iconify(
-                                Icones.sino,
-                                size: tamanho * 0.2,
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              );
-            },
+                  ),
+                  SizedBox(width: 8),
+                  SvgPicture.asset(
+                    'assets/icones/Vector.svg',
+                    width: 24,
+                    height: 24,
+                    color: Colors.white,
+                  )
+                ],
+              ),
+            ),
           ),
+          SizedBox(height: tamanho * 0.02),
+
+          //cards dos eventos do dia
+          RepaintBoundary(child: cardCalendario(_selectedDay, tamanho, largura))
         ]),
       ),
     );

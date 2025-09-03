@@ -48,7 +48,8 @@ class CalendarioFuncionalidades with ChangeNotifier {
   }
 
   juntarEventosEtapas(List<Etapas> listaEtapas, List<Eventos> listaEventos) {
-    final formatador = DateFormat('dd/MM/yyyy');
+    final formatadorDia = DateFormat('dd/MM');
+    final formatadorHoras = DateFormat('HH:ss');
 
     void adicionarAoCalendario({
       required DateTime inicio,
@@ -62,11 +63,12 @@ class CalendarioFuncionalidades with ChangeNotifier {
         tudoJunto.putIfAbsent(dia, () => []).add(
               MostrarNoCalendario(
                 titulo: tituloBuilder(i, totalDias),
-                dataInicio: formatador.format(inicio),
-                dataTermino: formatador.format(fim),
+                dataInicio:
+                    'Início: ${formatadorDia.format(inicio)} ás ${formatadorHoras.format(inicio)}',
+                dataTermino:
+                    'Término: ${formatadorDia.format(fim)} ás ${formatadorHoras.format(fim)}',
                 cor: cor,
                 tempo: verificarTempo(inicio, fim),
-                local: 'Local',
               ),
             );
       }
@@ -114,13 +116,13 @@ String verificarTempo(DateTime inicio, DateTime fim) {
 
   // Ainda não começou
   if (hoje.isBefore(inicio)) {
-    return 'Faltam $diasAteInicio dia${diasAteInicio == 1 ? '' : 's'}';
+    return 'Começa em $diasAteInicio dia${diasAteInicio == 1 ? '' : 's'}';
   }
 
   // Está acontecendo (hoje está entre inicio e fim, inclusive)
   if ((hoje.isAtSameMomentAs(inicio) || hoje.isAfter(inicio)) &&
       hoje.isBefore(fim.add(const Duration(days: 1)))) {
-    return 'Acontecendo';
+    return 'Em Andamento';
   }
 
   // Já terminou
