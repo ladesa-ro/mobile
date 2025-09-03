@@ -38,9 +38,6 @@ class Padroes {
 
   static double calcularAlturaAppBar(BuildContext context,
       {double? appBarSize}) {
-    return MediaQuery.of(context).size.height -
-        (appBarSize ?? 0) -
-        MediaQuery.of(context).padding.top -
-        larguraGeral() * 0.08;
+    return 100.h - (appBarSize ?? 0) - MediaQuery.of(context).padding.top;
   }
 }

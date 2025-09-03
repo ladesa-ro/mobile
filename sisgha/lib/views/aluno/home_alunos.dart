@@ -38,7 +38,6 @@ class _HomeAlunosState extends State<HomeAlunos> {
     initializeDateFormatting('pt_BR', null);
 
     var appBar = CustomAppBar(
-      height: 7.h,
       mes: DatasFormatadas.primeiroAUltimoDia,
       diaHoje: DatasFormatadas.obterDiaFormatado(),
       icones: true,
@@ -123,7 +122,6 @@ class _HomeAlunosState extends State<HomeAlunos> {
             ),
             SizedBox(height: tamanho * 0.03),
             Expanded(child: const QuadradosHome()),
-            SizedBox(height: tamanho * 0.03),
           ],
         ),
       ),

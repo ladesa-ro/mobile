@@ -43,7 +43,6 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
   @override
   Widget build(BuildContext context) {
     var appBar = CustomAppBar(
-      height: 7.h,
       mes: '${DatasFormatadas.mesAtualFormatado} - ${DatasFormatadas.anoAtual}',
       diaHoje: "Calendário Parcial",
       icones: false,

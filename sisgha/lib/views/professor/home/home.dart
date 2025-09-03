@@ -39,7 +39,6 @@ class _HomeState extends State<Home> {
     initializeDateFormatting('pt_BR', null);
 
     var appBar = CustomAppBar(
-      height: 7.h,
       mes: DatasFormatadas.primeiroAUltimoDia,
       diaHoje: DatasFormatadas.obterDiaFormatado(),
       icones: false,
