@@ -146,7 +146,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
                   Container(
                     margin: EdgeInsets.symmetric(
                         vertical: constraints.maxHeight *
-                            0.01), // Espaçamento dinâmico
+                            0.01), // Espaçamento dinâmic
                     color: retorno(
                         atributo1: CoresClaras.brancoTexto,
                         atributo2: CoresClaras.verdePrincipalTexto),
