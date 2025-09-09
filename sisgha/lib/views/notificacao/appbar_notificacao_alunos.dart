@@ -5,10 +5,6 @@ import 'package:sisgha/core/utils/estilos.dart';
 import 'package:sisgha/core/utils/icones.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../core/utils/colors.dart';
-import '../../core/utils/estilos.dart';
-import '../../core/utils/icones.dart';
-
 class AppbarNotificacaoAlunos extends StatelessWidget
     implements PreferredSizeWidget {
   final double height;
