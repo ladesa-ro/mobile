@@ -86,7 +86,7 @@ class _CorpoLoginState extends State<LoginForm> {
               color: CoresClaras.branco,
               size: 3.7.h,
             ),
-            const SizedBox(width: 10),
+            const SizedBox(width: 5),
             Container(
               width: 2,
               height: 3.h,
