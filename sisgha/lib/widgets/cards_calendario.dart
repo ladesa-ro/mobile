@@ -85,10 +85,13 @@ Widget cardCalendario(DateTime selectedDay, double tamanho, double largura) {
                     style: ButtonStyle(
                         backgroundColor:
                             WidgetStatePropertyAll(CoresClaras.branco),
-                        shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                        shape: WidgetStatePropertyAll(
+                          RoundedRectangleBorder(
                             side: BorderSide(
                                 color: CoresClaras.preto, width: 0.5),
-                            borderRadius: BorderRadiusGeometry.circular(5))),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
                         padding: WidgetStatePropertyAll(EdgeInsets.zero),
                         minimumSize: WidgetStatePropertyAll(
                           Size(20.w, 5.h),
