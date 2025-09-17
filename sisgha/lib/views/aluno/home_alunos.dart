@@ -42,7 +42,7 @@ class _HomeAlunosState extends State<HomeAlunos> {
       mes: DatasFormatadas.primeiroAUltimoDia,
       diaHoje: DatasFormatadas.obterDiaFormatado(),
       icones: true,
-      animacaoAtiva: true,
+      animacaoAtiva: false,
     );
 
     double tamanho = Padroes.calcularAlturaAppBar(context,

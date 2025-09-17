@@ -50,7 +50,9 @@ class _PerfilState extends State<Perfil> {
                   top: 10,
                   left: 10,
                   child: ElevatedButton(
-                    style: buttonStyleEdit(CoresClaras.vermelhoFraco),
+                    style: buttonStyleEdit(
+                      CoresClaras.vermelhoFraco,
+                    ),
                     onPressed: () async {
                       widgetQuit(context);
                     },
@@ -64,6 +66,7 @@ class _PerfilState extends State<Perfil> {
                     ),
                   ),
                 ),
+
                 //Botão de editar imagem de capa
                 Positioned(
                   top: 10,
