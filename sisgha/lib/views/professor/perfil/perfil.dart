@@ -138,9 +138,11 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
           ),
         ),
         Positioned(
-          left: 63,
-          top: 63,
+          left: 70,
+          top: 64,
           child: SizedBox(
+            width: 30,
+            height: 42,
             child: ElevatedButton(
               style: buttonStyleEdit(Theme.of(context).colorScheme.primary),
               onPressed: () => bottomSheat(context, atualizarImagemPerfil),
