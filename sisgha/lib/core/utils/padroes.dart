@@ -40,4 +40,9 @@ class Padroes {
       {double? appBarSize}) {
     return 100.h - (appBarSize ?? 0) - MediaQuery.of(context).padding.top;
   }
+
+  static String primeiraLetraMaiuscula(String palavra) {
+    if (palavra.isEmpty) return palavra;
+    return palavra[0].toUpperCase() + palavra.substring(1);
+  }
 }

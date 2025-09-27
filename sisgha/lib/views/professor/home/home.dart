@@ -38,18 +38,11 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     initializeDateFormatting('pt_BR', null);
 
-    var appBar = CustomAppBar(
-      mes: DatasFormatadas.primeiroAUltimoDia,
-      diaHoje: DatasFormatadas.obterDiaFormatado(),
-      icones: false,
-      animacaoAtiva: false,
-    );
     DateTime now = DateTime.now();
-    double tamanho = Padroes.calcularAlturaAppBar(context,
-        appBarSize: appBar.preferredSize.height);
+    double tamanho = Padroes.calcularAlturaAppBar(context, appBarSize: 7.h);
 
     return Scaffold(
-      appBar: appBar,
+      appBar: appBar(context, null),
       body: Padding(
         padding: Padroes.margem(),
         child: Column(

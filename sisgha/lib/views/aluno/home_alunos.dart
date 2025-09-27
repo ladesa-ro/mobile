@@ -37,18 +37,10 @@ class _HomeAlunosState extends State<HomeAlunos> {
   Widget build(BuildContext context) {
     initializeDateFormatting('pt_BR', null);
 
-    var appBar = CustomAppBar(
-      mes: DatasFormatadas.primeiroAUltimoDia,
-      diaHoje: DatasFormatadas.obterDiaFormatado(),
-      icones: true,
-      animacaoAtiva: true,
-    );
-
-    double tamanho = Padroes.calcularAlturaAppBar(context,
-        appBarSize: appBar.preferredSize.height);
+    double tamanho = Padroes.calcularAlturaAppBar(context, appBarSize: 7);
     DateTime now = DateTime.now();
     return Scaffold(
-      appBar: appBar,
+      appBar: appBar(context, null),
       body: Padding(
         padding: Padroes.margem(),
         child: Column(
