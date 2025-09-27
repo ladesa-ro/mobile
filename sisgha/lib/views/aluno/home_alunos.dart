@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:provider/provider.dart';
+import 'package:sisgha/viewmodels/escolha_horarios_alunos.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -36,11 +38,13 @@ class _HomeAlunosState extends State<HomeAlunos> {
   @override
   Widget build(BuildContext context) {
     initializeDateFormatting('pt_BR', null);
+    var provInfo = Provider.of<EscolhaHorariosAlunos>(context);
+    print(provInfo.turmaSelecionada ?? 'nada');
 
-    double tamanho = Padroes.calcularAlturaAppBar(context, appBarSize: 7);
+    double tamanho = Padroes.calcularAlturaAppBar(context, appBarSize: 7.h);
     DateTime now = DateTime.now();
     return Scaffold(
-      appBar: appBar(context, null),
+      appBar: appBar(context, provInfo),
       body: Padding(
         padding: Padroes.margem(),
         child: Column(

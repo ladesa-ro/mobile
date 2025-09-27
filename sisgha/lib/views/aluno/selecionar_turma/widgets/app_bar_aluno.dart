@@ -23,11 +23,11 @@ class AppbarAluno extends StatelessWidget implements PreferredSizeWidget {
           color: CoresClaras.branco,
         ),
         onPressed: () {
-          provider.resetarEscolhas();
-          Navigator.of(context).pushNamedAndRemoveUntil(
-            '/login',
-            (route) => false,
-          );
+          // provider.resetarEscolhas();
+          // Navigator.of(context).pushNamedAndRemoveUntil(
+          //   '/login',
+          //   (route) => false,
+          // );
         },
         style: ButtonStyle(
           iconSize: WidgetStatePropertyAll(6.h),

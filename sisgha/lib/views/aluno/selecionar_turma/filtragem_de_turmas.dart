@@ -21,16 +21,6 @@ class FiltrargemDeTurmas extends StatefulWidget {
 
 class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
   @override
-  void initState() {
-    super.initState();
-    Future.microtask(() {
-      // ignore: use_build_context_synchronously
-      Provider.of<EscolhaHorariosAlunos>(context, listen: false)
-          .resetarEscolhas();
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     final tamanho = Padroes.alturaGeral();
     return Scaffold(
@@ -65,8 +55,7 @@ class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
               return ElevatedButton(
                 style: buttonStyle(botaoAtivo),
                 onPressed: () => botaoAtivo
-                    ? Navigator.of(context)
-                        .pushNamedAndRemoveUntil('/navegação', (route) => false)
+                    ? Navigator.of(context).pushNamed('/navegação')
                     : null,
                 child: Text(
                   'Ver Horário',

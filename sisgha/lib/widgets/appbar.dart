@@ -28,13 +28,20 @@ PreferredSizeWidget appBar(BuildContext ctx, EscolhaHorariosAlunos? provInfo) {
             provInfo == null
                 ? Padding(padding: EdgeInsets.only(left: 2.w))
                 : IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      provInfo.resetarEscolhas();
+                      Navigator.of(ctx).pushNamedAndRemoveUntil(
+                          '/acessoAluno', (_) => false);
+                    },
                     icon: _buildIcones(Icones.setaVoltarDireita, 23)),
-            _buildInfo(),
+            _buildInfo(provInfo),
             SizedBox(width: 2.w),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [_buildTitulo(), _buildSubtitulo()],
+              children: [
+                _buildTitulo(provInfo),
+                provInfo == null ? _buildSubtitulo() : Container()
+              ],
             ),
             const Spacer(),
             IconButton(
@@ -58,14 +65,16 @@ PreferredSizeWidget appBar(BuildContext ctx, EscolhaHorariosAlunos? provInfo) {
       ));
 }
 
-Widget _buildInfo() {
+Widget _buildInfo(EscolhaHorariosAlunos? provInfo) {
+  final texto = provInfo?.turmaSelecionada ?? DatasFormatadas.diaAtual;
+
   return Text(
-    DatasFormatadas.diaAtual,
+    texto,
     style: estiloTexto(27, cor: CoresClaras.brancoTexto, peso: FontWeight.bold),
   );
 }
 
-Widget _buildTitulo() {
+Widget _buildTitulo(EscolhaHorariosAlunos? provInfo) {
   final String dia = DatasFormatadas.diaExtenso;
   return Text(Padroes.primeiraLetraMaiuscula(dia),
       style:
