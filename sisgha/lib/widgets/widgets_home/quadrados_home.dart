@@ -21,6 +21,8 @@ class _QuadradosHomeState extends State<QuadradosHome>
   @override
   void initState() {
     super.initState();
+    // !!!!!!!!!!!!!!!!!!!!!!!!!! arrumar isso !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // nao pode ser usado o mesmo selecionar curso com 'nome' para nao interferir nos dados já existentes
     Provider.of<EscolhaHorariosAlunos>(context, listen: false)
         .selecionarCurso('nome');
     _quadradoSelecionado =

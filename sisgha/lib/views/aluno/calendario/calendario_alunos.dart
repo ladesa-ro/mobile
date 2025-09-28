@@ -42,23 +42,14 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
 
   @override
   Widget build(BuildContext context) {
-    var appBar = CustomAppBar(
-      height: 7.h,
-      mes: '${DatasFormatadas.mesAtualFormatado} - ${DatasFormatadas.anoAtual}',
-      diaHoje: "Calendário Parcial",
-      icones: false,
-      animacaoAtiva: true,
-    );
-
-    double tamanho = Padroes.calcularAlturaAppBar(context,
-        appBarSize: appBar.preferredSize.height);
+    double tamanho = Padroes.calcularAlturaAppBar(context, appBarSize: 7.h);
     EdgeInsets margem = Padroes.margem();
     double largura = Padroes.larguraGeral() - margem.horizontal;
 
     return Scaffold(
       key: scaffoldKey,
       drawerEnableOpenDragGesture: false,
-      appBar: appBar,
+      appBar: appBar(context),
       endDrawer: const MenuLateralAlunos(),
       body: SingleChildScrollView(
         padding: margem,

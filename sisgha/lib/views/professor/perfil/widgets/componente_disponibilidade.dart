@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../../core/utils/icones.dart';
 import '../../../../core/utils/colors.dart';
@@ -82,18 +83,19 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
                 _iconButton(0, Icones.setaDireita),
               ],
             ),
-          ), //Esse container é o "botão" de selecionar o dia da semana
-          SizedBox(height: constraints.maxHeight * 0.05),
-          CarouselSlider(
-            carouselController: _carouselSliderController,
-            items: _listaComHorarios(context),
-            options: CarouselOptions(
-              enableInfiniteScroll: false,
-              viewportFraction: 1.0,
-              enlargeCenterPage: true,
-              height: constraints.maxHeight * 0.70,
-              scrollPhysics: const NeverScrollableScrollPhysics(),
-            ), //Este é os coiso onde aparece os horários
+          ),
+          Expanded(
+            child: CarouselSlider(
+              carouselController: _carouselSliderController,
+              items: _listaComHorarios(context),
+              options: CarouselOptions(
+                aspectRatio: 16 / 12,
+                enableInfiniteScroll: false,
+                viewportFraction: 1.0,
+                enlargeCenterPage: true,
+                scrollPhysics: const NeverScrollableScrollPhysics(),
+              ), //Este é os coiso onde aparece os horários
+            ),
           ),
         ],
       ),
@@ -132,7 +134,7 @@ List<Widget> _listaComHorarios(context) {
       builder: (context, constraints) => ListView(
         shrinkWrap: true,
         physics: Padroes.efeitoDeRolagem(),
-        padding: EdgeInsets.zero,
+        padding: EdgeInsets.symmetric(vertical: 2.h),
         children: [
           _periodo(context, horarios[0]["periodo"], horarios[0]["horario"]),
           const SizedBox(height: 15),
@@ -162,8 +164,7 @@ Widget _periodo(BuildContext context, String periodo, List<String> horas) {
           periodo,
           style: estiloTexto(16,
               cor: Theme.of(context).textTheme.bodyLarge?.color,
-              peso: FontWeight
-                  .bold), //Conversar com o Yuri sobre as cores dos textos
+              peso: FontWeight.bold),
         ),
       ],
     ),

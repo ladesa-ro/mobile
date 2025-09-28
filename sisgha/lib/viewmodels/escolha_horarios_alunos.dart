@@ -27,7 +27,7 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
     notifyListeners();
   }
 
-  pucharOpcoes() async {
+  Future<void> pucharOpcoes() async {
     listaNivelFormacao = await Repository.buscarNiveisDeFormacao();
     notifyListeners();
   }
@@ -61,7 +61,7 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
     notifyListeners();
   }
 
-  selecionarCurso(String? value) async {
+  Future<void> selecionarCurso(String? value) async {
     if (value == null || value == '') {
       cursoSelecionado = null;
       turmaSelecionada = null;
@@ -71,7 +71,6 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
       cursoSelecionado = value;
       listaTurmas = await Repository.buscarTurmas(nomeCurso: cursoSelecionado!);
       turmaExpandida = true;
-      turmaSelecionada = null;
     }
 
     notifyListeners();
@@ -83,11 +82,6 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
     } else {
       turmaSelecionada = value;
     }
-    notifyListeners();
-  }
-
-  void setTurmas(List<Turma> turmas) {
-    listaTurmas = turmas;
     notifyListeners();
   }
 

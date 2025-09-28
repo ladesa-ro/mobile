@@ -26,11 +26,6 @@ class _CardFormacaoState extends State<CardFormacao> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
@@ -40,8 +35,7 @@ class _CardFormacaoState extends State<CardFormacao> {
       },
       child: Consumer<EscolhaHorariosAlunos>(
         builder: (context, provider, child) {
-          final formacaoSelecionada =
-              provider.idFormacaoSelecionada != null ? true : false;
+          final formacaoSelecionada = provider.idFormacaoSelecionada != null;
 
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 4.w),
@@ -78,7 +72,7 @@ class _CardFormacaoState extends State<CardFormacao> {
                   crossFadeState: espandido
                       ? CrossFadeState.showSecond
                       : CrossFadeState.showFirst,
-                  firstChild: SizedBox.shrink(), // Quando fechado
+                  firstChild: SizedBox.shrink(),
                   secondChild: SizedBox(
                     height: Padroes.alturaGeral() * 0.07,
                     child: ListView.builder(
@@ -110,9 +104,15 @@ class _CardFormacaoState extends State<CardFormacao> {
                                 horizontal: 1.w, vertical: 0.5.h),
                             showCheckmark: false,
                             selected: selecionado,
-                            onSelected: (_) => selecionado
-                                ? provider.selecionarFormacao(null)
-                                : provider.selecionarFormacao(nome),
+                            onSelected: (_) {
+                              if (!selecionado) {
+                                // Seleciona a formação
+                                provider.selecionarFormacao(nome);
+                              } else {
+                                // Opcional: desmarcar explicitamente
+                                provider.selecionarFormacao(null);
+                              }
+                            },
                             selectedColor: CoresClaras.verdeTransparente,
                             backgroundColor:
                                 Theme.of(context).colorScheme.surfaceVariant,
@@ -137,40 +137,6 @@ class _CardFormacaoState extends State<CardFormacao> {
             ),
           );
         },
-      ),
-    );
-  }
-
-  Widget quadradoSelecionavel(String opcao, EscolhaHorariosAlunos provider) {
-    final selecionado = provider.nomeFormacaoSelecionada == opcao;
-
-    return ChoiceChip(
-      chipAnimationStyle:
-          ChipAnimationStyle(enableAnimation: AnimationStyle.noAnimation),
-      label: Text(opcao,
-          style: estiloTexto(
-            14,
-            cor: selecionado
-                ? CoresClaras.verdePrincipalTexto
-                : CoresClaras.cinzatexto,
-          )),
-      labelPadding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 0.5.h),
-      showCheckmark: false,
-      selected: selecionado,
-      onSelected: (_) => selecionado
-          ? provider.selecionarFormacao(null)
-          : provider.selecionarFormacao(opcao),
-      selectedColor: CoresClaras.verdeTransparente,
-      backgroundColor: Colors.white,
-      labelStyle: TextStyle(
-        color: selecionado ? Colors.white : Colors.black,
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-        side: BorderSide(
-            color: selecionado
-                ? CoresClaras.verdePrincipalBorda
-                : CoresClaras.cinzaBordas),
       ),
     );
   }

@@ -36,7 +36,7 @@ class DatasFormatadas {
     }
 
     DateTime date = diaAtualEmNumero.add(
-      Duration(days: 0 - diaAtualEmNumero.weekday),
+      Duration(days: 1 - diaAtualEmNumero.weekday),
     );
     final primeiroDiaDaSemana = DateFormat('dd').format(date);
     return primeiroDiaDaSemana;

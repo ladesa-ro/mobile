@@ -36,10 +36,11 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) => Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
             width: constraints.maxWidth,
-            height: constraints.maxHeight * 0.1,
+            height: constraints.maxHeight * 0.15,
             child: Padding(
               padding: Padroes.margem(),
               child: Row(
@@ -53,9 +54,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
               ),
             ),
           ),
-          SizedBox(
-            height: constraints.maxHeight * 0.9,
-            width: constraints.maxWidth,
+          Expanded(
             child: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
               controller: _controller,
