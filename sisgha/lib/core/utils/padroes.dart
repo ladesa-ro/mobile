@@ -46,7 +46,8 @@ class Padroes {
     return palavra[0].toUpperCase() + palavra.substring(1);
   }
 
-  static List<String?> separarTexto(String texto) {
+  static List<String?> separarTexto(String? texto) {
+    if (texto == null || texto == '') return [];
     if (texto.length < 4) return [];
     String texto1 = texto.substring(0, 2);
     String texto2 = texto[3].toUpperCase() + texto.substring(4);
