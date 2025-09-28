@@ -7,7 +7,8 @@ import 'package:sisgha/core/utils/estilos.dart';
 import 'package:sisgha/viewmodels/escolha_horarios_alunos.dart';
 import 'package:sizer/sizer.dart';
 
-PreferredSizeWidget appBarNotificacao(BuildContext ctx) {
+PreferredSizeWidget appBarNotificacao(
+    BuildContext ctx, bool voltarProfessores) {
   var provInfo = Provider.of<EscolhaHorariosAlunos>(ctx);
   return AppBar(
     toolbarHeight: 7.h,
@@ -21,6 +22,8 @@ PreferredSizeWidget appBarNotificacao(BuildContext ctx) {
     ),
     leading: IconButton(
       onPressed: () {
+        if (voltarProfessores) return Navigator.of(ctx).pop();
+
         provInfo.resetarEscolhas();
         Navigator.of(ctx).pushNamedAndRemoveUntil('/acessoAluno', (_) => false);
       },

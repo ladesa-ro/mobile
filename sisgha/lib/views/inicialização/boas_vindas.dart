@@ -1,12 +1,8 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/domain/logic/iniciar_providers_gerais.dart';
 
-import '../../repository/repository.dart';
-import '../../domain/logic/verificar_dados_armazenados.dart';
+import '../../viewmodels/calendario_funcionalidades.dart';
 import '../../viewmodels/dados_professor.dart';
 import '../../viewmodels/escolha_horarios_alunos.dart';
 import '../../widgets/progress_indicator.dart';
@@ -29,35 +25,36 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
 
   Future<void> _iniciar() async {
     try {
-      await Future.delayed(const Duration(seconds: 7), () async {
-        await context.read<EscolhaHorariosAlunos>().pucharOpcoes();
-        await Repository.testeBuscarTurmas();
-        await Repository.testeBuscarDisciplinas();
+      final sucesso = await inicicarProvidersGerais(
+        horariosAlunos: context.read<EscolhaHorariosAlunos>(),
+        dadosProfessor: context.read<DadosProfessor>(),
+        calendario: context.read<CalendarioFuncionalidades>(),
+      );
 
-        if (await verificarDadosBaixados()) {
-          await context.read<DadosProfessor>().iniciarProvider(context, true);
-        } else {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (_) => const PaginaLogin()),
-          );
-        }
-      });
-    } on TimeoutException {
-      showDialog(
-          context: context, builder: (context) => dialogoDeErro(context));
+      if (!mounted) return;
+
+      if (sucesso) {
+        await context.read<DadosProfessor>().iniciarProvider(context, true);
+      } else {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const PaginaLogin()),
+        );
+      }
     } catch (e) {
+      if (!mounted) return;
       showDialog(
-          context: context, builder: (context) => dialogoDeErro(context));
+        context: context,
+        builder: (ctx) => dialogoDeErro(ctx),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-          child: Progressindicator(
-        tamanho: 200,
-      )),
+        child: Progressindicator(tamanho: 200),
+      ),
     );
   }
 }
