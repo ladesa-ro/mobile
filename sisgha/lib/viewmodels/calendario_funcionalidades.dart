@@ -28,25 +28,6 @@ class CalendarioFuncionalidades with ChangeNotifier {
     }
   }
 
-  adicionarEventosCalendario(List<Eventos> lista) {
-    for (var evento in lista) {
-      final inicio = normalizarData(evento.dataInicio);
-      final fim = normalizarData(evento.dataTermino);
-
-      for (DateTime dia = inicio;
-          !dia.isAfter(fim);
-          dia = dia.add(const Duration(days: 1))) {
-        if (!eventosCalendario.containsKey(dia)) {
-          eventosCalendario[dia] = [];
-        }
-
-        eventosCalendario[dia]!.add(evento);
-      }
-    }
-
-    notifyListeners();
-  }
-
   juntarEventosEtapas(List<Etapas> listaEtapas, List<Eventos> listaEventos) {
     final formatadorDia = DateFormat('dd/MM');
     final formatadorHoras = DateFormat('HH:ss');
