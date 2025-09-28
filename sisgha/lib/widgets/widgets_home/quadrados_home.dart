@@ -135,7 +135,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
                   Padding(
                     padding: EdgeInsets.only(
                         bottom: constraints.maxHeight *
-                            0.02), // Dá espaço antes da barrinha
+                            0.0), // Dá espaço antes da barrinha
                     child: Text(
                       diasDaSemana[index],
                       style: estiloTexto(15,
@@ -148,7 +148,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
                   Container(
                     margin: EdgeInsets.symmetric(
                         vertical: constraints.maxHeight *
-                            0.01), // Espaçamento dinâmico
+                            0.01), // Espaçamento dinâmic
                     color: retorno(
                         atributo1: CoresClaras.brancoTexto,
                         atributo2: CoresClaras.verdePrincipalTexto),

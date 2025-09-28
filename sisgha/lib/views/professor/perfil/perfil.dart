@@ -49,37 +49,46 @@ class _PerfilState extends State<Perfil> {
                 Positioned(
                   top: 10,
                   left: 10,
-                  child: ElevatedButton(
-                    style: buttonStyleEdit(CoresClaras.vermelhoFraco),
-                    onPressed: () async {
-                      widgetQuit(context);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 5),
-                      child: Icon(
-                        Icones.sair,
-                        color: CoresClaras.branco,
-                        size: 10,
+                  child: SizedBox(
+                    width: 30,
+                    child: ElevatedButton(
+                      style: buttonStyleEdit(
+                        CoresClaras.vermelhoFraco,
+                      ),
+                      onPressed: () async {
+                        widgetQuit(context);
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 5),
+                        child: Icon(
+                          Icones.sair,
+                          color: CoresClaras.branco,
+                          size: 10,
+                        ),
                       ),
                     ),
                   ),
                 ),
+
                 //Botão de editar imagem de capa
                 Positioned(
                   top: 10,
                   right: 10,
-                  child: ElevatedButton(
-                    style:
-                        buttonStyleEdit(Theme.of(context).colorScheme.primary),
-                    child: const Iconify(
-                      Icones.lapiz,
-                      size: 10,
-                      color: CoresClaras.branco,
+                  child: SizedBox(
+                    width: 30,
+                    child: ElevatedButton(
+                      style: buttonStyleEdit(
+                          Theme.of(context).colorScheme.primary),
+                      child: const Iconify(
+                        Icones.lapiz,
+                        size: 10,
+                        color: CoresClaras.branco,
+                      ),
+                      onPressed: () => bottomSheat(
+                          context,
+                          (File imagem) =>
+                              provider.atualizarImagemCapa(context, imagem)),
                     ),
-                    onPressed: () => bottomSheat(
-                        context,
-                        (File imagem) =>
-                            provider.atualizarImagemCapa(context, imagem)),
                   ),
                 ),
                 //
@@ -135,9 +144,11 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
           ),
         ),
         Positioned(
-          left: 63,
-          top: 63,
+          left: 70,
+          top: 64,
           child: SizedBox(
+            width: 30,
+            height: 42,
             child: ElevatedButton(
               style: buttonStyleEdit(Theme.of(context).colorScheme.primary),
               onPressed: () => bottomSheat(context, atualizarImagemPerfil),
