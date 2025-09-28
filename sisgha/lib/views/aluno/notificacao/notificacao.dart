@@ -6,16 +6,19 @@ import '../../../core/utils/estilos.dart';
 import '../../../core/utils/icones.dart';
 import '../../appbar_e_menu/app_bar/appbar_notificacao.dart';
 
-class NotificacoesAlunos extends StatefulWidget {
-  final VoidCallback? onVoltar;
+class Notificacao extends StatefulWidget {
+  final bool voltarProfessores;
 
-  const NotificacoesAlunos({super.key, this.onVoltar});
+  const Notificacao({
+    super.key,
+    required this.voltarProfessores,
+  });
 
   @override
-  State<NotificacoesAlunos> createState() => _NotificacoesAlunosState();
+  State<Notificacao> createState() => _NotificacaoState();
 }
 
-class _NotificacoesAlunosState extends State<NotificacoesAlunos> {
+class _NotificacaoState extends State<Notificacao> {
   // Lista de notificações provisórias
   List<ItensNotificacoes> notificacoes = [
     ItensNotificacoes(
@@ -44,7 +47,7 @@ class _NotificacoesAlunosState extends State<NotificacoesAlunos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarNotificacao(context),
+      appBar: appBarNotificacao(context, widget.voltarProfessores),
       body: ListView.builder(
         itemCount: notificacoes.length,
         itemBuilder: (ctx, index) {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/views/aluno/calendario/calendario_alunos.dart';
-import 'package:sisgha/views/aluno/notificacao/notificacoes_alunos.dart';
+import 'package:sisgha/views/aluno/notificacao/notificacao.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/utils/icones.dart';
@@ -101,12 +101,8 @@ class _NavigationState extends State<Navigation> {
           page = const Center(child: HomeAlunos());
           break;
         case 2:
-          page = NotificacoesAlunos(
-            onVoltar: () {
-              setState(() {
-                _selectedIndex = _indiceAnterior ?? 1;
-              });
-            },
+          page = Notificacao(
+            voltarProfessores: false,
           );
           break;
         default:
