@@ -5,16 +5,16 @@ import 'package:sisgha/views/aluno/calendario/calendario_alunos.dart';
 import 'package:sisgha/views/aluno/notificacao/notificacoes_alunos.dart';
 import 'package:sizer/sizer.dart';
 
-import '../core/utils/icones.dart';
-import '../core/utils/colors.dart';
-import '../core/utils/padroes.dart';
-import '../viewmodels/escolha_calendario.dart';
-import '../domain/logic/verificar_token_ativo.dart';
-import '../views/professor/calendario/calendario.dart';
-import '../views/professor/home/home.dart';
-import '../views/aluno/home_alunos.dart';
-import '../views/professor/perfil/perfil.dart';
-import 'appbar.dart';
+import '../../core/utils/icones.dart';
+import '../../core/utils/colors.dart';
+import '../../core/utils/padroes.dart';
+import '../../viewmodels/escolha_calendario.dart';
+import '../../domain/logic/verificar_token_ativo.dart';
+import '../professor/calendario/calendario.dart';
+import '../professor/home/home.dart';
+import '../aluno/home_alunos.dart';
+import '../professor/perfil/perfil.dart';
+import 'app_bar/appbar_principal.dart';
 
 class Navigation extends StatefulWidget {
   final int initialIndex;

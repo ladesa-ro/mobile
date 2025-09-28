@@ -8,7 +8,7 @@ import 'package:sisgha/viewmodels/escolha_horarios_alunos.dart';
 import 'package:sisgha/widgets/dialogo_troca_de_tema.dart';
 import 'package:sizer/sizer.dart';
 
-import 'textos_alternados_widget.dart';
+import '../../../widgets/textos_alternados_widget.dart';
 
 PreferredSizeWidget appBar(BuildContext ctx) {
   var temaAtivo = Provider.of<TemasProvider>(ctx).temaAtivo.brightness;
