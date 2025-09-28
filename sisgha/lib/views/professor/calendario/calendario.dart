@@ -50,7 +50,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
 
     return Scaffold(
       key: scaffoldKey,
-      appBar: appBar(context, null),
+      appBar: appBar(context),
       endDrawer: const MenuLateral(),
       body: SingleChildScrollView(
         primary: true,

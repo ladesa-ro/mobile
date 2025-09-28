@@ -45,4 +45,15 @@ class Padroes {
     if (palavra.isEmpty) return palavra;
     return palavra[0].toUpperCase() + palavra.substring(1);
   }
+
+  static List<String?> separarTexto(String texto) {
+    if (texto.length < 4) return [];
+    String texto1 = texto.substring(0, 2);
+    String texto2 = texto[3].toUpperCase() + texto.substring(4);
+
+    List<String> lista = [];
+    lista.add(texto1);
+    lista.add(texto2);
+    return lista;
+  }
 }

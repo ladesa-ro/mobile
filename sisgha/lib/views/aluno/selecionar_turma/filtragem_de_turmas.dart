@@ -55,7 +55,8 @@ class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
               return ElevatedButton(
                 style: buttonStyle(botaoAtivo),
                 onPressed: () => botaoAtivo
-                    ? Navigator.of(context).pushNamed('/navegação')
+                    ? Navigator.of(context)
+                        .pushNamedAndRemoveUntil('/navegação', (_) => false)
                     : null,
                 child: Text(
                   'Ver Horário',

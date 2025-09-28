@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
     double tamanho = Padroes.calcularAlturaAppBar(context, appBarSize: 7.h);
 
     return Scaffold(
-      appBar: appBar(context, null),
+      appBar: appBar(context),
       body: Padding(
         padding: Padroes.margem(),
         child: Column(

@@ -11,7 +11,7 @@ import 'package:sisgha/viewmodels/escolha_horarios_alunos.dart';
 import 'package:sisgha/widgets/dialogo_troca_de_tema.dart';
 import 'package:sizer/sizer.dart';
 
-PreferredSizeWidget appBar(BuildContext ctx, EscolhaHorariosAlunos? provInfo) {
+PreferredSizeWidget appBar(BuildContext ctx) {
   var temaAtivo = Provider.of<TemasProvider>(ctx).temaAtivo.brightness;
 
   String verificarTemaAtivo() {
@@ -23,62 +23,96 @@ PreferredSizeWidget appBar(BuildContext ctx, EscolhaHorariosAlunos? provInfo) {
       toolbarHeight: 7.h,
       title: Container(
         color: CoresClaras.verdePrincipal,
-        child: Row(
-          children: [
-            provInfo == null
-                ? Padding(padding: EdgeInsets.only(left: 2.w))
-                : IconButton(
-                    onPressed: () {
-                      provInfo.resetarEscolhas();
-                      Navigator.of(ctx).pushNamedAndRemoveUntil(
-                          '/acessoAluno', (_) => false);
-                    },
-                    icon: _buildIcones(Icones.setaVoltarDireita, 23)),
-            _buildInfo(provInfo),
-            SizedBox(width: 2.w),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildTitulo(provInfo),
-                provInfo == null ? _buildSubtitulo() : Container()
-              ],
-            ),
-            const Spacer(),
-            IconButton(
-                onPressed: () {
-                  showDialog(
-                    context: ctx,
-                    builder: (context) => mostrarDialogoDeTrocaDeTema(
-                        context, verificarTemaAtivo()),
-                  );
-                },
-                icon: _buildIcones(Icones.sol, 22)),
-            provInfo == null
-                ? IconButton(
-                    onPressed: () {
-                      Navigator.of(ctx).pushNamed('/notificacao');
-                    },
-                    icon: _buildIcones(Icones.sino, 22))
-                : Container()
-          ],
-        ),
+        child: Consumer<EscolhaHorariosAlunos?>(
+            builder: (context, provInfo, child) {
+          bool existeInfo = provInfo != null;
+          bool existeSelecionado =
+              existeInfo ? provInfo.idFormacaoSelecionada == null : false;
+          return Row(
+            children: [
+              existeSelecionado
+                  ? Padding(padding: EdgeInsets.only(left: 2.w))
+                  : IconButton(
+                      onPressed: () {
+                        provInfo!.resetarEscolhas();
+                        Navigator.of(ctx).pushNamedAndRemoveUntil(
+                            '/acessoAluno', (_) => false);
+                      },
+                      icon: _buildIcones(Icones.setaVoltarDireita, 23)),
+              _buildInfo(provInfo),
+              SizedBox(width: 2.w),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildTitulo(provInfo, existeSelecionado),
+                  existeSelecionado ? _buildSubtitulo() : Container()
+                ],
+              ),
+              const Spacer(),
+              IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: ctx,
+                      builder: (context) => mostrarDialogoDeTrocaDeTema(
+                          context, verificarTemaAtivo()),
+                    );
+                  },
+                  icon: _buildIcones(Icones.sol, 22)),
+              existeSelecionado
+                  ? IconButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pushNamed('/notificacao');
+                      },
+                      icon: _buildIcones(Icones.sino, 22))
+                  : Container()
+            ],
+          );
+        }),
       ));
 }
 
 Widget _buildInfo(EscolhaHorariosAlunos? provInfo) {
   final texto = provInfo?.turmaSelecionada ?? DatasFormatadas.diaAtual;
+  final textoSeparado = Padroes.separarTexto(texto);
 
-  return Text(
-    texto,
-    style: estiloTexto(27, cor: CoresClaras.brancoTexto, peso: FontWeight.bold),
+  dynamic mostrar = textoSeparado.isEmpty ? texto : textoSeparado;
+
+  return SizedBox(
+    child: textoSeparado.isEmpty
+        ? Text(
+            texto,
+            style: estiloTexto(27,
+                cor: CoresClaras.brancoTexto, peso: FontWeight.bold),
+            maxLines: 2,
+          )
+        : Column(
+            //apresentar na reunião se vão gostar da ideia, se sim qual a orientação que vai ficar
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(mostrar[0],
+                  style: estiloTexto(18,
+                      cor: CoresClaras.brancoTexto, peso: FontWeight.bold)),
+              Text(mostrar[1],
+                  style: estiloTexto(18,
+                      cor: CoresClaras.brancoTexto, peso: FontWeight.bold))
+            ],
+          ),
   );
 }
 
-Widget _buildTitulo(EscolhaHorariosAlunos? provInfo) {
-  final String dia = DatasFormatadas.diaExtenso;
-  return Text(Padroes.primeiraLetraMaiuscula(dia),
+Widget _buildTitulo(EscolhaHorariosAlunos? provInfo, bool existeSelecionado) {
+  final texto = existeSelecionado
+      ? DatasFormatadas.diaExtenso
+      : '${provInfo!.nomeFormacaoSelecionada} - ${DatasFormatadas.anoAtual}';
+  return SizedBox(
+    width: existeSelecionado ? null : 50.w,
+    child: Text(
+      Padroes.primeiraLetraMaiuscula(texto),
       style:
-          estiloTexto(16, cor: CoresClaras.brancoTexto, peso: FontWeight.bold));
+          estiloTexto(16, cor: CoresClaras.brancoTexto, peso: FontWeight.bold),
+      maxLines: 2,
+    ),
+  );
 }
 
 Widget _buildSubtitulo() {

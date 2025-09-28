@@ -49,7 +49,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
     return Scaffold(
       key: scaffoldKey,
       drawerEnableOpenDragGesture: false,
-      appBar: appBar(context, null),
+      appBar: appBar(context),
       endDrawer: const MenuLateralAlunos(),
       body: SingleChildScrollView(
         padding: margem,
