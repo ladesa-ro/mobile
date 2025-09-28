@@ -9,7 +9,6 @@ import '../../core/utils/dias.dart';
 import '../../core/utils/estilos.dart';
 import '../../core/utils/icones.dart';
 import '../../core/utils/padroes.dart';
-import '../../widgets/appbar.dart';
 import '../../widgets/calendario.dart';
 import '../../widgets/widgets_home/quadrados_home.dart';
 
@@ -40,7 +39,6 @@ class _HomeAlunosState extends State<HomeAlunos> {
     double tamanho = Padroes.calcularAlturaAppBar(context, appBarSize: 7.h);
     DateTime now = DateTime.now();
     return Scaffold(
-      appBar: appBar(context),
       body: Padding(
         padding: Padroes.margem(),
         child: Column(

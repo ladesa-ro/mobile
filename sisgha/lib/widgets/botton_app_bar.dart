@@ -14,6 +14,7 @@ import '../views/professor/calendario/calendario.dart';
 import '../views/professor/home/home.dart';
 import '../views/aluno/home_alunos.dart';
 import '../views/professor/perfil/perfil.dart';
+import 'appbar.dart';
 
 class Navigation extends StatefulWidget {
   final int initialIndex;
@@ -62,6 +63,7 @@ class _NavigationState extends State<Navigation> {
     );
 
     return Scaffold(
+      appBar: _selectedIndex != 2 ? appBar(context) : null,
       body: _buildPage(_selectedIndex, tokenAtivo),
       bottomNavigationBar: bottomAppBar,
     );
