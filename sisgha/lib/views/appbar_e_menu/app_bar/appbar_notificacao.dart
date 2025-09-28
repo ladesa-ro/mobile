@@ -1,0 +1,34 @@
+import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:sisgha/core/utils/icones.dart';
+import 'package:sisgha/core/utils/colors.dart';
+import 'package:sisgha/core/utils/estilos.dart';
+import 'package:sisgha/viewmodels/escolha_horarios_alunos.dart';
+import 'package:sizer/sizer.dart';
+
+PreferredSizeWidget appBarNotificacao(BuildContext ctx) {
+  var provInfo = Provider.of<EscolhaHorariosAlunos>(ctx);
+  return AppBar(
+    toolbarHeight: 7.h,
+    titleSpacing: 0,
+    title: Text(
+      "Notificações",
+      style: estiloTexto(
+        18,
+        peso: FontWeight.bold,
+      ),
+    ),
+    leading: IconButton(
+      onPressed: () {
+        provInfo.resetarEscolhas();
+        Navigator.of(ctx).pushNamedAndRemoveUntil('/acessoAluno', (_) => false);
+      },
+      icon: Iconify(
+        Icones.setaVoltarDireita,
+        size: double.infinity,
+        color: CoresClaras.branco,
+      ),
+    ),
+  );
+}

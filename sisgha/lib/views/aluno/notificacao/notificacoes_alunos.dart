@@ -4,7 +4,7 @@ import 'package:sizer/sizer.dart';
 import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/icones.dart';
-import '../../../widgets/appbar_notificacao.dart';
+import '../../appbar_e_menu/app_bar/appbar_notificacao.dart';
 
 class NotificacoesAlunos extends StatefulWidget {
   final VoidCallback? onVoltar;
@@ -44,10 +44,7 @@ class _NotificacoesAlunosState extends State<NotificacoesAlunos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppbarNotificacaoAlunos(
-        height: 6.h,
-        onVoltar: widget.onVoltar ?? () => Navigator.of(context).pop(),
-      ),
+      appBar: appBarNotificacao(context),
       body: ListView.builder(
         itemCount: notificacoes.length,
         itemBuilder: (ctx, index) {

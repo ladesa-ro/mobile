@@ -10,7 +10,7 @@ import 'package:sisgha/viewmodels/calendario_funcionalidades.dart';
 
 import '../domain/logic/listas.dart';
 import '../domain/tratamento_de_erros/erro_de_imagem_do_perfil.dart';
-import '../widgets/botton_app_bar.dart';
+import '../views/appbar_e_menu/menu_de_navegacao.dart';
 import '../repository/repository.dart';
 import '../domain/model/professor.dart';
 import 'dados_ensino_professor_provider.dart';

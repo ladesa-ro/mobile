@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/utils/colors.dart';
-import 'Modal.dart';
+import 'modal.dart';
 import 'campo_de_pesquisar_dos_eventos_do_professor.dart';
 import 'evento_card_professor.dart';
 

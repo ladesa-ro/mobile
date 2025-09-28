@@ -10,7 +10,6 @@ import '../../../core/utils/colors.dart';
 import '../../../core/utils/dias.dart';
 import '../../../core/utils/padroes.dart';
 import '../../../viewmodels/calendario_funcionalidades.dart';
-import '../../../widgets/appbar.dart';
 import '../../../widgets/calendario.dart';
 import '../../../widgets/letreiro_rolante.dart';
 import '../ListagemDeEventosProfessores/modal_evento_professor.dart';
@@ -50,7 +49,6 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
 
     return Scaffold(
       key: scaffoldKey,
-      appBar: appBar(context),
       endDrawer: const MenuLateral(),
       body: SingleChildScrollView(
         primary: true,

@@ -12,7 +12,6 @@ import '../../../core/utils/dias.dart';
 import '../../../core/utils/padroes.dart';
 import '../../../viewmodels/calendario_funcionalidades.dart';
 import '../../../viewmodels/escolha_calendario.dart';
-import '../../../widgets/appbar.dart';
 import '../../../widgets/calendario.dart';
 import '../../professor/calendario/calendario.dart';
 import '../listagemDeEvento/modal_eventos_alunos.dart';
@@ -49,7 +48,6 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
     return Scaffold(
       key: scaffoldKey,
       drawerEnableOpenDragGesture: false,
-      appBar: appBar(context),
       endDrawer: const MenuLateralAlunos(),
       body: SingleChildScrollView(
         padding: margem,

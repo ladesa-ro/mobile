@@ -7,7 +7,7 @@ import '../../../core/utils/estilos.dart';
 import '../../../core/utils/icones.dart';
 import '../../../core/utils/padroes.dart';
 import '../../../viewmodels/escolha_horarios_alunos.dart';
-import 'widgets/app_bar_aluno.dart';
+import '../../appbar_e_menu/app_bar/app_bar_da_filtragem_de_turmas.dart';
 import 'widgets/card_curso.dart';
 import 'widgets/card_formacao.dart';
 import 'widgets/card_turma.dart';
@@ -24,7 +24,7 @@ class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
   Widget build(BuildContext context) {
     final tamanho = Padroes.alturaGeral();
     return Scaffold(
-      appBar: AppbarAluno(),
+      appBar: appBarFiltragemTurmas(context),
       body: ListView(
         physics: Padroes.efeitoDeRolagem(),
         padding: Padroes.margem().copyWith(top: tamanho * 0.15),
