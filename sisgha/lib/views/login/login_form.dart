@@ -7,7 +7,7 @@ import 'package:sisgha/views/login/login_viewmodel.dart';
 import 'package:sisgha/widgets/widget_erro.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../core/utils/colors.dart';
+import '../../core/utils/cores.dart';
 import '../../core/utils/estilos.dart';
 import '../../core/utils/icones.dart';
 import '../../core/utils/imagens.dart';
@@ -32,6 +32,8 @@ class _CorpoLoginState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     final loginVM = Provider.of<LoginViewModel>(context);
+    final tema = Theme.of(context).colorScheme;
+
     return Center(
       child: SingleChildScrollView(
         child: SizedBox(
@@ -56,11 +58,11 @@ class _CorpoLoginState extends State<LoginForm> {
                       SizedBox(height: Padroes.alturaGeral() * 0.02),
                       inputSenha(loginVM),
                       SizedBox(height: Padroes.alturaGeral() * 0.01),
-                      recuperarSenha(context),
+                      recuperarSenha(context, tema),
                       SizedBox(height: Padroes.alturaGeral() * 0.01),
-                      botaoEntrar(context, loginVM),
+                      botaoEntrar(context, loginVM, tema),
                       SizedBox(height: Padroes.alturaGeral() * 0.02),
-                      botaoEntrarAluno(context),
+                      botaoEntrarAluno(context, tema),
                     ],
                   ),
                 ),
@@ -72,9 +74,9 @@ class _CorpoLoginState extends State<LoginForm> {
     );
   }
 
-  Widget botaoEntrarAluno(BuildContext context) {
+  Widget botaoEntrarAluno(BuildContext context, ColorScheme tema) {
     return ElevatedButton(
-      style: Padroes.estiloBotao(context),
+      style: Padroes.estiloBotao(context, tema),
       onPressed: () => Navigator.pushNamed(context, "/acessoAluno"),
       child: Center(
         child: Row(
@@ -83,14 +85,14 @@ class _CorpoLoginState extends State<LoginForm> {
             const SizedBox(width: 19),
             Icon(
               Icons.person,
-              color: CoresClaras.branco,
+              color: tema.surfaceDim,
               size: 3.7.h,
             ),
             const SizedBox(width: 5),
             Container(
               width: 2,
               height: 3.h,
-              color: CoresClaras.branco,
+              color: tema.onTertiary,
             ),
             const Spacer(),
             Text(
@@ -106,7 +108,8 @@ class _CorpoLoginState extends State<LoginForm> {
     );
   }
 
-  Widget botaoEntrar(BuildContext context, LoginViewModel loginVM) {
+  Widget botaoEntrar(
+      BuildContext context, LoginViewModel loginVM, ColorScheme tema) {
     return FilledButton(
       onPressed: () async {
         FocusScopeNode currentFocus = FocusScope.of(context);
@@ -124,7 +127,7 @@ class _CorpoLoginState extends State<LoginForm> {
             // erro de conexão
             showDialog(
               context: context,
-              builder: (context) => dialogoDeErro(context),
+              builder: (context) => dialogoDeErro(context, tema),
             );
           } else if (deuCerto) {
             // funcionou corretamente
@@ -138,7 +141,7 @@ class _CorpoLoginState extends State<LoginForm> {
           }
         }
       },
-      style: Padroes.estiloBotao(context),
+      style: Padroes.estiloBotao(context, tema),
       child: SizedBox(
         height: Padroes.aluturaBotoes(),
         width: Padroes.larguraGeral(),
@@ -152,7 +155,7 @@ class _CorpoLoginState extends State<LoginForm> {
     );
   }
 
-  Container recuperarSenha(BuildContext context) {
+  Container recuperarSenha(BuildContext context, ColorScheme tema) {
     return Container(
       alignment: Alignment.center,
       child: Row(
@@ -161,7 +164,7 @@ class _CorpoLoginState extends State<LoginForm> {
           Text(
             'Esqueceu a senha?',
             style: estiloTexto(
-              cor: CoresClaras.verdecinza,
+              cor: tema.onPrimary,
               14,
               peso: FontWeight.w600,
             ),
@@ -173,8 +176,8 @@ class _CorpoLoginState extends State<LoginForm> {
             },
             child: Text(
               'Clique aqui',
-              style: estiloTexto(15,
-                  cor: CoresClaras.verdePrincipal, peso: FontWeight.w600),
+              style:
+                  estiloTexto(15, cor: tema.onPrimary, peso: FontWeight.w600),
             ),
           ),
         ],

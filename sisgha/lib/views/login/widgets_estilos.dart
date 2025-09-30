@@ -4,7 +4,7 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/utils/icones.dart';
-import '../../core/utils/colors.dart';
+import '../../core/utils/cores.dart';
 
 Widget elementoVerde(Alignment alignment) {
   BorderRadiusGeometry borderRadius = BorderRadius.zero;

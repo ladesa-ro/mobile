@@ -3,7 +3,7 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../core/utils/colors.dart';
+import '../../../../core/utils/cores.dart';
 import '../../../../core/utils/estilos.dart';
 import '../../../../core/utils/icones.dart';
 import '../../../../core/utils/padroes.dart';
@@ -19,6 +19,7 @@ class CardTurma extends StatefulWidget {
 class _CardTurmaState extends State<CardTurma> {
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     return Consumer<EscolhaHorariosAlunos>(
       builder: (context, provider, child) {
         final expandido = provider.turmaExpandida;
@@ -34,7 +35,7 @@ class _CardTurmaState extends State<CardTurma> {
           },
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 4.w),
-            decoration: bordasCardsAlunos(turmaSelecionada),
+            decoration: bordasCardsAlunos(turmaSelecionada, tema),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -56,8 +57,8 @@ class _CardTurmaState extends State<CardTurma> {
                         child: Iconify(
                           Icones.setaBaixo,
                           color: turmaSelecionada
-                              ? CoresClaras.verdePrincipal
-                              : CoresClaras.cinzaBordas,
+                              ? tema.onSurfaceVariant
+                              : tema.surfaceTint,
                           size: 3.5.h,
                         ),
                       ),
@@ -90,9 +91,8 @@ class _CardTurmaState extends State<CardTurma> {
                               nome,
                               style: estiloTexto(
                                 15,
-                                cor: selecionado
-                                    ? CoresClaras.verdePrincipalTexto
-                                    : CoresClaras.cinzatexto,
+                                cor:
+                                    selecionado ? tema.primary : tema.secondary,
                                 peso: FontWeight.bold,
                               ),
                             ),
@@ -103,7 +103,7 @@ class _CardTurmaState extends State<CardTurma> {
                             onSelected: (_) => selecionado
                                 ? provider.selecionarTurma(null)
                                 : provider.selecionarTurma(nome),
-                            selectedColor: CoresClaras.verdeTransparente,
+                            selectedColor: tema.errorContainer,
                             backgroundColor:
                                 Theme.of(context).colorScheme.surfaceVariant,
                             labelStyle: TextStyle(
@@ -113,8 +113,8 @@ class _CardTurmaState extends State<CardTurma> {
                               borderRadius: BorderRadius.circular(12.sp),
                               side: BorderSide(
                                 color: selecionado
-                                    ? CoresClaras.verdePrincipalBorda
-                                    : CoresClaras.cinzaBordas,
+                                    ? tema.tertiaryContainer
+                                    : tema.tertiary,
                               ),
                             ),
                           ),
@@ -131,7 +131,8 @@ class _CardTurmaState extends State<CardTurma> {
     );
   }
 
-  Widget quadradoSelecionavel(String opcao, EscolhaHorariosAlunos provider) {
+  Widget quadradoSelecionavel(
+      String opcao, EscolhaHorariosAlunos provider, ColorScheme tema) {
     final selecionado = provider.turmaSelecionada == opcao;
 
     return Padding(
@@ -144,9 +145,7 @@ class _CardTurmaState extends State<CardTurma> {
           opcao,
           style: estiloTexto(
             14,
-            cor: selecionado
-                ? CoresClaras.verdePrincipalTexto
-                : CoresClaras.cinzatexto,
+            cor: selecionado ? tema.primary : tema.secondary,
           ),
         ),
         labelPadding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 0.5.h),
@@ -155,7 +154,7 @@ class _CardTurmaState extends State<CardTurma> {
         onSelected: (_) => selecionado
             ? provider.selecionarTurma(null)
             : provider.selecionarTurma(opcao),
-        selectedColor: CoresClaras.verdeTransparente,
+        selectedColor: tema.errorContainer,
         backgroundColor: Colors.white,
         labelStyle: TextStyle(
           color: selecionado ? Colors.white : Colors.black,
@@ -163,9 +162,7 @@ class _CardTurmaState extends State<CardTurma> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
           side: BorderSide(
-            color: selecionado
-                ? CoresClaras.verdePrincipalBorda
-                : CoresClaras.cinzaBordas,
+            color: selecionado ? tema.tertiaryContainer : tema.tertiary,
           ),
         ),
       ),

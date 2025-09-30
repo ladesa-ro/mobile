@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
-import '../../../core/utils/colors.dart';
+import '../../../core/utils/cores.dart';
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/icones.dart';
 import '../../appbar_e_menu/app_bar/appbar_notificacao.dart';
@@ -46,6 +45,7 @@ class _NotificacaoState extends State<Notificacao> {
 
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: appBarNotificacao(context, widget.voltarProfessores),
       body: ListView.builder(
@@ -80,7 +80,7 @@ class _NotificacaoState extends State<Notificacao> {
                         const Spacer(),
                         Text(
                           item.tempo,
-                          style: TextStyle(color: CoresClaras.cinzatexto),
+                          style: TextStyle(color: tema.secondary),
                         ),
                       ],
                     ),
@@ -107,7 +107,7 @@ class _NotificacaoState extends State<Notificacao> {
               ),
               Divider(
                 thickness: 1.5,
-                color: CoresClaras.verdecinzaBorda,
+                color: tema.tertiary,
               ),
             ],
           );

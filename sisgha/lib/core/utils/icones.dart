@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sisgha/core/utils/colors.dart';
+import 'package:sisgha/core/utils/cores.dart';
 import 'package:sizer/sizer.dart';
 
 class Icones {
@@ -52,7 +52,7 @@ class Icones {
   //Outros
   static Icon lupa = Icon(
     Icons.search,
-    color: CoresClaras.branco,
+    color: CoresClaras.iconeBranco,
     size: 4.h,
   );
 }

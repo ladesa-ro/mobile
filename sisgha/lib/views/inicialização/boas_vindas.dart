@@ -44,7 +44,7 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
       if (!mounted) return;
       showDialog(
         context: context,
-        builder: (ctx) => dialogoDeErro(ctx),
+        builder: (ctx) => dialogoDeErro(ctx, null),
       );
     }
   }

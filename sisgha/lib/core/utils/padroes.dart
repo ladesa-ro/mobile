@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import 'colors.dart';
-
 class Padroes {
   static EdgeInsets margem() {
     return EdgeInsets.symmetric(horizontal: larguraGeral() * 0.05);
@@ -20,7 +18,7 @@ class Padroes {
     return 100.w;
   }
 
-  static ButtonStyle estiloBotao(BuildContext context) {
+  static ButtonStyle estiloBotao(BuildContext context, ColorScheme tema) {
     return ButtonStyle(
         maximumSize: WidgetStatePropertyAll(Size(100.w, 6.5.h)),
         minimumSize: WidgetStatePropertyAll(Size(100.w, 6.5.h)),
@@ -28,7 +26,7 @@ class Padroes {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.w))),
         backgroundColor:
             WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
-        foregroundColor: WidgetStatePropertyAll(CoresClaras.brancoTexto));
+        foregroundColor: WidgetStatePropertyAll(tema.primary));
   }
 
   //sempre implementar no physics dos ListViews ou outro tipo de widget de rolagem

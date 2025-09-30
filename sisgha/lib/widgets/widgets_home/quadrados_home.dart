@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/viewmodels/escolha_horarios_alunos.dart';
-import '../../core/utils/colors.dart';
+import '../../core/utils/cores.dart';
 import '../../core/utils/estilos.dart';
 import 'cards_horarios_disciplinas.dart';
 
@@ -49,6 +49,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
 
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     return LayoutBuilder(
       builder: (
         context,
@@ -68,7 +69,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
               controller: _tabController,
               tabs: List.generate(
                 6,
-                (index) => _contruindoInterface(index),
+                (index) => _contruindoInterface(index, tema),
               ),
             ),
           ),
@@ -85,7 +86,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
     );
   }
 
-  Widget _contruindoInterface(int index) {
+  Widget _contruindoInterface(int index, ColorScheme tema) {
     List<String> diasDaSemana = [
       'Seg',
       'Ter',
@@ -140,8 +141,8 @@ class _QuadradosHomeState extends State<QuadradosHome>
                       diasDaSemana[index],
                       style: estiloTexto(15,
                           cor: retorno(
-                              atributo1: CoresClaras.brancoTexto,
-                              atributo2: CoresClaras.verdePrincipalTexto),
+                              atributo1: tema.primary,
+                              atributo2: tema.onPrimary),
                           peso: FontWeight.w600),
                     ),
                   ),
@@ -150,8 +151,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
                         vertical: constraints.maxHeight *
                             0.01), // Espaçamento dinâmic
                     color: retorno(
-                        atributo1: CoresClaras.brancoTexto,
-                        atributo2: CoresClaras.verdePrincipalTexto),
+                        atributo1: tema.primary, atributo2: tema.onPrimary),
                     width: constraints.maxWidth * 0.45,
                     height: 1.5,
                   ),
@@ -163,8 +163,8 @@ class _QuadradosHomeState extends State<QuadradosHome>
                       diaDaSemanaSoQueEmNumeros,
                       style: estiloTexto(15,
                           cor: retorno(
-                              atributo1: CoresClaras.brancoTexto,
-                              atributo2: CoresClaras.verdePrincipalTexto),
+                              atributo1: tema.primary,
+                              atributo2: tema.onPrimary),
                           peso: FontWeight.w600),
                     ),
                   ),

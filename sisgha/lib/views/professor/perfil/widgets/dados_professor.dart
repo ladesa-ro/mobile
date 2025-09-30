@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/estilos.dart';
 
 Widget dadosUsuario(BuildContext context, String nome, String email,
-    String matricula, double espacamento) {
+    String matricula, double espacamento, ColorScheme tema) {
   return Column(
     children: [
       Text(
@@ -16,14 +15,12 @@ Widget dadosUsuario(BuildContext context, String nome, String email,
       SizedBox(height: espacamento),
       Text(
         'E-mail: $email',
-        style: estiloTexto(14,
-            cor: CoresClaras.verdecinzaTexto, peso: FontWeight.bold),
+        style: estiloTexto(14, cor: tema.secondary, peso: FontWeight.bold),
       ),
       SizedBox(height: espacamento),
       Text(
         'Matrícula: $matricula',
-        style: estiloTexto(14,
-            cor: CoresClaras.verdecinzaTexto, peso: FontWeight.bold),
+        style: estiloTexto(14, cor: tema.secondary, peso: FontWeight.bold),
       ),
     ],
   );
