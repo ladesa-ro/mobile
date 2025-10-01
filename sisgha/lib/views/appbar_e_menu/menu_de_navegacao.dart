@@ -6,7 +6,6 @@ import 'package:sisgha/views/aluno/notificacao/notificacao.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/utils/icones.dart';
-import '../../core/utils/cores.dart';
 import '../../core/utils/padroes.dart';
 import '../../viewmodels/escolha_calendario.dart';
 import '../../domain/logic/verificar_token_ativo.dart';
@@ -45,6 +44,7 @@ class _NavigationState extends State<Navigation> {
   Widget build(BuildContext context) {
     final tema = Theme.of(context).colorScheme;
     BottomAppBar bottomAppBar = BottomAppBar(
+      color: tema.primaryContainer,
       height: Padroes.alturaGeral() * 0.08,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -136,19 +136,19 @@ class _NavigationState extends State<Navigation> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
-        decoration: _decoretion(index),
+        decoration: _decoretion(index, tema),
         width: Padroes.larguraGeral() * 0.13,
         height: Padroes.alturaGeral() * 0.05,
         child: iconData != null
             ? Icon(
                 iconData,
-                color: tema.surfaceDim,
+                color: tema.primaryFixed,
                 size: 3.h,
               )
             : Iconify(
                 iconify!,
                 size: 3.h,
-                color: tema.surface,
+                color: tema.primaryFixed,
               ),
       ),
     );
@@ -158,11 +158,9 @@ class _NavigationState extends State<Navigation> {
     return _selectedIndex == index;
   }
 
-  BoxDecoration _decoretion(int index) {
+  BoxDecoration _decoretion(int index, ColorScheme tema) {
     return BoxDecoration(
-      color: _selectedIndex == index
-          ? Theme.of(context).colorScheme.secondary
-          : null,
+      color: _selectedIndex == index ? tema.secondaryContainer : null,
       borderRadius: BorderRadius.circular(Padroes.larguraGeral() * 0.03),
     );
   }

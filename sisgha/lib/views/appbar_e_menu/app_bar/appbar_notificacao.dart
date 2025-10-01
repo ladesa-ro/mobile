@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/core/utils/icones.dart';
-import 'package:sisgha/core/utils/cores.dart';
 import 'package:sisgha/core/utils/estilos.dart';
 import 'package:sisgha/viewmodels/escolha_horarios_alunos.dart';
 import 'package:sizer/sizer.dart';
@@ -14,10 +13,12 @@ PreferredSizeWidget appBarNotificacao(
   return AppBar(
     toolbarHeight: 7.h,
     titleSpacing: 0,
+    backgroundColor: tema.primaryContainer,
     title: Text(
       "Notificações",
       style: estiloTexto(
         18,
+        cor: tema.inversePrimary,
         peso: FontWeight.bold,
       ),
     ),
@@ -30,8 +31,8 @@ PreferredSizeWidget appBarNotificacao(
       },
       icon: Iconify(
         Icones.setaVoltarDireita,
-        size: double.infinity,
-        color: tema.surfaceDim,
+        size: 22.sp,
+        color: tema.primaryFixed,
       ),
     ),
   );

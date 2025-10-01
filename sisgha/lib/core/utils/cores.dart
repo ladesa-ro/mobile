@@ -69,6 +69,7 @@ class CoresClaras {
   static const Color iconeBranco = Color(0xFFFFFFFF);
   static const Color iconeCinza = Color(0xFF9F9F9F);
   static const Color iconeVerde = Color(0XFF2F9E41);
+  static const Color iconePreto = Color(0XFF050F07);
 }
 
 class CoresEscuras {
@@ -99,4 +100,5 @@ class CoresEscuras {
   static const Color iconeBranco = Color(0XFFD4DEDE);
   static const Color iconeCinza = Color(0XFF555D6E);
   static const Color iconeVerde = Color(0XFF066436);
+  static const Color iconePreto = Color(0xFF191B22);
 }

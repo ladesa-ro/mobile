@@ -59,7 +59,6 @@ BoxDecoration estiloBorda({
 BoxDecoration bordasCardsAlunos(bool selecionado, ColorScheme tema) {
   return BoxDecoration(
       border: Border.all(
-          color: selecionado ? tema.tertiaryContainer : tema.tertiary,
-          width: 2),
+          color: selecionado ? tema.onPrimary : tema.onSecondary, width: 2),
       borderRadius: BorderRadius.circular(15));
 }

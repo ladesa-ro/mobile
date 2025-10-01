@@ -29,14 +29,14 @@ PreferredSizeWidget appBarFiltragemTurmas(BuildContext ctx) {
       style: ButtonStyle(
         iconSize: WidgetStatePropertyAll(6.h),
       ),
-      color: Colors.white,
+      color: tema.onPrimary,
     ),
     title: Text(
       "Acesso de Aluno",
       style: estiloTexto(
         17,
         peso: FontWeight.bold,
-        cor: tema.onSecondary,
+        cor: tema.inversePrimary,
       ),
     ),
     backgroundColor: tema.primaryContainer,

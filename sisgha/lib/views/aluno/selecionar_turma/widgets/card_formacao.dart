@@ -52,16 +52,15 @@ class _CardFormacaoState extends State<CardFormacao> {
                       Text(
                         'Formação',
                         style: estiloTexto(15,
-                            peso: FontWeight.bold,
-                            cor: Theme.of(context).textTheme.bodyLarge?.color),
+                            peso: FontWeight.bold, cor: tema.primary),
                       ),
                       Transform.rotate(
                         angle: espandido ? 3.14 : 0,
                         child: Iconify(
                           Icones.setaBaixo,
                           color: formacaoSelecionada
-                              ? tema.onSurfaceVariant
-                              : tema.surfaceTint,
+                              ? tema.secondaryFixed
+                              : tema.tertiaryFixed,
                           size: 3.5.h,
                         ),
                       ),
@@ -96,8 +95,8 @@ class _CardFormacaoState extends State<CardFormacao> {
                               style: estiloTexto(
                                 15,
                                 cor: selecionado
-                                    ? tema.onPrimary
-                                    : tema.secondary,
+                                    ? tema.secondary
+                                    : tema.tertiary,
                                 peso: FontWeight.bold,
                               ),
                             ),
@@ -114,17 +113,14 @@ class _CardFormacaoState extends State<CardFormacao> {
                                 provider.selecionarFormacao(null);
                               }
                             },
-                            selectedColor: tema.tertiaryContainer,
-                            backgroundColor: tema.surfaceVariant,
-                            labelStyle: TextStyle(
-                              color: selecionado ? Colors.white : Colors.black,
-                            ),
+                            selectedColor: tema.surfaceVariant,
+                            backgroundColor: tema.surface,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.sp),
                               side: BorderSide(
                                 color: selecionado
-                                    ? tema.onSurfaceVariant
-                                    : tema.tertiary,
+                                    ? tema.onPrimary
+                                    : tema.onSecondary,
                               ),
                             ),
                           ),

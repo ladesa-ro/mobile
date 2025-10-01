@@ -36,6 +36,7 @@ class Temas {
         primaryFixed: CoresClaras.iconeBranco,
         secondaryFixed: CoresClaras.iconeVerde,
         tertiaryFixed: CoresClaras.iconeCinza,
+        onPrimaryFixedVariant: CoresClaras.iconePreto,
       ));
 
   //tema escuro
@@ -71,6 +72,7 @@ class Temas {
       primaryFixed: CoresEscuras.iconeBranco,
       secondaryFixed: CoresEscuras.iconeVerde,
       tertiaryFixed: CoresEscuras.iconeCinza,
+      onPrimaryFixedVariant: CoresEscuras.iconePreto,
     ),
   );
 }

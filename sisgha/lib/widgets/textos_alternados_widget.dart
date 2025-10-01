@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../core/utils/cores.dart';
 import '../core/utils/dias.dart';
 import '../core/utils/estilos.dart';
 import '../core/utils/padroes.dart';
@@ -62,18 +61,18 @@ class _InfoAlternadaState extends State<InfoAlternada> {
         child: textoSeparado.isEmpty
             ? Text(
                 textoBase,
-                style:
-                    estiloTexto(27, cor: tema.primary, peso: FontWeight.bold),
+                style: estiloTexto(26,
+                    cor: tema.inversePrimary, peso: FontWeight.bold),
                 maxLines: 2,
               )
             : Column(
                 children: [
                   Text(mostrar[0],
-                      style: estiloTexto(18,
-                          cor: tema.primary, peso: FontWeight.bold)),
+                      style: estiloTexto(17,
+                          cor: tema.inversePrimary, peso: FontWeight.bold)),
                   Text(mostrar[1],
-                      style: estiloTexto(18,
-                          cor: tema.primary, peso: FontWeight.bold)),
+                      style: estiloTexto(17,
+                          cor: tema.inversePrimary, peso: FontWeight.bold)),
                 ],
               ),
       ),
@@ -123,17 +122,20 @@ class _TituloAlternadoState extends State<TituloAlternado> {
             ? DatasFormatadas.diaExtenso
             : '${provInfo!.nomeFormacaoSelecionada} - ${DatasFormatadas.anoAtual}')
         : DatasFormatadas.diaExtenso;
+
     final tema = Theme.of(context).colorScheme;
+
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 300),
       transitionBuilder: (child, anim) =>
           FadeTransition(opacity: anim, child: child),
       child: SizedBox(
         key: ValueKey(texto),
-        width: existeSelecionado ? 50.w : null,
+        width: existeSelecionado ? 45.w : null,
         child: Text(
           Padroes.primeiraLetraMaiuscula(texto),
-          style: estiloTexto(16, cor: tema.primary, peso: FontWeight.bold),
+          style:
+              estiloTexto(15, cor: tema.inversePrimary, peso: FontWeight.bold),
           maxLines: 2,
         ),
       ),
@@ -179,7 +181,9 @@ class _SubtituloAlternadoState extends State<SubtituloAlternado> {
             ? '${Padroes.primeiraLetraMaiuscula(mes)} - Dia $primDia a $ultDia'
             : null)
         : '${Padroes.primeiraLetraMaiuscula(mes)} - Dia $primDia a $ultDia';
+
     final tema = Theme.of(context).colorScheme;
+
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 300),
       transitionBuilder: (child, anim) =>
@@ -189,7 +193,8 @@ class _SubtituloAlternadoState extends State<SubtituloAlternado> {
           : Text(
               texto,
               key: ValueKey(texto),
-              style: estiloTexto(16, cor: tema.primary, peso: FontWeight.bold),
+              style: estiloTexto(15,
+                  cor: tema.inversePrimary, peso: FontWeight.bold),
             ),
     );
   }

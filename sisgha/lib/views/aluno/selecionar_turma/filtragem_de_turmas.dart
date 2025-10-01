@@ -31,11 +31,13 @@ class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
         children: [
           Row(
             children: [
-              Icon(Icones.relogio, size: 3.h),
+              Icon(Icones.relogio,
+                  color: tema.onPrimaryFixedVariant, size: 3.h),
               SizedBox(width: Padroes.larguraGeral() * 0.015),
               Text(
                 'Selecionar Horario',
-                style: estiloTexto(18, peso: FontWeight.bold),
+                style:
+                    estiloTexto(18, cor: tema.primary, peso: FontWeight.bold),
               ),
             ],
           ),
@@ -61,7 +63,7 @@ class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
                 child: Text(
                   'Ver Horário',
                   style: estiloTexto(16,
-                      cor: tema.onSecondary, peso: FontWeight.bold),
+                      cor: tema.inversePrimary, peso: FontWeight.bold),
                 ),
               );
             },
@@ -80,7 +82,7 @@ class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
         Size(double.infinity, Padroes.aluturaBotoes()),
       ),
       backgroundColor: WidgetStatePropertyAll(
-        botaoAtivo ? tema.outline : tema.shadow,
+        botaoAtivo ? tema.primaryContainer : tema.tertiaryContainer,
       ),
       shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(

@@ -19,6 +19,7 @@ class _CardCursoState extends State<CardCurso> {
   @override
   Widget build(BuildContext context) {
     final tema = Theme.of(context).colorScheme;
+
     return Consumer<EscolhaHorariosAlunos>(
       builder: (context, provider, child) {
         bool expandido = provider.cursoExpandido;
@@ -48,7 +49,7 @@ class _CardCursoState extends State<CardCurso> {
                         style: estiloTexto(
                           15,
                           peso: FontWeight.bold,
-                          cor: Theme.of(context).textTheme.bodyLarge?.color,
+                          cor: tema.primary,
                         ),
                       ),
                       Transform.rotate(
@@ -56,8 +57,8 @@ class _CardCursoState extends State<CardCurso> {
                         child: Iconify(
                           Icones.setaBaixo,
                           color: cursoSelecionado
-                              ? tema.onSurfaceVariant
-                              : tema.surfaceTint,
+                              ? tema.secondaryFixed
+                              : tema.tertiaryFixed,
                           size: 3.5.h,
                         ),
                       ),
@@ -84,35 +85,35 @@ class _CardCursoState extends State<CardCurso> {
                           padding: EdgeInsets.symmetric(horizontal: 1.w),
                           child: ChoiceChip(
                             chipAnimationStyle: ChipAnimationStyle(
-                                enableAnimation: AnimationStyle.noAnimation),
+                              enableAnimation: AnimationStyle.noAnimation,
+                            ),
                             label: Text(
                               nome,
                               style: estiloTexto(
                                 15,
-                                cor:
-                                    selecionado ? tema.primary : tema.secondary,
+                                cor: selecionado
+                                    ? tema.secondary
+                                    : tema.tertiary,
                                 peso: FontWeight.bold,
                               ),
                             ),
                             labelPadding: EdgeInsets.symmetric(
-                                horizontal: 1.w, vertical: 0.5.h),
+                              horizontal: 1.w,
+                              vertical: 0.5.h,
+                            ),
                             showCheckmark: false,
                             selected: selecionado,
                             onSelected: (_) => selecionado
                                 ? provider.selecionarCurso(null)
                                 : provider.selecionarCurso(nome),
-                            selectedColor: tema.errorContainer,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.surfaceVariant,
-                            labelStyle: TextStyle(
-                              color: selecionado ? Colors.white : Colors.black,
-                            ),
+                            selectedColor: tema.surfaceVariant,
+                            backgroundColor: tema.surface,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.sp),
                               side: BorderSide(
                                 color: selecionado
-                                    ? tema.tertiaryContainer
-                                    : tema.tertiary,
+                                    ? tema.onPrimary
+                                    : tema.onSecondary,
                               ),
                             ),
                           ),
@@ -154,9 +155,6 @@ class _CardCursoState extends State<CardCurso> {
             : provider.selecionarCurso(opcao),
         selectedColor: tema.errorContainer,
         backgroundColor: Colors.white,
-        labelStyle: TextStyle(
-          color: selecionado ? Colors.white : Colors.black,
-        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
           side: BorderSide(
