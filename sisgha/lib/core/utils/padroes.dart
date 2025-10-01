@@ -24,9 +24,8 @@ class Padroes {
         minimumSize: WidgetStatePropertyAll(Size(100.w, 6.5.h)),
         shape: WidgetStateProperty.all<OutlinedBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.w))),
-        backgroundColor:
-            WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
-        foregroundColor: WidgetStatePropertyAll(tema.primary));
+        backgroundColor: WidgetStateProperty.all<Color>(tema.primaryContainer),
+        foregroundColor: WidgetStatePropertyAll(tema.inversePrimary));
   }
 
   //sempre implementar no physics dos ListViews ou outro tipo de widget de rolagem

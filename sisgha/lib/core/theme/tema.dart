@@ -5,40 +5,38 @@ import '../utils/cores.dart';
 class Temas {
   //claro
   static final temaClaro = ThemeData(
-    fontFamily: 'Poppins',
-    useMaterial3: true,
-    colorScheme: ColorScheme.light(
-      brightness: Brightness.light,
+      fontFamily: 'Poppins',
+      useMaterial3: true,
+      colorScheme: ColorScheme.light(
+        brightness: Brightness.light,
 
-      //fundo
-      surface: CoresClaras.background,
+        //fundo
+        surface: CoresClaras.background,
+        surfaceVariant: CoresClaras.verdeFraco,
 
-      //cores componentes
-      primaryContainer: CoresClaras.verdePrincipal,
-      secondaryContainer: CoresClaras.verdeClaro,
+        //cores componentes e botões
+        primaryContainer: CoresClaras.verde,
+        secondaryContainer: CoresClaras.verdeClaro,
+        tertiaryContainer: CoresClaras.cinza,
+        errorContainer: CoresClaras.vermelho,
 
-      //textos
-      primary: CoresClaras.textoPrincipal,
-      secondary: CoresClaras.textoSecundario,
-      onPrimary: CoresClaras.textoVerde,
-      onSecondary: CoresClaras.textoErro,
+        //textos
+        primary: CoresClaras.textoPrincipal,
+        secondary: CoresClaras.textoVerde,
+        tertiary: CoresClaras.textoCinza,
+        inversePrimary: CoresClaras.textoBranco,
+        error: CoresClaras.textoErro,
 
-      //bordas
-      tertiary: CoresClaras.cinzaBorda,
-      tertiaryContainer: CoresClaras.verdeBorda,
-      onTertiary: CoresClaras.brancoBorda,
+        //borda
+        onPrimary: CoresClaras.verdeBorda,
+        onSecondary: CoresClaras.cinzaBorda,
+        onTertiary: CoresClaras.bordaSecundaria,
 
-      //botões
-      outline: CoresClaras.verdeBotao,
-      errorContainer: CoresClaras.vermelhoBotao,
-      outlineVariant: CoresClaras.botaoSecundario,
-
-      //icones
-      surfaceDim: CoresClaras.iconeBranco,
-      surfaceTint: CoresClaras.iconeCinza,
-      onSurfaceVariant: CoresClaras.iconeVerde,
-    ),
-  );
+        //icones
+        primaryFixed: CoresClaras.iconeBranco,
+        secondaryFixed: CoresClaras.iconeVerde,
+        tertiaryFixed: CoresClaras.iconeCinza,
+      ));
 
   //tema escuro
   static final temaEscuro = ThemeData(
@@ -49,31 +47,30 @@ class Temas {
 
       //fundo
       surface: CoresEscuras.background,
+      surfaceVariant: CoresEscuras.verdeFraco,
 
-      //cores componentes
-      primaryContainer: CoresEscuras.verdePrincipal,
+      //cores componentes e botões
+      primaryContainer: CoresEscuras.verde,
       secondaryContainer: CoresEscuras.verdeClaro,
+      tertiaryContainer: CoresEscuras.cinza,
+      errorContainer: CoresEscuras.vermelho,
 
       //textos
       primary: CoresEscuras.textoPrincipal,
-      secondary: CoresEscuras.textoSecundario,
-      onPrimary: CoresEscuras.textoVerde,
-      onSecondary: CoresEscuras.textoErro,
+      secondary: CoresEscuras.textoVerde,
+      tertiary: CoresEscuras.textoCinza,
+      inversePrimary: CoresEscuras.textoBranco,
+      error: CoresEscuras.textoErro,
 
-      //bordas
-      tertiary: CoresEscuras.cinzaBorda,
-      tertiaryContainer: CoresEscuras.verdeBorda,
-      onTertiary: CoresEscuras.brancoBorda,
-
-      //botões
-      outline: CoresEscuras.verdeBotao,
-      errorContainer: CoresEscuras.vermelhoBotao,
-      outlineVariant: CoresEscuras.botaoSecundario,
+      //borda
+      onPrimary: CoresEscuras.verdeBorda,
+      onSecondary: CoresEscuras.cinzaBorda,
+      onTertiary: CoresEscuras.bordaSecundaria,
 
       //icones
-      surfaceDim: CoresEscuras.iconeBranco,
-      surfaceTint: CoresEscuras.iconeCinza,
-      onSurfaceVariant: CoresEscuras.iconeVerde,
+      primaryFixed: CoresEscuras.iconeBranco,
+      secondaryFixed: CoresEscuras.iconeVerde,
+      tertiaryFixed: CoresEscuras.iconeCinza,
     ),
   );
 }

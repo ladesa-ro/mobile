@@ -60,8 +60,8 @@ class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
                     : null,
                 child: Text(
                   'Ver Horário',
-                  style:
-                      estiloTexto(16, cor: tema.primary, peso: FontWeight.bold),
+                  style: estiloTexto(16,
+                      cor: tema.onSecondary, peso: FontWeight.bold),
                 ),
               );
             },
@@ -80,7 +80,7 @@ class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
         Size(double.infinity, Padroes.aluturaBotoes()),
       ),
       backgroundColor: WidgetStatePropertyAll(
-        botaoAtivo ? Theme.of(context).colorScheme.primary : tema.tertiary,
+        botaoAtivo ? tema.outline : tema.shadow,
       ),
       shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(

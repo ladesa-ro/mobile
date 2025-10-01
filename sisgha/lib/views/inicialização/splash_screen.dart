@@ -43,6 +43,7 @@ class _SplashScreen extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     return Scaffold(
       body: Stack(
         children: [
@@ -58,10 +59,10 @@ class _SplashScreen extends State<SplashScreen> {
             left: 0,
             child: AnimatedContainer(
               decoration: BoxDecoration(
-                gradient: const LinearGradient(colors: [
-                  CoresClaras.verdeClaro,
-                  CoresClaras.verdePrincipal
-                ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+                gradient: LinearGradient(
+                    colors: [tema.secondaryContainer, tema.primaryContainer],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter),
                 borderRadius: BorderRadius.only(
                   bottomRight:
                       Radius.circular(Padroes.alturaGeral() < 700 ? 80 : 100),
@@ -86,10 +87,10 @@ class _SplashScreen extends State<SplashScreen> {
             right: 0,
             child: AnimatedContainer(
               decoration: BoxDecoration(
-                gradient: const LinearGradient(colors: [
-                  CoresClaras.verdePrincipal,
-                  CoresClaras.verdeClaro
-                ], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+                gradient: LinearGradient(
+                    colors: [tema.primaryContainer, tema.secondaryContainer],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter),
                 borderRadius: BorderRadius.only(
                   topLeft:
                       Radius.circular(Padroes.alturaGeral() < 700 ? 80 : 100),

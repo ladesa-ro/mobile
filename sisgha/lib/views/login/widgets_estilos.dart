@@ -4,9 +4,8 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/utils/icones.dart';
-import '../../core/utils/cores.dart';
 
-Widget elementoVerde(Alignment alignment) {
+Widget elementoVerde(Alignment alignment, ColorScheme tema) {
   BorderRadiusGeometry borderRadius = BorderRadius.zero;
   borderRadius = verificarLadoDoElementoVerde(alignment);
 
@@ -16,12 +15,12 @@ Widget elementoVerde(Alignment alignment) {
       width: 30.w,
       height: 15.h,
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
+        gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            CoresClaras.verdePrincipal,
-            CoresClaras.verdeClaro,
+            tema.primaryContainer,
+            tema.secondaryContainer,
           ],
         ),
         borderRadius: borderRadius,

@@ -3,7 +3,6 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../core/utils/cores.dart';
 import '../../../../core/utils/estilos.dart';
 import '../../../../core/utils/icones.dart';
 import '../../../../core/utils/padroes.dart';
@@ -115,9 +114,8 @@ class _CardFormacaoState extends State<CardFormacao> {
                                 provider.selecionarFormacao(null);
                               }
                             },
-                            selectedColor: tema.errorContainer,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.surfaceVariant,
+                            selectedColor: tema.tertiaryContainer,
+                            backgroundColor: tema.surfaceVariant,
                             labelStyle: TextStyle(
                               color: selecionado ? Colors.white : Colors.black,
                             ),

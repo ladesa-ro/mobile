@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sisgha/core/utils/padroes.dart';
 import 'package:sizer/sizer.dart';
 
-import 'cores.dart';
-
 TextStyle estiloTexto(
   double tamanho, {
   Color? cor,
@@ -20,15 +18,16 @@ InputDecoration inputDecoration(BuildContext context, String labelText,
     {Widget? suffixIcon}) {
   final tema = Theme.of(context).colorScheme;
   return InputDecoration(
+    fillColor: tema.error,
     contentPadding: EdgeInsets.only(
         top: Padroes.aluturaBotoes() / 1.5, left: 12, right: 12),
     floatingLabelStyle:
-        estiloTexto(15, cor: tema.secondary, peso: FontWeight.bold),
+        estiloTexto(15, cor: tema.tertiary, peso: FontWeight.bold),
     labelText: labelText,
     alignLabelWithHint: false,
     enabledBorder: inputBorder(1.5, tema),
     border: inputBorder(2, tema),
-    labelStyle: estiloTexto(15, cor: tema.secondary, peso: FontWeight.w600),
+    labelStyle: estiloTexto(15, cor: tema.tertiary, peso: FontWeight.w600),
     focusedBorder: inputBorder(2, tema),
     suffixIcon: suffixIcon,
   );

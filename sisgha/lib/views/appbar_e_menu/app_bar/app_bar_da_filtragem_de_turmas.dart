@@ -3,7 +3,6 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../core/utils/cores.dart';
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/icones.dart';
 import '../../../viewmodels/escolha_horarios_alunos.dart';
@@ -37,9 +36,9 @@ PreferredSizeWidget appBarFiltragemTurmas(BuildContext ctx) {
       style: estiloTexto(
         17,
         peso: FontWeight.bold,
-        cor: tema.primary,
+        cor: tema.onSecondary,
       ),
     ),
-    backgroundColor: Theme.of(ctx).colorScheme.primary,
+    backgroundColor: tema.primaryContainer,
   );
 }

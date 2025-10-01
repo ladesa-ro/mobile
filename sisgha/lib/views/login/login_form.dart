@@ -7,7 +7,6 @@ import 'package:sisgha/views/login/login_viewmodel.dart';
 import 'package:sisgha/widgets/widget_erro.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../core/utils/cores.dart';
 import '../../core/utils/estilos.dart';
 import '../../core/utils/icones.dart';
 import '../../core/utils/imagens.dart';
@@ -54,9 +53,9 @@ class _CorpoLoginState extends State<LoginForm> {
                   child: Column(
                     children: [
                       SizedBox(height: Padroes.alturaGeral() * 0.03),
-                      inputMatricula(),
+                      inputMatricula(tema),
                       SizedBox(height: Padroes.alturaGeral() * 0.02),
-                      inputSenha(loginVM),
+                      inputSenha(loginVM, tema),
                       SizedBox(height: Padroes.alturaGeral() * 0.01),
                       recuperarSenha(context, tema),
                       SizedBox(height: Padroes.alturaGeral() * 0.01),
@@ -148,7 +147,7 @@ class _CorpoLoginState extends State<LoginForm> {
         child: Center(
           child: Text(
             'Entrar',
-            style: estiloTexto(16, cor: Colors.white, peso: FontWeight.w600),
+            style: estiloTexto(16, peso: FontWeight.w600),
           ),
         ),
       ),
@@ -164,7 +163,7 @@ class _CorpoLoginState extends State<LoginForm> {
           Text(
             'Esqueceu a senha?',
             style: estiloTexto(
-              cor: tema.onPrimary,
+              cor: tema.tertiary,
               14,
               peso: FontWeight.w600,
             ),
@@ -185,8 +184,9 @@ class _CorpoLoginState extends State<LoginForm> {
     );
   }
 
-  TextFormField inputMatricula() {
+  TextFormField inputMatricula(ColorScheme tema) {
     return TextFormField(
+      cursorColor: tema.onPrimary,
       controller: matriculaController,
       decoration: inputDecoration(context, 'Matrícula'),
       validator: (value) =>
@@ -195,8 +195,9 @@ class _CorpoLoginState extends State<LoginForm> {
     );
   }
 
-  TextFormField inputSenha(LoginViewModel loginVM) {
+  TextFormField inputSenha(LoginViewModel loginVM, ColorScheme tema) {
     return TextFormField(
+      cursorColor: tema.onPrimary,
       controller: senhaController,
       decoration: inputDecoration(context, 'Senha',
           suffixIcon: IconButton(
