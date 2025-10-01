@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/views/listagemDeEvento/modal_eventos.dart';
 import 'package:sisgha/widgets/cards_calendario.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/icones.dart';
-import '../../../core/utils/colors.dart';
 import '../../../core/utils/dias.dart';
 import '../../../core/utils/padroes.dart';
 import '../../../viewmodels/calendario_funcionalidades.dart';
 import '../../../widgets/calendario.dart';
 import '../../../widgets/letreiro_rolante.dart';
-import '../ListagemDeEventosProfessores/modal_evento_professor.dart';
 import 'widgets/menu_lateral.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -46,6 +45,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
     double tamanho = Padroes.calcularAlturaAppBar(context, appBarSize: 7.h);
     EdgeInsets margem = Padroes.margem();
     double largura = Padroes.larguraGeral() - margem.horizontal;
+    final tema = Theme.of(context).colorScheme;
 
     return Scaffold(
       key: scaffoldKey,
@@ -87,7 +87,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
               child: Container(
                 padding: EdgeInsets.only(bottom: 10),
                 decoration: BoxDecoration(
-                    border: Border.all(color: CoresClaras.cinzaBordas),
+                    border: Border.all(color: tema.tertiary),
                     borderRadius: BorderRadius.circular(15)),
                 child: TableCalendar(
                   availableGestures: AvailableGestures.none,
@@ -98,9 +98,9 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                   locale: 'pt-BR',
                   shouldFillViewport: true,
                   daysOfWeekHeight: 23,
-                  daysOfWeekStyle: estiloParteSuperior(context),
-                  headerStyle: estiloCabessario(),
-                  calendarBuilders: calendarBuilder(120.sp, _focusedDay),
+                  daysOfWeekStyle: estiloParteSuperior(tema),
+                  headerStyle: estiloCabessario(tema),
+                  calendarBuilders: calendarBuilder(120.sp, _focusedDay, tema),
                   pageAnimationCurve: Curves.linear,
                   pageAnimationDuration: const Duration(milliseconds: 300),
                   selectedDayPredicate: (day) {
@@ -137,7 +137,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                   isScrollControlled: true,
                   enableDrag: false,
                   backgroundColor: const Color.fromARGB(88, 0, 0, 0),
-                  builder: (context) => const ModalEventosProfessores(),
+                  builder: (context) => ModalEventos(),
                 );
               },
               child: Row(
@@ -165,7 +165,8 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
           SizedBox(height: tamanho * 0.02),
 
           //cards dos eventos do dia
-          RepaintBoundary(child: cardCalendario(_selectedDay, tamanho, largura))
+          RepaintBoundary(
+              child: cardCalendario(_selectedDay, tamanho, largura, tema))
         ]),
       ),
     );

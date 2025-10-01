@@ -4,12 +4,12 @@ import 'package:provider/provider.dart';
 import 'package:sisgha/core/utils/icones.dart';
 import 'package:sizer/sizer.dart';
 
-import '../core/utils/colors.dart';
 import '../core/utils/estilos.dart';
 import '../viewmodels/calendario_funcionalidades.dart';
 import '../views/professor/calendario/calendario.dart';
 
-Widget cardCalendario(DateTime selectedDay, double tamanho, double largura) {
+Widget cardCalendario(
+    DateTime selectedDay, double tamanho, double largura, ColorScheme tema) {
   return Consumer<CalendarioFuncionalidades>(
     builder: (context, provider, _) {
       final data = normalizarData(selectedDay);
@@ -19,8 +19,7 @@ Widget cardCalendario(DateTime selectedDay, double tamanho, double largura) {
           padding: EdgeInsets.symmetric(vertical: tamanho * 0.03),
           child: Text(
             "Nenhum evento para este dia.",
-            style: estiloTexto(15,
-                cor: CoresClaras.verdePrincipal, peso: FontWeight.bold),
+            style: estiloTexto(15, cor: tema.onPrimary, peso: FontWeight.bold),
           ),
         );
       }
@@ -37,11 +36,11 @@ Widget cardCalendario(DateTime selectedDay, double tamanho, double largura) {
               vertical: 8,
             ),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceVariant,
+              color: tema.surface,
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: CoresClaras.preto, // cor da borda
-                width: 0.5, // a espreçura
+                color: tema.onSecondary, // cor da borda
+                width: 1, // a espreçura
               ),
             ),
             child: Padding(
@@ -62,8 +61,8 @@ Widget cardCalendario(DateTime selectedDay, double tamanho, double largura) {
                       Text(
                         evento.titulo,
                         style: estiloTexto(
-                          16,
-                          cor: CoresClaras.pretoTexto,
+                          15,
+                          cor: tema.primary,
                           peso: FontWeight.bold,
                         ),
                       ),
@@ -71,25 +70,24 @@ Widget cardCalendario(DateTime selectedDay, double tamanho, double largura) {
                   ),
                   SizedBox(height: 2.h),
                   Text(evento.dataInicio,
-                      style: estiloTexto(16,
-                          cor: CoresClaras.preto, peso: FontWeight.bold)),
+                      style: estiloTexto(15,
+                          cor: tema.primary, peso: FontWeight.bold)),
                   Text(evento.dataTermino!,
-                      style: estiloTexto(16,
-                          cor: CoresClaras.preto, peso: FontWeight.bold)),
+                      style: estiloTexto(15,
+                          cor: tema.primary, peso: FontWeight.bold)),
                   SizedBox(height: 2.h),
                   Text(evento.tempo!,
-                      style: estiloTexto(16,
-                          cor: CoresClaras.preto, peso: FontWeight.bold)),
+                      style: estiloTexto(15,
+                          cor: tema.primary, peso: FontWeight.bold)),
                   SizedBox(height: 1.h),
                   ElevatedButton(
                     style: ButtonStyle(
-                        backgroundColor:
-                            WidgetStatePropertyAll(CoresClaras.branco),
+                        backgroundColor: WidgetStatePropertyAll(tema.surface),
                         shape: WidgetStatePropertyAll(
                           RoundedRectangleBorder(
-                            side: BorderSide(
-                                color: CoresClaras.preto, width: 0.5),
-                            borderRadius: BorderRadius.circular(5),
+                            side:
+                                BorderSide(color: tema.onSecondary, width: 0.5),
+                            borderRadius: BorderRadius.circular(15),
                           ),
                         ),
                         padding: WidgetStatePropertyAll(EdgeInsets.zero),
@@ -104,6 +102,7 @@ Widget cardCalendario(DateTime selectedDay, double tamanho, double largura) {
                         Iconify(
                           Icones.sino,
                           size: 18.sp,
+                          color: tema.onSecondaryFixedVariant,
                         ),
                         SizedBox(
                           width: 2.w,
@@ -111,7 +110,7 @@ Widget cardCalendario(DateTime selectedDay, double tamanho, double largura) {
                         Text(
                           'Local',
                           style: estiloTexto(15,
-                              cor: CoresClaras.preto, peso: FontWeight.bold),
+                              cor: tema.primary, peso: FontWeight.bold),
                         )
                       ],
                     ),

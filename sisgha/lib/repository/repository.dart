@@ -47,9 +47,10 @@ class Repository {
   }
 
   static void _erro(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     showDialog(
       context: context,
-      builder: (context) => dialogoDeErro(context),
+      builder: (context) => dialogoDeErro(context, tema),
     );
   }
 

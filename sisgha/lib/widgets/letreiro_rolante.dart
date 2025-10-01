@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:sisgha/viewmodels/escolha_calendario.dart';
 import 'package:text_scroll/text_scroll.dart';
 
-import '../core/utils/colors.dart';
+import '../core/utils/cores.dart';
 import '../core/utils/estilos.dart';
 
 class LetreiroRolante extends StatefulWidget {
@@ -26,10 +26,11 @@ class _LetreiroRolanteState extends State<LetreiroRolante> {
 
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       decoration: estiloBorda(
-        cor: CoresClaras.verdecinzaBorda,
+        cor: tema.tertiary,
         radius: 15,
         grossuraBorda: 2,
       ),
@@ -40,8 +41,7 @@ class _LetreiroRolanteState extends State<LetreiroRolante> {
                   TextScroll(
             velocity: Velocity(pixelsPerSecond: Offset(10, 0)),
             'Técnico Integrado - Informática 2023 - 2023',
-            style: estiloTexto(15,
-                cor: CoresClaras.verdePrincipal, peso: FontWeight.bold),
+            style: estiloTexto(15, cor: tema.onPrimary, peso: FontWeight.bold),
             mode: TextScrollMode.bouncing,
           ),
         ),

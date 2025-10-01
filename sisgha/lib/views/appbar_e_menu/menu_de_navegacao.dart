@@ -6,7 +6,6 @@ import 'package:sisgha/views/aluno/notificacao/notificacao.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../core/utils/icones.dart';
-import '../../core/utils/colors.dart';
 import '../../core/utils/padroes.dart';
 import '../../viewmodels/escolha_calendario.dart';
 import '../../domain/logic/verificar_token_ativo.dart';
@@ -26,7 +25,6 @@ class Navigation extends StatefulWidget {
 }
 
 class _NavigationState extends State<Navigation> {
-  int? _indiceAnterior;
   late int _selectedIndex;
   bool tokenAtivo = false;
 
@@ -44,20 +42,29 @@ class _NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     BottomAppBar bottomAppBar = BottomAppBar(
+      color: tema.primaryContainer,
       height: Padroes.alturaGeral() * 0.08,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           construirBarraDeNavegacao(
-              tokenAtivo: tokenAtivo, iconData: Icones.calendario, index: 0),
+              tokenAtivo: tokenAtivo,
+              iconData: Icones.calendario,
+              index: 0,
+              tema: tema),
           construirBarraDeNavegacao(
-              tokenAtivo: tokenAtivo, iconData: Icones.iconeSisgha, index: 1),
+              tokenAtivo: tokenAtivo,
+              iconData: Icones.iconeSisgha,
+              index: 1,
+              tema: tema),
           construirBarraDeNavegacao(
               tokenAtivo: tokenAtivo,
               iconData: tokenAtivo ? Icones.usuario : null,
               iconify: tokenAtivo ? null : Icones.sino,
-              index: 2),
+              index: 2,
+              tema: tema),
         ],
       ),
     );
@@ -118,30 +125,30 @@ class _NavigationState extends State<Navigation> {
     IconData? iconData,
     required int index,
     required bool tokenAtivo,
+    required ColorScheme tema,
   }) {
     return GestureDetector(
       onTap: () {
         setState(() {
-          _indiceAnterior = _selectedIndex;
           _selectedIndex = index;
         });
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
-        decoration: _decoretion(index),
+        decoration: _decoretion(index, tema),
         width: Padroes.larguraGeral() * 0.13,
         height: Padroes.alturaGeral() * 0.05,
         child: iconData != null
             ? Icon(
                 iconData,
-                color: CoresClaras.branco,
+                color: tema.primaryFixed,
                 size: 3.h,
               )
             : Iconify(
                 iconify!,
                 size: 3.h,
-                color: CoresClaras.branco,
+                color: tema.primaryFixed,
               ),
       ),
     );
@@ -151,11 +158,9 @@ class _NavigationState extends State<Navigation> {
     return _selectedIndex == index;
   }
 
-  BoxDecoration _decoretion(int index) {
+  BoxDecoration _decoretion(int index, ColorScheme tema) {
     return BoxDecoration(
-      color: _selectedIndex == index
-          ? Theme.of(context).colorScheme.secondary
-          : null,
+      color: _selectedIndex == index ? tema.secondaryContainer : null,
       borderRadius: BorderRadius.circular(Padroes.larguraGeral() * 0.03),
     );
   }

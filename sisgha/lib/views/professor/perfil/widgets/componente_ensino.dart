@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:text_scroll/text_scroll.dart';
 
-import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/estilos.dart';
 import '../../../../core/utils/icones.dart';
 import '../../../../core/utils/padroes.dart';
@@ -29,6 +28,7 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
 
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     return Consumer<DadosEnsinoProfessorProvider>(
       builder: (context, provider, child) {
         final listaDados = provider.dadosEnsino;
@@ -40,9 +40,9 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
                   EdgeInsets.symmetric(vertical: constraints.maxHeight * 0.05),
               physics: Padroes.efeitoDeRolagem(),
               children: [
-                _buildCarouselDisciplinas(listaDados, constraints),
+                _buildCarouselDisciplinas(listaDados, constraints, tema),
                 SizedBox(height: constraints.maxHeight * 0.05),
-                _buildCarouselIndicator(listaDados, constraints),
+                _buildCarouselIndicator(listaDados, constraints, tema),
               ],
             );
           },
@@ -51,8 +51,8 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
     );
   }
 
-  Widget _buildCarouselDisciplinas(
-      List<DadosEnsino> listaDados, BoxConstraints constraints) {
+  Widget _buildCarouselDisciplinas(List<DadosEnsino> listaDados,
+      BoxConstraints constraints, ColorScheme tema) {
     return CarouselSlider.builder(
       itemCount: listaDados.length,
       itemBuilder: (context, index, realIndex) {
@@ -63,7 +63,7 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
           padding: const EdgeInsets.all(8.0),
           child: Opacity(
             opacity: opacity,
-            child: _buildDisciplinaCard(listaDados[index], constraints),
+            child: _buildDisciplinaCard(listaDados[index], constraints, tema),
           ),
         );
       },
@@ -81,18 +81,19 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
     );
   }
 
-  Widget _buildDisciplinaCard(DadosEnsino dado, BoxConstraints constraints) {
+  Widget _buildDisciplinaCard(
+      DadosEnsino dado, BoxConstraints constraints, ColorScheme tema) {
     return Container(
       width: constraints.maxWidth,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: CoresClaras.cinzaBordas, width: 2),
+        border: Border.all(color: tema.onSecondary, width: 2),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildImagem(constraints.maxWidth, constraints.maxHeight * 0.2),
-          Divider(height: 0, color: CoresClaras.cinzaBordas, thickness: 2),
+          Divider(height: 0, color: tema.onTertiary, thickness: 2),
           Padding(
             padding:
                 EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.04),
@@ -102,11 +103,11 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
                 SizedBox(height: constraints.maxHeight * 0.01),
                 Text(
                   dado.disciplina.nome,
-                  style: estiloTexto(16,
-                      cor: CoresClaras.pretoTexto, peso: FontWeight.bold),
+                  style:
+                      estiloTexto(16, cor: tema.primary, peso: FontWeight.bold),
                 ),
                 SizedBox(height: constraints.maxHeight * 0.01),
-                _buildInformacoesContainer(dado.cursos, constraints),
+                _buildInformacoesContainer(dado.cursos, constraints, tema),
               ],
             ),
           ),
@@ -128,46 +129,45 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
     );
   }
 
-  Widget _buildInformacoesContainer(
-      List<CursoComTurmas> cursos, BoxConstraints constraints) {
+  Widget _buildInformacoesContainer(List<CursoComTurmas> cursos,
+      BoxConstraints constraints, ColorScheme tema) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.02),
       height: constraints.maxHeight * 0.22,
       width: constraints.maxWidth,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: CoresClaras.cinzaBordas, width: 2),
+        border: Border.all(color: tema.onSecondary, width: 2),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           const Spacer(),
-          _buildCursoSelector(cursos),
+          _buildCursoSelector(cursos, tema),
           Divider(
             indent: 12.sp,
             endIndent: 12.sp,
-            color: CoresClaras.cinzaBordas,
+            color: tema.onSecondary,
             thickness: 2,
           ),
-          Expanded(child: _buildTurmasCarousel(cursos)),
+          Expanded(child: _buildTurmasCarousel(cursos, tema)),
           const Spacer(),
         ],
       ),
     );
   }
 
-  Widget _buildCursoSelector(List<CursoComTurmas> cursos) {
+  Widget _buildCursoSelector(List<CursoComTurmas> cursos, ColorScheme tema) {
     return Row(
       children: [
         _buildIconButton(Icones.setaEsquerda, () {
           if (turmaMostrada > 0) turmasCarouselController.previousPage();
-        }),
+        }, tema),
         Expanded(
           child: TextScroll(
             cursos[turmaMostrada].curso.nome,
-            style: estiloTexto(14,
-                cor: CoresClaras.pretoTexto, peso: FontWeight.bold),
+            style: estiloTexto(14, cor: tema.primary, peso: FontWeight.bold),
             mode: TextScrollMode.bouncing,
             velocity: const Velocity(pixelsPerSecond: Offset(10, 0)),
             delayBefore: scrollDelay,
@@ -179,12 +179,13 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
           if (turmaMostrada < cursos[turmaMostrada].turmas.length - 1) {
             turmasCarouselController.nextPage();
           }
-        }),
+        }, tema),
       ],
     );
   }
 
-  Widget _buildIconButton(String icon, VoidCallback onPressed) {
+  Widget _buildIconButton(
+      String icon, VoidCallback onPressed, ColorScheme tema) {
     return IconButton(
       padding: EdgeInsets.zero,
       style: ButtonStyle(
@@ -193,19 +194,18 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
         minimumSize: MaterialStatePropertyAll(Size(20.sp, 20.sp)),
       ),
       onPressed: onPressed,
-      icon: Iconify(icon, size: 15.sp, color: CoresClaras.verdePrincipal),
+      icon: Iconify(icon, size: 15.sp, color: tema.secondaryFixed),
     );
   }
 
-  Widget _buildTurmasCarousel(List<CursoComTurmas> cursos) {
+  Widget _buildTurmasCarousel(List<CursoComTurmas> cursos, ColorScheme tema) {
     return CarouselSlider(
       disableGesture: true,
       carouselController: turmasCarouselController,
       items: cursos[turmaMostrada].turmas.map((turma) {
         return Text(
           turma.nome,
-          style: estiloTexto(14,
-              cor: CoresClaras.pretoTexto, peso: FontWeight.bold),
+          style: estiloTexto(14, cor: tema.primary, peso: FontWeight.bold),
         );
       }).toList(),
       options: CarouselOptions(
@@ -217,8 +217,8 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
     );
   }
 
-  Widget _buildCarouselIndicator(
-      List<DadosEnsino> listaDados, BoxConstraints constraints) {
+  Widget _buildCarouselIndicator(List<DadosEnsino> listaDados,
+      BoxConstraints constraints, ColorScheme tema) {
     return Center(
       child: SizedBox(
         height: constraints.maxHeight * 0.01 + 2,
@@ -232,8 +232,8 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
               width: constraints.maxHeight * 0.06 + 2,
               decoration: BoxDecoration(
                 color: disciplinaMostrada == index
-                    ? CoresClaras.preto
-                    : CoresClaras.cinzaBordas,
+                    ? tema.onPrimary
+                    : tema.onSecondary,
               ),
             );
           },
