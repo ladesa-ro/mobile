@@ -17,7 +17,7 @@ PreferredSizeWidget appBarFiltragemTurmas(BuildContext ctx) {
       icon: Iconify(
         Icones.setaVoltarDireita,
         size: double.infinity,
-        color: tema.surfaceDim,
+        color: tema.primaryFixed,
       ),
       onPressed: () {
         provider.resetarEscolhas();

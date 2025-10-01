@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/widgets/cards_calendario.dart';
+import 'package:sisgha/widgets/letreiro_rolante.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:text_scroll/text_scroll.dart';
@@ -13,7 +14,7 @@ import '../../../viewmodels/calendario_funcionalidades.dart';
 import '../../../viewmodels/escolha_calendario.dart';
 import '../../../widgets/calendario.dart';
 import '../../professor/calendario/calendario.dart';
-import '../../listagemDeEvento/modal_eventos_alunos.dart';
+import '../../listagem_de_eventos/modal_eventos_alunos.dart';
 import 'widgets/menu_lateral_alunos.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -61,28 +62,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                   height: Padroes.aluturaBotoes(),
                   width: largura * 0.80,
                   child: RepaintBoundary(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: estiloBorda(
-                        cor: tema.tertiary,
-                        radius: 15,
-                        grossuraBorda: 2,
-                      ),
-                      height: 40,
-                      child: Center(
-                        child: Consumer<EscolhaCalendario>(
-                          builder: (BuildContext context,
-                                  EscolhaCalendario value, Widget? child) =>
-                              TextScroll(
-                            velocity: Velocity(pixelsPerSecond: Offset(5, 0)),
-                            'Técnico Integrado - Informática 2023 - 2023',
-                            style: estiloTexto(15,
-                                cor: tema.primary, peso: FontWeight.bold),
-                            mode: TextScrollMode.bouncing,
-                          ),
-                        ),
-                      ),
-                    ),
+                    child: LetreiroRolante(),
                   ),
                 ),
                 const Spacer(),

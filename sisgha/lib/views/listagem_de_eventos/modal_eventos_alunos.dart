@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sisgha/views/listagemDeEvento/evento_card.dart';
-import 'package:sisgha/views/listagemDeEvento/modal_eventos.dart';
+import 'package:sisgha/views/listagem_de_eventos/evento_card.dart';
+import 'package:sisgha/views/listagem_de_eventos/modal_eventos.dart';
 import '../../core/utils/cores.dart';
 import 'campo_pesquisa_evento.dart';
 
