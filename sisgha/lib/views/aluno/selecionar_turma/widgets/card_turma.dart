@@ -48,7 +48,7 @@ class _CardTurmaState extends State<CardTurma> {
                         style: estiloTexto(
                           15,
                           peso: FontWeight.bold,
-                          cor: tema.primary,
+                          cor: turmaSelecionada ? tema.primary : tema.tertiary,
                         ),
                       ),
                       Transform.rotate(

@@ -49,7 +49,7 @@ class _CardCursoState extends State<CardCurso> {
                         style: estiloTexto(
                           15,
                           peso: FontWeight.bold,
-                          cor: tema.primary,
+                          cor: cursoSelecionado ? tema.primary : tema.tertiary,
                         ),
                       ),
                       Transform.rotate(

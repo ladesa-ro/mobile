@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sisgha/core/utils/padroes.dart';
 
 import '../../../../core/utils/icones.dart';
-import '../../../../core/utils/cores.dart';
 import '../../../../core/utils/estilos.dart';
 import 'componente_disponibilidade.dart';
 import 'componente_ensino.dart';
@@ -93,9 +92,8 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
               texto,
               style: estiloTexto(
                 15,
-                cor: _controller.index == index
-                    ? tema.tertiaryContainer
-                    : tema.secondary,
+                cor:
+                    _controller.index == index ? tema.secondary : tema.tertiary,
                 peso: FontWeight.bold,
               ),
             ),
@@ -103,8 +101,8 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
             Icon(
               icone,
               color: _controller.index == index
-                  ? tema.tertiaryContainer
-                  : tema.tertiary,
+                  ? tema.secondaryFixed
+                  : tema.tertiaryFixed,
               size: index == 0 ? 20 : 25,
             ),
           ],
@@ -116,16 +114,13 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
   BoxDecoration _boxDecoration(
       int index, bool bordaEsquerda, bool bordaDireita, ColorScheme tema) {
     return BoxDecoration(
-      color: _controller.index == index
-          ? Theme.of(context).colorScheme.surface
-          : Theme.of(context).colorScheme.surfaceVariant,
+      color: _controller.index == index ? tema.surfaceVariant : tema.surface,
       borderRadius: BorderRadius.horizontal(
         left: bordaEsquerda ? const Radius.circular(10) : Radius.zero,
         right: bordaDireita ? const Radius.circular(10) : Radius.zero,
       ),
       border: Border.all(
-        color:
-            _controller.index == index ? tema.tertiaryContainer : tema.tertiary,
+        color: _controller.index == index ? tema.onPrimary : tema.onSecondary,
       ),
     );
   }

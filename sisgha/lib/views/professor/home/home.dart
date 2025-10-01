@@ -4,7 +4,6 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../../core/utils/cores.dart';
 import '../../../core/utils/dias.dart';
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/icones.dart';
@@ -72,7 +71,7 @@ class _HomeState extends State<Home> {
                           locale: 'pt-BR',
                           shouldFillViewport: true,
                           daysOfWeekHeight: 23,
-                          daysOfWeekStyle: estiloParteSuperior(context),
+                          daysOfWeekStyle: estiloParteSuperior(tema),
                           headerStyle: estiloCabessario(tema),
                           calendarBuilders: calendarBuilder(100.h, null, tema),
                           pageAnimationCurve: Curves.linear,
@@ -92,19 +91,19 @@ class _HomeState extends State<Home> {
                   Icon(
                     Icones.calendario,
                     size: 3.h,
-                    color: tema.scrim,
+                    color: tema.primaryFixed,
                   ),
                   const Spacer(),
                   Text(
                     'Calendário ${now.year}',
                     style: estiloTexto(15,
-                        cor: tema.primary, peso: FontWeight.bold),
+                        cor: tema.inversePrimary, peso: FontWeight.bold),
                   ),
                   const Spacer(),
                   Iconify(
                     Icones.setaBaixo,
                     size: 4.h,
-                    color: tema.scrim,
+                    color: tema.primaryFixed,
                   ),
                   const SizedBox(
                     width: 16,

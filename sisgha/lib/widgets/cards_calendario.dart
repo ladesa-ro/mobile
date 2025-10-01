@@ -36,11 +36,11 @@ Widget cardCalendario(
               vertical: 8,
             ),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceVariant,
+              color: tema.surface,
               borderRadius: BorderRadius.circular(10),
               border: Border.all(
-                color: tema.errorContainer, // cor da borda
-                width: 0.5, // a espreçura
+                color: tema.onSecondary, // cor da borda
+                width: 1, // a espreçura
               ),
             ),
             child: Padding(
@@ -61,7 +61,7 @@ Widget cardCalendario(
                       Text(
                         evento.titulo,
                         style: estiloTexto(
-                          16,
+                          15,
                           cor: tema.primary,
                           peso: FontWeight.bold,
                         ),
@@ -70,14 +70,14 @@ Widget cardCalendario(
                   ),
                   SizedBox(height: 2.h),
                   Text(evento.dataInicio,
-                      style: estiloTexto(16,
+                      style: estiloTexto(15,
                           cor: tema.primary, peso: FontWeight.bold)),
                   Text(evento.dataTermino!,
-                      style: estiloTexto(16,
+                      style: estiloTexto(15,
                           cor: tema.primary, peso: FontWeight.bold)),
                   SizedBox(height: 2.h),
                   Text(evento.tempo!,
-                      style: estiloTexto(16,
+                      style: estiloTexto(15,
                           cor: tema.primary, peso: FontWeight.bold)),
                   SizedBox(height: 1.h),
                   ElevatedButton(
@@ -85,9 +85,9 @@ Widget cardCalendario(
                         backgroundColor: WidgetStatePropertyAll(tema.surface),
                         shape: WidgetStatePropertyAll(
                           RoundedRectangleBorder(
-                            side: BorderSide(
-                                color: tema.errorContainer, width: 0.5),
-                            borderRadius: BorderRadius.circular(5),
+                            side:
+                                BorderSide(color: tema.onSecondary, width: 0.5),
+                            borderRadius: BorderRadius.circular(15),
                           ),
                         ),
                         padding: WidgetStatePropertyAll(EdgeInsets.zero),
@@ -102,6 +102,7 @@ Widget cardCalendario(
                         Iconify(
                           Icones.sino,
                           size: 18.sp,
+                          color: tema.onSecondaryFixedVariant,
                         ),
                         SizedBox(
                           width: 2.w,

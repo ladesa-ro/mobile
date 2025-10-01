@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
+
 import 'package:sisgha/core/utils/icones.dart';
-import 'package:sisgha/core/utils/cores.dart';
 import 'package:sisgha/core/utils/estilos.dart';
 import 'package:sizer/sizer.dart';
 
@@ -19,26 +19,25 @@ Widget mostrarDialogoDeTrocaDeTema(
         SizedBox(height: 2.h),
         Iconify(
           temaAtual ? Icones.lua : Icones.sol,
-          color: temaAtual ? tema.errorContainer : tema.errorContainer,
+          color: tema.onSecondaryFixedVariant,
           size: 3.h,
         ),
         SizedBox(height: 1.5.h),
         Text(
           "Modificar tema",
-          style: estiloTexto(14, peso: FontWeight.bold),
+          style: estiloTexto(16, cor: tema.primary, peso: FontWeight.bold),
         ),
         SizedBox(height: 0.5.h),
         Text(
           "Deseja modificar o tema para $text",
-          style: estiloTexto(14, cor: tema.secondary, peso: FontWeight.bold),
+          style: estiloTexto(14, cor: tema.primary, peso: FontWeight.bold),
         ),
         SizedBox(height: 1.5.h),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              style: _estiloBotao(
-                  temaAtual ? tema.errorContainer : tema.errorContainer),
+              style: _estiloBotao(tema.errorContainer),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -46,20 +45,19 @@ Widget mostrarDialogoDeTrocaDeTema(
                 children: [
                   Text(
                     "Não  ",
-                    style: estiloTexto(14,
-                        cor: temaAtual ? tema.onSecondary : tema.onSecondary,
-                        peso: FontWeight.bold),
+                    style:
+                        estiloTexto(14, cor: tema.error, peso: FontWeight.bold),
                   ),
                   Icon(
                     Icons.close,
-                    color: temaAtual ? tema.onSecondary : tema.onSecondary,
+                    color: tema.error,
                   ),
                 ],
               ),
             ),
             SizedBox(width: 3.w),
             ElevatedButton(
-              style: _estiloBotao(temaAtual ? tema.outline : tema.outline),
+              style: _estiloBotao(tema.onPrimary),
               onPressed: () {
                 provider.mudarTema();
                 Navigator.of(context).pop();
@@ -69,14 +67,11 @@ Widget mostrarDialogoDeTrocaDeTema(
                   Text(
                     "Sim  ",
                     style: estiloTexto(14,
-                        cor: temaAtual ? tema.onPrimary : tema.onPrimary,
-                        peso: FontWeight.bold),
+                        cor: tema.secondary, peso: FontWeight.bold),
                   ),
                   Icon(
                     Icons.done,
-                    color: temaAtual
-                        ? tema.onSurfaceVariant
-                        : tema.onSurfaceVariant,
+                    color: tema.secondaryFixed,
                   ),
                 ],
               ),

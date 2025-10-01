@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../core/utils/cores.dart';
 import '../../../../core/utils/estilos.dart';
 import 'estilos_perfil.dart';
 
@@ -32,7 +31,7 @@ Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
 
   return showModalBottomSheet(
     context: context,
-    backgroundColor: Theme.of(context).colorScheme.surface,
+    backgroundColor: tema.surface,
     builder: (BuildContext context) {
       return SizedBox(
         height: 300,

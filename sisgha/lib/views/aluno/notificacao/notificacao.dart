@@ -65,7 +65,7 @@ class _NotificacaoState extends State<Notificacao> {
                       children: [
                         Icon(
                           item.icone,
-                          color: Theme.of(context).colorScheme.primary,
+                          color: tema.secondaryFixed,
                           size: 20,
                         ),
                         const SizedBox(width: 10),
@@ -73,22 +73,22 @@ class _NotificacaoState extends State<Notificacao> {
                           item.titulo,
                           style: estiloTexto(
                             15,
-                            cor: Theme.of(context).colorScheme.primary,
+                            cor: tema.secondaryFixed,
                             peso: FontWeight.bold,
                           ),
                         ),
                         const Spacer(),
                         Text(
                           item.tempo,
-                          style: TextStyle(color: tema.secondary),
+                          style: estiloTexto(13,
+                              cor: tema.tertiary, peso: FontWeight.bold),
                         ),
                       ],
                     ),
                     const SizedBox(height: 15),
                     Text(
                       item.texto,
-                      style: estiloTexto(15,
-                          cor: Theme.of(context).colorScheme.onSurface),
+                      style: estiloTexto(15, cor: tema.primary),
                     ),
                     TextButton(
                       onPressed: () {},
@@ -96,7 +96,7 @@ class _NotificacaoState extends State<Notificacao> {
                       child: Text(
                         item.link,
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
+                          color: tema.secondary,
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                         ),

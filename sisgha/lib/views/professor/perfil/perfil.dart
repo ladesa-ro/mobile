@@ -62,7 +62,7 @@ class _PerfilState extends State<Perfil> {
                         padding: const EdgeInsets.only(right: 5),
                         child: Icon(
                           Icones.sair,
-                          color: tema.surfaceDim,
+                          color: tema.primaryFixed,
                           size: 10,
                         ),
                       ),
@@ -77,12 +77,11 @@ class _PerfilState extends State<Perfil> {
                   child: SizedBox(
                     width: 30,
                     child: ElevatedButton(
-                      style: buttonStyleEdit(
-                          Theme.of(context).colorScheme.primary),
+                      style: buttonStyleEdit(tema.primaryContainer),
                       child: Iconify(
                         Icones.lapiz,
                         size: 10,
-                        color: tema.surfaceDim,
+                        color: tema.primaryFixed,
                       ),
                       onPressed: () => bottomSheat(
                           context,
@@ -129,7 +128,7 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
   return Container(
     padding: const EdgeInsets.all(4),
     decoration: BoxDecoration(
-      color: Theme.of(context).colorScheme.surface,
+      color: tema.surface,
       borderRadius: BorderRadius.circular(100),
     ),
     child: Stack(
@@ -140,7 +139,7 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
             width: 100,
             height: 100,
             child: CircleAvatar(
-                backgroundColor: tema.surfaceTint,
+                backgroundColor: tema.surfaceVariant,
                 backgroundImage: FileImage(imagem)),
           ),
         ),
@@ -151,12 +150,12 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
             width: 30,
             height: 42,
             child: ElevatedButton(
-              style: buttonStyleEdit(Theme.of(context).colorScheme.primary),
+              style: buttonStyleEdit(tema.primaryContainer),
               onPressed: () => bottomSheat(context, atualizarImagemPerfil),
               child: Iconify(
                 Icones.lapiz,
                 size: 10,
-                color: tema.surfaceDim,
+                color: tema.primaryFixed,
               ),
             ),
           ),

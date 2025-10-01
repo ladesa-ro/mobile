@@ -70,7 +70,7 @@ class _HomeAlunosState extends State<HomeAlunos> {
                           locale: 'pt-BR',
                           shouldFillViewport: true,
                           daysOfWeekHeight: 23,
-                          daysOfWeekStyle: estiloParteSuperior(context),
+                          daysOfWeekStyle: estiloParteSuperior(tema),
                           headerStyle: estiloCabessario(tema),
                           calendarBuilders: calendarBuilder(100.h, null, tema),
                           pageAnimationCurve: Curves.linear,
@@ -90,19 +90,19 @@ class _HomeAlunosState extends State<HomeAlunos> {
                   Icon(
                     Icones.calendario,
                     size: 3.h,
-                    color: tema.scrim,
+                    color: tema.primaryFixed,
                   ),
                   const Spacer(),
                   Text(
                     'Calendário ${now.year}',
                     style: estiloTexto(15,
-                        cor: tema.primary, peso: FontWeight.bold),
+                        cor: tema.inversePrimary, peso: FontWeight.bold),
                   ),
                   const Spacer(),
                   Iconify(
                     Icones.setaBaixo,
                     size: 4.h,
-                    color: tema.scrim,
+                    color: tema.primaryFixed,
                   ),
                   const SizedBox(
                     width: 16,

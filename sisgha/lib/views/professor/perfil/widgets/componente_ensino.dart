@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:text_scroll/text_scroll.dart';
 
-import '../../../../core/utils/cores.dart';
 import '../../../../core/utils/estilos.dart';
 import '../../../../core/utils/icones.dart';
 import '../../../../core/utils/padroes.dart';
@@ -88,13 +87,13 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
       width: constraints.maxWidth,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: tema.tertiary, width: 2),
+        border: Border.all(color: tema.onSecondary, width: 2),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildImagem(constraints.maxWidth, constraints.maxHeight * 0.2),
-          Divider(height: 0, color: tema.tertiary, thickness: 2),
+          Divider(height: 0, color: tema.onTertiary, thickness: 2),
           Padding(
             padding:
                 EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.04),
@@ -138,7 +137,7 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
       width: constraints.maxWidth,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: tema.tertiary, width: 2),
+        border: Border.all(color: tema.onSecondary, width: 2),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,7 +148,7 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
           Divider(
             indent: 12.sp,
             endIndent: 12.sp,
-            color: tema.tertiary,
+            color: tema.onSecondary,
             thickness: 2,
           ),
           Expanded(child: _buildTurmasCarousel(cursos, tema)),
@@ -195,7 +194,7 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
         minimumSize: MaterialStatePropertyAll(Size(20.sp, 20.sp)),
       ),
       onPressed: onPressed,
-      icon: Iconify(icon, size: 15.sp, color: tema.onSurfaceVariant),
+      icon: Iconify(icon, size: 15.sp, color: tema.secondaryFixed),
     );
   }
 
@@ -233,8 +232,8 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
               width: constraints.maxHeight * 0.06 + 2,
               decoration: BoxDecoration(
                 color: disciplinaMostrada == index
-                    ? tema.errorContainer
-                    : tema.tertiary,
+                    ? tema.onPrimary
+                    : tema.onSecondary,
               ),
             );
           },

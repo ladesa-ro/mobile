@@ -52,7 +52,10 @@ class _CardFormacaoState extends State<CardFormacao> {
                       Text(
                         'Formação',
                         style: estiloTexto(15,
-                            peso: FontWeight.bold, cor: tema.primary),
+                            peso: FontWeight.bold,
+                            cor: formacaoSelecionada
+                                ? tema.primary
+                                : tema.tertiary),
                       ),
                       Transform.rotate(
                         angle: espandido ? 3.14 : 0,

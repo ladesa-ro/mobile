@@ -98,7 +98,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                   locale: 'pt-BR',
                   shouldFillViewport: true,
                   daysOfWeekHeight: 23,
-                  daysOfWeekStyle: estiloParteSuperior(context),
+                  daysOfWeekStyle: estiloParteSuperior(tema),
                   headerStyle: estiloCabessario(tema),
                   calendarBuilders: calendarBuilder(120.sp, _focusedDay, tema),
                   pageAnimationCurve: Curves.linear,

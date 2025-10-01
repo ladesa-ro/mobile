@@ -6,7 +6,6 @@ import 'package:sisgha/viewmodels/calendario_funcionalidades.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../core/utils/cores.dart';
 import '../core/utils/estilos.dart';
 import '../core/utils/icones.dart';
 import '../views/professor/calendario/calendario.dart';
@@ -80,7 +79,7 @@ Widget estiloBlocoDiaSelecionado(
         style: estiloTexto(
           15,
           peso: FontWeight.bold,
-          cor: tema.primary,
+          cor: tema.surface,
         ),
       ),
     ),
@@ -93,14 +92,14 @@ Widget estiloDosBlocosDosDiasDoMesDesabilitados(
     width: height * 0.04,
     height: height * 0.04,
     decoration: BoxDecoration(
-      color: tema.errorContainer,
+      color: tema.surfaceVariant,
       borderRadius: BorderRadius.circular(10),
     ),
   );
 }
 
 TextStyle estiloTextoNumeros(ColorScheme tema) {
-  return estiloTexto(15, cor: tema.primary, peso: FontWeight.bold);
+  return estiloTexto(15, cor: tema.surface, peso: FontWeight.bold);
 }
 
 HeaderStyle estiloCabessario(ColorScheme tema) {
@@ -108,7 +107,7 @@ HeaderStyle estiloCabessario(ColorScheme tema) {
     headerMargin: const EdgeInsets.only(bottom: 7),
     headerPadding: EdgeInsets.all(1.h),
     decoration: BoxDecoration(
-      color: tema.errorContainer,
+      color: tema.surfaceContainer,
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(15),
         topRight: Radius.circular(15),
@@ -116,15 +115,16 @@ HeaderStyle estiloCabessario(ColorScheme tema) {
     ),
     titleCentered: true,
     formatButtonVisible: false,
-    titleTextStyle: estiloTexto(16, cor: tema.primary, peso: FontWeight.bold),
+    titleTextStyle:
+        estiloTexto(16, cor: tema.inversePrimary, peso: FontWeight.bold),
     leftChevronIcon: Iconify(
       Icones.setaEsquerda,
-      color: tema.surfaceDim,
+      color: tema.primaryFixed,
       size: 3.h,
     ),
     rightChevronIcon: Iconify(
       Icones.setaDireita,
-      color: tema.surfaceDim,
+      color: tema.primaryFixed,
       size: 3.h,
     ),
     titleTextFormatter: (date, locale) =>
@@ -132,14 +132,10 @@ HeaderStyle estiloCabessario(ColorScheme tema) {
   );
 }
 
-DaysOfWeekStyle estiloParteSuperior(BuildContext context) {
+DaysOfWeekStyle estiloParteSuperior(ColorScheme tema) {
   return DaysOfWeekStyle(
-    weekdayStyle: estiloTexto(15,
-        peso: FontWeight.bold,
-        cor: Theme.of(context).textTheme.bodyLarge?.color),
-    weekendStyle: estiloTexto(15,
-        peso: FontWeight.bold,
-        cor: Theme.of(context).textTheme.bodyLarge?.color),
+    weekdayStyle: estiloTexto(15, peso: FontWeight.bold, cor: tema.primary),
+    weekendStyle: estiloTexto(15, peso: FontWeight.bold, cor: tema.primary),
     dowTextFormatter: (date, locale) {
       switch (date.weekday) {
         case DateTime.monday:
@@ -182,7 +178,7 @@ CalendarBuilders calendarBuilder(
       defaultBuilder: (context, date, events) {
         final provider = context.read<CalendarioFuncionalidades>();
         final eventoDoDia = provider.tudoJunto[normalizarData(date)];
-        final cor = eventoDoDia?.first.cor ?? tema.surfaceTint;
+        final cor = eventoDoDia?.first.cor ?? tema.surfaceVariant;
 
         return estiloDosBlocosDosDiasDoMes(cor, date, heigth, tema);
       },

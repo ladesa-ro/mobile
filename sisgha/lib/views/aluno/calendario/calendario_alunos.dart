@@ -7,7 +7,6 @@ import 'package:text_scroll/text_scroll.dart';
 
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/icones.dart';
-import '../../../core/utils/cores.dart';
 import '../../../core/utils/dias.dart';
 import '../../../core/utils/padroes.dart';
 import '../../../viewmodels/calendario_funcionalidades.dart';
@@ -78,7 +77,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                             velocity: Velocity(pixelsPerSecond: Offset(5, 0)),
                             'Técnico Integrado - Informática 2023 - 2023',
                             style: estiloTexto(15,
-                                cor: tema.onPrimary, peso: FontWeight.bold),
+                                cor: tema.primary, peso: FontWeight.bold),
                             mode: TextScrollMode.bouncing,
                           ),
                         ),
@@ -91,7 +90,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                   height: Padroes.aluturaBotoes(),
                   width: largura * 0.17,
                   child: ElevatedButton(
-                    style: _estiloBotao(context),
+                    style: _estiloBotao(tema),
                     onPressed: () {
                       scaffoldKey.currentState?.openEndDrawer();
                     },
@@ -108,7 +107,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                 child: Container(
                   padding: EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
-                      border: Border.all(color: tema.tertiary),
+                      border: Border.all(color: tema.onSecondary),
                       borderRadius: BorderRadius.circular(15)),
                   child: TableCalendar(
                     availableGestures: AvailableGestures.none,
@@ -119,7 +118,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                     locale: 'pt-BR',
                     shouldFillViewport: true,
                     daysOfWeekHeight: 23,
-                    daysOfWeekStyle: estiloParteSuperior(context),
+                    daysOfWeekStyle: estiloParteSuperior(tema),
                     headerStyle: estiloCabessario(tema),
                     calendarBuilders:
                         calendarBuilder(120.sp, _focusedDay, tema),
@@ -151,7 +150,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
               width: largura,
               height: Padroes.aluturaBotoes(),
               child: ElevatedButton(
-                style: _estiloBotao(context),
+                style: _estiloBotao(tema),
                 onPressed: () {
                   showModalBottomSheet(
                     context: context,
@@ -169,7 +168,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                       "Ver todos os eventos",
                       style: estiloTexto(
                         16,
-                        cor: Colors.white,
+                        cor: tema.inversePrimary,
                         peso: FontWeight.bold,
                       ),
                     ),
@@ -178,7 +177,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                       'assets/icones/Vector.svg',
                       width: 24,
                       height: 24,
-                      color: Colors.white,
+                      color: tema.primaryFixed,
                     )
                   ],
                 ),
@@ -193,11 +192,10 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
   }
 }
 
-ButtonStyle _estiloBotao(BuildContext context) {
+ButtonStyle _estiloBotao(ColorScheme tema) {
   return ButtonStyle(
     padding: WidgetStatePropertyAll(EdgeInsets.zero),
-    backgroundColor:
-        WidgetStatePropertyAll(Theme.of(context).colorScheme.primary),
+    backgroundColor: WidgetStatePropertyAll(tema.primaryContainer),
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),

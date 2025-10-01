@@ -13,6 +13,7 @@ class Temas {
         //fundo
         surface: CoresClaras.background,
         surfaceVariant: CoresClaras.verdeFraco,
+        surfaceContainer: CoresClaras.roxoCalendario,
 
         //cores componentes e botões
         primaryContainer: CoresClaras.verde,
@@ -37,6 +38,7 @@ class Temas {
         secondaryFixed: CoresClaras.iconeVerde,
         tertiaryFixed: CoresClaras.iconeCinza,
         onPrimaryFixedVariant: CoresClaras.iconePreto,
+        onSecondaryFixedVariant: CoresClaras.iconePreto,
       ));
 
   //tema escuro
@@ -49,6 +51,7 @@ class Temas {
       //fundo
       surface: CoresEscuras.background,
       surfaceVariant: CoresEscuras.verdeFraco,
+      surfaceContainer: CoresEscuras.roxoCalendario,
 
       //cores componentes e botões
       primaryContainer: CoresEscuras.verde,
@@ -73,6 +76,7 @@ class Temas {
       secondaryFixed: CoresEscuras.iconeVerde,
       tertiaryFixed: CoresEscuras.iconeCinza,
       onPrimaryFixedVariant: CoresEscuras.iconePreto,
+      onSecondaryFixedVariant: CoresEscuras.iconeBranco,
     ),
   );
 }

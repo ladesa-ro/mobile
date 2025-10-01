@@ -4,7 +4,6 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../core/utils/icones.dart';
-import '../../../../core/utils/cores.dart';
 import '../../../../core/utils/estilos.dart';
 import '../../../../core/utils/padroes.dart';
 
@@ -68,7 +67,7 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
           Container(
             height: constraints.maxHeight * 0.11,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
+              color: tema.primaryContainer,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
@@ -77,8 +76,8 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
                 const Spacer(),
                 Text(
                   dias[diaIndex],
-                  style:
-                      estiloTexto(17, cor: tema.primary, peso: FontWeight.bold),
+                  style: estiloTexto(17,
+                      cor: tema.inversePrimary, peso: FontWeight.bold),
                 ),
                 const Spacer(),
                 _iconButton(0, Icones.setaDireita, tema),
@@ -123,7 +122,7 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
       onPressed: () {
         _alternarEntreDias(index);
       },
-      icon: Iconify(icone, color: tema.surfaceDim),
+      icon: Iconify(icone, color: tema.primaryFixed),
     );
   }
 }
