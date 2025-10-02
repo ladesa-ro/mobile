@@ -14,7 +14,7 @@ import '../../../viewmodels/calendario_funcionalidades.dart';
 import '../../../viewmodels/escolha_calendario.dart';
 import '../../../widgets/calendario.dart';
 import '../../professor/calendario/calendario.dart';
-import '../../listagem_de_eventos/modal_eventos_alunos.dart';
+import '../../listagem_de_eventos/listagem_de_eventos.dart';
 import 'widgets/menu_lateral_alunos.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -74,7 +74,11 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                     onPressed: () {
                       scaffoldKey.currentState?.openEndDrawer();
                     },
-                    child: Icones.lupa,
+                    child: Icon(
+                      Icones.lupa,
+                      color: tema.primaryFixed,
+                      size: 4.h,
+                    ),
                   ),
                 ),
               ],
@@ -138,7 +142,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                     isScrollControlled: true,
                     enableDrag: false,
                     backgroundColor: Color.fromARGB(88, 0, 0, 0),
-                    builder: (context) => ModalEventosAlunos(),
+                    builder: (context) => ListagemDeEventos(),
                   );
                 },
                 child: Row(

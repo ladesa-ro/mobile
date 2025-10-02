@@ -11,6 +11,12 @@ class CalendarioFuncionalidades with ChangeNotifier {
   Map<DateTime, List<Etapas>> etapasCalendario = {};
   Map<DateTime, List<MostrarNoCalendario>> tudoJunto = {};
 
+  List<MostrarNoCalendario> get listaDeTudo {
+    return tudoJunto.values.expand((lista) => lista).toList();
+  }
+
+  List<MostrarNoCalendario> filtroDePesquisa = [];
+
   adicionarEtapasCalendario(List<Etapas> lista) {
     for (var etapa in lista) {
       final inicio = normalizarData(etapa.dataInicio);
@@ -88,6 +94,16 @@ class CalendarioFuncionalidades with ChangeNotifier {
         },
       );
     }
+
+    filtroDePesquisa = listaDeTudo;
+  }
+
+  void aplicarFiltro(String? value) {
+    if (value == null || value == '') {
+      filtroDePesquisa = listaDeTudo;
+    }
+
+    notifyListeners();
   }
 }
 

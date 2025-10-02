@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/views/listagem_de_eventos/modal_eventos.dart';
+import 'package:sisgha/views/listagem_de_eventos/listagem_de_eventos.dart';
 import 'package:sisgha/widgets/cards_calendario.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -74,7 +74,11 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                   onPressed: () {
                     scaffoldKey.currentState?.openEndDrawer();
                   },
-                  child: Icones.lupa,
+                  child: Icon(
+                    Icones.lupa,
+                    color: tema.primaryFixed,
+                    size: 4.h,
+                  ),
                 ),
               ),
             ],
@@ -137,7 +141,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                   isScrollControlled: true,
                   enableDrag: false,
                   backgroundColor: const Color.fromARGB(88, 0, 0, 0),
-                  builder: (context) => ModalEventos(),
+                  builder: (context) => ListagemDeEventos(),
                 );
               },
               child: Row(
