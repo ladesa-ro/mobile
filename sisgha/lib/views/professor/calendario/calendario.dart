@@ -136,6 +136,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
           SizedBox(
             height: tamanho * 0.03,
           ),
+          // Início - Botão de ver todos os eventos
           SizedBox(
             width: largura,
             height: Padroes.aluturaBotoes(),
@@ -173,6 +174,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
               ),
             ),
           ),
+          // Fim - Botão de ver todos os eventos
           SizedBox(height: tamanho * 0.02),
 
           //cards dos eventos do dia
