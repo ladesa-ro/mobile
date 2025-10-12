@@ -3,7 +3,6 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/estilos.dart';
 import '../../../../core/utils/icones.dart';
 import '../../../../core/utils/padroes.dart';
@@ -26,12 +25,9 @@ class _CardFormacaoState extends State<CardFormacao> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
+
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -40,12 +36,11 @@ class _CardFormacaoState extends State<CardFormacao> {
       },
       child: Consumer<EscolhaHorariosAlunos>(
         builder: (context, provider, child) {
-          final formacaoSelecionada =
-              provider.idFormacaoSelecionada != null ? true : false;
+          final formacaoSelecionada = provider.idFormacaoSelecionada != null;
 
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 4.w),
-            decoration: bordasCardsAlunos(formacaoSelecionada),
+            decoration: bordasCardsAlunos(formacaoSelecionada, tema),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -58,15 +53,17 @@ class _CardFormacaoState extends State<CardFormacao> {
                         'Formação',
                         style: estiloTexto(15,
                             peso: FontWeight.bold,
-                            cor: Theme.of(context).textTheme.bodyLarge?.color),
+                            cor: formacaoSelecionada
+                                ? tema.primary
+                                : tema.tertiary),
                       ),
                       Transform.rotate(
                         angle: espandido ? 3.14 : 0,
                         child: Iconify(
                           Icones.setaBaixo,
                           color: formacaoSelecionada
-                              ? CoresClaras.verdePrincipal
-                              : CoresClaras.cinzaBordas,
+                              ? tema.secondaryFixed
+                              : tema.tertiaryFixed,
                           size: 3.5.h,
                         ),
                       ),
@@ -78,7 +75,7 @@ class _CardFormacaoState extends State<CardFormacao> {
                   crossFadeState: espandido
                       ? CrossFadeState.showSecond
                       : CrossFadeState.showFirst,
-                  firstChild: SizedBox.shrink(), // Quando fechado
+                  firstChild: SizedBox.shrink(),
                   secondChild: SizedBox(
                     height: Padroes.alturaGeral() * 0.07,
                     child: ListView.builder(
@@ -101,8 +98,8 @@ class _CardFormacaoState extends State<CardFormacao> {
                               style: estiloTexto(
                                 15,
                                 cor: selecionado
-                                    ? CoresClaras.verdePrincipalTexto
-                                    : CoresClaras.cinzatexto,
+                                    ? tema.secondary
+                                    : tema.tertiary,
                                 peso: FontWeight.bold,
                               ),
                             ),
@@ -110,21 +107,23 @@ class _CardFormacaoState extends State<CardFormacao> {
                                 horizontal: 1.w, vertical: 0.5.h),
                             showCheckmark: false,
                             selected: selecionado,
-                            onSelected: (_) => selecionado
-                                ? provider.selecionarFormacao(null)
-                                : provider.selecionarFormacao(nome),
-                            selectedColor: CoresClaras.verdeTransparente,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.surfaceVariant,
-                            labelStyle: TextStyle(
-                              color: selecionado ? Colors.white : Colors.black,
-                            ),
+                            onSelected: (_) {
+                              if (!selecionado) {
+                                // Seleciona a formação
+                                provider.selecionarFormacao(nome);
+                              } else {
+                                // Opcional: desmarcar explicitamente
+                                provider.selecionarFormacao(null);
+                              }
+                            },
+                            selectedColor: tema.surfaceVariant,
+                            backgroundColor: tema.surface,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.sp),
                               side: BorderSide(
                                 color: selecionado
-                                    ? CoresClaras.verdePrincipalBorda
-                                    : CoresClaras.cinzaBordas,
+                                    ? tema.onPrimary
+                                    : tema.onSecondary,
                               ),
                             ),
                           ),
@@ -137,40 +136,6 @@ class _CardFormacaoState extends State<CardFormacao> {
             ),
           );
         },
-      ),
-    );
-  }
-
-  Widget quadradoSelecionavel(String opcao, EscolhaHorariosAlunos provider) {
-    final selecionado = provider.nomeFormacaoSelecionada == opcao;
-
-    return ChoiceChip(
-      chipAnimationStyle:
-          ChipAnimationStyle(enableAnimation: AnimationStyle.noAnimation),
-      label: Text(opcao,
-          style: estiloTexto(
-            14,
-            cor: selecionado
-                ? CoresClaras.verdePrincipalTexto
-                : CoresClaras.cinzatexto,
-          )),
-      labelPadding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 0.5.h),
-      showCheckmark: false,
-      selected: selecionado,
-      onSelected: (_) => selecionado
-          ? provider.selecionarFormacao(null)
-          : provider.selecionarFormacao(opcao),
-      selectedColor: CoresClaras.verdeTransparente,
-      backgroundColor: Colors.white,
-      labelStyle: TextStyle(
-        color: selecionado ? Colors.white : Colors.black,
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-        side: BorderSide(
-            color: selecionado
-                ? CoresClaras.verdePrincipalBorda
-                : CoresClaras.cinzaBordas),
       ),
     );
   }

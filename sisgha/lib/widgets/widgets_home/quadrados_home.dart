@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/viewmodels/escolha_horarios_alunos.dart';
-import '../../core/utils/colors.dart';
 import '../../core/utils/estilos.dart';
 import 'cards_horarios_disciplinas.dart';
 
@@ -21,6 +20,8 @@ class _QuadradosHomeState extends State<QuadradosHome>
   @override
   void initState() {
     super.initState();
+    // !!!!!!!!!!!!!!!!!!!!!!!!!! arrumar isso !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // nao pode ser usado o mesmo selecionar curso com 'nome' para nao interferir nos dados já existentes
     Provider.of<EscolhaHorariosAlunos>(context, listen: false)
         .selecionarCurso('nome');
     _quadradoSelecionado =
@@ -47,6 +48,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
 
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     return LayoutBuilder(
       builder: (
         context,
@@ -66,7 +68,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
               controller: _tabController,
               tabs: List.generate(
                 6,
-                (index) => _contruindoInterface(index),
+                (index) => _contruindoInterface(index, tema),
               ),
             ),
           ),
@@ -83,7 +85,7 @@ class _QuadradosHomeState extends State<QuadradosHome>
     );
   }
 
-  Widget _contruindoInterface(int index) {
+  Widget _contruindoInterface(int index, ColorScheme tema) {
     List<String> diasDaSemana = [
       'Seg',
       'Ter',
@@ -106,12 +108,9 @@ class _QuadradosHomeState extends State<QuadradosHome>
     BoxDecoration boxDecoration(bool selecionado) {
       return BoxDecoration(
         color: retorno(
-            atributo1: Theme.of(context).colorScheme.primary,
-            atributo2: Colors.transparent),
+            atributo1: tema.primaryContainer, atributo2: Colors.transparent),
         border: Border.all(
-            color: Theme.of(context).colorScheme.primary,
-            width: 1.0,
-            style: BorderStyle.solid),
+            color: tema.onPrimary, width: 1.5, style: BorderStyle.solid),
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       );
     }
@@ -138,8 +137,8 @@ class _QuadradosHomeState extends State<QuadradosHome>
                       diasDaSemana[index],
                       style: estiloTexto(15,
                           cor: retorno(
-                              atributo1: CoresClaras.brancoTexto,
-                              atributo2: CoresClaras.verdePrincipalTexto),
+                              atributo1: tema.inversePrimary,
+                              atributo2: tema.secondary),
                           peso: FontWeight.w600),
                     ),
                   ),
@@ -148,8 +147,8 @@ class _QuadradosHomeState extends State<QuadradosHome>
                         vertical: constraints.maxHeight *
                             0.01), // Espaçamento dinâmic
                     color: retorno(
-                        atributo1: CoresClaras.brancoTexto,
-                        atributo2: CoresClaras.verdePrincipalTexto),
+                        atributo1: tema.inversePrimary,
+                        atributo2: tema.secondary),
                     width: constraints.maxWidth * 0.45,
                     height: 1.5,
                   ),
@@ -161,8 +160,8 @@ class _QuadradosHomeState extends State<QuadradosHome>
                       diaDaSemanaSoQueEmNumeros,
                       style: estiloTexto(15,
                           cor: retorno(
-                              atributo1: CoresClaras.brancoTexto,
-                              atributo2: CoresClaras.verdePrincipalTexto),
+                              atributo1: tema.inversePrimary,
+                              atributo2: tema.secondary),
                           peso: FontWeight.w600),
                     ),
                   ),

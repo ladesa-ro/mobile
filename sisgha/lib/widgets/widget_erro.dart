@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sisgha/core/utils/colors.dart';
 import 'package:sisgha/viewmodels/dados_professor.dart';
 
 import '../core/utils/estilos.dart';
 import '../core/utils/imagens.dart';
 
-Widget dialogoDeErro(BuildContext context) {
+Widget dialogoDeErro(BuildContext context, ColorScheme? tema) {
   DadosProfessor dadosProfessor = DadosProfessor();
   return AlertDialog(
     backgroundColor: Colors.white,
@@ -26,8 +25,9 @@ Widget dialogoDeErro(BuildContext context) {
           ),
           Text(
             'Nenhuma conexão com a internet ',
-            style:
-                estiloTexto(16, cor: CoresClaras.preto, peso: FontWeight.bold),
+            style: estiloTexto(16,
+                cor: tema == null ? Colors.amber : tema.primary,
+                peso: FontWeight.bold),
           ),
           const SizedBox(
             height: 10,
@@ -36,7 +36,7 @@ Widget dialogoDeErro(BuildContext context) {
             'Verifique sua conexão ou',
             style: estiloTexto(
               15,
-              cor: CoresClaras.preto,
+              cor: tema == null ? Colors.amber : tema.primary,
             ),
             textAlign: TextAlign.center,
           ),
@@ -47,14 +47,15 @@ Widget dialogoDeErro(BuildContext context) {
             'tente novamente',
             style: estiloTexto(
               15,
-              cor: CoresClaras.preto,
+              cor: tema == null ? Colors.amber : tema.primary,
             ),
           ),
           const SizedBox(
             height: 15,
           ),
           ElevatedButton(
-            style: _estiloBotao(CoresClaras.verdePrincipal, CoresClaras.branco),
+            style: _estiloBotao(tema == null ? Colors.amber : tema.outline,
+                tema == null ? Colors.amber : tema.primary),
             onPressed: () {
               dadosProfessor.apagarDados();
               Navigator.pushNamedAndRemoveUntil(
@@ -69,7 +70,8 @@ Widget dialogoDeErro(BuildContext context) {
             height: 15,
           ),
           ElevatedButton(
-            style: _estiloBotao(CoresClaras.branco, CoresClaras.verdePrincipal),
+            style: _estiloBotao(tema == null ? Colors.amber : tema.surface,
+                tema == null ? Colors.amber : tema.primary),
             onPressed: () {
               dadosProfessor.apagarDados();
               SystemNavigator.pop();

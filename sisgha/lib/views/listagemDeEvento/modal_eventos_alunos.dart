@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:sisgha/views/listagemDeEvento/evento_card.dart';
+import 'package:sisgha/views/listagemDeEvento/modal_eventos.dart';
+import '../../core/utils/cores.dart';
+import 'campo_pesquisa_evento.dart';
 
-import '../../../core/utils/colors.dart';
-import 'Modal.dart';
-import 'campo_de_pesquisar_dos_eventos_do_professor.dart';
-import 'evento_card_professor.dart';
-
-class ModalEventosProfessores extends StatefulWidget {
-  const ModalEventosProfessores({super.key});
+class ModalEventosAlunos extends StatefulWidget {
+  const ModalEventosAlunos({super.key});
 
   @override
-  State<ModalEventosProfessores> createState() =>
-      _ModalEventosProfessoresState();
+  State<ModalEventosAlunos> createState() => _ModalEventosAlunosState();
 }
 
-class _ModalEventosProfessoresState extends State<ModalEventosProfessores> {
+class _ModalEventosAlunosState extends State<ModalEventosAlunos> {
   final FocusNode _focusNode = FocusNode();
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
@@ -48,6 +46,7 @@ class _ModalEventosProfessoresState extends State<ModalEventosProfessores> {
 
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     return Align(
       alignment: Alignment.bottomCenter,
       child: FractionallySizedBox(
@@ -62,29 +61,29 @@ class _ModalEventosProfessoresState extends State<ModalEventosProfessores> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ModalEventosProf(),
-              CampoPesquisaEventosProf(
+              ModalEventos(),
+              CampoPesquisaEventos(
                 focusNode: _focusNode,
                 controller: _controller,
                 isFocused: _isFocused,
                 isEmpty: _isEmpty,
               ),
-              const SizedBox(height: 15),
+              SizedBox(height: 15),
               Expanded(
                 child: RawScrollbar(
                   controller: _scrollController,
                   thumbVisibility: true,
                   trackVisibility: true,
                   thickness: 5,
-                  radius: const Radius.circular(10),
-                  trackColor: CoresClaras.verdeclarinho,
-                  thumbColor: CoresClaras.verdebotao,
+                  radius: Radius.circular(10),
+                  trackColor: tema.secondaryContainer,
+                  thumbColor: tema.outline,
                   child: ListView.builder(
                     controller: _scrollController,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                     itemCount: 10,
                     itemBuilder: (context, index) {
-                      return EventoCardProf(index: index);
+                      return EventoCard(index: index);
                     },
                   ),
                 ),

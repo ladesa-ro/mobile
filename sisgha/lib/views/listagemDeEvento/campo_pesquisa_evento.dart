@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/colors.dart';
+import '../../core/utils/cores.dart';
 
-class CampoPesquisaEventosProf extends StatelessWidget {
+class CampoPesquisaEventos extends StatelessWidget {
   final FocusNode focusNode;
   final TextEditingController controller;
   final bool isFocused;
   final bool isEmpty;
 
-  const CampoPesquisaEventosProf({
+  const CampoPesquisaEventos({
     super.key,
     required this.focusNode,
     required this.controller,
@@ -18,6 +18,7 @@ class CampoPesquisaEventosProf extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Stack(
@@ -33,20 +34,19 @@ class CampoPesquisaEventosProf extends StatelessWidget {
                     : 'Digite o nome do evento ...',
                 suffixIcon: Icon(
                   Icons.search,
-                  color:
-                      isFocused ? CoresClaras.verdeBordas : CoresClaras.cinza,
+                  color: isFocused ? tema.onSurfaceVariant : tema.surfaceTint,
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: CoresClaras.cinza),
+                  borderSide: BorderSide(color: tema.tertiary),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: CoresClaras.cinza),
+                  borderSide: BorderSide(color: tema.tertiary),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: CoresClaras.verdeBordas),
+                  borderSide: BorderSide(color: tema.tertiaryContainer),
                 ),
                 contentPadding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
@@ -64,8 +64,7 @@ class CampoPesquisaEventosProf extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 14,
-                  color:
-                      isFocused ? CoresClaras.verdeBordas : CoresClaras.cinza,
+                  color: isFocused ? tema.tertiaryContainer : tema.tertiary,
                 ),
               ),
             ),

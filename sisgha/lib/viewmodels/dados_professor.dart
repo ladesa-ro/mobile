@@ -6,11 +6,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sisgha/viewmodels/calendario_funcionalidades.dart';
 
-import '../domain/logic/listas.dart';
 import '../domain/tratamento_de_erros/erro_de_imagem_do_perfil.dart';
-import '../widgets/botton_app_bar.dart';
+import '../views/appbar_e_menu/menu_de_navegacao.dart';
 import '../repository/repository.dart';
 import '../domain/model/professor.dart';
 import 'dados_ensino_professor_provider.dart';
@@ -89,17 +87,6 @@ class DadosProfessor with ChangeNotifier {
   }
 
   Future<void> iniciarProvider(BuildContext context, bool verificado) async {
-    //carregar eventos do calendario
-    final listas = Listas();
-    await listas.adicionarEtapas();
-    await listas.adicionarEventos();
-    await context
-        .read<CalendarioFuncionalidades>()
-        .adicionarEtapasCalendario(listas.listaEtapas);
-    await context
-        .read<CalendarioFuncionalidades>()
-        .juntarEventosEtapas(listas.listaEtapas, listas.listaEventos);
-    //carregar dados do professor
     final dados = DadosProfessor();
     verificado
         ? await dados.carregarDados(context)

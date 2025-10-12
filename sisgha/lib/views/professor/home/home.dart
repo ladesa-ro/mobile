@@ -4,12 +4,10 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../../core/utils/colors.dart';
 import '../../../core/utils/dias.dart';
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/icones.dart';
 import '../../../core/utils/padroes.dart';
-import '../../../widgets/appbar.dart';
 import '../../../widgets/calendario.dart';
 import '../../../widgets/widgets_home/quadrados_home.dart';
 
@@ -38,19 +36,11 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     initializeDateFormatting('pt_BR', null);
 
-    var appBar = CustomAppBar(
-      height: 7.h,
-      mes: DatasFormatadas.primeiroAUltimoDia,
-      diaHoje: DatasFormatadas.obterDiaFormatado(),
-      icones: false,
-      animacaoAtiva: false,
-    );
     DateTime now = DateTime.now();
-    double tamanho = Padroes.calcularAlturaAppBar(context,
-        appBarSize: appBar.preferredSize.height);
+    double tamanho = Padroes.calcularAlturaAppBar(context, appBarSize: 7.h);
+    final tema = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: appBar,
       body: Padding(
         padding: Padroes.margem(),
         child: Column(
@@ -58,7 +48,7 @@ class _HomeState extends State<Home> {
             SizedBox(height: tamanho * 0.03), // ja ta certo
             // Inicio do botão de calendário
             ElevatedButton(
-              style: Padroes.estiloBotao(context),
+              style: Padroes.estiloBotao(context, tema),
               onPressed: () {
                 showDialog(
                   context: context,
@@ -70,9 +60,7 @@ class _HomeState extends State<Home> {
                       child: Container(
                         padding: EdgeInsets.only(bottom: 15),
                         decoration: estiloBorda(
-                            cor: CoresClaras.verdecinzaBorda,
-                            radius: 15,
-                            grossuraBorda: 1.5),
+                            cor: tema.tertiary, radius: 15, grossuraBorda: 1.5),
                         width: 100.w * 0.85,
                         height: 100.h * 0.4,
                         child: TableCalendar(
@@ -83,9 +71,9 @@ class _HomeState extends State<Home> {
                           locale: 'pt-BR',
                           shouldFillViewport: true,
                           daysOfWeekHeight: 23,
-                          daysOfWeekStyle: estiloParteSuperior(context),
-                          headerStyle: estiloCabessario(),
-                          calendarBuilders: calendarBuilder(100.h, null),
+                          daysOfWeekStyle: estiloParteSuperior(tema),
+                          headerStyle: estiloCabessario(tema),
+                          calendarBuilders: calendarBuilder(100.h, null, tema),
                           pageAnimationCurve: Curves.linear,
                           pageAnimationDuration:
                               const Duration(milliseconds: 500),
@@ -103,19 +91,19 @@ class _HomeState extends State<Home> {
                   Icon(
                     Icones.calendario,
                     size: 3.h,
-                    color: CoresClaras.branco,
+                    color: tema.primaryFixed,
                   ),
                   const Spacer(),
                   Text(
                     'Calendário ${now.year}',
                     style: estiloTexto(15,
-                        cor: CoresClaras.brancoTexto, peso: FontWeight.bold),
+                        cor: tema.inversePrimary, peso: FontWeight.bold),
                   ),
                   const Spacer(),
                   Iconify(
                     Icones.setaBaixo,
                     size: 4.h,
-                    color: CoresClaras.branco,
+                    color: tema.primaryFixed,
                   ),
                   const SizedBox(
                     width: 16,

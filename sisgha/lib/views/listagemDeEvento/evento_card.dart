@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/colors.dart';
+import '../../core/utils/cores.dart';
 
-class EventoCardProf extends StatelessWidget {
+class EventoCard extends StatelessWidget {
   final int index;
 
-  const EventoCardProf({super.key, required this.index});
+  const EventoCard({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        border: Border.all(color: CoresClaras.cinza),
+        border: Border.all(color: tema.tertiary),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -29,7 +30,7 @@ class EventoCardProf extends StatelessWidget {
               const SizedBox(width: 6),
               Text(
                 '${index + 1}ª Etapa',
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ],
           ),
