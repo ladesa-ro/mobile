@@ -132,10 +132,11 @@ HeaderStyle estiloCabessario(ColorScheme tema) {
   );
 }
 
+// Estilo dos dias da semana
 DaysOfWeekStyle estiloParteSuperior(ColorScheme tema) {
   return DaysOfWeekStyle(
-    weekdayStyle: estiloTexto(15, peso: FontWeight.bold, cor: tema.primary),
-    weekendStyle: estiloTexto(15, peso: FontWeight.bold, cor: tema.primary),
+    weekdayStyle: estiloTexto(16, peso: FontWeight.bold, cor: tema.primary),
+    weekendStyle: estiloTexto(16, peso: FontWeight.bold, cor: tema.primary),
     dowTextFormatter: (date, locale) {
       switch (date.weekday) {
         case DateTime.monday:
