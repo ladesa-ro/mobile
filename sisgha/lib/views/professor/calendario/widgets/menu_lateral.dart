@@ -82,7 +82,7 @@ class _MenuLateralState extends State<MenuLateral> {
                       child: Text(
                         'Buscar',
                         style: estiloTexto(15,
-                            cor: tema.primary, peso: FontWeight.bold),
+                            cor: tema.primaryFixed, peso: FontWeight.bold),
                       ),
                     )),
               ),
@@ -114,9 +114,7 @@ Widget headerDrawer(
             ),
             Text(
               'Selecione as informações',
-              style: estiloTexto(15,
-                  cor: Theme.of(context).textTheme.bodyLarge?.color,
-                  peso: FontWeight.bold),
+              style: estiloTexto(15, cor: tema.tertiary, peso: FontWeight.bold),
             ),
           ],
         ),
@@ -155,8 +153,8 @@ Widget quadradosAnos(BuildContext context, ColorScheme tema) {
           listaAnos[index],
           style: estiloTexto(15,
               cor: index == provider.anoSelecionado
-                  ? tema.onPrimary
-                  : tema.secondary,
+                  ? tema.tertiary
+                  : tema.tertiary,
               peso: FontWeight.bold),
         ),
       ),
@@ -184,8 +182,8 @@ Widget quadradosModalidade(
             listaModalidade[index],
             style: estiloTexto(15,
                 cor: index == provider.cursoSelecionado
-                    ? tema.onPrimary
-                    : tema.secondary,
+                    ? tema.tertiary
+                    : tema.tertiary,
                 peso: FontWeight.bold),
           ),
         ),
@@ -214,8 +212,8 @@ Widget quadradoCurso(BuildContext context, double height, ColorScheme tema) {
             listaCurso[index],
             style: estiloTexto(15,
                 cor: index == provider.modalidadeSelecionada
-                    ? tema.onPrimary
-                    : tema.secondary,
+                    ? tema.tertiary
+                    : tema.tertiary,
                 peso: FontWeight.bold),
           ),
         ),
@@ -227,13 +225,14 @@ Widget quadradoCurso(BuildContext context, double height, ColorScheme tema) {
 BoxDecoration _decoration(
     int indexAtual, int indexSelecionado, ColorScheme tema) {
   return BoxDecoration(
-    color:
-        indexAtual == indexSelecionado ? tema.errorContainer : tema.onSecondary,
+    color: indexAtual == indexSelecionado
+        ? Colors.transparent
+        : Colors.transparent,
     border: Border.all(
       width: 1.5,
       color: indexAtual == indexSelecionado
           ? tema.tertiaryContainer
-          : Colors.transparent,
+          : tema.tertiaryContainer,
     ),
     borderRadius: BorderRadius.circular(12),
   );

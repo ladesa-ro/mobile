@@ -36,7 +36,7 @@ class _MenuLateralAlunosState extends State<MenuLateralAlunos> {
                   context, constraints.maxHeight, constraints.maxWidth, tema),
               Divider(
                 thickness: 2,
-                color: tema.tertiary,
+                color: tema.tertiaryContainer,
               ),
               //ano
               SizedBox(height: constraints.maxHeight * 0.03),
@@ -110,12 +110,19 @@ Widget headerDrawer(
           children: [
             Text(
               'Calendário Parcial',
-              style:
-                  estiloTexto(16, cor: tema.onPrimary, peso: FontWeight.bold),
+              style: estiloTexto(
+                16,
+                cor: tema.onPrimary,
+                peso: FontWeight.bold,
+              ),
             ),
             Text(
               'Selecione as informações',
-              style: estiloTexto(15, cor: tema.tertiary, peso: FontWeight.bold),
+              style: estiloTexto(
+                15,
+                cor: tema.tertiary,
+                peso: FontWeight.bold,
+              ),
             ),
           ],
         ),
