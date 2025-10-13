@@ -50,6 +50,7 @@ PreferredSizeWidget appBar(BuildContext ctx) {
               ],
             ),
             const Spacer(),
+            //Ícon de troca de tema
             IconButton(
                 onPressed: () {
                   showDialog(

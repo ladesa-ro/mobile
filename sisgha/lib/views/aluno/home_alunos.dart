@@ -94,9 +94,9 @@ class _HomeAlunosState extends State<HomeAlunos> {
                   ),
                   const Spacer(),
                   Text(
-                    'Calendário ${now.year}',
-                    style: estiloTexto(15,
-                        cor: tema.inversePrimary, peso: FontWeight.bold),
+                    'Calendário',
+                    style: estiloTexto(16,
+                        cor: tema.primaryFixed, peso: FontWeight.bold),
                   ),
                   const Spacer(),
                   Iconify(
