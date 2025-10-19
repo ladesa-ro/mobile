@@ -101,7 +101,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                     calendarFormat: CalendarFormat.month,
                     locale: 'pt-BR',
                     shouldFillViewport: true,
-                    daysOfWeekHeight: 23,
+                    daysOfWeekHeight: 4.h,
                     daysOfWeekStyle: estiloParteSuperior(tema),
                     headerStyle: estiloCabessario(tema),
                     calendarBuilders:

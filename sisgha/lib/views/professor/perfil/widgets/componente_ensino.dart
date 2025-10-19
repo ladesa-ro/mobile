@@ -168,8 +168,8 @@ class _WidgetEnsinoState extends State<WidgetEnsino> {
           child: TextScroll(
             cursos[turmaMostrada].curso.nome,
             style: estiloTexto(14, cor: tema.primary, peso: FontWeight.bold),
-            mode: TextScrollMode.bouncing,
-            velocity: const Velocity(pixelsPerSecond: Offset(10, 0)),
+            mode: TextScrollMode.endless,
+            velocity: const Velocity(pixelsPerSecond: Offset(30, 0)),
             delayBefore: scrollDelay,
             pauseBetween: scrollDelay,
             pauseOnBounce: scrollDelay,

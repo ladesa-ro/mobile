@@ -70,7 +70,7 @@ class _HomeState extends State<Home> {
                           calendarFormat: CalendarFormat.month,
                           locale: 'pt-BR',
                           shouldFillViewport: true,
-                          daysOfWeekHeight: 23,
+                          daysOfWeekHeight: 4.h,
                           daysOfWeekStyle: estiloParteSuperior(tema),
                           headerStyle: estiloCabessario(tema),
                           calendarBuilders: calendarBuilder(100.h, null, tema),
