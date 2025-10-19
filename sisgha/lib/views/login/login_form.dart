@@ -84,7 +84,7 @@ class _CorpoLoginState extends State<LoginForm> {
             const SizedBox(width: 19),
             Icon(
               Icons.person,
-              color: tema.onSecondaryFixedVariant,
+              color: tema.primaryFixed,
               size: 3.7.h,
             ),
             const SizedBox(width: 5),
