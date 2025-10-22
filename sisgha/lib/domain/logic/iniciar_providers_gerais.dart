@@ -6,7 +6,7 @@ import '../../repository/repository.dart';
 import '../../viewmodels/calendario_funcionalidades.dart';
 import '../../viewmodels/dados_professor.dart';
 import '../../viewmodels/escolha_horarios_alunos.dart';
-import 'listas.dart';
+import 'listas_eventos_e_etapas.dart';
 import 'verificar_dados_armazenados.dart';
 
 Future<bool> inicicarProvidersGerais({
