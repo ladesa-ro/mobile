@@ -1,7 +1,9 @@
+import 'package:uuid/uuid.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:sisgha/domain/model/etapas.dart';
 import 'package:sisgha/domain/model/mostrar_no_calendario.dart';
+import 'package:diacritic/diacritic.dart';
 
 import '../domain/model/eventos.dart';
 import '../views/professor/calendario/calendario.dart';
@@ -12,11 +14,22 @@ class CalendarioFuncionalidades with ChangeNotifier {
   Map<DateTime, List<MostrarNoCalendario>> tudoJunto = {};
 
   List<MostrarNoCalendario> get listaDeTudo {
-    return tudoJunto.values.expand((lista) => lista).toList();
+    var lista = tudoJunto.values.expand((lista) => lista).toList();
+    final mapaUnico = <String, MostrarNoCalendario>{};
+
+    for (var item in lista) {
+      // Remove acentos e converte para minúsculas
+
+      // Mantém o último encontrado com o mesmo nome base
+      mapaUnico[item.id] = item;
+    }
+
+    return mapaUnico.values.toList();
   }
 
   List<MostrarNoCalendario> filtroDePesquisa = [];
 
+  final uuid = Uuid();
   adicionarEtapasCalendario(List<Etapas> lista) {
     for (var etapa in lista) {
       final inicio = normalizarData(etapa.dataInicio);
@@ -39,6 +52,7 @@ class CalendarioFuncionalidades with ChangeNotifier {
     final formatadorHoras = DateFormat('HH:ss');
 
     void adicionarAoCalendario({
+      required String idConjunto,
       required DateTime inicio,
       required DateTime fim,
       required Color cor,
@@ -49,6 +63,7 @@ class CalendarioFuncionalidades with ChangeNotifier {
         final dia = inicio.add(Duration(days: i));
         tudoJunto.putIfAbsent(dia, () => []).add(
               MostrarNoCalendario(
+                id: idConjunto,
                 titulo: tituloBuilder(i, totalDias),
                 dataInicio:
                     'Início: ${formatadorDia.format(inicio)} ás ${formatadorHoras.format(inicio)}',
@@ -65,8 +80,10 @@ class CalendarioFuncionalidades with ChangeNotifier {
     for (var evento in listaEventos) {
       final inicio = normalizarData(evento.dataInicio);
       final fim = normalizarData(evento.dataTermino);
+      final idConjunto = uuid.v4();
 
       adicionarAoCalendario(
+        idConjunto: idConjunto,
         inicio: inicio,
         fim: fim,
         cor: evento.cor,
@@ -82,8 +99,10 @@ class CalendarioFuncionalidades with ChangeNotifier {
     for (var etapa in listaEtapas) {
       final inicio = normalizarData(etapa.dataInicio);
       final fim = normalizarData(etapa.dataTermino);
+      final idConjunto = uuid.v4();
 
       adicionarAoCalendario(
+        idConjunto: idConjunto,
         inicio: inicio,
         fim: fim,
         cor: etapa.cor,
@@ -94,19 +113,21 @@ class CalendarioFuncionalidades with ChangeNotifier {
         },
       );
     }
-
     filtroDePesquisa = listaDeTudo;
   }
 
   void aplicarFiltro(String? value) {
     if (value == null || value == '') {
       filtroDePesquisa = listaDeTudo;
+    } else {
+      filtroDePesquisa = [];
     }
 
     notifyListeners();
   }
 }
 
+// verifica se vai começar, já começou ou se ja terminou
 String verificarTempo(DateTime inicio, DateTime fim) {
   final hoje = DateTime.now();
   final diasAteInicio = inicio.difference(hoje).inDays;

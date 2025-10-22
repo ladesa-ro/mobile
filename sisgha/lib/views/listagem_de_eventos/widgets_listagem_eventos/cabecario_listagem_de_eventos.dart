@@ -9,13 +9,15 @@ Widget cabecarioListagemDeEventos(BuildContext ctx, ColorScheme tema) {
       Row(
         children: [
           Container(
-            width: 1.w,
-            height: 3.h,
-            color: tema.primaryContainer,
+            width: 1.5.w,
+            height: 4.h,
+            decoration: BoxDecoration(
+                color: tema.primaryContainer,
+                borderRadius: BorderRadius.circular(8)),
           ),
           const SizedBox(width: 8),
           Text(
-            'Listagem De Eventos',
+            'Eventos',
             style: estiloTexto(
               19,
               peso: FontWeight.bold,

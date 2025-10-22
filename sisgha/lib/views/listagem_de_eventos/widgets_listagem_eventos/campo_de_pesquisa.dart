@@ -10,8 +10,8 @@ Widget campoDePesquisa(BuildContext ctx, ColorScheme tema) {
   return TextField(
     cursorColor: tema.onPrimary,
     decoration: InputDecoration(
-      labelText: 'Pesquisar título',
-      labelStyle: estiloTexto(14, cor: tema.tertiary),
+      labelText: 'Pesquisar',
+      labelStyle: estiloTexto(15, cor: tema.tertiary, peso: FontWeight.bold),
       focusedBorder: inputBorder(1, tema),
       enabledBorder: inputBorder(1, tema),
       suffixIcon: Icon(
