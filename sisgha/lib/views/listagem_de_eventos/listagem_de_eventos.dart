@@ -4,6 +4,7 @@ import 'package:sisgha/core/utils/estilos.dart';
 import 'package:sisgha/domain/model/mostrar_no_calendario.dart';
 import 'package:sisgha/viewmodels/calendario_funcionalidades.dart';
 import 'package:sizer/sizer.dart';
+import '../../core/utils/padroes.dart';
 import 'widgets_listagem_eventos/cabecario_listagem_de_eventos.dart';
 import 'widgets_listagem_eventos/campo_de_pesquisa.dart';
 
@@ -104,7 +105,7 @@ Widget builderCard(MostrarNoCalendario item, ColorScheme tema) {
 }
 
 Widget buildTitle(String titulo, ColorScheme tema) {
-  titulo = titulo.replaceAll(r' - Fim', '').replaceAll(r' - Início', '');
+  titulo = Padroes.removerPalavras(titulo);
   return Text(
     titulo,
     style: estiloTexto(16, peso: FontWeight.bold, cor: tema.primary),

@@ -54,4 +54,8 @@ class Padroes {
     lista.add(texto2);
     return lista;
   }
+
+  static String removerPalavras(String texto) {
+    return texto.replaceAll(r' - Fim', '').replaceAll(r' - Início', '');
+  }
 }

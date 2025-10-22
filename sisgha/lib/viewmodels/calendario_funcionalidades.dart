@@ -1,9 +1,9 @@
+import 'package:sisgha/core/utils/padroes.dart';
 import 'package:uuid/uuid.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:sisgha/domain/model/etapas.dart';
 import 'package:sisgha/domain/model/mostrar_no_calendario.dart';
-import 'package:diacritic/diacritic.dart';
 
 import '../domain/model/eventos.dart';
 import '../views/professor/calendario/calendario.dart';
@@ -13,19 +13,7 @@ class CalendarioFuncionalidades with ChangeNotifier {
   Map<DateTime, List<Etapas>> etapasCalendario = {};
   Map<DateTime, List<MostrarNoCalendario>> tudoJunto = {};
 
-  List<MostrarNoCalendario> get listaDeTudo {
-    var lista = tudoJunto.values.expand((lista) => lista).toList();
-    final mapaUnico = <String, MostrarNoCalendario>{};
-
-    for (var item in lista) {
-      // Remove acentos e converte para minúsculas
-
-      // Mantém o último encontrado com o mesmo nome base
-      mapaUnico[item.id] = item;
-    }
-
-    return mapaUnico.values.toList();
-  }
+  List<MostrarNoCalendario> listaDeTudo = [];
 
   List<MostrarNoCalendario> filtroDePesquisa = [];
 
@@ -113,14 +101,31 @@ class CalendarioFuncionalidades with ChangeNotifier {
         },
       );
     }
+    listaDeTudo = formatarLista();
     filtroDePesquisa = listaDeTudo;
   }
 
+  List<MostrarNoCalendario> formatarLista() {
+    var lista = tudoJunto.values.expand((lista) => lista).toList();
+    final mapaUnico = <String, MostrarNoCalendario>{};
+
+    for (var item in lista) {
+      mapaUnico[item.id] = item;
+    }
+
+    return mapaUnico.values.toList();
+  }
+
+//função filtrar
   void aplicarFiltro(String? value) {
-    if (value == null || value == '') {
+    if (value == null || value.isEmpty) {
       filtroDePesquisa = listaDeTudo;
     } else {
-      filtroDePesquisa = [];
+      filtroDePesquisa = filtroDePesquisa.where((item) {
+        String titulo = Padroes.removerPalavras(item.titulo);
+
+        return titulo.toUpperCase().contains(value.toUpperCase());
+      }).toList();
     }
 
     notifyListeners();
