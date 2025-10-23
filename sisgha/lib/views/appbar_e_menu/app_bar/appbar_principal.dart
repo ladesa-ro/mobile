@@ -10,11 +10,11 @@ import 'package:sizer/sizer.dart';
 import '../../../widgets/textos_alternados_widget.dart';
 
 PreferredSizeWidget appBar(BuildContext ctx) {
-  var temaAtivo = Provider.of<TemasProvider>(ctx).temaAtivo.brightness;
+  var temaAtivo = Provider.of<TemasProvider>(ctx).themeMode;
   final tema = Theme.of(ctx).colorScheme;
 
   String verificarTemaAtivo() {
-    if (temaAtivo == Brightness.light) return 'escuro';
+    if (temaAtivo == ThemeMode.light) return 'escuro';
     return 'claro';
   }
 
