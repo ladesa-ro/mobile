@@ -47,7 +47,7 @@ class TemaPreferencia {
         _savedTheme = ThemeMode.system;
         break;
 
-      default: //
+      default:
         throw Exception(
             'Funcionalidade indisponivel no momento! constate a equipe de manuteção sobre esse erro');
     }
