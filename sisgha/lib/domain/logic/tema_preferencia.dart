@@ -23,6 +23,10 @@ class TemaPreferencia {
         break;
       case null:
         return await salvarPrefernciaDeTema();
+
+      default:
+        throw Exception(
+            'Funcionalidade indisponivel no momento! constate a equipe de manuteção sobre esse erro');
     }
   }
 
@@ -38,12 +42,14 @@ class TemaPreferencia {
       case 'light':
         _savedTheme = ThemeMode.light;
         break;
+
       case 'system':
         _savedTheme = ThemeMode.system;
         break;
 
-      default:
-        throw Exception('Opção invalida');
+      default: //
+        throw Exception(
+            'Funcionalidade indisponivel no momento! constate a equipe de manuteção sobre esse erro');
     }
   }
 
