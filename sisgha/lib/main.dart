@@ -34,15 +34,8 @@ class MyApp extends StatelessWidget {
     final temaProvider = Provider.of<TemasProvider>(context);
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        Device.setScreenSize(
-            context,
-            constraints,
-            MediaQuery.of(context).orientation,
-            constraints.maxWidth,
-            constraints.minWidth);
-
+    return Sizer(
+      builder: (context, orientation, devicetype) {
         return MaterialApp(
           showPerformanceOverlay: false,
           debugShowCheckedModeBanner: false,

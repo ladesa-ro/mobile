@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/widgets/widget_botao.dart';
 
 import 'package:sizer/sizer.dart';
 
 import '../../../../core/utils/icones.dart';
-import '../../../../core/utils/cores.dart';
 import '../../../../core/utils/estilos.dart';
 import '../../../../core/utils/padroes.dart';
 import '../../../../viewmodels/escolha_calendario.dart';
@@ -74,16 +74,14 @@ class _MenuLateralAlunosState extends State<MenuLateralAlunos> {
               Spacer(),
               SizedBox(
                 height: constraints.maxHeight * 0.07,
-                child: ElevatedButton(
-                    style: Padroes.estiloBotao(context, tema),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+                child: componenteBotao(
+                    tema: tema,
+                    onFuncion: () => Navigator.pop(context),
                     child: Center(
                       child: Text(
                         'Buscar',
                         style: estiloTexto(15,
-                            cor: tema.primary, peso: FontWeight.bold),
+                            cor: tema.inversePrimary, peso: FontWeight.bold),
                       ),
                     )),
               ),
