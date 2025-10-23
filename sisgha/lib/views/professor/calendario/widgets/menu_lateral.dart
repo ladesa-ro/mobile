@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/widgets/widget_botao.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../core/utils/icones.dart';
-import '../../../../core/utils/cores.dart';
 import '../../../../core/utils/estilos.dart';
 import '../../../../core/utils/padroes.dart';
 import '../../../../viewmodels/escolha_calendario.dart';
@@ -18,17 +18,17 @@ class MenuLateral extends StatefulWidget {
 
 class _MenuLateralState extends State<MenuLateral> {
   @override
-  Drawer build(BuildContext context) {
+  Widget build(BuildContext context) {
     final tema = Theme.of(context).colorScheme;
-    return Drawer(
-      width: Padroes.larguraGeral() * 0.82,
-      child: LayoutBuilder(
-        builder: (context, constraints) => Container(
+    return LayoutBuilder(
+      builder: (context, constraints) => Drawer(
+        width: Padroes.larguraGeral() * 0.82,
+        child: Container(
           margin: EdgeInsets.symmetric(horizontal: constraints.maxWidth * 0.03),
           height: constraints.maxHeight,
           width: constraints.maxWidth,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: ListView(
+            padding: EdgeInsets.zero,
             children: [
               SizedBox(height: constraints.maxHeight * 0.03),
               headerDrawer(
@@ -42,11 +42,11 @@ class _MenuLateralState extends State<MenuLateral> {
               Text(
                 'Ano Letivo',
                 style:
-                    estiloTexto(16, cor: tema.onPrimary, peso: FontWeight.bold),
+                    estiloTexto(16, cor: tema.secondary, peso: FontWeight.bold),
               ),
               SizedBox(height: constraints.maxHeight * 0.02),
               SizedBox(
-                height: constraints.maxHeight * 0.05,
+                height: 6.5.h,
                 width: constraints.maxWidth,
                 child: quadradosAnos(context, tema),
               ),
@@ -55,7 +55,7 @@ class _MenuLateralState extends State<MenuLateral> {
               Text(
                 'Modalidade',
                 style:
-                    estiloTexto(16, cor: tema.onPrimary, peso: FontWeight.bold),
+                    estiloTexto(16, cor: tema.secondary, peso: FontWeight.bold),
               ),
               SizedBox(height: constraints.maxHeight * 0.02),
               quadradosModalidade(context, constraints.maxHeight * 0.05, tema),
@@ -64,25 +64,23 @@ class _MenuLateralState extends State<MenuLateral> {
               Text(
                 'Calendário',
                 style:
-                    estiloTexto(16, cor: tema.onPrimary, peso: FontWeight.bold),
+                    estiloTexto(16, cor: tema.secondary, peso: FontWeight.bold),
               ),
               SizedBox(height: constraints.maxHeight * 0.02),
               quadradoCurso(context, constraints.maxHeight * 0.05, tema),
 
               //botao
-              Spacer(),
+              SizedBox(height: constraints.maxHeight * 0.02),
               SizedBox(
                 height: constraints.maxHeight * 0.07,
-                child: ElevatedButton(
-                    style: Padroes.estiloBotao(context, tema),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+                child: componenteBotao(
+                    tema: tema,
+                    onFuncion: () => Navigator.pop(context),
                     child: Center(
                       child: Text(
                         'Buscar',
                         style: estiloTexto(15,
-                            cor: tema.primary, peso: FontWeight.bold),
+                            cor: tema.inversePrimary, peso: FontWeight.bold),
                       ),
                     )),
               ),
@@ -110,13 +108,11 @@ Widget headerDrawer(
             Text(
               'Calendário Parcial',
               style:
-                  estiloTexto(16, cor: tema.onPrimary, peso: FontWeight.bold),
+                  estiloTexto(16, cor: tema.secondary, peso: FontWeight.bold),
             ),
             Text(
               'Selecione as informações',
-              style: estiloTexto(15,
-                  cor: Theme.of(context).textTheme.bodyLarge?.color,
-                  peso: FontWeight.bold),
+              style: estiloTexto(15, cor: tema.tertiary, peso: FontWeight.bold),
             ),
           ],
         ),
@@ -127,7 +123,7 @@ Widget headerDrawer(
           },
           icon: Iconify(
             Icones.setaVoltarEsquerda,
-            color: tema.onSurfaceVariant,
+            color: tema.secondaryFixed,
             size: 5.h,
           ),
         )
@@ -155,8 +151,8 @@ Widget quadradosAnos(BuildContext context, ColorScheme tema) {
           listaAnos[index],
           style: estiloTexto(15,
               cor: index == provider.anoSelecionado
-                  ? tema.onPrimary
-                  : tema.secondary,
+                  ? tema.secondary
+                  : tema.tertiary,
               peso: FontWeight.bold),
         ),
       ),
@@ -184,8 +180,8 @@ Widget quadradosModalidade(
             listaModalidade[index],
             style: estiloTexto(15,
                 cor: index == provider.cursoSelecionado
-                    ? tema.onPrimary
-                    : tema.secondary,
+                    ? tema.secondary
+                    : tema.tertiary,
                 peso: FontWeight.bold),
           ),
         ),
@@ -214,8 +210,8 @@ Widget quadradoCurso(BuildContext context, double height, ColorScheme tema) {
             listaCurso[index],
             style: estiloTexto(15,
                 cor: index == provider.modalidadeSelecionada
-                    ? tema.onPrimary
-                    : tema.secondary,
+                    ? tema.secondary
+                    : tema.tertiary,
                 peso: FontWeight.bold),
           ),
         ),
@@ -227,13 +223,10 @@ Widget quadradoCurso(BuildContext context, double height, ColorScheme tema) {
 BoxDecoration _decoration(
     int indexAtual, int indexSelecionado, ColorScheme tema) {
   return BoxDecoration(
-    color:
-        indexAtual == indexSelecionado ? tema.errorContainer : tema.onSecondary,
+    color: indexAtual == indexSelecionado ? tema.surfaceVariant : tema.surface,
     border: Border.all(
       width: 1.5,
-      color: indexAtual == indexSelecionado
-          ? tema.tertiaryContainer
-          : Colors.transparent,
+      color: indexAtual == indexSelecionado ? tema.onPrimary : tema.onSecondary,
     ),
     borderRadius: BorderRadius.circular(12),
   );

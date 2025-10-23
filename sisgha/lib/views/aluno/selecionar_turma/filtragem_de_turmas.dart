@@ -87,7 +87,7 @@ class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
       shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(
           side: BorderSide.none,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
     );

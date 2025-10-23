@@ -18,16 +18,6 @@ class Padroes {
     return 100.w;
   }
 
-  static ButtonStyle estiloBotao(BuildContext context, ColorScheme tema) {
-    return ButtonStyle(
-        maximumSize: WidgetStatePropertyAll(Size(100.w, 6.5.h)),
-        minimumSize: WidgetStatePropertyAll(Size(100.w, 6.5.h)),
-        shape: WidgetStateProperty.all<OutlinedBorder>(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.w))),
-        backgroundColor: WidgetStateProperty.all<Color>(tema.primaryContainer),
-        foregroundColor: WidgetStatePropertyAll(tema.inversePrimary));
-  }
-
   //sempre implementar no physics dos ListViews ou outro tipo de widget de rolagem
   static AlwaysScrollableScrollPhysics efeitoDeRolagem() {
     return AlwaysScrollableScrollPhysics(parent: ClampingScrollPhysics());

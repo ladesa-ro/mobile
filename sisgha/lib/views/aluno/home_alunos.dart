@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:sisgha/widgets/modal_calendario.dart';
+import 'package:sisgha/widgets/widget_botao.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../core/utils/cores.dart';
 import '../../core/utils/dias.dart';
 import '../../core/utils/estilos.dart';
 import '../../core/utils/icones.dart';
@@ -20,13 +21,6 @@ class HomeAlunos extends StatefulWidget {
 }
 
 class _HomeAlunosState extends State<HomeAlunos> {
-  late DateTime _selectedDay;
-  @override
-  void initState() {
-    super.initState();
-    _selectedDay = DatasFormatadas.diaAtualEmNumero;
-  }
-
   @override
   void dispose() {
     super.dispose();
@@ -46,68 +40,42 @@ class _HomeAlunosState extends State<HomeAlunos> {
         child: Column(
           children: [
             SizedBox(height: tamanho * 0.03),
-            ElevatedButton(
-              style: Padroes.estiloBotao(context, tema),
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return Dialog(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
-                      insetPadding: EdgeInsets.zero,
-                      child: Container(
-                        padding: EdgeInsets.only(bottom: 15),
-                        decoration: estiloBorda(
-                            cor: tema.tertiary, radius: 15, grossuraBorda: 1.5),
-                        width: 100.w * 0.85,
-                        height: 100.h * 0.4,
-                        child: TableCalendar(
-                          firstDay: DatasFormatadas.primeiroDiaDoAno,
-                          lastDay: DatasFormatadas.ultimoDiaDoAno,
-                          focusedDay: _selectedDay,
-                          calendarFormat: CalendarFormat.month,
-                          locale: 'pt-BR',
-                          shouldFillViewport: true,
-                          daysOfWeekHeight: 4.h,
-                          daysOfWeekStyle: estiloParteSuperior(tema),
-                          headerStyle: estiloCabessario(tema),
-                          calendarBuilders: calendarBuilder(100.h, null, tema),
-                          pageAnimationCurve: Curves.linear,
-                          pageAnimationDuration:
-                              const Duration(milliseconds: 500),
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-              child: Row(
-                children: [
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  Icon(
-                    Icones.calendario,
-                    size: 3.h,
-                    color: tema.primaryFixed,
-                  ),
-                  const Spacer(),
-                  Text(
-                    'Calendário ${now.year}',
-                    style: estiloTexto(15,
-                        cor: tema.inversePrimary, peso: FontWeight.bold),
-                  ),
-                  const Spacer(),
-                  Iconify(
-                    Icones.setaBaixo,
-                    size: 4.h,
-                    color: tema.primaryFixed,
-                  ),
-                  const SizedBox(
-                    width: 16,
-                  )
-                ],
+            SizedBox(
+              height: 6.5.h,
+              child: componenteBotao(
+                tema: tema,
+                onFuncion: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => ModalCalendario());
+                },
+                child: Row(
+                  children: [
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    Icon(
+                      Icones.calendario,
+                      size: 3.h,
+                      color: tema.primaryFixed,
+                    ),
+                    const Spacer(),
+                    Text(
+                      'Calendário ${now.year}',
+                      style: estiloTexto(15,
+                          cor: tema.inversePrimary, peso: FontWeight.bold),
+                    ),
+                    const Spacer(),
+                    Iconify(
+                      Icones.setaBaixo,
+                      size: 4.h,
+                      color: tema.primaryFixed,
+                    ),
+                    const SizedBox(
+                      width: 16,
+                    )
+                  ],
+                ),
               ),
             ),
             SizedBox(height: tamanho * 0.03),

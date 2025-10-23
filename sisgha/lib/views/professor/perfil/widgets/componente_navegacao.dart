@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/core/utils/padroes.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../../core/utils/icones.dart';
 import '../../../../core/utils/estilos.dart';
@@ -34,41 +35,39 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final tema = Theme.of(context).colorScheme;
-    return LayoutBuilder(
-      builder: (context, constraints) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            width: constraints.maxWidth,
-            height: constraints.maxHeight * 0.15,
-            child: Padding(
-              padding: Padroes.margem(),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _estiloTabs('Disponibilidade', Icones.iconeSisgha, 0,
-                      bordaEsquerda: true, bordaDireita: false, tema: tema),
-                  _estiloTabs('Ensino', Icones.disciplina, 1,
-                      bordaEsquerda: false, bordaDireita: true, tema: tema),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            child: TabBarView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: _controller,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          width: 100.w,
+          height: 6.5.h,
+          child: Padding(
+            padding: Padroes.margem(),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: Padroes.margem(),
-                  child: WidgetDisponibilidade(),
-                ),
-                WidgetEnsino(),
+                _estiloTabs('Disponibilidade', Icones.iconeSisgha, 0,
+                    bordaEsquerda: true, bordaDireita: false, tema: tema),
+                _estiloTabs('Ensino', Icones.disciplina, 1,
+                    bordaEsquerda: false, bordaDireita: true, tema: tema),
               ],
             ),
           ),
-        ],
-      ),
+        ),
+        Expanded(
+          child: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: _controller,
+            children: [
+              Padding(
+                padding: Padroes.margem(),
+                child: WidgetDisponibilidade(),
+              ),
+              WidgetEnsino(),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
