@@ -37,7 +37,7 @@ OutlineInputBorder inputBorder(double bold, ColorScheme tema) {
   return OutlineInputBorder(
     borderSide:
         BorderSide(color: tema.tertiary, style: BorderStyle.solid, width: bold),
-    borderRadius: BorderRadius.all(Radius.circular(3.w)),
+    borderRadius: BorderRadius.all(Radius.circular(15.sp)),
   );
 }
 
