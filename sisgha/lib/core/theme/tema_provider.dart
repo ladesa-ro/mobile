@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:sisgha/core/theme/tema.dart';
 
 class TemasProvider with ChangeNotifier {
-  ThemeData _temaAtivo = Temas.temaClaro;
+  ThemeMode? themeMode;
 
-  ThemeData get temaAtivo => _temaAtivo;
+  void carregarTemaSalvo(ThemeMode themeMode) {
+    this.themeMode = themeMode;
+    notifyListeners();
+  }
 
-  void mudarTema() {
-    if (_temaAtivo.brightness == Brightness.light) {
-      _temaAtivo = Temas.temaEscuro;
+  void mudarTema(bool? ativo) {
+    if (ativo == null) {
+      themeMode = ThemeMode.system;
     } else {
-      _temaAtivo = Temas.temaClaro;
+      themeMode = ativo ? ThemeMode.dark : ThemeMode.light;
     }
     notifyListeners();
   }

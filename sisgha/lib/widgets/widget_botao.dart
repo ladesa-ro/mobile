@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-Widget componenteBotao(
-    {required ColorScheme tema,
-    required Widget child,
-    VoidCallback? onFuncion,
-    double? width}) {
+Widget componenteBotao({
+  required ColorScheme tema,
+  required Widget child,
+  VoidCallback? onFuncion,
+  double? width,
+}) {
   return ElevatedButton(
       style: ButtonStyle(
           maximumSize: WidgetStatePropertyAll(Size(width ?? 100.w, 6.5.h)),

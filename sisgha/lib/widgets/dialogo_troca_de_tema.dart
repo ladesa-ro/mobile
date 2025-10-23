@@ -7,11 +7,12 @@ import 'package:sisgha/core/utils/estilos.dart';
 import 'package:sizer/sizer.dart';
 
 import '../core/theme/tema_provider.dart';
+import '../domain/logic/tema_preferencia.dart';
 
 Widget mostrarDialogoDeTrocaDeTema(
     BuildContext context, String text, ColorScheme tema) {
   final provider = Provider.of<TemasProvider>(context);
-  bool temaAtual = provider.temaAtivo.brightness == Brightness.light;
+  bool temaAtual = provider.themeMode == ThemeMode.light;
   return AlertDialog(
     content: Column(
       mainAxisSize: MainAxisSize.min,
@@ -59,7 +60,10 @@ Widget mostrarDialogoDeTrocaDeTema(
             ElevatedButton(
               style: _estiloBotao(tema.onPrimary),
               onPressed: () {
-                provider.mudarTema();
+                TemaPreferencia temaPreferencia = TemaPreferencia();
+                provider.mudarTema(temaAtual);
+                temaPreferencia
+                    .alterarPreferenciaDeTema(temaAtual ? 'dark' : 'light');
                 Navigator.of(context).pop();
               },
               child: Row(

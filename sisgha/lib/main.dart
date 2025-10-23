@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/core/theme/tema.dart';
 import 'package:sisgha/core/theme/tema_provider.dart';
 import 'package:sisgha/viewmodels/calendario_funcionalidades.dart';
 import 'package:sisgha/core/routes/app_routes.dart';
@@ -9,6 +12,8 @@ import 'package:sisgha/viewmodels/dados_professor.dart';
 import 'package:sisgha/viewmodels/escolha_horarios_alunos.dart';
 import 'package:sisgha/views/login/login_viewmodel.dart';
 import 'package:sizer/sizer.dart';
+
+import 'domain/logic/tema_preferencia.dart';
 
 void main() {
   runApp(
@@ -26,12 +31,30 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    loadTheme();
+  }
+
+  void loadTheme() async {
+    final themeStorage = TemaPreferencia();
+    await themeStorage.buscarPrefernciaDeTema();
+
+    context.read<TemasProvider>().carregarTemaSalvo(themeStorage.savedTheme);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final temaProvider = Provider.of<TemasProvider>(context);
+    final temaProvider = context.watch<TemasProvider>();
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return Sizer(
@@ -40,7 +63,9 @@ class MyApp extends StatelessWidget {
           showPerformanceOverlay: false,
           debugShowCheckedModeBanner: false,
           title: 'SISGHA',
-          theme: temaProvider.temaAtivo,
+          theme: Temas.temaClaro,
+          darkTheme: Temas.temaEscuro,
+          themeMode: temaProvider.themeMode,
           initialRoute: '/primeiraTela',
           routes: AppRoutes.rotas(),
         );
