@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/core/theme/tema_provider.dart';
 import 'package:sisgha/views/login/login_viewmodel.dart';
 import 'package:sisgha/widgets/widget_botao.dart';
 import 'package:sisgha/widgets/widget_erro.dart';
@@ -34,6 +35,9 @@ class _CorpoLoginState extends State<LoginForm> {
     final loginVM = Provider.of<LoginViewModel>(context);
     final tema = Theme.of(context).colorScheme;
 
+    var temaAtivo =
+        Provider.of<TemasProvider>(context).themeMode == ThemeMode.light;
+
     return Center(
       child: SingleChildScrollView(
         child: SizedBox(
@@ -45,7 +49,9 @@ class _CorpoLoginState extends State<LoginForm> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  ImageApp.logo_sigha_sem_barra,
+                  temaAtivo
+                      ? ImageApp.logo_sigha_sem_barra
+                      : ImageApp.logo_clara,
                   width: Padroes.larguraGeral() -
                       (Padroes.margem().horizontal * 4),
                 ),
