@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:sisgha/viewmodels/escolha_calendario.dart';
 import 'package:text_scroll/text_scroll.dart';
 
-import '../core/utils/cores.dart';
 import '../core/utils/estilos.dart';
 
 class LetreiroRolante extends StatefulWidget {
@@ -41,7 +40,7 @@ class _LetreiroRolanteState extends State<LetreiroRolante> {
                   TextScroll(
             velocity: Velocity(pixelsPerSecond: Offset(10, 0)),
             'Técnico Integrado - Informática 2023 - 2023',
-            style: estiloTexto(15, cor: tema.onPrimary, peso: FontWeight.bold),
+            style: estiloTexto(15, cor: tema.primary, peso: FontWeight.bold),
             mode: TextScrollMode.bouncing,
           ),
         ),

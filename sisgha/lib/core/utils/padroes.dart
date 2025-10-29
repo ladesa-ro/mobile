@@ -18,16 +18,6 @@ class Padroes {
     return 100.w;
   }
 
-  static ButtonStyle estiloBotao(BuildContext context, ColorScheme tema) {
-    return ButtonStyle(
-      maximumSize: WidgetStatePropertyAll(Size(100.w, 6.5.h)),
-      minimumSize: WidgetStatePropertyAll(Size(100.w, 6.5.h)),
-      shape: WidgetStateProperty.all<OutlinedBorder>(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.w))),
-      backgroundColor: WidgetStateProperty.all<Color>(tema.primaryContainer),
-    );
-  }
-
   //sempre implementar no physics dos ListViews ou outro tipo de widget de rolagem
   static AlwaysScrollableScrollPhysics efeitoDeRolagem() {
     return AlwaysScrollableScrollPhysics(parent: ClampingScrollPhysics());
@@ -53,5 +43,9 @@ class Padroes {
     lista.add(texto1);
     lista.add(texto2);
     return lista;
+  }
+
+  static String removerPalavras(String texto) {
+    return texto.replaceAll(r' - Fim', '').replaceAll(r' - Início', '');
   }
 }

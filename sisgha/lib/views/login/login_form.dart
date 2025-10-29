@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/views/login/login_viewmodel.dart';
+import 'package:sisgha/widgets/widget_botao.dart';
 import 'package:sisgha/widgets/widget_erro.dart';
 import 'package:sizer/sizer.dart';
 
@@ -74,9 +75,9 @@ class _CorpoLoginState extends State<LoginForm> {
   }
 
   Widget botaoEntrarAluno(BuildContext context, ColorScheme tema) {
-    return ElevatedButton(
-      style: Padroes.estiloBotao(context, tema),
-      onPressed: () => Navigator.pushNamed(context, "/acessoAluno"),
+    return componenteBotao(
+      tema: tema,
+      onFuncion: () => Navigator.pushNamed(context, "/acessoAluno"),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,7 +85,7 @@ class _CorpoLoginState extends State<LoginForm> {
             const SizedBox(width: 19),
             Icon(
               Icons.person,
-              color: tema.surfaceDim,
+              color: tema.primaryFixed,
               size: 3.7.h,
             ),
             const SizedBox(width: 5),
@@ -113,8 +114,9 @@ class _CorpoLoginState extends State<LoginForm> {
 
   Widget botaoEntrar(
       BuildContext context, LoginViewModel loginVM, ColorScheme tema) {
-    return FilledButton(
-      onPressed: () async {
+    return componenteBotao(
+      tema: tema,
+      onFuncion: () async {
         FocusScopeNode currentFocus = FocusScope.of(context);
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
@@ -144,7 +146,6 @@ class _CorpoLoginState extends State<LoginForm> {
           }
         }
       },
-      style: Padroes.estiloBotao(context, tema),
       child: SizedBox(
         height: Padroes.aluturaBotoes(),
         width: Padroes.larguraGeral(),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/views/listagemDeEvento/modal_eventos.dart';
+import 'package:sisgha/views/listagem_de_eventos/listagem_de_eventos.dart';
 import 'package:sisgha/widgets/cards_calendario.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -70,11 +70,15 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                 height: Padroes.aluturaBotoes(),
                 width: largura * 0.17,
                 child: ElevatedButton(
-                  style: _estiloBotao(context),
+                  style: _estiloBotao(tema),
                   onPressed: () {
                     scaffoldKey.currentState?.openEndDrawer();
                   },
-                  child: Icones.lupa,
+                  child: Icon(
+                    Icones.lupa,
+                    color: tema.primaryFixed,
+                    size: 4.h,
+                  ),
                 ),
               ),
             ],
@@ -129,7 +133,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
             width: largura,
             height: Padroes.aluturaBotoes(),
             child: ElevatedButton(
-              style: _estiloBotao(context),
+              style: _estiloBotao(tema),
               onPressed: () {
                 showModalBottomSheet(
                   context: context,
@@ -137,7 +141,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                   isScrollControlled: true,
                   enableDrag: false,
                   backgroundColor: const Color.fromARGB(88, 0, 0, 0),
-                  builder: (context) => ModalEventos(),
+                  builder: (context) => ListagemDeEventos(),
                 );
               },
               child: Row(
@@ -178,11 +182,10 @@ DateTime normalizarData(DateTime data) {
   return DateTime(data.year, data.month, data.day);
 }
 
-ButtonStyle _estiloBotao(BuildContext context) {
+ButtonStyle _estiloBotao(ColorScheme tema) {
   return ButtonStyle(
     padding: WidgetStatePropertyAll(EdgeInsets.zero),
-    backgroundColor:
-        WidgetStatePropertyAll(Theme.of(context).colorScheme.primary),
+    backgroundColor: WidgetStatePropertyAll(tema.primaryContainer),
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),

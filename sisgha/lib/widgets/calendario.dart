@@ -188,7 +188,7 @@ CalendarBuilders calendarBuilder(
       todayBuilder: (context, day, focusedDay) {
         final provider = context.read<CalendarioFuncionalidades>();
         final eventoDoDia = provider.tudoJunto[normalizarData(day)];
-        final cor = eventoDoDia?.first.cor ?? tema.surfaceTint;
+        final cor = eventoDoDia?.first.cor ?? tema.primaryContainer;
         if (day.month != focusedDay.month) {
           // Retorna o estilo padrão (sem destaque)
           return estiloDosBlocosDosDiasDoMesDesabilitados(

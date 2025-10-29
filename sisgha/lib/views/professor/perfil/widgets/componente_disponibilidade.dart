@@ -48,7 +48,7 @@ final List<Map<String, dynamic>> horarios = [
       "00:00 - 00:00",
     ]
   },
-]; //HORÁRIOS
+]; //HORÁRIOS temporarios
 
 class _MyWidgetState extends State<WidgetDisponibilidade> {
   List<String> dias = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta'];
@@ -60,45 +60,43 @@ class _MyWidgetState extends State<WidgetDisponibilidade> {
   @override
   Widget build(BuildContext context) {
     final tema = Theme.of(context).colorScheme;
-    return LayoutBuilder(
-      builder: (context, constraints) => Column(
-        children: [
-          SizedBox(height: constraints.maxHeight * 0.05),
-          Container(
-            height: constraints.maxHeight * 0.11,
-            decoration: BoxDecoration(
-              color: tema.primaryContainer,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              children: [
-                _iconButton(1, Icones.setaEsquerda, tema),
-                const Spacer(),
-                Text(
-                  dias[diaIndex],
-                  style: estiloTexto(17,
-                      cor: tema.inversePrimary, peso: FontWeight.bold),
-                ),
-                const Spacer(),
-                _iconButton(0, Icones.setaDireita, tema),
-              ],
-            ),
+    return Column(
+      children: [
+        SizedBox(height: 2.h),
+        Container(
+          height: 6.5.h,
+          decoration: BoxDecoration(
+            color: tema.primaryContainer,
+            borderRadius: BorderRadius.circular(10),
           ),
-          Expanded(
-            child: CarouselSlider(
-              carouselController: _carouselSliderController,
-              items: _listaComHorarios(context, tema),
-              options: CarouselOptions(
-                aspectRatio: 16 / 12,
-                enableInfiniteScroll: false,
-                viewportFraction: 1.0,
-                enlargeCenterPage: true,
-                scrollPhysics: const NeverScrollableScrollPhysics(),
-              ), //Este é os coiso onde aparece os horários
-            ),
+          child: Row(
+            children: [
+              _iconButton(1, Icones.setaEsquerda, tema),
+              const Spacer(),
+              Text(
+                dias[diaIndex],
+                style: estiloTexto(17,
+                    cor: tema.inversePrimary, peso: FontWeight.bold),
+              ),
+              const Spacer(),
+              _iconButton(0, Icones.setaDireita, tema),
+            ],
           ),
-        ],
-      ),
+        ),
+        Expanded(
+          child: CarouselSlider(
+            carouselController: _carouselSliderController,
+            items: _listaComHorarios(context, tema),
+            options: CarouselOptions(
+              aspectRatio: 16 / 12,
+              enableInfiniteScroll: false,
+              viewportFraction: 1.0,
+              enlargeCenterPage: true,
+              scrollPhysics: const NeverScrollableScrollPhysics(),
+            ), //Este é os coiso onde aparece os horários
+          ),
+        ),
+      ],
     );
   }
 
