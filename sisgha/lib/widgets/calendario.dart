@@ -116,7 +116,7 @@ HeaderStyle estiloCabessario(ColorScheme tema) {
     titleCentered: true,
     formatButtonVisible: false,
     titleTextStyle:
-        estiloTexto(16, cor: tema.inversePrimary, peso: FontWeight.bold),
+        estiloTexto(16, cor: tema.primaryFixed, peso: FontWeight.bold),
     leftChevronIcon: Iconify(
       Icones.setaEsquerda,
       color: tema.primaryFixed,

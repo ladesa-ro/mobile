@@ -97,7 +97,11 @@ class _CorpoLoginState extends State<LoginForm> {
             const Spacer(),
             Text(
               'Entrar como Aluno',
-              style: estiloTexto(16, peso: FontWeight.w600),
+              style: estiloTexto(
+                16,
+                cor: tema.inversePrimary,
+                peso: FontWeight.w600,
+              ),
             ),
             const Spacer(
               flex: 2,
@@ -148,7 +152,11 @@ class _CorpoLoginState extends State<LoginForm> {
         child: Center(
           child: Text(
             'Entrar',
-            style: estiloTexto(16, peso: FontWeight.w600),
+            style: estiloTexto(
+              16,
+              cor: tema.inversePrimary,
+              peso: FontWeight.w600,
+            ),
           ),
         ),
       ),

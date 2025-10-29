@@ -35,8 +35,11 @@ PreferredSizeWidget appBar(BuildContext ctx) {
                       Navigator.of(ctx).pushNamedAndRemoveUntil(
                           '/acessoAluno', (_) => false);
                     },
-                    icon: _buildIcones(Icones.setaVoltarDireita, 23, tema))
-                : Padding(padding: EdgeInsets.only(left: 2.w)),
+                    icon: _buildIcones(Icones.setaVoltarDireita, 24, tema))
+                : Padding(
+                    padding: EdgeInsets.only(
+                    left: 2.w,
+                  )),
             InfoAlternada(provInfo: provInfo),
             SizedBox(width: 2.w),
             Column(
@@ -50,6 +53,7 @@ PreferredSizeWidget appBar(BuildContext ctx) {
               ],
             ),
             const Spacer(),
+            //Ícon de troca de tema
             IconButton(
                 onPressed: () {
                   showDialog(
@@ -58,14 +62,14 @@ PreferredSizeWidget appBar(BuildContext ctx) {
                         context, verificarTemaAtivo(), tema),
                   );
                 },
-                icon: _buildIcones(Icones.sol, 22, tema)),
+                icon: _buildIcones(Icones.sol, 23, tema)),
             existeSelecionado
                 ? Container()
                 : IconButton(
                     onPressed: () {
                       Navigator.of(ctx).pushNamed('/notificacao');
                     },
-                    icon: _buildIcones(Icones.sino, 22, tema))
+                    icon: _buildIcones(Icones.sino, 23, tema))
           ],
         );
       }));

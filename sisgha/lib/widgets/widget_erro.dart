@@ -7,6 +7,7 @@ import '../core/utils/imagens.dart';
 
 Widget dialogoDeErro(BuildContext context, ColorScheme? tema) {
   DadosProfessor dadosProfessor = DadosProfessor();
+  var tema = Theme.of(context).colorScheme;
   return AlertDialog(
     backgroundColor: Colors.white,
     content: FittedBox(
@@ -25,9 +26,7 @@ Widget dialogoDeErro(BuildContext context, ColorScheme? tema) {
           ),
           Text(
             'Nenhuma conexão com a internet ',
-            style: estiloTexto(16,
-                cor: tema == null ? Colors.amber : tema.primary,
-                peso: FontWeight.bold),
+            style: estiloTexto(16, cor: tema.error, peso: FontWeight.bold),
           ),
           const SizedBox(
             height: 10,
@@ -36,7 +35,7 @@ Widget dialogoDeErro(BuildContext context, ColorScheme? tema) {
             'Verifique sua conexão ou',
             style: estiloTexto(
               15,
-              cor: tema == null ? Colors.amber : tema.primary,
+              cor: tema.error,
             ),
             textAlign: TextAlign.center,
           ),
@@ -47,15 +46,17 @@ Widget dialogoDeErro(BuildContext context, ColorScheme? tema) {
             'tente novamente',
             style: estiloTexto(
               15,
-              cor: tema == null ? Colors.amber : tema.primary,
+              cor: tema.error,
             ),
           ),
           const SizedBox(
             height: 15,
           ),
           ElevatedButton(
-            style: _estiloBotao(tema == null ? Colors.amber : tema.outline,
-                tema == null ? Colors.amber : tema.primary),
+            style: _estiloBotao(
+              tema.primaryContainer,
+              tema.inversePrimary,
+            ),
             onPressed: () {
               dadosProfessor.apagarDados();
               Navigator.pushNamedAndRemoveUntil(
@@ -64,19 +65,27 @@ Widget dialogoDeErro(BuildContext context, ColorScheme? tema) {
                 (route) => false,
               );
             },
-            child: const Text('Tente novamente'),
+            child: Text(
+              'Tente novamente',
+              style: estiloTexto(13, peso: FontWeight.bold),
+            ),
           ),
           const SizedBox(
             height: 15,
           ),
           ElevatedButton(
-            style: _estiloBotao(tema == null ? Colors.amber : tema.surface,
-                tema == null ? Colors.amber : tema.primary),
+            style: _estiloBotao(
+              tema.surface,
+              tema.primary,
+            ),
             onPressed: () {
               dadosProfessor.apagarDados();
               SystemNavigator.pop();
             },
-            child: const Text('Talvez mais tarde'),
+            child: Text(
+              'Talvez mais tarde',
+              style: estiloTexto(13, peso: FontWeight.bold),
+            ),
           ),
           const SizedBox(
             height: 20,
