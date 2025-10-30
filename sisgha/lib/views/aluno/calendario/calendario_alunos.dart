@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/widgets/cards_calendario.dart';
+import 'package:sisgha/widgets/letreiro_rolante.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:text_scroll/text_scroll.dart';
 
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/icones.dart';
-import '../../../core/utils/colors.dart';
 import '../../../core/utils/dias.dart';
 import '../../../core/utils/padroes.dart';
 import '../../../viewmodels/calendario_funcionalidades.dart';
 import '../../../viewmodels/escolha_calendario.dart';
 import '../../../widgets/calendario.dart';
 import '../../professor/calendario/calendario.dart';
-import '../listagemDeEvento/modal_eventos_alunos.dart';
+import '../../listagem_de_eventos/listagem_de_eventos.dart';
 import 'widgets/menu_lateral_alunos.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -44,6 +44,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
     double tamanho = Padroes.calcularAlturaAppBar(context, appBarSize: 7.h);
     EdgeInsets margem = Padroes.margem();
     double largura = Padroes.larguraGeral() - margem.horizontal;
+    final tema = Theme.of(context).colorScheme;
 
     return Scaffold(
       key: scaffoldKey,
@@ -61,29 +62,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                   height: Padroes.aluturaBotoes(),
                   width: largura * 0.80,
                   child: RepaintBoundary(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: estiloBorda(
-                        cor: CoresClaras.verdecinzaBorda,
-                        radius: 15,
-                        grossuraBorda: 2,
-                      ),
-                      height: 40,
-                      child: Center(
-                        child: Consumer<EscolhaCalendario>(
-                          builder: (BuildContext context,
-                                  EscolhaCalendario value, Widget? child) =>
-                              TextScroll(
-                            velocity: Velocity(pixelsPerSecond: Offset(5, 0)),
-                            'Técnico Integrado - Informática 2023 - 2023',
-                            style: estiloTexto(15,
-                                cor: CoresClaras.verdePrincipal,
-                                peso: FontWeight.bold),
-                            mode: TextScrollMode.bouncing,
-                          ),
-                        ),
-                      ),
-                    ),
+                    child: LetreiroRolante(),
                   ),
                 ),
                 const Spacer(),
@@ -91,11 +70,15 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                   height: Padroes.aluturaBotoes(),
                   width: largura * 0.17,
                   child: ElevatedButton(
-                    style: _estiloBotao(context),
+                    style: _estiloBotao(tema),
                     onPressed: () {
                       scaffoldKey.currentState?.openEndDrawer();
                     },
-                    child: Icones.lupa,
+                    child: Icon(
+                      Icones.lupa,
+                      color: tema.primaryFixed,
+                      size: 4.h,
+                    ),
                   ),
                 ),
               ],
@@ -108,7 +91,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                 child: Container(
                   padding: EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
-                      border: Border.all(color: CoresClaras.cinzaBordas),
+                      border: Border.all(color: tema.onSecondary),
                       borderRadius: BorderRadius.circular(15)),
                   child: TableCalendar(
                     availableGestures: AvailableGestures.none,
@@ -118,10 +101,11 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                     calendarFormat: CalendarFormat.month,
                     locale: 'pt-BR',
                     shouldFillViewport: true,
-                    daysOfWeekHeight: 23,
-                    daysOfWeekStyle: estiloParteSuperior(context),
-                    headerStyle: estiloCabessario(),
-                    calendarBuilders: calendarBuilder(120.sp, _focusedDay),
+                    daysOfWeekHeight: 4.h,
+                    daysOfWeekStyle: estiloParteSuperior(tema),
+                    headerStyle: estiloCabessario(tema),
+                    calendarBuilders:
+                        calendarBuilder(120.sp, _focusedDay, tema),
                     pageAnimationCurve: Curves.linear,
                     pageAnimationDuration: const Duration(milliseconds: 300),
                     selectedDayPredicate: (day) {
@@ -150,7 +134,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
               width: largura,
               height: Padroes.aluturaBotoes(),
               child: ElevatedButton(
-                style: _estiloBotao(context),
+                style: _estiloBotao(tema),
                 onPressed: () {
                   showModalBottomSheet(
                     context: context,
@@ -158,7 +142,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                     isScrollControlled: true,
                     enableDrag: false,
                     backgroundColor: Color.fromARGB(88, 0, 0, 0),
-                    builder: (context) => ModalEventosAlunos(),
+                    builder: (context) => ListagemDeEventos(),
                   );
                 },
                 child: Row(
@@ -168,7 +152,7 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                       "Ver todos os eventos",
                       style: estiloTexto(
                         16,
-                        cor: Colors.white,
+                        cor: tema.inversePrimary,
                         peso: FontWeight.bold,
                       ),
                     ),
@@ -177,14 +161,14 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                       'assets/icones/Vector.svg',
                       width: 24,
                       height: 24,
-                      color: Colors.white,
+                      color: tema.primaryFixed,
                     )
                   ],
                 ),
               ),
             ),
             SizedBox(height: tamanho * 0.03),
-            cardCalendario(_selectedDay, tamanho, largura)
+            cardCalendario(_selectedDay, tamanho, largura, tema)
           ],
         ),
       ),
@@ -192,11 +176,10 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
   }
 }
 
-ButtonStyle _estiloBotao(BuildContext context) {
+ButtonStyle _estiloBotao(ColorScheme tema) {
   return ButtonStyle(
     padding: WidgetStatePropertyAll(EdgeInsets.zero),
-    backgroundColor:
-        WidgetStatePropertyAll(Theme.of(context).colorScheme.primary),
+    backgroundColor: WidgetStatePropertyAll(tema.primaryContainer),
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),

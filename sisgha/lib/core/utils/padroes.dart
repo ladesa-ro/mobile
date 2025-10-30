@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import 'colors.dart';
-
 class Padroes {
   static EdgeInsets margem() {
     return EdgeInsets.symmetric(horizontal: larguraGeral() * 0.05);
@@ -18,17 +16,6 @@ class Padroes {
 
   static double larguraGeral() {
     return 100.w;
-  }
-
-  static ButtonStyle estiloBotao(BuildContext context) {
-    return ButtonStyle(
-        maximumSize: WidgetStatePropertyAll(Size(100.w, 6.5.h)),
-        minimumSize: WidgetStatePropertyAll(Size(100.w, 6.5.h)),
-        shape: WidgetStateProperty.all<OutlinedBorder>(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(3.w))),
-        backgroundColor:
-            WidgetStateProperty.all<Color>(Theme.of(context).primaryColor),
-        foregroundColor: WidgetStatePropertyAll(CoresClaras.brancoTexto));
   }
 
   //sempre implementar no physics dos ListViews ou outro tipo de widget de rolagem
@@ -56,5 +43,9 @@ class Padroes {
     lista.add(texto1);
     lista.add(texto2);
     return lista;
+  }
+
+  static String removerPalavras(String texto) {
+    return texto.replaceAll(r' - Fim', '').replaceAll(r' - Início', '');
   }
 }

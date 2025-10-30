@@ -4,12 +4,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/estilos.dart';
 import 'estilos_perfil.dart';
 
 Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
   final ImagePicker imagePicker = ImagePicker();
+  final tema = Theme.of(context).colorScheme;
 
   Future<void> _capturarFoto() async {
     final XFile? imagem =
@@ -31,7 +31,7 @@ Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
 
   return showModalBottomSheet(
     context: context,
-    backgroundColor: Theme.of(context).colorScheme.surface,
+    backgroundColor: tema.surface,
     builder: (BuildContext context) {
       return SizedBox(
         height: 300,
@@ -44,7 +44,7 @@ Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
               height: 6,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
-                color: CoresClaras.cinza,
+                color: tema.errorContainer,
               ),
             ),
             Text(
@@ -56,13 +56,13 @@ Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
             const SizedBox(height: 10),
             Text(
               'Escolha uma foto, imagem ou',
-              style: estiloTexto(16,
-                  cor: CoresClaras.cinza, peso: FontWeight.w500),
+              style:
+                  estiloTexto(16, cor: tema.secondary, peso: FontWeight.w500),
             ),
             Text(
               'arquivo .jpeg ou .png de 500x500',
-              style: estiloTexto(16,
-                  cor: CoresClaras.cinza, peso: FontWeight.w500),
+              style:
+                  estiloTexto(16, cor: tema.secondary, peso: FontWeight.w500),
             ),
             const Spacer(),
             ElevatedButton(

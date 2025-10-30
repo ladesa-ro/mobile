@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 
-import '../../core/utils/colors.dart';
+import '../../core/utils/cores.dart';
 import '../../core/utils/estilos.dart';
 import '../../core/utils/icones.dart';
 
@@ -18,6 +18,7 @@ class CustomAppBarNotificacao extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     return AppBar(
       titleSpacing: 0,
       title: Text(
@@ -32,7 +33,7 @@ class CustomAppBarNotificacao extends StatelessWidget
               icon: Iconify(
                 Icones.setaVoltarDireita,
                 size: double.infinity,
-                color: CoresClaras.branco,
+                color: tema.surfaceDim,
               ),
             )
           : null,

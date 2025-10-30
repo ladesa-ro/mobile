@@ -8,12 +8,13 @@ class PaginaLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          elementoVerde(Alignment.topLeft),
-          elementoVerde(Alignment.bottomRight),
+          elementoVerde(Alignment.topLeft, tema),
+          elementoVerde(Alignment.bottomRight, tema),
           LoginForm(),
         ],
       ),

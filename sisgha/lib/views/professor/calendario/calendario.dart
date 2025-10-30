@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sisgha/views/listagem_de_eventos/listagem_de_eventos.dart';
 import 'package:sisgha/widgets/cards_calendario.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/icones.dart';
-import '../../../core/utils/colors.dart';
 import '../../../core/utils/dias.dart';
 import '../../../core/utils/padroes.dart';
 import '../../../viewmodels/calendario_funcionalidades.dart';
 import '../../../widgets/calendario.dart';
 import '../../../widgets/letreiro_rolante.dart';
-import '../ListagemDeEventosProfessores/modal_evento_professor.dart';
 import 'widgets/menu_lateral.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -46,6 +45,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
     double tamanho = Padroes.calcularAlturaAppBar(context, appBarSize: 7.h);
     EdgeInsets margem = Padroes.margem();
     double largura = Padroes.larguraGeral() - margem.horizontal;
+    final tema = Theme.of(context).colorScheme;
 
     return Scaffold(
       key: scaffoldKey,
@@ -70,11 +70,15 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                 height: Padroes.aluturaBotoes(),
                 width: largura * 0.17,
                 child: ElevatedButton(
-                  style: _estiloBotao(context),
+                  style: _estiloBotao(tema),
                   onPressed: () {
                     scaffoldKey.currentState?.openEndDrawer();
                   },
-                  child: Icones.lupa,
+                  child: Icon(
+                    Icones.lupa,
+                    color: tema.primaryFixed,
+                    size: 4.h,
+                  ),
                 ),
               ),
             ],
@@ -87,7 +91,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
               child: Container(
                 padding: EdgeInsets.only(bottom: 10),
                 decoration: BoxDecoration(
-                    border: Border.all(color: CoresClaras.cinzaBordas),
+                    border: Border.all(color: tema.tertiary),
                     borderRadius: BorderRadius.circular(15)),
                 child: TableCalendar(
                   availableGestures: AvailableGestures.none,
@@ -97,10 +101,10 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                   calendarFormat: CalendarFormat.month,
                   locale: 'pt-BR',
                   shouldFillViewport: true,
-                  daysOfWeekHeight: 23,
-                  daysOfWeekStyle: estiloParteSuperior(context),
-                  headerStyle: estiloCabessario(),
-                  calendarBuilders: calendarBuilder(120.sp, _focusedDay),
+                  daysOfWeekHeight: 4.h,
+                  daysOfWeekStyle: estiloParteSuperior(tema),
+                  headerStyle: estiloCabessario(tema),
+                  calendarBuilders: calendarBuilder(120.sp, _focusedDay, tema),
                   pageAnimationCurve: Curves.linear,
                   pageAnimationDuration: const Duration(milliseconds: 300),
                   selectedDayPredicate: (day) {
@@ -129,7 +133,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
             width: largura,
             height: Padroes.aluturaBotoes(),
             child: ElevatedButton(
-              style: _estiloBotao(context),
+              style: _estiloBotao(tema),
               onPressed: () {
                 showModalBottomSheet(
                   context: context,
@@ -137,7 +141,7 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                   isScrollControlled: true,
                   enableDrag: false,
                   backgroundColor: const Color.fromARGB(88, 0, 0, 0),
-                  builder: (context) => const ModalEventosProfessores(),
+                  builder: (context) => ListagemDeEventos(),
                 );
               },
               child: Row(
@@ -165,7 +169,8 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
           SizedBox(height: tamanho * 0.02),
 
           //cards dos eventos do dia
-          RepaintBoundary(child: cardCalendario(_selectedDay, tamanho, largura))
+          RepaintBoundary(
+              child: cardCalendario(_selectedDay, tamanho, largura, tema))
         ]),
       ),
     );
@@ -177,11 +182,10 @@ DateTime normalizarData(DateTime data) {
   return DateTime(data.year, data.month, data.day);
 }
 
-ButtonStyle _estiloBotao(BuildContext context) {
+ButtonStyle _estiloBotao(ColorScheme tema) {
   return ButtonStyle(
     padding: WidgetStatePropertyAll(EdgeInsets.zero),
-    backgroundColor:
-        WidgetStatePropertyAll(Theme.of(context).colorScheme.primary),
+    backgroundColor: WidgetStatePropertyAll(tema.primaryContainer),
     shape: WidgetStatePropertyAll(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),

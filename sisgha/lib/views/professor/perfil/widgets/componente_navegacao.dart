@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sisgha/core/utils/padroes.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../../core/utils/icones.dart';
-import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/estilos.dart';
 import 'componente_disponibilidade.dart';
 import 'componente_ensino.dart';
@@ -34,46 +34,47 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            width: constraints.maxWidth,
-            height: constraints.maxHeight * 0.15,
-            child: Padding(
-              padding: Padroes.margem(),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _estiloTabs('Disponibilidade', Icones.iconeSisgha, 0,
-                      bordaEsquerda: true, bordaDireita: false),
-                  _estiloTabs('Ensino', Icones.disciplina, 1,
-                      bordaEsquerda: false, bordaDireita: true),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            child: TabBarView(
-              physics: const NeverScrollableScrollPhysics(),
-              controller: _controller,
+    final tema = Theme.of(context).colorScheme;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SizedBox(
+          width: 100.w,
+          height: 6.5.h,
+          child: Padding(
+            padding: Padroes.margem(),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: Padroes.margem(),
-                  child: WidgetDisponibilidade(),
-                ),
-                WidgetEnsino(),
+                _estiloTabs('Disponibilidade', Icones.iconeSisgha, 0,
+                    bordaEsquerda: true, bordaDireita: false, tema: tema),
+                _estiloTabs('Ensino', Icones.disciplina, 1,
+                    bordaEsquerda: false, bordaDireita: true, tema: tema),
               ],
             ),
           ),
-        ],
-      ),
+        ),
+        Expanded(
+          child: TabBarView(
+            physics: const NeverScrollableScrollPhysics(),
+            controller: _controller,
+            children: [
+              Padding(
+                padding: Padroes.margem(),
+                child: WidgetDisponibilidade(),
+              ),
+              WidgetEnsino(),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
   Widget _estiloTabs(String texto, IconData icone, int index,
-      {required bool bordaEsquerda, required bool bordaDireita}) {
+      {required bool bordaEsquerda,
+      required bool bordaDireita,
+      required ColorScheme tema}) {
     return Expanded(
         child: GestureDetector(
       onTap: () {
@@ -82,7 +83,7 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
       child: AnimatedContainer(
         alignment: Alignment.center,
         duration: const Duration(milliseconds: 300),
-        decoration: _boxDecoration(index, bordaEsquerda, bordaDireita),
+        decoration: _boxDecoration(index, bordaEsquerda, bordaDireita, tema),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -90,9 +91,8 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
               texto,
               style: estiloTexto(
                 15,
-                cor: _controller.index == index
-                    ? Theme.of(context).colorScheme.primary
-                    : CoresClaras.cinzatexto,
+                cor:
+                    _controller.index == index ? tema.secondary : tema.tertiary,
                 peso: FontWeight.bold,
               ),
             ),
@@ -100,8 +100,8 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
             Icon(
               icone,
               color: _controller.index == index
-                  ? Theme.of(context).colorScheme.primary
-                  : CoresClaras.cinzatexto,
+                  ? tema.secondaryFixed
+                  : tema.tertiaryFixed,
               size: index == 0 ? 20 : 25,
             ),
           ],
@@ -111,19 +111,15 @@ class _NavSwitchState extends State<NavSwitch> with TickerProviderStateMixin {
   }
 
   BoxDecoration _boxDecoration(
-      int index, bool bordaEsquerda, bool bordaDireita) {
+      int index, bool bordaEsquerda, bool bordaDireita, ColorScheme tema) {
     return BoxDecoration(
-      color: _controller.index == index
-          ? Theme.of(context).colorScheme.surface
-          : Theme.of(context).colorScheme.surfaceVariant,
+      color: _controller.index == index ? tema.surfaceVariant : tema.surface,
       borderRadius: BorderRadius.horizontal(
         left: bordaEsquerda ? const Radius.circular(10) : Radius.zero,
         right: bordaDireita ? const Radius.circular(10) : Radius.zero,
       ),
       border: Border.all(
-        color: _controller.index == index
-            ? Theme.of(context).colorScheme.primary
-            : CoresClaras.verdecinzaBorda,
+        color: _controller.index == index ? tema.onPrimary : tema.onSecondary,
       ),
     );
   }

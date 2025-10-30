@@ -1,25 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:sisgha/core/theme/tema.dart';
-
-import '../utils/colors.dart';
 
 class TemasProvider with ChangeNotifier {
-  ThemeData _temaAtivo = Temas.temaClaro;
+  ThemeMode? themeMode;
 
-  ThemeData get temaAtivo => _temaAtivo;
-
-  void mudarTema() {
-    if (_temaAtivo.brightness == Brightness.light) {
-      _temaAtivo = Temas.temaEscuro;
-    } else {
-      _temaAtivo = Temas.temaClaro;
-    }
+  void carregarTemaSalvo(ThemeMode themeMode) {
+    this.themeMode = themeMode;
     notifyListeners();
   }
 
-  Color corDosIcones() {
-    return _temaAtivo.brightness == Brightness.light
-        ? CoresClaras.branco
-        : CoresEscuras.brancoBotaoEscuro;
+  void mudarTema(bool? ativo) {
+    if (ativo == null) {
+      themeMode = ThemeMode.system;
+    } else {
+      themeMode = ativo ? ThemeMode.dark : ThemeMode.light;
+    }
+    notifyListeners();
   }
 }

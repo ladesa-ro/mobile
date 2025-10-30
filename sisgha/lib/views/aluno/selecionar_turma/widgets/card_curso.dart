@@ -3,7 +3,6 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/estilos.dart';
 import '../../../../core/utils/icones.dart';
 import '../../../../core/utils/padroes.dart';
@@ -19,6 +18,8 @@ class CardCurso extends StatefulWidget {
 class _CardCursoState extends State<CardCurso> {
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
+
     return Consumer<EscolhaHorariosAlunos>(
       builder: (context, provider, child) {
         bool expandido = provider.cursoExpandido;
@@ -34,7 +35,7 @@ class _CardCursoState extends State<CardCurso> {
           },
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 4.w),
-            decoration: bordasCardsAlunos(cursoSelecionado),
+            decoration: bordasCardsAlunos(cursoSelecionado, tema),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -48,7 +49,7 @@ class _CardCursoState extends State<CardCurso> {
                         style: estiloTexto(
                           15,
                           peso: FontWeight.bold,
-                          cor: Theme.of(context).textTheme.bodyLarge?.color,
+                          cor: cursoSelecionado ? tema.primary : tema.tertiary,
                         ),
                       ),
                       Transform.rotate(
@@ -56,8 +57,8 @@ class _CardCursoState extends State<CardCurso> {
                         child: Iconify(
                           Icones.setaBaixo,
                           color: cursoSelecionado
-                              ? CoresClaras.verdePrincipal
-                              : CoresClaras.cinzaBordas,
+                              ? tema.secondaryFixed
+                              : tema.tertiaryFixed,
                           size: 3.5.h,
                         ),
                       ),
@@ -84,36 +85,35 @@ class _CardCursoState extends State<CardCurso> {
                           padding: EdgeInsets.symmetric(horizontal: 1.w),
                           child: ChoiceChip(
                             chipAnimationStyle: ChipAnimationStyle(
-                                enableAnimation: AnimationStyle.noAnimation),
+                              enableAnimation: AnimationStyle.noAnimation,
+                            ),
                             label: Text(
                               nome,
                               style: estiloTexto(
                                 15,
                                 cor: selecionado
-                                    ? CoresClaras.verdePrincipalTexto
-                                    : CoresClaras.cinzatexto,
+                                    ? tema.secondary
+                                    : tema.tertiary,
                                 peso: FontWeight.bold,
                               ),
                             ),
                             labelPadding: EdgeInsets.symmetric(
-                                horizontal: 1.w, vertical: 0.5.h),
+                              horizontal: 1.w,
+                              vertical: 0.5.h,
+                            ),
                             showCheckmark: false,
                             selected: selecionado,
                             onSelected: (_) => selecionado
                                 ? provider.selecionarCurso(null)
                                 : provider.selecionarCurso(nome),
-                            selectedColor: CoresClaras.verdeTransparente,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.surfaceVariant,
-                            labelStyle: TextStyle(
-                              color: selecionado ? Colors.white : Colors.black,
-                            ),
+                            selectedColor: tema.surfaceVariant,
+                            backgroundColor: tema.surface,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.sp),
                               side: BorderSide(
                                 color: selecionado
-                                    ? CoresClaras.verdePrincipalBorda
-                                    : CoresClaras.cinzaBordas,
+                                    ? tema.onPrimary
+                                    : tema.onSecondary,
                               ),
                             ),
                           ),
@@ -130,7 +130,8 @@ class _CardCursoState extends State<CardCurso> {
     );
   }
 
-  Widget quadradoSelecionavel(String opcao, EscolhaHorariosAlunos provider) {
+  Widget quadradoSelecionavel(
+      String opcao, EscolhaHorariosAlunos provider, ColorScheme tema) {
     final selecionado = provider.cursoSelecionado == opcao;
 
     return Padding(
@@ -143,9 +144,7 @@ class _CardCursoState extends State<CardCurso> {
           opcao,
           style: estiloTexto(
             14,
-            cor: selecionado
-                ? CoresClaras.verdePrincipalTexto
-                : CoresClaras.cinzatexto,
+            cor: selecionado ? tema.primary : tema.secondary,
           ),
         ),
         labelPadding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 0.5.h),
@@ -154,17 +153,12 @@ class _CardCursoState extends State<CardCurso> {
         onSelected: (_) => selecionado
             ? provider.selecionarCurso(null)
             : provider.selecionarCurso(opcao),
-        selectedColor: CoresClaras.verdeTransparente,
+        selectedColor: tema.errorContainer,
         backgroundColor: Colors.white,
-        labelStyle: TextStyle(
-          color: selecionado ? Colors.white : Colors.black,
-        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
           side: BorderSide(
-            color: selecionado
-                ? CoresClaras.verdePrincipalBorda
-                : CoresClaras.cinzaBordas,
+            color: selecionado ? tema.tertiaryContainer : tema.tertiary,
           ),
         ),
       ),

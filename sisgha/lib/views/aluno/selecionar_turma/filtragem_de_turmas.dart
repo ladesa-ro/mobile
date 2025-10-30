@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../core/utils/colors.dart';
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/icones.dart';
 import '../../../core/utils/padroes.dart';
@@ -22,6 +21,7 @@ class FiltrargemDeTurmas extends StatefulWidget {
 class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     final tamanho = Padroes.alturaGeral();
     return Scaffold(
       appBar: appBarFiltragemTurmas(context),
@@ -31,11 +31,13 @@ class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
         children: [
           Row(
             children: [
-              Icon(Icones.relogio, size: 3.h),
+              Icon(Icones.relogio,
+                  color: tema.onPrimaryFixedVariant, size: 3.h),
               SizedBox(width: Padroes.larguraGeral() * 0.015),
               Text(
                 'Selecionar Horario',
-                style: estiloTexto(18, peso: FontWeight.bold),
+                style:
+                    estiloTexto(18, cor: tema.primary, peso: FontWeight.bold),
               ),
             ],
           ),
@@ -53,7 +55,7 @@ class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
                   provider.turmaSelecionada != null;
 
               return ElevatedButton(
-                style: buttonStyle(botaoAtivo),
+                style: buttonStyle(botaoAtivo, tema),
                 onPressed: () => botaoAtivo
                     ? Navigator.of(context)
                         .pushNamedAndRemoveUntil('/navegação', (_) => false)
@@ -61,7 +63,7 @@ class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
                 child: Text(
                   'Ver Horário',
                   style: estiloTexto(16,
-                      cor: CoresClaras.brancoTexto, peso: FontWeight.bold),
+                      cor: tema.inversePrimary, peso: FontWeight.bold),
                 ),
               );
             },
@@ -71,7 +73,7 @@ class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
     );
   }
 
-  ButtonStyle buttonStyle(bool botaoAtivo) {
+  ButtonStyle buttonStyle(bool botaoAtivo, ColorScheme tema) {
     return ButtonStyle(
       minimumSize: WidgetStatePropertyAll(
         Size(double.infinity, Padroes.aluturaBotoes()),
@@ -80,14 +82,12 @@ class _FiltrargemDeTurmas extends State<FiltrargemDeTurmas> {
         Size(double.infinity, Padroes.aluturaBotoes()),
       ),
       backgroundColor: WidgetStatePropertyAll(
-        botaoAtivo
-            ? Theme.of(context).colorScheme.primary
-            : CoresClaras.cinzaBordas,
+        botaoAtivo ? tema.primaryContainer : tema.tertiaryContainer,
       ),
       shape: WidgetStatePropertyAll(
         RoundedRectangleBorder(
           side: BorderSide.none,
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
     );

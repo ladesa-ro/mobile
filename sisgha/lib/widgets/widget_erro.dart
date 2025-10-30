@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sisgha/core/utils/colors.dart';
 import 'package:sisgha/viewmodels/dados_professor.dart';
 
 import '../core/utils/estilos.dart';
 import '../core/utils/imagens.dart';
 
-Widget dialogoDeErro(BuildContext context) {
+Widget dialogoDeErro(BuildContext context, ColorScheme? tema) {
   DadosProfessor dadosProfessor = DadosProfessor();
+  var tema = Theme.of(context).colorScheme;
   return AlertDialog(
     backgroundColor: Colors.white,
     content: FittedBox(
@@ -26,8 +26,7 @@ Widget dialogoDeErro(BuildContext context) {
           ),
           Text(
             'Nenhuma conexão com a internet ',
-            style:
-                estiloTexto(16, cor: CoresClaras.preto, peso: FontWeight.bold),
+            style: estiloTexto(16, cor: tema.error, peso: FontWeight.bold),
           ),
           const SizedBox(
             height: 10,
@@ -36,7 +35,7 @@ Widget dialogoDeErro(BuildContext context) {
             'Verifique sua conexão ou',
             style: estiloTexto(
               15,
-              cor: CoresClaras.preto,
+              cor: tema.error,
             ),
             textAlign: TextAlign.center,
           ),
@@ -47,14 +46,17 @@ Widget dialogoDeErro(BuildContext context) {
             'tente novamente',
             style: estiloTexto(
               15,
-              cor: CoresClaras.preto,
+              cor: tema.error,
             ),
           ),
           const SizedBox(
             height: 15,
           ),
           ElevatedButton(
-            style: _estiloBotao(CoresClaras.verdePrincipal, CoresClaras.branco),
+            style: _estiloBotao(
+              tema.primaryContainer,
+              tema.inversePrimary,
+            ),
             onPressed: () {
               dadosProfessor.apagarDados();
               Navigator.pushNamedAndRemoveUntil(
@@ -63,18 +65,27 @@ Widget dialogoDeErro(BuildContext context) {
                 (route) => false,
               );
             },
-            child: const Text('Tente novamente'),
+            child: Text(
+              'Tente novamente',
+              style: estiloTexto(13, peso: FontWeight.bold),
+            ),
           ),
           const SizedBox(
             height: 15,
           ),
           ElevatedButton(
-            style: _estiloBotao(CoresClaras.branco, CoresClaras.verdePrincipal),
+            style: _estiloBotao(
+              tema.surface,
+              tema.primary,
+            ),
             onPressed: () {
               dadosProfessor.apagarDados();
               SystemNavigator.pop();
             },
-            child: const Text('Talvez mais tarde'),
+            child: Text(
+              'Talvez mais tarde',
+              style: estiloTexto(13, peso: FontWeight.bold),
+            ),
           ),
           const SizedBox(
             height: 20,

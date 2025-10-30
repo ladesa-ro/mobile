@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:sisgha/core/utils/colors.dart';
+import 'package:sisgha/core/utils/cores.dart';
 import 'package:sisgha/core/utils/estilos.dart';
 import 'package:sisgha/core/utils/icones.dart';
 import 'package:sizer/sizer.dart';
@@ -21,13 +21,14 @@ class AppbarNotificacaoAlunos extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     return AppBar(
       title: Text(
         "Notificações",
         style: estiloTexto(
           17.sp,
           peso: FontWeight.bold,
-          cor: CoresClaras.brancoTexto,
+          cor: tema.primary,
         ),
       ),
       leading: IconButton(
@@ -35,7 +36,7 @@ class AppbarNotificacaoAlunos extends StatelessWidget
         icon: Iconify(
           Icones.setaVoltarDireita,
           size: double.infinity,
-          color: CoresClaras.branco,
+          color: tema.surfaceDim,
         ),
       ),
     );

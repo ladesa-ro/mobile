@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/utils/colors.dart';
 import '../../../core/utils/icones.dart';
 import '../../../core/utils/padroes.dart';
 import '../../../domain/logic/deslogar.dart';
@@ -25,6 +24,7 @@ class _PerfilState extends State<Perfil> {
   Widget build(BuildContext context) {
     final provider = Provider.of<DadosProfessor>(context);
     double tamanho = Padroes.calcularAlturaAppBar(context);
+    final tema = Theme.of(context).colorScheme;
 
     return Scaffold(
       body: Column(
@@ -53,7 +53,7 @@ class _PerfilState extends State<Perfil> {
                     width: 30,
                     child: ElevatedButton(
                       style: buttonStyleEdit(
-                        CoresClaras.vermelhoFraco,
+                        tema.errorContainer,
                       ),
                       onPressed: () async {
                         widgetQuit(context);
@@ -62,7 +62,7 @@ class _PerfilState extends State<Perfil> {
                         padding: const EdgeInsets.only(right: 5),
                         child: Icon(
                           Icones.sair,
-                          color: CoresClaras.branco,
+                          color: tema.primaryFixed,
                           size: 10,
                         ),
                       ),
@@ -77,12 +77,11 @@ class _PerfilState extends State<Perfil> {
                   child: SizedBox(
                     width: 30,
                     child: ElevatedButton(
-                      style: buttonStyleEdit(
-                          Theme.of(context).colorScheme.primary),
-                      child: const Iconify(
+                      style: buttonStyleEdit(tema.primaryContainer),
+                      child: Iconify(
                         Icones.lapiz,
                         size: 10,
-                        color: CoresClaras.branco,
+                        color: tema.primaryFixed,
                       ),
                       onPressed: () => bottomSheat(
                           context,
@@ -96,11 +95,11 @@ class _PerfilState extends State<Perfil> {
                 Positioned(
                   bottom: 0,
                   child: circleAvatar(
-                    context,
-                    provider.fotoImagemPerfil,
-                    (File imagem) =>
-                        provider.atualizarImagemPerfil(context, imagem),
-                  ),
+                      context,
+                      provider.fotoImagemPerfil,
+                      (File imagem) =>
+                          provider.atualizarImagemPerfil(context, imagem),
+                      tema),
                 ),
               ],
             ),
@@ -111,7 +110,8 @@ class _PerfilState extends State<Perfil> {
               provider.professor.nome,
               provider.professor.email,
               provider.professor.matricula,
-              tamanho * 0.005),
+              tamanho * 0.005,
+              tema),
           SizedBox(height: tamanho * 0.03),
           //Botões de seleção de abas
           Expanded(
@@ -124,11 +124,11 @@ class _PerfilState extends State<Perfil> {
 }
 
 Widget circleAvatar(BuildContext context, dynamic imagem,
-    Function(File) atualizarImagemPerfil) {
+    Function(File) atualizarImagemPerfil, ColorScheme tema) {
   return Container(
     padding: const EdgeInsets.all(4),
     decoration: BoxDecoration(
-      color: Theme.of(context).colorScheme.surface,
+      color: tema.surface,
       borderRadius: BorderRadius.circular(100),
     ),
     child: Stack(
@@ -139,7 +139,7 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
             width: 100,
             height: 100,
             child: CircleAvatar(
-                backgroundColor: CoresClaras.cinza,
+                backgroundColor: tema.surfaceVariant,
                 backgroundImage: FileImage(imagem)),
           ),
         ),
@@ -150,12 +150,12 @@ Widget circleAvatar(BuildContext context, dynamic imagem,
             width: 30,
             height: 42,
             child: ElevatedButton(
-              style: buttonStyleEdit(Theme.of(context).colorScheme.primary),
+              style: buttonStyleEdit(tema.primaryContainer),
               onPressed: () => bottomSheat(context, atualizarImagemPerfil),
-              child: const Iconify(
+              child: Iconify(
                 Icones.lapiz,
                 size: 10,
-                color: CoresClaras.branco,
+                color: tema.primaryFixed,
               ),
             ),
           ),

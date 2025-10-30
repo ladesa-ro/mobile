@@ -3,7 +3,6 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/estilos.dart';
 import '../../../../core/utils/icones.dart';
 import '../../../../core/utils/padroes.dart';
@@ -27,6 +26,8 @@ class _CardFormacaoState extends State<CardFormacao> {
 
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
+
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -39,7 +40,7 @@ class _CardFormacaoState extends State<CardFormacao> {
 
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 4.w),
-            decoration: bordasCardsAlunos(formacaoSelecionada),
+            decoration: bordasCardsAlunos(formacaoSelecionada, tema),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -52,15 +53,17 @@ class _CardFormacaoState extends State<CardFormacao> {
                         'Formação',
                         style: estiloTexto(15,
                             peso: FontWeight.bold,
-                            cor: Theme.of(context).textTheme.bodyLarge?.color),
+                            cor: formacaoSelecionada
+                                ? tema.primary
+                                : tema.tertiary),
                       ),
                       Transform.rotate(
                         angle: espandido ? 3.14 : 0,
                         child: Iconify(
                           Icones.setaBaixo,
                           color: formacaoSelecionada
-                              ? CoresClaras.verdePrincipal
-                              : CoresClaras.cinzaBordas,
+                              ? tema.secondaryFixed
+                              : tema.tertiaryFixed,
                           size: 3.5.h,
                         ),
                       ),
@@ -95,8 +98,8 @@ class _CardFormacaoState extends State<CardFormacao> {
                               style: estiloTexto(
                                 15,
                                 cor: selecionado
-                                    ? CoresClaras.verdePrincipalTexto
-                                    : CoresClaras.cinzatexto,
+                                    ? tema.secondary
+                                    : tema.tertiary,
                                 peso: FontWeight.bold,
                               ),
                             ),
@@ -113,18 +116,14 @@ class _CardFormacaoState extends State<CardFormacao> {
                                 provider.selecionarFormacao(null);
                               }
                             },
-                            selectedColor: CoresClaras.verdeTransparente,
-                            backgroundColor:
-                                Theme.of(context).colorScheme.surfaceVariant,
-                            labelStyle: TextStyle(
-                              color: selecionado ? Colors.white : Colors.black,
-                            ),
+                            selectedColor: tema.surfaceVariant,
+                            backgroundColor: tema.surface,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.sp),
                               side: BorderSide(
                                 color: selecionado
-                                    ? CoresClaras.verdePrincipalBorda
-                                    : CoresClaras.cinzaBordas,
+                                    ? tema.onPrimary
+                                    : tema.onSecondary,
                               ),
                             ),
                           ),

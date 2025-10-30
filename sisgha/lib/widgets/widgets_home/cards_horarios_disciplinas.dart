@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/utils/icones.dart';
-import '../../core/utils/colors.dart';
+import '../../core/utils/cores.dart';
 import '../../core/utils/estilos.dart';
 import '../../core/utils/padroes.dart';
 import '../../domain/model/teste_disciplinas.dart';
@@ -18,6 +18,7 @@ class ConstrutorHorarios extends StatefulWidget {
 class _ConstrutorHorariosState extends State<ConstrutorHorarios> {
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context).colorScheme;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 20),
@@ -28,7 +29,7 @@ class _ConstrutorHorariosState extends State<ConstrutorHorarios> {
             final turma = TesteTurma().turmas[index];
             final disciplina = TesteDisciplinas().disciplinas[index];
             return disciplinaprof(
-                disciplina.nome, turma.nome, '08:00 - 09:00', context);
+                disciplina.nome, turma.nome, '08:00 - 09:00', context, tema);
           },
         ),
       ),
@@ -36,8 +37,8 @@ class _ConstrutorHorariosState extends State<ConstrutorHorarios> {
   }
 }
 
-Widget disciplinaprof(
-    String materia, String turma, String horario, BuildContext context) {
+Widget disciplinaprof(String materia, String turma, String horario,
+    BuildContext context, ColorScheme tema) {
   bool ativadoOuNao = _verificar(horario);
 
   return Container(
@@ -46,9 +47,7 @@ Widget disciplinaprof(
     height: Padroes.alturaGeral() * 0.10,
     decoration: BoxDecoration(
       border: Border.all(
-          color: ativadoOuNao
-              ? CoresClaras.verdePrincipalBorda
-              : CoresClaras.verdecinzaBorda,
+          color: ativadoOuNao ? tema.tertiaryContainer : tema.tertiary,
           width: 2),
       borderRadius: const BorderRadius.all(
         Radius.circular(12),
@@ -63,34 +62,28 @@ Widget disciplinaprof(
             Text(
               materia,
               style: estiloTexto(15,
-                  cor: ativadoOuNao
-                      ? CoresClaras.pretoTexto
-                      : CoresClaras.verdecinzaTexto,
+                  cor: ativadoOuNao ? tema.primary : tema.tertiary,
                   peso: ativadoOuNao ? FontWeight.bold : FontWeight.normal),
             ),
             Text(
               turma,
               style: estiloTexto(15,
-                  cor: ativadoOuNao
-                      ? CoresClaras.pretoTexto
-                      : CoresClaras.verdecinzaTexto,
+                  cor: ativadoOuNao ? tema.primary : tema.tertiary,
                   peso: ativadoOuNao ? FontWeight.bold : FontWeight.normal),
             ),
             Text(
               'Horario: $horario',
               style: estiloTexto(15,
-                  cor: ativadoOuNao
-                      ? CoresClaras.pretoTexto
-                      : CoresClaras.verdecinzaTexto,
+                  cor: ativadoOuNao ? tema.primary : tema.tertiary,
                   peso: ativadoOuNao ? FontWeight.bold : FontWeight.normal),
             ),
           ],
         ),
         const Spacer(),
         ativadoOuNao
-            ? const Icon(
+            ? Icon(
                 Icones.relogio,
-                color: CoresClaras.verdeEscuro,
+                color: tema.onSurfaceVariant,
               )
             : Container(),
         const SizedBox(

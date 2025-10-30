@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sisgha/core/utils/padroes.dart';
 import 'package:sizer/sizer.dart';
 
-import 'colors.dart';
-
 TextStyle estiloTexto(
   double tamanho, {
   Color? cor,
@@ -18,29 +16,28 @@ TextStyle estiloTexto(
 
 InputDecoration inputDecoration(BuildContext context, String labelText,
     {Widget? suffixIcon}) {
+  final tema = Theme.of(context).colorScheme;
   return InputDecoration(
+    fillColor: tema.error,
     contentPadding: EdgeInsets.only(
         top: Padroes.aluturaBotoes() / 1.5, left: 12, right: 12),
-    floatingLabelStyle: estiloTexto(15,
-        cor: CoresClaras.verdecinzaTexto, peso: FontWeight.bold),
+    floatingLabelStyle:
+        estiloTexto(15, cor: tema.tertiary, peso: FontWeight.bold),
     labelText: labelText,
     alignLabelWithHint: false,
-    enabledBorder: inputBorder(1.5),
-    border: inputBorder(2),
-    labelStyle: estiloTexto(15,
-        cor: CoresClaras.verdecinzaTexto, peso: FontWeight.w600),
-    focusedBorder: inputBorder(2),
+    enabledBorder: inputBorder(1.5, tema),
+    border: inputBorder(2, tema),
+    labelStyle: estiloTexto(15, cor: tema.tertiary, peso: FontWeight.w600),
+    focusedBorder: inputBorder(2, tema),
     suffixIcon: suffixIcon,
   );
 }
 
-OutlineInputBorder inputBorder(double bold) {
+OutlineInputBorder inputBorder(double bold, ColorScheme tema) {
   return OutlineInputBorder(
-    borderSide: BorderSide(
-        color: CoresClaras.verdecinzaBorda,
-        style: BorderStyle.solid,
-        width: bold),
-    borderRadius: BorderRadius.all(Radius.circular(3.w)),
+    borderSide:
+        BorderSide(color: tema.tertiary, style: BorderStyle.solid, width: bold),
+    borderRadius: BorderRadius.all(Radius.circular(15.sp)),
   );
 }
 
@@ -59,12 +56,9 @@ BoxDecoration estiloBorda({
 }
 
 //utilizado na tela de filtragem das turmas para logar como aluno
-BoxDecoration bordasCardsAlunos(bool selecionado) {
+BoxDecoration bordasCardsAlunos(bool selecionado, ColorScheme tema) {
   return BoxDecoration(
       border: Border.all(
-          color: selecionado
-              ? CoresClaras.verdePrincipalBorda
-              : CoresClaras.cinzaBordas,
-          width: 2),
+          color: selecionado ? tema.onPrimary : tema.onSecondary, width: 2),
       borderRadius: BorderRadius.circular(15));
 }

@@ -15,5 +15,3 @@ class Listas {
     listaEventos = await Repository.buscarEventos();
   }
 }
-
-// adicionarEventos(); exemplo de chamada
