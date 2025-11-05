@@ -50,6 +50,7 @@ class CoresEscuras {
   static const Color textoCinza = Color(0XFF555D6E);
   static const Color textoErro = Color(0XFFA00F25);
   static const Color textoVerde = Color(0XFF066436);
+  static const Color textoPreto = Color(0XFF050F07);
   static const Color textoBranco = Color(0XFFD4DEDE);
 
   //bordas

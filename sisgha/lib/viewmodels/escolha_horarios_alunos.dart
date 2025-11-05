@@ -9,6 +9,7 @@ class EscolhaHorariosAlunos extends ChangeNotifier {
   String? idFormacaoSelecionada;
   String? cursoSelecionado;
   String? turmaSelecionada;
+  Color? cor;
 
   List<OfertaFormacao> listaNivelFormacao = [];
   List<Cursos> listaCursos = [];
