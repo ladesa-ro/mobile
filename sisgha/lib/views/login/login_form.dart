@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/core/theme/tema_provider.dart';
 import 'package:sisgha/views/login/login_viewmodel.dart';
 import 'package:sisgha/widgets/widget_botao.dart';
 import 'package:sisgha/widgets/widget_erro.dart';
@@ -15,6 +14,7 @@ import '../../core/utils/imagens.dart';
 import '../../core/utils/padroes.dart';
 import '../../repository/repository.dart';
 import '../../viewmodels/dados_professor.dart';
+import '../../viewmodels/tema_provider.dart';
 import '../../widgets/progress_indicator.dart';
 import 'widgets_estilos.dart';
 
