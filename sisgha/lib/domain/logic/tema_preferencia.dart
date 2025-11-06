@@ -26,7 +26,7 @@ class TemaPreferencia {
 
       default:
         throw Exception(
-            'Funcionalidade indisponivel no momento! constate a equipe de manuteção sobre esse erro');
+            'Funcionalidade indisponivel no momento! constate a equipe de manuteção sobre essa mensagem');
     }
   }
 
@@ -49,7 +49,7 @@ class TemaPreferencia {
 
       default:
         throw Exception(
-            'Funcionalidade indisponivel no momento! constate a equipe de manuteção sobre esse erro');
+            'Funcionalidade indisponivel no momento! constate a equipe de manuteção sobre essa mensagem');
     }
   }
 
