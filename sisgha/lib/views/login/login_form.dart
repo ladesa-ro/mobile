@@ -221,6 +221,7 @@ class _CorpoLoginState extends State<LoginForm> {
               loginVM.senhaVisivel
                   ? Icones.visibilidadeSenhaOn
                   : Icones.visibilidadeSenhaOff,
+              color: tema.onSecondaryFixedVariant,
             ),
           )),
       validator: (value) => verificacao(value, 'Campo Obrigatorio'),
