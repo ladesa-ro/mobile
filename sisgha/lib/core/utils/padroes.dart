@@ -48,4 +48,20 @@ class Padroes {
   static String removerPalavras(String texto) {
     return texto.replaceAll(r' - Fim', '').replaceAll(r' - Início', '');
   }
+
+  static int verificarCorExistente(String? cor, {int corPadrao = 0xFFFFFFFF}) {
+    if (cor == null || cor.isEmpty || cor == '') return 0;
+    final hexColorRegex =
+        RegExp(r'^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$');
+
+    if (hexColorRegex.hasMatch(cor)) {
+      try {
+        return int.parse(cor.replaceFirst('#', '0xff'), radix: 16);
+      } catch (_) {
+        // Caso haja erro de parse (raro, mas possível)
+        return corPadrao;
+      }
+    }
+    return corPadrao;
+  }
 }

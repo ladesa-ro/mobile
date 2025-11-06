@@ -6,7 +6,7 @@ import 'package:sisgha/core/utils/icones.dart';
 import 'package:sisgha/core/utils/estilos.dart';
 import 'package:sizer/sizer.dart';
 
-import '../core/theme/tema_provider.dart';
+import '../viewmodels/tema_provider.dart';
 import '../domain/logic/tema_preferencia.dart';
 
 Widget mostrarDialogoDeTrocaDeTema(

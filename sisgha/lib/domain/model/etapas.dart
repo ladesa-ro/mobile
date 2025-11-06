@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:sisgha/core/utils/padroes.dart';
 import 'package:sisgha/views/professor/calendario/calendario.dart';
 
 class Etapas {
@@ -20,9 +21,10 @@ class Etapas {
     final fim = DateTime.parse(json['dataTermino']);
 
     return Etapas(
-        numero: json['numero'],
-        dataInicio: normalizarData(inicio),
-        dataTermino: normalizarData(fim),
-        cor: Color(int.parse(json['cor'].replaceFirst('#', '0xff'))));
+      numero: json['numero'],
+      dataInicio: normalizarData(inicio),
+      dataTermino: normalizarData(fim),
+      cor: Color(Padroes.verificarCorExistente(json['cor'])),
+    );
   }
 }

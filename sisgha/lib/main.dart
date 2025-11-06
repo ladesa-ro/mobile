@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:sisgha/core/theme/tema.dart';
-import 'package:sisgha/core/theme/tema_provider.dart';
+import 'package:sisgha/viewmodels/tema_provider.dart';
 import 'package:sisgha/viewmodels/calendario_funcionalidades.dart';
 import 'package:sisgha/core/routes/app_routes.dart';
 import 'package:sisgha/viewmodels/dados_ensino_professor_provider.dart';

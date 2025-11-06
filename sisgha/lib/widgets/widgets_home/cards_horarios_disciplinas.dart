@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../core/utils/icones.dart';
-import '../../core/utils/cores.dart';
 import '../../core/utils/estilos.dart';
 import '../../core/utils/padroes.dart';
 import '../../domain/model/teste_disciplinas.dart';

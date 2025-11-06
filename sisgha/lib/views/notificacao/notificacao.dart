@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 
-import '../../core/utils/cores.dart';
 import '../../core/utils/estilos.dart';
 import '../../core/utils/icones.dart';
 
