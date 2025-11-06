@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sisgha/core/utils/cores.dart';
-import 'package:sizer/sizer.dart';
 
 class Icones {
   //IcoMoon
