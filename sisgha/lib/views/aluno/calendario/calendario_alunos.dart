@@ -4,14 +4,12 @@ import 'package:sisgha/widgets/cards_calendario.dart';
 import 'package:sisgha/widgets/letreiro_rolante.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:text_scroll/text_scroll.dart';
 
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/icones.dart';
 import '../../../core/utils/dias.dart';
 import '../../../core/utils/padroes.dart';
 import '../../../viewmodels/calendario_funcionalidades.dart';
-import '../../../viewmodels/escolha_calendario.dart';
 import '../../../widgets/calendario.dart';
 import '../../professor/calendario/calendario.dart';
 import '../../listagem_de_eventos/listagem_de_eventos.dart';

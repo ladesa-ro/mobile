@@ -63,7 +63,7 @@ class Temas {
       primary: CoresEscuras.textoPrincipal,
       secondary: CoresEscuras.textoVerde,
       tertiary: CoresEscuras.textoCinza,
-      inversePrimary: CoresEscuras.textoPreto,
+      inversePrimary: CoresEscuras.textoBranco,
       error: CoresEscuras.textoErro,
 
       //borda

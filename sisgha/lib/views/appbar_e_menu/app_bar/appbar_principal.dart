@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:sisgha/core/theme/tema_provider.dart';
+import 'package:sisgha/viewmodels/tema_provider.dart';
 import 'package:sisgha/core/utils/icones.dart';
 import 'package:sisgha/viewmodels/escolha_horarios_alunos.dart';
 import 'package:sisgha/widgets/dialogo_troca_de_tema.dart';
