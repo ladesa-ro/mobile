@@ -23,6 +23,7 @@ class _BoasVindasPageState extends State<BoasVindasPage> {
     _iniciar();
   }
 
+//alteração
   Future<void> _iniciar() async {
     try {
       final sucesso = await inicicarProvidersGerais(
