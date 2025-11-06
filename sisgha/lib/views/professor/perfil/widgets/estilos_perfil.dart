@@ -12,5 +12,8 @@ ButtonStyle buttonStyleEdit(Color corDeFundo) {
 }
 
 ButtonStyle botaoButtonSheat() {
-  return const ButtonStyle(elevation: WidgetStatePropertyAll(0));
+  return ButtonStyle(
+      padding: WidgetStatePropertyAll(EdgeInsets.zero),
+      elevation: WidgetStatePropertyAll(0),
+      shape: WidgetStatePropertyAll(RoundedRectangleBorder()));
 }
