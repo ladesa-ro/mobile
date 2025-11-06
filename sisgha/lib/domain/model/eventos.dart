@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sisgha/core/utils/padroes.dart';
 import 'package:sisgha/views/professor/calendario/calendario.dart';
 
 class Eventos {
@@ -22,7 +23,7 @@ class Eventos {
     return Eventos(
       nome: json['nome'],
       rrule: json['rrule'],
-      cor: Color(int.parse(json['cor'].replaceFirst('#', '0xff'))),
+      cor: Color(Padroes.verificarCorExistente(json['cor'])),
       dataInicio: normalizarData(inicio),
       dataTermino: normalizarData(fim),
     );

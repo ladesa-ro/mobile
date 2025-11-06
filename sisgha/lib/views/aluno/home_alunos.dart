@@ -4,13 +4,9 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:sisgha/widgets/modal_calendario.dart';
 import 'package:sisgha/widgets/widget_botao.dart';
 import 'package:sizer/sizer.dart';
-import 'package:table_calendar/table_calendar.dart';
-
-import '../../core/utils/dias.dart';
 import '../../core/utils/estilos.dart';
 import '../../core/utils/icones.dart';
 import '../../core/utils/padroes.dart';
-import '../../widgets/calendario.dart';
 import '../../widgets/widgets_home/quadrados_home.dart';
 
 class HomeAlunos extends StatefulWidget {

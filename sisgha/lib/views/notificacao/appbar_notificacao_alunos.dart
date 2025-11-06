@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:sisgha/core/utils/cores.dart';
 import 'package:sisgha/core/utils/estilos.dart';
 import 'package:sisgha/core/utils/icones.dart';
 import 'package:sizer/sizer.dart';
