@@ -3,6 +3,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sisgha/core/utils/padroes.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../../core/utils/estilos.dart';
 import 'estilos_perfil.dart';
@@ -33,65 +35,85 @@ Future bottomSheat(BuildContext context, Function(File) onImageSelected) {
     context: context,
     backgroundColor: tema.surface,
     builder: (BuildContext context) {
-      return SizedBox(
-        height: 300,
-        width: double.maxFinite,
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: Padroes.margem().right),
+        padding: Padroes.margem(),
+        width: 100.w,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              margin: const EdgeInsets.only(top: 10, bottom: 30),
-              width: 70,
-              height: 6,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: tema.errorContainer,
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 3 + 0.5.w,
+                  height: 4.h,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: tema.primaryContainer,
+                  ),
+                ),
+                SizedBox(width: Padroes.margem().left),
+                Align(
+                  child: Text(
+                    'Editar foto',
+                    style: estiloTexto(17,
+                        cor: tema.primary, peso: FontWeight.bold),
+                  ),
+                ),
+              ],
             ),
+            SizedBox(height: 1.h),
             Text(
-              'Editar foto de perfil',
-              style: estiloTexto(16,
-                  cor: Theme.of(context).textTheme.bodyLarge?.color,
-                  peso: FontWeight.bold),
+              'Escolha um arquivo .jpeg ou .png de 500x1000, ou tire uma foto',
+              style: estiloTexto(16, cor: tema.tertiary, peso: FontWeight.bold),
             ),
-            const SizedBox(height: 10),
-            Text(
-              'Escolha uma foto, imagem ou',
-              style:
-                  estiloTexto(16, cor: tema.secondary, peso: FontWeight.w500),
-            ),
-            Text(
-              'arquivo .jpeg ou .png de 500x500',
-              style:
-                  estiloTexto(16, cor: tema.secondary, peso: FontWeight.w500),
-            ),
-            const Spacer(),
+            SizedBox(height: 2.h),
             ElevatedButton(
               style: botaoButtonSheat(),
-              onPressed: _capturarFoto,
-              child: const Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              onPressed: () => _capturarFoto(),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(width: 60),
-                  Icon(Icons.camera_alt),
-                  SizedBox(width: 20),
-                  Text('Capturar foto'),
+                  Icon(
+                    Icons.camera_alt,
+                    color: tema.secondaryFixed,
+                    size: 22.sp,
+                  ),
+                  SizedBox(width: 2.w),
+                  Text(
+                    'Capturar foto',
+                    style: estiloTexto(
+                      16,
+                      cor: tema.secondary,
+                    ),
+                  ),
                 ],
               ),
             ),
             ElevatedButton(
               style: botaoButtonSheat(),
-              onPressed: _selecionarFoto,
-              child: const Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              onPressed: () => _selecionarFoto(),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(width: 60),
-                  Icon(Icons.photo),
-                  SizedBox(width: 20),
-                  Text('Selecionar foto'),
+                  Icon(
+                    Icons.photo,
+                    color: tema.secondaryFixed,
+                    size: 22.sp,
+                  ),
+                  SizedBox(width: 2.w),
+                  Text(
+                    'Selecionar foto',
+                    style: estiloTexto(
+                      16,
+                      cor: tema.secondary,
+                    ),
+                  ),
                 ],
               ),
             ),
-            const Spacer(flex: 2),
           ],
         ),
       );

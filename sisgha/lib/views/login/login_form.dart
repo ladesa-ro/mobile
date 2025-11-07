@@ -14,6 +14,7 @@ import '../../core/utils/imagens.dart';
 import '../../core/utils/padroes.dart';
 import '../../repository/repository.dart';
 import '../../viewmodels/dados_professor.dart';
+import '../../viewmodels/tema_provider.dart';
 import '../../widgets/progress_indicator.dart';
 import 'widgets_estilos.dart';
 
@@ -34,6 +35,9 @@ class _CorpoLoginState extends State<LoginForm> {
     final loginVM = Provider.of<LoginViewModel>(context);
     final tema = Theme.of(context).colorScheme;
 
+    var temaAtivo =
+        Provider.of<TemasProvider>(context).themeMode == ThemeMode.light;
+
     return Center(
       child: SingleChildScrollView(
         child: SizedBox(
@@ -45,7 +49,9 @@ class _CorpoLoginState extends State<LoginForm> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  ImageApp.logo_sigha_sem_barra,
+                  temaAtivo
+                      ? ImageApp.logo_sigha_sem_barra
+                      : ImageApp.logo_clara,
                   width: Padroes.larguraGeral() -
                       (Padroes.margem().horizontal * 4),
                 ),
@@ -215,6 +221,7 @@ class _CorpoLoginState extends State<LoginForm> {
               loginVM.senhaVisivel
                   ? Icones.visibilidadeSenhaOn
                   : Icones.visibilidadeSenhaOff,
+              color: tema.onSecondaryFixedVariant,
             ),
           )),
       validator: (value) => verificacao(value, 'Campo Obrigatorio'),

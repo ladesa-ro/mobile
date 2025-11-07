@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/cores.dart';
 import '../../../core/utils/estilos.dart';
 import '../../../core/utils/icones.dart';
 import '../../appbar_e_menu/app_bar/appbar_notificacao.dart';

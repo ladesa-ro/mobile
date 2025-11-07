@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../core/utils/cores.dart';
 import '../../core/utils/padroes.dart';
 
 class SplashScreen extends StatefulWidget {

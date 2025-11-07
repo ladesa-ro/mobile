@@ -16,7 +16,7 @@ Future<bool> inicicarProvidersGerais({
 }) async {
   try {
     // espera 7 segundos
-    await Future.delayed(const Duration(seconds: 7));
+    await Future.delayed(Duration(seconds: 7));
 
     //=----------------------------TURMAS DOS PROFESSORES-------------------------------=
     await horariosAlunos.pucharOpcoes();
@@ -24,10 +24,15 @@ Future<bool> inicicarProvidersGerais({
     await Repository.testeBuscarDisciplinas();
 
     //=-----------------------------CALENDÁRIO------------------------------------------=
+
     final listas = Listas();
+
     await listas.adicionarEtapas();
+
     await listas.adicionarEventos();
+
     await calendario.adicionarEtapasCalendario(listas.listaEtapas);
+
     await calendario.juntarEventosEtapas(
         listas.listaEtapas, listas.listaEventos);
 

@@ -281,14 +281,18 @@ class Repository {
 
   static Future<List<Eventos>> buscarEventos() async {
     final url = Uri.parse('$_api/eventos');
+
     final resposta = await http.get(url, headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     });
+
     if (verificarStatusCode(resposta.statusCode)) {
       final data = jsonDecode(resposta.body)['data'];
+
       return data.map<Eventos>((e) => Eventos.fromJson(e)).toList();
     }
+
     return <Eventos>[];
   }
 
@@ -303,15 +307,15 @@ class Repository {
     //   'Accept': 'application/json',
     // });
 
-    // print(response.statusCode);
+    // response.statusCode);
     // if (verificarStatusCode(response.statusCode)) {
     //   final data = jsonDecode(response.body)['disciplinas'];
-    //   print(data[1]['cursos'][0]['turmas'][0]['turma']['periodo']);
-    //   print('---------------------------');
+    //   data[1]['cursos'][0]['turmas'][0]['turma']['periodo']);
+    //   '---------------------------');
 
     // for (var element in data) {
-    //   print(element["periodo"]);
-    //   print(element["id"]);
+    //   element["periodo"]);
+    //   element["id"]);
     // }
     //  }
   }
