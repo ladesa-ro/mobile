@@ -139,24 +139,51 @@ class Repository {
   // --------------------------------------------------- IMAGENS ------------------------------------------------------------------//
   static Future<void> atualizarImagemPerfil(
       File imagemPerfil, BuildContext context) async {
-    SharedPreferences armazenamento = await SharedPreferences.getInstance();
-    final id = DadosProfessor().professor.id;
-    final url = Uri.parse("$_api/usuarios/$id/imagem/perfil");
+    try {
+      await refreshToken(context);
+      //dados armazenados necessarios
+      final armazenamento = await SharedPreferences.getInstance();
+      final id = armazenamento.getString('id');
+      final token = armazenamento.getString('token');
 
-    final request = http.MultipartRequest('PUT', url)
-      ..headers['Authorization'] = 'Bearer ${armazenamento.getString('token')}'
-      ..files.add(await http.MultipartFile.fromPath('file', imagemPerfil.path));
+      print(id);
+      //url
+      final url = Uri.parse(
+          '$_api/usuarios/17ed5d7e-79d4-4cfd-811c-263247dc4511/imagem/perfil');
 
-    final response = await request.send();
-    if (!verificarStatusCode(response.statusCode)) {
-      _mostrarErro(context, response.statusCode);
+      //preparação da requisição
+      final request = http.MultipartRequest('PUT', url);
+
+      //configurar cabeçalho
+      request.headers.addAll({
+        'Authorization': 'Bearer $token',
+        'Accept': 'text/plain',
+        'Content-Type': 'multipart/form-data',
+      });
+
+      //adicionar o arquivo
+      request.files
+          .add(await http.MultipartFile.fromPath('file', imagemPerfil.path));
+
+      //faz a requisição
+      final response = await request.send();
+
+      final responseBody = await response.stream.bytesToString();
+      print('Status: ${response.statusCode}');
+      print('Resposta: $responseBody');
+
+      print('---------');
+    } catch (e) {
+      print('erro: $e');
     }
   }
 
   static Future<void> atualizarImagemCapa(
       File imagemCapa, BuildContext context) async {
     SharedPreferences armazenamento = await SharedPreferences.getInstance();
-    final id = DadosProfessor().professor.id;
+
+    final id = armazenamento.getString('id');
+
     final url = Uri.parse("$_api/usuarios/$id/imagem/capa");
 
     final request = http.MultipartRequest('PUT', url)
