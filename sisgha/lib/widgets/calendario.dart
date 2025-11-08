@@ -163,6 +163,7 @@ DaysOfWeekStyle estiloParteSuperior(ColorScheme tema) {
 CalendarBuilders calendarBuilder(
     double heigth, DateTime? diafocado, ColorScheme tema) {
   return CalendarBuilders(
+
       //dia selecionado
       selectedBuilder: (context, date, focusedDay) {
         // Verifica se o dia selecionado está dentro do mês atual
