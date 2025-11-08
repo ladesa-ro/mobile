@@ -24,15 +24,23 @@ class CalendarioProfessor extends StatefulWidget {
 
 class _CalendarioProfessorState extends State<CalendarioProfessor> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  late DateTime _selectedDay;
+  DateTime? _selectedDay;
   late DateTime _focusedDay;
 
   @override
   void initState() {
     super.initState();
     final hoje = normalizarData(DateTime.now());
-    _selectedDay = hoje;
-    _focusedDay = hoje;
+
+    _focusedDay = DateTime.now(); // mostra o mês atual
+    _selectedDay = null; // nenhum dia selecionado
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final provider =
+          Provider.of<CalendarioFuncionalidades>(context, listen: false);
+      provider
+          .atualizarEventosDoMes(_focusedDay); // mostra todos os eventos do mês
+    });
   }
 
   @override
@@ -114,7 +122,18 @@ class _CalendarioProfessorState extends State<CalendarioProfessor> {
                     setState(() {
                       _selectedDay = selectedDay;
                       _focusedDay = focusedDay;
+                      final provider =
+                          context.read<CalendarioFuncionalidades>();
+                      provider.filtrarEventosDoDia(selectedDay);
                     });
+                  },
+                  onPageChanged: (focusedDay) {
+                    setState(() {
+                      _focusedDay = focusedDay;
+                    });
+
+                    final provider = context.read<CalendarioFuncionalidades>();
+                    provider.atualizarEventosDoMes(focusedDay);
                   },
                   eventLoader: (day) {
                     final provider =

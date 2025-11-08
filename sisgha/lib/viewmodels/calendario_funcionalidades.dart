@@ -23,14 +23,15 @@ class CalendarioFuncionalidades with ChangeNotifier {
   void atualizarEventosDoMes(DateTime mes) {
     mesAtual = mes;
 
-    // Pega todos os eventos do mês inteiro
-    eventosVisiveis = tudoJunto.entries
-        .where((entry) =>
-            entry.key.month == mes.month && entry.key.year == mes.year)
-        .expand((entry) => entry.value)
-        .toList();
+    eventosVisiveis = [
+      for (var entry in tudoJunto.entries)
+        if (entry.key.month == mes.month && entry.key.year == mes.year)
+          ...entry.value
+    ];
 
-    diaSelecionado = null; // Nenhum dia selecionado
+    eventosVisiveis.sort((a, b) => a.dataReal.compareTo(b.dataReal));
+
+    diaSelecionado = null;
     notifyListeners();
   }
 
@@ -82,6 +83,7 @@ class CalendarioFuncionalidades with ChangeNotifier {
               MostrarNoCalendario(
                 id: idConjunto,
                 titulo: tituloBuilder(i, totalDias),
+                dataReal: inicio.add(Duration(days: i)), // <-- aqui
                 dataInicio:
                     'Início: ${formatadorDia.format(inicio)} às ${formatadorHoras.format(inicio)}',
                 dataTermino:
