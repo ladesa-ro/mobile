@@ -9,11 +9,29 @@ import '../viewmodels/calendario_funcionalidades.dart';
 import '../views/professor/calendario/calendario.dart';
 
 Widget cardCalendario(
-    DateTime selectedDay, double tamanho, double largura, ColorScheme tema) {
+    DateTime? selectedDay, double tamanho, double largura, ColorScheme tema) {
   return Consumer<CalendarioFuncionalidades>(
     builder: (context, provider, _) {
-      final data = normalizarData(selectedDay);
-      final eventos = provider.tudoJunto[data] ?? [];
+      List eventos = [];
+
+      if (selectedDay == null) {
+        // Nenhum dia selecionado → mostrar todos os eventos do mês atual
+        final agora = DateTime.now();
+        final mesAtual = agora.month;
+        final anoAtual = agora.year;
+
+        eventos =
+            provider.tudoJunto.values.expand((lista) => lista).where((evento) {
+          final dataEvento = converterData(evento.dataInicio);
+
+          return dataEvento.month == mesAtual && dataEvento.year == anoAtual;
+        }).toList();
+      } else {
+        // Dia selecionado → mostrar eventos só daquele dia
+        final data = normalizarData(selectedDay);
+        eventos = provider.tudoJunto[data] ?? [];
+      }
+
       if (eventos.isEmpty) {
         return Padding(
           padding: EdgeInsets.symmetric(vertical: tamanho * 0.03),
@@ -123,4 +141,28 @@ Widget cardCalendario(
       );
     },
   );
+}
+
+DateTime converterData(String dataBruta) {
+  // Remove "Início:" ou espaços extras
+  dataBruta = dataBruta.replaceAll("Início:", "").trim();
+
+  // Exemplo esperado: "16/11 às 00:00"
+  final partes = dataBruta.split(' ');
+  final dataSplit = partes[0].split('/');
+
+  final dia = int.tryParse(dataSplit[0]) ?? 1;
+  final mes = int.tryParse(dataSplit[1]) ?? 1;
+  final ano = DateTime.now().year;
+
+  // hora
+  String horaStr = "00:00";
+  if (partes.length > 2) {
+    horaStr = partes[2];
+  }
+  final horaSplit = horaStr.split(':');
+  final hora = int.tryParse(horaSplit[0]) ?? 0;
+  final minuto = int.tryParse(horaSplit[1]) ?? 0;
+
+  return DateTime(ano, mes, dia, hora, minuto);
 }

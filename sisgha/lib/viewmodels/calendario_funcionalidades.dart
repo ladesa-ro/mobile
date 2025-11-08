@@ -12,10 +12,36 @@ class CalendarioFuncionalidades with ChangeNotifier {
   Map<DateTime, List<Eventos>> eventosCalendario = {};
   Map<DateTime, List<Etapas>> etapasCalendario = {};
   Map<DateTime, List<MostrarNoCalendario>> tudoJunto = {};
-
+  DateTime? mesAtual;
+  List<MostrarNoCalendario> eventosVisiveis = []; // vai mostrar no card
+  DateTime? diaSelecionado;
   List<MostrarNoCalendario> listaDeTudo = [];
 
   List<MostrarNoCalendario> filtroDePesquisa = [];
+
+// 🔹 Pega todos os eventos do mês
+  void atualizarEventosDoMes(DateTime mes) {
+    mesAtual = mes;
+
+    eventosVisiveis = [
+      for (var entry in tudoJunto.entries)
+        if (entry.key.month == mes.month && entry.key.year == mes.year)
+          ...entry.value
+    ];
+
+    eventosVisiveis.sort((a, b) => a.dataReal.compareTo(b.dataReal));
+
+    diaSelecionado = null;
+    notifyListeners();
+  }
+
+// 🔹 Pega só os eventos do dia
+  void filtrarEventosDoDia(DateTime dia) {
+    diaSelecionado = dia;
+    final chave = normalizarData(dia);
+    eventosVisiveis = tudoJunto[chave] ?? [];
+    notifyListeners();
+  }
 
   final uuid = Uuid();
   adicionarEtapasCalendario(List<Etapas> lista) {
@@ -48,15 +74,20 @@ class CalendarioFuncionalidades with ChangeNotifier {
     }) {
       final totalDias = fim.difference(inicio).inDays;
       for (int i = 0; i <= totalDias; i++) {
-        final dia = inicio.add(Duration(days: i));
+        print(
+            'Salvando evento em: ${normalizarData(inicio.add(Duration(days: i)))}');
+
+        final dia =
+            normalizarData(inicio.add(Duration(days: i))); // <-- 👈 aqui
         tudoJunto.putIfAbsent(dia, () => []).add(
               MostrarNoCalendario(
                 id: idConjunto,
                 titulo: tituloBuilder(i, totalDias),
+                dataReal: inicio.add(Duration(days: i)), // <-- aqui
                 dataInicio:
-                    'Início: ${formatadorDia.format(inicio)} ás ${formatadorHoras.format(inicio)}',
+                    'Início: ${formatadorDia.format(inicio)} às ${formatadorHoras.format(inicio)}',
                 dataTermino:
-                    'Término: ${formatadorDia.format(fim)} ás ${formatadorHoras.format(fim)}',
+                    'Término: ${formatadorDia.format(fim)} às ${formatadorHoras.format(fim)}',
                 cor: cor,
                 tempo: verificarTempo(inicio, fim),
               ),

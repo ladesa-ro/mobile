@@ -26,15 +26,21 @@ class CalendarioAlunos extends StatefulWidget {
 class _CalendarioAlunosState extends State<CalendarioAlunos> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-  late DateTime _selectedDay;
+  DateTime? _selectedDay;
   late DateTime _focusedDay;
-
   @override
   void initState() {
     super.initState();
-    final hoje = normalizarData(DateTime.now());
-    _selectedDay = hoje;
-    _focusedDay = hoje;
+
+    _focusedDay = DateTime.now(); // mostra o mês atual
+    _selectedDay = null; // nenhum dia selecionado
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final provider =
+          Provider.of<CalendarioFuncionalidades>(context, listen: false);
+      provider
+          .atualizarEventosDoMes(_focusedDay); // mostra todos os eventos do mês
+    });
   }
 
   @override
@@ -92,36 +98,55 @@ class _CalendarioAlunosState extends State<CalendarioAlunos> {
                       border: Border.all(color: tema.onSecondary),
                       borderRadius: BorderRadius.circular(15)),
                   child: TableCalendar(
-                    availableGestures: AvailableGestures.none,
-                    firstDay: DatasFormatadas.primeiroDiaDoAno,
-                    lastDay: DatasFormatadas.ultimoDiaDoAno,
-                    focusedDay: _focusedDay,
-                    calendarFormat: CalendarFormat.month,
-                    locale: 'pt-BR',
-                    shouldFillViewport: true,
-                    daysOfWeekHeight: 4.h,
-                    daysOfWeekStyle: estiloParteSuperior(tema),
-                    headerStyle: estiloCabessario(tema),
-                    calendarBuilders:
-                        calendarBuilder(120.sp, _focusedDay, tema),
-                    pageAnimationCurve: Curves.linear,
-                    pageAnimationDuration: const Duration(milliseconds: 300),
-                    selectedDayPredicate: (day) {
-                      return isSameDay(_selectedDay, day);
-                    },
-                    onDaySelected: (selectedDay, focusedDay) {
-                      setState(() {
-                        _selectedDay = selectedDay;
-                        _focusedDay = focusedDay;
-                      });
-                    },
-                    eventLoader: (day) {
-                      final provider =
-                          Provider.of<CalendarioFuncionalidades>(context);
-                      final dataNormalizada = normalizarData(day);
-                      return provider.tudoJunto[dataNormalizada] ?? [];
-                    },
-                  ),
+                      availableGestures: AvailableGestures.none,
+                      firstDay: DatasFormatadas.primeiroDiaDoAno,
+                      lastDay: DatasFormatadas.ultimoDiaDoAno,
+                      focusedDay: _focusedDay,
+                      calendarFormat: CalendarFormat.month,
+                      locale: 'pt-BR',
+                      shouldFillViewport: true,
+                      daysOfWeekHeight: 4.h,
+                      daysOfWeekStyle: estiloParteSuperior(tema),
+                      headerStyle: estiloCabessario(tema),
+                      calendarBuilders:
+                          calendarBuilder(120.sp, _focusedDay, tema),
+                      pageAnimationCurve: Curves.linear,
+                      pageAnimationDuration: const Duration(milliseconds: 300),
+                      selectedDayPredicate: (day) {
+                        return _selectedDay != null &&
+                            isSameDay(_selectedDay, day);
+                      },
+                      onDaySelected: (selectedDay, focusedDay) {
+                        setState(() {
+                          _selectedDay = selectedDay;
+                          _focusedDay = focusedDay;
+                        });
+
+                        final provider =
+                            context.read<CalendarioFuncionalidades>();
+
+                        // Quando clicar em um dia, filtra só os eventos dele
+                        provider.filtrarEventosDoDia(selectedDay);
+                      },
+                      eventLoader: (day) {
+                        final provider =
+                            Provider.of<CalendarioFuncionalidades>(context);
+                        final dataNormalizada = normalizarData(day);
+                        return provider.tudoJunto[dataNormalizada] ?? [];
+                      },
+                      onPageChanged: (focusedDay) {
+                        setState(() {
+                          _focusedDay = focusedDay;
+                        });
+
+                        final provider =
+                            context.read<CalendarioFuncionalidades>();
+
+                        // Se nenhum dia estiver selecionado, atualiza todos os eventos do mês
+                        if (provider.diaSelecionado == null) {
+                          provider.atualizarEventosDoMes(focusedDay);
+                        }
+                      }),
                 ),
               ),
             ),
